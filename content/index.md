@@ -83,13 +83,17 @@ no Google intellectual property.
 
 ## What languages and integrations does OpenCensus support?
 
-Languages supported:
+Languages under development:
 
++   C++ (planned)
++   [Erlang](https://github.com/census-instrumentation/opencensus-erlang)
 +   [Java (JVM, OpenJDK, Android)](https://github.com/census-instrumentation/opencensus-java)
 +   [Go](https://github.com/census-instrumentation/opencensus-go)
 +   [Ruby](https://github.com/census-instrumentation/opencensus-ruby)
++   .Net (planned)
++   Node.js (planned)
++   [PHP](https://github.com/census-instrumentation/opencensus-php)
 +   [Python](https://github.com/census-instrumentation/opencensus-python)
-+   C++ (under development)
 
 Integrations supported:
 
