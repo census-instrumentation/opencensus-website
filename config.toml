@@ -1,4 +1,4 @@
-baseURL = "https://websitetesttest.github.io/"
+baseURL = "http://opencensus.io/"
 languageCode = "en-us"
 title = "Open Census"
 theme = "hyde"
