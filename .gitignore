@@ -1,2 +1,16 @@
+# IntelliJ IDEA
+.idea
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings
+bin
+
+# OS X
+.DS_Store
+
+# Site
 _site
 .sass-cache
