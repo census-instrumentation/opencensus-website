@@ -18,8 +18,7 @@ tool.</p>
 
 The key features of OpenCensus include:
 
-+   Standard wire protocols
-    ([TraceContext](https://github.com/TraceContext/tracecontext-spec)) and
++   Standard wire protocols and
     consistent APIs for handling trace and metric data.
 +   A single set of libraries for many languages, including Java, C++, Go,
     .Net, Python, PHP, Node.js, Erlang, and Ruby.
