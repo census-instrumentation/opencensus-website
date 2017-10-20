@@ -1,0 +1,10 @@
+baseURL = "https://websitetesttest.github.io/"
+languageCode = "en-us"
+title = "Open Census"
+theme = "hyde"
+
+[params]
+  description = "A stats collection and distributed tracing framework"
+
+
+

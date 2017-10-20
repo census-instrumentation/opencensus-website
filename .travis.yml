@@ -1,0 +1,24 @@
+# See https://docs.travis-ci.com/user/deployment/pages/
+# for more information on pages deployment.
+
+install: go get -v github.com/spf13/hugo # use a stable release
+
+# Build the website
+script:
+  - hugo
+  - touch public/.nojekyll # required to disable Jekyll generation.
+
+branches:
+  only:
+    - master
+
+# Deploy to GitHub pages
+deploy:
+  provider: pages
+  repo: census-instrumentation/census-instrumentation.github.io
+  target_branch: master
+  skip_cleanup: true
+  local_dir: public
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
