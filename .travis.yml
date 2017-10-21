@@ -1,7 +1,9 @@
 # See https://docs.travis-ci.com/user/deployment/pages/
 # for more information on pages deployment.
 
-install: go get -v github.com/spf13/hugo # use a stable release
+install:
+ - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
+ - sudo dpkg -i /tmp/hugo.deb
 
 # Build the website
 script:
