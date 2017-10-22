@@ -1,6 +1,6 @@
 baseURL = "http://opencensus.io/"
 languageCode = "en-us"
-title = "Open Census"
+title = "OpenCensus"
 theme = "hyde"
 
 [params]

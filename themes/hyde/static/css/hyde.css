@@ -56,8 +56,9 @@ html {
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
-  color: rgba(255,255,255,.5);
-  background-color: #202020;
+  color: #666;
+  background-color: #f9f9f9;
+  border-right: solid 1px #e5e5e5;
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -72,15 +73,14 @@ html {
 
 /* Sidebar links */
 .sidebar a {
-  color: #fff;
+  color: #333;
+  font-weight: bold;
 }
 
 /* About section */
 .sidebar-about h1 {
-  color: #fff;
   margin-top: 0;
-  font-family: "Abril Fatface", serif;
-  font-size: 3.25rem;
+  font-size: 2.65rem;
 }
 
 /* Sidebar nav */
@@ -247,4 +247,12 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .content a,
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
+}
+
+.fork {
+  display: block;
+  height: 32px;
+  background-image: url(/images/github.png);
+  background-repeat: no-repeat;
+  padding-left: 40px;
 }
