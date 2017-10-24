@@ -256,3 +256,8 @@ a.sidebar-nav-item:focus {
   background-repeat: no-repeat;
   padding-left: 40px;
 }
+
+.edit {
+  font-size: .75rem;
+  text-align: right;
+}
