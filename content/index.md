@@ -118,7 +118,7 @@ Choose a supported APM tool and follow its configuration instructions for
 using OpenCensus.
 
 You can also use the OpenCensus z-Pages to view your
-tracing data, with our without an APM tool.
+tracing data without an APM tool.
 
 A user's guide will be released as soon as possible.
 
