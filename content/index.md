@@ -85,7 +85,7 @@ no Google intellectual property.
 
 Languages under development:
 
-+   C++ (planned)
++   [C++](https://github.com/census-instrumentation/opencensus-cpp)
 +   [Erlang](https://github.com/census-instrumentation/opencensus-erlang)
 +   [Java (JVM, OpenJDK, Android)](https://github.com/census-instrumentation/opencensus-java)
 +   [Go](https://github.com/census-instrumentation/opencensus-go)
@@ -94,6 +94,7 @@ Languages under development:
 +   Node.js (planned)
 +   [PHP](https://github.com/census-instrumentation/opencensus-php)
 +   [Python](https://github.com/census-instrumentation/opencensus-python)
++   Web JS (planned)
 
 Integrations supported:
 
