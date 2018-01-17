@@ -27,5 +27,5 @@ Press Ctrl+C to stop
 6. Once your PR is approved and merged, the website will be automatically regenerated and published.
 
 
-[website]: https://opencensus.io
+[website]: http://opencensus.io
 [install-hugo]: https://gohugo.io/getting-started/installing/
