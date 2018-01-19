@@ -98,11 +98,11 @@ Languages under development:
 
 Integrations supported:
 
-+   Spring
++   Spring (planned)
 +   gRPC
-+   JDBC
++   JDBC (planned)
 +   net/http
-+   Dropwizard (under development)
++   Dropwizard (planned)
 
 
 ## What APM tools does OpenCensus support?
