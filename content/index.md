@@ -26,10 +26,9 @@ The key features of OpenCensus include:
     metrics available out of the box.
 +   Included exporters for storage and analysis tools. Right now the list
     includes [Zipkin](http://zipkin.io), [Prometheus](http://prometheus.io),
-    [Datadog](http://datadoghq.com),
-    [Stackdriver](https://cloud.google.com/stackdriver),
-    [SignalFx](https://signalfx.com),
-    [Azure App Insights](https://azure.microsoft.com/en-us/services/application-insights/).
+    [Jeager](https://jaeger.readthedocs.io/en/latest/),
+    [Stackdriver](https://cloud.google.com/stackdriver), and
+    [SignalFx](https://signalfx.com).
 +   Full open source availability for additional integrations and export options.
 +   No additional server or daemon is required to support OpenCensus.
 +   In process debugging: an optional agent for displaying request and
