@@ -140,3 +140,8 @@ the OpenCensus library.
 +   Contribute to an existing library or create one for a new language.
 +   Integrate OpenCensus with a new framework.
 +   Integrate OpenCensus with a new APM tool.
+
+# Google Summer of Code
+
+Interested in developing for OpenCensus? Here are some ideas:
+[2018 Google Summer of Code Ideas List](https://storage.googleapis.com/summer-of-code/OpenCensusIdeasList.pdf)
