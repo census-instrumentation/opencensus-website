@@ -86,16 +86,18 @@ inside of Google. OpenCensus is a complete rewrite of the Google system.
 
 Languages under development:
 
-+   [C++](https://github.com/census-instrumentation/opencensus-cpp)
-+   [Erlang](https://github.com/census-instrumentation/opencensus-erlang)
-+   [Java (JVM, OpenJDK, Android)](https://github.com/census-instrumentation/opencensus-java)
-+   [Go](https://github.com/census-instrumentation/opencensus-go)
-+   [Ruby](https://github.com/census-instrumentation/opencensus-ruby)
-+   .Net (planned)
-+   Node.js (planned)
-+   [PHP](https://github.com/census-instrumentation/opencensus-php)
-+   [Python](https://github.com/census-instrumentation/opencensus-python)
-+   Web JS (planned)
+| Language        | Tracing         | Metrics         |
+|:--------------- |:--------------- |:--------------- |
+|[C++](https://github.com/census-instrumentation/opencensus-cpp)                           |Supported   |Supported   |
+|[Java (JVM, OpenJDK, Android)](https://github.com/census-instrumentation/opencensus-java) |Supported   |Supported   |
+|[Go](https://github.com/census-instrumentation/opencensus-go)                             |Supported   |Supported   |
+|[Python](https://github.com/census-instrumentation/opencensus-python)                     |Supported   |In Progress |
+|[PHP](https://github.com/census-instrumentation/opencensus-php)                           |Supported   |Planned     |
+|[Ruby](https://github.com/census-instrumentation/opencensus-ruby)                         |Supported   |Planned     |
+|[Node.js](https://github.com/census-instrumentation/opencensus-node)                      |In Progress |In Progress |
+|[C#/.Net](https://github.com/census-instrumentation/opencensus-csharp)                    |Planned     |Planned     |
+|[Erlang](https://github.com/census-instrumentation/opencensus-erlang)                     |In Progress |Planned     |
+|[Web JS](https://github.com/census-instrumentation/opencensus-web)                        |Planned     |Planned     |
 
 Integrations supported:
 
