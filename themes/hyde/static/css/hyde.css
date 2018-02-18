@@ -255,6 +255,7 @@ a.sidebar-nav-item:focus {
   background-image: url(/images/github.png);
   background-repeat: no-repeat;
   padding-left: 40px;
+  margin-top: 32px;
 }
 
 .edit {
