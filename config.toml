@@ -1,4 +1,4 @@
-baseURL = "http://opencensus.io/"
+baseURL = "https://opencensus.io/"
 languageCode = "en-us"
 title = "OpenCensus"
 theme = "hyde"
