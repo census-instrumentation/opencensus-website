@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113304960-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-113304960-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="A stats collection and distributed tracing framework">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="OpenCensus">
+
+		<!-- TITLE -->
+		<title>OpenCensus</title>
+
+		<!-- FAVICON -->
+	    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
+
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="css/colors/red.css">
+
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="load-circle"></div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+
+		<!-- ====== HEADER START ======  -->
+		<section class="s-header" id="home" data-scroll-index="0">
+			<div class="header-overlay">
+
+				<!-- ====== NAVGITION ======  -->
+				<nav class="navbar land-nav navbar-fixed-top">
+					<div class="container">
+						<div class="row">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+                                
+								<!-- logo -->
+                                <a class="logo navbar-brand" href="#home" data-scroll-nav="0"><ul><li><img src="img/logo-sm.svg"/> Open<span>Census</span></li></ul>
+								</a>
+							</div>
+
+							<!-- Collect the nav links, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="collapse">
+
+								<!-- links -->
+								<ul class="nav navbar-nav navbar-right" id="navbar">
+									<li><a href="about.html">About</a></li>
+                                           
+                                <!-- LANGUAGES NAV DROPDOWN  -->
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+	                                   <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">   Languages<b class="caret"></b></a>
+	                           <ul class="dropdown-menu multi-column columns-3">
+		                       <div class="row">
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="cpp/cplus.html">C++</a></li>
+					                   <li><a href="erlang/erlang.html">Erlang</a></li>
+					                   <li><a href="go/go.html">Go</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="java/java.html">Java</a></li>
+					                   <li><a href="dotnet/dotnet.html">.NET</a></li>
+					                   <li><a href="nodejs/nodejs.html">Node.js</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="php/php.html">PHP</a></li>
+					                   <li><a href="python/python.html">Python</a></li>
+					                   <li><a href="ruby/ruby.html">Ruby</a></li>
+                                       <li><a href="webjs/webjs.html">Web JS</a></li>
+				                    </ul>
+			                     </div>
+		                       </div>
+	                           </ul>
+	                           </li>   
+                            </ul>
+                            <!-- END LANGUAGES NAV DROPDOWN -->    
+									<li><a href="support/guides.html">Documentation</a></li>
+									<li><a href="blog.html">Community</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="support/support.html">Support</a></li>
+								</ul>                
+							</div><!-- /.navbar-collapse -->
+                        </div>
+					</div><!-- /.container -->
+				</nav>
+				<!-- ====== END NAVGITION ======  -->
+
+
+				<!-- Header Content -->
+				<div class="middle-c text-center">
+					<div class="capt">
+                        <p><br>
+                        <ul class="site-branding"><li><h1><img src="img/logo-lg.svg"/><span> Open</span>Census</h1></li></ul>
+						<h3>A single distribution of libraries for metrics and distributed tracing<br> with minimal overhead that allows you to export data to multiple backends.</h3>
+                        </p>
+						<!-- Buttons -->
+						<div class="header-btn">
+							<a class="b-act" href="overview.html">Get Started</a>
+						</div>
+					</div>
+				</div>
+				<!-- End Header Content -->
+			</div>            
+		</section>
+		<!-- ====== HEADER END ======  -->
+
+
+        <!-- ====== ABOUT START  ======  -->
+		<section class="sections about" id="about">
+			<div class="container-fluid">
+				<div class="row"><br><br>
+					<!-- ABOUT CONTENT START -->
+                    <div class="title">
+					   <div class="about-con col-md-6">
+                           <br>
+						   <h4>What is OpenCensus?</h4>
+						      <p>A single distribution of libraries that automatically collects traces and metrics from your app, displays them locally, and sends them to any analysis tool.</p>
+					   </div>
+        			   <div class="about-con col-md-6">
+                           <br>
+						   <h4>Who is behind OpenCensus?</h4>
+						      <p>OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there.</p>
+					   </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ABOUT CONTENT END -->
+
+        
+		<!-- ====== FEATURES START  ======  -->
+		<section class="sections features" id="features" data-scroll-index="1" style="background-color: aliceblue;">
+			<div class="container">
+				<div class="row"><br><br>
+
+					<!-- FEATURES START -->
+					<div class="features">
+                        <div class="title">
+                            <h4 id="features">Key Features</h4>
+                        </div>
+                        
+                        <div class="one">
+						<ul>
+							<li class="col-md-6">
+								<span class="icon icon-tools"></span>
+								<h3>Wire protocols and consistent APIs </h3>
+								<p>Standard wire protocols and consistent APIs for handling trace and metric data.</p>
+							</li>
+							<li class="col-md-6">
+								<span class="icon icon-book-open"></span>
+								<h3>Single set of Libraries</h3>
+								<p>A single set of libraries for many languages, including Java, C++, Go, .NET, Python, PHP, Node.js, Erlang, and Ruby.</p>
+							</li>
+						</ul>
+                        </div>
+                        
+                        <div class="two">
+						<ul>
+							<li class="col-md-6">
+								<span class="icon icon-gears"></span>
+								<h3>Integrations</h3>
+								<p>Included integrations with web and RPC frameworks, democratizing good tracing and metric collection.</p>
+							</li>
+							<li class="col-md-6">
+								<span class="icon icon-download"></span>
+								<h3>Exporters</h3>
+								<p>Included exporters for storage and analysis tools. Right now the list includes Zipkin, Prometheus, Jaeger, Stackdriver, and SignalFx.</p>
+							</li>
+						</ul>
+                        </div>
+                        
+                        <div class="three">
+						<ul>
+							<li class="col-md-6">
+								<span class="icon icon-global"></span>
+								<h3>Open Source</h3>
+								<p>All the code is entirely open source, to easily add your own integrations and exporters.</p>
+							</li>
+							<li class="col-md-6">
+								<span class="icon icon-layers"></span>
+								<h3>No Add-ons Needed</h3>
+								<p>No additional server or daemon is required to support OpenCensus.<br><br></p>
+							</li>
+						</ul>
+                        </div>
+                        
+                        <div class="four">
+						<ul>
+							<li class="col-md-6">
+								<span class="icon icon-linegraph"></span>
+								<h3>Optional Agent</h3>
+								<p>In process debugging: an optional agent for displaying request and metrics data on instrumented hosts.</p>
+							</li>
+                            <li class="col-md-6">
+                                <a href="https://storage.googleapis.com/summer-of-code/OpenCensusIdeasList.pdf"><img src="img/summerOfCode.png"></a>
+                                <h3></h3>
+                                <p><b>Get Involved</b> - Interested in developing for OpenCensus? Here are some ideas: <a href="https://storage.googleapis.com/summer-of-code/OpenCensusIdeasList.pdf" class="gloss1">2018 Google Summer of Code Ideas List</a></p>
+							</li>
+						</ul>
+                        </div>              
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ====== FEATURES END  ======  -->
+
+        
+		<!-- ====== LANGUAGE LIST START  ======  -->
+		<section class="sections work" id="work" data-scroll-index="3">
+			<div class="container">
+				<div class="row">
+					<!-- TITLE SECTION START -->
+					<div class="title">
+						<h4>Languages</h4>
+						<p>Go straight to the language of your choice:</p>
+					</div>
+					<!-- TITLE SECTION END -->
+
+					<!-- LANG BUTTONS -->
+					<div class="button-group filter-work">
+					  <a href="cpp/cplus.html" class="btn">C++</a>
+					  <a href="erlang/erlang.html" class="btn">Erlang</a>
+                      <a href="go/go.html" class="btn">Go</a>
+                    </div>
+                    <div class="button-group filter-work">
+                      <a href="java/java.html" class="btn">Java</a>
+                      <a href="dotnet/dotnet.html" class="btn">.NET</a>
+                      <a href="nodejs/nodejs.html" class="btn">Node.js</a>
+                    </div>
+                    <div class="button-group filter-work">
+                      <a href="php/php.html" class="btn">PHP</a>
+                      <a href="python/python.html" class="btn">Python</a>  
+                      <a href="ruby/ruby.html" class="btn">Ruby</a>
+                    </div>
+                    <div class="button-group filter-work">
+                      <a href="webjs/webjs.html" class="btn">Web JS</a>
+                    </div>
+					<!-- END LANG BUTTONS -->
+
+				</div>
+			</div>
+		</section>
+		<!-- ====== LANGUAGE LIST END  ======  -->
+
+
+		<!-- ====== CONTACT START  ======  -->
+		<section class="sections contact" id="contact">
+			<div class="container">
+				<div class="row">
+                <div class="item">
+                    <!-- FOOTER LINKS START -->
+                    <!-- LEFTS LINKS FORM START -->
+                    <div class="left-links">
+					   <div class="col-md-6">
+                            <p class="lead">OpenCensus</p>
+                            <p>Copyright © OpenCensus 2018 | All Rights Reserved.</p>
+                           <br>
+					   </div>
+                    </div>
+					<!-- LEFT LINKS END -->
+                    
+                    <!-- RIGHT LINKS START -->
+                    <!-- DOCUMENTS START -->
+				    <div class="col-md-2">
+                        <h6 class="ctit">Documents</h6>
+                        <p><a href="overview.html">Overview</a></p><br>
+                        <p><a href="quickstart.html">Quickstart</a></p><br>
+                        <p><a href="support/guides.html">Guides</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation">Tutorials</a></p><br>
+                        <p><a href="support/reference.html">API Reference</a></p><br>
+					</div>
+					<!-- DOCUMENTS END -->
+					<!-- RESOURCES START -->
+					<div class="col-md-2">
+                        <h6 class="ctit">Resources</h6>
+                        <p><a href="about.html">About</a></p><br>
+                        <p><a href="blog.html">Blog</a></p><br>
+                        <p><a href="support/support.html">Support</a></p><br>
+                        <p><a href="support/glossary.html">Glossary</a></p><br>
+					</div>
+					<!-- RESOURCES END  -->
+                    <!-- COMMUNITY START  -->
+					<div class="col-md-2">
+						<h6 class="ctit">Community</h6>
+                        <p><a href="https://github.com/census-instrumentation">Github</a></p><br>
+                        <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
+                        <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
+                        <p><a href="https://plus.google.com/communities/112482248706262039896">Google+</a></p><br>
+                        <p><a href="#">Email</a></p><br>
+					</div>
+					<!-- COMMUNITY END  -->
+                    <!-- FOOTER LINKS END -->
+                </div>                    
+				</div>
+			</div>
+		</section>
+		<!-- ====== CONTACT END  ======  -->
+
+		<!-- ====== JS ======  -->
+		<!-- JQUERY -->
+		<script src="js/jquery.v1.12.4.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- COUNT TO JS -->
+		<script src="js/jquery.countTo.js"></script>
+		<!-- ISOTOPE JS -->
+		<script src="js/isotope.pkgd.min.js"></script>
+		<!-- MASONRY JS -->
+		<script src="js/masonry.pkgd.min.js"></script>
+	    <!-- Magnific Popup core JS -->
+	    <script src="js/jquery.magnific-popup.min.js"></script>
+		<!-- PARSLEY file -->
+	    <script src="js/parsley.js"></script>
+		<!-- OWL CAROUSEL JS -->
+		<script src="js/owl.carousel.min.js"></script>
+	    <!-- SCROLLIT file -->
+	    <script src="js/scrollIt.min.js"></script>
+        <!-- ACCORDION JS -->
+        <script src="js/accordion.js"></script>
+		<!-- custom js -->
+		<script src="js/main.js"></script>
+	</body>
+</html>

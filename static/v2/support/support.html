@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113304960-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-113304960-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="DESCRIPTION">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="AUTHOR NAME">
+
+		<!-- TITLE -->
+		<title>OpenCensus Support</title>
+
+		<!-- FAVICON -->
+	    <link href=../favicon.ico rel="icon">
+        <link rel="apple-touch-icon" sizes="72x72" href="../favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../favicon/apple-icon-114x114.png">
+        <link rel="manifest" href="../favicon/site.webmanifest">
+		<link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
+
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="../css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="../css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="../css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="../css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="../css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="../css/colors/red.css">
+
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="load-circle">
+			</div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+
+		<!-- ====== HEADER START ======  -->
+		<section class="t-header" id="home" data-scroll-index="0">
+			<div class="header-overlay">
+
+				<!-- ====== NAVGITION ======  -->
+				<nav class="navbar land-nav navbar-fixed-top">
+					<div class="container">
+						<div class="row">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+                                
+								<!-- logo -->
+                                <a class="logo navbar-brand" href="../index.html"><ul><li><img src="../img/logo-sm.png"/> Open<span>Census</span></li></ul>
+								</a>
+							</div>
+
+							<!-- Collect the nav links, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="collapse">
+
+								<!-- links -->
+								<ul class="nav navbar-nav navbar-right" id="navbar">
+									<li><a href="../about.html">About</a></li>
+                                           
+                                <!-- LANGUAGES NAV DROPDOWN  -->
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+	                                   <a href="../languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
+	                           <ul class="dropdown-menu multi-column columns-3">
+		                      <div class="row">
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../cpp/cplus.html">C++</a></li>
+					                   <li><a href="../erlang/erlang.html">Erlang</a></li>
+					                   <li><a href="../go/go.html">Go</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../java/java.html">Java</a></li>
+					                   <li><a href="../dotnet/dotnet.html">.NET</a></li>
+					                   <li><a href="../nodejs/nodejs.html">Node.js</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../php/php.html">PHP</a></li>
+					                   <li><a href="../python/python.html">Python</a></li>
+					                   <li><a href="../ruby/ruby.html">Ruby</a></li>
+                                       <li><a href="../webjs/webjs.html">Web JS</a></li>
+				                    </ul>
+			                     </div>
+		                      </div>
+	                           </ul>
+	                           </li>   
+                            </ul>
+                            <!-- END LANGUAGES NAV DROPDOWN -->
+									<li><a href="../support/docs.html">Documentation</a></li>
+									<li><a href="../blog.html">Community</a></li>
+									<li><a href="../blog.html">Blog</a></li>
+									<li class="active"><a class="active" href="../support/support.html">Support</a></li>
+								</ul>
+							</div><!-- /.navbar-collapse -->
+						</div>
+					</div><!-- /.container -->
+				</nav>
+				<!-- ====== END NAVGITION ======  -->
+			</div>            
+		</section>
+		<!-- ====== HEADER END ======  -->
+
+        
+        <!-- ====== SUPPORT START  ======  -->
+		<section class="sections lang" id="lang">
+            <div class="container">
+				<div class="row">   
+					<!-- SUPPORT CONTENT START -->
+                    <div class="title">
+                        
+                        <!-- CENTER COULMN -->
+                        <div class="col-md-10 box" style="margin-left:5px">
+						  <h1>Frequently Asked Questions</h1>
+                          <br>
+                            
+                            <!-- COLLAPSIBLE ACCORDION START-->
+                            <div class="accordion">
+                                <dl>
+                                    <dt>
+                                        <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> Who is behind OpenCensus?</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+                                        <p>OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. This project is hosted on <a href="https://github.com/census-instrumentation"><span class="content">GitHub</span></a> and all work occurs there.</p><p>OpenCensus was initiated by Google, and is based on instrumentation systems used inside of Google. OpenCensus is a complete rewrite of the Google system and has no Google intellectual property.</p>
+                                    </dd>
+                                    <hr>
+                
+                                    <dt>
+                                        <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How does OpenCensus benefit the ecosystem?</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
+                                        <p>1. Making application metrics and distributed traces more accessible to developers. Today, one of the biggest challenges with gathering this information is the lack of good automatic instrumentation, as tracing and APM vendors have typically supplied their own limited, incompatible instrumentation solutions. With OpenCensus, more developers will be able to use these tools, which will improve the overall quality of their services and the web at large.</p>
+                                        <p>2. APM vendors will benefit from less setup friction for customers, broader language and framework coverage, and reduced effort spent in designing and maintaining their own instrumentation.</p>
+                                        <p>3. Local debugging capabilities. OpenCensus’s optional agent can be used to view requests and metrics locally and can dynamically change the sampling rate of traces, both of which are incredibly useful during critical production debugging sessions.</p>
+                                        <p>4. Collaboration and support from vendors (cloud providers like Google and Microsoft in addition to APM companies) and open source providers (Zipkin). As the OpenCensus libraries include instrumentation hooks into various web and RPC frameworks and exporters, they are immediately useful out of the box.</p>
+                                        <p>5. Allowing service providers to better debug customer issues. As OpenCensus defines a common context propagation format, customers experiencing issues can provide a request ID to providers so that they can debug the problem together. Ideally, providers can trace the same requests as customers, even if they are using different analysis systems.</p>
+                                    </dd>
+                                    <hr>
+                
+                                    <dt>
+                                        <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> What languages &amp; integrations does OpenCensus support?</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
+                                        <table>
+                                            <thead><br>
+                                                <tr>
+                                                    <th scope="col">Language</th>
+                                                    <th scope="col">Tracing</th>
+                                                    <th scope="col">Metrics</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Language">C++</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">Supported</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Erlang</td>
+                                                    <td data-label="Tracing">In Progress</td>
+                                                    <td data-label="Metrics">Planned</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Go</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">Supported</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Java (JVM, OpenJDK, Android)</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">Supported</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">C#/.NET</td>
+                                                    <td data-label="Tracing">Planned</td>
+                                                    <td data-label="Metrics">Planned</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Node.js</td>
+                                                    <td data-label="Tracing">In Progress</td>
+                                                    <td data-label="Metrics">In Progress</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">PHP</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">Planned</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Python</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">In Progress</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Ruby</td>
+                                                    <td data-label="Tracing">Supported</td>
+                                                    <td data-label="Metrics">Planned</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" data-label="Language">Web JS</td>
+                                                    <td data-label="Tracing">Planned</td>
+                                                    <td data-label="Metrics">Planned</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <hr>
+                                        <p>Integrations supported:</p>
+                                        <p>&bull; Spring (Planned)</p>
+                                        <p>&bull; gRPC</p>
+                                        <p>&bull; JDBC (Planned)</p>
+                                        <p>&bull; net/http</p>
+                                        <p>&bull; Dropwizard (Planned)</p>
+                                      </dd>
+                                      <hr>
+                
+                                  <dt>
+                                    <a href="#accordion4" aria-expanded="false" aria-controls="accordion4" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> What Exporters does OpenCensus support?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion4" aria-hidden="true">
+
+                                      <table>
+                                        <thead><br>
+                                            <tr>
+                                                <th scope="col">Backend</th>
+                                                <th scope="col">Go</th>
+                                                <th scope="col">Java</th>
+                                                <th scope="col">Erlang</th>
+                                                <th scope="col">C++</th>
+                                                <th scope="col">Node.js</th>
+                                                <th scope="col">Python</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-label="Backend">SignalFX</td>
+                                                <td data-label="Go" class="tall">No <a href="https://github.com/census-instrumentation/opencensus-go/issues/360"><span>(but filed)</span></a></td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <td data-label="Node.js">No</td>
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Prometheus</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">No <a href="https://github.com/census-instrumentation/opencensus-java/issues/851"><span>(but filed)</span></a></td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <td data-label="Node.js">No</td>
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Jaeger</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">No</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <td data-label="Node.js">No</td>
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Stackdriver</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <td data-label="Node.js">No</td>
+                                                <td data-label="Python">Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Zipkin</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <td data-label="Node.js">No</td>
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                  </dd>
+                                  <hr>
+                
+                                  <dt>
+                                    <a href="#accordion5" aria-expanded="false" aria-controls="accordion5" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> What APM tools does OpenCensus support?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion5" aria-hidden="true">
+                                    <p>This list is not yet available.</p>
+                                  </dd>
+                                  <hr>
+
+                                  <dt>
+                                    <a href="#accordion6" aria-expanded="false" aria-controls="accordion6" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How do I use OpenCensus in my application?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion6" aria-hidden="true">
+                                    <p>If you are using a supported application framework, follow its instructions for configuring OpenCensus.</p><p>Choose a supported APM tool and follow its configuration instructions for using OpenCensus.</p><p>You can also use the OpenCensus z-Pages to view your tracing data without an APM tool.</p><p>A user’s guide will be released as soon as possible.</p>
+                                  </dd>
+                                  <hr>
+
+                                  <dt>
+                                    <a href="#accordion7" aria-expanded="false" aria-controls="accordion7" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How do I integrate OpenCensus with my framework?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion7" aria-hidden="true">
+                                      <p>See the <a href="https://github.com/census-instrumentation/opencensus-cpp"><span>OpenCensus Guide for Framework Developers.</span></a></p>
+                                  </dd>
+                                  <hr>
+                
+                                  <dt>
+                                    <a href="#accordion8" aria-expanded="false" aria-controls="accordion8" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> What are the z-Pages?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion8" aria-hidden="true">
+                                    <p>OpenCensus provides a stand-alone application that uses a gRPC channel to communicate with the OpenCensus code linked into your application. The application displays configuration parameters and trace information in real time held in the OpenCensus library.</p>
+                                  </dd>
+                                  <hr>
+
+                                  <dt>
+                                    <a href="#accordion9" aria-expanded="false" aria-controls="accordion9" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How can I contribute to OpenCensus?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion9" aria-hidden="true">
+                                    <p>&bull; Help people on the discussion forums.</p><p>&bull; Tell us your success story using OpenCensus.</p><p>&bull; Tell us how we can improve OpenCensus, and help us do it.</p><p>&bull; Contribute to an existing library or create one for a new language.</p><p>&bull; Integrate OpenCensus with a new framework.</p><p>&bull; Integrate OpenCensus with a new APM tool.</p>
+                                  </dd>
+                                  <hr>
+                
+                                  <dt>
+                                    <a href="#accordion10" aria-expanded="false" aria-controls="accordion10" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How can I get support?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion10" aria-hidden="true">
+                                    <p>To be written.</p>
+                                  </dd>
+                                  <hr>
+
+                                  <dt>
+                                    <a href="#accordion11" aria-expanded="false" aria-controls="accordion11" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How do I report a bug?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion11" aria-hidden="true">
+                                    <p>To be written.</p>
+                                  </dd>
+                                  <hr>
+                
+                                  <dt>
+                                    <a href="#accordion12" aria-expanded="false" aria-controls="accordion12" class="accordion-title accordionTitle js-accordionTrigger"><b>+</b> How do I request new features?</a>
+                                  </dt>
+                                  <dd class="accordion-content accordionItem is-collapsed" id="accordion12" aria-hidden="true">
+                                    <p>To be written.</p>
+                                  </dd>
+                                  </dl>
+                                  <hr>
+                                  <!-- COLLAPSIBLE ACCORDION CONTENT END -->
+                            </div> <!-- END ACCORION -->
+                            <!-- END ACCORDIAN COULMN -->
+                            <!-- FAQ CONTENT END -->
+                        </div> <!-- END CENTER COLUMN -->
+                    </div> <!-- END TITLE -->
+                </div> <!-- END ROW -->
+            </div> <!-- END CONTAINER -->
+        </section>
+        <!-- ====== SUPPORT END  ======  -->
+
+
+		<!-- ====== CONTACT START  ======  -->
+		<section class="sections contact" id="contact">
+			<div class="container">
+				<div class="row">
+                <div class="item">
+                    <!-- FOOTER LINKS START -->
+                    <!-- LEFTS LINKS FORM START -->
+                    <div class="left-links">
+					   <div class="col-md-6">
+                            <p class="lead">OpenCensus</p>
+                            <p>Copyright © OpenCensus 2018 | All Rights Reserved.</p>
+                           <br>
+					   </div>
+                    </div>
+					<!-- LEFT LINKS END -->
+                    
+                    <!-- RIGHT LINKS START -->
+                    <!-- DOCUMENTS START -->
+				    <div class="col-md-2">
+                        <h6 class="ctit">Documents</h6>
+                        <p><a href="../overview.html">Overview</a></p><br>
+                        <p><a href="../quickstart.html">Quickstart</a></p><br>
+                        <p><a href="../support/guides.html">Guides</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation/opencensus-experiments">Tutorials</a></p><br>
+                        <p><a href="../support/reference.html">API Reference</a></p><br>
+					</div>
+					<!-- DOCUMENTS END -->
+					<!-- RESOURCES START -->
+					<div class="col-md-2">
+                        <h6 class="ctit">Resources</h6>
+                        <p><a href="../about.html">About</a></p><br>
+                        <p><a href="../blog.html">Blog</a></p><br>
+                        <p><a href="../support/support.html">Support</a></p><br>
+                        <p><a href="../support/glossary.html">Glossary</a></p><br>
+					</div>
+					<!-- RESOURCES END  -->
+                    <!-- COMMUNITY START  -->
+					<div class="col-md-2">
+						<h6 class="ctit">Community</h6>
+                        <p><a href="https://github.com/census-instrumentation">Github</a></p><br>
+                        <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
+                        <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
+                        <p><a href="https://plus.google.com/communities/112482248706262039896">Google+</a></p><br>
+                        <p><a href="#">Email</a></p><br>
+					</div>
+					<!-- COMMUNITY END  -->
+                    <!-- FOOTER LINKS END -->
+                </div>                    
+				</div>
+			</div>
+		</section>
+		<!-- ====== CONTACT END  ======  -->
+
+        
+		<!-- ====== JS ======  -->
+		<!-- JQUERY -->
+		<script src="../js/jquery.v1.12.4.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- COUNT TO JS -->
+		<script src="../js/jquery.countTo.js"></script>
+		<!-- ISOTOPE JS -->
+		<script src="../js/isotope.pkgd.min.js"></script>
+		<!-- MASONRY JS -->
+		<script src="../js/masonry.pkgd.min.js"></script>
+	    <!-- Magnific Popup core JS -->
+	    <script src="../js/jquery.magnific-popup.min.js"></script>
+		<!-- PARSLEY file -->
+	    <script src="../js/parsley.js"></script>
+		<!-- OWL CAROUSEL JS -->
+		<script src="../js/owl.carousel.min.js"></script>
+	    <!-- SCROLLIT file -->
+	    <script src="../js/scrollIt.min.js"></script>
+        <!-- ACCORDION JS -->
+        <script src="../js/accordion.js"></script>
+		<!-- custom js -->
+		<script src="../js/main.js"></script>
+	</body>
+</html>

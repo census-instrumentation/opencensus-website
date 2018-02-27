@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/about.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/cpp/cplus.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/erlang/erlang.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/go/go.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/java/java.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/dotnet/dotnet.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/nodejs/nodejs.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/php/php.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/python/python.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/ruby/ruby.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/webjs/webjs.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/support/guides.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/blog.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/support/support.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/overview.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/quickstart.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/support/reference.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/support/glossary.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/index.html</loc>
+  <lastmod>2018-02-26T19:04:36+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://oc-test-platform.firebaseapp.com/support/docs.html</loc>
+  <lastmod>2018-02-26T19:04:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

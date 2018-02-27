@@ -1,0 +1,95 @@
+/* ========================================================================================= */
+/* ======================================= COLOR : #FC6E51 =================================== */
+/* ========================================================================================= */
+.s-header .middle-c h1 span {
+  color: #FC6E51;
+}
+.s-header .middle-c .b-act {
+  background: #FC6E51;
+  border-color: #FC6E51;
+}
+.title h4 {
+  color: #FC6E51;
+}
+.navbar-fixed-top .logo {
+  color: #FC6E51;
+}
+.fixed .navbar-nav .active a {
+  color: #FC6E51;
+}
+.fixed .navbar-nav .active:hover a {
+  color: #FC6E51;
+}
+.box-icon span,
+.box-icon i {
+  border: 1px solid #FC6E51;
+  color: #FC6E51;
+}
+.box-content h3 {
+  color: #FC6E51;
+}
+.services .service-box:hover i,
+.services .service-box:hover span {
+  background: #FC6E51;
+  color: #FFF;
+}
+.work .filter-work a {
+  border: 1px solid #FC6E51;
+}
+.work .filter-work .is-checked {
+  background: #FC6E51;
+}
+.work .work-caption .overlay {
+  background: rgba(252, 110, 81, 0.8);
+}
+.facts .counting-icon i,
+.facts .counting-icon span {
+  color: #FC6E51;
+}
+.price .item .type {
+  color: #FC6E51;
+}
+.price .item .order a {
+  color: #FC6E51;
+  border: 1px solid #FC6E51;
+}
+.price .item .order a:hover {
+  background: #FC6E51;
+}
+.price .best .order a {
+  background: #FC6E51;
+  color: #FFF;
+}
+.price-table #most-p {
+  background: #FC6E51;
+}
+.testimonial-box h3 {
+  color: #FC6E51;
+}
+.blog-item .post-title a:hover {
+  color: #FC6E51;
+}
+.contact-form textarea:active,
+.contact-form textarea:focus {
+  border-color: #FC6E51;
+}
+.contact-form input:focus {
+  border-color: #FC6E51;
+}
+.contact-item .button {
+  color: #FC6E51;
+  border: 1px solid #FC6E51;
+}
+.contact-item .button:hover {
+  background: #FC6E51;
+}
+.contact .item i,
+.contact .item .icon {
+  color: #FC6E51;
+}
+.contact .item h6 {
+  color: #FC6E51;
+}
+.social-icon a:hover span {
+  background: #FC6E51;
+}

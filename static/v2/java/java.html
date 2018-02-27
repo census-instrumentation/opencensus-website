@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113304960-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-113304960-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="DESCRIPTION">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="AUTHOR NAME">
+
+		<!-- TITLE -->
+		<title>OpenCensus Java</title>
+
+		<!-- FAVICON -->
+	    <link href=../favicon.ico rel="icon">
+        <link rel="apple-touch-icon" sizes="72x72" href="../favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../favicon/apple-icon-114x114.png">
+        <link rel="manifest" href="../favicon/site.webmanifest">
+		<link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
+
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="../css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="../css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="../css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="../css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="../css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="../css/colors/red.css">
+
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="load-circle">
+			</div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+
+		<!-- ====== HEADER START ======  -->
+		<section class="t-header" id="home" data-scroll-index="0">
+			<div class="header-overlay">
+
+				<!-- ====== NAVGITION ======  -->
+				<nav class="navbar land-nav navbar-fixed-top">
+					<div class="container">
+						<div class="row">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+                                
+								<!-- logo -->
+                                <a class="logo navbar-brand" href="../index.html"><ul><li><img src="../img/logo-sm.png"/> Open<span>Census</span></li></ul>
+								</a>
+							</div>
+
+                            <!-- Collect the nav links, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="collapse">
+
+								<!-- links -->
+								<ul class="nav navbar-nav navbar-right" id="navbar">
+									<li><a href="../about.html">About</a></li>
+                                           
+                                <!-- LANGUAGES NAV DROPDOWN  -->
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+	                                   <a href="../languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
+	                           <ul class="dropdown-menu multi-column columns-3">
+		                      <div class="row">
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../cpp/cplus.html">C++</a></li>
+					                   <li><a href="../erlang/erlang.html">Erlang</a></li>
+					                   <li><a href="../go/go.html">Go</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../java/java.html">Java</a></li>
+					                   <li><a href="../dotnet/dotnet.html">.NET</a></li>
+					                   <li><a href="../nodejs/nodejs.html">Node.js</a></li>
+				                    </ul>
+			                     </div>
+			                     <div class="col-sm-4">
+				                    <ul class="multi-column-dropdown">
+					                   <li><a href="../php/php.html">PHP</a></li>
+					                   <li><a href="../python/python.html">Python</a></li>
+					                   <li><a href="../ruby/ruby.html">Ruby</a></li>
+                                       <li><a href="../webjs/webjs.html">Web JS</a></li>
+				                    </ul>
+			                     </div>
+		                      </div>
+	                           </ul>
+	                           </li>   
+                            </ul>
+                            <!-- END LANGUAGES NAV DROPDOWN -->    
+									<li><a href="../support/docs.html">Documentation</a></li>
+									<li><a href="../blog.html">Community</a></li>
+									<li><a href="../blog.html">Blog</a></li>
+									<li><a href="../support/support.html">Support</a></li>
+								</ul>
+							</div><!-- /.navbar-collapse -->
+						</div>
+					</div><!-- /.container -->
+				</nav>
+				<!-- ====== END NAVGITION ======  -->
+			</div>            
+		</section>
+		<!-- ====== HEADER END ======  -->
+
+
+        <!-- ====== JAVA START  ======  -->
+		<section class="sections lang" id="lang">
+            <div class="container">
+                
+				<!-- ====== MIDDLE NAVGITION ======  -->
+                <div class="row">
+                    <div class="title-right">
+                        <div class="lang-con1 col-sm-12">
+                            <p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+                            <p> &nbsp; | &nbsp; </p>
+                            <p><a href="https://github.com/census-instrumentation/opencensus-java"><span class="fa fa-github"></span> Edit <b>java.md</b></a></p>
+                        </div>
+                    </div>
+                </div>
+				<!-- ====== END MIDDLE NAVGITION ======  -->
+            </div>
+            
+			<div class="container">
+				<div class="row">   
+					<!-- JAVA CONTENT START -->
+                    <div class="title">
+                        
+                        <!-- LEFT COULMN -->
+                        <div class="col-md-3 box" style="margin-left:5px">
+                            <h4>Quickstart</h4>
+                            <hr>
+                            <ul>
+                                <li><p><a href="../cpp/cplus.html">C++</a></p></li>
+                                <li><p><a href="../erlang/erlang.html">Erlang</a></p></li>
+                                <li><p><a href="../go/go.html">Go</a></p></li>
+                                <li><p><a href="../java/java.html" class="active">&nbsp;&#9679; Java</a></p></li>
+                                <li><p><a href="../dotnet/dotnet.html">.NET</a></p></li>
+                                <li><p><a href="../nodejs/nodejs.html">Node.js</a></p></li>
+                                <li><p><a href="../php/php.html">PHP</a></p></li>
+                                <li><p><a href="../python/python.html">Python</a></p></li>
+                                <li><p><a href="../ruby/ruby.html">Ruby</a></p></li>
+                                <li><p><a href="../webjs/webjs.html">Web JS</a></p></li>
+                            </ul><hr><br>
+                        </div>
+                        <!-- END LEFT COULMN -->
+                        
+                        <!-- CENTER COULMN -->
+                        <div class="col-md-8 box" style="margin-left:5px">
+						  <h1>Java Quickstart</h1>
+						  <p>This guide gets you started with OpenCensus in Java with a simple working example.</p><br>
+                            
+                            <h4>Before you begin</h4>
+                            <p>What you need before you begin.<br>
+                            Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            
+                            <h4>Download the example</h4>
+                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. </p><br>
+                            
+                            <h4>Run an OpenCensus application</h4>
+                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            
+                            <h4>Update an OpenCensus service</h4>
+                            <p>Instructions of some sort go here. Instructions of some sort go here.</p>
+                            <p>
+                            <pre>
+                                <code>
+                                /*******************************************************
+                                Compilation:  javac HelloWorld.java
+                                Execution:    java HelloWorld
+
+                                Prints "Hello, World". By tradition, is everyone's first program.
+
+                                % java HelloWorld
+                                Hello, World
+                                *******************************************************/
+
+                                public class HelloWorld {
+
+                                   public static void main(String[] args) {
+                                   // Prints "Hello, World" to the terminal window.
+                                   System.out.println("Hello, World");
+                                   }
+
+                                }</code>
+                            </pre>  
+                            </p><br>
+                            
+                            <h4>Update and run the application</h4>
+                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            
+                            <h4>What’s next?</h4>
+                            <p>Something goes here.</p><br>
+					   </div>
+                        <!-- END CENTER COULMN -->
+                        <!-- JAVA CONTENT END -->                  
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ====== JAVA END  ======  -->
+
+
+		<!-- ====== CONTACT START  ======  -->
+		<section class="sections contact" id="contact">
+			<div class="container">
+				<div class="row">
+                <div class="item">
+                    <!-- FOOTER LINKS START -->
+                    <!-- LEFTS LINKS FORM START -->
+                    <div class="left-links">
+					   <div class="col-md-6">
+                            <p class="lead">OpenCensus</p>
+                            <p>Copyright © OpenCensus 2018 | All Rights Reserved.</p>
+                           <br>
+					   </div>
+                    </div>
+					<!-- LEFT LINKS END -->
+                    
+                    <!-- RIGHT LINKS START -->
+                    <!-- DOCUMENTS START -->
+				    <div class="col-md-2">
+                        <h6 class="ctit">Documents</h6>
+                        <p><a href="../overview.html">Overview</a></p><br>
+                        <p><a href="../quickstart.html">Quickstart</a></p><br>
+                        <p><a href="../support/guides.html">Guides</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation/opencensus-experiments">Tutorials</a></p><br>
+                        <p><a href="../support/reference.html">API Reference</a></p><br>
+					</div>
+					<!-- DOCUMENTS END -->
+					<!-- RESOURCES START -->
+					<div class="col-md-2">
+                        <h6 class="ctit">Resources</h6>
+                        <p><a href="../about.html">About</a></p><br>
+                        <p><a href="../blog.html">Blog</a></p><br>
+                        <p><a href="../support/support.html">Support</a></p><br>
+                        <p><a href="../support/glossary.html">Glossary</a></p><br>
+					</div>
+					<!-- RESOURCES END  -->
+                    <!-- COMMUNITY START  -->
+					<div class="col-md-2">
+						<h6 class="ctit">Community</h6>
+                        <p><a href="https://github.com/census-instrumentation">Github</a></p><br>
+                        <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
+                        <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
+                        <p><a href="https://plus.google.com/communities/112482248706262039896">Google+</a></p><br>
+                        <p><a href="#">Email</a></p><br>
+					</div>
+					<!-- COMMUNITY END  -->
+                    <!-- FOOTER LINKS END -->
+                </div>                    
+				</div>
+			</div>
+		</section>
+		<!-- ====== CONTACT END  ======  -->
+
+		<!-- ====== JS ======  -->
+		<!-- JQUERY -->
+		<script src="../js/jquery.v1.12.4.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- COUNT TO JS -->
+		<script src="../js/jquery.countTo.js"></script>
+		<!-- ISOTOPE JS -->
+		<script src="../js/isotope.pkgd.min.js"></script>
+		<!-- MASONRY JS -->
+		<script src="../js/masonry.pkgd.min.js"></script>
+	    <!-- Magnific Popup core JS -->
+	    <script src="../js/jquery.magnific-popup.min.js"></script>
+		<!-- PARSLEY file -->
+	    <script src="../js/parsley.js"></script>
+		<!-- OWL CAROUSEL JS -->
+		<script src="../js/owl.carousel.min.js"></script>
+	    <!-- SCROLLIT file -->
+	    <script src="../js/scrollIt.min.js"></script>
+        <!-- ACCORDION JS -->
+        <script src="../js/accordion.js"></script>
+		<!-- custom js -->
+		<script src="../js/main.js"></script>
+	</body>
+</html>
