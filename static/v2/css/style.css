@@ -1,5 +1,5 @@
 /* =======================================================================
-OpenCesnsus - Landing page
+OpenCesnsus CSS
 ======================================================================= */
 
 /*
@@ -13,7 +13,6 @@ OpenCesnsus - Landing page
     6. SERVICES
     7. WORK
     8. FACTS
-    9. PRICE
     10. TESTIMONIALS
     11. BLOG
     12. CONTACT
@@ -38,7 +37,8 @@ body {
   font-weight: 300;
   font-size: 15px;
   overflow-x: hidden;
-  color: #212121;
+  color: #232323;
+  /* color: #212121; */
 }
 ul,ol {
 	padding: 0;
@@ -48,7 +48,7 @@ li {
 	list-style: none;
 }
 a {
-	color:#212121;
+	color:#232323;
 }
 a:hover {
 	text-decoration: none;
@@ -86,9 +86,10 @@ img {
 }
 .title p {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
+  /* font-size: 13.5px; */
   width: 50%;
   margin: 0 auto;
 }
@@ -187,7 +188,7 @@ img {
 .s-header .middle-c a {
   margin: 0 15px;
   display: inline-block;
-  font-size: 11.5px;
+  font-size: 15px;
   padding: 8px 30px;
   border: 1px solid #fff;
   letter-spacing: 2px;
@@ -275,7 +276,7 @@ img {
 .t-header .middle-c a {
   margin: 0 15px;
   display: inline-block;
-  font-size: 11.5px;
+  font-size: 15px;
   padding: 8px 30px;
   border: 1px solid #fff;
   letter-spacing: 2px;
@@ -317,7 +318,7 @@ img {
   width: 100%;
 }
 .navbar-fixed-top .navbar-nav>li {
-  font-size: 16px;
+  font-size: 12px;
   margin: 30px 20px;
   font-weight: 400;
   cursor: pointer;
@@ -420,7 +421,7 @@ img {
 	display: block;
 	clear: both;
 	line-height: 1.428571429;
-	color: #333;
+	color: #232323;
 	white-space: normal;
 }
 .multi-column-dropdown li a:hover {
@@ -428,32 +429,12 @@ img {
 	color: #C1272D;
 	background-color: aliceblue;
 }
-
-/* ---- 2/16 ---- */
-/*
-.s-header .navbar .collapse a {
-    margin-left: 10px;
-}
-*/
-/*
-.dropdown-toggle {
-    margin-left: 40px;
-}
-*/
- 
 @media (max-width: 767px) {
 	.dropdown-menu.multi-column {
 		min-width: 240px !important;
 		overflow-x: hidden;
 	}
 }
-
-
-/* -------------------------------------
- SECONDARY NAVBAR
----------------------------------------*/
-
-
 
 /* --------------------------------------
   5. ABOUT
@@ -469,12 +450,12 @@ img {
   /* float: none; */
 }
 .about-con h3 {
-  color: #212121;
+  color: #232323;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
 .about-con p {
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
 }
 .about-con .signa {
@@ -507,8 +488,8 @@ img {
   font-size: 55px;
 }
 .features ul li p {
-  color: #6f6f6f;
-  font-size: 13.5px;
+  color: #232323;
+  font-size: 15px;
 }
 .features ul {
   margin-bottom: 30px;
@@ -567,7 +548,7 @@ img {
 }
 .box-content p {
   color: #555;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   line-height: 27px;
 }
@@ -593,13 +574,13 @@ img {
   margin-bottom: 20px;
 }
 .work .filter-work a {
-  color: #212121;
+  color: #232323;
   cursor: pointer;
   line-height: 27px;
   text-transform: uppercase;
   font-family: 'Dosis', sans-serif;
   letter-spacing: 2px;
-  font-size: 14px;
+  font-size: 15px;
   margin: 0 10px;
   -webkit-transition: ease-out .2s;
   -moz-transition: ease-out .2s;
@@ -652,7 +633,7 @@ img {
 }
 .work .work-caption .info-content h4 {
   color: #FFF;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   text-transform:uppercase;
   letter-spacing: 0.2em;
@@ -698,7 +679,7 @@ img {
   color: #000;
 }
 .white-popup div p {
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
   line-height: 27px;
 }
@@ -739,9 +720,9 @@ img {
 }
 .ref .title-right p a {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
   margin: 0 auto;
   text-align: right;
@@ -752,9 +733,9 @@ img {
   margin-bottom: 40px;
   text-align: left;
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
 }
 .ref .title h1 {
@@ -774,9 +755,9 @@ img {
 }
 .ref .title p {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
   text-align: left;
 }
@@ -795,7 +776,7 @@ img {
   text-transform: uppercase;
 }
 .ref-con1 p {
-  font-size: 14px;
+  font-size: 15px;
   text-align: right;
   display: inline;
 
@@ -808,9 +789,9 @@ img {
   margin: 0 auto;
   float: left;
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
 }
 .ref-con2 h3 {
@@ -825,7 +806,7 @@ img {
   font-weight: 300;
   color: #6f6f6f;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
 }
 .ref-con2 ul li a {
@@ -835,7 +816,7 @@ img {
   font-weight: 300;
   color: #C1272D;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
 }
 .ref-con2 .signa {
@@ -873,9 +854,9 @@ img {
 }
 .lang .title-right p a {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
   text-align: right;
   display: inline;
@@ -884,9 +865,9 @@ img {
   margin: 30px 0 40px 0;
   text-align: left;
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
 }
 .lang .title h4 {
@@ -914,8 +895,8 @@ img {
   letter-spacing: 4px;
   text-transform: uppercase;
   font-weight: 360;
-  font-size: 20px;
-  color: #6f6f6f;
+  font-size: 15px;
+  color: #232323;
 }
 .lang .title #center a:hover {
   color: #C1272D;
@@ -935,9 +916,9 @@ img {
 }
 .lang .title ul {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
   text-align: left;
 }
@@ -946,9 +927,9 @@ img {
 }
 .lang .title p {
   font-weight: 300;
-  color: #6f6f6f;
+  color: #232323;
   letter-spacing: 1px;
-  font-size: 13.5px;
+  font-size: 15px;
   width: 100%;
   text-align: left;
 }
@@ -956,7 +937,7 @@ img {
   font-weight: 300;
   color: #C1272D;
   letter-spacing: 1px;
-  font-size: 14.5px;
+  font-size: 15px;
   width: 100%;
   text-align: left;
 }
@@ -972,7 +953,7 @@ img {
   text-transform: uppercase;
 }
 .lang-con1 p {
-  font-size: 14px;
+  font-size: 15px;
   text-align: right;
   display: inline;
 }
@@ -1021,90 +1002,7 @@ code {
   letter-spacing: 3px;
 }
 
-/* --------------------------------------
-  9. PRICE
------------------------------------------*/
-.price {
-  background: #f2f4ec;
-}
-.price-table .item {
-  background: #FFF;
-  padding: 50px;
-  position: relative;
-  overflow: hidden;
-}
-.price .item .type {
-  margin: 0 0 50px;
-  font-family: 'Dosis', sans-serif;
-  text-transform: uppercase;
-}
-.price .item .type h5 {
-  font-size: 25px;
-  letter-spacing: 3px;
-}
-.price .item .mount {
-  margin: 0 0 50px;
-}
-.price .item .mount h3 {
-  font-size: 60px;
-  font-weight: 700;
-}
-.price .item .mount h3 span {
-  font-size: 20px;
-  font-weight: 400;
-  padding-right: 5px;
-}
-.price .item .features {
-  margin: 0 0 50px;
-  width: 100%;
-}
-.price .item .features p {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #f2f4ec;
-  color: #6f6f6f;
-  font-size: 14px;
-}
-.price .item .features p:last-child {
-  border-width: 0;
-  margin-bottom: 0;
-}
-.price .item .order a {
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  padding: 7px;
-  width: 90%;
-  display: inline-block;
-  background: #FFF;
-  letter-spacing: .5px;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -o-transition: all .5s;
-  -ms-transition: all .5s;
-  transition: all .5s;
-}
-.price .item .order a:hover {
-  color: #FFF;
-}
-.price .best .order a {
-  color: #FFF;
-}
-.price-table #most-p {
-  position: absolute;
-  color: #FFF;
-  padding: 4px 70px;
-  font-size: 13px;
-  top: 35px;
-  left: -65px;
-  transform: rotate(-35deg);
-  -webkit-transform: rotate(-35deg);
-  -moz-transform: rotate(-35deg);
-  -o-transform: rotate(-35deg);
-  -ms-transform: rotate(-35deg);
-}
+
 
 /* --------------------------------------
   10. TESTIMONIALS
@@ -1133,7 +1031,7 @@ code {
 }
 .testimonial-box p {
   color: #FFF;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   line-height: 27px; 
   margin-bottom: 30px;
@@ -1143,7 +1041,7 @@ code {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-family: 'Dosis', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   padding-bottom: 30px;
   font-weight: 700;
 }
@@ -1193,7 +1091,12 @@ code {
   background: #252525;
   color: #FFF;
 }
-.blog-item  .post-meta {
+.blog-item span {
+  font-size: 13px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+}
+.blog-item .post-meta {
   font-size: 13px;
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
@@ -1220,7 +1123,7 @@ code {
   font-weight: 400;
 }
 .blog-item .post-content p {
-  color: #6f6f6f;
+  color: #232323;
   font-size: 14px;
 }
 .blog-item:hover p {
@@ -1234,7 +1137,7 @@ code {
 
 /* -- ACCORDION -- */
 .title .accordion span {
-  font-size: 13.5px;
+  font-size: 15px;
   margin-bottom: 5px;
   font-weight: 360;
   color: #C1272D;
@@ -1242,16 +1145,16 @@ code {
   text-decoration: underline;
 }
 .accordion a {
-  font-size: 19px;
+  font-size: 15px;
   margin-bottom: 5px;
   letter-spacing: 4px;
   font-weight: 360;
-  color: #6f6f6f;
+  color: #232323;
   text-transform: uppercase;
 }
 .accordion .accordion-content a {
-  color: #6f6f6f;
-  font-size: 13.5px;
+  color: #232323;
+  font-size: 15px;
 }
 .accordion p {
   padding:1em 2em 1em 2em;
@@ -1269,7 +1172,7 @@ code {
 
 .accordionTitleActive, 
 .accordionTitle.is-expanded {
-   background-color:darken(#38cc70, 10%);
+   background-color:darken(#fff, 10%);
     &:before {
      
       transform:rotate(-225deg);
@@ -1449,7 +1352,7 @@ table th {
 .contact-form input {
   width: 100%;
   float: left;
-  font-size: 16px;
+  font-size: 1px;
   padding: 10px;
   border: none;
   background: #191919;
