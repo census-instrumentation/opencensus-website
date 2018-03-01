@@ -136,7 +136,7 @@ img {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 75vh;
   width: 100%;
   position: relative;
   overflow-x: hidden!important;
@@ -153,7 +153,7 @@ img {
   color:#FFF;
   position: absolute;
   width: 100%;
-  top: 50%;
+  top: 70%;
   left: 0;
   -webkit-transform: translate(0,-70%);
   -moz-transform: translate(0,-70%);
@@ -250,7 +250,7 @@ img {
   transform: translate(0,-50%);
 }
 .t-header .middle-c .capt {
-  margin-top: 50px;
+  margin-top: 90px;
 }
 .t-header .middle-c h1 {
   font-weight: 300;
