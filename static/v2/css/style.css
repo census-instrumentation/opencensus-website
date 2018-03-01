@@ -13,6 +13,7 @@ OpenCesnsus CSS
     6. SERVICES
     7. WORK
     8. FACTS
+    9. DOCUMENTS
     10. TESTIMONIALS
     11. BLOG
     12. CONTACT
@@ -1006,8 +1007,34 @@ code {
   letter-spacing: 3px;
 }
 
-
-
+/*---------------------------------------
+  9. DOCUMENTS                
+-----------------------------------------*/
+#docbox {
+    margin: 20px 0px 40px 0px;
+}
+#docbox table {
+  border: none;
+  width: 90%;
+}
+#docbox tr {
+    border: none;
+    background-color: white;
+    text-align: left;
+    /* margin-left: 5px; */
+}
+#docbox th {
+    text-align: left;
+    margin-left: 5px;
+}
+#docbox td {
+    text-align: left;
+    margin-left: 5px;
+}
+doc1:hover tr td a {
+  color: #C1272D;
+  text-decoration: underline;
+}
 /* --------------------------------------
   10. TESTIMONIALS
 -----------------------------------------*/
