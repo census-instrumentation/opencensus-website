@@ -38,7 +38,6 @@ body {
   font-size: 15px;
   overflow-x: hidden;
   color: #232323;
-  /* color: #212121; */
 }
 ul,ol {
 	padding: 0;
@@ -89,7 +88,6 @@ img {
   color: #232323;
   letter-spacing: 1px;
   font-size: 15px;
-  /* font-size: 13.5px; */
   width: 50%;
   margin: 0 auto;
 }
@@ -149,7 +147,6 @@ img {
   left: 0;
   height: 100%;
   width: 100%;
-  /*background: rgba(48,122,187,1); */  
   background: rgba(0,0,0,.4);
 }
 .s-header .middle-c {
@@ -457,6 +454,7 @@ img {
 .about-con p {
   font-size: 15px;
   text-align: left;
+  width: 60%;
 }
 .about-con .signa {
   margin-top: 35px;
@@ -464,6 +462,12 @@ img {
 .about .title {
   margin-bottom: 40px;
   text-align: left;
+}
+#cont {
+    margin-top: 35px;
+}
+#cont p {
+    text-align: center;
 }
 
 /* --------------------------------------
@@ -1088,7 +1092,7 @@ code {
 }
 .blog-item:hover a,
 .blog-item:hover {
-  background: #252525;
+  background: #535559;
   color: #FFF;
 }
 .blog-item span {

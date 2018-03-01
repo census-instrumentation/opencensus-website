@@ -25,14 +25,15 @@
 		<meta name="author" content="AUTHOR NAME">
 
 		<!-- TITLE -->
-		<title>OpenCensus Quickstart</title>
+		<title>OpenCensus Docs</title>
 
 		<!-- FAVICON -->
-	    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	    <link href=../favicon.ico rel="icon">
+        <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
         <link rel="manifest" href="favicon/site.webmanifest">
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
         <meta name="msapplication-TileColor" content="#2d89ef">
         <meta name="theme-color" content="#ffffff">
 
@@ -132,7 +133,7 @@
                                     </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="support/guides.html">Documentation</a></li>
-                                    <li><a href="roadmap.html">Roadmap</a></li>
+                                    <li class="active"><a href="roadmap.html">Roadmap</a></li>
 									<li><a href="blog.html">Blog</a></li>
 									<li><a href="support/faq.html">FAQ</a></li>
                                     <li><a href="about.html">About</a></li>
@@ -147,55 +148,82 @@
 		<!-- ====== HEADER END ======  -->
 
 
-        <!-- ====== QUICKSTART START  ======  -->
+        <!-- ====== DOCS START  ======  -->
 		<section class="sections lang" id="lang">
+            <div class="container">
+
 			<div class="container">
 				<div class="row">   
-					<!-- QUICKSTART CONTENT START -->
+					<!-- DOCS CONTENT START -->
                     <div class="title">
                         
                         <!-- CENTER COULMN -->
                         <div class="col-md-10 box" style="margin-left:5px">
-						  <h1>Quickstart</h1>
-						  <p></p><br>
                             
-                            <h4><a href="cpp/cplus.html">C++</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="erlang/erlang.html">Erlang</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="go/go.html">Go</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                                                        
-                            <h4><a href="java/java.html">Java</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="dotnet/dotnet.html">.NET</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="nodejs/nodejs.html">Node.js</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="php/php.html">PHP</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="python/python.html">Python</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                                                        
-                            <h4><a href="ruby/ruby.html">Ruby</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="webjs/webjs.html">Web JS</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
+						  <h1>Roadmap</h1>
+						  <br>
+                            <!-- COLLAPSIBLE ACCORDIAN START-->
+                            <div class="accordion">
+                                <dl>
+                                    <dt>
+                                        <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">+ Documentation by Language</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+                                        <p><a href="../cpp/cplus.html">C++</a></p>
+                                        <p><a href="../erlang/erlang.html">Erlang</a></p>
+                                        <p><a href="../go/go.html">Go</a></p>
+                                        <p><a href="../java/java.html">Java</a></p>
+                                        <p><a href="../dotnet/dotnet.html">.NET</a></p>
+                                        <p><a href="../nodejs/nodejs.html">Node.js</a></p>
+                                        <p><a href="../php/php.html">PHP</a></p>
+                                        <p><a href="../python/python.html">Python</a></p>
+                                        <p><a href="../ruby/ruby.html">Ruby</a></p>
+                                        <p><a href="../webjs/webjs.html">Web JS</a></p>
+                                    </dd>
+                                    <hr>
+                                    
+                                    <dt>
+                                        <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger">+ API</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
+                                        <p>To be written.</p>
+                                    </dd>
+                                    <hr>
+                                    
+                                    <dt>
+                                        <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger">+ Tutorials</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
+                                        <p>To be written.</p>
+                                    </dd>
+                                    <hr>
+                                    
+                                    <dt>
+                                        <a href="#accordion4" aria-expanded="false" aria-controls="accordion4" class="accordion-title accordionTitle js-accordionTrigger">+ Examples</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion4" aria-hidden="true">
+                                        <p>To be written.</p>
+                                    </dd>
+                                    <hr>
+                                    
+                                    <dt>
+                                        <a href="#accordion5" aria-expanded="false" aria-controls="accordion5" class="accordion-title accordionTitle js-accordionTrigger">+ 3rd Party Integrations</a>
+                                    </dt>
+                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion5" aria-hidden="true">
+                                        <p>To be written.</p>
+                                    </dd>
+                                    <hr>
+                                </dl>
+                            </div>    
+                            <!-- COLLAPSIBLE ACCORDION CONTENT END -->
 					   </div>
-                        <!-- END CENTER COULMN -->
-                        <!-- QUICKSTART CONTENT END -->
+                        <!-- END ACCORDIAN COULMN -->
+                        <!-- DOCS CONTENT END -->
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ====== QUICKSTART END  ======  -->
+        <!-- ====== DOCS END  ======  -->
 
 
 		<!-- ====== CONTACT START  ======  -->
@@ -218,20 +246,20 @@
                     <!-- DOCUMENTS START -->
 				    <div class="col-md-2">
                         <h6 class="ctit">Documents</h6>
-                        <p><a href="overview.html">Overview</a></p><br>
-                        <p><a href="quickstart.html">Quickstart</a></p><br>
-                        <p><a href="support/guides.html">Guides</a></p><br>
-                        <p><a href="tutorials.html">Tutorials</a></p><br>
-                        <p><a href="support/reference.html">API Reference</a></p><br>
+                        <p><a href="../overview.html">Overview</a></p><br>
+                        <p><a href="../quickstart.html">Quickstart</a></p><br>
+                        <p><a href="../support/guides.html">Guides</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation/opencensus-experiments">Tutorials</a></p><br>
+                        <p><a href="../support/reference.html">API Reference</a></p><br>
 					</div>
 					<!-- DOCUMENTS END -->
 					<!-- RESOURCES START -->
 					<div class="col-md-2">
                         <h6 class="ctit">Resources</h6>
-                        <p><a href="about.html">About</a></p><br>
-                        <p><a href="blog.html">Blog</a></p><br>
-                        <p><a href="support/faq.html">FAQ</a></p><br>
-                        <p><a href="support/glossary.html">Glossary</a></p><br>
+                        <p><a href="../about.html">About</a></p><br>
+                        <p><a href="../blog.html">Blog</a></p><br>
+                        <p><a href="../support/faq.html">FAQ</a></p><br>
+                        <p><a href="../support/glossary.html">Glossary</a></p><br>
 					</div>
 					<!-- RESOURCES END  -->
                     <!-- COMMUNITY START  -->
@@ -271,6 +299,8 @@
 		<script src="js/owl.carousel.min.js"></script>
 	    <!-- SCROLLIT file -->
 	    <script src="js/scrollIt.min.js"></script>
+        <!-- ACCORDION JS -->
+        <script src="js/accordion.js"></script>
 		<!-- custom js -->
 		<script src="js/main.js"></script>
 	</body>

@@ -96,47 +96,47 @@
 
 								<!-- links -->
 								<ul class="nav navbar-nav navbar-right" id="navbar">
-									<li><a href="about.html">About</a></li>
-                                           
-                                <!-- LANGUAGES NAV DROPDOWN  -->
-                                <ul class="nav navbar-nav">
-                                    <li class="dropdown">
-	                                   <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                           <ul class="dropdown-menu multi-column columns-3">
-		                      <div class="row">
-			                     <div class="col-sm-4">
-				                    <ul class="multi-column-dropdown">
-					                   <li><a href="cpp/cplus.html">C++</a></li>
-					                   <li><a href="erlang/erlang.html">Erlang</a></li>
-					                   <li><a href="go/go.html">Go</a></li>
-				                    </ul>
-			                     </div>
-			                     <div class="col-sm-4">
-				                    <ul class="multi-column-dropdown">
-					                   <li><a href="java/java.html">Java</a></li>
-					                   <li><a href="dotnet/dotnet.html">.NET</a></li>
-					                   <li><a href="nodejs/nodejs.html">Node.js</a></li>
-				                    </ul>
-			                     </div>
-			                     <div class="col-sm-4">
-				                    <ul class="multi-column-dropdown">
-					                   <li><a href="php/php.html">PHP</a></li>
-					                   <li><a href="python/python.html">Python</a></li>
-					                   <li><a href="ruby/ruby.html">Ruby</a></li>
-                                       <li><a href="webjs/webjs.html">Web JS</a></li>
-				                    </ul>
-			                     </div>
-		                      </div>
-	                           </ul>
-	                           </li>   
-                            </ul>
-                            <!-- END LANGUAGES NAV DROPDOWN -->            
-									<li><a href="support/docs.html">Documentation</a></li>
                                     <li><a href="overview.html">Overview</a></li>
-									<li><a href="blog.html">Community</a></li>
+									
+                                    <!-- LANGUAGES NAV DROPDOWN  -->
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+	                                       <ul class="dropdown-menu multi-column columns-3">
+		                                      <div class="row">
+			                                     <div class="col-sm-4">
+				                                    <ul class="multi-column-dropdown">
+                                                       <li><a href="cpp/cplus.html">C++</a></li>
+                                                       <li><a href="erlang/erlang.html">Erlang</a></li>
+                                                       <li><a href="go/go.html">Go</a></li>
+                                                    </ul>
+			                                     </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                       <li><a href="java/java.html">Java</a></li>
+                                                       <li><a href="dotnet/dotnet.html">.NET</a></li>
+                                                       <li><a href="nodejs/nodejs.html">Node.js</a></li>
+                                                    </ul>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                       <li><a href="php/php.html">PHP</a></li>
+                                                       <li><a href="python/python.html">Python</a></li>
+                                                       <li><a href="ruby/ruby.html">Ruby</a></li>
+                                                       <li><a href="webjs/webjs.html">Web JS</a></li>
+                                                    </ul>
+                                                 </div>
+		                                      </div>
+	                                       </ul>
+	                                   </li>   
+                                    </ul>
+                                    <!-- END LANGUAGES NAV DROPDOWN -->    
+									<li><a href="support/guides.html">Documentation</a></li>
+                                    <li><a href="roadmap.html">Roadmap</a></li>
 									<li class="active"><a href="blog.html">Blog</a></li>
 									<li><a href="support/faq.html">FAQ</a></li>
-								</ul>
+                                    <li><a href="about.html">About</a></li>
+								</ul> 
 							</div><!-- /.navbar-collapse -->
 						</div>
 					</div><!-- /.container -->
@@ -164,6 +164,34 @@
 
 					<!-- BLOG CONTENT START -->
 					<div class="blog-c">
+                        <!-- BLOG ITEM -->
+						<div class="col-md-4">
+							<div class="blog-item">
+								<div class="post-meta">
+									<ul>
+										<li>
+											<i class="fa fa-tags"></i>
+											<span>OC</span>
+										</li>
+										<li>
+											<i class="fa fa-calendar-o"></i>
+											<span>January 17, 2018</span>
+										</li>
+									</ul>
+								</div>
+								<div class="post-title">
+									<a href="https://opensource.googleblog.com/2018/01/opencensus.html">
+										<h3>OpenCensus: A Stats Collection and Distributed Tracing Framework</h3>
+									</a>
+								</div>
+								<div class="post-content">
+									<p>
+										Today we’re pleased to announce the release of OpenCensus, a vendor-neutral open source library for metric collection and tracing.
+									</p>
+								</div>
+							</div>
+						</div>
+                        
 						<!-- BLOG ITEM -->
 						<div class="col-md-4">
 							<div class="blog-item">
@@ -171,22 +199,22 @@
 									<ul>
 										<li>
 											<i class="fa fa-tags"></i>
-											<span>C++</span>
+											<span>OC</span>
 										</li>
 										<li>
 											<i class="fa fa-calendar-o"></i>
-											<span>February 10, 2018</span>
+											<span>January 18, 2018</span>
 										</li>
 									</ul>
 								</div>
 								<div class="post-title">
-									<a href="https://github.com/census-instrumentation/opencensus-cpp">
-										<h3>A stats collection and distributed tracing framework</h3>
+									<a href="https://kausal.co/blog/opencensus-prometheus-kausal/">
+										<h3>OpenCensus with Prometheus and Kubernetes</h3>
 									</a>
 								</div>
 								<div class="post-content">
 									<p>
-										OpenCensus is a toolkit for collecting application performance and behavior data. It currently includes an API for tracing and stats.
+										Yesterday, Google announced OpenCensus, an instrumentation framework for monitoring and tracing. It comes with a set of client libraries for Golang and Java, with more to come. 
 									</p>
 								</div>
 							</div>
@@ -199,54 +227,27 @@
 									<ul>
 										<li>
 											<i class="fa fa-tags"></i>
-											<span>Node.js</span>
+											<span>OC</span>
 										</li>
 										<li>
 											<i class="fa fa-calendar-o"></i>
-											<span>February 14, 2018</span>
+											<span>January 23, 2018</span>
 										</li>
 									</ul>
 								</div>
 								<div class="post-title">
-									<a href="https://github.com/census-instrumentation/opencensus-node">
-										<h3>A stats collection and distributed tracing framework</h3>
+									<a href="http://dieswaytoofast.blogspot.com/2018/01/opencensustowards-harmonizing-your.html">
+										<h3>OpenCensus — towards harmonizing your Instrumentation</h3>
 									</a>
 								</div>
 								<div class="post-content">
 									<p>
-										OpenCensus is a toolkit for collecting application performance and behavior data. It currently includes 3 apis: stats, tracing and tags.
+										You’ve really gotten into this whole Observability thing, and have started plugging Prometheus into, well, everything that doesn’t already have it.
 									</p>
 								</div>
 							</div>
 						</div>
 
-						<!-- BLOG ITEM -->
-						<div class="col-md-4">
-							<div class="blog-item">
-								<div class="post-meta">
-									<ul>
-										<li>
-											<i class="fa fa-tags"></i>
-											<span>Erlang</span>
-										</li>
-										<li>
-											<i class="fa fa-calendar-o"></i>
-											<span>February 22, 2018</span>
-										</li>
-									</ul>
-								</div>
-								<div class="post-title">
-									<a href="https://github.com/census-instrumentation/opencensus-erlang">
-										<h3>Erlang stats collection and distributed tracing framework</h3>
-									</a>
-								</div>
-								<div class="post-content">
-									<p>
-										Exea conse quat duis irurey dolor sed reprehen derit volupta velit cilum lorem incididunt labore sed magna exceptur aliqua.
-									</p>
-								</div>
-							</div>
-						</div>
 					</div>
 					<!-- BLOG CONTENT END -->
                     </div>
@@ -299,6 +300,7 @@
                         <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
                         <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
                         <p><a href="https://plus.google.com/communities/112482248706262039896">Google+</a></p><br>
+                        <p><a href="https://gitter.im/census-instrumentation/Lobby">Gitter</a></p><br>
                         <p><a href="#">Email</a></p><br>
 					</div>
 					<!-- COMMUNITY END  -->
