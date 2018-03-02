@@ -38,7 +38,7 @@ body {
   font-weight: 300;
   font-size: 15px;
   overflow-x: hidden;
-  color: #232323;
+  color: #3E3E3E;
 }
 ul,ol {
 	padding: 0;
@@ -48,7 +48,7 @@ li {
 	list-style: none;
 }
 a {
-	color:#232323;
+	color:#3E3E3E;
 }
 a:hover {
 	text-decoration: none;
@@ -86,7 +86,7 @@ img {
 }
 .title p {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 50%;
@@ -201,7 +201,7 @@ img {
 }
 .s-header .middle-c a:hover {
   background: #FFF;
-  color: #232323;
+  color: #3E3E3E;
 }
 .s-header .middle-c .b-act {
   color: #FFF;
@@ -289,7 +289,7 @@ img {
 }
 .t-header .middle-c a:hover {
   background: #FFF;
-  color: #232323;
+  color: #3E3E3E;
 }
 .t-header .middle-c .b-act {
   color: #FFF;
@@ -419,7 +419,7 @@ img {
 	display: block;
 	clear: both;
 	line-height: 1.428571429;
-	color: #232323;
+	color: #3E3E3E;
 	white-space: normal;
 }
 .multi-column-dropdown li a:hover {
@@ -448,7 +448,7 @@ img {
   /* float: none; */
 }
 .about-con h3 {
-  color: #232323;
+  color: #3E3E3E;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
@@ -493,7 +493,7 @@ img {
   font-size: 55px;
 }
 .features ul li p {
-  color: #232323;
+  color: #3E3E3E;
   font-size: 15px;
 }
 .features ul {
@@ -579,7 +579,7 @@ img {
   margin-bottom: 20px;
 }
 .work .filter-work a {
-  color: #232323;
+  color: #3E3E3E;
   cursor: pointer;
   line-height: 27px;
   text-transform: uppercase;
@@ -725,7 +725,7 @@ img {
 }
 .ref .title-right p a {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -738,7 +738,7 @@ img {
   margin-bottom: 40px;
   text-align: left;
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -760,7 +760,7 @@ img {
 }
 .ref .title p {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -794,7 +794,7 @@ img {
   margin: 0 auto;
   float: left;
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -809,7 +809,7 @@ img {
   margin: 0 auto;
   float: left;
   font-weight: 300;
-  color: #6f6f6f;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -859,7 +859,7 @@ img {
 }
 .lang .title-right p a {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -870,7 +870,7 @@ img {
   margin: 30px 0 40px 0;
   text-align: left;
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -901,7 +901,7 @@ img {
   text-transform: uppercase;
   font-weight: 360;
   font-size: 15px;
-  color: #232323;
+  color: #3E3E3E;
 }
 .lang .title #center a:hover {
   color: #C1272D;
@@ -921,7 +921,7 @@ img {
 }
 .lang .title ul {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -932,7 +932,7 @@ img {
 }
 .lang .title p {
   font-weight: 300;
-  color: #232323;
+  color: #3E3E3E;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -1031,8 +1031,10 @@ code {
     text-align: left;
     margin-left: 5px;
 }
-.doc1:hover tr td a {
+.doc1:hover a {
   color: #C1272D;
+}
+.doc1:hover {
   text-decoration: underline;
 }
 /* --------------------------------------
@@ -1154,7 +1156,7 @@ code {
   font-weight: 400;
 }
 .blog-item .post-content p {
-  color: #232323;
+  color: #3E3E3E;
   font-size: 14px;
 }
 .blog-item:hover p {
@@ -1180,21 +1182,16 @@ code {
   margin-bottom: 5px;
   letter-spacing: 4px;
   font-weight: 360;
-  color: #232323;
+  color: #3E3E3E;
   text-transform: uppercase;
 }
 .accordion .accordion-content a {
-  color: #232323;
+  color: #3E3E3E;
   font-size: 15px;
 }
 .accordion p {
   padding:1em 2em 1em 2em;
 }
-/*
-.accordion {
-    position:relative;
-}
-*/
 .container {
   max-width:960px;
   margin:0 auto;
@@ -1222,7 +1219,6 @@ code {
         transition:max-height 0.5s       
     }
 }
- 
 .accordionItem.is-collapsed {
     max-height:0;
 }
@@ -1257,7 +1253,6 @@ code {
            transform:scale(0.9) rotateX(-60deg);
        }
 }
-
 
 /* -- ACCORDION TABLE -- */
 table {
@@ -1452,13 +1447,6 @@ table th {
     color: #fff;
     margin-left: 10px;
 }
-
-/* -------------------------------------
-    POP-UP EMAIL CONTACT FORM STARTS HERE
-----------------------------------------*/
-
-
-
 /* --------------------------------------
   13. RIGHTS
 -----------------------------------------*/

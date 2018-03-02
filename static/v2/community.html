@@ -25,7 +25,7 @@
 		<meta name="author" content="AUTHOR NAME">
 
 		<!-- TITLE -->
-		<title>OpenCensus Overview</title>
+		<title>About OpenCensus</title>
 
 		<!-- FAVICON -->
 	    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
@@ -96,7 +96,7 @@
 
 								<!-- links -->
 								<ul class="nav navbar-nav navbar-right" id="navbar">
-                                    <li class="active"><a href="overview.html">Overview</a></li>
+                                    <li><a href="overview.html">Overview</a></li>
 									
                                     <!-- LANGUAGES NAV DROPDOWN  -->
                                     <ul class="nav navbar-nav">
@@ -112,7 +112,7 @@
 			                                     </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li><a href="go/go.html">Go</a></li>
+                                                       <li><a href="go/go.html">Go</a></li>
                                                        <li><a href="java/java.html">Java</a></li>
                                                        <!-- <li><a href="dotnet/dotnet.html">.NET</a></li>
                                                        <li><a href="nodejs/nodejs.html">Node.js</a></li> -->
@@ -148,96 +148,36 @@
 		<!-- ====== HEADER END ======  -->
 
 
-        <!-- ====== OVERVIEW START  ======  -->
+        <!-- ====== ABOUT START  ======  -->
 		<section class="sections lang" id="lang">
-			<div class="container">
+            <div class="container">
 				<div class="row">   
-					<!-- OVERVIEW CONTENT START -->
+					<!-- COMMUNITY CONTENT START -->
                     <div class="title">
                         
-                        <!-- LEFT COULMN -->
-                        <div class="col-md-3 box" style="margin-left:5px">
-                            <h4>Quickstart</h4>
-                            <hr>
-                            <ul>
-                                <li><p><a href="cpp/cplus.html">C++</a></p></li>
-                                <li><p><a href="erlang/erlang.html">Erlang</a></p></li>
-                                <li><p><a href="go/go.html">Go</a></p></li>
-                                <li><p><a href="java/java.html">Java</a></p></li>
-                                <!-- <li><p><a href="dotnet/dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs/nodejs.html">Node.js</a></p></li> -->
-                                <li><p><a href="php/php.html">PHP</a></p></li>
-                                <li><p><a href="python/python.html">Python</a></p></li>
-                                <li><p><a href="ruby/ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs/webjs.html">Web JS</a></p></li> -->
-                            </ul><hr><br>
-                        </div>
-                        <!-- END LEFT COULMN -->
-                        
                         <!-- CENTER COULMN -->
-                        <div class="col-md-8 box" style="margin-left:5px">
-						  <h1>Overview</h1>
-						  <p>OpenCensus is a single distribution of libraries that automatically collects traces and metrics from your application, displays them locally, and sends them to any analysis tool.</p><br>
-                            
-                          <h4>Key concepts</h4><br>
-                          <h5>Distributed Tracing</h5>
-                            <p>A distributed trace tracks the progression of a single user request as it is handled by the services and processes that make up an application. Each step is called a span in the trace. Spans include metadata about the step, including especially the time spent in the step, called the span’s latency. You can use this information to tune the performance of your application.</p>
-                            <br>
-                            <p>Example: A customer completes an order on the checkout page of an e-commerce application. The distributed trace for this request typically shows how the request passes through the front end web service, the user authentication service, the product database, and so on.</p>
-                            <br>
-                            <p>Examples of distributed tracing systems include Zipkin, Jaeger, Datadog APM, and Stackdriver Trace.</p>
-                            <br>
-                            <br>
-                            
-                          <h5>Metrics</h5>
-                            <p>An application metric records information about some part of your application system: the number of orders received, the number of failed authentications, the number of RPC connections received, and so on. You use this information to track usage trends and to detect anomalies that might indicate a problem.</p>
-                            <br>
-                            <p>OpenCensus automatically collects a set of predefined metrics from certain runtime libraries, and you can easily send your own application and runtime metrics. Because OpenCensus is linked with your application, it does not send system-level metrics such as CPU or memory utilization.</p>
-                            <br><hr>
-                            
-                            <h4>Key capabilities</h4>
-                            <p>To be written. Key capabilities in tabular form; see the Key capabilities section in the introduction to Cloud Firestore as an example. It's user-friendly: easier and quicker to absorb the information when it's in a table.</p><br><hr>
-                            
-                            <h4>Features</h4>
-                            <p>The key features of OpenCensus include:</p><br>
-                            <p><ul>
-                            <li>&bull; Standard wire protocols and consistent APIs for handling trace and metric data.</li><br>
-                            <li>&bull; A single set of libraries for many languages, including Java, C++, Go, Python, PHP, Erlang, and Ruby.</li><br>
-                            <li>&bull; Included integrations with web and RPC frameworks, making traces and metrics available out of the box.</li><br>
-                            <li>&bull; Included exporters for storage and analysis tools. Right now the list includes Zipkin, Prometheus, Jaeger, Stackdriver, and SignalFx.</li><br>
-                            <li>&bull; Full open source availability for additional integrations and export options.</li><br>
-                            <li>&bull; No additional server or daemon is required to support OpenCensus.</li><br>
-                            <li>&bull; In process debugging: an optional agent for displaying request and metrics data on instrumented hosts.</li>
-                            </ul></p><br>
-                            <p>OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there.</p><br><hr>
-                            
-                            <h4>How does OpenCensus work?</h4>
-                            <p>OpenCensus is a open source collection of libraries for collecting metrics and tracing distributed applications. Think of OpenCensus as a torch to illuminate your distributed applications and then export that data, to be examined by different backends like (Note for the artist : Let's also a logo of each of these services as they are being mentioned.) Prometheus, SignalFX, Stackdriver Monitoring and Trace, Jaeger, Zipkin and more. OpenCensus can be integrated into any backend in any of the supported languages: (Note for the Artist : Perhaps an animation of each of the logos of these languages appearing on the screen as they are mentioned.) Go, Java(Android, JVM, OpenJDK), Python, C++, Erlang, Ruby, PHP.</p><br>
-                            <p>The technology that inspired OpenCensus has been running inside Google for the past 10 years and OpenCensus is now being developed in the open, at <a href="https://github.com/census-instrumentation" class="gloss1">GitHub OpenCensus</a>.</p>
-                            <hr><br>
-                            
-                            <h4 class="highlight">Integrations</h4>
-                            <p>To be written. Integrations for OpenCensus; provide one or more programming-language-independent diagrams for visual learners—helpful to have before getting started.</p><br> 
-                            
-                            <h4><a href="#">GCP</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="#">Zipkin</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                            
-                            <h4><a href="#">Prometheus</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-                                                        
-                            <h4><a href="#">Other 3rd Party Framework</a></h4>
-                            <p>Brief description to be written. Brief description to be written.</p><br>
-					   </div>
-                        <!-- END CENTER COULMN -->
-                        <!-- OVERVIEW CONTENT END -->
+                        <div class="col-md-10 box" style="margin-left:5px">    
+						  <h1>Community</h1>
+						  <br><br>
+                            <div class="comm">
+                                <p>OpenCensus has an active community of developers who are using, enhancing and building valuable integrations with other software projects. We’d love your help to improve and extend the project. You can reach us via Email, <a href="https://gitter.im/census-instrumentation/Lobby"><span class="gloss1">Gitter</span></a> channel, <a href="https://twitter.com/opencensusio"><span class="gloss1">Twitter</span></a> to start engaging with the project and its members.</p>
+                                <br><hr><br>
+                                <h4>Contribute on Github</h4>
+                                <p>OpenCensus has an active community of developers who are using, enhancing and building valuable integrations with other software projects. We are always looking for active contributors in OpenCensus and OpenCensus Ecosystem. Here are a few areas where we would love community contribution in OpenCensus project. Be sure to follow our <a href="https://github.com/census-instrumentation/opencensus-website"><span class="gloss1">community addition guidelines.</span></a></p>
+                                <br><hr><br>
+                                <h4>Mailing List</h4>
+                                <p>Any questions or suggestions? You can reach us via email: census-developers@googlegroups.com. Just want to be in the loop of what is going on with the project? Join the <a href="https://plus.google.com/communities/112482248706262039896"><span class="gloss1">mailing list.</span></a></p>
+                                <br><hr><br>
+                                <h4>Gitter Channel</h4>
+                                <p>Join other developers and users on the OpenCensus <a href="https://gitter.im/census-instrumentation/Lobby"><span class="gloss1">Gitter channel.</span></a></p>
+                            </div>
+					    </div>
+                        <!-- COMMUNITY CONTENT END -->
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ====== OVERVIEW END  ======  -->
+        <!-- ====== ABOUT END  ======  -->
 
 
 		<!-- ====== CONTACT START  ======  -->
@@ -263,7 +203,7 @@
                         <p><a href="overview.html">Overview</a></p><br>
                         <p><a href="quickstart.html">Quickstart</a></p><br>
                         <p><a href="support/guides.html">Guides</a></p><br>
-                        <p><a href="tutorials.html">Tutorials</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation">Tutorials</a></p><br>
                         <p><a href="support/reference.html">API Reference</a></p><br>
 					</div>
 					<!-- DOCUMENTS END -->
@@ -279,7 +219,7 @@
                     <!-- COMMUNITY START  -->
 					<div class="col-md-2">
 						<h6 class="ctit">Community</h6>
-                        <p><a href="community.html">Community</a></p><br>
+                        <p><a href="../community.html">Community</a></p><br>
                         <p><a href="https://github.com/census-instrumentation">Github</a></p><br>
                         <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
                         <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
@@ -313,6 +253,8 @@
 		<script src="js/owl.carousel.min.js"></script>
 	    <!-- SCROLLIT file -->
 	    <script src="js/scrollIt.min.js"></script>
+        <!-- ACCORDION JS -->
+        <script src="js/accordion.js"></script>
 		<!-- custom js -->
 		<script src="js/main.js"></script>
 	</body>
