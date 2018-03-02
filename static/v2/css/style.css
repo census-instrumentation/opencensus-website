@@ -1016,12 +1016,12 @@ code {
 #docbox table {
   border: none;
   width: 90%;
+  
 }
 #docbox tr {
     border: none;
     background-color: white;
     text-align: left;
-    /* margin-left: 5px; */
 }
 #docbox th {
     text-align: left;
@@ -1031,7 +1031,7 @@ code {
     text-align: left;
     margin-left: 5px;
 }
-doc1:hover tr td a {
+.doc1:hover tr td a {
   color: #C1272D;
   text-decoration: underline;
 }
