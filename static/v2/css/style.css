@@ -974,6 +974,18 @@ code {
   display: block;
   padding: 20px;
 }
+.red {
+  color: #C1272D;
+}
+.blue {
+  color: blue;
+}
+.code {
+  font-family: monospace, monospace;
+}
+.comment {
+  color: gray;
+}
 
 /* --------------------------------------
   8. FACTS
