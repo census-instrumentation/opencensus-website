@@ -34,7 +34,7 @@ The key features of OpenCensus include:
 +   In process debugging: an optional agent for displaying request and
     metrics data on instrumented hosts.
 
-The project is[hosted on GitHub](https://github.com/census-instrumentation) and
+The project is [hosted on GitHub](https://github.com/census-instrumentation) and
 all work occurs there.
 
 ## Concepts
