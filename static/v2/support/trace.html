@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113304960-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-113304960-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="DESCRIPTION">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="AUTHOR NAME">
+
+		<!-- TITLE -->
+		<title>OpenCensus Overview</title>
+
+		<!-- FAVICON -->
+	    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+        <link rel="manifest" href="../favicon/site.webmanifest">
+        <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
+
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="../css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="../css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="../css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="../css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="../css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="../css/colors/red.css">
+
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="load-circle">
+			</div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+		<!-- ====== HEADER START ======  -->
+		<section class="t-header" id="home" data-scroll-index="0">
+			<div class="header-overlay">
+
+				<!-- ====== NAVGITION ======  -->
+				<nav class="navbar land-nav navbar-fixed-top">
+					<div class="container">
+						<div class="row">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+                                
+								<!-- logo -->
+                                <a class="logo navbar-brand" href="index.html"><ul><li><img src="../img/logo-sm.png"/> Open<span>Census</span></li></ul>
+								</a>
+							</div>
+
+							<!-- Collect the nav links, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="collapse">
+
+								<!-- links -->
+								<ul class="nav navbar-nav navbar-right" id="navbar">
+                                    <li class="active"><a href="../overview.html">Overview</a></li>
+									
+                                    <!-- LANGUAGES NAV DROPDOWN  -->
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+	                                       <ul class="dropdown-menu multi-column columns-3">
+		                                      <div class="row">
+			                                     <div class="col-sm-4">
+				                                    <ul class="multi-column-dropdown">
+                                                       <li><a href="../cpp/cpp.html">C++</a></li>
+                                                       <li><a href="../erlang/erlang.html">Erlang</a></li>
+                                                    </ul>
+			                                     </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <li><a href="../go/go.html">Go</a></li>
+                                                       <li><a href="../java/java.html">Java</a></li>
+                                                        <li><a href="../ruby/ruby.html">Ruby</a></li>
+                                                       <!-- <li><a href="../dotnet/dotnet.html">.NET</a></li>
+                                                       <li><a href="../nodejs/nodejs.html">Node.js</a></li> -->
+                                                    </ul>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                       <li><a href="../php/php.html">PHP</a></li>
+                                                       <li><a href="../python/python.html">Python</a></li>
+                                                       <!-- <li><a href="../webjs/webjs.html">Web JS</a></li> -->
+                                                    </ul>
+                                                 </div>
+		                                      </div>
+	                                       </ul>
+	                                   </li>   
+                                    </ul>
+                                    <!-- END LANGUAGES NAV DROPDOWN -->    
+									<li><a href="docs.html">Docs</a></li>
+                                    <li><a href="glossary.html">Glossary</a></li>
+                                    <li><a href="../roadmap.html">Roadmap</a></li>
+									<li><a href="../blog.html">Blog</a></li>
+									<li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="../about.html">About</a></li>
+								</ul> 
+							</div><!-- /.navbar-collapse -->
+						</div>
+					</div><!-- /.container -->
+				</nav>
+				<!-- ====== END NAVGITION ======  -->
+			</div>            
+		</section>
+		<!-- ====== HEADER END ======  -->
+
+
+        <!-- ====== TRACE START  ======  -->
+		<section class="sections lang" id="lang">
+			<div class="container">
+				<div class="row">   
+					<!-- TRACE CONTENT START -->
+                    <div class="title">
+                        
+                        <!-- LEFT COULMN -->
+                        <div class="col-md-3 box" style="margin-left:5px">
+                            <h4>Quickstart</h4>
+                            <hr>
+                            <ul>
+                                <li><p><a href="../cpp/cpp.html">C++</a></p></li>
+                                <li><p><a href="../erlang/erlang.html">Erlang</a></p></li>
+                                <li><p><a href="../go/go.html">Go</a></p></li>
+                                <li><p><a href="../java/java.html">Java</a></p></li>
+                                <!-- <li><p><a href="../dotnet/dotnet.html">.NET</a></p></li>
+                                <li><p><a href="../nodejs/nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="../php/php.html">PHP</a></p></li>
+                                <li><p><a href="../python/python.html">Python</a></p></li>
+                                <li><p><a href="../ruby/ruby.html">Ruby</a></p></li>
+                                <!-- <li><p><a href="../webjs/webjs.html">Web JS</a></p></li> -->
+                            </ul><hr><br>
+                        </div>
+                        <!-- END LEFT COULMN -->
+                        
+                        <!-- CENTER COULMN -->
+                        <div class="col-md-8 box" style="margin-left:5px">
+						  <h1>Distributed Tracing</h1>
+                            <p>A distributed trace tracks the progression of a single user request as it is handled by the services and processes that make up an application. Each step is called a span in the trace. Spans include metadata about the step, including especially the time spent in the step, called the span’s latency. You can use this information to tune the performance of your application.</p><br><hr><br>
+                            
+                            <h4>Overview</h4>
+                            <p>In a modern system, a single user request may require many microservices, running across many machines, to service it.</p><br>
+                            <p><b>Distributed Tracing</b> tracks the progression of a request as it is handled by the services and processes that make up a distributed system. Each step in the Trace is called a Span. Each Span contains metadata, such as the length of time spent in the step, and optionally <b>Annotations</b> about the work being performed. This information can be used for debugging and performance tuning of distributed systems.</p><br><hr><br>
+                            
+                            <h4>Motivating Example</h4>
+                            <p>Picture a three-tier web application:<br>
+                                <ul>
+                                    <li class="bullet">&bull; User requests arrive at a load balancer.</li>
+                                    <li class="bullet">&bull; The load balancer forwards the request to an application server.</li>
+                                    <li class="bullet">&bull; The application server sends two database requests, then returns a webpage.</li>
+                                </ul>
+                            </p><br>
+                            <p>The database requests can be issued concurrently, but both have to complete before the webpage can be built. In this architecture, a single user request passes through four distinct systems, each is probably sharded into multiple replicas, and running across more than four machines.</p><br>
+                            <p>If a user request is slow, how do we determine why?<br>
+                                <ul>
+                                    <li class="bullet">&bull; Maybe one of the two database lookups was slow. Which one?</li>
+                                    <li class="bullet">&bull; Maybe the app server responded in time and the load balancer caused the slow-down.</li>
+                                </ul>
+                            </p><br>
+                            <p>Given a distributed trace of the slow user request, we can tell at a glance what happened.</p><br><hr><br>
+                    
+                            <h4>Tracing Concepts</h4>
+                            <p>What follows is a list of all Tracing concepts and how to apply them:</p><br>
+                    
+                            <p><b>Trace</b><br>A Trace is a collection of nested Spans. Traces often extend across multiple nodes in a distributed system. Traces are uniquely identified by a TraceId and all Spans within a Trace will have the same TraceId.</p><br><br>
+                    
+                            <p><b>Span</b><br>A Span represents an operation or a unit of work. Multiple spans can be part of a "Trace", which represents an execution path (usually distributed) across multiple processes/nodes. Spans are uniquely identified by a SpanId and a TraceId. Spans within the same trace have the same TraceId.</p><br>
+                            <p>All completed Spans have:<br>
+                                <ul>
+                                    <li class="bullet">&bull; TraceId</li>
+                                    <li class="bullet">&bull; SpanId</li>
+                                    <li class="bullet">&bull; Start Time</li>
+                                    <li class="bullet">&bull; End Time</li>
+                                    <li class="bullet">&bull; Status</li>
+                                </ul>
+                            </p><br>
+                            <p>Spans can optionally have:<br>
+                                <ul>
+                                    <li class="bullet">&bull; Parent SpanId</li>
+                                    <li class="bullet">&bull; Remote Parent</li>
+                                    <li class="bullet">&bull; Attributes</li>
+                                    <li class="bullet">&bull; Annotations</li>
+                                    <li class="bullet">&bull; Message Events</li>
+                                    <li class="bullet">&bull; Links</li>                
+                                </ul>
+                            </p><br><br>
+            
+                            <p><b>Starting/Ending Spans</b><br>When a Span starts, it records a start time.  When a Span ends, the end time is recorded. Latency is calculated by the difference between the start and end times.  Spans will only be exported to exporting services after they have ended. Attributes, annotations, message events, etc. can only be added to span that is active (i.e. has started but has not ended).</p><br><br>
+            
+                            <p><b>Status</b><br>Status represents the current state of the span. It is represented by a canonical status code which maps onto a predefined set of error values and an optional string message.</p><br>
+                            <p>e.g. OK<br>e.g. { PERMISSION_DENIED, "User foo does not have access to resource bar." }</p><br><br>
+            
+                            <p><b>Parent Span</b><br>A Span can have a parent Span, e.g. a database query that needed to read from disk might be expressed as a parent Span for the query and a child Span for the disk read. The initial Span in a Trace is the "root span" and has no parent Span.</p><br><br>
+            
+                            <p><b>Remote Parent</b><br>If the parent Span is in another process, it is considered a remote parent. Often, this means the parent Span ran on a different machine.</p><br><br>
+            
+                            <p><b>SpanContext</b><br>A SpanContext is a combination of TraceId, SpanId, and TraceOptions. Every Span has a SpanContext.</p><br>
+                            <p>The SpanContext represents the state information that must be propagated to child Spans and between processes to maintain a Trace, e.g. a Span causing a network operation sends its SpanContext, and the receiver uses it to create a child Span.</p><br>
+                            <p>Example:<br>TraceId-SpanId-Options: 3563a30535bddcaeca5dd00bc84f29ba-90a9d220f553e7fc-01</p><br><br>
+            
+                            <p><b>TraceId</b><br>An opaque 128-bit blob, expected to be randomly generated and globally(?) unique for each Trace.</p><br><br>
+            
+                            <p><b>SpanId</b><br>An opaque 64-bit blob, expected to be randomly generated and unique across all Spans within a Trace.</p><br><br>
+            
+                            <p><b>TraceOptions</b><br>A set of options that are enabled for this Span. Currently the only defined option is "enable tracing." When a microservice receives a request with this bit enabled, it should trace its operations, and also propagate the bit to any requests it makes while servicing the original request.</p><br><br>
+            
+                            <p><b>Attributes</b><br>Attributes are additional information that is included in the span which can represent arbitrary data assigned by the user.  They are key value pairs with the key being a string and the value being either a string, boolean, or integer.</p><br><br>
+            
+                            <p><b>Annotations</b><br>Annotations are a very useful and important concept in tracing. An Annotation is a timestamped string, with optional attributes. Annotations are used like log lines, but the log is per-Span.</p><br>
+            
+                            <p>Example:<br>
+                                <ul>
+                                    <li class="bullet">&bull; 0.001s Evaluating database failover rules.</li>
+                                    <li class="bullet">&bull; 0.002s Failover replica selected. attributes:{replica:ab_001 zone:xy}</li>
+                                    <li class="bullet">&bull; 0.006s Response received.</li>
+                                    <li class="bullet">&bull; 0.007s Response requires additional lookups. attributes:{fanout:4}</li>
+                                </ul>
+                            </p><br><br>
+            
+                            <p><b>Message Events</b><br>Message events represent messages sent/received between spans. It records whether the message was sent/received, its ID, and optionally the message size.</p><br>
+                            <p>Usually, Message Events are added to a Span by the RPC framework to track when frames(?) are sent and received.</p><br><br>
+            
+                            <p><b>Links</b><br>Links represent a connection between to a Span in a different Trace. The linked Span can be either a parent or child.</p><br>
+                            <p>For example: the current Span is a database write in the service of a user request, it has a Link to a child Span in another Trace because it created work to the side, like a write to a shared forward journal.</p><br><br>
+            
+                            <p><b>Sampler</b><br>Tracing every Span can incur a large overhead, so sampling is often employed. Samplers decide whether or not given Span will be sampled. The default sampler is a probabilistic one with a configurable probability threshold. Users can write their own samplers as well.</p><br>
+                            <p>Sampling can be changed at runtime, e.g. sample 100% of requests for 30 seconds to debug a problem that's currently happening.</p><br><br>
+            
+                            <p><b>TraceConfig</b><br>TraceConfig holds the global default TraceParams which control tracing. It is the interface to change the parameters dynamically, during runtime.</p><br><br>
+        
+                            <p><b>TraceParams</b><br>TraceParams defines limits enforced by tracing. It sets the maximum number of attributes, annotations, message events, and links per span as well as the default sampling probability.</p><br><br>
+
+                            <p><b>Exporter</b><br>Code that sends completed Spans to a storage system such as Stackdriver or Zipkin.</p><br><br>
+
+                            <p><b>Plugin</b><br>Instrumentation for a framework. e.g. The gRPC plugin creates a Span for every RPC sent and received.</p><br><br>
+
+					   </div>
+                        <!-- END CENTER COULMN -->
+                        <!-- TRACE CONTENT END -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ====== TRACE END  ======  -->
+
+
+		<!-- ====== CONTACT START  ======  -->
+		<section class="sections contact" id="contact">
+			<div class="container">
+				<div class="row">
+                <div class="item">
+                    <!-- FOOTER LINKS START -->
+                    <!-- LEFTS LINKS FORM START -->
+                    <div class="left-links">
+					   <div class="col-md-6">
+                            <p class="lead">OpenCensus</p>
+                            <p>Copyright © OpenCensus 2018 | All Rights Reserved.</p>
+                           <br>
+					   </div>
+                    </div>
+					<!-- LEFT LINKS END -->
+                    
+                    <!-- RIGHT LINKS START -->
+                    <!-- DOCUMENTS START -->
+				    <div class="col-md-2">
+                        <h6 class="ctit">Documents</h6>
+                        <p><a href="../overview.html">Overview</a></p><br>
+                        <p><a href="../quickstart.html">Quickstart</a></p><br>
+                        <p><a href="guides.html">Guides</a></p><br>
+                        <p><a href="#">Tutorials</a></p><br>
+                        <p><a href="reference.html">API Reference</a></p><br>
+					</div>
+					<!-- DOCUMENTS END -->
+					<!-- RESOURCES START -->
+					<div class="col-md-2">
+                        <h6 class="ctit">Resources</h6>
+                        <p><a href="../about.html">About</a></p><br>
+                        <p><a href="../blog.html">Blog</a></p><br>
+                        <p><a href="faq.html">FAQ</a></p><br>
+                        <p><a href="glossary.html">Glossary</a></p><br>
+					</div>
+					<!-- RESOURCES END  -->
+                    <!-- COMMUNITY START  -->
+					<div class="col-md-2">
+						<h6 class="ctit">Community</h6>
+                        <p><a href="community.html">Community</a></p><br>
+                        <p><a href="https://github.com/census-instrumentation">Github</a></p><br>
+                        <p><a href="https://twitter.com/opencensusio">Twitter</a></p><br>
+                        <p><a href="https://www.facebook.com/opencensus">Facebook</a></p><br>
+                        <p><a href="https://plus.google.com/communities/112482248706262039896">Google+</a></p><br>
+                        <p><a href="https://gitter.im/census-instrumentation/Lobby">Gitter</a></p><br>
+					</div>
+					<!-- COMMUNITY END  -->
+                    <!-- FOOTER LINKS END -->
+                </div>                    
+				</div>
+			</div>
+		</section>
+		<!-- ====== CONTACT END  ======  -->
+
+		<!-- ====== JS ======  -->
+		<!-- JQUERY -->
+		<script src="../js/jquery.v1.12.4.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- COUNT TO JS -->
+		<script src="../js/jquery.countTo.js"></script>
+		<!-- ISOTOPE JS -->
+		<script src="../js/isotope.pkgd.min.js"></script>
+		<!-- MASONRY JS -->
+		<script src="../js/masonry.pkgd.min.js"></script>
+	    <!-- Magnific Popup core JS -->
+	    <script src="../js/jquery.magnific-popup.min.js"></script>
+		<!-- PARSLEY file -->
+	    <script src="../js/parsley.js"></script>
+		<!-- OWL CAROUSEL JS -->
+		<script src="../js/owl.carousel.min.js"></script>
+	    <!-- SCROLLIT file -->
+	    <script src="../js/scrollIt.min.js"></script>
+		<!-- custom js -->
+		<script src="../js/main.js"></script>
+	</body>
+</html>

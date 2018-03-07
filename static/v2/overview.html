@@ -201,13 +201,13 @@
                             
                           <h4>Concepts</h4><br>
                             <p><b>Tags</b></p>
-                            <p>OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. <a href="#tags"><span class="gloss1">Read more.</span></a></p><br><br>
+                            <p>OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. <a href="support/tags.html"><span class="gloss1">Read more.</span></a></p><br><br>
                         
                             <p><b>Signals</b></p>
                             <p>OpenCensus is a framework that support multiple signal types.
                                 <ul>
-                                    <li class="bullet">&bull; <i>Stats</i> collection allow libraries and applications to record measurements, aggregate the recorded data and export them. <a href="#stats"><span class="gloss1">Read more.</span></a></li>
-                                    <li class="bullet">&bull; <i>Distributed traces</i> track the progression of a single user request as it is handled by the internal services until the user request is responded.<br><a href="#trace"><span class="gloss1">Read more.</span></a></li>
+                                    <li class="bullet">&bull; <i>Stats</i> collection allow libraries and applications to record measurements, aggregate the recorded data and export them. <a href="support/stats.html"><span class="gloss1">Read more.</span></a></li>
+                                    <li class="bullet">&bull; <i>Distributed traces</i> track the progression of a single user request as it is handled by the internal services until the user request is responded.<br><a href="support/trace.html"><span class="gloss1">Read more.</span></a></li>
                                 </ul>
                             </p><br><br>
                     
@@ -218,23 +218,6 @@
                             <p>OpenCensus provides in-process dashboards that displays diagnostics data from the process. These pages are called z-pages and they are useful to understand to see collected data from a specific process without having to depend on any metric collection or distributed tracing backend.</p><br>
                             <img src="img/traceZ.png" alt="TraceZ summary example image" /><br>
                             <span class="comment">An example /tracez handler served by the application that reports traces collected in the process.</span><br><hr><br>
-                            
-                            <h4>Tags (<a href="opencensus.io/tags"><span class="gloss1">opencensus.io/tags</span></a>)</h4><br>
-                            <p>OpenCensus allows systems to associate contextual key-value pairs called tags with measurements as they are recorded. These tags can later be used in views as dimensions to break down the measurements, analyze them from various different perspectives and target specific cases in isolation even in highly interconnected and complex systems.</p><br>
-
-                            <p>Tags may be defined in one service and used in a view in a different service because they are propagated along the call chain. For example, assume you have a frontend service that processes REST API requests by making calls to a backend service responsible for data storage. You can create a view in the data storage service that breaks down some measurement (e.g. disk accesses) but the API method in the frontend. </p><br><hr><br>
-                    
-                            <h4 id="stats">Stats (<a href="opencensus.io/stats"><span class="gloss1">opencensus.io/stats</span></a>)</h4><br>
-                            <p>OpenCensus collects application stats and a set of predefined stats from certain libraries and frameworks.</p><br>
-
-                            <p>OpenCensus is a low-overhead framework even if instrumentation is always enabled. In order to be so, it is optimized to make recording of data points fast and separate from the data aggregation.</p><br>
-
-                            <p>OpenCensus stats collection happens in two stages:<br>
-                                <ul>
-                                <li class="bullet">&bull; Definition of measures and recording of data points</li>
-                                <li class="bullet">&bull; Definition of views and aggregation of the recorded data</li>
-                            </ul>
-                            </p><br><hr><br>
                 
                             <h4>Measures</h4>
                             <p>A measure represents a type of metric to be recorded. For example, request latency in µs and request size in kB/s are examples of measures to collect from a server.</p><br>
@@ -264,9 +247,6 @@
                             <h4>Exporting</h4>
                             <p>Collected and aggregated data can be exported to a stats collection backend by registering an exporter.</p><br>
                             <p>Multiple exporters can be registered to upload the data to various different backends. Users can unregister the exporters if they no longer are needed.</p><br><hr><br>
-            
-            <h4 id="trace">Distributed Tracing (<a href="opencensus.io/trace"><span class="gloss1">opencensus.io/trace</span></a>)</h4>
-            <p>A distributed trace tracks the progression of a single user request as it is handled by the services and processes that make up an application. Each step is called a span in the trace. Spans include metadata about the step, including especially the time spent in the step, called the span’s latency. You can use this information to tune the performance of your application.</p><br><br>
             
 					   </div>
                         <!-- END CENTER COULMN -->
