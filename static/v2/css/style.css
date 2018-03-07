@@ -169,11 +169,11 @@ img {
   width: 100%;
   top: 70%;
   left: 0;
-  -webkit-transform: translate(0,-70%);
-  -moz-transform: translate(0,-70%);
-  -ms-transform: translate(0,-70%);
-  -o-transform: translate(0,-70%);
-  transform: translate(0,-70%);
+  -webkit-transform: translate(0,-68%);
+  -moz-transform: translate(0,-68%);
+  -ms-transform: translate(0,-68%);
+  -o-transform: translate(0,-68%);
+  transform: translate(0,-68%);
 }
 .s-header .middle-c .capt {
   margin-top: 80px;
@@ -238,7 +238,7 @@ img {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 35vh;
+  height: 27vh;
   width: 100%;
   position: relative;
   overflow-x: hidden!important;
@@ -316,10 +316,10 @@ img {
   4. NAVGITION
 -----------------------------------------*/
 .navbar-fixed-top {
-  background-color: white;
+  background: #FFF;
   border-color: transparent;
-  padding: 20px 0 30px;
-  background: 0 0;
+  padding: 20px 0 3px;
+  /* background: 0 0; */
   border: none;
   border-radius: 0;
   z-index: 9;
@@ -338,8 +338,10 @@ img {
 .navbar-fixed-top .navbar-nav>li:last-child {
   margin-right:14px;
 }
+
 .navbar-fixed-top .navbar-nav>li>a {
-  color: rgba(255, 255, 255, 0.95);
+  /* color: rgba(255, 255, 255, 0.95); */
+  color: #555;
   margin: 0;
   padding: 0;
   text-transform: uppercase;
@@ -352,6 +354,7 @@ img {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
+
 .navbar-fixed-top .navbar-nav>li>a:focus {
   background: transparent;
 }
@@ -366,7 +369,7 @@ img {
   padding-top: 20px;
 }
 .navbar-fixed-top .logo span {
-  color: #fff;
+  color: #555;
   font-weight: 300;
 }
 .navbar-fixed-top .logo, .navbar-fixed-top .logo:focus, .navbar-fixed-top .logo:hover {
@@ -383,7 +386,7 @@ img {
   -o-box-shadow: 0 0 13px #ddd;
   -ms-box-shadow: 0 0 13px #ddd;
   box-shadow: 0 0 13px #ddd;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; 
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
