@@ -193,49 +193,56 @@
                         <!-- CENTER COULMN -->
                         <div class="col-md-8 box" style="margin-left:5px">
 						  <h1>Java Quickstart</h1>
-						  <p>This guide gets you started with OpenCensus in Java with a simple working example.</p><br>
+						  <br>
                             
-                            <h4>Before you begin</h4>
-                            <p>What you need before you begin.<br>
-                            Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>The Quickstart Example</h4>
+                            <p>The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.</p><br><hr><br>
                             
-                            <h4>Download the example</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. </p><br>
+                            <h4>OpenCensus Java API Documentation</h4>
+                            <p>The OpenCensus Java artifacts are released to Maven Central (<a href="http://search.maven.org/"><span class="gloss1">maven.org</span></a>), each contains the jar file, the associated javadoc, and the associated source code. The OpenCensus Java API artifact (along with the associated javadoc and source) is available on Maven Central here: <a href="https://search.maven.org/#search%7Cga%7C1%7Copencensus%20api"><span class="gloss1">Open Census API</span></a></p><br><hr><br>
                             
-                            <h4>Run an OpenCensus application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <ol>
+                            <h4>The Quickstart Example Code:</h4>
+                            <p><li>Clone the OpenCensus Java github repository:</li></p>
+                            <p><pre><code>git clone <a href="https://github.com/census-instrumentation/opencensus-java.git">https://github.com/census-instrumentation/opencensus-java.git</a></code></pre><br>
+                            <li>Code is in directory:</li> <span class="code">examples/src/main/java/io/opencensus/examples/helloworld/</span></p><br><hr><br>
                             
-                            <h4>Update an OpenCensus service</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here.</p>
+                            <h4>To Build/Run The Example:</h4>
+                            <p>The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:<br><br>
+                            <li>Build the example code e.g.:</li>
+                                <ul>
+                                    <li>a. Gradle: ./gradlew installDist</li>
+                                    <li>b. Maven: mvn package appassembler:assemble</li>
+                                    <li>c. Bazel: bazel build :all</li>
+                                </ul><br>
+                            <li>Run the Quickstart example e.g.:</li>
+                                <ul>
+                                    <li>a. Gradle: ./examples/build/install/opencensus-examples/bin/QuickStart</li>
+                                    <li>b. Maven: ./examples/target/appassembler/bin/QuickStart</li>
+                                    <li>c. Bazel: ./examples/bazel-bin/QuickStart</li>
+                                </ul>
+                            </p><br><hr><br>
+                            
+                            <h4>The Example Code:</h4>
                             <p>
-                            <pre>
-                                <code>
-                                /*******************************************************
-                                Compilation:  javac HelloWorld.java
-                                Execution:    java HelloWorld
-
-                                Prints "Hello, World". By tradition, is everyone's first program.
-
-                                % java HelloWorld
-                                Hello, World
-                                *******************************************************/
-
-                                public class HelloWorld {
-
-                                   public static void main(String[] args) {
-                                   // Prints "Hello, World" to the terminal window.
-                                   System.out.println("Hello, World");
-                                   }
-
-                                }</code>
-                            </pre>  
-                            </p><br>
+                            <pre><code><span class="comment">/** Simple program that collects data for video size. */</span><br>public final class QuickStart {<br>&nbsp;&nbsp;static Logger logger = Logger.getLogger(<br>&nbsp;&nbsp;QuickStart.class.getName());<br>&nbsp;&nbsp;static Tagger tagger = Tags.getTagger();<br>&nbsp;&nbsp;static ViewManager viewManager = Stats.getViewManager();<br>&nbsp;&nbsp;static StatsRecorder statsRecorder = Stats.getStatsRecorder();<br>&nbsp;&nbsp;static Tracer tracer = Tracing.getTracer();<br><br>&nbsp;&nbsp;<span class="comment">// frontendKey allows us to break down the recorded data</span><br>&nbsp;&nbsp;static final TagKey FRONTEND_KEY = TagKey.create(<br>&nbsp;&nbsp;"my.org/keys/frontend");<br><br><span class="comment">&nbsp;&nbsp;// videoSize will measure the size of processed videos.</span><br>&nbsp;&nbsp;static final MeasureLong VIDEO_SIZE = MeasureLong.create(<br>&nbsp;&nbsp;"my.org/measure/video_size",<br>&nbsp;&nbsp;"size of processed videos",<br>&nbsp;&nbsp;"MBy");<br><br><span class="comment">&nbsp;&nbsp;// Create view to see the processed video size distribution broken<br>&nbsp;&nbsp;// down by frontend. The view has bucket boundaries (0, 256, 65536)<br>&nbsp;&nbsp;// that will group measure values into histogram buckets.</span><br>&nbsp;&nbsp;private static final View.Name VIDEO_SIZE_VIEW_NAME =<br>&nbsp;&nbsp;View.Name.create("my.org/views/video_size");<br>&nbsp;&nbsp;private static final View VIDEO_SIZE_VIEW = View.create(<br>&nbsp;&nbsp;VIDEO_SIZE_VIEW_NAME,<br>&nbsp;&nbsp;"processed video size over time",<br>&nbsp;&nbsp;VIDEO_SIZE,<br>&nbsp;&nbsp;Aggregation.Distribution.create(<br>&nbsp;&nbsp;&nbsp;BucketBoundaries.create(Arrays.asList(0.0, 256.0, 65536.0))),<br>&nbsp;&nbsp;Collections.singletonList(FRONTEND_KEY),<br>&nbsp;&nbsp;Cumulative.create());<br><br><span class="comment">&nbsp;&nbsp;/** Main launcher for the QuickStart example. */</span><br>&nbsp;&nbsp;public static void main(String[] args) throws<br>&nbsp;&nbsp;InterruptedException {<br>&nbsp;&nbsp;TagContextBuilder tagContextBuilder = tagger.currentBuilder()<br>&nbsp;&nbsp;&nbsp;.put(FRONTEND_KEY, TagValue.create("mobile-ios9.3.5"));<br>&nbsp;&nbsp;SpanBuilder spanBuilder = tracer.spanBuilder(<br>&nbsp;&nbsp;&nbsp;"my.org/ProcessVideo")<br>&nbsp;&nbsp;&nbsp;.setRecordEvents(true)<br>&nbsp;&nbsp;&nbsp;.setSampler(Samplers.alwaysSample());<br>&nbsp;&nbsp;viewManager.registerView(VIDEO_SIZE_VIEW);<br>&nbsp;&nbsp;LoggingTraceExporter.register();<br><br><span class="comment">&nbsp;&nbsp;// Process video. Record the processed video size.</span><br>&nbsp;&nbsp;try (Scope scopedTags = tagContextBuilder.buildScoped();<br>&nbsp;&nbsp;&nbsp;Scope scopedSpan = spanBuilder.startScopedSpan()) {<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Start processing video.");<br>&nbsp;&nbsp;&nbsp;<span class="comment">// Sleep for [0,10] milliseconds to fake work.</span><br>&nbsp;&nbsp;&nbsp;Thread.sleep(new Random().nextInt(10) + 1);<br>&nbsp;&nbsp;&nbsp;statsRecorder.newMeasureMap().put(VIDEO_SIZE, 25648).record();<br>&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Finished processing video.");<br>&nbsp;&nbsp;} catch (Exception e) {<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Exception thrown when processing video.");<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan().setStatus(Status.UNKNOWN);<br>&nbsp;&nbsp;&nbsp;&nbsp;logger.severe(e.getMessage());<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;logger.info("Wait longer than the reporting duration...");<br>&nbsp;&nbsp;<span class="comment">// Wait for a duration longer than reporting duration (5s) to<br>&nbsp;&nbsp;// ensure spans are exported.</span><br>&nbsp;&nbsp;Thread.sleep(5100);<br>&nbsp;&nbsp;ViewData viewData = viewManager.getView(VIDEO_SIZE_VIEW_NAME);<br>&nbsp;&nbsp;logger.info(<br>&nbsp;&nbsp;&nbsp;String.format("Recorded stats for %s:\n %s",<br>&nbsp;&nbsp;&nbsp;&nbsp;VIDEO_SIZE_VIEW_NAME.asString(), viewData));<br>&nbsp;}<br>}<br></code></pre></p>
+                            <br><hr><br>
                             
-                            <h4>Update and run the application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>The Example Output (Raw)</h4>
+                            <p class="code">Mar 02, 2018 6:38:26 PM io.opencensus.examples.helloworld.QuickStart main<br>
+                            INFO: Wait longer than the reporting duration...<br>
+                            Mar 02, 2018 6:38:31 PM<br>
+                            io.opencensus.exporter.trace.logging.LoggingTraceExporter<br>&nbsp;$LoggingExporterHandler export<br>
+                            INFO:<br>
+                            SpanData{context=SpanContext{traceId=TraceId{traceId=<br>&nbsp;6490d4a26cffac83529a7679a0ef978b}, spanId=SpanId{spanId=2e1f17c65921d367}, traceOptions=TraceOptions{sampled=true}}, parentSpanId=null, hasRemoteParent=null, name=my.org/ProcessVideo, startTimestamp=Timestamp{seconds=1520044706, nanos=41005486}, attributes=Attributes{attributeMap={}, droppedAttributesCount=0}, annotations=TimedEvents{events=[TimedEvent{timestamp=Timestamp{seconds=1520044706, nanos=44080800}, event=Annotation{description=Start processing video., attributes={}}}, TimedEvent{timestamp=Timestamp{seconds=1520044706, nanos=53061607}, event=Annotation{description=Finished processing video., attributes={}}}], droppedEventsCount=0}, messageEvents=TimedEvents{events=[], droppedEventsCount=0}, links=Links{links=[], droppedLinksCount=0}, childSpanCount=null, status=Status{canonicalCode=OK, description=null}, endTimestamp=Timestamp{seconds=1520044706, nanos=54084898}}<br><br>
+                            Mar 02, 2018 6:38:31 PM<br>
+                            io.opencensus.examples.helloworld.QuickStart main
+                            INFO:<br>
+                            Recorded stats for my.org/views/video_size:
+                            ViewData{view=View{name=Name{asString=my.org/views/video_size}, description=processed video size over time, measure=MeasureLong{name=my.org/measure/video_size, description=size of processed videos, unit=MBy}, aggregation=Distribution{bucketBoundaries=BucketBoundaries{boundaries=[0.0, 256.0, 65536.0]}}, columns=[TagKey{name=my.org/keys/frontend}], window=Cumulative{}}, aggregationMap={[TagValue{asString=mobile-ios9.3.5}]=DistributionData{mean=25648.0, count=1, min=25648.0, max=25648.0, sumOfSquaredDeviations=0.0, bucketCounts=[0, 0, 1, 0]}}, windowData=CumulativeData{start=Timestamp{seconds=1520044706, nanos=28000000}, end=Timestamp{seconds=1520044711, nanos=170000000}}}</p>
+                            </ol>
+                            <br><br>
                             
-                            <h4>What’s next?</h4>
-                            <p>Something goes here.</p><br>
 					   </div>
                         <!-- END CENTER COULMN -->
                         <!-- JAVA CONTENT END -->                  

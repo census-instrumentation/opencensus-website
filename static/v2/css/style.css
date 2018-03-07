@@ -41,20 +41,33 @@ body {
   color: #3E3E3E;
 }
 ul,ol {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
-li {
-	list-style: none;
+ol li {
+  list-style: decimal;
+  margin-left: 16px;
+}
+
+li.bullet {
+  margin-left: 35px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  list-style-position: inside;
+  text-indent: -1em;
+}
+
+ul li {
+  list-style: none;
 }
 a {
-	color:#3E3E3E;
+  color:#3E3E3E;
 }
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 a:focus {
-	text-decoration: none;
+  text-decoration: none;
 }
 p,span,h1,h2,h3,h4,h5,a {
   margin:0;
@@ -303,7 +316,7 @@ img {
   4. NAVGITION
 -----------------------------------------*/
 .navbar-fixed-top {
-  background-color: transparent;
+  background-color: white;
   border-color: transparent;
   padding: 20px 0 30px;
   background: 0 0;
