@@ -204,13 +204,13 @@
                           <h5>Sampling:</h5>
                             <p>Is the mechanism that determines how often the system will trace a request.<br>There are  3 types of sampling:</p>
                             <p><ul><br>
-                            <li><b>Always sample:</b></li>
+                            <li><h5>Always sample:</h5></li>
                             <li class="gloss">With this sampling, every single request is traced.</li>
                             <br>
-                            <li><b>Probabilistic sampling:</b></li>
+                            <li><h5>Probabilistic sampling:</h5></li>
                             <li class="gloss">Here a probability is set e.g specify 1 in 10000 or 0.0001 and the system will sample only 1 in 10000 requests. This entirely depends on your QPS.</li>
                             <br>
-                            <li><b>Never sample:</b></li>
+                            <li><h5>Never sample:</h5></li>
                             <li class="gloss">Here you’ve asked that the system never traces any request.</li>
                             </ul></p>
                             <br><hr>
@@ -222,13 +222,13 @@
                           <h5>Aggregation:</h5>
                             <p>The style of characterizing measures. We have 4 types of Aggregations:</p><br>
                             <p><ul>
-                            <li><b>Count Aggregation:</b></li>
-                            <li class="gloss">Characterizing measures as a sum of increasing quantiles e.g number of requests overtime always increases and is quantified by a natural number i.e. >= 1</li><br>
-                            <li><b>Distribution Aggregation:</b></li>
+                            <li><h5>Count Aggregation:</h5></li>
+                            <li class="gloss">Characterizing measures as a sum of increasing quantiles e.g number of requests overtime always increases and is quantified by a natural number<br>i.e. >= 1</li><br>
+                            <li><h5>Distribution Aggregation:</h5></li>
                             <li class="gloss">Characterizing measures as belonging to buckets with ranges on sharp boundaries e.g <10, <100, <1000 which distinctly identify values of 112, 99, 17 as belonging to buckets <1000, <100 and <10 respectively</li><br>
-                            <li><b>Mean Aggregation:</b></li>
+                            <li><h5>Mean Aggregation:</h5></li>
                             <li class="gloss">Characterizing measures over the mean of all of the values and maintains the mean value.</li><br>
-                            <li><b>Sum Aggregation:</b></li>
+                            <li><h5>Sum Aggregation:</h5></li>
                             <li class="gloss">Characterizing measures over the total of values and maintains the value as a sum.</li><br>
                             </ul></p>
                             <hr>
@@ -267,11 +267,6 @@
                             <p>OpenCensus adds minimal overhead to your applications while still giving you the ability to export metrics and traces in near real-time to various backends of your choice, simultaneously e.g Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger. The multiplicity and convenience enables many application performance monitoring teams and even administrators visualize your applications. Your teams don’t have to expend precious time in maintenance and integration; OpenCensus should just work. We have some examples that you can check out to instrument your backends too. With the ability to introspect your applications, you can apply sound engineering practices making your teams even more productive.</p>
                             <br><br>
                             
-                          <!--
-                          <h4>How can you get involved?</h4>
-                            <p>Please check out <a href="http://opencensus.io" class="gloss1">OpenCensus.io</a> the code that’s entirely developed in the open at <a href="https://github.com/census-instrumentation" class="gloss1">GitHub</a> checkout the respective clients in your favorite language, instrument your backends, share your feedback with the community, we’d like to hear from you, write for us experience reports. Check out our social media, share tips with your teams</p>
-                            <br>
-                            -->
 					   </div>
                         <!-- END CENTER COULMN -->
                         <!-- GLOSSARY CONTENT END -->
