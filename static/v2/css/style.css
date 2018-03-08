@@ -360,7 +360,7 @@ img {
 }
 .navbar-fixed-top .navbar-nav>li>a:hover {
   background: transparent;
-  color: rgba(255, 255, 255, 0.75);
+  color: #C1272D;
 }
 .navbar-fixed-top .logo {
   font-size: 30px;
