@@ -26,6 +26,7 @@ OpenCesnsus CSS
 -----------------------------------------*/
   
 /* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Arimo');
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
@@ -35,10 +36,11 @@ OpenCesnsus CSS
 body {
   background: #FFF;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 350;
   font-size: 15px;
   overflow-x: hidden;
-  color: #3E3E3E;
+    color: #3d3d3d; /*
+  color: #3E3E3E; */
 }
 ul,ol {
   padding: 0;
@@ -61,7 +63,7 @@ ul li {
   list-style: none;
 }
 a {
-  color:#3E3E3E;
+  color:#3d3d3d;
 }
 a:hover {
   text-decoration: none;
@@ -99,7 +101,7 @@ img {
 }
 .title p {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 50%;
@@ -214,7 +216,7 @@ img {
 }
 .s-header .middle-c a:hover {
   background: #FFF;
-  color: #3E3E3E;
+  color: #3d3d3d;
 }
 .s-header .middle-c .b-act {
   color: #FFF;
@@ -302,7 +304,7 @@ img {
 }
 .t-header .middle-c a:hover {
   background: #FFF;
-  color: #3E3E3E;
+  color: #3d3d3d;
 }
 .t-header .middle-c .b-act {
   color: #FFF;
@@ -341,7 +343,7 @@ img {
 
 .navbar-fixed-top .navbar-nav>li>a {
   /* color: rgba(255, 255, 255, 0.95); */
-  color: #555;
+  color: #3d3d3d;
   margin: 0;
   padding: 0;
   text-transform: uppercase;
@@ -369,7 +371,7 @@ img {
   padding-top: 20px;
 }
 .navbar-fixed-top .logo span {
-  color: #555;
+  color: #3d3d3d;
   font-weight: 300;
 }
 .navbar-fixed-top .logo, .navbar-fixed-top .logo:focus, .navbar-fixed-top .logo:hover {
@@ -393,10 +395,10 @@ img {
   -ms-transition: all 0.4s ease-in-out;
 }
 .fixed .logo span {
-  color: #555;
+  color: #3d3d3d;
 }
 .fixed .navbar-nav>li>a {
-  color: #555;
+  color: #3d3d3d;
 }
 .fixed .navbar-nav>li>a:hover {
   color: #C1272D;
@@ -434,7 +436,7 @@ img {
 	display: block;
 	clear: both;
 	line-height: 1.428571429;
-	color: #3E3E3E;
+	color: #3d3d3d;
 	white-space: normal;
 }
 .multi-column-dropdown li a:hover {
@@ -463,7 +465,7 @@ img {
   /* float: none; */
 }
 .about-con h3 {
-  color: #3E3E3E;
+  color: #3d3d3d;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
@@ -508,7 +510,7 @@ img {
   font-size: 55px;
 }
 .features ul li p {
-  color: #3E3E3E;
+  color: #3d3d3d;
   font-size: 15px;
 }
 .features ul {
@@ -567,7 +569,7 @@ img {
   letter-spacing: 2px;
 }
 .box-content p {
-  color: #555;
+  color: #3d3d3d;
   font-size: 15px;
   font-weight: 300;
   line-height: 27px;
@@ -594,7 +596,7 @@ img {
   margin-bottom: 20px;
 }
 .work .filter-work a {
-  color: #3E3E3E;
+  color: #3d3d3d;
   cursor: pointer;
   line-height: 27px;
   text-transform: uppercase;
@@ -740,7 +742,7 @@ img {
 }
 .ref .title-right p a {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -753,7 +755,7 @@ img {
   margin-bottom: 40px;
   text-align: left;
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -775,7 +777,7 @@ img {
 }
 .ref .title p {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -791,7 +793,9 @@ img {
   display: inline;
 }
 .ref-con1 h3 {
-  color: #212121;
+    /*
+  color: #212121; */
+    color: #3d3d3d;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
@@ -809,13 +813,13 @@ img {
   margin: 0 auto;
   float: left;
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
 }
 .ref-con2 h3 {
-  color: #212121;
+  color: #3d3d3d;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
@@ -824,7 +828,7 @@ img {
   margin: 0 auto;
   float: left;
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -874,7 +878,7 @@ img {
 }
 .lang .title-right p a {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -885,7 +889,7 @@ img {
   margin: 30px 0 40px 0;
   text-align: left;
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -896,7 +900,7 @@ img {
   text-transform: uppercase;
   font-weight: 360;
   font-size: 20px;
-  color: #6f6f6f;
+  color: #3d3d3d;
 }
 #lang .title .highlight {
   margin-bottom: 30px;
@@ -916,7 +920,7 @@ img {
   text-transform: uppercase;
   font-weight: 360;
   font-size: 15px;
-  color: #3E3E3E;
+  color: #3d3d3d;
 }
 .lang .title #center a:hover {
   color: #C1272D;
@@ -936,7 +940,7 @@ img {
 }
 .lang .title ul {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -947,7 +951,7 @@ img {
 }
 .lang .title p {
   font-weight: 300;
-  color: #3E3E3E;
+  color: #3d3d3d;
   letter-spacing: 1px;
   font-size: 15px;
   width: 100%;
@@ -968,7 +972,7 @@ img {
   display: inline;
 }
 .lang-con1 h3 {
-  color: #212121;
+  color: #3d3d3d;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
@@ -1183,7 +1187,7 @@ code {
   font-weight: 400;
 }
 .blog-item .post-content p {
-  color: #3E3E3E;
+  color: #3d3d3d;
   font-size: 14px;
 }
 .blog-item:hover p {
@@ -1209,11 +1213,11 @@ code {
   margin-bottom: 5px;
   letter-spacing: 4px;
   font-weight: 360;
-  color: #3E3E3E;
+  color: #3d3d3d;
   text-transform: uppercase;
 }
 .accordion .accordion-content a {
-  color: #3E3E3E;
+  color: #3d3d3d;
   font-size: 15px;
 }
 .accordion p {
@@ -1362,8 +1366,6 @@ table th {
     border-bottom: 0;
   }
 }
-
-
 /* --------------------------------------
   GLOSSARY
 -----------------------------------------*/
@@ -1374,7 +1376,6 @@ table th {
   color: #C1272D;
   text-decoration: underline;
 }
-
 /* --------------------------------------
   12. CONTACT
 -----------------------------------------*/
