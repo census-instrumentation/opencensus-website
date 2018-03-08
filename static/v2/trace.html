@@ -184,17 +184,17 @@
                             <p><b>Distributed Tracing</b> tracks the progression of a request as it is handled by the services and processes that make up a distributed system. Each step in the Trace is called a Span. Each Span contains metadata, such as the length of time spent in the step, and optionally <b>Annotations</b> about the work being performed. This information can be used for debugging and performance tuning of distributed systems.</p><br><hr><br>
                             
                             <h4>Motivating Example</h4>
-                            <p>Picture a three-tier web application:<br>
+                            <p>Picture a three-tier web application:<br><br>
                                 <ul>
-                                    <li class="bullet">&bull; User requests arrive at a load balancer.</li>
-                                    <li class="bullet">&bull; The load balancer forwards the request to an application server.</li>
+                                    <li class="bullet">&bull; User requests arrive at a load balancer.</li><br>
+                                    <li class="bullet">&bull; The load balancer forwards the request to an application server.</li><br>
                                     <li class="bullet">&bull; The application server sends two database requests, then returns a webpage.</li>
                                 </ul>
                             </p><br>
                             <p>The database requests can be issued concurrently, but both have to complete before the webpage can be built. In this architecture, a single user request passes through four distinct systems, each is probably sharded into multiple replicas, and running across more than four machines.</p><br>
-                            <p>If a user request is slow, how do we determine why?<br>
+                            <p>If a user request is slow, how do we determine why?<br><br>
                                 <ul>
-                                    <li class="bullet">&bull; Maybe one of the two database lookups was slow. Which one?</li>
+                                    <li class="bullet">&bull; Maybe one of the two database lookups was slow. Which one?</li><br>
                                     <li class="bullet">&bull; Maybe the app server responded in time and the load balancer caused the slow-down.</li>
                                 </ul>
                             </p><br>
@@ -206,22 +206,22 @@
                             <p><b>Trace</b><br>A Trace is a collection of nested Spans. Traces often extend across multiple nodes in a distributed system. Traces are uniquely identified by a TraceId and all Spans within a Trace will have the same TraceId.</p><br><br>
                     
                             <p><b>Span</b><br>A Span represents an operation or a unit of work. Multiple spans can be part of a "Trace", which represents an execution path (usually distributed) across multiple processes/nodes. Spans are uniquely identified by a SpanId and a TraceId. Spans within the same trace have the same TraceId.</p><br>
-                            <p>All completed Spans have:<br>
+                            <p>All completed Spans have:<br><br>
                                 <ul>
-                                    <li class="bullet">&bull; TraceId</li>
-                                    <li class="bullet">&bull; SpanId</li>
-                                    <li class="bullet">&bull; Start Time</li>
-                                    <li class="bullet">&bull; End Time</li>
-                                    <li class="bullet">&bull; Status</li>
+                                    <li class="bullet">&bull; TraceId</li><br>
+                                    <li class="bullet">&bull; SpanId</li><br>
+                                    <li class="bullet">&bull; Start Time</li><br>
+                                    <li class="bullet">&bull; End Time</li><br>
+                                    <li class="bullet">&bull; Status</li><br>
                                 </ul>
                             </p><br>
-                            <p>Spans can optionally have:<br>
+                            <p>Spans can optionally have:<br><br>
                                 <ul>
-                                    <li class="bullet">&bull; Parent SpanId</li>
-                                    <li class="bullet">&bull; Remote Parent</li>
-                                    <li class="bullet">&bull; Attributes</li>
-                                    <li class="bullet">&bull; Annotations</li>
-                                    <li class="bullet">&bull; Message Events</li>
+                                    <li class="bullet">&bull; Parent SpanId</li><br>
+                                    <li class="bullet">&bull; Remote Parent</li><br>
+                                    <li class="bullet">&bull; Attributes</li><br>
+                                    <li class="bullet">&bull; Annotations</li><br>
+                                    <li class="bullet">&bull; Message Events</li><br>
                                     <li class="bullet">&bull; Links</li>                
                                 </ul>
                             </p><br><br>
@@ -249,12 +249,12 @@
             
                             <p><b>Annotations</b><br>Annotations are a very useful and important concept in tracing. An Annotation is a timestamped string, with optional attributes. Annotations are used like log lines, but the log is per-Span.</p><br>
             
-                            <p>Example:<br>
+                            <p>Example:<br><br>
                                 <ul>
-                                    <li class="bullet">&bull; 0.001s Evaluating database failover rules.</li>
-                                    <li class="bullet">&bull; 0.002s Failover replica selected. attributes:{replica:ab_001 zone:xy}</li>
-                                    <li class="bullet">&bull; 0.006s Response received.</li>
-                                    <li class="bullet">&bull; 0.007s Response requires additional lookups. attributes:{fanout:4}</li>
+                                    <li class="bullet">&bull; 0.001s Evaluating database failover rules.</li><br>
+                                    <li class="bullet">&bull; 0.002s Failover replica selected. attributes:{replica:ab_001 zone:xy}</li><br>
+                                    <li class="bullet">&bull; 0.006s Response received.</li><br>
+                                    <li class="bullet">&bull; 0.007s Response requires additional lookups. attributes:{fanout:4}</li><br>
                                 </ul>
                             </p><br><br>
             
