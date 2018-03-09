@@ -155,53 +155,32 @@
 					<!-- GLOSSARY CONTENT START -->
                     <div class="title">
                         
-                        <!-- LEFT COULMN -->
-                        <div class="col-md-3 box" style="margin-left:5px">
-                            <h4>Quickstart</h4>
-                            <hr>
-                            <ul>
-                                <li><p><a href="cpp.html">C++</a></p></li>
-                                <li><p><a href="erlang.html">Erlang</a></p></li>
-                                <li><p><a href="go.html">Go</a></p></li>
-                                <li><p><a href="java.html">Java</a></p></li>
-                                <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
-                                <li><p><a href="php.html">PHP</a></p></li>
-                                <li><p><a href="python.html">Python</a></p></li>
-                                <li><p><a href="ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
-                            </ul><hr><br>
-                        </div>
-                        <!-- END LEFT COULMN -->
-                        
                         <!-- CENTER COULMN -->
-                        <div class="col-md-8 box" style="margin-left:5px">
+                        <div class="col-md-12 box">
                         <h1>Glossary</h1>
-                            
-                          <h4>Key concepts</h4>
                           <br>
-                          <h5>Tracing:</h5>
+                          <h5>Tracing</h5>
                             <p>Tracking the entire path of execution of a service or a function from start until end. e.g. During an upload, tracking when a file handle is received, opened, sanitized and uploaded to the cloud.</p>
                             <br><hr>
                             
-                          <h5>Span:</h5>
+                          <h5>Span</h5>
                             <p>The unit of traversal during tracing. Each span might have a children spans within it or it might be the first in its generation and called a root.</p>
                             <br><hr>
                             
-                          <h5>Root Span:</h5>
+                          <h5>Root Span</h5>
                             <p>The first span in a trace; this span does not have a parent.</p>
                             <br><hr>
                             
-                          <h5>Child Span:</h5>
+                          <h5>Child Span</h5>
                             <p>A span with a parent span; it represents a call that originates from an already traced one.<br>
                             A span MAY or MAY NOT be a child and spans can coexist as siblings on the same level.</p>
                             <br><hr>
                             
-                          <h5>Trace:</h5>
+                          <h5>Trace</h5>
                             <p>A tree of spans. A trace has a root span that encapsulates all the spans from start to end, and the children spans being the distinct calls invoked in between.</p>
                             <br><hr>
                             
-                          <h5>Sampling:</h5>
+                          <h5>Sampling</h5>
                             <p>Is the mechanism that determines how often the system will trace a request.<br>There are  3 types of sampling:</p>
                             <p><ul><br>
                             <li><h5>Always sample:</h5></li>
@@ -215,11 +194,11 @@
                             </ul></p>
                             <br><hr>
                             
-                          <h5>Measure:</h5>
+                          <h5>Measure</h5>
                             <p>Any quantifiable measurement/metric that you would like to track, it could be number of requests, number of failed responses, bytes downloaded, cache misses, number of radios purchsed etc.</p>
                             <br><hr>
                             
-                          <h5>Aggregation:</h5>
+                          <h5>Aggregation</h5>
                             <p>The style of characterizing measures. We have 4 types of Aggregations:</p><br>
                             <p><ul>
                             <li><h5>Count Aggregation:</h5></li>
@@ -233,7 +212,7 @@
                             </ul></p>
                             <hr>
                             
-                          <h5>Tags:</h5>
+                          <h5>Tags</h5>
                             <p>Tags are key-value pairs that are used to store information about metrics for example;</p>
                             <p><ul>
                             <li class="gloss">ip=10.32.103.12</li>
@@ -242,27 +221,27 @@
                             </ul></p>
                             <br><hr>
                             
-                          <h5>Views:</h5>
+                          <h5>Views</h5>
                             <p>A view is a mechanism for grouping measures, aggregations, tags as well as the timing information, essentially characterizing your metrics for visualization and inspection.</p>
                             <br><hr>
                             
-                          <h5>View Data:</h5>
+                          <h5>View Data</h5>
                             <p>The grouping of a set of rows that uniquely describe the collection of a measure, its start and end times and the associated view.</p>
                             <br><hr>
                             
-                          <h5>Row:</h5>
+                          <h5>Row</h5>
                             <p>It groups the data aggregation with distinct tags.</p>
                             <br><hr>
                             
-                          <h5>RPC:</h5>
+                          <h5>RPC</h5>
                             <p>Remote Procedure Call. The mechanism of invoking a procedure/subroutine in a different scope/address space.</p>
                             <br><hr>
                             
-                          <h5>Context Propagation:</h5>
+                          <h5>Context Propagation</h5>
                             <p>The mechanism by which identifiable information about a span, e.g. traceId, spanId and traceOptions are sent over RPC scope boundaries. This span can then be linked as a remote parent. This movement could translate to getting information such as “the data storage team” invoked delete on the “database records” service which then invoked the “data consistency service”.</p>
                             <br><hr>
                             
-                          <h5>Exporters:</h5>
+                          <h5>Exporters</h5>
                             <p>The adapters that allow for metrics and traces collected by OpenCensus to be consumed by other services.</p>
                             <p>OpenCensus adds minimal overhead to your applications while still giving you the ability to export metrics and traces in near real-time to various backends of your choice, simultaneously e.g Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger. The multiplicity and convenience enables many application performance monitoring teams and even administrators visualize your applications. Your teams don’t have to expend precious time in maintenance and integration; OpenCensus should just work. We have some examples that you can check out to instrument your backends too. With the ability to introspect your applications, you can apply sound engineering practices making your teams even more productive.</p>
                             <br><br>
