@@ -1193,7 +1193,9 @@ code {
 .blog-item:hover p {
   color: #999;
 }
-
+.blog-c {
+  margin-bottom: 80px;
+}
 
 /* --------------------------------------
   SUPPORT
