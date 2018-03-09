@@ -101,33 +101,35 @@
                                         <!-- LANGUAGES NAV DROPDOWN  -->
                                         <ul class="nav navbar-nav">
                                             <li class="dropdown">
-	                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                                           <ul class="dropdown-menu multi-column columns-3">
+                                               <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                               <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                               <ul class="dropdown-menu">
                                                   <div class="row">
-                                                     <div class="col-sm-4">
+                                                     <div class="col-sm-12">
                                                         <ul class="multi-column-dropdown">
-                                                           <li><a href="cpp.html">C++</a></li>
-                                                           <li><a href="erlang.html">Erlang</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
                                                         </ul>
                                                      </div>
+                                                      <!--
                                                      <div class="col-sm-4">
                                                         <ul class="multi-column-dropdown">
+                                                            <li> </li>
                                                             <li><a href="go.html">Go</a></li>
-                                                            <li><a href="java.html">Java</a></li>
-                                                            <li><a href="ruby.html">Ruby</a></li>
-                                                           <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                           <li><a href="nodejs.html">Node.js</a></li> -->
+                                                            <li> </li>
                                                         </ul>
                                                      </div>
                                                      <div class="col-sm-4">
                                                         <ul class="multi-column-dropdown">
-                                                           <li><a href="php.html">PHP</a></li>
-                                                           <li><a href="python.html">Python</a></li>
-                                                           <!-- <li><a href="webjs.html">Web JS</a></li> -->
+                                                            <li> </li>
+                                                            <li><a href="java.html">Java</a></li>
+                                                            <li> </li>
                                                         </ul>
                                                      </div>
+                                                      -->
                                                   </div>
-                                                </ul>
+                                               </ul>
                                            </li>   
                                         </ul>
                                         <!-- END LANGUAGES NAV DROPDOWN -->            
@@ -159,60 +161,60 @@
                         <div class="col-md-12 box">
                         <h1>Glossary</h1>
                           <br>
-                          <h5>Tracing</h5>
+                            <p><b>Tracing</b></p>
                             <p>Tracking the entire path of execution of a service or a function from start until end. e.g. During an upload, tracking when a file handle is received, opened, sanitized and uploaded to the cloud.</p>
                             <br><hr>
                             
-                          <h5>Span</h5>
+                            <p><b>Span</b></p>
                             <p>The unit of traversal during tracing. Each span might have a children spans within it or it might be the first in its generation and called a root.</p>
                             <br><hr>
                             
-                          <h5>Root Span</h5>
+                            <p><b>Root Span</b></p>
                             <p>The first span in a trace; this span does not have a parent.</p>
                             <br><hr>
                             
-                          <h5>Child Span</h5>
+                            <p><b>Child Span</b></p>
                             <p>A span with a parent span; it represents a call that originates from an already traced one.<br>
                             A span MAY or MAY NOT be a child and spans can coexist as siblings on the same level.</p>
                             <br><hr>
                             
-                          <h5>Trace</h5>
+                            <p><b>Trace</b></p>
                             <p>A tree of spans. A trace has a root span that encapsulates all the spans from start to end, and the children spans being the distinct calls invoked in between.</p>
                             <br><hr>
                             
-                          <h5>Sampling</h5>
+                            <p><b>Sampling</b></p>
                             <p>Is the mechanism that determines how often the system will trace a request.<br>There are  3 types of sampling:</p>
                             <p><ul><br>
-                            <li><h5>Always sample:</h5></li>
+                            <li class="gloss5"><b>Always sample:</b></li>
                             <li class="gloss">With this sampling, every single request is traced.</li>
                             <br>
-                            <li><h5>Probabilistic sampling:</h5></li>
+                            <li class="gloss5"><b>Probabilistic sampling:</b></li>
                             <li class="gloss">Here a probability is set e.g specify 1 in 10000 or 0.0001 and the system will sample only 1 in 10000 requests. This entirely depends on your QPS.</li>
                             <br>
-                            <li><h5>Never sample:</h5></li>
+                            <li class="gloss5"><b>Never sample:</b></li>
                             <li class="gloss">Here you’ve asked that the system never traces any request.</li>
                             </ul></p>
                             <br><hr>
                             
-                          <h5>Measure</h5>
+                            <p><b>Measure</b></p>
                             <p>Any quantifiable measurement/metric that you would like to track, it could be number of requests, number of failed responses, bytes downloaded, cache misses, number of radios purchsed etc.</p>
                             <br><hr>
                             
-                          <h5>Aggregation</h5>
+                            <p><b>Aggregation</b></p>
                             <p>The style of characterizing measures. We have 4 types of Aggregations:</p><br>
                             <p><ul>
-                            <li><h5>Count Aggregation:</h5></li>
+                            <li class="gloss5"><b>Count Aggregation:</b></li>
                             <li class="gloss">Characterizing measures as a sum of increasing quantiles e.g number of requests overtime always increases and is quantified by a natural number<br>i.e. >= 1</li><br>
-                            <li><h5>Distribution Aggregation:</h5></li>
+                            <li class="gloss5"><b>Distribution Aggregation:</b></li>
                             <li class="gloss">Characterizing measures as belonging to buckets with ranges on sharp boundaries e.g <10, <100, <1000 which distinctly identify values of 112, 99, 17 as belonging to buckets <1000, <100 and <10 respectively</li><br>
-                            <li><h5>Mean Aggregation:</h5></li>
+                            <li class="gloss5"><b>Mean Aggregation:</b></li>
                             <li class="gloss">Characterizing measures over the mean of all of the values and maintains the mean value.</li><br>
-                            <li><h5>Sum Aggregation:</h5></li>
+                            <li class="gloss5"><b>Sum Aggregation:</b></li>
                             <li class="gloss">Characterizing measures over the total of values and maintains the value as a sum.</li><br>
                             </ul></p>
                             <hr>
                             
-                          <h5>Tags</h5>
+                            <p><b>Tags</b></p>
                             <p>Tags are key-value pairs that are used to store information about metrics for example;</p>
                             <p><ul>
                             <li class="gloss">ip=10.32.103.12</li>
@@ -221,27 +223,27 @@
                             </ul></p>
                             <br><hr>
                             
-                          <h5>Views</h5>
+                            <p><b>Views</b></p>
                             <p>A view is a mechanism for grouping measures, aggregations, tags as well as the timing information, essentially characterizing your metrics for visualization and inspection.</p>
                             <br><hr>
                             
-                          <h5>View Data</h5>
+                            <p><b>View Data</b></p>
                             <p>The grouping of a set of rows that uniquely describe the collection of a measure, its start and end times and the associated view.</p>
                             <br><hr>
                             
-                          <h5>Row</h5>
+                            <p><b>Row</b></p>
                             <p>It groups the data aggregation with distinct tags.</p>
                             <br><hr>
                             
-                          <h5>RPC</h5>
+                            <p><b>RPC</b></p>
                             <p>Remote Procedure Call. The mechanism of invoking a procedure/subroutine in a different scope/address space.</p>
                             <br><hr>
                             
-                          <h5>Context Propagation</h5>
+                            <p><b>Context Propagation</b></p>
                             <p>The mechanism by which identifiable information about a span, e.g. traceId, spanId and traceOptions are sent over RPC scope boundaries. This span can then be linked as a remote parent. This movement could translate to getting information such as “the data storage team” invoked delete on the “database records” service which then invoked the “data consistency service”.</p>
                             <br><hr>
                             
-                          <h5>Exporters</h5>
+                            <p><b>Exporters</b></p>
                             <p>The adapters that allow for metrics and traces collected by OpenCensus to be consumed by other services.</p>
                             <p>OpenCensus adds minimal overhead to your applications while still giving you the ability to export metrics and traces in near real-time to various backends of your choice, simultaneously e.g Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger. The multiplicity and convenience enables many application performance monitoring teams and even administrators visualize your applications. Your teams don’t have to expend precious time in maintenance and integration; OpenCensus should just work. We have some examples that you can check out to instrument your backends too. With the ability to introspect your applications, you can apply sound engineering practices making your teams even more productive.</p>
                             <br><br>

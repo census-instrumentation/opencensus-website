@@ -99,43 +99,45 @@
 								<ul class="nav navbar-nav navbar-right" id="navbar">
 								    <li><a href="overview.html">Overview</a></li> 
                                         <!-- LANGUAGES NAV DROPDOWN  -->
-                                        <ul class="nav navbar-nav">
-                                            <li class="dropdown">
-	                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                                           <ul class="dropdown-menu multi-column columns-3">
-                                                  <div class="row">
-                                                     <div class="col-sm-4">
-                                                        <ul class="multi-column-dropdown">
-                                                           <li><a href="cpp.html">C++</a></li>
-                                                           <li><a href="erlang.html">Erlang</a></li>
-                                                        </ul>
-                                                     </div>
-                                                     <div class="col-sm-4">
-                                                        <ul class="multi-column-dropdown">
-                                                            <li><a href="go.html">Go</a></li>
-                                                           <li><a href="java.html">Java</a></li>
-                                                            <li><a href="ruby.html">Ruby</a></li>
-                                                           <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                           <li><a href="nodejs.html">Node.js</a></li> -->
-                                                        </ul>
-                                                     </div>
-                                                     <div class="col-sm-4">
-                                                        <ul class="multi-column-dropdown">
-                                                           <li><a href="php.html">PHP</a></li>
-                                                           <li><a href="python.html">Python</a></li>
-                                                           <!-- <li><a href="webjs.html">Web JS</a></li> -->
-                                                        </ul>
-                                                     </div>
-                                                  </div>
-                                                </ul>
-                                           </li>   
-                                        </ul>
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <ul class="dropdown-menu">
+		                                      <div class="row">
+			                                     <div class="col-sm-12">
+				                                    <ul class="multi-column-dropdown">
+                                                        <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
+                                                    </ul>
+			                                     </div>
+                                                  <!--
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <li> </li>
+                                                        <li><a href="go.html">Go</a></li>
+                                                        <li> </li>
+                                                    </ul>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <li> </li>
+                                                        <li><a href="java.html">Java</a></li>
+                                                        <li> </li>
+                                                    </ul>
+                                                 </div>
+                                                  -->
+		                                      </div>
+	                                       </ul>
+	                                   </li>   
+                                    </ul>
                                         <!-- END LANGUAGES NAV DROPDOWN -->            
 									<li class="active"><a href="docs.html">Docs</a></li>
                                     <li><a href="glossary.html">Glossary</a></li>
 									<li><a href="roadmap.html">Roadmap</a></li>
 									<li><a href="blog.html">Blog</a></li>
-									<li><a href="support/faq.html">FAQ</a></li>
+									<li><a href="faq.html">FAQ</a></li>
                                     <li><a href="about.html">About</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -177,16 +179,11 @@
                                         <td><a href="cpp.html" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="https://github.com/census-instrumentation/opencensus-cpp/tree/master/examples" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
+                            <!--
                             <div class="col-md-4 box" id="docbox">
                                 <table>
                                     <tr>
@@ -196,16 +193,11 @@
                                         <td><a href="" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
+                            -->
                             <div class="col-md-4 box" id="docbox">
                                 <table>
                                     <tr>
@@ -215,13 +207,7 @@
                                         <td><a href="go.html" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -235,16 +221,11 @@
                                         <td><a href="java.html" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="https://github.com/census-instrumentation/opencensus-java/blob/master/examples/src/main/java/io/opencensus/examples/helloworld/QuickStart.java" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
+                            <!--
                             <div class="col-md-4 box" id="docbox">
                                 <table>
                                     <tr>
@@ -254,13 +235,7 @@
                                         <td><a href="" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -273,13 +248,7 @@
                                         <td><a href="" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -293,34 +262,33 @@
                                         <td><a href="" class="doc1">Quickstart Guide</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="" class="doc1">OpenCensus Basics Tutorial</a></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="" class="doc1">API Reference</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="" class="doc1">Generated Code Reference</a></td>
                                     </tr>
                                 </table>
                             </div>
+                            -->
                           <!-- END DOCS BY LANGUAGE COULMNS -->
                         </div>
                         
                         <!-- OPENCENSUS BY USE CASES START -->
+                        <!-- 
                         <div class="col-md-12 box">
                             <br><hr><br>
                             <h4>OpenCensus by USe Cases</h4>
                             <p>Comming soon.</p>
                             <br><hr><br>
                         </div>
+                        -->
                         <!-- OPENCENSUS BY USE CASES END -->
                         
                         <!-- OPENCENSUS IN OTHER PROJECTS START -->
+                        <!-- 
                         <div class="col-md-12 box">
                             <h4>OpenCensus in other Projects</h4>
                             <p>Comming soon.</p>
                             <br><hr><br>
                         </div>
+                        -->
                         <!-- OPENCENSUS IN OTHER PROJECTS END -->
                     </div>
                     <!-- DOCS CONTENT END -->

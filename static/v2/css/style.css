@@ -414,10 +414,10 @@ img {
   4.5 DROPDOWN NAV
 -----------------------------------------*/
 .dropdown-menu {
-	min-width: 200px;
+	min-width: 150px;
 }
 .dropdown-menu.columns-2 {
-	min-width: 400px;
+	min-width: 200px;
 }
 .dropdown-menu.columns-3 {
 	min-width: 300px;
@@ -1045,7 +1045,7 @@ code {
     margin: 20px 0px 40px 0px;
 }
 #docbox table {
-  border: none;
+  border-width: 1px;
   width: 90%;
   
 }
@@ -1377,6 +1377,13 @@ table th {
 .gloss1 {
   color: #C1272D;
   text-decoration: underline;
+}
+.gloss5 {
+  text-indent: 10px;
+}
+.gloss5 li {
+list-style-position: inside;
+text-indent: -1em;
 }
 /* --------------------------------------
   12. CONTACT

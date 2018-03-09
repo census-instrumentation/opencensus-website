@@ -102,35 +102,37 @@
                                         <!-- LANGUAGES NAV DROPDOWN  -->
                                         <ul class="nav navbar-nav">
                                             <li class="dropdown">
-	                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                                           <ul class="dropdown-menu multi-column columns-3">
-		                                      <div class="row">
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                        <li><a href="go.html">Go</a></li>
-                                                        <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                              </div>
-	                                       </ul>
-	                                   </li>   
-                                    </ul>
+                                               <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                               <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                               <ul class="dropdown-menu">
+                                                  <div class="row">
+                                                     <div class="col-sm-12">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
+                                                        </ul>
+                                                     </div>
+                                                      <!--
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="go.html">Go</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="java.html">Java</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                      -->
+                                                  </div>
+                                               </ul>
+                                           </li>   
+                                        </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="docs.html">Docs</a></li>
                                     <li><a href="glossary.html">Glossary</a></li>
@@ -177,15 +179,15 @@
                             <hr>
                             <ul>
                                 <li><p><a href="cpp.html">C++</a></p></li>
-                                <li><p><a href="erlang.html">Erlang</a></p></li>
+                                <!-- <li><p><a href="erlang.html">Erlang</a></p></li> -->
                                 <li><p><a href="go.html">Go</a></p></li>
-                                <li><p><a href="java.html" class="active">&nbsp;&#9679; Java</a></p></li>
+                                <li><p><a href="java.html">Java</a></p></li>
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="nodejs.html">Node.js</a></p></li>
                                 <li><p><a href="php.html">PHP</a></p></li>
                                 <li><p><a href="python.html">Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
+                                <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
                         </div>
                         <!-- END LEFT COULMN -->
@@ -205,7 +207,7 @@
                             <p><pre><code>git clone <a href="https://github.com/census-instrumentation/opencensus-java.git">https://github.com/census-instrumentation/opencensus-java.git</a></code></pre><br>
                             <li>Code is in directory:</li> <span class="code">examples/src/main/java/io/opencensus/examples/helloworld/</span></p><br><hr><br>
                             
-                            <h4>To Build/Run The Example:</h4>
+                            <h4>To Build/Run The Example</h4>
                             <p>The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:<br><br>
                             <li>Build the example code e.g.:</li>
                                 <ul>
@@ -221,7 +223,7 @@
                                 </ul>
                             </p><br><hr><br>
                             
-                            <h4>The Example Code:</h4>
+                            <h4>The Example Code</h4>
                             <p>
                             <pre><code><span class="comment">/** Simple program that collects data for video size. */</span><br>public final class QuickStart {<br>&nbsp;&nbsp;static Logger logger = Logger.getLogger(<br>&nbsp;&nbsp;QuickStart.class.getName());<br>&nbsp;&nbsp;static Tagger tagger = Tags.getTagger();<br>&nbsp;&nbsp;static ViewManager viewManager = Stats.getViewManager();<br>&nbsp;&nbsp;static StatsRecorder statsRecorder = Stats.getStatsRecorder();<br>&nbsp;&nbsp;static Tracer tracer = Tracing.getTracer();<br><br>&nbsp;&nbsp;<span class="comment">// frontendKey allows us to break down the recorded data</span><br>&nbsp;&nbsp;static final TagKey FRONTEND_KEY = TagKey.create(<br>&nbsp;&nbsp;"my.org/keys/frontend");<br><br><span class="comment">&nbsp;&nbsp;// videoSize will measure the size of processed videos.</span><br>&nbsp;&nbsp;static final MeasureLong VIDEO_SIZE = MeasureLong.create(<br>&nbsp;&nbsp;"my.org/measure/video_size",<br>&nbsp;&nbsp;"size of processed videos",<br>&nbsp;&nbsp;"MBy");<br><br><span class="comment">&nbsp;&nbsp;// Create view to see the processed video size distribution broken<br>&nbsp;&nbsp;// down by frontend. The view has bucket boundaries (0, 256, 65536)<br>&nbsp;&nbsp;// that will group measure values into histogram buckets.</span><br>&nbsp;&nbsp;private static final View.Name VIDEO_SIZE_VIEW_NAME =<br>&nbsp;&nbsp;View.Name.create("my.org/views/video_size");<br>&nbsp;&nbsp;private static final View VIDEO_SIZE_VIEW = View.create(<br>&nbsp;&nbsp;VIDEO_SIZE_VIEW_NAME,<br>&nbsp;&nbsp;"processed video size over time",<br>&nbsp;&nbsp;VIDEO_SIZE,<br>&nbsp;&nbsp;Aggregation.Distribution.create(<br>&nbsp;&nbsp;&nbsp;BucketBoundaries.create(Arrays.asList(0.0, 256.0, 65536.0))),<br>&nbsp;&nbsp;Collections.singletonList(FRONTEND_KEY),<br>&nbsp;&nbsp;Cumulative.create());<br><br><span class="comment">&nbsp;&nbsp;/** Main launcher for the QuickStart example. */</span><br>&nbsp;&nbsp;public static void main(String[] args) throws<br>&nbsp;&nbsp;InterruptedException {<br>&nbsp;&nbsp;TagContextBuilder tagContextBuilder = tagger.currentBuilder()<br>&nbsp;&nbsp;&nbsp;.put(FRONTEND_KEY, TagValue.create("mobile-ios9.3.5"));<br>&nbsp;&nbsp;SpanBuilder spanBuilder = tracer.spanBuilder(<br>&nbsp;&nbsp;&nbsp;"my.org/ProcessVideo")<br>&nbsp;&nbsp;&nbsp;.setRecordEvents(true)<br>&nbsp;&nbsp;&nbsp;.setSampler(Samplers.alwaysSample());<br>&nbsp;&nbsp;viewManager.registerView(VIDEO_SIZE_VIEW);<br>&nbsp;&nbsp;LoggingTraceExporter.register();<br><br><span class="comment">&nbsp;&nbsp;// Process video. Record the processed video size.</span><br>&nbsp;&nbsp;try (Scope scopedTags = tagContextBuilder.buildScoped();<br>&nbsp;&nbsp;&nbsp;Scope scopedSpan = spanBuilder.startScopedSpan()) {<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Start processing video.");<br>&nbsp;&nbsp;&nbsp;<span class="comment">// Sleep for [0,10] milliseconds to fake work.</span><br>&nbsp;&nbsp;&nbsp;Thread.sleep(new Random().nextInt(10) + 1);<br>&nbsp;&nbsp;&nbsp;statsRecorder.newMeasureMap().put(VIDEO_SIZE, 25648).record();<br>&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Finished processing video.");<br>&nbsp;&nbsp;} catch (Exception e) {<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotation("Exception thrown when processing video.");<br>&nbsp;&nbsp;&nbsp;&nbsp;tracer.getCurrentSpan().setStatus(Status.UNKNOWN);<br>&nbsp;&nbsp;&nbsp;&nbsp;logger.severe(e.getMessage());<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;logger.info("Wait longer than the reporting duration...");<br>&nbsp;&nbsp;<span class="comment">// Wait for a duration longer than reporting duration (5s) to<br>&nbsp;&nbsp;// ensure spans are exported.</span><br>&nbsp;&nbsp;Thread.sleep(5100);<br>&nbsp;&nbsp;ViewData viewData = viewManager.getView(VIDEO_SIZE_VIEW_NAME);<br>&nbsp;&nbsp;logger.info(<br>&nbsp;&nbsp;&nbsp;String.format("Recorded stats for %s:\n %s",<br>&nbsp;&nbsp;&nbsp;&nbsp;VIDEO_SIZE_VIEW_NAME.asString(), viewData));<br>&nbsp;}<br>}<br></code></pre></p>
                             <br><hr><br>

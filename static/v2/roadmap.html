@@ -103,30 +103,32 @@
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
 	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
-	                                       <ul class="dropdown-menu multi-column columns-3">
+	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <ul class="dropdown-menu">
 		                                      <div class="row">
-			                                     <div class="col-sm-4">
+			                                     <div class="col-sm-12">
 				                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
                                                     </ul>
 			                                     </div>
+                                                  <!--
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                       <li><a href="go.html">Go</a></li>
-                                                       <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
+                                                        <li> </li>
+                                                        <li><a href="go.html">Go</a></li>
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
+                                                        <li> </li>
+                                                        <li><a href="java.html">Java</a></li>
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
+                                                  -->
 		                                      </div>
 	                                       </ul>
 	                                   </li>   
@@ -162,9 +164,138 @@
                         <div class="col-md-10 box" style="margin-left:5px">
                             
 						  <h1>Roadmap</h1>
-                            <p>Content to be written.</p>
                             <br>
-                            
+                            <h4>Languages</h4>
+                            <p><table>
+                                <thead><br>
+                                    <tr>
+                                        <th scope="col">Language</th>
+                                        <th scope="col">Tracing</th>
+                                        <th scope="col">Stats</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-cpp"><span class="gloss1">C++</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">Supported</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-erlang"><span class="gloss1">Erlang</span></a></td>
+                                        <td data-label="Tracing">In Progress</td>
+                                        <td data-label="Metrics">Planned</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-go"><span class="gloss1">Go</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">Supported</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-java"><span class="gloss1">Java (JVM, OpenJDK, Android)</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">Supported</td>
+                                    </tr>
+                                    <!--
+                                    <tr>
+                                        <td scope="row" data-label="Language">C#/.NET</td>
+                                        <td data-label="Tracing">Planned</td>
+                                        <td data-label="Metrics">Planned</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language">Node.js</td>
+                                        <td data-label="Tracing">In Progress</td>
+                                        <td data-label="Metrics">In Progress</td>
+                                    </tr> -->
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-php"><span class="gloss1">PHP</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">Planned</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-python"><span class="gloss1">Python</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">In Progress</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-ruby"><span class="gloss1">Ruby</span></a></td>
+                                        <td data-label="Tracing">Supported</td>
+                                        <td data-label="Metrics">Planned</td>
+                                    </tr>
+                                    <!--
+                                    <tr>
+                                        <td scope="row" data-label="Language">Web JS</td>
+                                        <td data-label="Tracing">Planned</td>
+                                        <td data-label="Metrics">Planned</td>
+                                    </tr> -->
+                                    </tbody>            
+                                </table>
+                                <br>
+                            </p><hr>
+                            <br>
+                        <h4>Exporters</h4>
+                                      <table>
+                                        <thead><br>
+                                            <tr>
+                                                <th scope="col">Backend</th>
+                                                <th scope="col">Go</th>
+                                                <th scope="col">Java</th>
+                                                <th scope="col">Erlang</th>
+                                                <th scope="col">C++</th>
+                                                <!-- <th scope="col">Node.js</th> -->
+                                                <th scope="col">Python</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-label="Backend">SignalFX</td>
+                                                <td data-label="Go" class="tall">No <a href="https://github.com/census-instrumentation/opencensus-go/issues/360"><span>(open issue)</span></a></td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <!-- <td data-label="Node.js">No</td> -->
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Prometheus</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">No <a href="https://github.com/census-instrumentation/opencensus-java/issues/851"><span>(open issue)</span></a></td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <!-- <td data-label="Node.js">No</td> -->
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Jaeger</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">No</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <!-- <td data-label="Node.js">No</td> -->
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Stackdriver</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <!-- <td data-label="Node.js">No</td> -->
+                                                <td data-label="Python">Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Backend">Zipkin</td>
+                                                <td data-label="Go">Yes</td>
+                                                <td data-label="Java">Yes</td>
+                                                <td data-label="Erlang">No</td>
+                                                <td data-label="C++">No</td>
+                                                <!-- <td data-label="Node.js">No</td> -->
+                                                <td data-label="Python">No</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                           <br><hr><br>
+						   <h4>How do I contribute?</h4>
+                           <p>Contributions are highly appreciated! Please follow the steps for <a href="community.html" class="gloss1">Contributing Here.</a></p>
 					   </div>
                         <!-- END ACCORDIAN COULMN -->
                         <!-- ROADMAP CONTENT END -->

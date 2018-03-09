@@ -102,30 +102,32 @@
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
 	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
-	                                       <ul class="dropdown-menu multi-column columns-3">
+	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <ul class="dropdown-menu">
 		                                      <div class="row">
-			                                     <div class="col-sm-4">
+			                                     <div class="col-sm-12">
 				                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
                                                     </ul>
 			                                     </div>
+                                                  <!--
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
+                                                        <li> </li>
                                                         <li><a href="go.html">Go</a></li>
-                                                       <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
+                                                        <li> </li>
+                                                        <li><a href="java.html">Java</a></li>
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
+                                                  -->
 		                                      </div>
 	                                       </ul>
 	                                   </li>   
@@ -161,15 +163,15 @@
                             <hr>
                             <ul>
                                 <li><p><a href="cpp.html">C++</a></p></li>
-                                <li><p><a href="erlang.html">Erlang</a></p></li>
+                                <!-- <li><p><a href="erlang.html">Erlang</a></p></li> -->
                                 <li><p><a href="go.html">Go</a></p></li>
                                 <li><p><a href="java.html">Java</a></p></li>
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="nodejs.html">Node.js</a></p></li>
                                 <li><p><a href="php.html">PHP</a></p></li>
                                 <li><p><a href="python.html">Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
+                                <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
                         </div>
                         <!-- END LEFT COULMN -->
@@ -203,13 +205,11 @@
                             <p><b>Tags</b></p>
                             <p>OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. <a href="tags.html"><span class="gloss1">Read more.</span></a></p><br><br>
                         
-                            <p><b>Stats, Trace</b></p>
-                            <p>OpenCensus is a framework that support multiple signal types.<br><br>
-                                <ul>
-                                    <li class="bullet">&bull; <i>Stats</i> collection allow libraries and applications to record measurements, aggregate the recorded data and export them. <a href="stats.html"><span class="gloss1">Read more.</span></a></li><br>
-                                    <li class="bullet">&bull; <i>Distributed traces</i> track the progression of a single user request as it is handled by the internal services until the user request is responded.<br><a href="trace.html"><span class="gloss1">Read more.</span></a></li>
-                                </ul>
-                            </p><br><br>
+                            <p><b>Stats</b></p>
+                            <p><i>Stats</i> is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. <a href="stats.html"><span class="gloss1">Read more.</span></a></p><br><br>
+                                
+                            <p><b>Trace</b></p>
+                            <p><i>Distributed traces</i> track the progression of a single user request as it is handled by the internal services until the user request is responded.<br><a href="trace.html"><span class="gloss1">Read more.</span></a></p><br><br>
                     
                             <p><b>Exporters</b></p>
                             <p>OpenCensus is vendor-agnostic and can upload data to any backend with various exporter implementations. Even though, OpenCensus provides support for many backends, users can also implement their own exporters for proprietary and unofficially supported backends.</p><br><br>

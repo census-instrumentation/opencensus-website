@@ -101,35 +101,37 @@
                                         <!-- LANGUAGES NAV DROPDOWN  -->
                                         <ul class="nav navbar-nav">
                                             <li class="dropdown">
-	                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                                           <ul class="dropdown-menu multi-column columns-3">
-		                                      <div class="row">
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                        <li><a href="go.html">Go</a></li>
-                                                        <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                              </div>
-	                                       </ul>
-	                                   </li>   
-                                    </ul>
+                                               <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                               <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                               <ul class="dropdown-menu">
+                                                  <div class="row">
+                                                     <div class="col-sm-12">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
+                                                        </ul>
+                                                     </div>
+                                                      <!--
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="go.html">Go</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="java.html">Java</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                      -->
+                                                  </div>
+                                               </ul>
+                                           </li>   
+                                        </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="docs.html">Docs</a></li>
                                     <li><a href="glossary.html">Glossary</a></li>
@@ -175,15 +177,15 @@
                             <hr>
                             <ul>
                                 <li><p><a href="cpp.html">C++</a></p></li>
-                                <li><p><a href="erlang.html">Erlang</a></p></li>
-                                <li><p><a href="go.html" class="active">&nbsp;&#9679; Go</a></p></li>
+                                <!-- <li><p><a href="erlang.html">Erlang</a></p></li> -->
+                                <li><p><a href="go.html">Go</a></p></li>
                                 <li><p><a href="java.html">Java</a></p></li>
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="nodejs.html">Node.js</a></p></li>
                                 <li><p><a href="php.html">PHP</a></p></li>
                                 <li><p><a href="python.html">Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
+                                <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
                         </div>
                         <!-- END LEFT COULMN -->
@@ -210,7 +212,7 @@
                             <p><pre><code>$ cd $(go env GOPATH)/src/go.opencensus.io/examples/helloworld<br>$ go get -v . # get the dependencies<br>$ go run main.go</code></pre></p>
                 
                             <p><pre><code><span class="comment">// Command helloworld is an example program that collects data for</span><br><span class="comment">// video size.</span><br>package main<br><br>import (<br>&nbsp;&nbsp;"context"<br>&nbsp;&nbsp;"fmt"<br>&nbsp;&nbsp;"log"<br>&nbsp;&nbsp;"math/rand"<br>&nbsp;&nbsp;"time"<br><br>&nbsp;&nbsp;"go.opencensus.io/examples/exporter"<br>&nbsp;&nbsp;"go.opencensus.io/stats"<br>&nbsp;&nbsp;"go.opencensus.io/stats/view"<br>&nbsp;&nbsp;"go.opencensus.io/tag"<br>&nbsp;&nbsp;"go.opencensus.io/trace"<br>)<br><br>var (<br>&nbsp;&nbsp;<span class="comment">// frontendKey allows us to breakdown the recorded data<br>&nbsp;&nbsp;// by the frontend used when uploading the video.</span><br>&nbsp;&nbsp;frontendKey tag.Key<br><br>&nbsp;&nbsp;<span class="comment">// videoSize will measure the size of processed videos.</span><br>&nbsp;&nbsp;videoSize *stats.Int64Measure<br>)<br><br>func main() {<br>&nbsp;&nbsp;ctx := context.Background()<br><br>&nbsp;&nbsp;<span class="comment">// Register an exporter to be able to retrieve<br>&nbsp;&nbsp;// the data from the subscribed views.</span><br>&nbsp;&nbsp;e := &exporter.PrintExporter{}<br>&nbsp;&nbsp;view.RegisterExporter(e)<br>&nbsp;&nbsp;trace.RegisterExporter(e)<br><br>&nbsp;&nbsp;var err error<br>&nbsp;&nbsp;frontendKey, err = tag.NewKey("my.org/keys/frontend")<br>&nbsp;&nbsp;if err != nil {<br>&nbsp;&nbsp;&nbsp;log.Fatal(err)<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;videoSize, err = stats.Int64("my.org/measure/video_size",<br>&nbsp;&nbsp;&nbsp;"size of processed videos", "MBy")<br>&nbsp;&nbsp;if err != nil {<br>&nbsp;&nbsp;&nbsp;log.Fatalf("Video size measure not created: %v", err)<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;<span class="comment">// Create view to see the processed video size<br>&nbsp;&nbsp;// distribution broken down by frontend.</span><br>&nbsp;&nbsp;v, err := view.New(<br>&nbsp;&nbsp;&nbsp;"my.org/views/video_size",<br>&nbsp;&nbsp;&nbsp;"processed video size over time",<br>&nbsp;&nbsp;&nbsp;[]tag.Key{frontendKey},<br>&nbsp;&nbsp;&nbsp;videoSize,<br>&nbsp;&nbsp;&nbsp;view.DistributionAggregation([]float64{0, 1 << 16, 1 << 32}),<br>&nbsp;&nbsp;)<br>&nbsp;&nbsp;if err != nil {<br>&nbsp;&nbsp;&nbsp;log.Fatalf("Cannot create view: %v", err)<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;<span class="comment">// Subscribe will allow view data to be exported.<br>&nbsp;&nbsp;// Once no longer need, you can unsubscribe from the view.</span><br>&nbsp;&nbsp;if err := v.Subscribe(); err != nil {<br>&nbsp;&nbsp;&nbsp;log.Fatalf("Cannot subscribe to the view: %v", err)<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;<span class="comment">// Process the video.</span><br>&nbsp;&nbsp;process(ctx)<br><br>&nbsp;&nbsp;<span class="comment">// Wait for a duration longer than reporting<br>&nbsp;&nbsp;duration to ensure the stats<br>&nbsp;&nbsp;// library reports the collected data.</span><br>&nbsp;&nbsp;fmt.Println("Wait longer than the reporting duration...")<br>&nbsp;&nbsp;time.Sleep(2 * time.Second)<br>}<br><br><span class="comment">// process processes the video and instruments the processing<br>// by creating a span and collecting metrics about the operation.</span><br>func process(ctx context.Context) {<br>&nbsp;&nbsp;ctx, err := tag.New(ctx,<br>&nbsp;&nbsp;&nbsp;tag.Insert(frontendKey, "mobile-ios9.3.5"),<br>&nbsp;&nbsp;)<br>&nbsp;&nbsp;if err != nil {<br>&nbsp;&nbsp;&nbsp;log.Fatal(err)<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;ctx, span := trace.StartSpan(ctx, "my.org/ProcessVideo")<br>&nbsp;&nbsp;defer span.End()<br>&nbsp;&nbsp;<span class="comment">// Process video.<br>&nbsp;&nbsp;// Record the processed video size.<br>&nbsp;&nbsp;// Sleep for [1,10] milliseconds to fake work.</span><br>&nbsp;&nbsp;time.Sleep(time.Duration(rand.Intn(10)+1) * time.Millisecond)<br><br>&nbsp;&nbsp;stats.Record(ctx, videoSize.M(25648))<br>}</code></pre></p>
-                            <br><hr><br>
+                            <br><br>
                             
 					   </div>
                         <!-- END CENTER COULMN -->

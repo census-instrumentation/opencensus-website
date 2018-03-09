@@ -101,35 +101,37 @@
                                         <!-- LANGUAGES NAV DROPDOWN  -->
                                         <ul class="nav navbar-nav">
                                             <li class="dropdown">
-	                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
-	                                           <ul class="dropdown-menu multi-column columns-3">
-		                                      <div class="row">
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                        <li><a href="go.html">Go</a></li>
-                                                        <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                                 <div class="col-sm-4">
-                                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
-                                                    </ul>
-                                                 </div>
-                                              </div>
-	                                       </ul>
-	                                   </li>   
-                                    </ul>
+                                               <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                               <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                               <ul class="dropdown-menu">
+                                                  <div class="row">
+                                                     <div class="col-sm-12">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                            <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
+                                                        </ul>
+                                                     </div>
+                                                      <!--
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="go.html">Go</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                     <div class="col-sm-4">
+                                                        <ul class="multi-column-dropdown">
+                                                            <li> </li>
+                                                            <li><a href="java.html">Java</a></li>
+                                                            <li> </li>
+                                                        </ul>
+                                                     </div>
+                                                      -->
+                                                  </div>
+                                               </ul>
+                                           </li>   
+                                        </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="docs.html">Docs</a></li>
                                     <li><a href="glossary.html">Glossary</a></li>
@@ -175,16 +177,16 @@
                             <h4>Quickstart</h4>
                             <hr>
                             <ul>
-                                <li><p><a href="cpp.html" class="active">&nbsp;&#9679; C++</a></p></li>
-                                <li><p><a href="erlang.html">Erlang</a></p></li>
+                                <li><p><a href="cpp.html">C++</a></p></li>
+                                <!-- <li><p><a href="erlang.html">Erlang</a></p></li> -->
                                 <li><p><a href="go.html">Go</a></p></li>
                                 <li><p><a href="java.html">Java</a></p></li>
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="nodejs.html">Node.js</a></p></li>
                                 <li><p><a href="php.html">PHP</a></p></li>
                                 <li><p><a href="python.html">Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
-                                <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
+                                <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
                         </div>
                         <!-- END LEFT COULMN -->
@@ -198,41 +200,41 @@
                           Running the HelloWorld Example:<br>
                           <pre><code>./bazel-bin/opencensus/examples/helloworld/hello_world</code></pre></p><br><hr><br>
                             
-                          <h4>Overview:</h4>
-                          <p><b>Traces:</b><br>A <i>trace</i> measures the amount of time it takes an application to complete a single operation. Traces usually extend across multiple nodes in a distributed system. For example, it can describe how long it takes for the application to process an incoming request from a user and return a response. This could include the time taken for the frontend to send requests and receive responses from backend systems. A trace consists of one or more spans, each of which describes the amount of time it takes to complete a suboperation. Traces are uniquely identified by a TraceId.  All spans within a trace will share the same TraceId.</p><br><br>
+                          <h4>Overview</h4>
+                          <p><b>Traces</b><br>A <i>trace</i> measures the amount of time it takes an application to complete a single operation. Traces usually extend across multiple nodes in a distributed system. For example, it can describe how long it takes for the application to process an incoming request from a user and return a response. This could include the time taken for the frontend to send requests and receive responses from backend systems. A trace consists of one or more spans, each of which describes the amount of time it takes to complete a suboperation. Traces are uniquely identified by a TraceId.  All spans within a trace will share the same TraceId.</p><br><br>
                         
-                          <p><b>Spans:</b><br><i>Spans</i> measure the latency of suboperations within a trace. Multiple spans can be part of a "Trace", which represents an execution path (usually distributed) across multiple processes/nodes. For example, it can describe how long it takes for the application to perform a round-trip RPC call to another system when handling a request, or how long it takes to perform another task that is part of a larger operation.  Spans are uniquely identified by a SpanId and a TraceId. Spans can inherit the TraceId from a parent span. If they are created without a parent, they will be marked as a root span.  The initial span in a trace will always be a root span.<br><br>Spans may optionally contain a number of other elements that can be used for debugging and diagnostic purposes. This includes attributes, annotations, message events, links, and status.<br><br>Example span creation:<br><pre><code><span class="red">auto</span> parent_span = <span class="blue">opencensus::trace::Span::StartSpan</span>("root");<br><span class="red">auto</span> child_span = <span class="blue">opencensus::trace::Span::StartSpan</span>("child", &parent_span);</code></pre></p><br><br>
+                          <p><b>Spans</b><br><i>Spans</i> measure the latency of suboperations within a trace. Multiple spans can be part of a "Trace", which represents an execution path (usually distributed) across multiple processes/nodes. For example, it can describe how long it takes for the application to perform a round-trip RPC call to another system when handling a request, or how long it takes to perform another task that is part of a larger operation.  Spans are uniquely identified by a SpanId and a TraceId. Spans can inherit the TraceId from a parent span. If they are created without a parent, they will be marked as a root span.  The initial span in a trace will always be a root span.<br><br>Spans may optionally contain a number of other elements that can be used for debugging and diagnostic purposes. This includes attributes, annotations, message events, links, and status.<br><br>Example span creation:<br><pre><code><span class="red">auto</span> parent_span = <span class="blue">opencensus::trace::Span::StartSpan</span>("root");<br><span class="red">auto</span> child_span = <span class="blue">opencensus::trace::Span::StartSpan</span>("child", &parent_span);</code></pre></p><br><br>
 
-                          <p><b>Attributes:</b><br><i>Attributes</i> are additional information that is included in the span which can represent arbitrary data assigned by the user. They are key value pairs with the key being a string and the value being either a string, boolean, or integer.<br><br>Examples:<br><pre><code>span.<span class="blue">AddAttribute</span>("my_attribute", "red");<br><span class="blue">span.AddAttribute</span>("event_occurred", "true");<br><span class="blue">span.AddAttribute</span>("bytes", "10");</code></pre></p><br><br>
+                          <p><b>Attributes</b><br><i>Attributes</i> are additional information that is included in the span which can represent arbitrary data assigned by the user. They are key value pairs with the key being a string and the value being either a string, boolean, or integer.<br><br>Examples:<br><pre><code>span.<span class="blue">AddAttribute</span>("my_attribute", "red");<br><span class="blue">span.AddAttribute</span>("event_occurred", "true");<br><span class="blue">span.AddAttribute</span>("bytes", "10");</code></pre></p><br><br>
                         
-                          <p><b>Annotations:</b><br><i>Annotations</i> are a set of attributes that have been grouped together and are optionally accompanied by a string description.<pre><code>span.<span class="blue">AddAnnotation</span>("Constructing greeting.", <br>&nbsp;&nbsp;{{"name", request-><span class="blue">name</span>()}, {"name length",<br>&nbsp;&nbsp;request-><span class="blue">name</span>().<span class="blue">size</span>()}});</code></pre></p><br><br>
+                          <p><b>Annotations</b><br><i>Annotations</i> are a set of attributes that have been grouped together and are optionally accompanied by a string description.<pre><code>span.<span class="blue">AddAnnotation</span>("Constructing greeting.", <br>&nbsp;&nbsp;{{"name", request-><span class="blue">name</span>()}, {"name length",<br>&nbsp;&nbsp;request-><span class="blue">name</span>().<span class="blue">size</span>()}});</code></pre></p><br><br>
                         
-                          <p><b>Message Events:</b><br><i>Message events</i> represent messages sent/received between spans. It records whether the message was sent/received and optionally the message size.</p><br><br>
+                          <p><b>Message Events</b><br><i>Message events</i> represent messages sent/received between spans. It records whether the message was sent/received and optionally the message size.</p><br><br>
                         
-                          <p><b>Links:</b><br><i>Links</i> represent a connection between two spans in different traces. The linked span can be either a parent or child.</p><br><br>
+                          <p><b>Links</b><br><i>Links</i> represent a connection between two spans in different traces. The linked span can be either a parent or child.</p><br><br>
                         
-                          <p><b>Status:</b><br><i>Status</i> represents the current state of the span. It is represented by a canonical status code which maps onto a predefined set of error values and an optional string message.</p><br><br>
+                          <p><b>Status</b><br><i>Status</i> represents the current state of the span. It is represented by a canonical status code which maps onto a predefined set of error values and an optional string message.</p><br><br>
                         
-                          <p><b>Span Context:</b><br>The <i>span context</i> represents the state information that must be propagated to child spans and between processes to maintain a trace.  A span context contains a TraceId, SpanId, and a set of span options for a given span.<br>Example span context:<br><span class="code">TraceId-SpanId-Options:<br>3563a30535bddcaeca5dd00bc84f29ba-90a9d220f553e7fc-01</span></p><br><br>
+                          <p><b>Span Context</b><br>The <i>span context</i> represents the state information that must be propagated to child spans and between processes to maintain a trace.  A span context contains a TraceId, SpanId, and a set of span options for a given span.<br>Example span context:<br><span class="code">TraceId-SpanId-Options:<br>3563a30535bddcaeca5dd00bc84f29ba-90a9d220f553e7fc-01</span></p><br><br>
                         
-                          <p><b>Starting/Ending Spans:</b><br>When a span starts it records a start time.  When a span ends, the end time is recorded. Latency is calculated by the difference between the start and end times.  Spans will only be exported to exporting services after they have ended. Attributes, annotations, message events, etc. can only be added to span that is active (i.e. has started but has not ended). Ending a span is usually the responsibility of the user.</p><br><br>
+                          <p><b>Starting/Ending Spans</b><br>When a span starts it records a start time.  When a span ends, the end time is recorded. Latency is calculated by the difference between the start and end times.  Spans will only be exported to exporting services after they have ended. Attributes, annotations, message events, etc. can only be added to span that is active (i.e. has started but has not ended). Ending a span is usually the responsibility of the user.</p><br><br>
                         
-                          <p><b>Samplers:</b><br>Tracing every span can incur a large overhead, so sampling is often employed. Samplers decide whether or not given span will be sampled. The default sampler is a probabilistic one with a configurable probability threshold. Users can write their own samplers as well.<br><br>CustomSampler sampler;<br><pre><code><span class="red">auto</span> span = <span class="blue">Span::StartSpan</span>("Span", nullptr, {&sampler});</code></pre></p><br><br>
+                          <p><b>Samplers</b><br>Tracing every span can incur a large overhead, so sampling is often employed. Samplers decide whether or not given span will be sampled. The default sampler is a probabilistic one with a configurable probability threshold. Users can write their own samplers as well.<br><br>CustomSampler sampler;<br><pre><code><span class="red">auto</span> span = <span class="blue">Span::StartSpan</span>("Span", nullptr, {&sampler});</code></pre></p><br><br>
                         
-                          <p><b>Trace Params:</b><br>Trace params defines the tracing parameters used by opencensus. It sets the maximum number of attributes, annotations, message events, and links per span as well as the default probability sampler. Opencensus uses global trace params which can be set by the user.  The values in the global trace params will be the default values for all spans unless specified otherwise.</p><br><br>
+                          <p><b>Trace Params</b><br>Trace params defines the tracing parameters used by opencensus. It sets the maximum number of attributes, annotations, message events, and links per span as well as the default probability sampler. Opencensus uses global trace params which can be set by the user.  The values in the global trace params will be the default values for all spans unless specified otherwise.</p><br><br>
                         
-                          <p><b>Exporters:</b><br>OpenCensus supports exporting of span data to various monitoring systems for analysis of tracing and stats data. The default exporter is stackdriver which is natively supported on Google Cloud Platform. OpenCensus also supports prometheus for stats and zipkin for tracing, and it allows for user supplied exporters.</p><br><br>
+                          <p><b>Exporters</b><br>OpenCensus supports exporting of span data to various monitoring systems for analysis of tracing and stats data. The default exporter is stackdriver which is natively supported on Google Cloud Platform. OpenCensus also supports prometheus for stats and zipkin for tracing, and it allows for user supplied exporters.</p><br><br>
                         
-                          <p><b>Plugins:</b><br>Opencensus supports integration with underlying rpc systems. By default opencensus works with grpc. Users can write their own plugins to interface opencensus with other rpc systems.</p><br><br>
+                          <p><b>Plugins</b><br>Opencensus supports integration with underlying rpc systems. By default opencensus works with grpc. Users can write their own plugins to interface opencensus with other rpc systems.</p><br><br>
         
-                          <p><b>Views:</b><br>A view is a data structure for handling on-task data collection. Once a View is instantiated, OpenCensus will collect data for it. Views must be registered for export to allow the data to be exported to backed monitoring systems like Stackdriver.</p><br><br>
+                          <p><b>Views</b><br>A view is a data structure for handling on-task data collection. Once a View is instantiated, OpenCensus will collect data for it. Views must be registered for export to allow the data to be exported to backed monitoring systems like Stackdriver.</p><br><br>
                         
-                          <p><b>Measures:</b><br>A measure defines one type of measurement, such as “RPC latency” or “HTTP request size”. Each view must have a measure which defines what is being measured and the units it is measured with.</p><br><hr><br>
+                          <p><b>Measures</b><br>A measure defines one type of measurement, such as “RPC latency” or “HTTP request size”. Each view must have a measure which defines what is being measured and the units it is measured with.</p><br><hr><br>
                             
-                          <h4>Quickstart Example:</h4>
+                          <h4>Quickstart Example</h4>
                           <p>The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.<br><br>In this case we are using stdout exporters which we register at the beginning.<br><pre><code><span class="comment">// Register stdout exporters.</span><br><span class="blue">opencensus::exporters::stats::StdoutExporter::Register</span>();<br><span class="blue">opencensus::exporters::trace::StdoutExporter::Register</span>();</code></pre><br><br>We define a measure for video size which records the sizes in megabytes "MBy".<br><pre><code><span class="comment">// Call measure so that it is initialized.</span><br><span class="blue">VideoSizeMeasure</span>();</code></pre><br><br>We create a view and register it with the local Stdout exporter.<br><pre><code><span class="comment">// Create view to see the processed video size distribution broken down<br>// by frontend. The view has bucket boundaries (0, 256, 65536)<br>//that will group measure values into histogram buckets.</span><br><span class="red">const</span>opencensus::stats::ViewDescriptor video_size_view =<br><span class="blue">opencensus::stats::ViewDescriptor</span>()<br>&nbsp;&nbsp;&nbsp;.<span class="blue">set_name</span>(<span class="blue">kVideoSizeViewName</span>)<br>&nbsp;&nbsp;&nbsp;.<span class="blue">set_description</span>("processed video size over time")<br>&nbsp;&nbsp;&nbsp;.<span class="blue">set_measure</span>(<span class="blue">kVideoSizeMeasureName</span>)<br>&nbsp;&nbsp;&nbsp;.<span class="blue">set_aggregation</span>(<span class="blue">opencensus::stats::Aggregation::Distribution<br>&nbsp;&nbsp;&nbsp;</span>(<span class="blue">opencensus::stats::BucketBoundaries::Exponential</span>(<span class="blue">8</span>, <span class="blue">1</span> &lt;&lt; <span class="blue">8</span>, <span class="blue">2</span>)))<br>&nbsp;&nbsp;&nbsp;.<span class="blue">add_column</span>(<span class="blue">kFrontendKey</span>);<br><br><span class="comment">// Create the view.</span><br>opencensus::stats::View view(video_size_view);<br><br><span class="comment">// Register the view for export.</span><br>video_size_view.RegisterForExport();</code></pre></p><br>
                           
-                          <p><b>Example View:</b><br>
+                          <p><b>Example View</b><br>
                           <span class="code">name: "my.org/views/video_size"<br>
                               measure: name: "my.org/measure/video_size"; units: "MBy";<br>
                               description: "size of processed videos"; type: int64<br>
@@ -248,7 +250,7 @@
     
                           <p><pre><code><span class="blue">opencensus::stats::Record</span>({{<span class="blue">VideoSizeMeasure</span>(), <span class="blue">25648</span>}},{{<span class="blue">kFrontendKey</span>, "video size"}});</code></pre></p><br>
     
-                          <p><b>Example Span:</b><br>
+                          <p><b>Example Span</b><br>
                           <span class="code">Name: my.org/ProcessVideo<br>
                           TraceId-SpanId-Options:<br>
                           &nbsp;&nbsp;a17625c6ed57d878092ea01fe87ded35-e9ec94e4de02fadb-01<br>

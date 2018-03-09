@@ -102,30 +102,32 @@
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
 	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
-	                                       <ul class="dropdown-menu multi-column columns-3">
+	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <ul class="dropdown-menu">
 		                                      <div class="row">
-			                                     <div class="col-sm-4">
+			                                     <div class="col-sm-12">
 				                                    <ul class="multi-column-dropdown">
-                                                       <li><a href="cpp.html">C++</a></li>
-                                                       <li><a href="erlang.html">Erlang</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="cpp.html">C++</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="go.html">Go</a></li>
+                                                        <li style="margin:5px 20px 5px 10px"><a href="java.html">Java</a></li>
                                                     </ul>
 			                                     </div>
+                                                  <!--
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
+                                                        <li> </li>
                                                         <li><a href="go.html">Go</a></li>
-                                                       <li><a href="java.html">Java</a></li>
-                                                        <li><a href="ruby.html">Ruby</a></li>
-                                                       <!-- <li><a href="dotnet.html">.NET</a></li>
-                                                       <li><a href="nodejs.html">Node.js</a></li> -->
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                       <li><a href="php.html">PHP</a></li>
-                                                       <li><a href="python.html">Python</a></li>
-                                                       <!-- <li><a href="webjs.html">Web JS</a></li> -->
+                                                        <li> </li>
+                                                        <li><a href="java.html">Java</a></li>
+                                                        <li> </li>
                                                     </ul>
                                                  </div>
+                                                  -->
 		                                      </div>
 	                                       </ul>
 	                                   </li>   
@@ -165,6 +167,34 @@
 					<!-- BLOG CONTENT ROW 1 START -->
 					<div class="blog-c">
                         <!-- BLOG ITEM -->
+                        <div class="col-md-4">
+							<div class="blog-item">
+								<div class="post-meta">
+									<ul>
+										<li>
+											<i class="fa fa-tags"></i>
+											<span>OC</span>
+										</li>
+										<li>
+											<i class="fa fa-calendar-o"></i>
+											<span>March 8, 2018</span>
+										</li>
+									</ul>
+								</div>
+								<div class="post-title">
+									<a href="https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e">
+										<h3>Cloud Spanner, instrumented by OpenCensus and exported to Stackdriver</h3>
+									</a>
+								</div>
+								<div class="post-content">
+									<p>
+										In this post, we’ll explore the power of OpenCensus’ exporters, using the Google Cloud Spanner package for both the Go and Java programming languages.<br>
+									</p>
+								</div>
+							</div>
+						</div>
+                        
+                        <!-- BLOG ITEM -->
 						<div class="col-md-4">
 							<div class="blog-item">
 								<div class="post-meta">
@@ -175,23 +205,23 @@
 										</li>
 										<li>
 											<i class="fa fa-calendar-o"></i>
-											<span>January 17, 2018</span>
+											<span>January 23, 2018</span>
 										</li>
 									</ul>
 								</div>
 								<div class="post-title">
-									<a href="https://opensource.googleblog.com/2018/01/opencensus.html">
-										<h3>OpenCensus: A Stats Collection and Distributed Tracing Framework</h3>
+									<a href="http://dieswaytoofast.blogspot.com/2018/01/opencensustowards-harmonizing-your.html">
+										<h3>OpenCensus — towards harmonizing your Instrumentation</h3>
 									</a>
 								</div>
 								<div class="post-content">
 									<p>
-										Today we’re pleased to announce the release of OpenCensus, a vendor-neutral open source library for metric collection and tracing.<br><br>
+										You’ve really gotten into this whole Observability thing, and have started plugging Prometheus into, well, everything that doesn’t already have it.<br><br>
 									</p>
 								</div>
 							</div>
-						</div>
-                        
+						</div> 
+
 						<!-- BLOG ITEM -->
 						<div class="col-md-4">
 							<div class="blog-item">
@@ -219,34 +249,7 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- BLOG ITEM -->
-						<div class="col-md-4">
-							<div class="blog-item">
-								<div class="post-meta">
-									<ul>
-										<li>
-											<i class="fa fa-tags"></i>
-											<span>OC</span>
-										</li>
-										<li>
-											<i class="fa fa-calendar-o"></i>
-											<span>January 23, 2018</span>
-										</li>
-									</ul>
-								</div>
-								<div class="post-title">
-									<a href="http://dieswaytoofast.blogspot.com/2018/01/opencensustowards-harmonizing-your.html">
-										<h3>OpenCensus — towards harmonizing your Instrumentation</h3>
-									</a>
-								</div>
-								<div class="post-content">
-									<p>
-										You’ve really gotten into this whole Observability thing, and have started plugging Prometheus into, well, everything that doesn’t already have it.<br><br>
-									</p>
-								</div>
-							</div>
-						</div>                        
+                       
 					</div>
 					<!-- BLOG CONTENT ROW 1 END -->
 				</div> <!-- ROW END -->
@@ -267,18 +270,18 @@
 										</li>
 										<li>
 											<i class="fa fa-calendar-o"></i>
-											<span>March 8, 2018</span>
+											<span>January 17, 2018</span>
 										</li>
 									</ul>
 								</div>
 								<div class="post-title">
-									<a href="https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e">
-										<h3>Cloud Spanner, instrumented by OpenCensus and exported to Stackdriver</h3>
+									<a href="https://opensource.googleblog.com/2018/01/opencensus.html">
+										<h3>OpenCensus: A Stats Collection and Distributed Tracing Framework</h3>
 									</a>
 								</div>
 								<div class="post-content">
 									<p>
-										In this post, we’ll explore the power of OpenCensus’ exporters, using the Google Cloud Spanner package for both the Go and Java programming languages.<br><br>
+										Today we’re pleased to announce the release of OpenCensus, a vendor-neutral open source library for metric collection and tracing.<br><br>
 									</p>
 								</div>
 							</div>
