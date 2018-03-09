@@ -414,7 +414,7 @@ img {
   4.5 DROPDOWN NAV
 -----------------------------------------*/
 .dropdown-menu {
-	min-width: 150px;
+	min-width: 300px;
 }
 .dropdown-menu.columns-2 {
 	min-width: 200px;
