@@ -1,0 +1,95 @@
+/* ========================================================================================= */
+/* ======================================= COLOR : #8CC152 =================================== */
+/* ========================================================================================= */
+.s-header .middle-c h1 span {
+  color: #8CC152;
+}
+.s-header .middle-c .b-act {
+  background: #8CC152;
+  border-color: #8CC152;
+}
+.title h4 {
+  color: #8CC152;
+}
+.navbar-fixed-top .logo {
+  color: #8CC152;
+}
+.fixed .navbar-nav .active a {
+  color: #8CC152;
+}
+.fixed .navbar-nav .active:hover a {
+  color: #8CC152;
+}
+.box-icon span,
+.box-icon i {
+  border: 1px solid #8CC152;
+  color: #8CC152;
+}
+.box-content h3 {
+  color: #8CC152;
+}
+.services .service-box:hover i,
+.services .service-box:hover span {
+  background: #8CC152;
+  color: #FFF;
+}
+.work .filter-work a {
+  border: 1px solid #8CC152;
+}
+.work .filter-work .is-checked {
+  background: #8CC152;
+}
+.work .work-caption .overlay {
+  background: rgba(140, 193, 82, 0.8);
+}
+.facts .counting-icon i,
+.facts .counting-icon span {
+  color: #8CC152;
+}
+.price .item .type {
+  color: #8CC152;
+}
+.price .item .order a {
+  color: #8CC152;
+  border: 1px solid #8CC152;
+}
+.price .item .order a:hover {
+  background: #8CC152;
+}
+.price .best .order a {
+  background: #8CC152;
+  color: #FFF;
+}
+.price-table #most-p {
+  background: #8CC152;
+}
+.testimonial-box h3 {
+  color: #8CC152;
+}
+.blog-item .post-title a:hover {
+  color: #8CC152;
+}
+.contact-form textarea:active,
+.contact-form textarea:focus {
+  border-color: #8CC152;
+}
+.contact-form input:focus {
+  border-color: #8CC152;
+}
+.contact-item .button {
+  color: #8CC152;
+  border: 1px solid #8CC152;
+}
+.contact-item .button:hover {
+  background: #8CC152;
+}
+.contact .item i,
+.contact .item .icon {
+  color: #8CC152;
+}
+.contact .item h6 {
+  color: #8CC152;
+}
+.social-icon a:hover span {
+  background: #8CC152;
+}
