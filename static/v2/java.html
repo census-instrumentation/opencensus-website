@@ -200,25 +200,23 @@
                             <p><pre><code>
 			    git clone <a href="https://github.com/census-instrumentation/opencensus-java.git">https://github.com/census-instrumentation/opencensus-java.git</a>
 			    cd opencensus-java/examples
-			    ./gradlew installDist
-			    build/install/opencensus-examples/bin/QuickStart
 			    </code></pre><br>
-                            <li>Code is in directory:</li> <span class="code">examples/src/main/java/io/opencensus/examples/helloworld/</span></p><br><hr><br>
+                            <li>Code is in directory:</li> <span class="code">src/main/java/io/opencensus/examples/helloworld/</span></p><br><hr><br>
                             
                             <h4>To Build/Run The Example</h4>
 			    <p>Further build instructions can be found in <a href="https://github.com/census-instrumentation/opencensus-java/blob/master/examples/README.md">examples/README.md</a>.</p>
                             <p>The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:<br><br>
-                            <li>Build the example code e.g.:</li>
+                            <li>Build the example code e.g.: (assuming current directory is opencensus/emaples/)</li>
                                 <ul>
                                     <li>a. Gradle: ./gradlew installDist</li>
                                     <li>b. Maven: mvn package appassembler:assemble</li>
                                     <li>c. Bazel: bazel build :all</li>
                                 </ul><br>
-                            <li>Run the Quickstart example e.g.:</li>
+                            <li>Run the Quickstart example e.g.: (assuming current directory is opencensus/emaples/)</li>
                                 <ul>
-                                    <li>a. Gradle: ./examples/build/install/opencensus-examples/bin/QuickStart</li>
-                                    <li>b. Maven: ./examples/target/appassembler/bin/QuickStart</li>
-                                    <li>c. Bazel: ./examples/bazel-bin/QuickStart</li>
+                                    <li>a. Gradle: ./build/install/opencensus-examples/bin/QuickStart</li>
+                                    <li>b. Maven: ./target/appassembler/bin/QuickStart</li>
+                                    <li>c. Bazel: ./bazel-bin/QuickStart</li>
                                 </ul>
                             </p><br><hr><br>
                             
