@@ -197,10 +197,16 @@
                             <ol>
                             <h4>Example</h4>
                             <p><li>Clone the OpenCensus Java github repository:</li></p>
-                            <p><pre><code>git clone <a href="https://github.com/census-instrumentation/opencensus-java.git">https://github.com/census-instrumentation/opencensus-java.git</a></code></pre><br>
+                            <p><pre><code>
+			    git clone <a href="https://github.com/census-instrumentation/opencensus-java.git">https://github.com/census-instrumentation/opencensus-java.git</a>
+			    cd opencensus-java/examples
+			    ./gradlew installDist
+			    build/install/opencensus-examples/bin/QuickStart
+			    </code></pre><br>
                             <li>Code is in directory:</li> <span class="code">examples/src/main/java/io/opencensus/examples/helloworld/</span></p><br><hr><br>
                             
                             <h4>To Build/Run The Example</h4>
+			    <p>Further build instructions can be found in <a href="https://github.com/census-instrumentation/opencensus-java/blob/master/examples/README.md">examples/README.md</a>.</p>
                             <p>The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:<br><br>
                             <li>Build the example code e.g.:</li>
                                 <ul>
