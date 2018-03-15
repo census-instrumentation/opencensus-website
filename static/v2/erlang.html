@@ -108,17 +108,18 @@
 		                                      <div class="row">
 			                                     <div class="col-sm-4">
 				                                    <ul class="multi-column-dropdown">
-                                                        <li style="margin:10px 5px 10px 5px"><a href="cpp.html">C++</a></li>
+                                                        <li style="droplist"><a href="cpp.html">C++</a></li>
                                                     </ul>
 			                                     </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="margin:10px 5px 10px 5px"><a href="go.html">Go</a></li>
+                                                        <li style="droplist"><a href="go.html">Go</a></li>
+                                                        <li style="droplist"><a href="erlang.html">Erlang</a></li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="margin:10px 5px 10px 5px"><a href="java.html">Java</a></li>
+                                                        <li style="droplist"><a href="java.html">Java</a></li>
                                                     </ul>
                                                  </div>
 		                                      </div>
@@ -153,7 +154,7 @@
                         <div class="lang-con1 col-sm-12">
                             <p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
                             <p> &nbsp; | &nbsp; </p>
-                            <p><a href="https://github.com/census-instrumentation/opencensus-erlang"><span class="fa fa-github"></span> Edit <b>Erlang.md</b></a></p>
+                            <p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/static/v2/erlang.html"><span class="fa fa-github"></span> Edit <b>erlang.html</b></a></p>
                         </div>
                     </div>
                 </div>
@@ -171,11 +172,11 @@
                             <hr>
                             <ul>
                                 <li><p><a href="cpp.html">C++</a></p></li>
-                                <li><p><a href="erlang.html"class="active">&nbsp;&#9679; Erlang</a></p></li>
+                                <li><p><a href="erlang.html"class="active"> Erlang</a></p></li>
                                 <li><p><a href="go.html">Go</a></p></li>
                                 <li><p><a href="java.html">Java</a></p></li>
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
-                                <li><p><a href="nodejs.html">Node.js</a></p></li> -->
+                                <li><p><a href="nodejs.html">Node.js</a></p></li>
                                 <li><p><a href="php.html">PHP</a></p></li>
                                 <li><p><a href="python.html">Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
@@ -186,32 +187,44 @@
                         
                         <!-- CENTER COULMN -->
                         <div class="col-md-8 box" style="margin-left:5px">
-						  <h1>Erlang Quickstart</h1>
-						  <p>This guide gets you started with OpenCensus in Erlang with a simple working example.</p><br>
+						  <h1>Erlang Quickstart</h1><br>
                             
-                            <h4>Before you begin</h4>
-                            <p>What you need before you begin.<br>
-                            Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <p>The example demonstrates how to record stats and traces for a video processing system. It records data with the "frontend" tag so that collected data can be broken by the frontend user who initiated the video processing. Code for this example can be found under the <span class="code1">examples/helloworld</span> directory of the <a href="https://github.com/census-instrumentation/opencensus-erlang"><span class="gloss1">OpenCensus Erlang repo</span></a>.</p><br><hr><br>
                             
-                            <h4>Download the example</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. </p><br>
+                            <h4>API Documentation</h4>
+                            <p>The OpenCensus Erlang API artifact is available <a href="https://hexdocs.pm/opencensus/0.3.0/index.html"><span class="gloss1">here</span></a>.</p><br><hr><br>
                             
-                            <h4>Run an OpenCensus application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>Example</h4>
+                            <p><b>Prerequisite</b><br><a href="http://www.erlang.org/"><span class="gloss1">Erlang/OTP 20</span></a> and <a href="http://www.rebar3.org/"><span class="gloss1">rebar3</span></a> are required.</p><br><br>
                             
-                            <h4>Update an OpenCensus service</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here.</p>
-                            <p>
-                            <pre>
-                                <code>/*******************************************************<br>Compilation:  -module(hello_world).<br>Execution:    -compile(export_all).<br><br>Prints "Hello, World". By tradition, is everyone's first program.<br><br>% erlang HelloWorld<br>Hello, World<br>*******************************************************/<br>-module(hello_world).<br>-compile(export_all).<br><br><br>hello() -><br> io:format("hello world~n").</code>
-                            </pre>  
-                            </p><br>
+                            <p><b>Using</b><br>Create a new Erlang application with <span class="code1">rebar3 new</span> named <span class="code1">helloworld</span>:</p>
                             
-                            <h4>Update and run the application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <p><pre><code>$ rebar3 new app helloworld<br>===> Writing helloworld/src/helloworld_app.erl<br>===> Writing helloworld/src/helloworld_sup.erl<br>===> Writing helloworld/src/helloworld.app.src<br>===> Writing helloworld/rebar.config<br>===> Writing helloworld/.gitignore<br>===> Writing helloworld/LICENSE<br>===> Writing helloworld/README.md<br>$ cd helloworld</code></pre></p><br><br>
+                        
+                            <p>Add <span class="code1">opencensus</span> as a dependency in <span class="code1">rebar.config</span>. For development purposes it is also useful to include the <span class="code1">shell</span> section of the config which tells rebar3 to boot the application and load configuration when running <span class="code1">rebar3 shell</span>:</p>
+                        
+                            <p><pre><code>{erl_opts, [debug_info]}.<br>{deps, [opencensus]}.<br><br>{shell, [{apps, [helloworld]},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{config, "config/sys.config"}]}.</code></pre></p><br>
+                    
+                            <p><pre><code>[<br>{opencensus, [{sampler, {oc_sampler_always, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter, {oc_reporter_stdout, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{stat, [{exporters, [{oc_stat_exporter_stdout, []}]}]}<br>].</code></pre></p><br><br>
+                
+                            <p><span class="code1">opencensus</span> is a runtime dependency so it is added to the applications list in <span class="code1">src/helloworld.app.src</span>, ensuring it is included and started in a release of <span class="code1">helloworld</span>:</p>
                             
-                            <h4>What’s next?</h4>
-                            <p>Something goes here.</p><br>
+                            <p><pre><code>{application, helloworld,<br>&nbsp;[{description, "Example OpenCensus application"},<br>&nbsp;&nbsp;{vsn, "0.1.0"},<br>&nbsp;&nbsp;{registered, []},<br>&nbsp;&nbsp;{mod, { helloworld_app, []}},<br>&nbsp;&nbsp;{applications,<br>&nbsp;&nbsp;&nbsp;[kernel,<br>&nbsp;&nbsp;&nbsp;&nbsp;stdlib,<br>&nbsp;&nbsp;&nbsp;&nbsp;opencensus<br>&nbsp;&nbsp;&nbsp;]},<br>&nbsp;&nbsp;{env,[]},<br>&nbsp;&nbsp;{modules, []},<br><br>&nbsp;&nbsp;{maintainers, []},<br>&nbsp;&nbsp;{licenses, ["Apache 2.0"]},<br>&nbsp;&nbsp;{links, []}<br>]}.</code></pre></p><br><br>
+            
+                            <p>Building the application with <span class="code1">rebar3 compile</span> will fetch the OpenCensus Erlang library and its dependencies.</p><br>
+            
+                            <p>When our application starts it needs to create and subscribe to the statistics that we'll record. So a call to <span class="code1">subscribe_views/0</span> is added to the application start function, <span class="code1">helloworld_app:start/2</span>:</p>
+                        
+                            <p><pre><code>subscribe_views() -><br>&nbsp;&nbsp;&nbsp;&nbsp;oc_stat_view:subscribe(#{name => "video_size",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description => "size of processed videos",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags => ['frontend'],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;measure => 'my.org/measure/video_size',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregation => default_size_distribution()}).<br><br>default_size_distribution() -><br>&nbsp;&nbsp;&nbsp;&nbsp;{oc_stat_aggregation_distribution,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{buckets, [0, 1 bsl 16, 1 bsl 32]}]}.</code></pre></p><br><br>
+        
+                            <p>The main module called to actually do the video processing is <span class="code1">helloworld</span>. It creates a tag for who made the process request to include with the record statistic and creates a span for the duration of the video processing (a random sleep between 0 and 10 seconds):</p>
+        
+                            <p><pre><code>-module(helloworld).<br><br>-export([process/0]).<br><br>process() -><br>&nbsp;&nbsp;&nbsp;%% create a tag for who sent the request and start a child span<br>&nbsp;&nbsp;&nbsp;Tags = oc_tags:new(#{'frontend' => "mobile-ios9.3.5"}),<br>&nbsp;&nbsp;&nbsp;ocp:with_child_span(<<"my.org/ProcessVideo">>),<br><br>&nbsp;&nbsp;&nbsp;%% sleep for 0-10 seconds to simulate processing time<br>&nbsp;&nbsp;&nbsp;timer:sleep(timer:seconds(rand:uniform(10))),<br><br>&nbsp;&nbsp;&nbsp;%% finish the span<br>&nbsp;&nbsp;&nbsp;ocp:finish_span(),<br><br>&nbsp;&nbsp;&nbsp;%% record the size of the video<br>&nbsp;&nbsp;&nbsp;oc_stat:record(Tags, 'my.org/measure/video_size', 25648).</code></pre></p><br><br>
+
+                            <p>Run the application with <span class="code1">rebar3 shell</span> and see the stats and span reported to the console:</p>
+    
+                            <p><pre><code>$ rebar3 shell<br>...<br>===> Booted opencensus<br>===> Booted helloworld<br>> helloworld:process().<br>ok<br>{span,<<"my.org/ProcessVideo">>,1201374966367397737078249396493886473,<br>&nbsp;&nbsp;&nbsp;10421649746227310879,undefined,1,<br>&nbsp;&nbsp;&nbsp;{-576460748652616660,2097430124176280981},<br>&nbsp;&nbsp;&nbsp;{-576460740651723247,2097430124176280981},<br>&nbsp;&nbsp;&nbsp;#{},undefined,[],[],undefined,undefined,undefined}<br>video_size: #{rows =><br>&nbsp;&nbsp;&nbsp;&nbsp;[#{tags => #{"frontend" => "mobile-ios9.3.5"},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value =><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{buckets =><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{0,0},{65536,1},{4294967296,0},{infinity,0}],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count => 1,mean => 25648.0,sum => 25648}}],<br>&nbsp;&nbsp;&nbsp;type => distribution}</code></pre></p><br><br>
+
 					   </div>
                         <!-- END CENTER COULMN -->
                         <!-- ERLANG CONTENT END -->                  
