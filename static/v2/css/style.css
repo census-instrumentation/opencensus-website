@@ -423,7 +423,7 @@ img {
 	min-width: 300px;
 }
 .dropdown-menu li a {
-	padding: 1px 15px;
+	padding: 1px 5px;
 	font-weight: 300;
     content:"\2022";
 }
@@ -431,6 +431,7 @@ img {
 	list-style: none;
     margin: 0px;
     padding: 0px;
+    margin:5px 5px 5px 15px;
 }
 .multi-column-dropdown li a {
 	display: block;
@@ -1004,6 +1005,12 @@ code {
 }
 .comment {
   color: gray;
+}
+/* SNIPPET CODE ON ERLANG */
+.code1 {
+  font-family: monospace, monospace;
+  background-color: #eee;
+  padding: 1px 5px 1px 5px;
 }
 
 /* --------------------------------------
