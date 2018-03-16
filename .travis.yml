@@ -4,12 +4,12 @@
 language: node_js
 
 node_js:
- — “7”
+ - "7"
 
 install:
  - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
  - sudo dpkg -i /tmp/hugo.deb
- — npm install -g firebase-tools
+ - npm install -g firebase-tools
 
 # Build the website
 script:
