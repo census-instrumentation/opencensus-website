@@ -1,9 +1,15 @@
 # See https://docs.travis-ci.com/user/deployment/pages/
 # for more information on pages deployment.
 
+language: node_js
+
+node_js:
+ — “7”
+
 install:
  - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
  - sudo dpkg -i /tmp/hugo.deb
+ — npm install -g firebase-tools
 
 # Build the website
 script:
@@ -26,3 +32,7 @@ deploy:
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
     branch: master
+
+# Deploy to Firebase Hosting
+after_success:
+ - firebase deploy --project opencensusio --token "$FIREBASE_TOKEN"
