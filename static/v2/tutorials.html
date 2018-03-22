@@ -25,7 +25,7 @@
 		<meta name="author" content="AUTHOR NAME">
 
 		<!-- TITLE -->
-		<title>Cloud Spanner</title>
+		<title>Tutorials</title>
 
 		<!-- FAVICON -->
 	    <link href=favicon.ico rel="icon">
@@ -144,40 +144,28 @@
 		<!-- ====== HEADER END ======  -->
 
 
-        <!-- ====== GLOSSARY START  ======  -->
+        <!-- ====== TUTORIAL START  ======  -->
 		<section class="sections lang" id="lang">
             <div class="container">
                 
-                <!-- ====== MIDDLE NAVGITION ======  -->
-                <!--
-                <div class="row">
-                    <div class="title-right">
-                        <div class="lang-con1 col-sm-12">
-                            <p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
-                            <p> &nbsp; | &nbsp; </p>
-                            <p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/static/v2/glossary.html"><span class="fa fa-github"></span> Edit <b>spanner.html</b></a></p>
-                        </div>
-                    </div>
-                </div>
-                -->
-				<!-- ====== END MIDDLE NAVGITION ======  -->
             </div>
             
 			<div class="container">
 				<div class="row">   
-					<!-- GLOSSARY CONTENT START -->
+					<!-- TUTORIAL CONTENT START -->
                     <div class="title">
                         
                         <!-- CENTER COULMN -->
                         <div class="col-md-12 box">
-                        <h1>Cloud Spanner</h1>
-                            <h4>Instrumented by OpenCensus and exported to Stackdriver</h4>
-                          <br><br>
+                        <h1>Tutorials</h1><br><br>
+                              
+                          <h4>Cloud SpannerInstrumented by<br>OpenCensus and exported to Stackdriver</h4>
+                          <br>
                             <p>In this post, we’ll explore the power of OpenCensus’ exporters, using the Google Cloud Spanner package for both the Go and Java programming languages.</p><br>
                             
                             <p>The Cloud Spanner package has already been instrumented using OpenCensus. Our mission is to add a few lines to already running code to harness this instrumentation, to extract metrics and traces. We’ll then export them to Stackdriver for recording, root cause analyses, visualization and other analyses — a typical task that Application Performance Management teams would perform.</p><br>
                             
-                            <p>The example is an excerpt of a microservice from a fictional athletics startup, ZeuSports. It is their database microservice(dBmus). dBmus is in charge of adding newly subscribed players to the app. In this demo we’ll visualize some metrics and traces, to see how long Cloud Spanner calls take thus harnessing the power of the instrumentation already in the Cloud Spanner package, leveraged by the respective exporters.</p><br><hr><br>
+                            <p>The example is an excerpt of a microservice from a fictional athletics startup, ZeuSports. It is their database microservice(dBmus). dBmus is in charge of adding newly subscribed players to the app. In this demo we’ll visualize some metrics and traces, to see how long Cloud Spanner calls take thus harnessing the power of the instrumentation already in the Cloud Spanner package, leveraged by the respective exporters.</p><br><br><br>
                             
                             <p><b>Requirements</b></p><br>
                             <p>
@@ -186,39 +174,39 @@
                                     <li>A cloud provider based project; it should support Stackdriver Monitoring and Tracing — we’ll use Google Cloud Platform for this example</li><br>
                                     <li>Enable Stackdriver Monitoring and Tracing on the project</li>
                                 </ul>
-                            </p><br><hr><br>
+                            </p><br><br><br>
                         
                             <p><b>Step 1: Enable the Stackdriver APIs</b></p><br>
                             <p>Assuming you have an account on a cloud provider that supports Stackdriver Monitoring and Tracing; for this example we’ll use Google Cloud Platform. Let’s go ahead and firstly search for, then enable the APIs on our project, if they are not yet enabled.</p><br>
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*hirr5OnW9Ta6e8HDPA-vpA.png" /><br>
-                                <p style="text-align:center">search for stackdriver APIs</p>
+                                <p style="text-align:center">search for stackdriver APIs<p>
                             </div><br><br><br>
                         
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*dFRIVQVEhz0AN127dzzoUA.png" /><br>
                                 <p style="text-align:center">Enable Stackdriver Monitoring API</p>
                             </div><br><br><br>
                         
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*8R7AXsSbLkajTaKBAiEWhQ.png" /><br>
                                 <p style="text-align:center">Stackdriver Monitoring API enabled</p>
                             </div><br><br><br>
                         
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*aLEDq5bHmV5u6WJzDRiF7w.png" /><br>
                                 <p style="text-align:center">Enable Stackdriver Trace API</p>
                             </div><br><br><br>
                         
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*8K5fzp8T1RQ9YC5PnRUn4Q.png" /><br>
                                 <p style="text-align:center">Stackdriver Trace API enabled</p>
-                            </div><br><hr><br>
+                            </div><br><br><br>
                                 
                             <p><b>Step 2a: Operational details</b></p><br>
                             <p>Our microservice receives new players’ information and adds them to a Cloud Spanner table “players” where the schema looks like this</p><br>
                         
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*Q6_lk7pd7K0zNmYYIJwCUw.png" /><br>
                                 <p style="text-align:center">Players table schema</p>
                             </div><br><br><br>
@@ -235,11 +223,11 @@
                                     <li class="bullet">e) Subscribe to the respective gRPC metrics that we would like to track, in this case we’ll subscribe to: RoundTrip latency, Per-Minute Error count, Number of requests</li><br>
                                 </ul>
                             </p>
-                            <br><hr><br>
+                            <br><br><br>
                             
                             <p><b>Step 3: Show me the code</b></p>
                             <p>The Go code:</p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>package main
+                            <p><pre class="tutor"><code>package main
 
 import (
 	"fmt"
@@ -349,7 +337,7 @@ func newPlayers(ctx context.Context, client *spanner.Client, players ...*Player)
                             <br><br>
                     
                             <p><b>The equivalent Java code is:</b></p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>package com.opencensus.examples;
+                            <p><pre class="tutor"><code>package com.opencensus.examples;
 
 import com.google.cloud.spanner.DatabaseClient;
 import com.google.cloud.spanner.DatabaseId;
@@ -462,29 +450,29 @@ public class ZeuSportsDB {
     }
 }</code></pre></p>
                             <p style="text-align:center">the entirety of the source code in Java</p>
-                            <br><hr><br>
+                            <br><br><br>
                     
                             <p><b>Step 3.X: Enable Application Default Credentials</b></p>
                             <p>Please make sure to enable Application Default Credentials for authentication.<br>Please visit <a href="https://cloud.google.com/docs/authentication/production"><span class="gloss1">https://developers.google.com/identity/protocols/application-default-credentials</span></a> if you haven’t yet enabled them.</p>
-                            <br><hr><br>
+                            <br><br><br>
                     
                             <p><b>Step 4: Get the dependencies and run it!</b></p>
                             <p>Let’s go into our terminal and do something like this:</p><br>
                             <p>For Go:</p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>mkdir -p $GOPATH/src/census-demo && cd $GOPATH/src/census-demo</code></pre></p>
+                            <p><pre class="tutor"><code>mkdir -p $GOPATH/src/census-demo && cd $GOPATH/src/census-demo</code></pre></p>
                             <p style="text-align:center">make the directory go gettable/buildable</p><br><br>
                     
                             <p>Then, we’ll paste the main.go file from above and afterwards run:</p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>go get -d && census-demo</code></pre></p>
+                            <p><pre class="tutor"><code>go get -d && census-demo</code></pre></p>
                             <p style="text-align:center">go get dependencies, build and then run the binary</p><br><br>
                 
                             <p>Note: Just in case you didn’t properly setup your Application Default Credentials but have some test credentials, instead do this:</p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>go get -d && GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/census-demos.json census-demo</code></pre></p>
+                            <p><pre class="tutor"><code>go get -d && GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/census-demos.json census-demo</code></pre></p>
                             <p style="text-align:center">go get dependencies, build the binary but also include the target Google Credentials source</p><br><br>
             
                             <p><b>For Java:</b></p>
                             <p>Please add the pom.xml file below:</p><br>
-                            <p><pre style="margin:0px 10px 0px 20px"><xmp><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            <p><pre class="tutor"><xmp><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.opencensus.examples</groupId>
@@ -573,19 +561,19 @@ public class ZeuSportsDB {
 
 </project></xmp></pre></p>
                             <p style="text-align:center">pom.xml</p>
-                            <br><hr><br>
+                            <br><br><br>
         
                                 
                             <p><b>Create the project directory</b></p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>mkdir -p src/main/java/com/opencensus/examples</code></pre></p><br><br>
+                            <p><pre class="tutor"><code>mkdir -p src/main/java/com/opencensus/examples</code></pre></p><br><br>
 
                             <p><b>The Java source code</b></p>
                             <p>Paste the ZeuSportsDB.java file to end up like this</p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>src/main/java/com/opencensus/examples/ZeuSportsDB.java</code></pre></p><br><br>
+                            <p><pre class="tutor"><code>src/main/java/com/opencensus/examples/ZeuSportsDB.java</code></pre></p><br><br>
 
                             <p><b>The Maven pom.xml file too</b></p>
                             <p>Paste it the same working directory as src to give you this structure</p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>pom.xml
+                            <p><pre class="tutor"><code>pom.xml
     src/
        |-main/
           |-java
@@ -595,50 +583,51 @@ public class ZeuSportsDB {
                       |-ZeusSportsDB.java</code></pre></p><br><br>
 
                             <p><b>Build it</b></p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>mvn clean package</code></pre></p><br><br>
+                            <p><pre class="tutor"><code>mvn clean package</code></pre></p><br><br>
 
                             <p><b>Lastly run it!</b></p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>mvn exec:java -Dexec.mainClass=com.opencensus.examples.ZeuSportsDB -Dexec.args="census-demos demo1"</code></pre></p><br><br>
+                            <p><pre class="tutor"><code>mvn exec:java -Dexec.mainClass=com.opencensus.examples.ZeuSportsDB -Dexec.args="census-demos demo1"</code></pre></p><br><br>
 
                             <p>If you need to use credentials from a test/known file</p>
-                            <p><pre style="margin:0px 10px 0px 20px"><code>GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/census-demos-237a8e1e41df.json mvn exec:java -Dexec.mainClass=com.opencensus.examples.ZeuSportsDB -Dexec.args="census-demos demo1"</code></pre></p>
+                            <p><pre class="tutor"><code>GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/census-demos-237a8e1e41df.json mvn exec:java -Dexec.mainClass=com.opencensus.examples.ZeuSportsDB -Dexec.args="census-demos demo1"</code></pre></p>
                             <p style="text-align:center">run it</p>
-                            <br><hr><br>
+                            <br><br><br>
                                 
                             <p><b>Step 5: Harness the power and visualize!</b></p>
                             <p>As soon as the code ran, it started exporting to Stackdriver, so let’s switch back to our browser and open up Stackdriver Trace at <a href="https://console.cloud.google.com/traces/traces"><span class="gloss1">https://console.cloud.google.com/traces/traces</span></a> to see the output.</p><br><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*WWDzGLQ1gVTtdUIjagZr1g.png" />
                                 <p style="text-align:center">overview of the trace list</p>
-                            </div><br><br><br>
+                            </div><br>
 
-                            <p>Notice in the span list that the latencies of create-players are variable; as the number of operations increases and existing sessions are reused, it gets faster. For example notice above that CreateSession took ~212ms but as we continued reusing the expensively setup session things got a lot more faster, down to ~8ms! You can learn more about the benefits of CreateSession at <a href="https://cloud.google.com/spanner/docs/sessions#performance_benefits_of_a_session_cache"><span class="gloss1">https://cloud.google.com/spanner/docs/sessions#performance_benefits_of_a_session_cache</span></a></p><br><br>
+                            <p>Notice in the span list that the latencies of create-players are variable; as the number of operations increases and existing sessions are reused, it gets faster. For example notice above that CreateSession took ~212ms but as we continued reusing the expensively setup session things got a lot more faster, down to ~8ms! You can learn more about the benefits of CreateSession at <a href="https://cloud.google.com/spanner/docs/sessions#performance_benefits_of_a_session_cache"><span class="gloss1">https://cloud.google.com/spanner/docs/sessions#performance_benefits_of_a_session_cache</span></a></p><br><br><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*iHBt_Fl60cW9PI3q8L69lw.png" />
                                 <p style="text-align:center">create-players trace</p>
-                            </div><br><br><br>
+                            </div><br><br>
 
-                            <p>Drilling down to a particular data point in time yields a trace with a root span and children spans shown below:</p><br><br>
+                            <p>Drilling down to a particular data point in time yields a trace with a root span and children spans shown below:</p><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*09LX8aIn3aF6JTjR9FfPNw.png" />
                                 <p style="text-align:center">First child span, ReadWriteTransaction</p>
-                            </div><br><br><br>
+                            </div><br><br>
 
-                            <p><b>Further drilling down to the child span:</b></p><br><br>
+                            <p><b>Further drilling down to the child span:</b></p><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*5tMKdma490TvVst5LA6Vhw.png" />
                                 <p style="text-align:center">Last child span, Commit</p>
-                            </div><br><br><br>
+                            </div><br><br>
 
-                            <p>It is worth noting that the above graphs were produced by multiple runs of the sample code. But in a long running server applications, where cloud spanner client is created just once and used for the lifetime of the server, we expect to see very few CreateSession calls after the initial warm up. Typical usage of cloud spanner client in such an application would yield a graph like this:</p><br><br>
+                            <p>It is worth noting that the above graphs were produced by multiple runs of the sample code. But in a long running server applications, where cloud spanner client is created just once and used for the lifetime of the server, we expect to see very few CreateSession calls after the initial warm up. Typical usage of cloud spanner client in such an application would yield a graph like this:</p><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*yVlFnsZz-9jgBDD_UlnNOw.png" />
-                                <p style="text-align:center">querying</p><br><br>
+                                <p style="text-align:center">querying</p><br><br><br>
+                                
                                 <img src="https://cdn-images-1.medium.com/max/800/1*UJHbMkpz6XZpT5tabAVW6A.png" /><br>
                                 <img src="https://cdn-images-1.medium.com/max/800/1*bQfvfd4LKoh95TqvpgsPJw.png" /><br>
                                 <img src="https://cdn-images-1.medium.com/max/800/1*IJA-7jNjKktjAC1B8qXUiw.png" /><br>
@@ -647,15 +636,15 @@ public class ZeuSportsDB {
 
                             <p>And now to view the collected metrics at <a href="https://app.google.stackdriver.com/metrics-explorer?project=census-demos"><span class="gloss1">https://app.google.stackdriver.com/metrics-explorer?project=census-demos</span></a>:</p><br><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*f1ja2oGqFUIW4rHba8mJZg.png" />
                                 <p style="text-align:center">Visualizing the number of BeginTransaction operations</p>
                             </div><br><br><br>
 
-                            <div class="spanner">
+                            <div class="tutor">
                                 <img src="https://cdn-images-1.medium.com/max/800/1*5rKWGm8qm62TXgHoJQPHFQ.png" />
                                 <p style="text-align:center">request latencies</p>
-                            </div><br><br><br>
+                            </div><br><br>
 
                             <p>As you can see, from the example above, in less than 42 lines, ZeuSports went from blindly operating their backend(they couldn’t guess how long Cloud Spanner operations took, what the latencies were), to getting an illumination on their database operations, metrics and traces in near-realtime, using OpenCensus’ packages in both the Go and Java programming languages. The power of visualization helps teams perform root cause analyses, post-mortems, bisect bad changes, figure out what needs to be optimized. The OpenCensus team has built and continues to actively build more client libraries in other languages too as well as more exporters such as Prometheus, Zipkin, SignalFx, and many others — with the purpose of democratizing good instrumentation, cheaply, scalably and nicely without having to burden your teams with maintenance.</p><br><br>
 
@@ -665,16 +654,15 @@ public class ZeuSportsDB {
 
                             <p>The code in this tutorial/example is heavily borrowed from <a href="https://github.com/GoogleCloudPlatform/golang-samples/blob/master/opencensus/opencensus_spanner_quickstart/main.go"><span class="gloss1">https://github.com/GoogleCloudPlatform/golang-samples/blob/master/opencensus/opencensus_spanner_quickstart/main.go</span></a> and the wiki <a href="https://github.com/GoogleCloudPlatform/google-cloud-go/wiki/OpenCensus"><span class="gloss1">https://github.com/GoogleCloudPlatform/google-cloud-go/wiki/OpenCensus</span></a> as well as from <a href="https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/spanner/cloud-client"><span class="gloss1">https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/spanner/cloud-client</span></a></p><br><br>
 
-                            <p>By Emmanuel T Odeke, Orijtech, Inc.</p><br><br>
-
-					   </div>
+                            <p>By Emmanuel T Odeke, Orijtech, Inc.</p><br><hr><br>
+				        </div>
                         <!-- END CENTER COULMN -->
-                        <!-- GLOSSARY CONTENT END -->
+                        <!-- TUTORIAL CONTENT END -->
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ====== GLOSSARY END  ======  -->
+        <!-- ====== TUTORIAL END  ======  -->
 
 
 		<!-- ====== CONTACT START  ======  -->
@@ -700,7 +688,7 @@ public class ZeuSportsDB {
                         <p><a href="overview.html">Overview</a></p><br>
                         <p><a href="quickstart.html">Quickstart</a></p><br>
                         <p><a href="guides.html">Guides</a></p><br>
-                        <p><a href="https://github.com/census-instrumentation">Tutorials</a></p><br>
+                        <p><a href="tutorials.html">Tutorials</a></p><br>
                         <p><a href="reference.html">API Reference</a></p><br>
 					</div>
 					<!-- DOCUMENTS END -->
