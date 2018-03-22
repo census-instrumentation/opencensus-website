@@ -1393,6 +1393,16 @@ list-style-position: inside;
 text-indent: -1em;
 }
 /* --------------------------------------
+  TUTORIALS
+-----------------------------------------*/
+#tutorials {
+  margin: 40px 0px 20px 0px;
+}
+.tutor {
+  margin: auto;
+  width: 90%;
+}
+/* --------------------------------------
   12. CONTACT
 -----------------------------------------*/
 .contact {
