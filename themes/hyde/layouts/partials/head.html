@@ -1,30 +1,144 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"{{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}"{{end}}>
-<head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  {{ .Hugo.Generator }}
+<html lang="en">
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115468315-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            gtag('config', 'UA-115468315-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<meta charset="utf-8">
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  {{ if .IsHome -}}
-  <title>{{ .Site.Title }}</title>
-  {{- else -}}
-  <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
-  {{- end }}
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="DESCRIPTION">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="AUTHOR NAME">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/print.css" media="print">
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/poole.css">
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/syntax.css">
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/hyde.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+		<!-- TITLE -->
+		<title>{{.Title}}</title>
 
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
+		<!-- FAVICON -->
+	    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/favicon/site.webmanifest">
+        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
 
-  <!-- RSS -->
-  <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-</head>
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="/css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="/css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="/css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="/css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="/css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="/css/colors/red.css">
+
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="load-circle">
+			</div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+		<!-- ====== HEADER START ======  -->
+		<section class="t-header" id="home" data-scroll-index="0">
+			<div class="header-overlay">
+
+				<!-- ====== NAVGITION ======  -->
+				<nav class="navbar land-nav navbar-fixed-top">
+					<div class="container">
+						<div class="row">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+                                
+								<!-- logo -->
+                                <a class="logo navbar-brand" href="/"><ul><li><img src="/img/logo-sm.png"/> Open<span>Census</span></li></ul>
+								</a>
+							</div>
+
+							<!-- Collect the nav links, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="collapse">
+
+								<!-- links -->
+								<ul class="nav navbar-nav navbar-right" id="navbar">
+                                    <li class="active"><a href="/overview">Overview</a></li>
+									
+                                    <!-- LANGUAGES NAV DROPDOWN  -->
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+	                                       <a href="/languages" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <ul class="dropdown-menu">
+		                                      <div class="row">
+			                                     <div class="col-sm-4">
+				                                    <ul class="multi-column-dropdown">
+                                                        <li style="droplist"><a href="/cpp">C++</a></li>
+                                                    </ul>
+			                                     </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <li style="droplist"><a href="/go">Go</a></li>
+                                                        <li style="droplist"><a href="/erlang">Erlang</a></li>
+                                                    </ul>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <li style="droplist"><a href="/java">Java</a></li>
+                                                    </ul>
+                                                 </div>
+		                                      </div>
+	                                       </ul>
+	                                   </li>   
+                                    </ul>
+                                    <!-- END LANGUAGES NAV DROPDOWN -->    
+									<li><a href="/docs">Docs</a></li>
+                                    <li><a href="/glossary">Glossary</a></li>
+                                    <li><a href="/roadmap">Roadmap</a></li>
+									<li><a href="/blog">Blog</a></li>
+									<li><a href="/faq">FAQ</a></li>
+                                    <li><a href="/about">About</a></li>
+								</ul> 
+							</div><!-- /.navbar-collapse -->
+						</div>
+					</div><!-- /.container -->
+				</nav>
+				<!-- ====== END NAVGITION ======  -->
+				
+			</div>            
+		</section>
+		<!-- ====== HEADER END ======  -->

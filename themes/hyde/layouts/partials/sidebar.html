@@ -1,17 +1,10 @@
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>
-      <p class="lead">
-        {{.Site.Params.description}}
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      {{ range .Site.Menus.main -}}
-        <li><a href="{{.URL}}"> {{ .Name }} </a></li>
-      {{- end }}
-      <li><a href="https://github.com/census-instrumentation" class="fork"> Fork on GitHub</a></li>
-    </ul>
-  </div>
+<div class="col-md-3 box" style="margin-left:5px">
+    <h4>Quickstart</h4>
+    <hr>
+    <ul>
+        <li><p><a href="/cpp">C++</a></p></li>
+        <li><p><a href="/erlang">Erlang</a></p></li>
+        <li><p><a href="/go">Go</a></p></li>
+        <li><p><a href="/java">Java</a></p></li>
+    </ul><hr><br>
 </div>

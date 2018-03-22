@@ -1,11 +1,16 @@
-{{ define "main" -}}
-<div class="post">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+{{ partial "head.html" . }}
+
+<div class="content">
+<section class="sections lang" id="lang">
+  <div class="container">
+    <div class="container">    
+      <div class="row">
+          <div class="title"><h1>{{.Title}}</h1></div>
+          {{ .Content }}
+      </div>
+    </div>
+  </div>
+</section>
 </div>
 
-{{ if .Site.DisqusShortname -}}
-<h2>Comments</h2>
-{{ template "_internal/disqus.html" . }}
-{{- end }}
-{{- end }}
+{{ partial "footer.html" . }}
