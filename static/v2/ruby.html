@@ -102,29 +102,31 @@
                                     <!-- LANGUAGES NAV DROPDOWN  -->
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
-	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
-	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                           <!-- <ul class="dropdown-menu multi-column columns-3"> -->
                                            <ul class="dropdown-menu">
-		                                      <div class="row">
-			                                     <div class="col-sm-4">
-				                                    <ul class="multi-column-dropdown">
+                                              <div class="row">
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
                                                         <li style="droplist"><a href="cpp.html">C++</a></li>
+														<li style="droplist"><a href="go.html">Go</a></li>
                                                     </ul>
-			                                     </div>
+                                                 </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="droplist"><a href="go.html">Go</a></li>
                                                         <li style="droplist"><a href="erlang.html">Erlang</a></li>
+														<li style="droplist"><a href="java.html">Java</a></li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="droplist"><a href="java.html">Java</a></li>
+                                                        <li style="droplist"><a href="php.html">PHP</a></li>
+														<li style="droplist"><a href="ruby.html">Ruby</a></li>
                                                     </ul>
                                                  </div>
-		                                      </div>
-	                                       </ul>
-	                                   </li>   
+                                              </div>
+                                           </ul>
+                                       </li>   
                                     </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="docs.html">Docs</a></li>
@@ -178,8 +180,8 @@
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
                                 <li><p><a href="nodejs.html">Node.js</a></p></li> -->
                                 <li><p><a href="php.html">PHP</a></p></li>
-                                <li><p><a href="python.html">Python</a></p></li>
-                                <li><p><a href="ruby.html" class="active">&nbsp;&#9679; Ruby</a></p></li>
+                                <!-- <li><p><a href="python.html">Python</a></p></li> -->
+                                <li><p><a href="ruby.html" class="active"> Ruby</a></p></li>
                                 <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
                         </div>
@@ -188,31 +190,34 @@
                         <!-- CENTER COULMN -->
                         <div class="col-md-8 box" style="margin-left:5px">
 						  <h1>Ruby Quickstart</h1>
-						  <p>This guide gets you started with OpenCensus in Ruby with a simple working example.</p><br>
+						  <p>This example application demonstrates how to use OpenCensus to record traces for a Sinatra-based web application. You can find the source code for the application at <a href="https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world"><span class="gloss1">https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world</span></a>.</p><br>
                             
-                            <h4>Before you begin</h4>
-                            <p>What you need before you begin.<br>
-                            Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>Prerequisites</h4>
+                            <p>Ruby 2.2 or later is required. Make sure you have Bundler installed as well.</p>
+							<p><pre><code>gem install bundler</code></pre></p><br>
                             
-                            <h4>Download the example</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. </p><br>
+                            <h4>Installation</h4>
+                            <p>Get the example from the OpenCensus Ruby repository on Github, and cd into the example application directory.</p>
+							<p><pre><code>git clone <a href="https://github.com/census-instrumentation/opencensus-ruby.git"><span class="gloss1">https://github.com/census-instrumentation/opencensus-ruby.git</span></a><br>cd opencensus-ruby/examples/hello-world</code></pre></p><br>
+							<p>Install the dependencies using Bundler.</p>
+							<p><pre><code>bundle install</code></pre></p><br>
                             
-                            <h4>Run an OpenCensus application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>Running the example</h4>
+                            <p>Run the application locally on your workstation with:</p>
+							<p><pre><code>bundle exec ruby hello.rb</code></pre></p><br>
+							<p>This will run on port 4567 by default, and display application logs on the terminal. From a separate shell, you can send requests using a tool such as curl:</p>
+							<p><pre><code>curl http://localhost:4567/<br>curl http://localhost:4567/lengthy</code></pre></p><br>
+							<p>The running application will log the captured traces.</p><br>
                             
-                            <h4>Update an OpenCensus service</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here.</p>
-                            <p>
-                            <pre>
-                                <code>/*******************************************************<br>Compilation:  -module(hello_world).<br>Execution:    -compile(export_all).<br>Prints "Hello, World". By tradition, is everyone's first program.<br>% erlang HelloWorld<br>Hello, World<br>*******************************************************/<br>-module(hello_world).<br>-compile(export_all).<br><br>hello() -><br>io:format("hello world~n").<br></code>
-                            </pre>  
-                            </p><br>
+                            <h4>The example application code</h4>
+                            <p>The example application’s Gemfile includes the `opencensus` gem:</p>
+                            <p><pre><code>source <a href="https://rubygems.org"><span class="gloss1">"https://rubygems.org"</span></a><br>gem "faraday", "~> 0.14"<br>gem "opencensus", "~> 0.3"<br>gem "sinatra", "~> 2.0"</code></pre></p><br>
+	
+							<p>Following is the `hello.rb` source file from the example:</p>
+							<p><pre><code>require "sinatra"<br><br><span class="comment"># Install the Rack middleware to trace incoming requests.</span><br>require "opencensus/trace/integrations/rack_middleware"<br>use OpenCensus::Trace::Integrations::RackMiddleware<br><br><span class="comment"># Access the Faraday middleware which will be used to trace outgoing</span><br><span class="comment"># HTTP requests.</span><br>require "opencensus/trace/integrations/faraday_middleware"<br><br><span class="comment"># Each request will be traced automatically by the middleware.</span><br>get "/" do<br>&nbsp;&nbsp;"Hello world!"<br>end<br><br><span class="comment"># Traces for this request will also include sub-spans as indicated</span><br><span class="comment"># below.</span><br>get "/lengthy" do<br>&nbsp;&nbsp;<span class="comment"># Configure this Faraday connection with a middleware to trace</span><br>&nbsp;&nbsp;<span class="comment"># outgoing requests.</span><br>&nbsp;&nbsp;conn = Faraday.new(url: <a href="http://www.google.com"><span class="gloss1">"http://www.google.com"</span></a>) do |c|<br>&nbsp;&nbsp;&nbsp;&nbsp;c.use OpenCensus::Trace::Integrations::FaradayMiddleware<br>&nbsp;&nbsp;&nbsp;&nbsp;c.adapter Faraday.default_adapter<br>&nbsp;&nbsp;end<br>&nbsp;&nbsp;conn.get "/"<br><br>&nbsp;&nbsp;<span class="comment"># You may instrument your code to create custom spans for</span><br>&nbsp;&nbsp;<span class="comment"># long-running operations.</span><br>&nbsp;&nbsp;OpenCensus::Trace.in_span "long task" do<br>&nbsp;&nbsp;&nbsp;&nbsp;sleep rand<br>&nbsp;&nbsp;end<br><br>&nbsp;&nbsp;"Done!"<br>end</code></pre></p><br>
                             
-                            <h4>Update and run the application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
-                            
-                            <h4>What’s next?</h4>
-                            <p>Something goes here.</p><br>
+                            <h4>API Documentation</h4>
+                            <p>The OpenCensus Ruby API is documented at: <a href="http://www.rubydoc.info/gems/opencensus"><span class="gloss1">http://www.rubydoc.info/gems/opencensus</span></a></p><br><br>
 					   </div>
                         <!-- END CENTER COULMN -->
                         <!-- RUBY CONTENT END -->                   
