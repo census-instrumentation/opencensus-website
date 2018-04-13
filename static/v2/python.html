@@ -102,29 +102,32 @@
                                     <!-- LANGUAGES NAV DROPDOWN  -->
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown">
-	                                       <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
-	                                       <!-- <ul class="dropdown-menu multi-column columns-3"> -->
+                                           <a href="languages.html" class="dropdown-toggle" data-toggle="dropdown">Languages<b class="caret"></b></a>
+                                           <!-- <ul class="dropdown-menu multi-column columns-3"> -->
                                            <ul class="dropdown-menu">
-		                                      <div class="row">
-			                                     <div class="col-sm-4">
-				                                    <ul class="multi-column-dropdown">
+                                              <div class="row">
+                                                 <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
                                                         <li style="droplist"><a href="cpp.html">C++</a></li>
+														<li style="droplist"><a href="go.html">Go</a></li>
                                                     </ul>
-			                                     </div>
+                                                 </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="droplist"><a href="go.html">Go</a></li>
                                                         <li style="droplist"><a href="erlang.html">Erlang</a></li>
+														<li style="droplist"><a href="java.html">Java</a></li>
+														<li style="droplist"><a href="ruby.html">Ruby</a></li>
                                                     </ul>
                                                  </div>
                                                  <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <li style="droplist"><a href="java.html">Java</a></li>
+                                                        <li style="droplist"><a href="php.html">PHP</a></li>
+														<li style="droplist"><a href="python.html">Python</a></li>
                                                     </ul>
                                                  </div>
-		                                      </div>
-	                                       </ul>
-	                                   </li>   
+                                              </div>
+                                           </ul>
+                                       </li>   
                                     </ul>
                                     <!-- END LANGUAGES NAV DROPDOWN -->    
 									<li><a href="docs.html">Docs</a></li>
@@ -178,7 +181,7 @@
                                 <!-- <li><p><a href="dotnet.html">.NET</a></p></li>
                                 <li><p><a href="nodejs.html">Node.js</a></p></li> -->
                                 <li><p><a href="php.html">PHP</a></p></li>
-                                <li><p><a href="python.html" class="active">&nbsp;&#9679; Python</a></p></li>
+                                <li><p><a href="python.html" class="active"> Python</a></p></li>
                                 <li><p><a href="ruby.html">Ruby</a></p></li>
                                 <!-- <li><p><a href="webjs.html">Web JS</a></p></li> -->
                             </ul><hr><br>
@@ -188,31 +191,36 @@
                         <!-- CENTER COULMN -->
                         <div class="col-md-8 box" style="margin-left:5px">
 						  <h1>Python Quickstart</h1>
-						  <p>This guide gets you started with OpenCensus in Python with a simple working example.</p><br>
+						  <p>The example demonstrates how to record traces for a simple Flask web application.</p><br><hr><br>
                             
-                            <h4>Before you begin</h4>
-                            <p>What you need before you begin.<br>
-                            Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>OpenCensus Python API Documentation</h4>
+							<p>The OpenCensus libraries artifacts are released to <a href="https://pypi.python.org/pypi/opencensus"><span class="gloss1">PyPI</span></a>. The API documentation is available <a href="https://census-instrumentation.github.io/opencensus-python/trace/api/index.html"><span class="gloss1">here</span></a>.</p><br><hr><br>
                             
-                            <h4>Download the example</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here. </p><br>
+                            <h4>The Quickstart Example Code</h4>
+							<p>
+							  <ol>
+								<li>Clone the OpenCensus Python GitHub repo:<br>
+								  a. git clone <a href="https://github.com/census-instrumentation/opencensus-python.git"><span class="gloss1">https://github.com/census-instrumentation/opencensus-python.git</span></a></li><br>
+								<li>Code is in directory: <span class="code">examples/trace/helloworld/flask.</span></li>
+							  </ol>
+							</p><br><hr><br>
                             
-                            <h4>Run an OpenCensus application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
-                            
-                            <h4>Update an OpenCensus service</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here.</p>
+                            <h4>To Run The Example</h4>
                             <p>
-                            <pre>
-                                <code>/*******************************************************<br>Compilation:  -module(hello_world).<br><br>Execution:    -compile(export_all).<br>Prints "Hello, World". By tradition, is everyone's first program.<br>% erlang HelloWorld<br>Hello, World<br>*******************************************************/<br>-module(hello_world).<br>-compile(export_all).<br><br>hello() -><br>io:format("hello world~n").<br></code>
-                            </pre>  
-                            </p><br>
+							  <ol>
+							  	<li>Install dependencies via pip:<br><pre><code>$ pip install opencensus</code></pre></li><br>
+								<li>The OpenCensus Python Quickstart example can be run as below:<br><pre><code>$ python simple.py</code></pre></li><br>
+								<li>Make a HTTP request to hit the application:<br><pre><code>$ curl http://localhost:8080/</code></pre></li>
+							  </ol>
+							</p><br><hr><br>
                             
-                            <h4>Update and run the application</h4>
-                            <p>Instructions of some sort go here. Instructions of some sort go here. Instructions of some sort go here.</p><br>
+                            <h4>The Example Code</h4>
+                            <p>
+								<pre><code>import flask<br>from opencensus.trace.exporters import stackdriver_exporter<br>from opencensus.trace.ext.flask.flask_middleware import FlaskMiddleware<br><br><br>app = flask.Flask(__name__)<br><br># Enable tracing the requests<br>middleware = FlaskMiddleware(app)<br><br><br>@app.route('/')<br>def hello():<br>&nbsp;&nbsp;&nbsp;return 'Hello world!'<br><br><br>if __name__ == '__main__':<br>&nbsp;&nbsp;&nbsp;app.run(host='localhost', port=8080)<br></code></pre>  
+                            </p><br><hr><br>
                             
-                            <h4>What’s next?</h4>
-                            <p>Something goes here.</p><br>
+                            <h4>The Example Output (Raw)</h4>
+                            <p class="code">[<br>&nbsp;&nbsp;SpanData(<br>&nbsp;&nbsp;&nbsp;&nbsp;name='[GET]http://localhost:8080/',<br>&nbsp;&nbsp;&nbsp;&nbsp;context=<opencensus.trace.span_context.SpanContext object at 0x7f669a880dd8>,<br>&nbsp;&nbsp;&nbsp;&nbsp;span_id='0eadaaabacea4ca7',<br>&nbsp;&nbsp;&nbsp;&nbsp;parent_span_id=None,<br>&nbsp;&nbsp;&nbsp;&nbsp;attributes={<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/http/method': 'GET',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/http/url': 'http://localhost:8080/',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/http/status_code': '200<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;start_time='2018-04-09T23:04:41.784921Z',<br>&nbsp;&nbsp;&nbsp;&nbsp;end_time='2018-04-09T23:04:41.785165Z',<br>&nbsp;&nbsp;&nbsp;&nbsp;child_span_count=0,<br>&nbsp;&nbsp;&nbsp;&nbsp;stack_trace=None,<br>&nbsp;&nbsp;&nbsp;&nbsp;time_events=[],<br>&nbsp;&nbsp;&nbsp;links=[],<br>&nbsp;&nbsp;&nbsp;status=None,<br>&nbsp;&nbsp;&nbsp;same_process_as_parent_span=None,<br>&nbsp;&nbsp;&nbsp;span_kind=0<br>&nbsp;&nbsp;)<br>]</p><br><br>
 					   </div>
                         <!-- END CENTER COULMN -->
                         <!-- PYTHON CONTENT END -->                  
