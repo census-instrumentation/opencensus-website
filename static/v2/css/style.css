@@ -1003,6 +1003,11 @@ code {
 .code {
   font-family: monospace, monospace;
 }
+p.code {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding-left: 10px;
+}
 .comment {
   color: gray;
 }
