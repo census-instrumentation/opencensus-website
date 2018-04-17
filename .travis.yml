@@ -17,6 +17,7 @@ script:
   - touch public/.nojekyll # required to disable Jekyll generation.
   - echo "opencensus.io" > public/CNAME
   - curl -L https://github.com/census-instrumentation/opencensus-php/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/php
+  - curl -L https://github.com/census-instrumentation/opencensus-python/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/python
 
 branches:
   only:
