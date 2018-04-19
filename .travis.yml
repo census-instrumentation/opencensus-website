@@ -7,33 +7,16 @@ node_js:
  - "7"
 
 install:
- - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
- - sudo dpkg -i /tmp/hugo.deb
  - npm install -g firebase-tools
 
 # Build the website
 script:
   - curl -L https://github.com/census-instrumentation/opencensus-php/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/php
   - curl -L https://github.com/census-instrumentation/opencensus-python/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/python
-  - hugo
-  - touch public/.nojekyll # required to disable Jekyll generation.
-  - echo "opencensus.io" > public/CNAME
 
 branches:
   only:
     - master
-
-# Deploy to GitHub pages
-deploy:
-  provider: pages
-  repo: census-instrumentation/census-instrumentation.github.io
-  target_branch: master
-  skip_cleanup: true
-  local_dir: public
-  email: jbd@google.com # To satisfy the CLA check, replace this with bot email.
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  on:
-    branch: master
 
 # Deploy to Firebase Hosting
 after_success:
