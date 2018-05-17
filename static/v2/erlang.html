@@ -207,7 +207,7 @@
                         
                             <p><pre><code>{erl_opts, [debug_info]}.<br>{deps, [opencensus]}.<br><br>{shell, [{apps, [helloworld]},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{config, "config/sys.config"}]}.</code></pre></p><br>
                     
-                            <p><pre><code>[<br>{opencensus, [{sampler, {oc_sampler_always, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter, {oc_reporter_stdout, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{stat, [{exporters, [{oc_stat_exporter_stdout, []}]}]}<br>].</code></pre></p><br><br>
+                            <p><pre><code>[<br>{opencensus, [{sampler, {oc_sampler_always, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter, {oc_reporter_stdout, []}},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{stat, [{exporters, [{oc_stat_exporter_stdout, []}]}]}]}<br>].</code></pre></p><br><br>
                 
                             <p><span class="code1">opencensus</span> is a runtime dependency so it is added to the applications list in <span class="code1">src/helloworld.app.src</span>, ensuring it is included and started in a release of <span class="code1">helloworld</span>:</p>
                             
