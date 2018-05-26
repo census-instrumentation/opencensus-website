@@ -321,7 +321,6 @@ img {
   background: #FFF;
   border-color: transparent;
   padding: 20px 0 3px;
-  /* background: 0 0; */
   border: none;
   border-radius: 0;
   z-index: 9;
@@ -342,7 +341,6 @@ img {
 }
 
 .navbar-fixed-top .navbar-nav>li>a {
-  /* color: rgba(255, 255, 255, 0.95); */
   color: #3d3d3d;
   margin: 0;
   padding: 0;
