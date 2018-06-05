@@ -12,16 +12,17 @@ date = "2018-05-16T12:02:16-05:00"
 
 Build and run the example:  
 
-``` cpp
+```cpp
 git clone https://github.com/census-instrumentation/opencensus-cpp.git  
 
 cd opencensus-cpp  
 bazel build //examples/helloworld:helloworld  
 bazel-bin/opencensus/examples/helloworld/hello_world
-```  
-&nbsp;  
+```
 
----  
+&nbsp; 
+
+---
 
 #### Quickstart Example  
 
@@ -29,20 +30,22 @@ The example demonstrates how to record stats and traces for a video processing s
 &nbsp;  
 
 In this case we are using stdout exporters which we register at the beginning.
-``` cpp
+
+```cpp
 // Register stdout exporters.
 opencensus::exporters::stats::StdoutExporter::Register();
 opencensus::exporters::trace::StdoutExporter::Register();
 ```  
   
 We define a measure for video size which records the sizes in megabytes "MBy".
-``` cpp
+
+```cpp
 // Call measure so that it is initialized.
 VideoSizeMeasure();
 ```  
-&nbsp;  
 
 We create a view and register it with the local Stdout exporter.
+
 ``` cpp
 // Create view to see the processed video size distribution broken down
 // by frontend. The view has bucket boundaries (0, 256, 65536)
@@ -61,11 +64,13 @@ opencensus::stats::View view(video_size_view);
 
 // Register the view for export.
 video_size_view.RegisterForExport();
-```  
-&nbsp;  
+``` 
+
+
 Example View
 
-`name: "my.org/views/video_size"
+```
+name: "my.org/views/video_size"
 measure: name: "my.org/measure/video_size"; units: "MBy";
 description: "size of processed videos"; type: int64
 aggregation: Distribution with Buckets:
@@ -74,17 +79,20 @@ aggregation window: Cumulative
 columns: my.org/keys/frontend
 description: "processed video size over time"
 video size : count: 1 mean: 25648 sum of squared deviation: 0 min: 25648 max: 25648
-histogram counts: 0, 0, 0, 0, 0, 0, 0, 0, 1, 0`  
-&nbsp;  
+histogram counts: 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
+```
 
 In this case the view stores a distribution. The example records 1 video size to the view, which is 25648. This shows up in the histogram, with 1 bucket having a single value in it.
 
-``` cpp
+```cpp
 opencensus::stats::Record({{VideoSizeMeasure(), 25648}},{{kFrontendKey, "video size"}});
-```  
+```
+
 &nbsp;  
 Example Span
-`Name: my.org/ProcessVideo
+
+```
+Name: my.org/ProcessVideo
 TraceId-SpanId-Options:
   a17625c6ed57d878092ea01fe87ded35-e9ec94e4de02fadb-01
 Parent SpanId: 0000000000000000 (remote: false)
@@ -97,12 +105,13 @@ Annotations: (0 dropped)
 Message events: (0 dropped)
 Links: (0 dropped)
 Span ended: true
-Status: OK`  
+Status: OK
+```
 &nbsp;  
 
 Span context information is displayed in hexadecimal on a single line which is the concatenation of TraceId, SpanId, and span options. Parent SpanId is displayed on the following line. In this case there is no parent (root span), so the parent id is 0. There were 2 attributes added. After work has been completed a span must be ended by the user. A span that is still active (i.e. not ended), will not be exported.
 
-``` cpp
+```cpp
 span.AddAnnotation("Start processing video.");
 ...
 span.AddAnnotation("Finished processing video.");
