@@ -148,7 +148,7 @@ img {
   3. HEADER                
 -----------------------------------------*/
 .s-header {
-  background: "/static/img/banner22/png"'	
+  background: url('./static/img/banner22.png');	
 /*
   background: url('./img/banner22.png');
 */
