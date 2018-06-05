@@ -1,0 +1,41 @@
+{{ partial "nav" . }}
+<!-- ====== GUIDES EDIT START  ======  -->
+<section class="sections ref" id="ref">
+	<div class="container">
+
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin-right:20px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/guides.md"><span class="fa fa-github"></span> Edit <b>guides.md</b></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- ====== END MIDDLE NAVGITION ======  -->
+	</div>
+
+<!-- ====== GUIDES START  ======  -->
+<!--<section class="sections lang" id="lang"> -->
+	<div class="container">
+		<div class="row">   
+			<!-- GUIDE CONTENT START -->
+			<div class="title">
+
+				<!-- CENTER COULMN -->
+				<div class="col-md-10 box" style="margin:0px 22px 0px 5px;"> 
+				  <h1>OpenCensus Guides</h1>
+				  <br>
+					{{.Inner}}
+					<!-- COLLAPSIBLE ACCORDION CONTENT END -->
+			   </div>
+				<!-- END ACCORDIAN COULMN -->
+			</div>
+		</div>
+	</div>
+<!--</section> -->
+<!-- ====== GUIDES CONTENT END  ======  -->
+</section>
+<!-- ====== GUIDES EDIT END  ======  -->
+{{ partial "footer.html" . }}

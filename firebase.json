@@ -1,5 +1,5 @@
 {
   "hosting": {
-    "public": "static/v2"
+    "public": "public"
   }
 }

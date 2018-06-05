@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenCensus</title>
+    <link>https://opencensus.io/</link>
+    <description>Recent content on OpenCensus</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 31 May 2018 14:31:01 -0500</lastBuildDate>
+    
+	<atom:link href="https://opencensus.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Guides</title>
+      <link>https://opencensus.io/guides/</link>
+      <pubDate>Thu, 31 May 2018 14:31:01 -0500</pubDate>
+      
+      <guid>https://opencensus.io/guides/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit guides.md
+    OpenCensus Guides   + Guide for Application Developers  See the guide for OpenCensus Application Developers here.</description>
+    </item>
+    
+    <item>
+      <title>GO gRPC</title>
+      <link>https://opencensus.io/gogrpc/</link>
+      <pubDate>Thu, 31 May 2018 11:12:41 -0500</pubDate>
+      
+      <guid>https://opencensus.io/gogrpc/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       OpenCensus for Go gRPC developers &amp;nbsp;
+In this tutorial, we’ll examine how to use OpenCensus in your gRPC projects in the Go programming language for observability both into your server and then client!</description>
+    </item>
+    
+    <item>
+      <title>Spanner</title>
+      <link>https://opencensus.io/spanner/</link>
+      <pubDate>Wed, 30 May 2018 16:50:51 -0500</pubDate>
+      
+      <guid>https://opencensus.io/spanner/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Cloud Spanner Instrumented by OpenCensus and exported to Stackdriver &amp;nbsp;
+In this post, we’ll explore the power of OpenCensus’ exporters, using the Google Cloud Spanner package for both the Go and Java programming languages.</description>
+    </item>
+    
+    <item>
+      <title>Trace</title>
+      <link>https://opencensus.io/trace/</link>
+      <pubDate>Wed, 30 May 2018 15:37:24 -0500</pubDate>
+      
+      <guid>https://opencensus.io/trace/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit trace.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Tags</title>
+      <link>https://opencensus.io/tags/</link>
+      <pubDate>Wed, 30 May 2018 15:30:07 -0500</pubDate>
+      
+      <guid>https://opencensus.io/tags/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit tags.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Stats</title>
+      <link>https://opencensus.io/stats/</link>
+      <pubDate>Wed, 30 May 2018 14:53:59 -0500</pubDate>
+      
+      <guid>https://opencensus.io/stats/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit stats.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Reference</title>
+      <link>https://opencensus.io/reference/</link>
+      <pubDate>Wed, 30 May 2018 14:31:18 -0500</pubDate>
+      
+      <guid>https://opencensus.io/reference/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit reference.md
+    Language Specific API Reference Links to the language specific automatically generated API reference documentation.
+&amp;nbsp;
+C++ API &amp;nbsp;</description>
+    </item>
+    
+    <item>
+      <title>Quickstart</title>
+      <link>https://opencensus.io/quickstart/</link>
+      <pubDate>Wed, 30 May 2018 14:11:36 -0500</pubDate>
+      
+      <guid>https://opencensus.io/quickstart/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit quickstart.md
+    Quickstart &amp;nbsp;
+C++ &amp;nbsp;
+&amp;nbsp;
+Erlang &amp;nbsp;
+&amp;nbsp;
+Go &amp;nbsp;
+&amp;nbsp;
+Java &amp;nbsp;
+&amp;nbsp;
+PHP &amp;nbsp;
+&amp;nbsp;</description>
+    </item>
+    
+    <item>
+      <title>Community</title>
+      <link>https://opencensus.io/community/</link>
+      <pubDate>Wed, 30 May 2018 13:47:11 -0500</pubDate>
+      
+      <guid>https://opencensus.io/community/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit community.md
+    Community OpenCensus has an active community of developers who are using, enhancing and building valuable integrations with other software projects.</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>https://opencensus.io/overview/</link>
+      <pubDate>Wed, 30 May 2018 10:49:38 -0500</pubDate>
+      
+      <guid>https://opencensus.io/overview/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit overview.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby
+   OpenCensus GCP Tutorial</description>
+    </item>
+    
+    <item>
+      <title>OpenCensus</title>
+      <link>https://opencensus.io/</link>
+      <pubDate>Tue, 22 May 2018 11:02:24 -0500</pubDate>
+      
+      <guid>https://opencensus.io/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}    
+ OpenCensus A single distribution of libraries for metrics and distributed tracing
+with minimal overhead that allows you to export data to multiple backends.</description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>https://opencensus.io/ruby/</link>
+      <pubDate>Fri, 18 May 2018 13:52:18 -0500</pubDate>
+      
+      <guid>https://opencensus.io/ruby/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit ruby.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://opencensus.io/python/</link>
+      <pubDate>Fri, 18 May 2018 13:08:20 -0500</pubDate>
+      
+      <guid>https://opencensus.io/python/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit python.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>PHP</title>
+      <link>https://opencensus.io/php/</link>
+      <pubDate>Fri, 18 May 2018 12:37:28 -0500</pubDate>
+      
+      <guid>https://opencensus.io/php/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit php.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://opencensus.io/java/</link>
+      <pubDate>Fri, 18 May 2018 09:59:40 -0500</pubDate>
+      
+      <guid>https://opencensus.io/java/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit java.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Erlang</title>
+      <link>https://opencensus.io/erlang/</link>
+      <pubDate>Thu, 17 May 2018 15:41:51 -0500</pubDate>
+      
+      <guid>https://opencensus.io/erlang/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit erlang.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>https://opencensus.io/go/</link>
+      <pubDate>Thu, 17 May 2018 14:17:26 -0500</pubDate>
+      
+      <guid>https://opencensus.io/go/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit go.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://opencensus.io/cpp/</link>
+      <pubDate>Wed, 16 May 2018 12:02:16 -0500</pubDate>
+      
+      <guid>https://opencensus.io/cpp/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit C++.md
+    Quickstart   C++
+ Erlang
+ Go
+ Java
+ PHP
+ Python
+ Ruby</description>
+    </item>
+    
+    <item>
+      <title>Docs</title>
+      <link>https://opencensus.io/docs/</link>
+      <pubDate>Tue, 15 May 2018 11:29:28 -0500</pubDate>
+      
+      <guid>https://opencensus.io/docs/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit docs.md
+    Documentation Welcome to the developer documentation for OpenCensus. Here you can learn about key OpenCensus concepts, find quick starts, reference material, and tutorials for all our supported languages, and more.</description>
+    </item>
+    
+    <item>
+      <title>Glossary</title>
+      <link>https://opencensus.io/glossary/</link>
+      <pubDate>Mon, 14 May 2018 16:11:08 -0500</pubDate>
+      
+      <guid>https://opencensus.io/glossary/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit glossary.md
+ Glossary Tracing
+Tracking the entire path of execution of a service or a function from start until end. e.g. During an upload, tracking when a file handle is received, opened, sanitized and uploaded to the cloud.</description>
+    </item>
+    
+    <item>
+      <title>Roadmap</title>
+      <link>https://opencensus.io/roadmap/</link>
+      <pubDate>Fri, 11 May 2018 12:09:08 -0500</pubDate>
+      
+      <guid>https://opencensus.io/roadmap/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit roadmap.md
+	Roadmap OpenCensus’s journey ahead: platforms and languages &amp;nbsp;
+Languages &amp;nbsp;
+   LANGUAGE TRACING STATS     C++ Supported Supported   Erlang Supported Supported   GO Supported Supported   Java (JVM, OpenJDK, Android) Supported Supported   PHP Supported Planned   Python Supported In Progress   Ruby Supported Planned</description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://opencensus.io/blog/</link>
+      <pubDate>Fri, 11 May 2018 10:32:44 -0500</pubDate>
+      
+      <guid>https://opencensus.io/blog/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit blog.md
+    Blog &amp;amp; Latest news       OC    May 13, 2018    OpenCensus for Go gRPC developers   In this tutorial, we’ll examine how to use OpenCensus in your gRPC projects in the Go programming language for observability both into your server and then client!</description>
+    </item>
+    
+    <item>
+      <title>FAQ</title>
+      <link>https://opencensus.io/faq/</link>
+      <pubDate>Thu, 10 May 2018 14:14:33 -0500</pubDate>
+      
+      <guid>https://opencensus.io/faq/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit faq.md
+ Frequently Asked Questions &amp;nbsp;
+  + Who is behind OpenCensus?  OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://opencensus.io/about/</link>
+      <pubDate>Tue, 08 May 2018 13:19:03 +0700</pubDate>
+      
+      <guid>https://opencensus.io/about/</guid>
+      <description>Toggle navigation       Overview Languages  C++ Go   Erlang Java Ruby   PHP Python       Docs Glossary Roadmap Blog FAQ About       Contribution Guidelines
+ &amp;nbsp; | &amp;nbsp;  Edit about.md
+    About OpenCensus   + Who is behind OpenCensus?  OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors.</description>
+    </item>
+    
+  </channel>
+</rss>

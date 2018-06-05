@@ -1,0 +1,13 @@
+name = "census"
+license = "MIT"
+licenselink = "#"
+description = "OpenCensus theme"
+tags = ["development", "OpenCensus"]
+features = ["blog", "themes", "disqus"]
+min_version = 0.1
+
+[author]
+    name = "Adam Garza"
+	organization = "OpenCensus"
+    homepage = "http://opencensus.io"
+
