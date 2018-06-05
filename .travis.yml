@@ -4,23 +4,23 @@
 language: node_js
 
 node_js:
-  "7"
+ - "7"
 
 install:
-  wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.31.1/hugo_0.31.1_Linux-64bit.deb
-  sudo dpkg -i /tmp/hugo.deb
-  npm install -g firebase-tools
+ - npm install -g firebase-tools
+ - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.31.1/hugo_0.31.1_Linux-64bit.deb
+ - sudo dpkg -i /tmp/hugo.deb
 
 # Build the website
 script:
-  curl -L https://github.com/census-instrumentation/opencensus-php/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/php
-  curl -L https://github.com/census-instrumentation/opencensus-python/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/python
-  hugo
+  - curl -L https://github.com/census-instrumentation/opencensus-php/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/php
+  - curl -L https://github.com/census-instrumentation/opencensus-python/archive/gh-pages.tar.gz | tar -xz --strip-components=1 -C static/v2/api/python
+  - hugo
 
 branches:
   only:
-    master
+    - master
 
 # Deploy to Firebase Hosting
 after_success:
-   firebase deploy --project opencensusio --token "$FIREBASE_TOKEN"
+ - firebase deploy --project opencensusio --token "$FIREBASE_TOKEN"
