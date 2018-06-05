@@ -1,0 +1,40 @@
+{{ partial "nav" . }}
+<!-- ====== QUICKSTART START  ======  -->
+<section class="sections lang" id="lang">
+	<div class="container">
+
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin-right:20px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/quickstart.md"><span class="fa fa-github"></span> Edit <b>quickstart.md</b></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- ====== END MIDDLE NAVGITION ======  -->
+	</div>
+
+	<div class="container">
+		<div class="row">   
+			<!-- QUICKSTART CONTENT START -->
+			<div class="title">
+
+				<!-- CENTER COULMN -->
+				<div class="col-md-10 box" style="margin:0px 22px 0px 5px;"> 
+				  <h1>Quickstart</h1>
+				  <br>
+					<div class="col-md-10 box" style="margin-left:5px">
+						{{.Inner}}
+					</div>
+					<br>
+			   </div>
+				<!-- END CENTER COULMN -->
+				<!-- QUICKSTART CONTENT END -->
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ====== QUICKSTART END  ======  -->
+{{ partial "footer.html" . }}

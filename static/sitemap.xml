@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://opencensus.io/guides/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/gogrpc/</loc>
+    <lastmod>2018-05-31T11:12:41-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/spanner/</loc>
+    <lastmod>2018-05-30T16:50:51-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/trace/</loc>
+    <lastmod>2018-05-30T15:37:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/tags/</loc>
+    <lastmod>2018-05-30T15:30:07-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/stats/</loc>
+    <lastmod>2018-05-30T14:53:59-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/reference/</loc>
+    <lastmod>2018-05-30T14:31:18-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/quickstart/</loc>
+    <lastmod>2018-05-30T14:11:36-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/community/</loc>
+    <lastmod>2018-05-30T13:47:11-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/overview/</loc>
+    <lastmod>2018-05-30T10:49:38-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/</loc>
+    <lastmod>2018-05-22T11:02:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/ruby/</loc>
+    <lastmod>2018-05-18T13:52:18-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/python/</loc>
+    <lastmod>2018-05-18T13:08:20-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/php/</loc>
+    <lastmod>2018-05-18T12:37:28-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/java/</loc>
+    <lastmod>2018-05-18T09:59:40-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/erlang/</loc>
+    <lastmod>2018-05-17T15:41:51-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/go/</loc>
+    <lastmod>2018-05-17T14:17:26-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/cpp/</loc>
+    <lastmod>2018-05-16T12:02:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/docs/</loc>
+    <lastmod>2018-05-15T11:29:28-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/glossary/</loc>
+    <lastmod>2018-05-14T16:11:08-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/roadmap/</loc>
+    <lastmod>2018-05-11T12:09:08-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/blog/</loc>
+    <lastmod>2018-05-11T10:32:44-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/faq/</loc>
+    <lastmod>2018-05-10T14:14:33-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/about/</loc>
+    <lastmod>2018-05-08T13:19:03+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/tags/development/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/categories/development/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/tags/opencensus/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/categories/opencensus/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://opencensus.io/tags/</loc>
+    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

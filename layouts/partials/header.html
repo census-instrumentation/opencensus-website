@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"{{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}"{{end}}>
+	<head>
+        <!-- GOOGLE ANALYTICS SNIPPET -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115468315-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            gtag('config', 'UA-115468315-1');
+        </script>
+        <!-- END GOOGLE ANALYTICS -->
+        
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		{{ .Hugo.Generator }}
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+		<meta name="description" content="A stats collection and distributed tracing framework">
+		<meta name="keywords" content="KEYWORDS">
+		<meta name="author" content="OpenCensus">
+		
+		<!-- TITLE -->
+		{{ if .IsHome -}}
+  		<title>{{ .Site.Title }}</title>
+  		{{- else -}}
+		<title>{{ .Title }} &middot; {{ .Site.Title }}</title>
+		{{- end }}
+		<!--<title>OpenCensus</title>-->
+
+		<!-- FAVICON -->
+	    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.BaseURL }}favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.BaseURL }}favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.BaseURL }}favicon/favicon-16x16.png">
+        <link rel="manifest" href="{{ .Site.BaseURL }}favicon/site.webmanifest">
+        <link rel="mask-icon" href="{{ .Site.BaseURL }}favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#2d89ef">
+        <meta name="theme-color" content="#ffffff">
+
+		<!-- BOOTSTRAP CSS -->
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/bootstrap/bootstrap.min.css">
+
+		<!-- FONT-AWESOME & ET-LINE-FONT CSS -->
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/et-line-font/et-line-font.css">
+
+	    <!-- MAGNIFIC POPUP CORE CSS -->
+	    <link href="{{ .Site.BaseURL }}css/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- OWL CAROUSEL -->
+        <link href="{{ .Site.BaseURL }}css/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="{{ .Site.BaseURL }}css/owl-carousel/owl.theme.default.min.css" rel="stylesheet">
+
+		<!-- MAIN STYLE CSS -->
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
+
+		<!-- RESPONSIVE STYLE CSS -->
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/responsive.css">
+		
+		<!-- COLORS CSS -->
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/colors/red.css">
+	</head>
+	

@@ -1,0 +1,32 @@
+{{ partial "nav.html" . }}
+<!-- ====== BLOG START  ======  -->
+<section class="sections lang" id="lang">
+	<div class="container">
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin-right:20px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md" target="_new">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/blog.md" target="_new"><span class="fa fa-github"></span> Edit <b>blog.md</b></a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ====== END MIDDLE NAVGITION ======  -->
+
+	<div class="container">
+		<div class="row">   
+			<!-- BLOG CONTENT START -->
+			<div class="title">
+				<!-- CENTER COULMN -->
+				<div class="col-md-12 box" style="margin:0px 1px 0px 5px;">  
+				  <h1>Blog &amp; Latest news</h1>
+				  <br />
+				</div>
+			</div>
+		</div>
+			{{.Inner}}
+	</div>
+</section>
+{{ partial "footer.html" . }}

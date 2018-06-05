@@ -1,0 +1,41 @@
+{{ partial "nav" . }}
+<!-- ====== REFERENCE API START  ======  -->
+<section class="sections lang" id="lang">
+	<div class="container">
+
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin-right:20px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/reference.md"><span class="fa fa-github"></span> Edit <b>reference.md</b></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- ====== END MIDDLE NAVGITION ======  -->
+	</div>
+
+	<!-- ====== REFERENCE API CONTENT START  ======  -->
+	<div class="container">
+		<div class="row">   
+			<!-- REFERENCE CONTENT START -->
+			<div class="title">
+
+				<!-- CENTER COULMN -->
+				<div class="col-md-10 box" style="margin:0px 22px 0px 5px;"> 
+				  <h1>Language Specific API Reference</h1>
+				  <p>Links to the language specific automatically generated API reference documentation.</p><br>
+
+					<div class="col-md-10 box" style="margin-left:5px">
+						{{.Inner}}
+					</div>
+			   </div>
+				<!-- END CENTER COULMN -->
+				<!-- REFERENCE API CONTENT END -->
+			</div>
+		</div>
+	</div><!-- ====== REFERENCE API CONTENT END  ======  -->
+</section>
+<!-- ====== REFERENCE API END  ======  -->
+{{ partial "footer.html" . }}

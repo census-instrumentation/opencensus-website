@@ -1,0 +1,36 @@
+{{ partial "nav.html" . }}
+<!-- ====== DOCS START  ======  -->
+<section class="sections lang" id="lang">
+	<div class="container">
+
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin-right:20px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/docs.md"><span class="fa fa-github"></span> Edit <b>docs.md</b></a></p>
+				</div>
+			</div>
+		</div>
+		<!-- ====== END MIDDLE NAVGITION ======  -->
+	</div>
+
+	<div class="container">
+		<div class="row">   
+			<!-- DOCS CONTENT START -->
+			<div class="title">
+
+				<!-- CENTER COULMNS -->
+				<div class="col-md-12 box" style="margin:0px 22px 0px 5px;">
+				  <h1>Documentation</h1>
+				  <br />
+					<span>{{.Inner}}</span>
+				  <br /><br />
+				</div>
+			<!-- TUTORIALS ENDS -->
+		</div>
+	</div>
+</section>
+<!-- ====== DOCS END  ======  -->
+{{ partial "footer.html" . }}

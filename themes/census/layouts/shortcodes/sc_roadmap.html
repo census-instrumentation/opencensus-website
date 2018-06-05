@@ -1,0 +1,28 @@
+{{ partial "nav.html" . }}
+<!-- ====== DOCS START  ======  -->
+<section class="sections lang" id="lang">
+	<div class="container">
+
+		<!-- ====== MIDDLE NAVGITION ======  -->
+		<div class="row">
+			<div class="title">
+				<div class="lang-con1 col-sm-12" style="margin:0px 20px 105px 0px;">
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
+					<p> &nbsp; | &nbsp; </p>
+					<p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/roadmap.md"><span class="fa fa-github"></span> Edit <b>roadmap.md</b></a></p>
+				</div>		
+				
+				<!-- CENTER COULMN -->
+				<div class="col-md-12 box" style="margin:0px 22px 0px 5px;">
+				  <h1>Roadmap</h1>
+					<br />
+					{{.Inner}}
+			   </div>
+				<!-- END ACCORDIAN COULMN -->
+				<!-- ROADMAP CONTENT END -->
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ====== ROADMAP END  ======  -->
+{{ partial "footer.html" . }}
