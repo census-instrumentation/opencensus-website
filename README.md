@@ -22,7 +22,7 @@ $ firebase serve
 
 === Serving from '/Users/me/opencensus-website'...
 
-i  hosting: Serving hosting files from: public/v2
+i  hosting: Serving hosting files from: public/
 
 ✔  hosting: Local server: http://localhost:5000
 

@@ -18,81 +18,128 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 &nbsp;  
 #### OpenCensus by Language
 
-{{% sc_doc_cards %}}
-| C++ |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../cpp/index.html) |
-| [{{< sc_gloss1 >}}Stats API Reference{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/stats/README.md ) |
-| [{{< sc_gloss1 >}}Trace API Reference{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/trace/README.md) |
+<div class="col-md-12 box" style="margin-top:20">
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>C++</th>
+			</tr>
+			<tr>
+				<td><a href="../cpp/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/stats/README.md" target="_blank"><span class="gloss1">Stats API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/trace/README.md" target="_blank"><span class="gloss1">Trace API Reference</span></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>Erlang</th>
+			</tr>
+			<tr>
+				<td><a href="../erlang/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://hexdocs.pm/opencensus/0.3.1/" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://hex.pm/packages/opencensus" target="_blank"><span class="gloss1">Package</span></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>Go</th>
+			</tr>
+			<tr>
+				<td><a href="../go/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://godoc.org/go.opencensus.io" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="col-md-12 box">
+	<div class="col-md-4 box" id="docbox" style="align:left;">
+		<table>
+			<tr>
+				<th>Java</th>
+			</tr>
+			<tr>
+				<td><a href="../java/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>PHP</th>
+			</tr>
+			<tr>
+				<td><a href="../php/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://packagist.org/packages/opencensus/opencensus" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>Python</th>
+			</tr>
+			<tr>
+			<td><a href="../python/index.html"><span class="gloss1">Quickstart Guide</span></td>
+			</tr>
+			<tr>
+				<td><a href="https://census-instrumentation.github.io/opencensus-python/trace/api/index.html" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="col-md-12 box">
+	<div class="col-md-4 box" id="docbox">
+		<table>
+			<tr>
+				<th>Ruby</th>
+			</tr>
+			<tr>
+				<td><a href="../ruby/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+			</tr>
+			<tr>
+				<td><a href="https://www.rubydoc.info/gems/opencensus" target="_blank"><span class="gloss1">API Reference</span></a></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>
 &nbsp;
 
-| Java |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../java/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2) |
-| &nbsp;&nbsp; |
-&nbsp;
+---
 
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;
-{{% /sc_doc_cards %}}
-
-{{% sc_doc_cards %}}
-| Erlang |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../erlang/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://hexdocs.pm/opencensus/0.3.1/) |
-| [{{< sc_gloss1 >}}Package{{< /sc_gloss1 >}}](https://hex.pm/packages/opencensus) |
-&nbsp;
-
-| PHP |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../php/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://packagist.org/packages/opencensus/opencensus) |
-| &nbsp;&nbsp; |
-&nbsp;
-
-| Ruby |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../ruby/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://www.rubydoc.info/gems/opencensus) |
-| &nbsp;&nbsp; |
-&nbsp;
-{{% /sc_doc_cards %}}
-
-{{% sc_doc_cards %}}
-| Go |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../go/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io) |
-| &nbsp;&nbsp; |
-&nbsp;
-
-| Python |
-| --- |
-| [{{< sc_gloss1 >}}Quickstart Guide{{< /sc_gloss1 >}}](../python/index.html) |
-| [{{< sc_gloss1 >}}API Reference{{< /sc_gloss1 >}}](https://census-instrumentation.github.io/opencensus-python/trace/api/index.html) |
-| &nbsp;&nbsp; |
-&nbsp;
-
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;&nbsp;
-&nbsp;
-{{% /sc_doc_cards %}}
-
-&nbsp;  
-<br /><br /><br />
-<br /><br /> 
-
-* * *
-  
 #### Tutorials
 
 [{{< sc_gloss1 >}}CLOUD SPANNER - INSTRUMENTED BY OPENCENSUS AND EXPORTED TO STACKDRIVER {{< /sc_gloss1 >}}][1]  
