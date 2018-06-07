@@ -1071,12 +1071,10 @@ p.code {
   9. DOCUMENTS                
 -----------------------------------------*/
 #docbox {
-    margin: 20px 0px 40px 0px;
+  border-width: 1px;
 }
 #docbox table {
-  border-width: 1px;
-  width: 90%;
-  
+  width: 90%; 
 }
 #docbox tr {
     border: none;
@@ -1094,12 +1092,7 @@ p.code {
     text-align: left;
     margin-left: 5px;
 }
-.doc1:hover a {
-  color: #C1272D;
-}
-.doc1:hover {
-  text-decoration: underline;
-}
+
 /* --------------------------------------
   10. TESTIMONIALS
 -----------------------------------------*/
