@@ -18,11 +18,11 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 &nbsp;  
 #### OpenCensus by Language
 
-<div class="col-md-12 box" style="margin-top:20">
+<div class="col-md-12 box" style="margin-top:20px">
 	<div class="col-md-4 box" id="docbox">
 		<table>
 			<tr>
-				<th>C++</th>
+				<th data-label="C++:">C++</th>
 			</tr>
 			<tr>
 				<td><a href="../cpp/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
@@ -38,7 +38,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 	<div class="col-md-4 box" id="docbox">
 		<table>
 			<tr>
-				<th>Erlang</th>
+				<th data-label="Erlang:">Erlang</th>
 			</tr>
 			<tr>
 				<td><a href="../erlang/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
@@ -68,7 +68,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 		</table>
 	</div>
 </div>
-<div class="col-md-12 box">
+<div class="col-md-12 box" style="margin-top:20px">
 	<div class="col-md-4 box" id="docbox" style="align:left;">
 		<table>
 			<tr>
@@ -118,7 +118,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 		</table>
 	</div>
 </div>
-<div class="col-md-12 box">
+<div class="col-md-12 box" style="margin-top:20px">
 	<div class="col-md-4 box" id="docbox">
 		<table>
 			<tr>

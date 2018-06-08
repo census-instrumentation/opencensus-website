@@ -1070,11 +1070,9 @@ p.code {
 /*---------------------------------------
   9. DOCUMENTS                
 -----------------------------------------*/
-#docbox {
-  border-width: 1px;
-}
 #docbox table {
-  width: 90%; 
+  width: 90%;
+  border: 1px solid dimgray;
 }
 #docbox tr {
     border: none;
@@ -1092,7 +1090,6 @@ p.code {
     text-align: left;
     margin-left: 5px;
 }
-
 /* --------------------------------------
   10. TESTIMONIALS
 -----------------------------------------*/
@@ -1312,7 +1309,7 @@ p.code {
        }
 }
 
-/* -- ACCORDION TABLE -- */
+/* -- TABLE -- */
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -1321,7 +1318,6 @@ table {
   width: 100%;
   table-layout: fixed;
 }
-/* Zebra striping */
 tr:nth-of-type(odd) { 
   background: #eee; 
 }
@@ -1378,16 +1374,14 @@ table th {
     font-size: .8em;
     text-align: left;
     word-wrap: break-word;
+	margin-right: 5px;
   }
   table td:before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-    content: attr(data-label);
+    content: attr(data-label); 
     float: left;
     font-weight: bold;
     text-transform: uppercase;
+	display: inline-block;
   }
   table td:last-child {
     border-bottom: 0;
@@ -1402,6 +1396,9 @@ table th {
 .gloss1 {
   color: #C1272D;
   text-decoration: underline;
+}
+.gloss6 {
+  color: #C1272D;
 }
 .gloss5 {
   text-indent: 10px;
