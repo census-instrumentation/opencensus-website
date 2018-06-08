@@ -37,50 +37,50 @@ date = "2018-05-10T14:14:33-05:00"
 </dt>
 <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
 <table>
-	<thead>
-		<tr>
-			<th scope="col">Language</th>
-			<th scope="col">Tracing</th>
-			<th scope="col">Stats</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-cpp" target="_blank"><span class="gloss1">C++</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Supported</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-erlang" target="_blank"><span class="gloss1">Erlang</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Supported</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-go" target="_blank"><span class="gloss1">Go</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Supported</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-java" target="_blank"><span class="gloss1">Java (JVM, OpenJDK, Android)</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Supported</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-php" target="_blank"><span class="gloss1">PHP</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Planned</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-python" target="_blank"><span class="gloss1">Python</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">In Progress</td>
-		</tr>
-		<tr>
-			<td scope="row" data-label="Language"><a href="https://github.com/census-instrumentation/opencensus-ruby" target="_blank"><span class="gloss1">Ruby</span></a></td>
-			<td data-label="Tracing">Supported</td>
-			<td data-label="Stats">Planned</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+	  <th scope="col">Language</th>
+	  <th scope="col">Tracing</th>
+	  <th scope="col">Stats</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-cpp" target="_blank"><span>C++</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Supported</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-erlang" target="_blank"><span>Erlang</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Supported</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-go" target="_blank"><span>Go</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Supported</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-java" target="_blank"><span>Java (JVM, OpenJDK, Android)</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Supported</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-php" target="_blank"><span>PHP</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Planned</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-python" target="_blank"><span>Python</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">In Progress</td>
+	</tr>
+	<tr>
+	  <td scope="row" data-label="Language: &nbsp; "><a href="https://github.com/census-instrumentation/opencensus-ruby" target="_blank"><span>Ruby</span></a></td>
+	  <td data-label="Tracing: &nbsp; ">Supported</td>
+	  <td data-label="Stats: &nbsp; ">Planned</td>
+	</tr>
+  </tbody>
 </table>
 </dd>
 <hr>
@@ -89,64 +89,58 @@ date = "2018-05-10T14:14:33-05:00"
 </dt>
 <dd class="accordion-content accordionItem is-collapsed" id="accordion4" aria-hidden="true">
 <table>
-<thead>
+  <thead>
 	<tr>
-		<th scope="col">Backend</th>
-		<th scope="col">Go</th>
-		<th scope="col">Java</th>
-		<th scope="col">Erlang</th>
-		<th scope="col">C++</th>
-		<!-- <th scope="col">Node.js</th> -->
-		<th scope="col">Python</th>
+	  <th scope="col">Backend</th>
+	  <th scope="col">Go</th>
+	  <th scope="col">Java</th>
+	  <th scope="col">Erlang</th>
+	  <th scope="col">C++</th>
+	  <th scope="col">Python</th>
 	</tr>
-</thead>
-<tbody>
+  </thead>
+  <tbody>
 	<tr>
-		<td data-label="Backend">SignalFX</td>
-		<td data-label="Go" class="tall">No <a href="https://github.com/census-instrumentation/opencensus-go/issues/360" target="_blank"><span>(open issue)</span></a></td>
-		<td data-label="Java">Yes</td>
-		<td data-label="Erlang">No</td>
-		<td data-label="C++">No</td>
-		<!-- <td data-label="Node.js">No</td> -->
-		<td data-label="Python">No</td>
+	  <td data-label="Backend: &nbsp; ">SignalFX</td>
+	  <td data-label="Go: &nbsp; " class="tall">No <a href="https://github.com/census-instrumentation/opencensus-go/issues/360" target="_blank"><span>(open issue)</span></a></td>
+	  <td data-label="Java: &nbsp; ">Yes</td>
+	  <td data-label="Erlang: &nbsp; ">No</td>
+	  <td data-label="C++: &nbsp; ">No</td>
+	  <td data-label="Python: &nbsp; ">No</td>
 	</tr>
 	<tr>
-		<td data-label="Backend">Prometheus</td>
-		<td data-label="Go">Yes</td>
-		<td data-label="Java">Yes</span></a></td>
-		<td data-label="Erlang">Yes</td>
-		<td data-label="C++">No</td>
-		<!-- <td data-label="Node.js">No</td> -->
-		<td data-label="Python">No</td>
+	  <td data-label="Backend: &nbsp; ">Prometheus</td>
+	  <td data-label="Go: &nbsp; ">Yes</td>
+	  <td data-label="Java: &nbsp; ">Yes</span></a></td>
+	  <td data-label="Erlang: &nbsp; ">Yes</td>
+	  <td data-label="C++: &nbsp; ">No</td>
+	  <td data-label="Python: &nbsp; ">No</td>
 	</tr>
 	<tr>
-		<td data-label="Backend">Jaeger</td>
-		<td data-label="Go">Yes</td>
-		<td data-label="Java">No</td>
-		<td data-label="Erlang">No</td>
-		<td data-label="C++">No</td>
-		<!-- <td data-label="Node.js">No</td> -->
-		<td data-label="Python">No</td>
+	  <td data-label="Backend: &nbsp; ">Jaeger</td>
+	  <td data-label="Go: &nbsp; ">Yes</td>
+	  <td data-label="Java: &nbsp; ">No</td>
+	  <td data-label="Erlang: &nbsp; ">No</td>
+	  <td data-label="C++: &nbsp; ">No</td>
+	  <td data-label="Python: &nbsp; ">No</td>
 	</tr>
 	<tr>
-		<td data-label="Backend">Stackdriver</td>
-		<td data-label="Go">Yes</td>
-		<td data-label="Java">Yes</td>
-		<td data-label="Erlang">Yes (trace only)</td>
-		<td data-label="C++">No</td>
-		<!-- <td data-label="Node.js">No</td> -->
-		<td data-label="Python">Yes</td>
+	  <td data-label="Backend: &nbsp; ">Stackdriver</td>
+	  <td data-label="Go: &nbsp; ">Yes</td>
+	  <td data-label="Java: &nbsp; ">Yes</td>
+	  <td data-label="Erlang: &nbsp; ">Yes (trace only)</td>
+	  <td data-label="C++: &nbsp; ">No</td>
+	  <td data-label="Python: &nbsp; ">Yes</td>
 	</tr>
 	<tr>
-		<td data-label="Backend">Zipkin</td>
-		<td data-label="Go">Yes</td>
-		<td data-label="Java">Yes</td>
-		<td data-label="Erlang">Yes</td>
-		<td data-label="C++">No</td>
-		<!-- <td data-label="Node.js">No</td> -->
-		<td data-label="Python">No</td>
+	  <td data-label="Backend: &nbsp; ">Zipkin</td>
+	  <td data-label="Go: &nbsp; ">Yes</td>
+	  <td data-label="Java: &nbsp; ">Yes</td>
+	  <td data-label="Erlang: &nbsp; ">Yes</td>
+	  <td data-label="C++: &nbsp; ">No</td>
+	  <td data-label="Python: &nbsp; ">No</td>
 	</tr>
-</tbody>
+  </tbody>
 </table>
 </dd>
 <hr>
