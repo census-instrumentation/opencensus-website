@@ -15,7 +15,7 @@ A single distribution of libraries that automatically collects traces and metric
 {{% /sc_index2 %}}
 
 {{% sc_index2 %}}
-#### How is behind OpenCensus?
+#### Who is behind OpenCensus?
 OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there..
 {{% /sc_index2 %}}
 
