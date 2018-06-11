@@ -107,6 +107,9 @@ Go straight to the language of your choice:
 &nbsp;  
 {{% sc_index9 %}}
 #### Current Status
-So what is the [{{% sc_gloss1 %}}current status{{% /sc_gloss1 %}}](./roadmap/index.html) of OpenCensus?
+So what is the [{{% sc_gloss1 %}}current status{{% /sc_gloss1 %}}](./roadmap/index.html) of OpenCensus?  
+&nbsp;  
+
+---
 {{% /sc_index9 %}}
 {{% /sc_index8 %}}
