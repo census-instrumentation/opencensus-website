@@ -77,8 +77,7 @@ In process debugging: an optional agent for displaying request and metrics data 
 {{% sc_index7 %}}
 ![Google Summer of Code](./img/summerOfCode.png)  
 &nbsp;  
-**Get Involved** - Interested in developing for OpenCensus? Here are some ideas:  
-[{{< sc_red >}}2018 Google Summer of Code{{< /sc_red >}}](https://storage.googleapis.com/summer-of-code/OpenCensusIdeasList.pdf)
+**Get Involved** - Interested in developing for OpenCensus? Here are some ideas: [{{< sc_red >}}2018 Google Summer of Code{{< /sc_red >}}](https://storage.googleapis.com/summer-of-code/OpenCensusIdeasList.pdf)
 {{% /sc_index7 %}}
 {{% /sc_index4 %}}
 
