@@ -14,7 +14,32 @@ date = "2018-05-11T10:32:44-05:00"
 <div class="row">   
 	<!-- BLOG CONTENT ROW 1 START -->
 	<div class="blog-c">
-		<!-- BLOG ITEM 1 -->
+        <!-- BLOG ITEM 1 -->
+		<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>June 13, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/" target="_blank">
+                            <h3>Microsoft Joins the OpenCensus Project</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>We are happy to announce that Microsoft is joining the open source OpenCensus project, and they are excited to help it achieve the goal of "a single distribution of libraries for metrics and distributed tracing"&hellip;<br></p>
+                    </div>
+                </div>
+        </div>
+		<!-- BLOG ITEM 2 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -39,7 +64,7 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 2 -->
+		<!-- BLOG ITEM 3 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -64,31 +89,6 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 3 -->
-		<div class="col-md-4">
-			<div class="blog-item">
-				<div class="post-meta">
-					<ul>
-						<li>
-							<i class="fa fa-tags"></i>
-							<span>OC</span>
-						</li>
-						<li>
-							<i class="fa fa-calendar-o"></i>
-							<span>May 4, 2018</span>
-						</li>
-					</ul>
-				</div>
-				<div class="post-title">
-					<a href="https://www.youtube.com/watch?time_continue=1565&v=Nxqd7y78h7Q" target="_blank">
-						<h3>Practical and Useful Latency Analysis using Istio and OpenCenus</h3>
-					</a>
-				</div>
-				<div class="post-content">
-					<p>Want to view more sessions and keep the conversations going?  Join us for KubeCon + CloudNativeCon North America in Seattle, December 11 - 13, 2018<br><br></p>
-				</div>
-			</div>
-		</div>
 	</div>
 	<!-- BLOG CONTENT ROW 1 END -->
 </div> <!-- ROW END -->
@@ -98,6 +98,31 @@ date = "2018-05-11T10:32:44-05:00"
 <!-- BLOG CONTENT ROW 2 START -->
 	<div class="blog-c">
 		<!-- BLOG ITEM 1 -->
+		<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>May 4, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://www.youtube.com/watch?time_continue=1565&v=Nxqd7y78h7Q" target="_blank">
+                            <h3>Practical and Useful Latency Analysis using Istio and OpenCenus</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>Want to view more sessions and keep the conversations going?  Join us for KubeCon + CloudNativeCon North America in Seattle, December 11 - 13, 2018<br><br></p>
+                    </div>
+                </div>
+        </div>
+		<!-- BLOG ITEM 2 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -124,7 +149,7 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 2 -->
+		<!-- BLOG ITEM 3 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -151,33 +176,6 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 3 -->
-		<div class="col-md-4">
-			<div class="blog-item">
-				<div class="post-meta">
-					<ul>
-						<li>
-							<i class="fa fa-tags"></i>
-							<span>OC</span>
-						</li>
-						<li>
-							<i class="fa fa-calendar-o"></i>
-							<span>April 4, 2018</span>
-						</li>
-					</ul>
-				</div>
-				<div class="post-title">
-					<a href="https://twitter.com/bobquillin/status/981571739720167425" target="_new">
-						<h3>Twitter - Bob Quillin</h3>
-					</a>
-				</div>
-				<div class="post-content">
-					<p>
-						Great OpenCensus 101 explaining its role in microservices stats collection, distributed tracing, and support for multiple backends <a href ="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4" target="_new">https://storage.googleapis.com/<br>opencensusio/OpenCensusVideo.<br>mp4</a><br><br>
-					</p>
-				</div>
-			</div>
-		</div>
 	</div>
 	<!-- BLOG CONTENT ROW 2 END -->
 </div> <!-- ROW END -->
@@ -187,6 +185,33 @@ date = "2018-05-11T10:32:44-05:00"
 <!-- BLOG CONTENT ROW 3 START -->
 	<div class="blog-c">
 		<!-- BLOG ITEM 1 -->
+		<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>April 4, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://twitter.com/bobquillin/status/981571739720167425" target="_new">
+                            <h3>Twitter - Bob Quillin</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>
+                            Great OpenCensus 101 explaining its role in microservices stats collection, distributed tracing, and support for multiple backends <a href ="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4" target="_new">https://storage.googleapis.com/<br>opencensusio/OpenCensusVideo.<br>mp4</a><br><br>
+                        </p>
+                    </div>
+                </div>
+        </div>
+		<!-- BLOG ITEM 2 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -213,7 +238,7 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 2 -->
+		<!-- BLOG ITEM 3 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -240,33 +265,6 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 3 -->
-		<div class="col-md-4">
-			<div class="blog-item">
-				<div class="post-meta">
-					<ul>
-						<li>
-							<i class="fa fa-tags"></i>
-							<span>OC</span>
-						</li>
-						<li>
-							<i class="fa fa-calendar-o"></i>
-							<span>April 3, 2018</span>
-						</li>
-					</ul>
-				</div>
-				<div class="post-title">
-					<a href="https://twitter.com/brucemacv/status/981324918330744833" target="_new">
-						<h3>Twitter Bruce MacVarish</h3>
-					</a>
-				</div>
-				<div class="post-content">
-					<p>
-						We’re really excited about moving all of our metrics and trace reporting to OpenCensus.  #serverless #cloudnative <a href="https://twitter.com/OracleIaaS" target="_new">@OracleIaaS</a><br><br><br><br><br>
-					</p>
-				</div>
-			</div>
-		</div>
 	</div><!-- BLOG CONTENT ROW 3 END -->
 </div> <!-- ROW END -->
 <br><br>
@@ -275,6 +273,33 @@ date = "2018-05-11T10:32:44-05:00"
 <!-- BLOG CONTENT ROW 4 START -->
 	<div class="blog-c">
 		<!-- BLOG ITEM 1 -->
+		<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>April 3, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://twitter.com/brucemacv/status/981324918330744833" target="_new">
+                            <h3>Twitter Bruce MacVarish</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>
+                            We’re really excited about moving all of our metrics and trace reporting to OpenCensus.  #serverless #cloudnative <a href="https://twitter.com/OracleIaaS" target="_new">@OracleIaaS</a><br><br><br><br><br>
+                        </p>
+                    </div>
+                </div>
+        </div>
+		<!-- BLOG ITEM 2 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -301,7 +326,7 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 2 -->
+		<!-- BLOG ITEM 3 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -328,33 +353,6 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 3 -->
-		<div class="col-md-4">
-			<div class="blog-item">
-				<div class="post-meta">
-					<ul>
-						<li>
-							<i class="fa fa-tags"></i>
-							<span>OC</span>
-						</li>
-						<li>
-							<i class="fa fa-calendar-o"></i>
-							<span>March 13, 2018</span>
-						</li>
-					</ul>
-				</div>
-				<div class="post-title">
-					<a href="https://opensource.googleblog.com/2018/03/the-value-of-opencensus.html" target="_new">
-						<h3>The Value of OpenCensus</h3>
-					</a>
-				</div>
-				<div class="post-content">
-					<p>
-						This post is the second in a series about OpenCensus. You can find the first post here. Early this year we open sourced OpenCensus, a distributed tracing and stats instrumentation framework.<br><br>
-					</p>
-				</div>
-			</div>
-		</div>
 	</div><!-- BLOG CONTENT ROW 4 END -->
 </div> <!-- ROW END -->
 <br><br>
@@ -363,6 +361,33 @@ date = "2018-05-11T10:32:44-05:00"
 	<!-- BLOG CONTENT ROW 5 START -->
 	<div class="blog-c">
 		<!-- BLOG ITEM 1 -->
+		<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>March 13, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://opensource.googleblog.com/2018/03/the-value-of-opencensus.html" target="_new">
+                            <h3>The Value of OpenCensus</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>
+                            This post is the second in a series about OpenCensus. You can find the first post here. Early this year we open sourced OpenCensus, a distributed tracing and stats instrumentation framework.<br><br>
+                        </p>
+                    </div>
+                </div>
+        </div>
+		<!-- BLOG ITEM 2 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -389,7 +414,7 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div> 
-		<!-- BLOG ITEM 2 -->
+		<!-- BLOG ITEM 3 -->
 		<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -416,33 +441,6 @@ date = "2018-05-11T10:32:44-05:00"
 				</div>
 			</div>
 		</div>
-		<!-- BLOG ITEM 3 -->
-		<div class="col-md-4">
-		<div class="blog-item">
-			<div class="post-meta">
-				<ul>
-					<li>
-						<i class="fa fa-tags"></i>
-						<span>OC</span>
-					</li>
-					<li>
-						<i class="fa fa-calendar-o"></i>
-						<span>March 7, 2018</span>
-					</li>
-				</ul>
-			</div>
-			<div class="post-title">
-				<a href="https://opensource.googleblog.com/2018/03/how-google-uses-opencensus-internally.html" target="_new">
-					<h3>How Google uses Census internally</h3>
-				</a>
-			</div>
-			<div class="post-content">
-				<p>
-					This post is the first in a series about OpenCensus, a set of open source instrumentation libraries based on what we use inside Google. This series will cover the benefits of OpenCensus for developers and vendors...<br>
-				</p>
-			</div>
-		</div>
-	</div>
 	</div><!-- BLOG CONTENT ROW 5 END -->
 </div> <!-- ROW END -->
 <br><br>
@@ -450,6 +448,33 @@ date = "2018-05-11T10:32:44-05:00"
 <!-- BLOG ROW 6 START -->
 <div class="row">
 	<!-- BLOG ITEM 1 -->
+	<div class="col-md-4">
+                <div class="blog-item">
+                    <div class="post-meta">
+                        <ul>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <span>OC</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                <span>March 7, 2018</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-title">
+                        <a href="https://opensource.googleblog.com/2018/03/how-google-uses-opencensus-internally.html" target="_new">
+                            <h3>How Google uses Census internally</h3>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>
+                            This post is the first in a series about OpenCensus, a set of open source instrumentation libraries based on what we use inside Google. This series will cover the benefits of OpenCensus for developers and vendors...<br>
+                        </p>
+                    </div>
+                </div>
+    </div>
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 		<div class="blog-item">
 			<div class="post-meta">
@@ -476,7 +501,7 @@ date = "2018-05-11T10:32:44-05:00"
 			</div>
 		</div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 		<div class="blog-item">
 			<div class="post-meta">
@@ -502,8 +527,13 @@ date = "2018-05-11T10:32:44-05:00"
 				</p>
 			</div>
 		</div>
-	</div>
-	<!-- BLOG ITEM 3 -->
+	</div><!-- BLOG CONTENT ROW 6 END -->
+</div><!-- ROW END -->
+<br><br>
+
+<!-- BLOG ROW 7 START -->
+<div class="row">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 			<div class="blog-item">
 				<div class="post-meta">
@@ -529,13 +559,8 @@ date = "2018-05-11T10:32:44-05:00"
 					</p>
 				</div>
 			</div>
-		</div><!-- BLOG CONTENT ROW 6 END -->
-</div><!-- ROW END -->
-<br><br>
-
-<!-- BLOG ROW 7 START -->
-<div class="row">
-	<!-- BLOG ITEM 1 -->
+	</div>
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 		<div class="blog-item">
 			<div class="post-meta">
