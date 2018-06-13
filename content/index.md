@@ -11,8 +11,10 @@ date = "2018-05-22T11:02:24-05:00"
 {{% sc_index1 %}}
 {{% sc_index2 %}}
 #### What is OpenCensus?
-A single distribution of libraries that automatically collects traces and metrics from your app, displays them locally, and sends them to any analysis tool. [{{% sc_gloss1 %}}Watch this video{{% /sc_gloss1 %}}](https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4) for an overview.
-{{% /sc_index2 %}}
+A single distribution of libraries that automatically collects traces and metrics from your app, displays them locally, and sends them to any analysis tool. [{{% sc_gloss1 %}}Watch this video{{% /sc_gloss1 %}}](https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4) for an overview.  
+&nbsp;  
+&nbsp;  
+{{% /sc_index2 %}}  
 
 {{% sc_index2 %}}
 #### Who is behind OpenCensus?
@@ -109,6 +111,9 @@ Go straight to the language of your choice:
 So what is the [{{% sc_gloss1 %}}current status{{% /sc_gloss1 %}}](./roadmap/index.html) of OpenCensus?  
 &nbsp;  
 
----
+---  
+&nbsp;  
+
+#### Partners & Contributors
 {{% /sc_index9 %}}
 {{% /sc_index8 %}}

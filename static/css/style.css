@@ -148,12 +148,11 @@ img {
   3. HEADER                
 -----------------------------------------*/
 .s-header {
-
   background: url('/img/banner22.png');
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 80vh;
+  height: 70vh;
   width: 100%;
   position: relative;
   overflow-x: hidden!important;
@@ -162,7 +161,7 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 70vh;
   width: 100%;
   background: rgba(0,0,0,.4);
 }
@@ -170,7 +169,7 @@ img {
   color:#FFF;
   position: absolute;
   width: 100%;
-  top: 70%;
+  top: 65%;
   left: 0;
   -webkit-transform: translate(0,-68%);
   -moz-transform: translate(0,-68%);
@@ -179,7 +178,7 @@ img {
   transform: translate(0,-68%);
 }
 .s-header .middle-c .capt {
-  margin-top: 80px;
+  margin: 80px 0 0 0;
 }
 .s-header .middle-c h1 {
   font-weight: 300;
@@ -227,7 +226,7 @@ img {
   border-color: #FFF;
   background: #FFF;
 }
-@media screen and (max-width: 900px){
+@media screen and (max-width: 990px){
  .site-branding {
     display: none;
  }
@@ -237,11 +236,11 @@ img {
   T-HEADER
 -----------------------------------------*/
 .t-header {
-  background: url('../img/banner3.png');
+  background: url('../img/banner22.png');
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 27vh;
+  height: 20vh;
   width: 100%;
   position: relative;
   overflow-x: hidden!important;
@@ -250,69 +249,9 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 20vh;
   width: 100%;
   background: rgba(0,0,0,.3);
-}
-.t-header .middle-c {
-  color:#FFF;
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  -webkit-transform: translate(0,-50%);
-  -moz-transform: translate(0,-50%);
-  -ms-transform: translate(0,-50%);
-  -o-transform: translate(0,-50%);
-  transform: translate(0,-50%);
-}
-.t-header .middle-c .capt {
-  margin-top: 90px;
-}
-.t-header .middle-c h1 {
-  font-weight: 300;
-  font-size: 58px;
-  letter-spacing: 4px;
-  display: inline-block;
-  color: #fff;
-}
-.t-header .middle-c h1 span {
-  font-weight: 300;
-  font-size: 58px;
-}
-.t-header .middle-c h3 {
-  margin: 40px 0;
-  font-size: 16px;
-  font-weight: 300;
-  color: #fff;
-  letter-spacing: 2px;
-}
-.t-header .middle-c a {
-  margin: 0 15px;
-  display: inline-block;
-  font-size: 15px;
-  padding: 8px 30px;
-  border: 1px solid #fff;
-  letter-spacing: 2px;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-  background: transparent;
-  color: #FFF;
-}
-.t-header .middle-c a:hover {
-  background: #FFF;
-  color: #3d3d3d;
-}
-.t-header .middle-c .b-act {
-  color: #FFF;
-}
-.t-header .middle-c .b-act:hover {
-  border-color: #FFF;
-  background: #FFF;
 }
 
 /* --------------------------------------
@@ -321,10 +260,9 @@ img {
 .navbar-fixed-top {
   background: #FFF;
   border-color: transparent;
-  padding: 20px 0 3px;
+  padding: 0 0;
   border: none;
   border-radius: 0;
-  z-index: 9;
   position: absolute;
   top: 0;
   left: 0;
@@ -332,11 +270,12 @@ img {
 }
 .navbar-fixed-top .navbar-nav>li {
   font-size: 12px;
-  margin: 30px 20px;
+  margin: 15px 15px;
   font-weight: 400;
   cursor: pointer;
   position: relative;
 }
+
 .navbar-fixed-top .navbar-nav>li:last-child {
   margin-right:14px;
 }
@@ -367,7 +306,7 @@ img {
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 2.5px;
-  padding-top: 20px;
+  padding-top: 5px;
 }
 .navbar-fixed-top .logo span {
   color: #3d3d3d;
@@ -381,7 +320,7 @@ img {
 .fixed {
   background: #FFF;
   padding:0;
-  position:fixed;
+  position: fixed;
   -webkit-box-shadow: 0 0 13px #ddd;
   -moz-box-shadow: 0 0 13px #ddd;
   -o-box-shadow: 0 0 13px #ddd;
@@ -403,29 +342,9 @@ img {
   color: #C1272D;
   opacity: 0.7;
 }
-.fixed .logo {
-  padding-top: 25px;
-}
 .navbar-toggle .icon-bar {
   background: #FFF;
-}
-
-/* --------------------------------------
-  VIDEO CONTAINER
-----------------------------------------*/
-.video-responsive {
-	position: relative;
-	padding-bottom: 56.25%;
-	height: 0;
-	overflow: hidden;
-}
-.video-container video {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 50%;
-	height: 100%;
-	position: absolute;
+  margin-right: auto;
 }
 
 /* --------------------------------------
@@ -464,10 +383,28 @@ img {
 	background-color: aliceblue;
 }
 @media (max-width: 767px) {
-	.dropdown-menu.multi-column {
+	.dropdown-menu .multi-column {
 		min-width: 240px !important;
 		overflow-x: hidden;
 	}
+}
+
+/* --------------------------------------
+  VIDEO CONTAINER
+----------------------------------------*/
+.video-responsive {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+.video-container video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	position: absolute;
 }
 
 /* --------------------------------------
