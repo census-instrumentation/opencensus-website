@@ -75,6 +75,40 @@ date = "2018-05-11T10:32:44-05:00"
 			</li>
 			<li>
 			  <i class="fa fa-calendar-o"></i>
+			  <span>June 12, 2018</span>
+			</li>
+		  </ul>
+		</div>
+		<div class="post-title">
+		  <a href="https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058" target="_blank">
+			<h3>Hit the Ground Running with Distributed Tracing Core Concepts</h3>
+		  </a>
+		</div>
+		<div class="post-content">
+			<p>Wondering what Distributed Tracing is, or having trouble making it work? Understanding its core concepts is a critical first step. Monolithic service architectures for large backend applications&hellip;</p>
+		</div>
+	  </div>
+	</div>
+  </div> <!-- ROW 1 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 2 START ------->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+    <!-- BLOG ITEM 1 -->
+	<div class="col-md-4">
+	  <div class="blog-item">
+	    <div class="post-meta">
+		  <ul>
+		    <li>
+			  <i class="fa fa-tags"></i>
+			  <span>OC</span>
+			</li>
+			<li>
+			  <i class="fa fa-calendar-o"></i>
 			  <span>May 13, 2018</span>
 			</li>
 		  </ul>
@@ -89,16 +123,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 1 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 2 START ------->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -123,7 +148,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -148,7 +173,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 2 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 3 START ------->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -173,16 +207,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 2 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 3 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -207,7 +232,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -232,7 +257,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 3 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 4 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -257,16 +291,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 3 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 4 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -291,7 +316,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -316,7 +341,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 4 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 5 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -341,16 +375,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 4 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 5 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -375,7 +400,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -400,7 +425,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 5 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 6 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -425,16 +459,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 5 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 6 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -459,7 +484,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -484,7 +509,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 6 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 7 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -509,16 +543,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 6 END -->
-</div> <!-- ROW END -->
-<br /><br />
-
-
-<!-- ROW 7 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -543,7 +568,7 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -568,7 +593,16 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 7 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 8 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -593,8 +627,8 @@ date = "2018-05-11T10:32:44-05:00"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 7 END -->
+  </div> <!-- ROW 8 END -->
 </div> <!-- ROW END -->
-<br /><br />
+<br />
 
 {{% /sc_blog %}}
