@@ -9,6 +9,12 @@ date = "2018-05-30T10:49:38-05:00"
 +++
 
 {{% sc_overview %}}
+[{{< sc_gloss1 >}}HERE IS A GREAT ARTICLE THAT EXPLAINS TRACING CONCEPTS{{< /sc_gloss1 >}}](https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058) - BY NIC MUNROE  
+&nbsp;  
+
+---
+&nbsp;  
+
 OpenCensus is a framework for stats collection and distributed tracing. It supports multiple backends.  
 &nbsp; 
 
@@ -93,9 +99,5 @@ OpenCensus provides in-process dashboards that displays diagnostics data from th
 &nbsp;  
 An example /tracez handler served by the application that reports traces collected in the process.  
 &nbsp;  
-
----
-&nbsp;  
-[{{< sc_gloss1 >}}HERE IS A GREAT ARTICLE THAT EXPLAINS TRACING CONCEPTS{{< /sc_gloss1 >}}](https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058) - BY NIC MUNROE 
 
 {{% /sc_overview %}}
