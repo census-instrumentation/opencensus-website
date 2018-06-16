@@ -91,6 +91,11 @@ OpenCensus provides in-process dashboards that displays diagnostics data from th
 ![traceZ summary example image](../img/traceZ.png "traceZ summary example image")  
 
 &nbsp;  
-An example /tracez handler served by the application that reports traces collected in the process.
+An example /tracez handler served by the application that reports traces collected in the process.  
+&nbsp;  
+
+---
+&nbsp;  
+[{{< sc_gloss1 >}}HERE IS A GREAT ARTICLE THAT EXPLAINS TRACING CONCEPTS{{< /sc_gloss1 >}}](https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058) - BY NIC MUNROE 
 
 {{% /sc_overview %}}
