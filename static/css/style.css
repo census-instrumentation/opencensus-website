@@ -1533,3 +1533,32 @@ text-indent: -1em;
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+/* --------------------------------------
+  Supported exporters page
+-----------------------------------------*/
+.stats-exporter, .trace-exporter {
+  display: inline-block;
+  padding: .05em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
+}
+
+/* Disable bootstrap defaults for abbr elements */
+.stats-exporter[title], .trace-exporter[title] {
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.stats-exporter {
+  color: #fff;
+  background-color: #17a2b8;
+}
+
+.trace-exporter {
+  color: #fff;
+  background-color: #007bff;
+}
