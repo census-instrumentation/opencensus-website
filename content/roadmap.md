@@ -99,8 +99,8 @@ date = "2018-05-11T12:09:08-05:00"
 	  <td data-label="Erlang: &nbsp; ">–</td>
 	  <td data-label="Go: &nbsp; ">–</td>
 	  <td data-label="Java: &nbsp; ">{{< sc_traceExporter />}}</td>
-		<td data-label="Node.js: &nbsp; ">–</td>
-		<td data-label="PHP: &nbsp; ">–</td>
+	  <td data-label="Node.js: &nbsp; ">{{< sc_traceExporter />}}</td>
+	  <td data-label="PHP: &nbsp; ">–</td>
 	  <td data-label="Python: &nbsp; ">–</td>
 		<td data-label="Ruby: &nbsp; ">–</td>
 	</tr>
@@ -110,8 +110,8 @@ date = "2018-05-11T12:09:08-05:00"
 	  <td data-label="Erlang: &nbsp; ">–</td>
 	  <td data-label="Go: &nbsp; ">{{< sc_traceExporter />}}</td>
 	  <td data-label="Java: &nbsp; ">{{< sc_traceExporter />}}</td>
-		<td data-label="Node.js: &nbsp; ">–</td>
-		<td data-label="PHP: &nbsp; ">–</td>
+	  <td data-label="Node.js: &nbsp; ">{{< sc_traceExporter />}}</td>
+	  <td data-label="PHP: &nbsp; ">–</td>
 	  <td data-label="Python: &nbsp; ">{{< sc_traceExporter />}}</td>
 		<td data-label="Ruby: &nbsp; ">–</td>
 	</tr>
