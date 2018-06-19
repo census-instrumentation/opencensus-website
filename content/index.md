@@ -10,7 +10,8 @@ date = "2018-05-22T11:02:24-05:00"
 
 {{% sc_index1 %}}
 
-<i class="fa fa fa-quote-left" style="color:#C1272D"></i> Kudos to whoever came up with the design and architecture of OpenCensus. Tried it for the first time yesterday and it was a great experience for me as a monitoring developer. It feels a lot more thought out and robust than other solutions. <i class="fa fa fa-quote-right" style="color:#C1272D"></i>&nbsp;&nbsp; ***- Ben Ripkens, Staff Software Engineer - Instana***  
+<i class="fa fa fa-quote-left" style="color:#C1272D"></i> Kudos to whoever came up with the design and architecture of OpenCensus. Tried it for the first time yesterday and it was a great experience for me as a monitoring developer. It feels a lot more thought out and robust than other solutions. <i class="fa fa fa-quote-right" style="color:#C1272D"></i>  
+&nbsp;&nbsp; ***- Ben Ripkens, Staff Software Engineer - Instana***  
 &nbsp;  
 &nbsp;  
 
