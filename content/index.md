@@ -9,6 +9,11 @@ date = "2018-05-22T11:02:24-05:00"
 +++
 
 {{% sc_index1 %}}
+
+<i class="fa fa fa-quote-left" style="color:#C1272D"></i> Kudos to whoever came up with the design and architecture of OpenCensus. Tried it for the first time yesterday and it was a great experience for me as a monitoring developer. It feels a lot more thought out and robust than other solutions. <i class="fa fa fa-quote-right" style="color:#C1272D"></i>&nbsp;&nbsp; ***- Ben Ripkens, Staff Software Engineer - Instana***  
+&nbsp;  
+&nbsp;  
+
 {{% sc_index2 %}}
 #### What is OpenCensus?
 A single distribution of libraries that automatically collects traces and metrics from your app, displays them locally, and sends them to any analysis tool. [{{% sc_gloss1 %}}Watch this video{{% /sc_gloss1 %}}](https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4) for an overview.  
@@ -18,7 +23,7 @@ A single distribution of libraries that automatically collects traces and metric
 
 {{% sc_index2 %}}
 #### Who is behind OpenCensus?
-OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there..
+OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there.
 {{% /sc_index2 %}}
 
 {{% sc_index3 %}}
