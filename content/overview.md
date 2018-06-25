@@ -63,19 +63,19 @@ No additional server or daemon is required to support OpenCensus.
 
 __Tags__  
 
-OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](../tags/index.html)  
+OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/tags)  
 
 &nbsp;  
 
 __Stats__  
 
-*Stats* is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](../stats/index.html)  
+*Stats* is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/stats)  
 
 &nbsp;  
 
 __Trace__  
 
-*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](../trace/index.html)  
+*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/trace)  
 
 &nbsp;  
 
@@ -90,7 +90,7 @@ __Introspection__
 OpenCensus provides in-process dashboards that displays diagnostics data from the process. These pages are called z-pages and they are useful to understand to see collected data from a specific process without having to depend on any metric collection or distributed tracing backend.  
 
 &nbsp;  
-![traceZ summary example image](../img/traceZ.png "traceZ summary example image")  
+![traceZ summary example image](/img/traceZ.png "traceZ summary example image")  
 
 &nbsp;  
 An example /tracez handler served by the application that reports traces collected in the process.  

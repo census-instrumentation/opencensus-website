@@ -25,7 +25,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th data-label="C++:">C++</th>
 			</tr>
 			<tr>
-				<td><a href="../cpp/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/cpp"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/stats/README.md" target="_blank"><span class="gloss1">Stats API Reference</span></a></td>
@@ -41,7 +41,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th data-label="Erlang:">Erlang</th>
 			</tr>
 			<tr>
-				<td><a href="../erlang/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/erlang"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://hexdocs.pm/opencensus/0.3.1/" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -57,7 +57,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th>Go</th>
 			</tr>
 			<tr>
-				<td><a href="../go/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/go"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://godoc.org/go.opencensus.io" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -75,7 +75,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th>Java</th>
 			</tr>
 			<tr>
-				<td><a href="../java/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/java"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -91,7 +91,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th>PHP</th>
 			</tr>
 			<tr>
-				<td><a href="../php/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/php"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://packagist.org/packages/opencensus/opencensus" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -107,7 +107,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th>Python</th>
 			</tr>
 			<tr>
-			<td><a href="../python/index.html"><span class="gloss1">Quickstart Guide</span></td>
+			<td><a href="/python"><span class="gloss1">Quickstart Guide</span></td>
 			</tr>
 			<tr>
 				<td><a href="https://census-instrumentation.github.io/opencensus-python/trace/api/index.html" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -125,7 +125,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<th>Ruby</th>
 			</tr>
 			<tr>
-				<td><a href="../ruby/index.html"><span class="gloss1">Quickstart Guide</span></a></td>
+				<td><a href="/ruby"><span class="gloss1">Quickstart Guide</span></a></td>
 			</tr>
 			<tr>
 				<td><a href="https://www.rubydoc.info/gems/opencensus" target="_blank"><span class="gloss1">API Reference</span></a></td>
@@ -149,7 +149,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 [{{< sc_gloss1 >}}OPENCENSUS FOR GO gRPC DEVELOPERS{{< /sc_gloss1 >}}][2]
 
 
-[1]: ../spanner/index.html
-[2]: ../gogrpc/index.html
+[1]: /spanner
+[2]: /gogrpc
 
 {{% /sc_docs %}}

@@ -38,6 +38,6 @@ date = "2018-05-11T12:09:08-05:00"
 #### How do I contribute?
 
 Contributions are highly appreciated! Please follow the steps for [{{< sc_gloss1 >}}Contribute Here.{{< /sc_gloss1 >}}]
-(../community/index.html)
+(/community)
 
 {{% /sc_roadmap %}}
