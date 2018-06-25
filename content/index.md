@@ -29,7 +29,7 @@ OpenCensus is being developed by a group of cloud providers, Application Perform
 
 {{% sc_index3 %}}
 #### How do I contribute?
-Contributions are highly appreciated! Please follow the steps for [{{% sc_gloss1 %}}Contributing Here{{% /sc_gloss1 %}}](./community/index.html).
+Contributions are highly appreciated! Please follow the steps for [{{% sc_gloss1 %}}Contributing Here{{% /sc_gloss1 %}}](community).
 {{% /sc_index3 %}}
 {{% /sc_index1 %}}
 
@@ -97,15 +97,15 @@ Go straight to the language of your choice:
 
 
 <div class="button-group filter-work">
-  <a href="./cpp/index.html" class="btn">C++</a>
-  <a href="./erlang/index.html" class="btn">Erlang</a>
-  <a href="./go/index.html" class="btn">Go</a>
+  <a href="/cpp" class="btn">C++</a>
+  <a href="/erlang" class="btn">Erlang</a>
+  <a href="/go" class="btn">Go</a>
 </div>
 <div class="button-group filter-work">
-  <a href="./java/index.html" class="btn">Java</a>
-  <a href="./php/index.html" class="btn">PHP</a>
-  <a href="./python/index.html" class="btn">Python</a>
-  <a href="./ruby/index.html" class="btn">Ruby</a>
+  <a href="/java" class="btn">Java</a>
+  <a href="/php" class="btn">PHP</a>
+  <a href="/python" class="btn">Python</a>
+  <a href="/ruby" class="btn">Ruby</a>
 </div>
 
 &nbsp;  
@@ -114,7 +114,7 @@ Go straight to the language of your choice:
 &nbsp;  
 {{% sc_index9 %}}
 #### Current Status
-So what is the [{{% sc_gloss1 %}}current status{{% /sc_gloss1 %}}](./roadmap/index.html) of OpenCensus?  
+So what is the [{{% sc_gloss1 %}}current status{{% /sc_gloss1 %}}](/roadmap) of OpenCensus?  
 &nbsp;  
 
 ---  

@@ -11,43 +11,43 @@ date = "2018-05-30T14:11:36-05:00"
 {{% sc_quickstart %}}
 &nbsp;  
 
-#### [C++](../cpp/index.html)
+#### [C++](/cpp)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [Erlang](../erlang/index.html)
+#### [Erlang](/erlang)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [Go](../go/index.html)
+#### [Go](/go)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [Java](../java/index.html)
+#### [Java](/java)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [PHP](../php/index.html)
+#### [PHP](/php)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [Python](../python/index.html)
+#### [Python](/python)
 &nbsp;  
 
 ---
 &nbsp;  
 
-#### [Ruby](../ruby/index.html)
+#### [Ruby](/ruby)
 &nbsp;  
 
 ---
