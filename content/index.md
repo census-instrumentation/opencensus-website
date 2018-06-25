@@ -59,7 +59,7 @@ Included integrations with web and RPC frameworks, democratizing good tracing an
 {{% sc_index7 %}}
 ![icon-download](./img/icon-download.svg)
 ### Exporters
-Included exporters for storage and analysis tools. Right now the list includes Zipkin, Prometheus, Jaeger, Stackdriver, and SignalFx.
+Included exporters for storage and analysis tools. Right now the list includes Zipkin, Prometheus, Jaeger, Stackdriver, Datadog, and SignalFx.
 {{% /sc_index7 %}}
 
 {{% sc_index6 %}}
