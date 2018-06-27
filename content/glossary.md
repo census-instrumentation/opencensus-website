@@ -15,7 +15,7 @@ Distributed Tracing tracks the progression of a request as it is handled by the 
 
 **Span**  
 
-A unit work in a trace. Each span might have a children spans within it or it might be the first in its generation and called a root span.  
+A unit work in a trace. Each span might have children spans within. If a span does not have a parent, it is called a root span.  
 
 ---
 
@@ -41,7 +41,7 @@ Sampling determines how often requests will be traced.
 There are three types of sampling made available from OpenCensus libraries:  
 
 * **Always sample:** With this sampling, every single request is traced.  
-* **Probabilisticly sample:** A probability is set (e.g 0.0001) and the libraries will sample only 1 in 10000 requests.
+* **Probabilisticly sample:** A probability is set (e.g 0.0001) and the libraries will sample according to that probability (e.g. 1 in 10000 requests).
 * **Never sample:** No request is traced.  
 
 ---
@@ -58,7 +58,6 @@ OpenCensus provides the following aggregations:
 
 * **Count:** Reports the count of the recorded data points. For example, number of requests.
 * **Distribution:** Reports the histogram distribution of the recorded measurements.
-* **Mean:** Reports the mean of the recorded measurements.
 * **Sum:** Reports the sum of the recorded measurements.
 * **Last Value:** Reports on the last recorded measurement and drops everything else.
 
@@ -67,7 +66,7 @@ OpenCensus provides the following aggregations:
 **Tags**
 
 Tags are key-value pairs that can be recorded with measurements.
-They later used to breakdown the collected data in the metric collection backend.
+They are later used to breakdown the collected data in the metric collection backend.
 Tags should be designed to meet the data querying requirements. Examples of tags: 
 
 * ip=10.32.103.12
