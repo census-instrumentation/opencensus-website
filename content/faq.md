@@ -16,11 +16,12 @@ OpenCensus was initiated by Google, and is based on instrumentation systems used
 --- 
 
 ####  How does OpenCensus benefit the ecosystem?
-1. Making application metrics and distributed traces more accessible to developers. Today, one of the biggest challenges with gathering this information is the lack of good automatic instrumentation, as tracing and APM vendors have typically supplied their own limited, incompatible instrumentation solutions. With OpenCensus, more developers will be able to use these tools, which will improve the overall quality of their services and the web at large.
-2. APM vendors will benefit from less setup friction for customers, broader language and framework coverage, and reduced effort spent in designing and maintaining their own instrumentation.
-3. Local debugging capabilities. OpenCensus’s optional agent can be used to view requests and metrics locally and can dynamically change the sampling rate of traces, both of which are incredibly useful during critical production debugging sessions.</p>
-4. Collaboration and support from vendors (cloud providers like Google and Microsoft in addition to APM companies) and open source providers (Zipkin). As the OpenCensus libraries include instrumentation hooks into various web and RPC frameworks and exporters, they are immediately useful out of the box.
-5. Allowing service providers to better debug customer issues. As OpenCensus defines a common context propagation format, customers experiencing issues can provide a request ID to providers so that they can debug the problem together. Ideally, providers can trace the same requests as customers, even if they are using different analysis systems.
+
+* Making application metrics and distributed traces more accessible to developers. Today, one of the biggest challenges with gathering this information is the lack of good automatic instrumentation, as tracing and APM vendors have typically supplied their own limited, incompatible instrumentation solutions. With OpenCensus, more developers will be able to use these tools, which will improve the overall quality of their services and the web at large.
+* APM vendors will benefit from less setup friction for customers, broader language and framework coverage, and reduced effort spent in designing and maintaining their own instrumentation.
+* Local debugging capabilities. OpenCensus’s optional agent can be used to view requests and metrics locally and can dynamically change the sampling rate of traces, both of which are incredibly useful during critical production debugging sessions.</p>
+* Collaboration and support from vendors (cloud providers like Google and Microsoft in addition to APM companies) and open source providers (Zipkin). As the OpenCensus libraries include instrumentation hooks into various web and RPC frameworks and exporters, they are immediately useful out of the box.
+* Allowing service providers to better debug customer issues. As OpenCensus defines a common context propagation format, customers experiencing issues can provide a request ID to providers so that they can debug the problem together. Ideally, providers can trace the same requests as customers, even if they are using different analysis systems.
 
 --- 
 
