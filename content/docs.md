@@ -8,11 +8,13 @@ menu = "main"
 date = "2018-05-15T11:29:28-05:00"
 +++
 
-Welcome to the developer documentation for OpenCensus. Here you can learn about key OpenCensus concepts, find quick starts, reference material, and tutorials for all our supported languages, and more. If you’re new to OpenCensus we recommend that you read What is OpenCensus? to find out more about our system and how it works. Or, if you want to see OpenCensus in action first, visit the QuickStart for your favourite language.  
+Welcome to the developer documentation for OpenCensus. Here you can learn about key OpenCensus concepts, find quick starts, reference material, and tutorials for all our supported languages. If you’re new to OpenCensus we recommend that you read our [overview](/overview) first. Or, if you want to see OpenCensus in action first, visit the quickStart for your favourite language.
+
+OpenCensus terminology is explained at the [glossary](/glossary).
 
 ---
 
-&nbsp;  
+&nbsp;
 #### OpenCensus by Language
 
 <div class="col-md-12 box" style="margin-top:20px">
