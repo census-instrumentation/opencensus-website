@@ -14,8 +14,8 @@ The example demonstrates how to record stats and traces for a video processing s
 ---
 
 #### API Documentation  
-The OpenCensus Go API artifact is available here:  
-[{{< sc_gloss1 >}}https://godoc.org/go.opencensus.io{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io)  
+The OpenCensus Go API reference is available at  
+[godoc](https://godoc.org/go.opencensus.io).
 
 ---
 #### Example
@@ -37,7 +37,7 @@ Install the OpenCensus packages by running:
 $ go get go.opencensus.io
 ```
 
-See the [{{< sc_gloss1 >}}tag{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/tag), [{{< sc_gloss1 >}}stats{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/stats), [{{< sc_gloss1 >}}trace{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/trace) godoc for the API reference and [{{< sc_gloss1 >}}examples{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-go/tree/master/examples) directory for samples.  
+See the [tag](https://godoc.org/go.opencensus.io/tag), [stats](https://godoc.org/go.opencensus.io/stats), [trace](https://godoc.org/go.opencensus.io/trace) godoc for the API reference and [examples](https://github.com/census-instrumentation/opencensus-go/tree/master/examples) directory for samples.  
 
 **Example**  
 

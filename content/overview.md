@@ -11,7 +11,7 @@ OpenCensus is a framework for stats collection and distributed tracing. It suppo
 <div class="video-responsive">
 	<video width="550px" poster="../img/vidposter.svg" controls>
 		<source src="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4" type="video/mp4">
-		<p>This browser does not support the video element. <a href="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4"><span class="gloss1">Here</span></a> is a link to the video instead.</p>
+		<p>This browser does not support the video element. <a href="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4">Here</a> is a link to the video instead.</p>
 	</video>
 </div>
 
@@ -40,15 +40,15 @@ No additional server or daemon is required to support OpenCensus.
 
 __Tags__  
 
-OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/tags)  
+OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. [Read more](/tags). 
 
 __Stats__  
 
-*Stats* is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/stats)  
+*Stats* is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. [Read more](/stats).
 
 __Trace__  
 
-*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [{{< sc_gloss1 >}}Read more.{{< /sc_gloss1 >}}](/trace)  
+*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [Read more](/trace).
 
 __Exporters__  
 

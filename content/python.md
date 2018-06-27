@@ -13,7 +13,8 @@ The example demonstrates how to record traces for a simple Flask web application
 ---
 
 #### API Documentation
-The OpenCensus libraries artifacts are released to [{{% sc_gloss1 %}}PyPI{{% /sc_gloss1 %}}](https://pypi.python.org/pypi/opencensus). The API documentation is available [{{% sc_gloss1 %}}here{{% /sc_gloss1 %}}](https://census-instrumentation.github.io/opencensus-python/trace/api/index.html).  
+
+The OpenCensus libraries artifacts are released to [PyPI](https://pypi.python.org/pypi/opencensus). The API documentation is available [here](https://census-instrumentation.github.io/opencensus-python/trace/api/index.html).  
 
 ---
 

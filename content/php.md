@@ -13,7 +13,7 @@ The example demonstrates how to record traces for a simple website that calculat
 ---
 
 #### API Documentation
-The OpenCensus libraries artifacts are released to Packagist ([{{< sc_gloss1 >}}packagist.org{{< /sc_gloss1 >}}](https://packagist.org/)) [{{< sc_gloss1 >}}opencensus/opencensus{{< /sc_gloss1 >}}](https://packagist.org/packages/opencensus/opencensus). The API documentation is available [{{< sc_gloss1 >}}here{{< /sc_gloss1 >}}](https://census-instrumentation.github.io/opencensus-php/api/).  
+The OpenCensus libraries artifacts are released to Packagist ([packagist.org](https://packagist.org/)) [opencensus/opencensus](https://packagist.org/packages/opencensus/opencensus). The API documentation is available [here](https://census-instrumentation.github.io/opencensus-php/api/).  
 
 ---
 #### Example
