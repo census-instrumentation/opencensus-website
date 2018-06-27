@@ -8,12 +8,14 @@ date = "2018-05-14T16:11:08-05:00"
 +++
 
 **Tracing**  
-Tracking the entire path of execution of a service or a function from start until end. e.g. During an upload, tracking when a file handle is received, opened, sanitized and uploaded to the cloud.  
+
+Distributed Tracing tracks the progression of a request as it is handled by the services and processes that make up a distributed system. Each step in the Trace is called a Span. Each Span contains metadata, such as the length of time spent in the step, and optionally annotations about the work being performed. This information can be used for debugging and performance tuning of distributed systems.
 
 ---
 
 **Span**  
-The unit of traversal during tracing. Each span might have a children spans within it or it might be the first in its generation and called a root.  
+
+A unit work in a trace. Each span might have children spans within. If a span does not have a parent, it is called a root span.  
 
 ---
 
@@ -23,8 +25,7 @@ The first span in a trace; this span does not have a parent.
 ---
 
 **Child Span**  
-A span with a parent span; it represents a call that originates from an already traced one.  
-
+A span with a parent span; it represents a unit of work that originates from an existing span.  
 A span MAY or MAY NOT be a child and spans can coexist as siblings on the same level.  
 
 ---
@@ -34,74 +35,76 @@ A tree of spans. A trace has a root span that encapsulates all the spans from st
 
 ---
 
-**Sampling**  
-Is the mechanism that determines how often the system will trace a request.  
-There are  3 types of sampling:  
+**Sampling**
 
-1. **Always sample:**  
-  
-    - With this sampling, every single request is traced.  
-		
-2. **Probabilistic sampling:**  
-	
-	- Here a probability is set e.g specify 1 in 10000 or 0.0001 and the system will sample only 1 in 10000 requests. This entirely depends on your QPS.  
-		
-3. **Never sample:**  
-	
-	- Here you’ve asked that the system never traces any request.  
+Sampling determines how often requests will be traced.
+There are three types of sampling made available from OpenCensus libraries:  
+
+* **Always sample:** With this sampling, every single request is traced.  
+* **Probabilisticly sample:** A probability is set (e.g 0.0001) and the libraries will sample according to that probability (e.g. 1 in 10000 requests).
+* **Never sample:** No request is traced.  
 
 ---
 
 **Measure**  
-Any quantifiable measurement/metric that you would like to track, it could be number of requests, number of failed responses, bytes downloaded, cache misses, number of radios purchsed etc.  
+Any quantifiable metric. Examples of measures are number of requests, number of failed responses, bytes downloaded, cache misses, number of transactions, etc.  
 
 ---
 
-**Aggregation**  
-The style of characterizing measures. We have 4 types of Aggregations:  
+**Aggregation**
 
-1. **Count Aggregation:**  
+OpenCensus doesn't export each collected measurement. It preaggregates measurements in the process.
+OpenCensus provides the following aggregations:  
 
-    - Characterizing measures as a sum of increasing quantiles e.g number of requests overtime always increases and is quantified by a natural number.  
-	i.e. >= 1  
-  
-2. **Distribution Aggregation:**  
-
-    - Characterizing measures as belonging to buckets with ranges on sharp boundaries e.g. <10, <100, <1000 which distinctly identify values of 112, 99, 17 as belonging to buckets <1000, <100 and <10 respectively.  
-  
-3. **Mean Aggregation:**  
-
-    - Characterizing measures over the mean of all of the values and maintains the mean value.  
-  
-4. **Sum Aggregation:**  
-
-    - Characterizing measures over the total of values and maintains the value as a sum.  
+* **Count:** Reports the count of the recorded data points. For example, number of requests.
+* **Distribution:** Reports the histogram distribution of the recorded measurements.
+* **Sum:** Reports the sum of the recorded measurements.
+* **Last Value:** Reports on the last recorded measurement and drops everything else.
 
 ---
 
-**Tags**  
-Tags are key-value pairs that are used to store information about metrics for example;  
+**Tags**
 
-+ ip=10.32.103.12  
+Tags are key-value pairs that can be recorded with measurements.
+They are later used to breakdown the collected data in the metric collection backend.
+Tags should be designed to meet the data querying requirements. Examples of tags: 
 
-+ user-agent=curl/1.0  
-
-+ coupon=discount-1f1acdbe3  
-
----
-
-**Views**  
-A view is a mechanism for grouping measures, aggregations, tags as well as the timing information, essentially characterizing your metrics for visualization and inspection.  
+* ip=10.32.103.12
+* version=1.23
+* frontend=ios-10.3.1  
 
 ---
 
-**View Data**  
-The grouping of a set of rows that uniquely describe the collection of a measure, its start and end times and the associated view.  
+**Views**
+
+A view manages the aggregation of a measure and exports the collected data.
+Recordings on the measures won't be exported until a view is registered to
+collect from the measure.
 
 ---
 
-**Row**  
-It groups the data aggregation with distinct tags.  
+**View Data**
+
+View Data is the exported data from a view.
+It contains view information, aggregated data,
+start and end time of the collection.
+
+---
+
+**Exporters**
+
+Exporters allow for metrics and traces collected by
+OpenCensus to be uploaded to the other services.  
+Various providers have OpenCensus exporters, examples are
+Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger.
+
+---
+
+**Context Propagation**  
+
+The mechanism to transmit identifiers or metadata on the wire
+and in-process. For example, trace span identifier and stats tags
+can be propagated in the process and among multiple processors.
 
 ---
 
@@ -110,12 +113,3 @@ It groups the data aggregation with distinct tags.
 Remote Procedure Call. The mechanism of invoking a procedure/subroutine in a different scope/address space.  
 
 ---
-
-**Context Propagation**  
-The mechanism by which identifiable information about a span, e.g. traceId, spanId and traceOptions are sent over RPC scope boundaries. This span can then be linked as a remote parent. This movement could translate to getting information such as “the data storage team” invoked delete on the “database records” service which then invoked the “data consistency service”.  
-
----
-
-**Exporters**  
-The adapters that allow for metrics and traces collected by OpenCensus to be consumed by other services.  
-OpenCensus adds minimal overhead to your applications while still giving you the ability to export metrics and traces in near real-time to various backends of your choice, simultaneously e.g Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger. The multiplicity and convenience enables many application performance monitoring teams and even administrators visualize your applications. Your teams don’t have to expend precious time in maintenance and integration; OpenCensus should just work. We have some examples that you can check out to instrument your backends too. With the ability to introspect your applications, you can apply sound engineering practices making your teams even more productive.  
