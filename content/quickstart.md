@@ -8,7 +8,6 @@ title = "Quickstart"
 date = "2018-05-30T14:11:36-05:00"
 +++
 
-{{% sc_quickstart %}}
 &nbsp;  
 
 #### [C++](/cpp)
@@ -52,6 +51,3 @@ date = "2018-05-30T14:11:36-05:00"
 
 ---
 &nbsp;  
-
-
-{{% /sc_quickstart %}}

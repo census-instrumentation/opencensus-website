@@ -8,8 +8,6 @@ title = "Trace"
 date = "2018-05-30T15:37:24-05:00"
 +++
 
-{{% sc_trace%}}
-
 A distributed trace tracks the progression of a single user request as it is handled by the services and processes that make up an application. Each step is called a span in the trace. Spans include metadata about the step, including especially the time spent in the step, called the span’s latency. You can use this information to tune the performance of your application.  
 &nbsp;  
 
@@ -169,5 +167,3 @@ Code that sends completed Spans to a storage system such as Stackdriver or Zipki
 __Plugin__  
 Instrumentation for a framework. e.g. The gRPC plugin creates a Span for every RPC sent and received.  
 &nbsp;  
-
-{{% /sc_trace %}}

@@ -8,7 +8,6 @@ title = "Stats"
 date = "2018-05-30T14:53:59-05:00"
 +++
 
-{{% sc_stats %}}
 OpenCensus collects application stats and a set of predefined stats from certain libraries and frameworks.  
 &nbsp;  
 OpenCensus is a low-overhead framework even if instrumentation is always enabled. In order to be so, it is optimized to make recording of data points fast and separate from the data aggregation.  
@@ -81,5 +80,3 @@ Collected and aggregated data can be exported to a stats collection backend by r
 Multiple exporters can be registered to upload the data to various different backends. Users can unregister the exporters if they no longer are needed.  
 &nbsp;  
 &nbsp;  
-
-{{% /sc_stats %}}

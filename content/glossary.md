@@ -1,14 +1,11 @@
 +++
+title = "Glossary"
 Description = "glossary"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "glossary"
-
-title = "Glossary"
 date = "2018-05-14T16:11:08-05:00"
 +++
-
-{{% sc_glossary %}}
 
 **Tracing**  
 Tracking the entire path of execution of a service or a function from start until end. e.g. During an upload, tracking when a file handle is received, opened, sanitized and uploaded to the cloud.  
@@ -152,5 +149,3 @@ The mechanism by which identifiable information about a span, e.g. traceId, span
 The adapters that allow for metrics and traces collected by OpenCensus to be consumed by other services.  
 OpenCensus adds minimal overhead to your applications while still giving you the ability to export metrics and traces in near real-time to various backends of your choice, simultaneously e.g Stackdriver Monitoring and Tracing, Prometheus, SignalFX, Jaeger. The multiplicity and convenience enables many application performance monitoring teams and even administrators visualize your applications. Your teams don’t have to expend precious time in maintenance and integration; OpenCensus should just work. We have some examples that you can check out to instrument your backends too. With the ability to introspect your applications, you can apply sound engineering practices making your teams even more productive.  
 &nbsp;  
-
-{{% /sc_glossary %}}

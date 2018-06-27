@@ -3,12 +3,10 @@ Description = "python"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
+type = "leftnav"
 title = "Python"
 date = "2018-05-18T13:08:20-05:00"
 +++
-
-{{% sc_python %}}
 
 The example demonstrates how to record traces for a simple Flask web application.  
 &nbsp;  
@@ -111,5 +109,3 @@ if __name__ == '__main__':
   )
 ]
 ```
-
-{{% /sc_python %}}

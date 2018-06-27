@@ -3,12 +3,10 @@ Description = "go grpc"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "GO gRPC"
+title = "OpenCensus for Go gRPC"
 date = "2018-05-31T11:12:41-05:00"
 +++
 
-{{% sc_gogrpc %}}
 &nbsp;  
 
 In this tutorial, we’ll examine how to use OpenCensus in your gRPC projects in the Go programming language for observability both into your server and then client! We’ll then examine how we can integrate with OpenCensus exporters from AWS X-Ray, Prometheus, Zipkin and Google Stackdriver Tracing and Monitoring.  
@@ -774,20 +772,11 @@ With that we are off to the races!
 &nbsp;  
 
 Thank you for reading this far and hope this tutorial was useful, you can find all the code in this tutorial at [{{< sc_gloss1 >}}https://github.com/orijtech/opencensus-for-grpc-go-developers{{< /sc_gloss1 >}}](https://github.com/orijtech/opencensus-for-grpc-go-developers).  
-&nbsp;  
 
 Please feel free to check out the OpenCensus community https://opencensus.io send us feedback, instrument your backends and share with your friends and teams!  
-&nbsp;  
 
 This tutorial is part of a bunch more coming where we’ll use different languages, different transports and provide more samples etc.  
-&nbsp;  
 
 Thank you again.  
-&nbsp;  
-
-Kind regards,  
-&nbsp;  
 
 Emmanuel T Odeke  
-
-{{% /sc_gogrpc %}}

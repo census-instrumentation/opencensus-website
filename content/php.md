@@ -3,12 +3,10 @@ Description = "php"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
+type = "leftnav"
 title = "PHP"
 date = "2018-05-18T12:37:28-05:00"
 +++
-
-{{% sc_php %}}
 
 The example demonstrates how to record traces for a simple website that calculate Fibonacci numbers recursively.  
 &nbsp;  
@@ -513,6 +511,4 @@ The 3th Fibonacci number is 3.Array
     )
 
 )
-```   
-
-{{% /sc_php %}}
+```

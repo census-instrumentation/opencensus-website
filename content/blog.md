@@ -1,14 +1,11 @@
 +++
+title = "Blog"
 Description = "blog"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "Blog"
 date = "2018-05-11T10:32:44-05:00"
 +++
-
-{{% sc_blog %}}
 
 <!-- ROW 1 START ------->
 <div class="row">   
@@ -630,5 +627,3 @@ date = "2018-05-11T10:32:44-05:00"
   </div> <!-- ROW 8 END -->
 </div> <!-- ROW END -->
 <br />
-
-{{% /sc_blog %}}
