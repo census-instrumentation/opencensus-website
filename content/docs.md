@@ -25,10 +25,10 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/cpp">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/stats/README.md" target="_blank">Stats API Reference</a></td>
+				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/stats/README.md">Stats API Reference</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/trace/README.md" target="_blank">Trace API Reference</a></td>
+				<td><a href="https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/trace/README.md">Trace API Reference</a></td>
 			</tr>
 		</table>
 	</div>
@@ -41,10 +41,10 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/erlang">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://hexdocs.pm/opencensus/0.3.1/" target="_blank">API Reference</a></td>
+				<td><a href="https://hexdocs.pm/opencensus/0.3.1/">API Reference</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://hex.pm/packages/opencensus" target="_blank">Package</a></td>
+				<td><a href="https://hex.pm/packages/opencensus">Package</a></td>
 			</tr>
 		</table>
 	</div>
@@ -57,7 +57,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/go">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://godoc.org/go.opencensus.io" target="_blank">API Reference</a></td>
+				<td><a href="https://godoc.org/go.opencensus.io">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -75,7 +75,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/java">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2" target="_blank">API Reference</a></td>
+				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -91,7 +91,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/php">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://packagist.org/packages/opencensus/opencensus" target="_blank">API Reference</a></td>
+				<td><a href="https://packagist.org/packages/opencensus/opencensus">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -107,7 +107,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 			<td><a href="/python">Quickstart Guide</td>
 			</tr>
 			<tr>
-				<td><a href="https://census-instrumentation.github.io/opencensus-python/trace/api/index.html" target="_blank">API Reference</a></td>
+				<td><a href="https://census-instrumentation.github.io/opencensus-python/trace/api/index.html">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -125,7 +125,7 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 				<td><a href="/ruby">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://www.rubydoc.info/gems/opencensus" target="_blank">API Reference</a></td>
+				<td><a href="https://www.rubydoc.info/gems/opencensus">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
