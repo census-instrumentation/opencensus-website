@@ -1573,3 +1573,8 @@ text-indent: -1em;
   list-style-type: circle;
   margin: 0px 0px 5px 30px;
 }
+
+.content a {
+  color: #C1272D;
+  font-weight: bold;
+}

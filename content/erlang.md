@@ -10,20 +10,20 @@ date = "2018-05-17T15:41:51-05:00"
 +++
 
 
-The example demonstrates how to record stats and traces for a video processing system. It records data with the "frontend" tag so that collected data can be broken by the frontend user who initiated the video processing. Code for this example can be found under the {{< sc_code >}}examples/helloworld{{< /sc_code >}} directory of the [{{< sc_gloss1 >}}OpenCensus Erlang repo{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-erlang).  
+The example demonstrates how to record stats and traces for a video processing system. It records data with the "frontend" tag so that collected data can be broken by the frontend user who initiated the video processing. Code for this example can be found under the {{< sc_code >}}examples/helloworld{{< /sc_code >}} directory of the [OpenCensus Erlang repo](https://github.com/census-instrumentation/opencensus-erlang).  
 
 ---
 
 #### API Documentation
 
-The OpenCensus Erlang API artifact is available [{{< sc_gloss1 >}}here{{< /sc_gloss1 >}}](https://hexdocs.pm/opencensus/0.3.0/index.html).  
+The OpenCensus Erlang API artifact is available [here](https://hexdocs.pm/opencensus/0.3.0/index.html). 
 
 ---
   
 #### Example
 
 **Prerequisite**  
-[{{< sc_gloss1 >}}Erlang/OTP 20{{< /sc_gloss1 >}}](http://www.erlang.org/) and [{{< sc_gloss1 >}}rebar3{{< /sc_gloss1 >}}](http://www.rebar3.org/) are required.  
+[Erlang/OTP 20](http://www.erlang.org/) and [rebar3](http://www.rebar3.org/) are required.  
 
 **Using**  
 Create a new Erlang application with {{< sc_code >}}rebar3 new{{< /sc_code >}} named {{< sc_code >}}helloworld{{< /sc_code >}}:

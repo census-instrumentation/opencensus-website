@@ -14,7 +14,7 @@ The example demonstrates how to record stats and traces for a video processing s
 
 #### API Documentation
 
-The OpenCensus Java artifacts are released to Maven Central [{{< sc_gloss1 >}}maven.org{{< /sc_gloss1 >}}](http://search.maven.org/), each contains the jar file, the associated javadoc, and the associated source code. The OpenCensus Java API artifact (along with the associated javadoc and source) is available on Maven Central here: [{{< sc_gloss1 >}}Open Census API{{< /sc_gloss1 >}}](https://search.maven.org/#search%7Cga%7C1%7Copencensus%20api)  
+The OpenCensus Java artifacts are released to Maven Central [maven.org](http://search.maven.org/), each contains the jar file, the associated javadoc, and the associated source code. The OpenCensus Java API artifact (along with the associated javadoc and source) is available on Maven Central here: [Open Census API](https://search.maven.org/#search%7Cga%7C1%7Copencensus%20api)  
 
 ---
 
@@ -34,7 +34,7 @@ src/main/java/io/opencensus/examples/helloworld/
 ---
 
 #### To Build/Run The Example
-Further build instructions can be found in [{{< sc_gloss1 >}}examples/README.md{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-java/blob/master/examples/README.md).
+Further build instructions can be found in [examples/README.md](https://github.com/census-instrumentation/opencensus-java/blob/master/examples/README.md).
 
 The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:  
 

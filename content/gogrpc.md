@@ -11,11 +11,11 @@ In this tutorial, we’ll examine how to use OpenCensus in your gRPC projects in
 
 ---
 
-gRPC is a modern high performance framework for remote procedure calls, powered by Protocol Buffer encoding. It is polyglot in nature, accessible and useable on a variety of environments ranging from mobile mobile devices, general purpose computers to data centres for distributed computing, and it is implemented in a variety of languages: Go, Java, Python, C/C++, Node.js, Ruby, PHP [{{< sc_gloss1 >}}https://grpc.io/{{< /sc_gloss1 >}}](https://grpc.io/).  
+gRPC is a modern high performance framework for remote procedure calls, powered by Protocol Buffer encoding. It is polyglot in nature, accessible and useable on a variety of environments ranging from mobile mobile devices, general purpose computers to data centres for distributed computing, and it is implemented in a variety of languages: Go, Java, Python, C/C++, Node.js, Ruby, PHP. See [gRPC homepage](https://grpc.io/).  
 
-OpenCensus is a modern observability framework for distributed tracing and monitoring across microservices and monoliths alike. It is polyglot in nature, accessible and useable too on a variety of environments from mobile devices, general purpose computers and data centres for distributed computing and it is implemented in a plethora of languages: Go, Java, Python, C++, Node.js, Ruby, PHP, C#(coming soon) [{{< sc_gloss1 >}}https://opencensus.io/{{< /sc_gloss1 >}}](https://opencensus.io/).  
+OpenCensus is a modern observability framework for distributed tracing and monitoring across microservices and monoliths alike. It is polyglot in nature, accessible and useable too on a variety of environments from mobile devices, general purpose computers and data centres for distributed computing and it is implemented in a plethora of languages: Go, Java, Python, C++, Node.js, Ruby, PHP, C# (coming soon).
 
-Go is a modern programming language that powers the cloud as well as modern systems programming, making it easy to build simple, reliable and efficient software. It is a cross platform, fast, statically typed and a simple language [{{< sc_gloss1 >}}https://golang.org{{< /sc_gloss1 >}}](https://golang.org).  
+Go is a modern programming language that powers the cloud as well as modern systems programming, making it easy to build simple, reliable and efficient software. It is a cross platform, fast, statically typed and a simple language. See [golang.org](https://golang.org).  
 
 With the above three introductory paragraphs, perhaps you already noticed the common themes: high performance, distributed computing, modern nature, cross platform, simplicity, reliability — those points make the three a match #compatibility, hence the motivation for this tutorial/article.  
 
@@ -23,7 +23,7 @@ With the above three introductory paragraphs, perhaps you already noticed the co
 
 For this tutorial, we have a company’s service that’s in charge of capitalizing letters sent in from various clients and internal microservices using gRPC.  
 
-To use gRPC, we firstly need to create Protocol Buffer definitions and from those, use the Protocol Buffer compiler with the gRPC plugin to generate code stubs. If you need to take a look at the pre-requisites or a primer into gRPC, please check out this article [{{< sc_gloss1 >}}https://grpc.io/docs/{{< /sc_gloss1 >}}](https://grpc.io/docs/).
+To use gRPC, we firstly need to create Protocol Buffer definitions and from those, use the Protocol Buffer compiler with the gRPC plugin to generate code stubs. If you need to take a look at the pre-requisites or a primer into gRPC, please check out the docs at [grpc.io/docs/](https://grpc.io/docs/).
 
 Our service takes in a payload with bytes, and then capitalizes them on the server.  
 							
@@ -655,12 +655,12 @@ which gives this visualization
 
 ![image - observability by instrumenting the client](https://cdn-images-1.medium.com/max/800/1*4Qx_NM7t-Vfnv7BGqDUIoA.png "observability by instrumenting the client")  
 
-Engineers can add alerts with Prometheus [{{< sc_gloss1 >}}https://prometheus.io/docs/alerting/overview/{{< /sc_gloss1 >}}](https://prometheus.io/docs/alerting/overview/) or Stackdriver Monitoring [{{< sc_gloss1 >}}https://cloud.google.com/monitoring/alerts/{{< /sc_gloss1 >}}](https://cloud.google.com/monitoring/alerts/) but also the various teams can examine system behaviour simultaneously, be it traces or metrics on a variety of backends. A question one might have is: “how about observability for streaming?” — for streaming you can use the same logic, but since in order to export a trace, the span needs to have been ended. However, with streaming, you have a single persistent connection that’s perhaps infinitely open. What you can do is register unique identifying information from a streaming request and then per stream response, start and end a span!  
+Engineers can add alerts with Prometheus [https://prometheus.io/docs/alerting/overview/](https://prometheus.io/docs/alerting/overview/) or Stackdriver Monitoring [https://cloud.google.com/monitoring/alerts/](https://cloud.google.com/monitoring/alerts/) but also the various teams can examine system behaviour simultaneously, be it traces or metrics on a variety of backends. A question one might have is: “how about observability for streaming?” — for streaming you can use the same logic, but since in order to export a trace, the span needs to have been ended. However, with streaming, you have a single persistent connection that’s perhaps infinitely open. What you can do is register unique identifying information from a streaming request and then per stream response, start and end a span!  
 &nbsp;  
 
 With that we are off to the races!  
 
-Thank you for reading this far and hope this tutorial was useful, you can find all the code in this tutorial at [{{< sc_gloss1 >}}https://github.com/orijtech/opencensus-for-grpc-go-developers{{< /sc_gloss1 >}}](https://github.com/orijtech/opencensus-for-grpc-go-developers).  
+Thank you for reading this far and hope this tutorial was useful, you can find all the code in this tutorial at [https://github.com/orijtech/opencensus-for-grpc-go-developers](https://github.com/orijtech/opencensus-for-grpc-go-developers).  
 
 Please feel free to check out the OpenCensus community https://opencensus.io send us feedback, instrument your backends and share with your friends and teams!  
 
