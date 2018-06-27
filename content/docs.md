@@ -9,7 +9,6 @@ date = "2018-05-15T11:29:28-05:00"
 +++
 
 Welcome to the developer documentation for OpenCensus. Here you can learn about key OpenCensus concepts, find quick starts, reference material, and tutorials for all our supported languages, and more. If you’re new to OpenCensus we recommend that you read What is OpenCensus? to find out more about our system and how it works. Or, if you want to see OpenCensus in action first, visit the QuickStart for your favourite language.  
-&nbsp;  
 
 ---
 
@@ -134,17 +133,14 @@ Welcome to the developer documentation for OpenCensus. Here you can learn about 
 		</table>
 	</div>
 </div>
-&nbsp;
 
----
+
+<br clear="both">
 
 #### Tutorials
 
-[{{< sc_gloss1 >}}CLOUD SPANNER - INSTRUMENTED BY OPENCENSUS AND EXPORTED TO STACKDRIVER {{< /sc_gloss1 >}}][1]  
-
-&nbsp;  
-
-[{{< sc_gloss1 >}}OPENCENSUS FOR GO gRPC DEVELOPERS{{< /sc_gloss1 >}}][2]
+* [{{< sc_gloss1 >}}Cloud Spanner - Instrumented by OpenCensus and exported to Stackdriver{{< /sc_gloss1 >}}][1]  
+* [{{< sc_gloss1 >}}OpenCensus for gRPC Go{{< /sc_gloss1 >}}][2]
 
 
 [1]: https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e

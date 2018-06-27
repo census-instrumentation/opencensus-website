@@ -10,45 +10,40 @@ date = "2018-05-17T14:17:26-05:00"
 +++
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
-&nbsp;  
 
 ---
-&nbsp;  
+
 #### API Documentation  
 The OpenCensus Go API artifact is available here:  
 [{{< sc_gloss1 >}}https://godoc.org/go.opencensus.io{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io)  
-&nbsp;  
 
 ---
-&nbsp;
 #### Example
 This guide helps you write a Go program instrumented with OpenCensus.  
-&nbsp;
 
 **Prerequisites**  
 
 Go 1.8 or higher is required. Make sure you have 1.8+ installed by running:
 
-``` go
+```bash
 $ go version
 ```  
 
-&nbsp;  
 **Installation**
 
 Install the OpenCensus packages by running:
 
-``` go
+```bash
 $ go get go.opencensus.io
 ```
 
 See the [{{< sc_gloss1 >}}tag{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/tag), [{{< sc_gloss1 >}}stats{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/stats), [{{< sc_gloss1 >}}trace{{< /sc_gloss1 >}}](https://godoc.org/go.opencensus.io/trace) godoc for the API reference and [{{< sc_gloss1 >}}examples{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-go/tree/master/examples) directory for samples.  
-&nbsp;  
+
 **Example**  
 
 The following example uses  demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” dimension to be able to break down collected data by the frontend user started the video processing from.
 
-``` go
+```
 $ cd $(go env GOPATH)/src/go.opencensus.io/examples/helloworld
 $ go get -v . # get the dependencies
 $ go run main.go

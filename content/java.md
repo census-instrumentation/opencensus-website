@@ -9,58 +9,47 @@ date = "2018-05-18T09:59:40-05:00"
 +++
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
-&nbsp;  
 
 ---
 
-&nbsp;  
 #### API Documentation
 
 The OpenCensus Java artifacts are released to Maven Central [{{< sc_gloss1 >}}maven.org{{< /sc_gloss1 >}}](http://search.maven.org/), each contains the jar file, the associated javadoc, and the associated source code. The OpenCensus Java API artifact (along with the associated javadoc and source) is available on Maven Central here: [{{< sc_gloss1 >}}Open Census API{{< /sc_gloss1 >}}](https://search.maven.org/#search%7Cga%7C1%7Copencensus%20api)  
-&nbsp;  
 
 ---
 
-&nbsp;  
 #### Example
-1. Clone the OpenCensus Java github repository:
 
+1. Clone the OpenCensus Java GitHub repository:
 ``` java
 git clone https://github.com/census-instrumentation/opencensus-java.git
-
 cd opencensus-java/examples
-```  
-&nbsp;  
-2. Code is in directory:
+```
+
+2. Code is in the following directory:
 ```
 src/main/java/io/opencensus/examples/helloworld/
 ```  
-&nbsp;  
 
 ---
 
-&nbsp; 
 #### To Build/Run The Example
 Further build instructions can be found in [{{< sc_gloss1 >}}examples/README.md{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-java/blob/master/examples/README.md).
 
 The OpenCensus Java Quickstart example can be built/executed using either gradle, maven, or bazel:  
-&nbsp;  
 
 3. Build the example code e.g.: (assuming current directory is opencensus/examples/)
-    - a. Gradle: ./gradlew installDist
-    - b. Maven: mvn package appassembler:assemble
-    - c. Bazel: bazel build :all  
-&nbsp;  
+    * Gradle: ./gradlew installDist
+    * Maven: mvn package appassembler:assemble
+    * Bazel: bazel build :all  
 
 4. Run the Quickstart example e.g.: (assuming current directory is opencensus/examples/)
-	- a. Gradle: ./build/install/opencensus-examples/bin/QuickStart
-	- b. Maven: ./target/appassembler/bin/QuickStart
-	- c. Bazel: ./bazel-bin/QuickStart  
-&nbsp;  
+	* Gradle: ./build/install/opencensus-examples/bin/QuickStart
+	* Maven: ./target/appassembler/bin/QuickStart
+	* Bazel: ./bazel-bin/QuickStart  
 
 ---
 
-&nbsp;  
 #### The Example Code
 ``` java
 /** Simple program that collects data for video size. **/
@@ -136,11 +125,9 @@ public final class QuickStart {
  }
 }
 ```  
-&nbsp;  
 
 ---
   
-&nbsp;  
 #### The Example Output (Raw)
 ```
 Mar 02, 2018 6:38:26 PM io.opencensus.examples.helloworld.QuickStart main

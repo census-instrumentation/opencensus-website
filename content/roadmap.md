@@ -8,31 +8,22 @@ title = "Roadmap"
 date = "2018-05-11T12:09:08-05:00"
 +++
 
-
-#### OpenCensus’s journey ahead: [{{< sc_gloss1 >}}platforms and languages{{< /sc_gloss1 >}}](https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html)  
-&nbsp;  
+OpenCensus’s journey ahead: [{{< sc_gloss1 >}}platforms and languages{{< /sc_gloss1 >}}](https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html).
 
 ---
-&nbsp;
 
 #### Languages  
-&nbsp;  
 
 {{< sc_supportedLanguages />}}
 
-&nbsp;  
 
 ---
-&nbsp;  
 
 #### Exporters  
 
 {{< sc_supportedExporters />}}
 
-&nbsp;  
-
 ---
-&nbsp;  
 
 #### How do I contribute?
 

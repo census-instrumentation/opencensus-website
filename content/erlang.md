@@ -11,24 +11,19 @@ date = "2018-05-17T15:41:51-05:00"
 
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the "frontend" tag so that collected data can be broken by the frontend user who initiated the video processing. Code for this example can be found under the {{< sc_code >}}examples/helloworld{{< /sc_code >}} directory of the [{{< sc_gloss1 >}}OpenCensus Erlang repo{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-erlang).  
-&nbsp;  
 
 ---
-  
-&nbsp; 
+
 #### API Documentation
 
 The OpenCensus Erlang API artifact is available [{{< sc_gloss1 >}}here{{< /sc_gloss1 >}}](https://hexdocs.pm/opencensus/0.3.0/index.html).  
-&nbsp;  
 
 ---
   
-&nbsp; 
 #### Example
 
 **Prerequisite**  
 [{{< sc_gloss1 >}}Erlang/OTP 20{{< /sc_gloss1 >}}](http://www.erlang.org/) and [{{< sc_gloss1 >}}rebar3{{< /sc_gloss1 >}}](http://www.rebar3.org/) are required.  
-&nbsp;
 
 **Using**  
 Create a new Erlang application with {{< sc_code >}}rebar3 new{{< /sc_code >}} named {{< sc_code >}}helloworld{{< /sc_code >}}:
@@ -44,10 +39,8 @@ $ rebar3 new app helloworld
 ===> Writing helloworld/README.md
 $ cd helloworld
 ```  
-&nbsp;
 
 Add {{< sc_code >}}opencensus{{< /sc_code >}} as a dependency in {{< sc_code >}}rebar.config{{< /sc_code >}}. For development purposes it is also useful to include the {{< sc_code >}}shell{{< /sc_code >}} section of the config which tells rebar3 to boot the application and load configuration when running {{< sc_code >}}rebar3 shell{{< /sc_code >}}:  
-&nbsp;
 
 ```erlang
 {erl_opts, [debug_info]}.
@@ -56,7 +49,6 @@ Add {{< sc_code >}}opencensus{{< /sc_code >}} as a dependency in {{< sc_code >}}
 {shell, [{apps, [helloworld]},
 	  {config, "config/sys.config"}]}.
 ```  
-&nbsp;
 
 ```erlang
 [
@@ -65,7 +57,6 @@ Add {{< sc_code >}}opencensus{{< /sc_code >}} as a dependency in {{< sc_code >}}
               {stat, [{exporters, [{oc_stat_exporter_stdout, []}]}]}
 ].
 ```  
-&nbsp;  
 
 {{< sc_code >}}opencensus{{< /sc_code >}} is a runtime dependency so it is added to the applications list in {{< sc_code >}}src/helloworld.app.src{{< /sc_code >}}, ensuring it is included and started in a release of {{< sc_code >}}helloworld{{< /sc_code >}}:  
 
@@ -88,10 +79,8 @@ Add {{< sc_code >}}opencensus{{< /sc_code >}} as a dependency in {{< sc_code >}}
   {links, []}
 ]}.
 ```  
-&nbsp;
 
 Building the application with {{< sc_code >}}rebar3 compile{{< /sc_code >}} will fetch the OpenCensus Erlang library and its dependencies.  
-&nbsp;
 
 When our application starts it needs to create and subscribe to the statistics that we'll record. So a call to {{< sc_code >}}subscribe_views/0{{< /sc_code >}} is added to the application start function, {{< sc_code >}}helloworld_app:start/2{{< /sc_code >}}:  
 
@@ -107,7 +96,6 @@ default_size_distribution() ->
     {oc_stat_aggregation_distribution,
      [{buckets, [0, 1 bsl 16, 1 bsl 32]}]}.
 ```  
-&nbsp;  
 
 The main module called to actually do the video processing is {{< sc_code >}}helloworld{{< /sc_code >}}. It creates a tag for who made the process request to include with the record statistic and creates a span for the duration of the video processing (a random sleep between 0 and 10 seconds):
 
@@ -130,7 +118,6 @@ process() ->
    %% record the size of the video
    oc_stat:record(Tags, 'my.org/measure/video_size', 25648).
 ```  
-&nbsp;  
 
 Run the application with {{< sc_code >}}rebar3 shell{{< /sc_code >}} and see the stats and span reported to the console:  
 

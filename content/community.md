@@ -8,7 +8,6 @@ date = "2018-05-30T13:47:11-05:00"
 +++
 
 OpenCensus has an active community of developers who are using, enhancing and building valuable integrations with other software projects. We’d love your help to improve and extend the project. You can reach us via [{{% sc_gloss1 %}}Email,{{% /sc_gloss1 %}}](mailto:census-developers@googlegroups.com) [{{% sc_gloss1 %}}Gitter channel,{{% /sc_gloss1 %}}](https://gitter.im/census-instrumentation/Lobby) or [{{% sc_gloss1 %}}Twitter{{% /sc_gloss1 %}}](https://twitter.com/opencensusio) to start engaging with the project and its members.  
-&nbsp;  
 
 ---
 
