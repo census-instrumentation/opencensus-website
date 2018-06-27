@@ -35,13 +35,17 @@ OpenCesnsus CSS
 -----------------------------------------*/
 body {
   background: #FFF;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 350;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   overflow-x: hidden;
-    color: #3d3d3d; /*
-  color: #3E3E3E; */
+  color: #3d3d3d;
 }
+
+.logo, h1, h2, h3, h4, h5, h6 {
+  font-weight: 350;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
 ul,ol {
   padding: 0;
   margin: 0;
