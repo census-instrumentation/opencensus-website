@@ -3,12 +3,11 @@ Description = "go"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
+type = "leftnav"
 
 title = "Go"
 date = "2018-05-17T14:17:26-05:00"
 +++
-
-{{% sc_go %}}
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
 &nbsp;  
@@ -151,5 +150,3 @@ func process(ctx context.Context) {
   stats.Record(ctx, videoSize.M(25648))
 }
 ```
-
-{{% /sc_go %}}

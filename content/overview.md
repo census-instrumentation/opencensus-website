@@ -1,14 +1,8 @@
 +++
-Description = "overview"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
-
 title = "Overview"
+type = "leftnav"
 date = "2018-05-30T10:49:38-05:00"
 +++
-
-{{% sc_overview %}}
 
 ---
 
@@ -95,5 +89,3 @@ OpenCensus provides in-process dashboards that displays diagnostics data from th
 &nbsp;  
 An example /tracez handler served by the application that reports traces collected in the process.  
 &nbsp;  
-
-{{% /sc_overview %}}

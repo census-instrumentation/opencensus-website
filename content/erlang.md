@@ -3,12 +3,12 @@ Description = "erlang"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
+type = "leftnav"
 
 title = "Erlang"
 date = "2018-05-17T15:41:51-05:00"
 +++
 
-{{% sc_erlang %}}
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the "frontend" tag so that collected data can be broken by the frontend user who initiated the video processing. Code for this example can be found under the {{< sc_code >}}examples/helloworld{{< /sc_code >}} directory of the [{{< sc_gloss1 >}}OpenCensus Erlang repo{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-erlang).  
 &nbsp;  
@@ -155,5 +155,3 @@ video_size: #{rows =>
         count => 1,mean => 25648.0,sum => 25648}}],
    type => distribution}
 ```
-
-{{% /sc_erlang %}}

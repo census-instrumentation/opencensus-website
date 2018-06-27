@@ -3,12 +3,11 @@ Description = "ruby"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
+type = "leftnav"
 title = "Ruby"
 date = "2018-05-18T13:52:18-05:00"
 +++
 
-{{% sc_ruby %}}
 
 This example application demonstrates how to use OpenCensus to record traces for a Sinatra-based web application. You can find the source code for the application at [{{< sc_gloss1 >}}https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world).  
 &nbsp;  
@@ -105,5 +104,3 @@ end
 #### API Documentation  
 The OpenCensus Ruby API is documented at:  
 [<span class="gloss1">http://www.rubydoc.info/gems/opencensus</span>](http://www.rubydoc.info/gems/opencensus)  
-
-{{% /sc_ruby %}}

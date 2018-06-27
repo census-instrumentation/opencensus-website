@@ -1,14 +1,12 @@
 +++
+title = "API Reference"
 Description = "reference"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "Reference"
 date = "2018-05-30T14:31:18-05:00"
 +++
 
-{{% sc_reference %}}
 &nbsp;  
 
 #### [C++ API](https://github.com/census-instrumentation/opencensus-cpp)
@@ -45,5 +43,4 @@ date = "2018-05-30T14:31:18-05:00"
 &nbsp;  
 
 ---
-&nbsp;  
-{{% /sc_reference %}}
+&nbsp;

@@ -1,15 +1,12 @@
 +++
+title = "FAQ"
 Description = "faq"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "FAQ"
 date = "2018-05-10T14:14:33-05:00"
 +++
 
-{{% sc_faq %}}
-&nbsp;  
 
 <!-- COLLAPSIBLE ACCORDION START-->
 <div class="accordion">
@@ -78,5 +75,4 @@ date = "2018-05-10T14:14:33-05:00"
 </dl><!-- COLLAPSIBLE ACCORDION CONTENT END -->
 </div><!-- END ACCORION -->
 
-{{% /sc_faq %}}
 

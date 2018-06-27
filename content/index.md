@@ -3,7 +3,7 @@ Description = "index"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
+type = "index"
 title = "OpenCensus"
 date = "2018-05-22T11:02:24-05:00"
 +++

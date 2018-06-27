@@ -1,14 +1,12 @@
 +++
+title = "C++"
 Description = "C++"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "C++"
+type = "leftnav"
 date = "2018-05-16T12:02:16-05:00"
 +++
-
-{{% sc_cpp %}}
 
 Build and run the example:  
 
@@ -117,5 +115,3 @@ span.AddAnnotation("Start processing video.");
 span.AddAnnotation("Finished processing video.");
 span.End();
 ```
-
-{{% /sc_cpp %}}

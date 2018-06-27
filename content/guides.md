@@ -8,8 +8,6 @@ title = "Guides"
 date = "2018-05-31T14:31:01-05:00"
 +++
 
-{{% sc_guides %}}
-
 <div class="accordion">
 	<dl>
 		<dt>
@@ -36,5 +34,3 @@ date = "2018-05-31T14:31:01-05:00"
 		</dd>
 	</dl>
 </div>
-
-{{% /sc_guides %}}

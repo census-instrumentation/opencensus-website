@@ -3,12 +3,10 @@ Description = "java"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
+type = "leftnav"
 title = "Java"
 date = "2018-05-18T09:59:40-05:00"
 +++
-
-{{% sc_java %}}
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
 &nbsp;  
@@ -158,5 +156,3 @@ Mar 02, 2018 6:38:31 PM
 io.opencensus.examples.helloworld.QuickStart main INFO:
 Recorded stats for my.org/views/video_size: ViewData{view=View{name=Name{asString=my.org/views/video_size}, description=processed video size over time, measure=MeasureLong{name=my.org/measure/video_size, description=size of processed videos, unit=MBy}, aggregation=Distribution{bucketBoundaries=BucketBoundaries{boundaries=[0.0, 256.0, 65536.0]}}, columns=[TagKey{name=my.org/keys/frontend}], window=Cumulative{}}, aggregationMap={[TagValue{asString=mobile-ios9.3.5}]=DistributionData{mean=25648.0, count=1, min=25648.0, max=25648.0, sumOfSquaredDeviations=0.0, bucketCounts=[0, 0, 1, 0]}}, windowData=CumulativeData{start=Timestamp{seconds=1520044706, nanos=28000000}, end=Timestamp{seconds=1520044711, nanos=170000000}}}
 ```
-
-{{% /sc_java %}}
