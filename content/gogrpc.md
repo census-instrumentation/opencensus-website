@@ -53,7 +53,7 @@ protoc -I rpc rpc/defs.proto --go_out=plugins=grpc:rpc
 
 {{< sc_center >}}Makefile{{< /sc_center >}}  
 
-{{< sc_code >}}make{{< /sc_code >}} should then generate code that’ll make the directory structure look like this  
+`make` should then generate code that’ll make the directory structure look like this  
 
 ```
 |-rpc/
@@ -66,7 +66,7 @@ After the code generation, we now need to add the business logic into the server
 
 ### Plain Server  
 
-Our server’s sole purpose is to capitalize content sent in and send it back to the client. With gRPC, as previously mentioned, the protoc plugin generated code for a server interface. This allows you create your own custom logic of operation, as we shall do below with a custom object that implements the {{< sc_code >}}Capitalize{{< /sc_code >}} method.  
+Our server’s sole purpose is to capitalize content sent in and send it back to the client. With gRPC, as previously mentioned, the protoc plugin generated code for a server interface. This allows you create your own custom logic of operation, as we shall do below with a custom object that implements the `Capitalize`method.  
 
 ```							
 package main
@@ -117,7 +117,7 @@ With that, we can now monetize access to generate money $$$. In order to accompl
 
 ### Plain Client  
 
-Our client makes a request to the gRPC server above, sending content that then gets capitalized and printed to our screen. It is interactive and can be run simply by {{< sc_code >}}go run client.go{{< /sc_code >}}  
+Our client makes a request to the gRPC server above, sending content that then gets capitalized and printed to our screen. It is interactive and can be run simply by `go run client.go`.
 							
 ```
 package main
@@ -184,7 +184,7 @@ OpenCensus allows you to trace and measure once and then export to a variety of 
 
 ### Part 1: observability by instrumenting the server  
 
-To collect statistics from gRPC servers, OpenCensus is already integrated with gRPC out of the box, and one just has to import {{< sc_code >}}go.opencensus.io/plugin/ocgrpc{{< /sc_code >}}. And then also subscribe to the gRPC server views. This amounts to a 7 line change  
+To collect statistics from gRPC servers, OpenCensus is already integrated with gRPC out of the box, and one just has to import `go.opencensus.io/plugin/ocgrpc`. And then also subscribe to the gRPC server views. This amounts to a 7 line change  
 							
 ```
 10a11,13
@@ -214,7 +214,7 @@ and then to trace the application, we’ll start a span on entering the function
 > 	}, "Data in")
 ```
 							
-In the tracing, notice the {{< sc_code >}}trace.StartSpan(ctx, "(*fetchIt).Capitalize"){{< /sc_code >}}? We take a {{< sc_code >}}context.Context{{< /sc_code >}} as the first argument, to use context propagation which carries over RPC specific information about a request to uniquely identify it.  
+In the tracing, notice the `trace.StartSpan(ctx, "(*fetchIt).Capitalize")`? We take a `context.Context`as the first argument, to use context propagation which carries over RPC specific information about a request to uniquely identify it.  
 
 ### How do we examine that “observability”?  
 &nbsp;  
@@ -392,13 +392,13 @@ func createAndRegisterExporters() {
 
 and with the following variables set in our environment  
 
-{{< sc_code >}}AWS_REGION=region{{< /sc_code >}}  
+`AWS_REGION=region` 
 
-{{< sc_code >}}AWS_ACCESS_KEY_ID=keyID{{< /sc_code >}}  
+`AWS_ACCESS_KEY_ID=keyID` 
 
-{{< sc_code >}}AWS_SECRET_ACCESS_KEY=key{{< /sc_code >}}  
+`AWS_SECRET_ACCESS_KEY=key` 
 
-{{< sc_code >}}GOOGLE_APPLICATION_CREDENTIALS=credentials.json{{< /sc_code >}}  
+`GOOGLE_APPLICATION_CREDENTIALS=credentials.json` 
 
 as well as our prometheus.yml file  
 							
@@ -418,11 +418,11 @@ scrape_configs:
       - targets: ['localhost:9888', 'localhost:9988', 'localhost:9989']
 ```
 							
-{{< sc_code >}}prometheus --config.file=prometheus.yml{{< /sc_code >}}  
+`prometheus --config.file=prometheus.yml` 
 
-{{< sc_code >}}go run server.go{{< /sc_code >}}  
+`go run server.go` 
 
-{{< sc_code >}}2018/05/12 11:40:17 fetchIt gRPC server serving at ":9988"{{< /sc_code >}}  
+`2018/05/12 11:40:17 fetchIt gRPC server serving at ":9988"` 
 
 ### Monitoring results
 
