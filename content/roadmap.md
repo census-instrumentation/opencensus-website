@@ -8,7 +8,7 @@ title = "Roadmap"
 date = "2018-05-11T12:09:08-05:00"
 +++
 
-Read OpenCensus’s journey ahead at [platforms and languages](https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html).
+Read OpenCensus’s journey ahead: [platforms and languages](https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html).
 
 ---
 
