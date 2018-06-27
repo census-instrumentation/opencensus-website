@@ -18,14 +18,11 @@ bazel build //examples/helloworld:helloworld
 bazel-bin/opencensus/examples/helloworld/hello_world
 ```
 
-&nbsp; 
-
 ---
 
 #### Quickstart Example  
 
 The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
-&nbsp;  
 
 In this case we are using stdout exporters which we register at the beginning.
 
@@ -64,7 +61,6 @@ opencensus::stats::View view(video_size_view);
 video_size_view.RegisterForExport();
 ``` 
 
-
 Example View
 
 ```
@@ -86,7 +82,6 @@ In this case the view stores a distribution. The example records 1 video size to
 opencensus::stats::Record({{VideoSizeMeasure(), 25648}},{{kFrontendKey, "video size"}});
 ```
 
-&nbsp;  
 Example Span
 
 ```
@@ -105,7 +100,6 @@ Links: (0 dropped)
 Span ended: true
 Status: OK
 ```
-&nbsp;  
 
 Span context information is displayed in hexadecimal on a single line which is the concatenation of TraceId, SpanId, and span options. Parent SpanId is displayed on the following line. In this case there is no parent (root span), so the parent id is 0. There were 2 attributes added. After work has been completed a span must be ended by the user. A span that is still active (i.e. not ended), will not be exported.
 

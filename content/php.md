@@ -9,16 +9,13 @@ date = "2018-05-18T12:37:28-05:00"
 +++
 
 The example demonstrates how to record traces for a simple website that calculate Fibonacci numbers recursively.  
-&nbsp;  
 
 ---
-&nbsp;
+
 #### API Documentation
 The OpenCensus libraries artifacts are released to Packagist ([{{< sc_gloss1 >}}packagist.org{{< /sc_gloss1 >}}](https://packagist.org/)) [{{< sc_gloss1 >}}opencensus/opencensus{{< /sc_gloss1 >}}](https://packagist.org/packages/opencensus/opencensus). The API documentation is available [{{< sc_gloss1 >}}here{{< /sc_gloss1 >}}](https://census-instrumentation.github.io/opencensus-php/api/).  
-&nbsp;  
 
 ---
-&nbsp;
 #### Example
 1. Clone the OpenCensus PHP github repository:  
 
@@ -30,10 +27,8 @@ git clone https://github.com/census-instrumentation/opencensus-php.git
 ``` php
 examples/silex/
 ```  
-&nbsp;  
 
 ---
-&nbsp;
 
 #### To Build/Run The Example
 1. Install dependencies via composer:  
@@ -41,21 +36,19 @@ examples/silex/
 ``` php
 $ composer install
 ```  
-&nbsp;    
+
 2. The OpenCensus PHP Quickstart example can be run using the build-in PHP webserver:  
 
 ``` php
 $ php -S localhost:8000 -t web
 ```  
-&nbsp;  
+
 3. Make a HTTP request to hit the application:  
 ``` php
 $ curl http://localhost:8000/fib/3
 ```  
-&nbsp;  
 
 ---
-&nbsp;
 
 #### The Example Code
 
@@ -98,10 +91,8 @@ $app->get('/fib/{n}', function ($n) use ($app) {
 
 $app->run();
 ```  
-&nbsp;  
 
 ---
-&nbsp;
 
 #### The Example Output (Raw)
 ```

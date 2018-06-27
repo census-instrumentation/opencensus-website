@@ -10,16 +10,21 @@ date = "2018-05-18T13:52:18-05:00"
 
 
 This example application demonstrates how to use OpenCensus to record traces for a Sinatra-based web application. You can find the source code for the application at [{{< sc_gloss1 >}}https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world{{< /sc_gloss1 >}}](https://github.com/census-instrumentation/opencensus-ruby/tree/master/examples/hello-world).  
-&nbsp;  
+
+
+#### API Documentation  
+The OpenCensus Ruby API is documented at:  
+[<span class="gloss1">http://www.rubydoc.info/gems/opencensus</span>](http://www.rubydoc.info/gems/opencensus)  
 
 ---
-&nbsp;  
+
 #### Prerequisites  
 Ruby 2.2 or later is required. Make sure you have Bundler installed as well.  
 ```ruby
 gem install bundler
 ```  
-&nbsp;  
+
+---
 
 #### Installation  
 Get the example from the OpenCensus Ruby repository on Github, and cd into the example application directory.
@@ -28,13 +33,12 @@ Get the example from the OpenCensus Ruby repository on Github, and cd into the e
 git clone https://github.com/census-instrumentation/opencensus-ruby.git
 cd opencensus-ruby/examples/hello-world
 ```   
-&nbsp;  
+
 Install the dependencies using Bundler.  
 
 ```
 bundle install
 ```  
-&nbsp;  
 
 #### Running the example
 Run the application locally on your workstation with:  
@@ -42,7 +46,6 @@ Run the application locally on your workstation with:
 ```ruby
 bundle exec ruby hello.rb
 ```  
-&nbsp;  
 
 This will run on port 4567 by default, and display application logs on the terminal. From a separate shell, you can send requests using a tool such as curl:  
 
@@ -50,7 +53,6 @@ This will run on port 4567 by default, and display application logs on the termi
 curl http://localhost:4567/
 curl http://localhost:4567/lengthy
 ```  
-&nbsp;  
 The running application will log the captured traces.  
 &nbsp;  
 #### The example application code
@@ -62,7 +64,7 @@ gem "faraday", "~> 0.14"
 gem "opencensus", "~> 0.3"
 gem "sinatra", "~> 2.0"
 ```  
-&nbsp;  
+
 Following is the **hello.rb** source file from the example:  
 ```ruby
 require "sinatra"
@@ -100,7 +102,3 @@ get "/lengthy" do
   "Done!"
 end
 ```  
-&nbsp;  
-#### API Documentation  
-The OpenCensus Ruby API is documented at:  
-[<span class="gloss1">http://www.rubydoc.info/gems/opencensus</span>](http://www.rubydoc.info/gems/opencensus)  

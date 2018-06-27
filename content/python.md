@@ -9,54 +9,46 @@ date = "2018-05-18T13:08:20-05:00"
 +++
 
 The example demonstrates how to record traces for a simple Flask web application.  
-&nbsp;  
 
 ---
-&nbsp;  
-#### OpenCensus Python API Documentation
+
+#### API Documentation
 The OpenCensus libraries artifacts are released to [{{% sc_gloss1 %}}PyPI{{% /sc_gloss1 %}}](https://pypi.python.org/pypi/opencensus). The API documentation is available [{{% sc_gloss1 %}}here{{% /sc_gloss1 %}}](https://census-instrumentation.github.io/opencensus-python/trace/api/index.html).  
-&nbsp;  
 
 ---
-&nbsp;  
-#### The Quickstart Example Code
-1. Clone the OpenCensus Python GitHub repo:
 
+#### The Quickstart Example Code
+
+1. Clone the OpenCensus Python GitHub repo:
 ```
 git clone https://github.com/census-instrumentation/opencensus-python.git
 ```  
-&nbsp;  
-2. Code is in directory:  
 
+2. Code is in directory:  
 ```
 examples/trace/helloworld/flask
 ```  
-&nbsp;  
 
 ---
-&nbsp;  
 
 #### To Run The Example
-1. Install dependencies via pip:  
 
+1. Install dependencies via pip:  
 ``` python
 $ pip install opencensus
-```  
-&nbsp;  
-2. The OpenCensus Python Quickstart example can be run as below:  
+```
 
+2. The OpenCensus Python Quickstart example can be run as below:
 ``` python
 $ python simple.py
 ```  
-&nbsp;  
-3. Make a HTTP request to hit the application:  
+
+3. Make a HTTP request to hit the application:
 ``` python
 $ curl http://localhost:8080/
 ```  
-&nbsp;  
 
 ---
-&nbsp;  
 
 #### The Example Code
 ``` python
@@ -79,10 +71,8 @@ def hello():
 if __name__ == '__main__':
    app.run(host='localhost', port=8080)
 ```  
-&nbsp;  
 
 ---
-&nbsp;  
 
 #### The Example Output (Raw)
 ```
