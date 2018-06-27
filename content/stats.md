@@ -1,10 +1,10 @@
 +++
+title = "Stats"
 Description = "stats"
 Tags = ["Development", "OpenCensus"]
 Categories = ["Development", "OpenCensus"]
 menu = "main"
-
-title = "Stats"
+type = "leftnav"
 date = "2018-05-30T14:53:59-05:00"
 +++
 
