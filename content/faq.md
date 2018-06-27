@@ -47,12 +47,6 @@ A user’s guide will be released as soon as possible.
 
 ---
 
-#### How do I integrate OpenCensus with my framework?
-
-See the <a href="https://github.com/census-instrumentation/opencensus-cpp">OpenCensus Guide for Framework Developers</a>.
-
----
-
 #### What are the z-Pages?
 
 OpenCensus provides a stand-alone application that uses a gRPC channel to communicate with the OpenCensus code linked into your application. The application displays configuration parameters and trace information in real time held in the OpenCensus library.
