@@ -14,7 +14,6 @@ OpenCensus terminology is explained at the [glossary](/glossary).
 
 ---
 
-&nbsp;
 #### OpenCensus by Language
 
 <div class="col-md-12 box" style="margin-top:20px">
