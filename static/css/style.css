@@ -1581,3 +1581,7 @@ text-indent: -1em;
   color: #C1272D;
   font-weight: bold;
 }
+
+.content h1, .content h2, .content h3, .content h4, .content h5 {
+  margin: 20px 0px;
+}

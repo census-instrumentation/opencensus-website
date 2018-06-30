@@ -1,35 +1,36 @@
 +++
-Description = "go"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
-type = "leftnav"
-
 title = "Go"
-date = "2018-05-17T14:17:26-05:00"
+type = "leftnav"
 +++
 
-The example demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” tag so that collected data can be broken by the frontend user who initiated the video processing.  
 
 ---
 
-#### API Documentation  
-The OpenCensus Go API reference is available at  
-[godoc](https://godoc.org/go.opencensus.io).
+#### API Documentation
+
+The OpenCensus Go API reference is available at [godoc.org](https://godoc.org/go.opencensus.io).
 
 ---
-#### Example
-This guide helps you write a Go program instrumented with OpenCensus.  
 
-**Prerequisites**  
+![OpenCensus Overview](https://i.imgur.com/cf4ElHE.jpg)
+
+In a distributed system, a user request may go through multiple services until there is a response. OpenCensus allows you to instrument your services and collect diagnostics data all through your services end-to-end.
+
+Start with instrumenting HTTP and gRPC clients and servers, then add additional custom instrumentation if needed.
+
+* [HTTP guide](https://github.com/census-instrumentation/opencensus-go/tree/master/examples/http)
+* [gRPC guide](https://github.com/census-instrumentation/opencensus-go/tree/master/examples/grpc)
+
+---
+
+## Installation
+
 
 Go 1.8 or higher is required. Make sure you have 1.8+ installed by running:
 
 ```bash
 $ go version
 ```  
-
-**Installation**
 
 Install the OpenCensus packages by running:
 
@@ -39,109 +40,151 @@ $ go get go.opencensus.io
 
 See the [tag](https://godoc.org/go.opencensus.io/tag), [stats](https://godoc.org/go.opencensus.io/stats), [trace](https://godoc.org/go.opencensus.io/trace) godoc for the API reference and [examples](https://github.com/census-instrumentation/opencensus-go/tree/master/examples) directory for samples.  
 
-**Example**  
 
-The following example uses  demonstrates how to record stats and traces for a video processing system. It records data with the “frontend” dimension to be able to break down collected data by the frontend user started the video processing from.
+---
 
-```
-$ cd $(go env GOPATH)/src/go.opencensus.io/examples/helloworld
-$ go get -v . # get the dependencies
-$ go run main.go
-```
+## Tags
 
-``` go
-// Command helloworld is an example program that collects data for
-// video size.
-package main
+Tags represent propagated key-value pairs. They are propagated using `context.Context`
+in the same process or can be encoded to be transmitted on the wire.
 
-import (
-  "context"
-  "fmt"
-  "log"
-  "math/rand"
-  "time"
+Package tag allows adding or modifying tags in the current context.
 
-  "go.opencensus.io/examples/exporter"
-  "go.opencensus.io/stats"
-  "go.opencensus.io/stats/view"
-  "go.opencensus.io/tag"
-  "go.opencensus.io/trace"
+```go
+ctx, err = tag.New(ctx,
+	tag.Insert(osKey, "macOS-10.12.5"),
+	tag.Upsert(userIDKey, "cde36753ed"),
 )
-
-var (
-  // frontendKey allows us to breakdown the recorded data
-  // by the frontend used when uploading the video.
-  frontendKey tag.Key
-
-  // videoSize will measure the size of processed videos.
-  videoSize *stats.Int64Measure
-)
-
-func main() {
-  ctx := context.Background()
-
-  // Register an exporter to be able to retrieve
-  // the data from the subscribed views.
-  e := &exporter.PrintExporter{}
-  view.RegisterExporter(e)
-  trace.RegisterExporter(e)
-
-  var err error
-  frontendKey, err = tag.NewKey("my.org/keys/frontend")
-  if err != nil {
-   log.Fatal(err)
-  }
-  videoSize, err = stats.Int64("my.org/measure/video_size",
-   "size of processed videos", "MBy")
-  if err != nil {
-   log.Fatalf("Video size measure not created: %v", err)
-  }
-
-  // Create view to see the processed video size
-  // distribution broken down by frontend.
-  v, err := view.New(
-   "my.org/views/video_size",
-   "processed video size over time",
-   []tag.Key{frontendKey},
-   videoSize,
-   view.DistributionAggregation([]float64{0, 1 << 16, 1 << 32}),
-  )
-  if err != nil {
-   log.Fatalf("Cannot create view: %v", err)
-  }
-
-  // Subscribe will allow view data to be exported.
-  // Once no longer need, you can unsubscribe from the view.
-  if err := v.Subscribe(); err != nil {
-   log.Fatalf("Cannot subscribe to the view: %v", err)
-  }
-
-  // Process the video.
-  process(ctx)
-
-  // Wait for a duration longer than reporting
-  duration to ensure the stats
-  // library reports the collected data.
-  fmt.Println("Wait longer than the reporting duration...")
-  time.Sleep(2 * time.Second)
-}
-
-// process processes the video and instruments the processing
-// by creating a span and collecting metrics about the operation.
-func process(ctx context.Context) {
-  ctx, err := tag.New(ctx,
-   tag.Insert(frontendKey, "mobile-ios9.3.5"),
-  )
-  if err != nil {
-   log.Fatal(err)
-  }
-  ctx, span := trace.StartSpan(ctx, "my.org/ProcessVideo")
-  defer span.End()
-  // Process video.
-  // Record the processed video size.
-  // Sleep for [1,10] milliseconds to fake work.
-  time.Sleep(time.Duration(rand.Intn(10)+1) * time.Millisecond)
-
-  stats.Record(ctx, videoSize.M(25648))
+if err != nil {
+	log.Fatal(err)
 }
 ```
+
+---
+
+## Stats
+
+OpenCensus stats collection happens in two stages:
+
+* Definition of measures and recording of data points
+* Definition of views and aggregation of the recorded data
+
+### Recording
+
+Measurements are data points associated with a measure.
+Recording the measurements with tags from the provided context:
+
+```go
+stats.Record(ctx, videoSize.M(102478))
+```
+
+### Views
+
+Views are how Measures are aggregated. You can think of them as queries over the
+set of recorded data points (measurements).
+
+Views have two parts: the tags to group by and the aggregation type used.
+
+Below, there are examples of aggregations:
+
+```go
+distAgg := view.Distribution(0, 1<<32, 2<<32, 3<<32)
+countAgg := view.Count()
+```
+
+Here, we are creating a view with the distribution aggregation over our measure.
+
+```go
+if err := view.Register(&view.View{
+	Name:        "example.com/video_size_distribution",
+	Description: "processed video size over time",
+	Measure:     videoSize,
+	TagKeys:     []tag.Key{osKey},
+	Aggregation: view.Distribution(0, 1<<32, 2<<32, 3<<32),
+}); err != nil {
+	log.Fatalf("Failed to register view: %v", err)
+}
+```
+
+Register begins data collection for the view. Registered views' data will be
+exported via the registered exporters.
+
+---
+
+## Traces
+
+Users can create custom trace spans: 
+
+```go
+ctx, span := trace.StartSpan(ctx, "service.Method")
+defer span.End()
+```
+
+Or add attributes and
+annotations to the current span in the context:
+
+```go
+span := trace.FromContext(ctx)
+span.Annotate(nil, "Transaction completed.")
+```
+
+---
+
+## Profiles
+
+OpenCensus tags can be applied as profiler labels
+for users who are on Go 1.9 and above.
+
+[embedmd]:# (internal/readme/tags.go profiler)
+```go
+ctx, err = tag.New(ctx,
+	tag.Insert(osKey, "macOS-10.12.5"),
+	tag.Insert(userIDKey, "fff0989878"),
+)
+if err != nil {
+	log.Fatal(err)
+}
+tag.Do(ctx, func(ctx context.Context) {
+	// Do work.
+	// When profiling is on, samples will be
+	// recorded with the key/values from the tag map.
+})
+```
+
+A screenshot of the CPU profile from the program above:
+
+![CPU profile](https://i.imgur.com/jBKjlkw.png)
+
+---
+
+## Execution tracer
+
+With Go 1.11, OpenCensus Go will be able to work mutually 
+with execution tracer. See [Debugging Latency in Go](https://medium.com/observability/debugging-latency-in-go-1-11-9f97a7910d68)
+to see an example of their mutual use.
+
+---
+
+## Exporters
+
+Only main packages should register exporters.
+Following Go exporters are available for OpenCensus Go:
+
+* [Prometheus][exporter-prom] for stats
+* [OpenZipkin][exporter-zipkin] for traces
+* Stackdriver [Monitoring][exporter-stackdriver] and [Trace][exporter-stackdriver]
+* [Jaeger][exporter-jaeger] for traces
+* [AWS X-Ray][exporter-xray] for traces
+* [Datadog][exporter-datadog] for stats and traces
+
+---
+
+
+Bug reports and feature requests can be filed at the GitHub [repo](https://github.com/census-instrumentation/opencensus-go).
+
+[exporter-prom]: https://godoc.org/go.opencensus.io/exporter/prometheus
+[exporter-stackdriver]: https://godoc.org/contrib.go.opencensus.io/exporter/stackdriver
+[exporter-zipkin]: https://godoc.org/go.opencensus.io/exporter/zipkin
+[exporter-jaeger]: https://godoc.org/go.opencensus.io/exporter/jaeger
+[exporter-xray]: https://github.com/census-instrumentation/opencensus-go-exporter-aws
+[exporter-datadog]: https://github.com/DataDog/opencensus-go-exporter-datadog
