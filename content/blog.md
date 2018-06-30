@@ -1,10 +1,5 @@
 +++
 title = "Blog"
-Description = "blog"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
-date = "2018-05-11T10:32:44-05:00"
 +++
 
 <!-- ROW 1 START ------->
@@ -27,7 +22,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/@orijtech/redis-clients-instrumented-by-opencensus-in-java-and-go-402470d92c5c" target="_blank">
+		  <a href="https://medium.com/@orijtech/redis-clients-instrumented-by-opencensus-in-java-and-go-402470d92c5c">
 			<h3>Redis clients instrumented by OpenCensus in Java and Go</h3>
 		  </a>
 		</div>
@@ -52,7 +47,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/" target="_blank">
+		  <a href="https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/">
 			<h3>Microsoft joins the OpenCensus project</h3>
 		  </a>
 		</div>
@@ -77,7 +72,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058" target="_blank">
+		  <a href="https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058">
 			<h3>Hit the Ground Running with Distributed Tracing Core Concepts</h3>
 		  </a>
 		</div>
@@ -111,7 +106,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/@orijtech/opencensus-for-go-grpc-developers-7f3ee1ac3d6d" target="_blank">
+		  <a href="https://medium.com/@orijtech/opencensus-for-go-grpc-developers-7f3ee1ac3d6d">
 			<h3>OpenCensus for Go gRPC developers</h3>
 		  </a>
 		</div>
@@ -136,7 +131,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html" target="_blank">
+		  <a href="https://opensource.googleblog.com/2018/05/opencensus-journey-ahead-part-1.html">
 			<h3>OpenCensus’s journey ahead: platforms and languages</h3>
 		  </a>
 		</div>
@@ -161,7 +156,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://www.youtube.com/watch?reload=9&time_continue=1565&v=Nxqd7y78h7Q" target="_blank">
+		  <a href="https://www.youtube.com/watch?reload=9&time_continue=1565&v=Nxqd7y78h7Q">
 			<h3>Practical and Useful Latency Analysis using Istio and OpenCenus</h3>
 		  </a>
 		</div>
@@ -195,7 +190,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/@orijtech/memcached-clients-instrumented-with-opencensus-in-go-and-python-dacbd01b269c" target="_blank">
+		  <a href="https://medium.com/@orijtech/memcached-clients-instrumented-with-opencensus-in-go-and-python-dacbd01b269c">
 			<h3>Memcached clients instrumented with OpenCensus in Go and Python</h3>
 		  </a>
 		</div>
@@ -220,7 +215,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/@orijtech/hello-world-for-web-servers-in-go-with-opencensus-29955b3f02c6" target="_blank">
+		  <a href="https://medium.com/@orijtech/hello-world-for-web-servers-in-go-with-opencensus-29955b3f02c6">
 			<h3>“Hello, world!” for web servers in Go with OpenCensus</h3>
 		  </a>
 		</div>
@@ -245,7 +240,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://twitter.com/bobquillin/status/981571739720167425" target="_blank">
+		  <a href="https://twitter.com/bobquillin/status/981571739720167425">
 			<h3>Twitter - Bob Quillin</h3>
 		  </a>
 		</div>
@@ -279,7 +274,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/fnproject/tracing-all-the-fn-things-with-opencensus-e579b268aeca" target="_blank">
+		  <a href="https://medium.com/fnproject/tracing-all-the-fn-things-with-opencensus-e579b268aeca">
 			<h3>Tracing all the Fn things with OpenCensus</h3>
 		  </a>
 		</div>
@@ -304,7 +299,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://twitter.com/chadarimura/status/981319453282467840" target="_blank">
+		  <a href="https://twitter.com/chadarimura/status/981319453282467840">
 			<h3>Twitter - Chad Arimura</h3>
 		  </a>
 		</div>
@@ -329,7 +324,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://twitter.com/brucemacv/status/981324918330744833" target="_blank">
+		  <a href="https://twitter.com/brucemacv/status/981324918330744833">
 			<h3>Twitter - Bruce MacVarish</h3>
 		  </a>
 		</div>
@@ -363,7 +358,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://blog.doit-intl.com/measure-once-export-anywhere-opencensus-in-the-wild-61724f44eb00" target="_blank">
+		  <a href="https://blog.doit-intl.com/measure-once-export-anywhere-opencensus-in-the-wild-61724f44eb00">
 			<h3>Measure Once — Export Anywhere: OpenCensus in the wild</h3>
 		  </a>
 		</div>
@@ -388,7 +383,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://www.gcppodcast.com/post/episode-118-opencensus-with-morgan-mclean-and-jbd/" target="_blank">
+		  <a href="https://www.gcppodcast.com/post/episode-118-opencensus-with-morgan-mclean-and-jbd/">
 			<h3>OpenCensus with Morgan McLean and JBD</h3>
 		  </a>
 		</div>
@@ -413,7 +408,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://opensource.googleblog.com/2018/03/the-value-of-opencensus.html" target="_blank">
+		  <a href="https://opensource.googleblog.com/2018/03/the-value-of-opencensus.html">
 			<h3>The value of OpenCensus</h3>
 		  </a>
 		</div>
@@ -447,7 +442,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/google-cloud/opencensus-tracing-w-stackdriver-a079fae52499" target="_blank">
+		  <a href="https://medium.com/google-cloud/opencensus-tracing-w-stackdriver-a079fae52499">
 			<h3>OpenCensus Tracing w/ Stackdriver</h3>
 		  </a>
 		</div>
@@ -472,7 +467,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e" target="_blank">
+		  <a href="https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e">
 			<h3>Cloud Spanner, instrumented by OpenCensus and exported to Stackdriver</h3>
 		  </a>
 		</div>
@@ -497,7 +492,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://opensource.googleblog.com/2018/03/how-google-uses-opencensus-internally.html" target="_blank">
+		  <a href="https://opensource.googleblog.com/2018/03/how-google-uses-opencensus-internally.html">
 			<h3>How Google uses Census internally</h3>
 		  </a>
 		</div>
@@ -531,7 +526,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://gianarb.it/blog/what-is-distributed-tracing-opentracing-opencensus" target="_blank">
+		  <a href="https://gianarb.it/blog/what-is-distributed-tracing-opentracing-opencensus">
 			<h3>What is distributed tracing. Zoom on opencensus and opentracing</h3>
 		  </a>
 		</div>
@@ -556,7 +551,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="http://dieswaytoofast.blogspot.com/2018/01/opencensustowards-harmonizing-your.html" target="_blank">
+		  <a href="http://dieswaytoofast.blogspot.com/2018/01/opencensustowards-harmonizing-your.html">
 			<h3>OpenCensus — towards harmonizing your Instrumentation</h3>
 		  </a>
 		</div>
@@ -581,7 +576,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://kausal.co/blog/opencensus-prometheus-kausal/" target="_blank">
+		  <a href="https://kausal.co/blog/opencensus-prometheus-kausal/">
 			<h3>OpenCensus with Prometheus and Kubernetes</h3>
 		  </a>
 		</div>
@@ -615,7 +610,7 @@ date = "2018-05-11T10:32:44-05:00"
 		  </ul>
 		</div>
 		<div class="post-title">
-		  <a href="https://opensource.googleblog.com/2018/01/opencensus.html" target="_blank">
+		  <a href="https://opensource.googleblog.com/2018/01/opencensus.html">
 			<h3>OpenCensus: A Stats Collection and Distributed Tracing Framework</h3>
 		  </a>
 		</div>
