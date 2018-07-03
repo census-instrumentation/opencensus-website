@@ -76,7 +76,7 @@ OpenCensus terminology is explained at the [glossary](/glossary).
 				<td><a href="/java">Quickstart Guide</a></td>
 			</tr>
 			<tr>
-				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/0.13.2">API Reference</a></td>
+				<td><a href="https://www.javadoc.io/doc/io.opencensus/opencensus-api/">API Reference</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
