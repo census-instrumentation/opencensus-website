@@ -6,7 +6,32 @@ title = "Blog"
 <div class="row">   
   <!-- BLOG CONTENT START -->
   <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+  <!-- BLOG ITEM 1 -->
+	<div class="col-md-4">
+	  <div class="blog-item">
+	    <div class="post-meta">
+		  <ul>
+		    <li>
+			  <i class="fa fa-tags"></i>
+			  <span>OC</span>
+			</li>
+			<li>
+			  <i class="fa fa-calendar-o"></i>
+			  <span>July 11, 2018</span>
+			</li>
+		  </ul>
+		</div>
+		<div class="post-title">
+		  <a href="https://medium.com/google-cloud/monitoring-http-latency-with-opencensus-and-stackdriver-bf561608e81a">
+			<h3>Monitoring HTTP Latency with OpenCensus and Stackdriver</h3>
+		  </a>
+		</div>
+		<div class="post-content">
+			<p>This post will describe how to code your own monitoring probes, similar in function to Stackdriver uptime checks on Google Cloud. Code, configuration files, commands, and detailed instructions&hellip;</p>
+		</div>
+	  </div>
+	</div>
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -31,7 +56,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -56,7 +81,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 1 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 2 START ------->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+  <!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -81,16 +115,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 1 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 2 START ------->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-    <!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -115,7 +140,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -140,7 +165,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 2 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 3 START ------->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -165,16 +199,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 2 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 3 START ------->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -199,7 +224,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -224,7 +249,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 3 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 4 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -249,16 +283,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 3 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 4 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -283,7 +308,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -308,7 +333,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 4 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 5 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -333,16 +367,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 4 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 5 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -367,7 +392,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -392,7 +417,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 5 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 6 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -417,16 +451,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 5 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 6 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -451,7 +476,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -476,7 +501,16 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
+  </div> <!-- ROW 6 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 7 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
@@ -501,16 +535,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 6 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 7 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+	<!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -535,7 +560,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 2 -->
+	<!-- BLOG ITEM 3 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
@@ -560,8 +585,17 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-	<!-- BLOG ITEM 3 -->
-	<div class="col-md-4">
+  </div> <!-- ROW 7 END -->
+</div> <!-- ROW END -->
+<br />
+
+
+<!-- ROW 8 START -->
+<div class="row">   
+  <!-- BLOG CONTENT START -->
+  <div class="blog-c">
+	<!-- BLOG ITEM 1 -->
+  <div class="col-md-4">
 	  <div class="blog-item">
 		<div class="post-meta">
 		  <ul>
@@ -585,16 +619,7 @@ title = "Blog"
 		</div>
 	  </div>
 	</div>
-  </div> <!-- ROW 7 END -->
-</div> <!-- ROW END -->
-<br />
-
-
-<!-- ROW 8 START -->
-<div class="row">   
-  <!-- BLOG CONTENT START -->
-  <div class="blog-c">
-	<!-- BLOG ITEM 1 -->
+  <!-- BLOG ITEM 2 -->
 	<div class="col-md-4">
 	  <div class="blog-item">
 	    <div class="post-meta">
