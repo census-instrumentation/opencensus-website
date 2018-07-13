@@ -24,7 +24,7 @@ A single distribution of libraries that automatically collects traces and metric
 
 {{% sc_index2 %}}
 #### Who is behind OpenCensus?
-OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there.
+OpenCensus originates from Google, where a set of libraries called Census were used to automatically capture traces and metrics from services. Since going open source, the project is now composed of a group of cloud providers, application performance management vendors, and open source contributors. The project is hosted in GitHub and all work occurs there.
 {{% /sc_index2 %}}
 
 {{% sc_index3 %}}
