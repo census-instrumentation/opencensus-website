@@ -1565,6 +1565,8 @@ text-indent: -1em;
 
 .content p {
   margin: 20px 0px;
+  line-height: 23px;
+  letter-spacing: 0px;
 }
 
 .content ul, .content ol {
@@ -1573,8 +1575,8 @@ text-indent: -1em;
 
 .content ul li, .content ol li {
   list-style-type: circle;
-  margin: 0px 0px 10px 40px;
-  line-height: 27px;
+  margin: 0px 0px 0px 40px;
+  line-height: 23px;
 }
 
 .content a {

@@ -1,137 +1,134 @@
 +++
-title = "Trace"
-Description = "trace"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
+title = "Tracing"
 type = "leftnav"
 date = "2018-05-30T15:37:24-05:00"
 +++
 
-A distributed trace tracks the progression of a single user request as it is handled by the services and processes that make up an application. Each step is called a span in the trace. Spans include metadata about the step, including especially the time spent in the step, called the span’s latency. You can use this information to tune the performance of your application.  
+A trace tracks the progression of a single user request
+as it is handled by other services that make up an application.
 
----
-#### Overview  
-
-In a modern system, a single user request may require many microservices, running across many machines, to service it.  
-&nbsp;  
-
-__Distributed Tracing__ tracks the progression of a request as it is handled by the services and processes that make up a distributed system. Each step in the Trace is called a Span. Each Span contains metadata, such as the length of time spent in the step, and optionally __annotations__ about the work being performed. This information can be used for debugging and performance tuning of distributed systems.  
-
-Picture a three-tier web application:  
-
-* User requests arrive at a load balancer.
-* The load balancer forwards the request to an application server.
-* The application server sends two database requests, then returns a webpage.  
-
-The database requests can be issued concurrently, but both have to complete before the webpage can be built. In this architecture, a single user request passes through four distinct systems, each is probably sharded into multiple replicas, and running across more than four machines.  
-
-If a user request is slow, how do we determine why?  
-
-* Maybe one of the two database lookups was slow. Which one?
-* Maybe the app server responded in time and the load balancer caused the slow-down.  
-
-Given a distributed trace of the slow user request, we can tell at a glance what happened.  
-&nbsp;  
+Each unit work is called a span in a trace. Spans include metadata about the work,
+including the time spent in the step (latency) and status.
+You can use tracing to debug errors and
+latency issues of your application.  
 
 ---
 
-#### Tracing Concepts  
+## Spans
 
-What follows is a list of all Tracing concepts and how to apply them:  
+A trace is a tree of spans.
 
-__Trace__  
-A Trace is a collection of nested Spans. Traces often extend across multiple nodes in a distributed system. Traces are uniquely identified by a TraceId and all Spans within a Trace will have the same TraceId.  
+A span is the unit work represented in a trace. A span may
+represent a HTTP request, an RPC, a server handler,
+a database query or a section customly marked in user code.
 
-__Span__  
-A Span represents an operation or a unit of work. Multiple spans can be part of a "Trace", which represents an execution path (usually distributed) across multiple processes/nodes. Spans are uniquely identified by a SpanId and a TraceId. Spans within the same trace have the same TraceId.  
+![A trace](/img/trace-trace.png)
 
-All completed Spans have: 
+Above, you see a trace with various spans. In order to respond
+to `/messages`, several other internal requests are made. First,
+we are checking if the user is authenticated, we are trying to
+get the results from the cache. It is a cache miss, hence we
+query the database for the results, we cache the results back,
+and respond back to the user.
 
-* TraceId
-* SpanId
-* Start Time
-* End Time
-* Status
+There are two types of spans:
 
-Spans can optionally have:  
+* **Root span**: Root spans don't have a parent span. They are the
+  first span. `/messages` span above is a root span.
+* **Child span**: Child spans have an existing span as their parent. 
 
-* Parent SpanId
-* Remote Parent
-* Attributes
-* Annotations
-* Message Events
-* Links
 
-__Starting/Ending Spans__  
-When a Span starts, it records a start time.  When a Span ends, the end time is recorded. Latency is calculated by the difference between the start and end times.  Spans will only be exported to exporting services after they have ended. Attributes, annotations, message events, etc. can only be added to span that is active (i.e. has started but has not ended).  
+Spans are identified with an ID and are associated to a trace.
+These identifiers and options byte together are called span context.
+Inside the same process, span context is propagated in a context
+object. When crossing process boundaries, it is serialized into
+protocol headers. The receiving end can read the span context
+and create child spans.
 
-__Status__  
-Status represents the current state of the span. It is represented by a canonical status code which maps onto a predefined set of error values and an optional string message.  
+### Name
 
-e.g. OK  
-e.g. { PERMISSION_DENIED, "User foo does not have access to resource bar." }  
+Span names represent what span does. Span names should
+be statistically meaningful. Most tracing backend and analysis
+tools use span names to auto generate reports for the
+represented work.
 
-__Parent Span__  
-A Span can have a parent Span, e.g. a database query that needed to read from disk might be expressed as a parent Span for the query and a child Span for the disk read. The initial Span in a Trace is the "root span" and has no parent Span.  
+Examples of span names:
 
-__Remote Parent__  
-If the parent Span is in another process, it is considered a remote parent. Often, this means the parent Span ran on a different machine.  
+* "cache.Get" represents the Get method of the cache service.
+* "/messages" represents the messages web page.
+* "/api/user/(\\d+)" represents the user detail pages.
 
-__SpanContext__  
-A SpanContext is a combination of TraceId, SpanId, and TraceOptions. Every Span has a SpanContext.  
+### Status
 
-The SpanContext represents the state information that must be propagated to child Spans and between processes to maintain a Trace, e.g. a Span causing a network operation sends its SpanContext, and the receiver uses it to create a child Span.  
+Status represents the current state of the span.
+It is represented by a canonical status code which maps onto a
+predefined set of error values and an optional string message.
 
-Example:  
-TraceId-SpanId-Options: 3563a30535bddcaeca5dd00bc84f29ba-90a9d220f553e7fc-01  
+Status allows tracing visualization tools to highlight
+unsuccessful spans and helps tracing users to debug errors.
 
-__TraceId__  
-An opaque 128-bit blob, expected to be randomly generated and globally(?) unique for each Trace.  
+![A trace with an error span](/img/trace-errorspan.png)
 
-__SpanId__  
-An opaque 64-bit blob, expected to be randomly generated and unique across all Spans within a Trace.  
+Above, you can see `cache.Put` is errored because of the
+violation of the key size limit. As a result of this error,
+ `/messages` request responded with an error to the user.
 
-__TraceOptions__  
-A set of options that are enabled for this Span. Currently the only defined option is "enable tracing." When a microservice receives a request with this bit enabled, it should trace its operations, and also propagate the bit to any requests it makes while servicing the original request.  
+### Annotations
 
-__Attributes__  
-Attributes are additional information that is included in the span which can represent arbitrary data assigned by the user.  They are key value pairs with the key being a string and the value being either a string, boolean, or integer.  
+Annotations are timestamped strings with optional attributes.
+Annotations are used like log lines, but the log is per-Span.  
 
-__Annotations__  
-Annotations are a very useful and important concept in tracing. An Annotation is a timestamped string, with optional attributes. Annotations are used like log lines, but the log is per-Span.  
-&nbsp;  
-
-Example:  
+Example annotations:  
 
 * 0.001s Evaluating database failover rules.
 * 0.002s Failover replica selected. attributes:{replica:ab_001 zone:xy}
 * 0.006s Response received.
 * 0.007s Response requires additional lookups. attributes:{fanout:4}
 
-__Message Events__  
-Message events represent messages sent/received between spans. It records whether the message was sent/received, its ID, and optionally the message size.  
+Annotations provide rich details to debug problems in the scope of a span.
 
-Usually, Message Events are added to a Span by the RPC framework to track when frames(?) are sent and received.  
+### Attributes
 
-__Links__  
-Links represent a connection between to a Span in a different Trace. The linked Span can be either a parent or child.  
+Attributes are additional information that is included in the
+span which can represent arbitrary data assigned by the user.
+They are key value pairs with the key being a string and the
+value being either a string, boolean, or integer.  
 
-For example: the current Span is a database write in the service of a user request, it has a Link to a child Span in another Trace because it created work to the side, like a write to a shared forward journal.  
+Examples of attributes:
 
-__Sampler__  
-Tracing every Span can incur a large overhead, so sampling is often employed. Samplers decide whether or not given Span will be sampled. The default sampler is a probabilistic one with a configurable probability threshold. Users can write their own samplers as well.  
+* {http_code: 200}
+* {zone: "us-central2"}
+* {container_id: "replica04ed"}
 
-Sampling can be changed at runtime, e.g. sample 100% of requests for 30 seconds to debug a problem that's currently happening.  
+Attributes can be used to query the tracing data and allow
+users to filter large volume tracing data. For example, you can
+filter the traces by HTTP status code or availability zone by
+using the example attributes above.
 
-__TraceConfig__  
-TraceConfig holds the global default TraceParams which control tracing. It is the interface to change the parameters dynamically, during runtime.  
+---
 
-__TraceParams__  
-TraceParams defines limits enforced by tracing. It sets the maximum number of attributes, annotations, message events, and links per span as well as the default sampling probability.  
+## Sampling
 
-__Exporter__  
-Code that sends completed Spans to a storage system such as Stackdriver or Zipkin.  
+Trace data is often very large in size and is expensive to collect.
+This is why rather than collecting traces for every request, downsampling
+is prefered. By default, OpenCensus provides a probabilistic sampler that
+will trace once in every 10,000 requests.
 
-__Plugin__  
-Instrumentation for a framework. e.g. The gRPC plugin creates a Span for every RPC sent and received.  
+You can set a custom probablistic sampler, prefer to always sample or
+not sample at all.
+There are two ways to set samplers:
+
+* **Global sampler**: Global sampler is the global default.
+* **Span sampler**: When starting a new span, a custom
+  sampler can be provided. If no custom sampling is
+  provided, global sampler is used. Span samplers are
+  useful if you want to over-sample some sections of your
+  code. For example, a low throughput background service
+  may use a higher sampling rate than a high-load RPC
+  server.
+
+---
+
+## Exporting
+
+Recorded spans will be reported by the registered exporters.
