@@ -1,11 +1,6 @@
 +++
 title = "Tags"
-Description = "tags"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
 type = "leftnav"
-date = "2018-05-30T15:30:07-05:00"
 +++
 
 OpenCensus allows systems to associate contextual key-value pairs called tags with measurements as they are recorded. These tags can later be used in views as dimensions to break down the measurements, analyze them from various different perspectives and target specific cases in isolation even in highly interconnected and complex systems.  
