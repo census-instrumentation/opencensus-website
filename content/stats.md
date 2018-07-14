@@ -1,66 +1,78 @@
 +++
 title = "Stats"
-Description = "stats"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
 type = "leftnav"
-date = "2018-05-30T14:53:59-05:00"
 +++
 
-OpenCensus collects application stats and a set of predefined stats from certain libraries and frameworks.  
+Application and request metrics are important indicators
+to determine whether a service is working as expected or not.
+Custom metrics can provide insights into how availability indicators
+impact the business. Collected data can help automatically
+generate alerts at an outage or trigger better scheduling
+decisions to scale up a service automatically upon high demand.
 
-OpenCensus is a low-overhead framework even if instrumentation is always enabled. In order to be so, it is optimized to make recording of data points fast and separate from the data aggregation.  
+Stats collection allows users to collect custom metrics and provide
+a set of predefined metrics through the framework integrations.
+Collected data can be multidimensional and
+it can be filtered and grouped by [tags](/tags).
 
-OpenCensus stats collection happens in two stages:  
+Stats collection separates:  
 
-* Definition of measures and recording of data points
-* Definition of views and aggregation of the recorded data
-&nbsp;  
+* Definition of measures and recording of data points.
+* Definition of views and aggregation of the recorded data.
 
 ---
 
-#### Measures  
+## Measures  
 
-A measure represents a type of metric to be recorded. For example, request latency in µs and request size in kB/s are examples of measures to collect from a server.  
+A measure represents a type of metric to be recorded. For example, request latency
+in µs and request size in kB/s are examples of measures to collect from a server.
+All measures are identified by a name and also have a description and a unit.
+Libraries and frameworks can define and export measures for their end users to
+collect data on the provided measures.  
 
-All measures are identified by a name and also have a description and a unit.  
-
-Libraries and frameworks can define and export measures for their end users to collect data on the provided measures.  
+Below, there is an example measure for HTTP latency in microseconds:
 
 ```
-latency = Measure.create("my.org/measures/request_latency",
- "Request latency in nanoseconds",
- "nanoseconds")
+RequestLatecy = { 
+  "http/request_latency",
+  "HTTP request latency in microseconds",
+  "microsecs",
+}
 ```
 ---
 
-#### Recording Measurements  
+## Recording  
 Measurement is a data point to be collected for a measure. For example, for a latency (ms) measure, 100 is a measurement that represents a 100 ms latency event. Users collect data points on the existing measures with the current context. Tags from the current context are recorded with the measurements if they are any.  
 
 Recorded measurements are dropped immediately if user is not aggregating them via views. Users don’t necessarily need to conditionally enable/disable recording to reduce cost. Recording of measurements is cheap.  
 
-Libraries can record measurements, and end-users can later decide on which measurements they want to collect later.  
+Libraries can record measurements and provide measures,
+and end-users can later decide on which measurements
+they want to collect later.  
 
 ---
 
-#### Views  
-In order to collect and aggregate measurements, views need to be defined. A view allows recorded measurements to be aggregated with a one of the aggregation methods set by the user cumulatively. All recorded measurements is broken down by user-provided tag keys.  
+## Views
 
-OpenCensus provides several aggregation methods:  
+In order to aggregate measurements and export, users need to define views.
+A view allows recorded measurements to be aggregated with a one of the
+aggregation methods set by the user cumulatively.
+All recorded measurements is broken down by user-provided [tag](/tags) keys.  
 
-* Count: The count of the number of measurement points.
-* Distribution: Statistical summary of the measurement points.
-* Sum: A sum up of the measurement points.
-* Mean: Mean of the recorded measurements.
+Several aggregation method are supported:  
 
-Users can dynamically create and delete views in runtime.  
+* **Count**: The count of the number of measurement points.
+* **Distribution**: Histogram distribution of the measurement points.
+* **Sum**: A sum up of the measurement points.
+* **LastValue**: Keeps the last recorded value, drops everything else.
 
-Libraries may export their own views and claim the view names by registering them.  
+Users can dynamically create and delete views at runtime. Libraries may
+export their own views and claim the view names by registering them.  
 
 ---
 
-#### Exporting  
+## Exporting 
+
 Collected and aggregated data can be exported to a stats collection backend by registering an exporter.  
 
 Multiple exporters can be registered to upload the data to various different backends. Users can unregister the exporters if they no longer are needed. 
