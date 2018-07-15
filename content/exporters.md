@@ -8,13 +8,15 @@ OpenCensus exporters can be contributed by anyone, and we provide support for se
 open source backends and vendors out-of-the-box.
 
 Once you choose your backend, follow the instructions to initialize an exporter.
-Then register the initialized exporter.
+Then, register the initialized exporter.
 
 ## Stats
 
-Below, a Prometheus exporter is registered and Prometheus is going to scrape
-`:9999` to read the collected data:
+As an example, a Prometheus exporter is registered and Prometheus is going to scrape
+`:9091` to read the collected data:
 
+{{% snippets %}}
+{{% go %}}
 ``` go
 import (
     "go.opencensus.io/exporter/prometheus"
@@ -28,14 +30,30 @@ if err != nil {
 view.RegisterExporter(exporter)
 
 http.Handle("/metrics", exporter)
-log.Fatal(http.ListenAndServe(":9999", nil))
+log.Fatal(http.ListenAndServe(":9091", nil))
 ```
+{{% /go %}}
+{{% java %}}
+```
+// Add the dependencies by following the instructions at
+// https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/stats/prometheus.
+
+PrometheusStatsCollector.createAndRegister();
+
+// Uses a simple Prometheus HTTPServer to export metrics. 
+io.prometheus.client.exporter.HTTPServer server = 
+    new HTTPServer("localhost", 9091, true);
+```
+{{% /java %}}
+{{% /snippets %}}
 
 ## Traces
 
-Below, a Zipkin exporter is registered. All collected trace data will be reported
+As an example, a Zipkin exporter is registered. All collected trace data will be reported
 to the registered Zipkin endpoint:
 
+{{% snippets %}}
+{{% go %}}
 ```
 import (
     openzipkin "github.com/openzipkin/zipkin-go"
@@ -54,11 +72,20 @@ defer reporter.Close()
 exporter := zipkin.NewExporter(reporter, localEndpoint)
 trace.RegisterExporter(exporter)
 ```
+{{% /go %}}
+{{% java %}}
+```
+// Add the dependencies by following the instructions
+// at https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/zipkin.
 
----
+ZipkinTraceExporter.createAndRegister(
+    "http://localhost:9411/api/v2/spans", "example-server");
+```
+{{% /java %}}
+{{% /snippets %}}
 
 Exporters can be registered dynamically and unregistered. But most users will register
-and exporter in their main application and never unregister it.
+an exporter in their main application and never unregister it.
 
 Libraries instrumented with OpenCensus should not register exporters. Exporters should
 only be registered by main applications.
