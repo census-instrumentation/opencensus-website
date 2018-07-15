@@ -12,7 +12,7 @@ Then, register the initialized exporter.
 
 ## Stats
 
-Below, a Prometheus exporter is registered and Prometheus is going to scrape
+As an example, a Prometheus exporter is registered and Prometheus is going to scrape
 `:9091` to read the collected data:
 
 {{% snippets %}}
@@ -34,7 +34,7 @@ log.Fatal(http.ListenAndServe(":9091", nil))
 ```
 {{% /go %}}
 {{% java %}}
-``` java
+```
 // Add the dependencies by following the instructions at
 // https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/stats/prometheus.
 
@@ -49,12 +49,12 @@ io.prometheus.client.exporter.HTTPServer server =
 
 ## Traces
 
-Below, a Zipkin exporter is registered. All collected trace data will be reported
+As an example, a Zipkin exporter is registered. All collected trace data will be reported
 to the registered Zipkin endpoint:
 
 {{% snippets %}}
 {{% go %}}
-``` go
+```
 import (
     openzipkin "github.com/openzipkin/zipkin-go"
     "github.com/openzipkin/zipkin-go/reporter/http"
@@ -74,7 +74,7 @@ trace.RegisterExporter(exporter)
 ```
 {{% /go %}}
 {{% java %}}
-``` java
+```
 // Add the dependencies by following the instructions
 // at https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/zipkin.
 
