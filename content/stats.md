@@ -89,6 +89,10 @@ aggregated data.
 
 ## Exporting 
 
-Collected and aggregated data can be exported to a stats collection backend by registering an exporter.  
+Collected and aggregated data can be exported to a stats collection
+backend by registering an exporter.  
 
-Multiple exporters can be registered to upload the data to various different backends. Users can unregister the exporters if they no longer are needed. 
+Multiple exporters can be registered to upload the data to various different backends.
+Users can unregister the exporters if they no longer are needed.
+
+See [exporters](/exporters) to learn more.
