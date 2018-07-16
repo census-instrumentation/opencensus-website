@@ -1,7 +1,7 @@
 <table data-inner="{{.Inner}}">
   <thead>
 	<tr>
-	  <th scope="col">Backend</th>
+	  <th style="width: 120px" scope="col">Backend</th>
 	  <th scope="col">C++</th>
 	  <th scope="col">Erlang</th>
 	  <th scope="col">Go</th>
@@ -14,81 +14,81 @@
   </thead>
   <tbody>
         <tr>
-          <td data-label="Backend: &nbsp; ">Datadog</td>
-          <td data-label="C++: &nbsp; ">–</td>
-          <td data-label="Erlang: &nbsp; ">–</td>
-          <td data-label="Go: &nbsp; ">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
-          <td data-label="Java: &nbsp; ">–</td>
-          <td data-label="Node.js: &nbsp; ">–</td>
-          <td data-label="PHP: &nbsp; ">–</td>
-          <td data-label="Python: &nbsp; ">–</td>
-          <td data-label="Ruby: &nbsp; ">–</td>
+          <td>Datadog</td>
+          <td data-label="cpp">–</td>
+          <td data-label="erlang">–</td>
+          <td data-label="golang">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
+          <td data-label="java">–</td>
+          <td data-label="nodejs">–</td>
+          <td data-label="php">–</td>
+          <td data-label="python">–</td>
+          <td data-label="ruby">–</td>
         </tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">Instana</td>
-	  <td data-label="C++: &nbsp; ">–</td>
-	  <td data-label="Erlang: &nbsp; ">–</td>
-	  <td data-label="Go: &nbsp; ">–</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Node.js: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">–</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>Instana</td>
+	  <td data-label="cpp">–</td>
+	  <td data-label="erlang">–</td>
+	  <td data-label="golang">–</td>
+	  <td data-label="java">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="nodejs">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="php">–</td>
+	  <td data-label="python">–</td>
+		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">Jaeger</td>
-	  <td data-label="C++: &nbsp; ">–</td>
-	  <td data-label="Erlang: &nbsp; ">–</td>
-	  <td data-label="Go: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Node.js: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>Jaeger</td>
+	  <td data-label="cpp">–</td>
+	  <td data-label="erlang">–</td>
+	  <td data-label="golang">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="java">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="nodejs">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="php">–</td>
+	  <td data-label="python">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">Prometheus</td>
-	  <td data-label="C++: &nbsp; ">{{ partial "statsExporter.html" . }}</td>
-	  <td data-label="Erlang: &nbsp; ">{{ partial "statsExporter.html" . }}</td>
-	  <td data-label="Go: &nbsp; ">{{ partial "statsExporter.html" . }}</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "statsExporter.html" . }}</td>
-		<td data-label="Node.js: &nbsp; ">–</td>
-		<td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">–</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>Prometheus</td>
+	  <td data-label="cpp">{{ partial "statsExporter.html" . }}</td>
+	  <td data-label="erlang">{{ partial "statsExporter.html" . }}</td>
+	  <td data-label="golang">{{ partial "statsExporter.html" . }}</td>
+	  <td data-label="java">{{ partial "statsExporter.html" . }}</td>
+		<td data-label="nodejs">–</td>
+		<td data-label="php">–</td>
+	  <td data-label="python">–</td>
+		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">SignalFX</td>
-	  <td data-label="C++: &nbsp; ">–</td>
-	  <td data-label="Erlang: &nbsp; ">–</td>
-	  <td data-label="Go: &nbsp; ">–</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "statsExporter.html" . }}</td>
-		<td data-label="Node.js: &nbsp; ">–</td>
-		<td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">–</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>SignalFX</td>
+	  <td data-label="cpp">–</td>
+	  <td data-label="erlang">–</td>
+	  <td data-label="golang">–</td>
+	  <td data-label="java">{{ partial "statsExporter.html" . }}</td>
+		<td data-label="nodejs">–</td>
+		<td data-label="php">–</td>
+	  <td data-label="python">–</td>
+		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">Stackdriver</td>
-	  <td data-label="C++: &nbsp; ">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
-	  <td data-label="Erlang: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Go: &nbsp; ">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
-		<td data-label="Node.js: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>Stackdriver</td>
+	  <td data-label="cpp">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
+	  <td data-label="erlang">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="golang">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
+	  <td data-label="java">{{ partial "traceExporter.html" . }} {{ partial "statsExporter.html" . }}</td>
+		<td data-label="nodejs">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="php">–</td>
+	  <td data-label="python">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-	  <td data-label="Backend: &nbsp; ">Zipkin</td>
-	  <td data-label="C++: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Erlang: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Go: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-	  <td data-label="Java: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="Node.js: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="PHP: &nbsp; ">–</td>
-	  <td data-label="Python: &nbsp; ">{{ partial "traceExporter.html" . }}</td>
-		<td data-label="Ruby: &nbsp; ">–</td>
+	  <td>Zipkin</td>
+	  <td data-label="cpp">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="erlang">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="golang">{{ partial "traceExporter.html" . }}</td>
+	  <td data-label="java">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="nodejs">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="php">–</td>
+	  <td data-label="python">{{ partial "traceExporter.html" . }}</td>
+		<td data-label="ruby">–</td>
 	</tr>
   </tbody>
 </table>

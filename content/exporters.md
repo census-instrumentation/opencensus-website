@@ -89,3 +89,9 @@ an exporter in their main application and never unregister it.
 
 Libraries instrumented with OpenCensus should not register exporters. Exporters should
 only be registered by main applications.
+
+## Supported Backends
+
+Exporter support in each language for each backend:
+
+{{< sc_supportedExporters />}}
