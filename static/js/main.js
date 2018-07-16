@@ -1,9 +1,10 @@
+"use strict";
+
 //////////////////////////////////////////////////////  //
 //    EVENTS ON DOCUMENT READY                          //
 //////////////////////////////////////////////////////  //
 
 $(document).ready(function () {
-    "use strict";
 
     //// PRELOADER TRIGGER
     $(window).on("load", function() {
@@ -69,20 +70,6 @@ $(document).ready(function () {
       midClick: true
     });
 
-    //// COUNT TO TRIGGER
-    var eventFired = false,
-    objectPositionTop = $('.facts').offset().top;
-    $(window).on('scroll', function () {
-        var currentPosition = $(document).scrollTop() + 400;
-        if (currentPosition >= objectPositionTop && eventFired === false) {
-            eventFired = true;
-            $(".count").countTo({
-                speed: 5000,
-                refreshInterval: 80
-            });
-        }
-    });
-
     // OWL CAROUSEL TRIGGER
     $('.owl-carousel').owlCarousel({
         items: 1,
@@ -93,5 +80,28 @@ $(document).ready(function () {
     //// PARSLEY TRIGGER
     $('.cont-fo').parsley();
 
+    var snippets = $('.snippets');
+    for (var i=0; i<snippets.length; i++) {
+        var s = $(snippets[i]);
+       
+        var tabs = '<div class="snippets-header">';
+        var c = s.children('div');
+        for (var j=0; j< c.length; j++) {
+            var snippet = $(c[j]);
+            if (j != 0) {
+                // Hide everything other than the first snippet.
+                snippet.hide();
+            }
+            tabs += '<a class="snippet-choose" data-language="' + snippet.attr('class') + '">' + snippet.data('languagename') + '</a> ';
+        }
+        tabs += '</div>';
+        s.before(tabs);
+    }
+
+    $('.snippet-choose').click(function(e) {
+        var langClass = $(this).data('language');
+        $('.snippets div').hide();
+        $('.snippets .'+langClass).show();
+    });
 
 });
