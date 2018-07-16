@@ -11,26 +11,10 @@
 {{ else if eq .Type "leftnav" }}
 <!-- ====== OVERVIEW START  ======  -->
 <section class="sections lang" id="lang">
-    <div class="container">
-
-        <!-- ====== MIDDLE NAVGITION ======  -->
-        <div class="row">
-            <div class="title">
-                <div class="lang-con1 col-sm-12" style="margin-right:20px;">
-                    <p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
-                    <p> &nbsp; | &nbsp; </p>
-                    <p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/{{.File.Path}}"><span class="fa fa-github"></span> Edit <b>{{.File.Path}}</b></a></p>
-                </div>
-            </div>
-        </div>
-        <!-- ====== END MIDDLE NAVGITION ======  -->
-    </div>
-
     <div class="container">    
         <div class="row">   
             <!-- OVERVIEW CONTENT START -->
             <div class="title">
-
                 <!-- LEFT COULMN -->
                 <div class="col-md-3 box" style="margin-left:5px">
                     <h4>Concepts</h4>
@@ -38,7 +22,7 @@
                     <ul>
                         <li><p><a href="/tags">Tags</a></p></li>
                         <li><p><a href="/stats">Stats</a></p></li>
-                        <li><p><a href="/trace">Tracing</a></p></li>
+                        <li><p><a href="/traces">Traces</a></p></li>
                         <li><p><a href="/exporters">Exporters</a></p></li>
                         <li><p><a href="/zpages">Z-Pages</a></p></li>
                     </ul>
@@ -64,7 +48,10 @@
                 <!-- CENTER COULMN -->
                 <div class="col-md-8 box" style="margin:0px 22px 0px 5px;">
                     <h1>{{.Title}}</h1>
-                    <div class="content">{{.Content}}</div>
+                    <div class="content">
+                        {{.Content}}
+                    </div>
+                    {{ partial "contribute.html" . }}
                 </div>
                 <!-- END CENTER COULMN -->
                 <!-- OVERVIEW CONTENT END -->
@@ -77,32 +64,14 @@
     <!-- ====== START  ======  -->
     <section class="sections lang" id="lang">
         <div class="container">
-            <!-- ====== MIDDLE NAVGITION ======  -->
-            <div class="row">
-                <div class="title">
-                    <div class="lang-con1 col-sm-12" style="margin-right:20px;">
-                        <p><a href="https://github.com/census-instrumentation/opencensus-website/blob/master/README.md">Contribution Guidelines</a></p>
-                        <p> &nbsp; | &nbsp; </p>
-                        <p><a href="https://github.com/census-instrumentation/opencensus-website/edit/master/content/{{.File.Path}}"><span class="fa fa-github"></span> Edit <b>{{.File.Path}}</b></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ====== END MIDDLE NAVGITION ======  -->
-        
-        <div class="container">
             <div class="row">   
-                <!-- COMMUNITY CONTENT START -->
                 <div class="title">
                     <!-- CENTER COULMN -->
-                    <div class="col-md-12 box" style="margin:0px 22px 0px 5px;">   
+                    <div class="col-md-12 box" style="margin:0px 22px 0px 5px;">
                         <h1>{{.Title}}</h1>
-                        <br>
-                        <div class="content">
-                            {{.Content}}
-                        </div>
+                        <div class="content">{{.Content}}</div>
+                        {{ partial "contribute.html" . }}
                     </div>
-                    <!-- COMMUNITY CONTENT END -->
                 </div>
             </div>
         </div>

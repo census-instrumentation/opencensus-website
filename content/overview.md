@@ -4,8 +4,6 @@ type = "leftnav"
 date = "2018-05-30T10:49:38-05:00"
 +++
 
----
-
 OpenCensus is a framework for stats collection and distributed tracing. It supports multiple backends.  
 
 <div class="video-responsive">
@@ -14,7 +12,6 @@ OpenCensus is a framework for stats collection and distributed tracing. It suppo
 		<p>This browser does not support the video element. <a href="https://storage.googleapis.com/opencensusio/OpenCensusVideo.mp4">Here</a> is a link to the video instead.</p>
 	</video>
 </div>
-
 
 In microservices architectures, it is difficult to understand how services use resources across shared infrastructure. In monolithic systems, we depend on traditional tools that report per-process resource usage and latency characteristics that are limited to a single process. In order to be able to collect and analyze resource utilization and performance characteristics of distributed systems, OpenCensus tracks resource utilization through the chain of services processing a user request.  
 
@@ -36,24 +33,24 @@ __OpenCensus aims to provide:__
 
 No additional server or daemon is required to support OpenCensus.
 
-#### Concepts  
+## Concepts  
 
-__Tags__  
+### Tags
 
 OpenCensus allows systems to associate measurements with dimensions as they are recorded. Recorded data allows us to breakdown the measurements, analyze them from various different perspectives and be able to target specific cases in isolation even in highly interconnected and complex systems. [Read more](/tags). 
 
-__Stats__  
+### Stats 
 
 *Stats* is collection allow libraries and applications to record measurements, aggregate the recorded data and export them. [Read more](/stats).
 
-__Trace__  
+### Traces  
 
-*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [Read more](/trace).
+*Distributed traces* track the progression of a single user request as it is handled by the internal services until the user request is responded. [Read more](/traces).
 
-__Exporters__  
+### Exporters  
 
 OpenCensus is vendor-agnostic and can upload data to any backend with various exporter implementations. Even though, OpenCensus provides support for many backends, users can also implement their own exporters for proprietary and unofficially supported backends. [Read more](/exporters).
 
-__Z-Pages__  
+### Z-Pages  
 
 OpenCensus provides in-process dashboards that displays diagnostics data from the process. These pages are called z-pages and they are useful to understand to see collected data from a specific process without having to depend on any metric collection or distributed tracing backend. [Read more](/zpages).

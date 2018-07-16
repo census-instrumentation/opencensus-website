@@ -1,5 +1,5 @@
 +++
-title = "Tracing"
+title = "Traces"
 type = "leftnav"
 date = "2018-05-30T15:37:24-05:00"
 +++

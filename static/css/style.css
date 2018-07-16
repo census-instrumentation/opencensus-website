@@ -1594,3 +1594,8 @@ text-indent: -1em;
   border: solid 1px #ccc;
   color: #212121;
 }
+
+.contribute {
+  text-align: right;
+  font-size: 12px;
+}
