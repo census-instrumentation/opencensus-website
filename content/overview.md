@@ -52,11 +52,8 @@ __Trace__
 
 __Exporters__  
 
-OpenCensus is vendor-agnostic and can upload data to any backend with various exporter implementations. Even though, OpenCensus provides support for many backends, users can also implement their own exporters for proprietary and unofficially supported backends.  
+OpenCensus is vendor-agnostic and can upload data to any backend with various exporter implementations. Even though, OpenCensus provides support for many backends, users can also implement their own exporters for proprietary and unofficially supported backends. [Read more](/exporters).
 
-__Introspection__  
+__Z-Pages__  
 
-OpenCensus provides in-process dashboards that displays diagnostics data from the process. These pages are called z-pages and they are useful to understand to see collected data from a specific process without having to depend on any metric collection or distributed tracing backend.  
-
-![traceZ summary example image](/img/traceZ.png "traceZ summary example image")  
-An example /tracez handler served by the application that reports traces collected in the process.  
+OpenCensus provides in-process dashboards that displays diagnostics data from the process. These pages are called z-pages and they are useful to understand to see collected data from a specific process without having to depend on any metric collection or distributed tracing backend. [Read more](/zpages).
