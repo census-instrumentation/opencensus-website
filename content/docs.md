@@ -1,20 +1,26 @@
 +++
 title = "Documentation"
-Description = "docs"
-Tags = ["Development", "OpenCensus"]
-Categories = ["Development", "OpenCensus"]
-menu = "main"
-
-date = "2018-05-15T11:29:28-05:00"
 +++
 
-Welcome to the developer documentation for OpenCensus. Here you can learn about key OpenCensus concepts, find quick starts, reference material, and tutorials for all our supported languages. If you’re new to OpenCensus we recommend that you read our [overview](/overview) first. Or, if you want to see OpenCensus in action first, visit the quickStart for your favourite language.
+Welcome to the developer documentation for OpenCensus.
+Learn about key OpenCensus concepts, find library docs,
+reference material, and tutorials.
 
 OpenCensus terminology is explained at the [glossary](/glossary).
 
 ---
 
-#### OpenCensus by Language
+## Concepts
+
+* [Overview](/overview)
+* [Tags](/tags)
+* [Stats](/stats)
+* [Exporters](/exporters)
+* [Z-Pages](/zpages)
+
+---
+
+## Libraries
 
 <div class="col-md-12 box" style="margin-top:20px">
 	<div class="col-md-4 box" id="docbox">
@@ -138,7 +144,9 @@ OpenCensus terminology is explained at the [glossary](/glossary).
 
 <br clear="both">
 
-#### Tutorials
+---
+
+## Use Cases
 
 * [Cloud Spanner - Instrumented by OpenCensus and exported to Stackdriver][1]  
 * [OpenCensus for gRPC Go][2]
