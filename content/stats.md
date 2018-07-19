@@ -35,7 +35,7 @@ collect data on the provided measures.
 Below, there is an example measure that represents HTTP latency in ms:
 
 ```
-RequestLatecy = { 
+RequestLatency = { 
   "http/request_latency",
   "HTTP request latency in microseconds",
   "microsecs",
