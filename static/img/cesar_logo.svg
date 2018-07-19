@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="443.52px" height="337.68px" viewBox="0 0 443.52 337.68" enable-background="new 0 0 443.52 337.68" xml:space="preserve">
+<pattern  x="-12.24" y="492.84" width="18" height="18" patternUnits="userSpaceOnUse" id="New_Pattern_Swatch_2" viewBox="0 -18 18 18" overflow="visible">
+	<g>
+		<polygon fill="none" points="0,0 18,0 18,-18 0,-18 		"/>
+		<polygon fill="#FC7B2D" points="18,0 0,0 0,-18 18,-18 		"/>
+	</g>
+</pattern>
+<g>
+	<g>
+		<path fill="#FC7B2D" d="M176.52,51.494c-46.091,6.334-78.76,22.167-78.76,40.697c0,24.107,55.293,43.649,123.5,43.649
+			s123.5-19.542,123.5-43.649c0-18.955-34.186-35.088-81.955-41.118l-0.058-2.463c90.854,7.781,159.013,40.297,159.013,79.23
+			c0,44.735-89.991,81-201,81s-201-36.265-201-81c0-38.61,67.035-70.91,156.761-79.032L176.52,51.494z"/>
+		<path fill="#FC7B2D" d="M238.657,61.658c19.407,2.031,33.179,7.149,33.179,13.142c0,7.775-23.181,14.078-51.774,14.078
+			c-28.594,0-51.775-6.303-51.775-14.078c0-6.082,14.187-11.263,34.052-13.23l-0.126-4.062
+			c-37.423,2.867-65.452,14.612-65.452,28.666c0,16.2,37.246,29.333,83.191,29.333s83.191-13.133,83.191-29.333
+			c0-13.949-27.61-25.624-64.611-28.6L238.657,61.658z"/>
+	</g>
+	<g>
+		<pattern  id="SVGID_1_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+		</pattern>
+		<path fill="none" stroke="url(#SVGID_1_)" stroke-width="5.3208" stroke-miterlimit="10" d="M306.766,289.097v-28.502
+			c0,0,1.278-7.182,9.375-7.182h0.954c8.097,0,9.376,7.182,9.376,7.182v28.502"/>
+		<pattern  id="SVGID_2_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+		</pattern>
+		
+			<line fill="none" stroke="url(#SVGID_2_)" stroke-width="5.3208" stroke-miterlimit="10" x1="326.068" y1="270.595" x2="306.884" y2="270.595"/>
+		<pattern  id="SVGID_3_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+		</pattern>
+		<path fill="none" stroke="url(#SVGID_3_)" stroke-width="5.3208" stroke-miterlimit="10" d="M210.873,281.773
+			c0,0,1.469,6.614,7.619,6.614c6.15,0,6.15,0,6.15,0s5.69-1.769,5.69-7.266s0-5.497,0-5.497s-0.367-5.124-10.097-5.217
+			c0,0-7.068-0.467-7.068-8.571s6.793-8.011,6.793-8.011s9.271-1.119,9.546,4.844"/>
+		<pattern  id="SVGID_4_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+		</pattern>
+		<path fill="none" stroke="url(#SVGID_4_)" stroke-width="5.3208" stroke-miterlimit="10" d="M137.193,280.568
+			c-1.056,4.449-3.63,9.354-9.849,9.354h-0.204c-11.382,0-10.556-16.426-10.556-16.426v-3.332c0,0-0.826-16.426,10.556-16.426h0.204
+			c11.382,0,10.92,16.487,10.92,16.487v0.374v0.449h-20.74"/>
+		<pattern  id="SVGID_5_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+		</pattern>
+		<path fill="none" stroke="url(#SVGID_5_)" stroke-width="5.3208" stroke-miterlimit="10" d="M42.026,280.568
+			c-1.055,4.449-3.63,9.354-9.848,9.354h-0.204c-11.382,0-10.556-16.426-10.556-16.426v-3.332c0,0-0.826-16.426,10.556-16.426h0.204
+			c5.678,0,8.409,4.104,9.719,8.216"/>
+		<rect x="362.128" y="289.324" fill="#FC7B2D" width="3.546" height="3.6"/>
+		<rect x="268.434" y="289.324" fill="#FC7B2D" width="3.547" height="3.6"/>
+		<rect x="174.741" y="289.324" fill="#FC7B2D" width="3.547" height="3.6"/>
+		<rect x="82.034" y="289.324" fill="#FC7B2D" width="3.546" height="3.6"/>
+		<g>
+			
+				<pattern  id="SVGID_6_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1143.5093 -1158.7783)">
+			</pattern>
+			<path fill="none" stroke="url(#SVGID_6_)" stroke-width="5.3208" stroke-miterlimit="10" d="M409.494,269.246
+				c0,0,11.877-2.406,11.899,19.118v1.041"/>
+			<pattern  id="SVGID_7_" xlink:href="#New_Pattern_Swatch_2" patternTransform="matrix(0.8523 0 0 0.8651 -1135.6577 -1157.041)">
+			</pattern>
+			<path fill="none" stroke="url(#SVGID_7_)" stroke-width="5.3208" stroke-miterlimit="10" d="M400.315,289.479v-26.591v-3.631
+				l0.011-0.218c0-1.93,3.421-4.299,5.458-5.693s5.575-1.18,5.575-1.18l4.825,0.857c0,0,6.219,2.252,6.219,7.827
+				s-6.862,8.362-6.862,8.362h-14.797"/>
+		</g>
+	</g>
+</g>
+</svg>

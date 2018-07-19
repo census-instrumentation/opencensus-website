@@ -9,11 +9,9 @@ date = "2018-05-10T14:14:33-05:00"
 
 ####  Who is behind OpenCensus?
 
-OpenCensus is being developed by a group of cloud providers, Application Performance Management vendors, and open source contributors. This project is hosted on <a href="https://github.com/census-instrumentation">GitHub</a> and all work occurs there.
+OpenCensus originates from Google, where a set of libraries called Census were used to automatically capture traces and metrics from services. Since going open source, the project is now composed of a group of cloud providers, application performance management vendors, and open source contributors. The project is hosted in [GitHub](https://github.com/census-instrumentation/) and all work occurs there.
 
-OpenCensus was initiated by Google, and is based on instrumentation systems used inside of Google. OpenCensus is a complete rewrite of the Google system and has no Google intellectual property.
-
---- 
+---
 
 ####  How does OpenCensus benefit the ecosystem?
 
@@ -23,13 +21,13 @@ OpenCensus was initiated by Google, and is based on instrumentation systems used
 * Collaboration and support from vendors (cloud providers like Google and Microsoft in addition to APM companies) and open source providers (Zipkin). As the OpenCensus libraries include instrumentation hooks into various web and RPC frameworks and exporters, they are immediately useful out of the box.
 * Allowing service providers to better debug customer issues. As OpenCensus defines a common context propagation format, customers experiencing issues can provide a request ID to providers so that they can debug the problem together. Ideally, providers can trace the same requests as customers, even if they are using different analysis systems.
 
---- 
+---
 
 #### What languages &amp; integrations does OpenCensus support?
 
 {{< sc_supportedLanguages />}}
 
---- 
+---
 
 #### What Exporters does OpenCensus support?
 
@@ -51,7 +49,7 @@ A user’s guide will be released as soon as possible.
 
 OpenCensus provides a stand-alone application that uses a gRPC channel to communicate with the OpenCensus code linked into your application. The application displays configuration parameters and trace information in real time held in the OpenCensus library.
 
---- 
+---
 
 ####  How can I contribute to OpenCensus?
 
@@ -61,4 +59,3 @@ OpenCensus provides a stand-alone application that uses a gRPC channel to commun
 * Contribute to an existing library or create one for a new language.
 * Integrate OpenCensus with a new framework.
 * Integrate OpenCensus with a new APM tool.
-
