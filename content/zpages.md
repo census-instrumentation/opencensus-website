@@ -46,7 +46,7 @@ from the libraries:
 ## /rpcz
 
 Rpcz are available at [/rpcz](http://127.0.0.1:7777/debug/rpcz). This page serves
-stats about sent and recieved RPCs.
+stats about sent and received RPCs.
 
 Available stats:
 
