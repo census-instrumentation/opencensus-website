@@ -18,7 +18,7 @@ latency issues of your application.
 
 A trace is a tree of spans.
 
-A span is the unit work represented in a trace. A span may
+A span is the unit of work represented in a trace. A span may
 represent a HTTP request, an RPC, a server handler,
 a database query or a section customly marked in user code.
 
@@ -91,7 +91,7 @@ Annotations provide rich details to debug problems in the scope of a span.
 
 Attributes are additional information that is included in the
 span which can represent arbitrary data assigned by the user.
-They are key value pairs with the key being a string and the
+They are key-value pairs with the key being a string and the
 value being either a string, boolean, or integer.  
 
 Examples of attributes:
@@ -101,7 +101,7 @@ Examples of attributes:
 * {container_id: "replica04ed"}
 
 Attributes can be used to query the tracing data and allow
-users to filter large volume tracing data. For example, you can
+users to filter large volumes of tracing data. For example, you can
 filter the traces by HTTP status code or availability zone by
 using the example attributes above.
 
