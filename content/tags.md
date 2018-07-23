@@ -25,7 +25,7 @@ Tags may be defined in one service and used in a view in a different
 service; they are propagated on the wire.
 
 In distributed systems, a service is likely to be depending 
-on many of other services.
+on many other services.
 This results in many challenges when analyzing the data
 collected at the lower ends of the stack.
 Instrumentation at lower layer might not be very valuable
