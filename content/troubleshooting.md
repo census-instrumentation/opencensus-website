@@ -20,13 +20,13 @@ the handler is violating the error rate SLO.
 
 In order to debug, they query the tracing backend
 to search for a trace where
-inbox.Timeline.Messages span is errored.
+`inbox.Timeline.Messages` span is errored.
 
 ![Errored Span](/img/troubleshoot-errortrace.png)
 
-From the traces, it is visible that mysql.Query is
-consistently erroring for inbox.Timeline.Messages.
-The error is INVALID_ARGUMENT.
+From the traces, it is visible that `mysql.Query` is
+consistently erroring for `inbox.Timeline.Messages`.
+The error is `INVALID_ARGUMENT`.
 
 Carefully investigating the code, they see that
 there is an escaping problem with the MySQL query.
@@ -55,8 +55,8 @@ taking more than 100ms.
 From the traces, it is visible that auth.AccessToken
 is often retried when serving the /timeline endpoint.
 
-By looking at the logs with the NetOps team and they
-realize that there is a networking outage affecting
+By looking at the logs with the NetOps team,
+they realize that there is a networking outage affecting
 the requests between the HTTP server and the auth service.
 
 Operations fix the networking issue and retries 
@@ -70,20 +70,20 @@ Latency returns back to normal.
 Operations get an alert for increasing latency for
 the `inbox.Timeline.Messages` RPC handler.
 Team looks at the dashboards and confirms that
-inbox.Timeline.Messages handler is violating the latency SLO.
+`inbox.Timeline.Messages` handler is violating the latency SLO.
 
 ![Unexpected RPC Latency](/img/troubleshoot-cachemiss.png)
 
-They search for a trace where inbox.Timeline.Messages
+They search for a trace where `inbox.Timeline.Messages`
 span is taking more than 100ms and violating the SLOs.
 
 ![No Caching](/img/troubleshoot-nocacheput.png)
 
-They realize for all cases inbox.Timeline.Messages
+They realize for all cases `inbox.Timeline.Messages`
 are querying the database and never see any cache hits.
 By looking at the handler source code, they see
 the latest development push mistakenly removed the
-cache.Put call after database is queries.
+`cache.Put` call after database is queries.
 
 They roll back the new release and fix the bug.
 
