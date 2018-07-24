@@ -45,8 +45,8 @@ from the libraries:
 
 ## /rpcz
 
-Rpcz are available at [/rpcz](http://127.0.0.1:7777/debug/rpcz). This page serves
-stats about sent and received RPCs.
+Rpcz page is available at [/rpcz](http://127.0.0.1:7777/debug/rpcz).
+This page serves stats about sent and received RPCs.
 
 Available stats:
 
@@ -59,10 +59,9 @@ Available stats:
 
 ## /tracez
 
-Tracez are available at [/tracez](http://127.0.0.1:7777/debug/tracez). This page
-serves details about the trace spans collected
-in the process. It provides several sample spans
-per latency bucket and sample errored spans.
+Tracez page is available at [/tracez](http://127.0.0.1:7777/debug/tracez).
+This page serves details about the trace spans collected in the process.
+It provides several sample spans per latency bucket and sample errored spans.
 
 An example screenshot from this page is below:
 
