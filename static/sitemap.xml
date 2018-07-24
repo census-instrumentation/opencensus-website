@@ -13,12 +13,7 @@
   </url>
   
   <url>
-    <loc>https://opencensus.io/spanner/</loc>
-    <lastmod>2018-05-30T16:50:51-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/trace/</loc>
+    <loc>https://opencensus.io/traces/</loc>
     <lastmod>2018-05-30T15:37:24-05:00</lastmod>
   </url>
   
@@ -30,16 +25,6 @@
   <url>
     <loc>https://opencensus.io/stats/</loc>
     <lastmod>2018-05-30T14:53:59-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/reference/</loc>
-    <lastmod>2018-05-30T14:31:18-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/quickstart/</loc>
-    <lastmod>2018-05-30T14:11:36-05:00</lastmod>
   </url>
   
   <url>
@@ -123,44 +108,23 @@
   </url>
   
   <url>
-    <loc>https://opencensus.io/categories/</loc>
-    <priority>0</priority>
+    <loc>https://opencensus.io/exporters/</loc>
+    <lastmod>2018-07-16T22:37:18+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://opencensus.io/tags/development/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
+    <loc>https://opencensus.io/index/</loc>
+    <lastmod>2018-07-13T19:30:17+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://opencensus.io/categories/development/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
+    <loc>https://opencensus.io/troubleshooting/</loc>
+    <lastmod>2018-07-21T02:31:30+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://opencensus.io/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/tags/opencensus/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/categories/opencensus/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://opencensus.io/tags/</loc>
-    <lastmod>2018-05-31T14:31:01-05:00</lastmod>
-    <priority>0</priority>
+    <loc>https://opencensus.io/zpages/</loc>
+    <lastmod>2018-07-16T18:55:34+07:00</lastmod>
   </url>
   
 </urlset>
