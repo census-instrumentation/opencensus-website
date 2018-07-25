@@ -1,0 +1,20 @@
+{
+  "environment": "web",
+  "source": "spanner.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-07-24T22:33:17-07:00",
+  "id": "spanner",
+  "duration": 4,
+  "title": "Setup and Configure Google Cloud Spanner",
+  "author": "Emmanuel Odeke and Henry Ventura",
+  "summary": "Setup and configure Google Stackdriver",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [
+    "web"
+  ],
+  "url": "spanner"
+}

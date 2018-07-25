@@ -1,0 +1,97 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Setup and Configure Jaeger</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Setup and Configure Jaeger"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <p>This tutorial shows you how to setup and configure Jaeger</p>
+<p><img src="img/a74b22a1a2749ae7.png"></p>
+<p>Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing system released as open source by Uber Technologies. It is used for monitoring and troubleshooting microservices-based distributed systems, including:</p>
+<p>Distributed context propagation<br>Distributed transaction monitoring<br>Root cause analysis<br>Service dependency analysis<br>Performance / latency optimization</p>
+<p>Requirements:</p>
+<ul>
+<li>Docker, if you don&#39;t already have it, you can learn <a href="https://docs.docker.com/install/" target="_blank">How to install Docker</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Downloading the Jaeger Docker image" duration="1">
+        <p>We&#39;ll get the Jaeger Docker image from https://hub.docker.com/u/jaegertracing/</p>
+<p>by</p>
+<pre><code>docker pull jaegertracing/all-in-one:latest
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Starting Jaeger" duration="0">
+        <pre><code>docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:latest
+</code></pre>
+<p>and now the Jaeger user interface can be opened in your web browser by visiting <a href="http://localhost:16686/" target="_blank">http://localhost:16686</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

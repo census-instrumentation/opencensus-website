@@ -1,0 +1,27 @@
+header {
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 13px #ddd;
+  -moz-box-shadow: 0 0 13px #ddd;
+  -o-box-shadow: 0 0 13px #ddd;
+  -ms-box-shadow: 0 0 13px #ddd;
+  box-shadow: 0 0 13px #ddd;
+}
+
+header::after {
+  background: none;
+}
+
+.logo a {
+  color: #000;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.logo p {
+  margin: 0;
+}
+
+.logo span {
+  color: #BF2A32;
+}

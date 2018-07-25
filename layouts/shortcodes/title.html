@@ -1,0 +1,11 @@
+{{- $red :=  .Get "red" | default false }}
+
+<span class="logo brand">
+  <img src="/img/logo-sm.svg" />
+
+  {{- if eq $red "true"}}
+  <span>OpenCensus</span>
+  {{- else}}
+  <span>Open</span>Census
+  {{end}}
+</span>
