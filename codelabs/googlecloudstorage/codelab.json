@@ -1,0 +1,20 @@
+{
+  "environment": "web",
+  "source": "google_cloud_storage.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-07-24T23:08:01-07:00",
+  "id": "googlecloudstorage",
+  "duration": 4,
+  "title": "Setup and Configure Google Cloud Storage",
+  "author": "Emmanuel Odeke and Henry Ventura",
+  "summary": "Setup and configure Google Stackdriver",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [
+    "web"
+  ],
+  "url": "googlecloudstorage"
+}

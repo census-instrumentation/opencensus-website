@@ -1,0 +1,104 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Setup and Configure Prometheus</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Setup and Configure Prometheus"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <p>This tutorial shows you how to setup and configure Prometheus</p>
+<p><img src="img/452ecf341cd4cb4d.png"></p>
+<p>Prometheus is a monitoring system that collects metrics from systems, by scraping exposed endpoints at<br>a regular interval. It evaluates rule expressions and displays results. It can also trigger alerts if<br>alert conditions are met.</p>
+<p>Requirements:</p>
+<ul>
+<li>An installation of Prometheus which you can get from here <a href="https://prometheus.io/docs/introduction/first_steps/" target="_blank">Install Prometheus</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configure Prometheus" duration="1">
+        <p>Prometheus Monitoring requires a system configuration usually in the form a &#34;.yaml&#34; file. For example, here is<br>a sample &#34;prometheus.yaml&#34; file to scrape from our servers running at <code>localhost:9888</code>, <code>localhost:9988</code> and <code>localhost:9989</code></p>
+<pre><code>global:
+  scrape_interval: 10s
+
+  external_labels:
+    monitor: &#39;media_search&#39; 
+
+scrape_configs:
+  - job_name: &#39;media_search&#39;
+
+    scrape_interval: 10s
+
+    static_configs:
+      - targets: [&#39;localhost:9888&#39;, &#39;localhost:9988&#39;, &#39;localhost:9989&#39;]
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Starting Prometheus" duration="0">
+        <p>Having successfully downloaded Prometheus and setup your config.yaml file, you should now be able to run</p>
+<pre><code>prometheus --config.file=config.yaml
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Viewing Prometheus output" duration="0">
+        <p>You should now be able to navigate to <a href="http://localhost:9090/" target="_blank">http://localhost:9090/</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
