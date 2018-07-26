@@ -6,8 +6,8 @@ This repo contains the source for the [opencensus.io][website] website.
 ## Contributing
 
 Contributions are highly appreciated! Please follow the steps below to contribute:
-Important to Note: This site is currently built on Hugo v0.31.1 found [Here][version-control].
-Use v0.31.1 to run your edits locally.
+Important to Note: This site is currently built on Hugo v0.32 found [Here][version-control].
+Use v0.32 to run your edits locally.
 
 1. Install [Hugo][install-hugo].
 2. Check out the website source:

@@ -8,7 +8,7 @@ node_js:
 
 install:
  - npm install -g firebase-tools
- - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.31.1/hugo_0.31.1_Linux-64bit.deb
+ - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.32/hugo_0.32_Linux-64bit.deb
  - sudo dpkg -i /tmp/hugo.deb
 
 # Build the website
