@@ -10,8 +10,8 @@ class: "resized-logo"
 
 
 Cloud Storage is a unified object storage for developers and enterprises, managed by Google.
-For more information you can read about it here and get started [Storage docs](https://cloud.google.com/storage/docs)
+For more information you can read about it here and get started [Storage docs](https://cloud.google.com/storage/docs).
 
-However, OpenCensus is already integrated into some Google Cloud Storage API clients in the various languages:
+OpenCensus is integrated into Google Cloud Storage API clients in the various languages:
 
 {{%children%}}

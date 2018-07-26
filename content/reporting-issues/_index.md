@@ -18,6 +18,6 @@ C#|https://github.com/census-instrumentation/opencensus-csharp
 Erlang|https://github.com/census-instrumentation/opencensus-erlang
 
 For all other issues, please send an email to
-[census-developers@googlegroups.com](mailto:census-developers@googlegroups.com)
+[census-developers@googlegroups.com](mailto:census-developers@googlegroups.com).
 
-or reach out via the [Gitter channel](https://gitter.im/census-instrumentation/Lobby)
+Or reach out via the [Gitter channel](https://gitter.im/census-instrumentation/Lobby).

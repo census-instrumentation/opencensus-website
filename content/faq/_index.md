@@ -60,7 +60,7 @@ If you are using a supported application framework, follow its instructions for 
 
 OpenCensus provides a stand-alone application that uses a gRPC channel to communicate with the OpenCensus code linked into your application. The application displays configuration parameters and trace information in real time held in the OpenCensus library.
 
-You can learn more by visiting [zPages](/core-concepts/z-pages/)
+You can learn more by visiting [zPages](/core-concepts/z-pages/).
 
 
 

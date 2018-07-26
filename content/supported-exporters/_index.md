@@ -6,4 +6,4 @@ weight: 50
 ---
 
 OpenCensus' language implementations have support for various exporters.
-If you don't yet know what an exporter is, please visit [exporter](/core-concepts/exporters)
+See [exporters](/core-concepts/exporters) page for an overview of exporters.
