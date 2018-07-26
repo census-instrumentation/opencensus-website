@@ -22,7 +22,7 @@ A span is the unit work represented in a trace. A span may
 represent a HTTP request, an RPC, a server handler,
 a database query or a section customly marked in user code.
 
-![A trace](https://opencensus.io/img/trace-trace.png)
+![A trace](/img/trace-trace.png)
 
 Above, you see a trace with various spans. In order to respond
 to `/messages`, several other internal requests are made. First,
@@ -67,7 +67,7 @@ predefined set of error values and an optional string message.
 Status allows tracing visualization tools to highlight
 unsuccessful spans and helps tracing users to debug errors.
 
-![A trace with an error span](https://opencensus.io/img/trace-errorspan.png)
+![A trace with an error span](/img/trace-errorspan.png)
 
 Above, you can see `cache.Put` is errored because of the
 violation of the key size limit. As a result of this error,

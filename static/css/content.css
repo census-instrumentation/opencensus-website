@@ -62,16 +62,6 @@ p, ol, li, a {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
-article section.page.shadowed-image img,
-article section.page.shadow-images img {
-  -webkit-box-shadow: 0 0 13px #ddd;
-  -moz-box-shadow: 0 0 13px #ddd;
-  -o-box-shadow: 0 0 13px #ddd;
-  -ms-box-shadow: 0 0 13px #ddd;
-  box-shadow: 0 0 13px #ddd;
-  border: 2px solid #ddd;
-}
-
 article section.page code,
 article section.page code * {
     font-family: "RobotoMono", monospace;

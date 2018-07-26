@@ -298,6 +298,7 @@ article {
   margin-top: 3.5rem; }
 
 article section.page {
+  max-width: 900px;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;

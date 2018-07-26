@@ -40,7 +40,7 @@ Instead, we use tag propagation.
 Higher level services produce tags, and lower-end uses them when
 recording data.
 
-![Tag propagation](https://opencensus.io/img/tags-propagation.png)
+![Tag propagation](/img/tags-propagation.png)
 
 Above, frontend depends on the authentication service. Authentication
 service needs to query database that depends on the lower-level
