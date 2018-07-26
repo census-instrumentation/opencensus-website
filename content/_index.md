@@ -45,10 +45,10 @@ OpenCensus originates from Google, where a set of libraries called Census were u
 * Tell us how we can improve OpenCensus, and help us do it
 * Contribute to an existing library or create one for a new language
 
-##### Partners & Contributors
-
-{{<partners>}}
-
 {{<button class="btn-light" icon="true" href="https://gitter.im/census-instrumentation/Lobby">}}Discussion forum{{</button>}}
 
 {{<button class="btn-light" icon="true" href="https://github.com/census-instrumentation/">}}Contribute{{</button>}}
+
+##### Partners & Contributors
+
+{{<partners>}}
