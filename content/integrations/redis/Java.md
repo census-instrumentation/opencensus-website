@@ -30,6 +30,8 @@ jedis|https://github.com/opencensus-integrations/jedis
 - [Enabling observability](#enabling-observability)
 - [End to end example](#end-to-end-example)
     - [Running it](#running-it)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
 
 #### Generating the JAR
 
@@ -251,4 +253,8 @@ public class JedisOpenCensus {
 mvn install && mvn exec:java -Dexec.mainClass=io.opencensus.tutorials.jedis.JedisOpenCensus
 ```
 
-#### Examining your metrics and traces
+##### Viewing your metrics
+Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
+
+##### Viewing your traces
+Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
