@@ -9,7 +9,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 ##### What is OpenCensus?
 
-{{<title>}} is a vendor-agnostic single distribution of libraries to provide **metrics** collection and **tracing** for your microservices and monoliths alike.
+{{<title>}} is a vendor-agnostic single distribution of libraries to provide **metrics** collection and **tracing** for your services.
 
 {{<button class="btn-light" icon="true" href="/introduction/overview">}}Overview{{</button>}}
 

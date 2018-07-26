@@ -134,6 +134,10 @@ article section.page.no-search div.searchbox {
   margin-bottom: 50px;
 }
 
+.title-card img {
+  padding-right: 10px;
+}
+
 article section.page div.title-card img {
   width: 100px;
   margin: 10px 0 0 0;
