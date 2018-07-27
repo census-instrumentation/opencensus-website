@@ -130,6 +130,12 @@ func main() {
 	}
 	defer sd.Flush()
 
+        // Register the trace exporter
+        trace.RegisterExporter(sd)
+
+        // Register the stats exporter
+        view.RegisterExporter(sd)
+
 	// And for the custom transport to enable metrics collection
 	ctx := context.Background()
 	dc, err := google.DefaultClient(ctx, storage.ScopeReadWrite)
