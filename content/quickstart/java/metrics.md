@@ -38,7 +38,7 @@ In this quickstart, we’ll learn gleam insights into a segment of code and lear
 
 #### Requirements
 - Java 8+
-- Google Cloud Platform account anproject
+- Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
 
 #### Installation
