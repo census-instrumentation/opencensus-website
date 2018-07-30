@@ -30,7 +30,7 @@ This guide makes use of Stackdriver for visualizing your data. For assistance se
     - [Export Views](#export-views)
 - [Viewing your Metrics on Stackdriver](#viewing-your-metrics-on-stackdriver)
 
-In this quickstart, we’ll learn gleam insights into a segment of code and learn how to:
+In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for a [backend](http://localhost:1313/core-concepts/exporters/#supported-backends) of our choice
@@ -155,11 +155,11 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 
 1. Create quantifiable metrics (numerical) that we will record
 2. Create [tags](/core-concepts/tags) that we will associate with our metrics
-3. Organize our metrics, similar to a writing a report, in to a `View`
+3. Organize our metrics, similar to writing a report, in to a `View`
 4. Export our views to a backend (Stackdriver in this case)
 
 #### Getting Started
-We will be creating a simple "read-evaluate-print" (REPL) app. Let's collect some metrics to observe the work that is going on this code, such as:
+We will be creating a simple "read-evaluate-print" (REPL) app. Let's collect some metrics to observe the work that is going on within this code, such as:
 
 - Latency per processing loop
 - Number of lines read
