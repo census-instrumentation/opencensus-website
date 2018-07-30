@@ -372,7 +372,7 @@ public class Repl {
 We will begin by creating a private static `Tracer` as a property of our Repl class.
 
 ```java
-private static final Tracer TRACER = Tracing.getTracer();
+private static final Tracer tracer = Tracing.getTracer();
 ```
 
 We will be tracing the execution as it flows through `readEvaluateProcess`, `readLine`, and finally `processLine`.
@@ -381,7 +381,7 @@ To do this, we will create a [span](http://localhost:1313/core-concepts/tracing/
 
 You can create a span by inserting the following line in each of the three functions:
 ```java
-Scope ss = TRACER.spanBuilder("repl").startScopedSpan();
+Scope ss = tracer.spanBuilder("repl").startScopedSpan();
 ```
 
 Here is our updated state of `Repl.java`:
@@ -400,7 +400,7 @@ import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Our OpenCensus initialization will eventually go here
@@ -418,20 +418,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -571,7 +571,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Our OpenCensus initialization will eventually go here
@@ -589,20 +589,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -656,7 +656,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Tracing.
@@ -680,20 +680,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -769,7 +769,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Tracing.
@@ -793,20 +793,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -874,7 +874,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Tracing.
@@ -898,20 +898,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -967,7 +967,7 @@ Between `String line = readLine(in)` and `String processed = processLine(line)`,
 Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
 attributes.put("len", AttributeValue.longAttributeValue(line.length()));
 attributes.put("use", AttributeValue.stringAttributeValue("repl"));
-Span span = TRACER.getCurrentSpan();
+Span span = tracer.getCurrentSpan();
 span.addAnnotation("Invoking processLine", attributes);
 ```
 
@@ -995,7 +995,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 
 public class Repl {
-    private static final Tracer TRACER = Tracing.getTracer();
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Tracing.
@@ -1019,20 +1019,20 @@ public class Repl {
     }
 
     private static String processLine(String line) {
-        try (Scope ss = TRACER.spanBuilder("processLine").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
             return line.toUpperCase();
         }
     }
 
     private static String readLine(BufferedReader in) {
-        Scope ss = TRACER.spanBuilder("readLine").startScopedSpan();
+        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
 
         String line = "";
 
         try {
             line = in.readLine();
         } catch (Exception e) {
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.setStatus(Status.INTERNAL.withDescription(e.toString()));
         } finally {
             ss.close();
@@ -1041,7 +1041,7 @@ public class Repl {
     }
 
     private static void readEvaluateProcess(BufferedReader in) throws IOException {
-        try (Scope ss = TRACER.spanBuilder("repl").startScopedSpan()) {
+        try (Scope ss = tracer.spanBuilder("repl").startScopedSpan()) {
             System.out.print("> ");
             System.out.flush();
             String line = readLine(in);
@@ -1050,7 +1050,7 @@ public class Repl {
             Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
             attributes.put("len", AttributeValue.longAttributeValue(line.length()));
             attributes.put("use", AttributeValue.stringAttributeValue("repl"));
-            Span span = TRACER.getCurrentSpan();
+            Span span = tracer.getCurrentSpan();
             span.addAnnotation("Invoking processLine", attributes);
 
             String processed = processLine(line);
