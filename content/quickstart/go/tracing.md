@@ -23,15 +23,15 @@ This guide makes use of Stackdriver for visualizing your data. For assistance se
     - [Create Annotations](#create-annotations)
 - [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
 
-In this quickstart, we’ll learn gleam insights into a segment of code and learn how to:
+In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 1. Trace the code using [OpenCensus Tracing](/core-concepts/tracing)
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View traces on the backend of our choice
 
 #### Requirements
-- Go1.9 and above
-- Google Cloud Platform account anproject
+- Go 1.9 or above
+- Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
 
 #### Installation
