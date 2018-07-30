@@ -45,7 +45,7 @@ To create the exporters, you'll need to:
 ```xml
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.14.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>

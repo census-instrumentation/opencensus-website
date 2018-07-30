@@ -61,7 +61,7 @@ Put this in your newly generated `pom.xml` file:
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.14.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <build>
@@ -239,7 +239,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file:
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.14.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -468,7 +468,7 @@ To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependen
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.14.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
