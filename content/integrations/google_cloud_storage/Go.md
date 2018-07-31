@@ -21,6 +21,7 @@ Google Cloud Storage (GCS) is a unified object storage for developers and enterp
 For more information you can read about it here and get started [Storage docs](https://godoc.org/cloud.google.com/go/storage/docs)
 
 Cloud Storage 's Go package was already instrumented for:
+
 * Tracing with OpenCensus
 
 ## Table of contents
@@ -36,7 +37,7 @@ For tracing and metrics on Spanner, we'll import a couple of packages
 
 Package Name|Package link
 ---|---
-The Cloud Storage Go package|[cloud.google.com/storage](https://godoc.org/cloud.google.com/storage)
+The Cloud Storage Go package|[cloud.google.com/storage](https://godoc.org/cloud.google.com/go/storage)
 The OpenCensus trace package|[go.opencensus.io/trace](https://godoc.org/go.opencensus.io/trace)
 The OpenCensus stats packages|[go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats)
 The OpenCensus HTTP plugin package|[go.opencensus.io/plugin/ochttp](https://godoc.org/go.opencensus.io/plugin/ochttp)
@@ -45,10 +46,10 @@ And when imported in code
 {{<highlight go>}}
 import (
     "cloud.google.com/storage"
+
     "go.opencensus.io/plugin/ochttp"
     "go.opencensus.io/stats/view"
     "go.opencensus.io/trace" 
-    "google.golang.org/api/option"
 )
 {{</highlight>}}
 
@@ -65,11 +66,10 @@ import (
     "net/http"
 
     "go.opencensus.io/plugin/ochttp"
-    "google.golang.org/api/option"
 )
 
 hc := &http.Client{Transport: new(ochttp.Transport)}
-gcsClient := storage.NewClient(context.Background(), option.WithHTTPClient(hc))
+gcsClient := storage.NewClient(context.Background())
 {{</highlight>}}
 
 #### Enable metric reporting
@@ -105,13 +105,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"log"
 	"os"
+	"time"
 
 	"cloud.google.com/go/storage"
-	"golang.org/x/oauth2/google"
-	"google.golang.org/api/option"
 
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/plugin/ochttp"
@@ -136,15 +136,8 @@ func main() {
 	// Register the stats exporter
 	view.RegisterExporter(sd)
 
-	// And for the custom transport to enable metrics collection
 	ctx := context.Background()
-	dc, err := google.DefaultClient(ctx, storage.ScopeReadWrite)
-	if err != nil {
-		log.Fatalf("Failed to create the google OAuth2 client: %v", err)
-	}
-	// Enable ochttp.Transport on the base transport
-	dc.Transport = &ochttp.Transport{Base: dc.Transport}
-	gcsClient, err := storage.NewClient(ctx, option.WithHTTPClient(dc))
+	gcsClient, err := storage.NewClient(ctx)
 	if err != nil {
 		log.Fatalf("Failed to create GCS client: %v", err)
 	}
@@ -160,20 +153,30 @@ func main() {
 	// For the purposes of demo, we'll always sample
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 
+	// Create our parent span for the upload tutorial
+	ctx, span := trace.StartSpan(ctx, "opencensus.tutorial.Upload")
+	defer span.End()
+
+	// Using bucket "census-demos"
 	bucket := gcsClient.Bucket("census-demos")
 	obj := bucket.Object("hello.txt")
-	// Write "Hello, world!" to the object
+
+	// Write the current time to the object
 	w := obj.NewWriter(ctx)
-	if _, err := w.Write([]byte("Hello, world!")); err != nil {
+	now := fmt.Sprintf("The time is: %s\n\n", time.Now().Round(0))
+	if _, err := w.Write([]byte(now)); err != nil {
+		span.SetStatus(trace.Status{Code: trace.StatusCodeInternal, Message: err.Error()})
 		log.Fatalf("Failed to write to object: %v", err)
 	}
 	if err := w.Close(); err != nil {
+		span.SetStatus(trace.Status{Code: trace.StatusCodeInternal, Message: err.Error()})
 		log.Fatalf("Failed to close object handle: %v", err)
 	}
 
-	// Now read back the content
+	// Now read back the content that we just wrote
 	r, err := obj.NewReader(ctx)
 	if err != nil {
+		span.SetStatus(trace.Status{Code: trace.StatusCodeInternal, Message: err.Error()})
 		log.Fatalf("Failed to read from object: %v", err)
 	}
 	defer r.Close()
@@ -187,3 +190,4 @@ Please visit [https://console.cloud.google.com/monitoring](https://console.cloud
 
 #### Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
+![](/images/gcs_go_trace.png)
