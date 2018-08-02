@@ -110,8 +110,6 @@ func readLine(br *bufio.Reader) ([]byte, error) {
 // processLine takes in a line of text and
 // transforms it. Currently it just capitalizes it.
 func processLine(in []byte) (out []byte, err error) {
-	defer span.End()
-
 	return bytes.ToUpper(in), nil
 }
 {{</highlight>}}
@@ -197,8 +195,6 @@ func readLine(br *bufio.Reader) ([]byte, error) {
 // processLine takes in a line of text and
 // transforms it. Currently it just capitalizes it.
 func processLine(in []byte) (out []byte, err error) {
-	defer span.End()
-
 	return bytes.ToUpper(in), nil
 }
 {{</highlight>}}
