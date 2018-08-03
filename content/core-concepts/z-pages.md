@@ -1,8 +1,6 @@
 ---
 title: "zPages"
-date: 2018-07-16T14:28:48-07:00
-draft: false
-class: "shadow-images"
+weight: 40
 ---
 
 OpenCensus provides in-process web pages that displays
