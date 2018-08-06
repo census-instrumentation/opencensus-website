@@ -85,6 +85,7 @@ private void enableOpenCensusObservability() throws IOException {
 ```
 
 ##### End to end code sample
+
 With all the steps combined, we'll finally have this code snippet, adapted from [Bigtable Java helloworld](https://cloud.google.com/bigtable/docs/samples-java-hello/)
 
 {{<tabs Source "pom.xml">}}
