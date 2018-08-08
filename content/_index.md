@@ -20,7 +20,7 @@ Our libraries support Go, Java, C++, Ruby, Erlang, Python, and PHP.
 
 Supported backends include Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/core-concepts/exporters/).
 
-{{<button class="btn-light" icon="true" href="/introduction/language-support">}}Language Support{{</button>}}
+{{<button class="btn-light" icon="true" href="/language-support">}}Language Support{{</button>}}
 
 {{<button class="btn-light" icon="true" href="/supported-exporters">}}Supported Backends{{</button>}}
 
