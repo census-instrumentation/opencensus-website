@@ -2,6 +2,7 @@
 title: "Java"
 date: 2018-08-08T16:10:31-07:00
 draft: false
+weight: 2
 ---
 
 ![](/images/java-grpc-opencensus.png)
@@ -365,7 +366,7 @@ To gain insights to our service, we'll add trace and metrics instrumentation as 
 ##### Instrumenting the server
 
 
-We'll instrument the server by tracing as well as tracing gRPC metrics using OpenCensus with imports such as:
+We'll instrument the server by tracing as well as gRPC metrics using OpenCensus with imports such as:
 
 Import|Purpose
 ---|---
@@ -764,7 +765,7 @@ public class TutorialServer {
 
 ##### Instrumenting the client
 
-We'll instrument the server by tracing as well as tracing gRPC metrics using OpenCensus with imports such as:
+We'll instrument the client too by tracing as well as gRPC metrics using OpenCensus with imports such as:
 
 Import|Purpose
 ---|---
@@ -773,6 +774,7 @@ io.opencensus.trace.*|The tracing packages
 io.opencensus.exporter.stats.stackdriver.*|The Stackdriver Stats exporter
 io.opencensus.exporter.trace.stackdriver.*|The Stackdriver Tracing exporter
 
+The subsequent code follows:
 
 {{<tabs Traces Metrics Combined>}}
 {{<highlight java>}}
