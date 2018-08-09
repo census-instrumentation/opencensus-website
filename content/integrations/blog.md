@@ -26,12 +26,12 @@ Our application is a prototype which demonstrates how we can utilize OpenCensus 
 
 #### Requirements
 
-* Raspberry Pi 2B+ with Go 1.8 and greater installed
-* PC under Mac OS or Ubuntu
+* Raspberry Pi 2B+ with Go 1.8 or greater installed
+* PC under Mac OS or UNIX
 * Raspberry Pi and PC are under the same LAN
-* Arduino UNO with Arduino IDE 1.8.5 and greater
+* Arduino UNO with Arduino IDE 1.8.5 or greater
 * Sensors including DHT11, HTU21D and SparkFun sound detector
-* Enable Stackdriver Monitoring on the Project
+* A Google Cloud project with Stackdriver Monitoring enabled. You could also use other backend servers such as Prometheus.
 
 #### Installation
 
@@ -116,7 +116,7 @@ The light strength data in a day is shown as below.
 
 On the whole, the light strength shows a very similar trend as the temperature: The light strength would increase to a high level at 6 AM and decrease to a low level at 7 PM every day.  Different from temperature, the light strength would keep this trend in the weekend.
 
-One interesting phenomenon is that there are sometimes sudden peaks during the night in the graph. The reason is that Google TVCs would come to the building for cleaning in the late evening.  Even after they finish their work and leave, there would be a delay for the human detectors inside the building.
+One interesting phenomenon is that there are sometimes sudden peaks during the night in the graph. The reason is that Google staffs would come to the building for cleaning in the late evening.  Even after they finish their work and leave, there would be a delay for the human detectors inside the building.
 
 ##### System II
 
@@ -143,11 +143,11 @@ The protocol defines the basic format of messages exchanged between the master a
 }
 ```
 
-In the message, except for the measurement name and measurement value, slaves could also upload the tag for the measurement. Tags allow us to associate contextual key-value pairs with collected data.
+In the message, except for the measurement name and measurement value, slaves could also upload tags for the measurement. Tags allow us to associate contextual key-value pairs with collected data.
 
 After collection, tags can later be used as dimensions to break down the data and analyze it from various different perspectives to target specific cases in isolation even in highly complex systems. More details would be discussed in the demo part.
 
-Moreover,  the protocol defines the message exchange pattern between master and slave nodes: Every time after a slave node sends a data request to the master node, it must wait for the positive response from master node to send another data request. With exponential backoff mechanism, the flow condition in the system could be controlled to some extends.
+Moreover,  the protocol defines the message exchange pattern between master and slave nodes: Every time after a slave node sends a data request to the master node, it must wait for the positive response from master node to send another data request. With exponential backoff mechanism, the flow condition in the system could be controlled to some extends. There's also a predefined timeout after certain times of retries.
 
 ###### System Configuration
 
