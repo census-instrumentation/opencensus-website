@@ -30,7 +30,7 @@ Our serivce takes in a payload containing bytes and capitalizes them.
 
 Using OpenCensus, we can collect traces and metrics of our system and export them to the backend of our choice, to give observability to our distributed systems.
 
-The `grpc-java` implementation has already been instrumented with OpenCensus for tracing and metrics. To enable tracing and metrics, we'll import and use the OpenCensus gRPC plugin.
+grpc-Java has already been instrumented [gRPC-Core](https://github.com/grpc/grpc-java) with OpenCensus for tracing and metrics. Application users just need to add a runtime dependency on OpenCensus-Java impl, and the instrumentations should just work.
 
 As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download), the respective inclusions to our build systems are:
 
@@ -371,6 +371,8 @@ Import|Purpose
 ---|---
 io.opencensus.contrib.grpc.metrics.RpcViews|gRPC metrics
 io.opencensus.trace.*|The tracing packages
+io.opencensus.exporter.stats.stackdriver.*|The Stackdriver Stats exporter
+io.opencensus.exporter.trace.stackdriver.*|The Stackdriver Tracing exporter
 
 And we'll have the source code as follows
 
@@ -378,6 +380,7 @@ And we'll have the source code as follows
 {{<highlight java>}}
 package io.octutorials.ocgrpc;
 
+import io.opencensus.common.Scope;
 import io.opencensus.trace.Span;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
@@ -394,7 +397,7 @@ public class TutorialServer {
     static class FetchImpl extends FetchGrpc.FetchImplBase {
         @Override
         public void capitalize(Payload req, StreamObserver<Payload> responseObserver) {
-            Span span = TutorialServer.tracer.spanBuilder("octutorials.FetchImpl.capitalize").startSpan();
+            Scope ss = TutorialServer.tracer.spanBuilder("octutorials.FetchImpl.capitalize").startScopedSpan();
 
             try {
                 String capitalized = req.getData().toString("UTF8").toUpperCase();
@@ -403,7 +406,7 @@ public class TutorialServer {
                 responseObserver.onNext(resp);
             } catch (UnsupportedEncodingException e) {
             } finally {
-                span.end();
+                ss.close();
                 responseObserver.onCompleted();
             }
         }
@@ -504,7 +507,7 @@ public class TutorialServer {
     static class FetchImpl extends FetchGrpc.FetchImplBase {
         @Override
         public void capitalize(Payload req, StreamObserver<Payload> responseObserver) {
-            Span span = TutorialServer.tracer.spanBuilder("octutorials.FetchImpl.capitalize").startSpan();
+            Scope ss = TutorialServer.tracer.spanBuilder("octutorials.FetchImpl.capitalize").startScopedSpan();
 
             try {
                 String capitalized = req.getData().toString("UTF8").toUpperCase();
@@ -513,7 +516,7 @@ public class TutorialServer {
                 responseObserver.onNext(resp);
             } catch (UnsupportedEncodingException e) {
             } finally {
-                span.end();
+                ss.close();
                 responseObserver.onCompleted();
             }
         }
@@ -760,6 +763,16 @@ public class TutorialServer {
 {{</tabs>}}
 
 ##### Instrumenting the client
+
+We'll instrument the server by tracing as well as tracing gRPC metrics using OpenCensus with imports such as:
+
+Import|Purpose
+---|---
+io.opencensus.contrib.grpc.metrics.RpcViews|gRPC metrics
+io.opencensus.trace.*|The tracing packages
+io.opencensus.exporter.stats.stackdriver.*|The Stackdriver Stats exporter
+io.opencensus.exporter.trace.stackdriver.*|The Stackdriver Tracing exporter
+
 
 {{<tabs Traces Metrics Combined>}}
 {{<highlight java>}}
