@@ -3,7 +3,6 @@ title: "OpenCensus for IoT"
 date: 2018-08-02
 draft: false
 weight: 3
-class: "resized-logo"
 ---
 
 ![](/images/IoT-GoogleCloud.jpg)
@@ -35,7 +34,7 @@ Our application is a prototype which demonstrates how we can utilize OpenCensus 
 
 #### Installation
 
-```
+```shell
 go get -u github.com/census-ecosystem/opencensus-experiments
 ```
 
@@ -71,7 +70,7 @@ In the first system, Raspberry Pi collects data from multiple sensors and then c
 
 ###### Step 1:
 
-```
+```shell
 cd $(go env GOPATH)/src/github.com/census-ecosystem/oepncensus-experiments/go/iot/sensor
 ./configure.sh raspberry-id raspberry-ip-address rasberry-ssh-password
 ```
@@ -80,7 +79,7 @@ During this step, you would install the required dependencies and configure the 
 
 ###### Step 2:
 
-```
+```shell
 ./run.sh raspberry-id raspberry-ip-address raspberry-ssh-password
 ```
 
@@ -132,12 +131,12 @@ To decouple the master and slave nodes in the System II, we design a robust and 
 
 The protocol defines the basic format of messages exchanged between the master and slave nodes. One example is as below:
 
-```
+```json
 {
-	"Name": "my.org/measure/Temperature"
-	"Value": "23.57"
+	"Name": "my.org/measure/Temperature",
+	"Value": "23.57",
 	"Tags": {
-	    "DeviceId": "Arduino-1
+	    "DeviceId": "Arduino-1",
 	    "SampleDate": "2018-08-08"
 	}
 }
@@ -153,7 +152,7 @@ Moreover,  the protocol defines the message exchange pattern between master and 
 
 Configuration for the system II is very similar to the one in the System I. The only difference is the first step.
 
-```
+```shell
 cd $(go env GOPATH)/src/github.com/census-ecosystem/oepncensus-experiments/go/iot/protocol
 ```
 
@@ -167,7 +166,7 @@ The graph above looks very similar to the graph we get in the first system. Howe
 
 ![](/images/protocolid.png)
 
- Using the `Filter`method in the left column, we could select the data source from one of the Arduino.
+ Using the `Filter` method in the left column, we could select the data source from one of the Arduino.
 
 ![](/images/protocolmean.png)
 
@@ -183,4 +182,4 @@ Big thanks Yang Song and Jaana Burcu Dogan for giving me lots of useful suggesti
 
 Ramon Nogueira, Pritam Shah for the reviews and fund supports on devices, and also to every one on the OpenCensus team for all their hard work!
 
-By Peiqin Zhao, Google, Inc.
+By Peiqin Zhao, Google, LLC.
