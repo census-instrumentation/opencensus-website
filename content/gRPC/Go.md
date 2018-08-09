@@ -2,6 +2,7 @@
 title: "Go"
 date: 2018-08-05T14:52:17-07:00
 draft: false
+weight: 1
 ---
 
 ![](/images/go-grpc-opencensus.png)
