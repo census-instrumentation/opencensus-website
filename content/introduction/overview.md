@@ -17,7 +17,7 @@ After [instrumenting](https://en.wikipedia.org/wiki/Instrumentation_(computer_pr
 {{<button href="/quickstart" class="btn-info">}}Visit the Quickstart guide to begin{{</button>}}
 
 {{% notice note %}}
-Already familiar with OpenCensus? [Click here](https://opencensus.io/docs/) for a full overview of our API to get started.
+Already familiar with OpenCensus? [Click here](https://opencensus.io/language-support/) for a full overview of our API to get started.
 {{% /notice %}}
 
 ## Why OpenCensus?
