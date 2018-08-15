@@ -80,12 +80,12 @@ article section.page.resized-logo img:first-child {
 }
 
 table td {
-  overflow: scroll;
+  overflow: auto;
 }
 
-table td code {
+table td code,
+table td a {
   white-space: nowrap;
-  overflow: scroll;
 }
 
 article section.page.no-pagination .chevrons {
