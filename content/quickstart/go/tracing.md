@@ -449,7 +449,7 @@ trace.RegisterExporter
 
 2. We want to trace a large percentage of executions (this is called [sampling](/core-concepts/tracing/#sampling))
 ```go
-stackdriver.ApplyConfig
+trace.ApplyConfig
 ```
 
 Now, let's look at what our `main` function will look like:
