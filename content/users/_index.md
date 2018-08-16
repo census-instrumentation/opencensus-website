@@ -16,3 +16,4 @@ Some of the publicly known OpenCensus users:
 * Stratumn
 * [Trillian](https://github.com/google/trillian)
 * [Oracle Fn Project](https://github.com/fnproject)
+* [Ardan Service Project](https://github.com/ardanlabs/service)
