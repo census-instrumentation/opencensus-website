@@ -4,6 +4,7 @@ date: 2018-07-21T18:52:35-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/instana]
 ---
 
 ![](/images/instana.png)

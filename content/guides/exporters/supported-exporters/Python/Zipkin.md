@@ -4,6 +4,7 @@ date: 2018-07-22T23:12:15-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/python/zipkin]
 ---
 
 ![](/img/zipkin-logo.jpg)

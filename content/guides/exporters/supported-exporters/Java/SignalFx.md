@@ -4,6 +4,7 @@ date: 2018-07-22T16:58:03-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/java/signalfx]
 ---
 
 ![](https://opencensus.io/img/signalFx_logo.svg)

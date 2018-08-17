@@ -4,6 +4,7 @@ date: 2018-07-30T18:44:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_bigtable/java]
 ---
 
 ![](/images/java.png)
@@ -160,10 +161,10 @@ public class BigtableOpenCensus implements AutoCloseable {
 
                 // Write some data to the table
                 boc.writeRows(table, GREETINGS);
-           
+
                 // Read the written rows
                 boc.readRows(table);
-            
+
                 // Finally cleanup by deleting the created table
                 boc.deleteTable(table);
             }

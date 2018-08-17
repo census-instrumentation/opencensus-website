@@ -2,6 +2,7 @@
 title: "Trace exporter"
 draft: false
 weight: 3
+aliases: [/custom_exporter/go/trace]
 ---
 
 ### Table of contents
@@ -95,7 +96,7 @@ func main() {
 will print out something like this
 
 ```shell
-$ go run trace.go 
+$ go run trace.go
 Name: sample-0
 TraceID: 3635343562376561613230663237336363393634666366376234643430663662
 SpanID: 64653466326237353234396336636564

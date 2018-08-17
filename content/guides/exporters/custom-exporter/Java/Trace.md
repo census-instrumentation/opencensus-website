@@ -2,6 +2,7 @@
 title: "Trace exporter"
 draft: false
 weight: 3
+aliases: [/custom_exporter/java/trace]
 ---
 
 ### Table of contents
@@ -268,7 +269,7 @@ Annotations: TimedEvents{events=[TimedEvent{timestamp=Timestamp{seconds=15337689
 
 #### Notes
 
-* Please remember to invoke [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-) for your created Trace exporter lest it won't receive exported span data 
+* Please remember to invoke [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-) for your created Trace exporter lest it won't receive exported span data
 
 * Your exporter's `export` method will receive exported span data only for spans that have been ended
 

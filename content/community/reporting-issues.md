@@ -3,6 +3,7 @@ title: "Reporting issues"
 date: 2018-07-22T20:14:00-07:00
 draft: false
 weight: 120
+aliases: [/reporting-issues]
 ---
 
 If you'd like to report any bugs, security issues or any other sort of issues, please find below, links to each language implementation's repository:

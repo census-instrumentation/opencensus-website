@@ -4,6 +4,7 @@ date: 2018-07-30T18:34:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_bigtable]
 ---
 
 ![](/images/cloud_bigtable.png)

@@ -1,5 +1,6 @@
 ---
 title: "Users"
+aliases: [/users]
 ---
 
 Some of the publicly known OpenCensus users:

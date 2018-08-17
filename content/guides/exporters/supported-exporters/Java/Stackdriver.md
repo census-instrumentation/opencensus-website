@@ -4,6 +4,7 @@ date: 2018-07-21T14:27:35-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/java/stackdriver]
 ---
 
 ![](/images/logo_gcp_vertical_rgb.png)
@@ -60,13 +61,13 @@ To create the exporters, you'll need to:
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-exporter-stats-stackdriver</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
- 
+
         <dependency>
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-exporter-trace-stackdriver</artifactId>

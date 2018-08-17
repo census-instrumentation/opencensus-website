@@ -3,6 +3,7 @@ title: "Go"
 date: 2018-08-02T20:59:20-07:00
 draft: false
 weight: 3
+aliases: [/integrations/google_cloud_datastore/go]
 ---
 
 ![](/images/gopher.png)
@@ -122,7 +123,7 @@ func main() {
 		log.Fatalf("Failed to create datastore client: %v", err)
 	}
 	defer client.Close()
-        // Warm up datastore first to ensure the session is already setup. Usually in 
+        // Warm up datastore first to ensure the session is already setup. Usually in
         // your application, you'd have hit this point by the time you are handling traffic.
 	_, _ = client.Count(context.Background(), datastore.NewQuery("Record"))
 

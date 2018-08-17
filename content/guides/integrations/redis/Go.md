@@ -3,6 +3,7 @@ title: "Go"
 date: 2018-07-24T07:09:03-07:00
 draft: false
 class: "integration-page"
+aliases: [/integrations/redis/go]
 ---
 
 ![](/images/go-opencensus.png)

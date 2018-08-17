@@ -4,6 +4,7 @@ date: 2018-07-22T23:33:31-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/python/jaeger]
 ---
 
 ![](https://www.jaegertracing.io/img/jaeger-logo.png)

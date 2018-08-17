@@ -3,6 +3,7 @@ title: "Go"
 date: 2018-08-05T14:52:17-07:00
 draft: false
 weight: 1
+aliases: [/grpc/go]
 ---
 
 ![](/images/go-grpc-opencensus.png)
@@ -265,7 +266,7 @@ import "go.opencensus.io/trace"
 func (fi *fetchIt) Capitalize(ctx context.Context, in *rpc.Payload) (*rpc.Payload, error) {
 	ctx, span := trace.StartSpan(ctx, "oc.tutorials.grpc.Capitalize")
 	defer span.End()
-	
+
 	out := &rpc.Payload{
 		Data: bytes.ToUpper(in.Data),
 	}

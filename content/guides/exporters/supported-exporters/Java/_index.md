@@ -4,6 +4,7 @@ date: 2018-07-21T18:40:01-02:00
 draft: false
 weight: 2
 class: "resized-logo"
+aliases: [/supported-exporters/java]
 ---
 
 ![](/images/java.png)

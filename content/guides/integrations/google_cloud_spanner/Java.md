@@ -4,6 +4,7 @@ date: 2018-07-24T15:14:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_spanner/java]
 ---
 
 ![](/images/java.png)

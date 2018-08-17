@@ -4,6 +4,7 @@ date: 2018-07-24T15:14:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_spanner/go]
 ---
 
 ![](/images/gopher.png)
@@ -39,7 +40,7 @@ Package Name|Package link
 ---|---
 The Cloud Spanner Go package|[cloud.google.com/spanner](https://godoc.org/cloud.google.com/spanner)
 The OpenCensus trace package|[go.opencensus.io/trace](https://godoc.org/go.opencensus.io/trace)
-The OpenCensus metrics views package|[go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats) 
+The OpenCensus metrics views package|[go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats)
 The OpenCensus gRPC plugin|[go.opencensus.io/plugin/ocgrpc](https://godoc.org/go.opencensus.io/plugin/ocgrpc)
 
 And when imported in code

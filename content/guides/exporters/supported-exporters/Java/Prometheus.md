@@ -4,6 +4,7 @@ date: 2018-07-22T14:27:35-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/supported-exporters/java/prometheus]
 ---
 
 ![](/img/prometheus-logo.png)
@@ -56,13 +57,13 @@ Add this to your pom.xml file:
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-exporter-stats-prometheus</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
- 
+
         <dependency>
             <groupId>prometheus</groupId>
             <artifactId>simpleclient_httpserver</artifactId>
@@ -83,7 +84,7 @@ public class PrometheusTutorial {
     public static void main(String ...args) {
         // Register the Prometheus exporter
         PrometheusStatsExporter.createAndRegister();
-        
+
         // Run the server as a daemon on address "localhost:8888"
         HTTPServer server = new HTTPServer("localhost", 8888, true);
     }

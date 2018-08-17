@@ -2,6 +2,7 @@
 title: "C++"
 date: 2018-08-16T18:46:23-07:00
 draft: false
+aliases: [/grpc/cplusplus]
 ---
 
 ![](/images/cplusplus-grpc-opencensus.png)

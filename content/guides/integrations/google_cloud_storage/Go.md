@@ -4,6 +4,7 @@ date: 2018-07-24T23:19:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_spanner/go]
 ---
 
 ![](/images/gopher.png)
@@ -49,7 +50,7 @@ import (
 
     "go.opencensus.io/plugin/ochttp"
     "go.opencensus.io/stats/view"
-    "go.opencensus.io/trace" 
+    "go.opencensus.io/trace"
 )
 {{</highlight>}}
 

@@ -2,6 +2,7 @@
 title: "Metrics exporter"
 draft: false
 weight: 3
+aliases: [/custom_exporter/go/metrics]
 ---
 
 ### Table of contents

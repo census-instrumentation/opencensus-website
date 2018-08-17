@@ -3,6 +3,7 @@ title: "Java"
 date: 2018-08-08T16:10:31-07:00
 draft: false
 weight: 2
+aliases: [/grpc/java]
 ---
 
 ![](/images/java-grpc-opencensus.png)

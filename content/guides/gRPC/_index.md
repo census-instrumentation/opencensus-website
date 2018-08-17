@@ -4,6 +4,11 @@ date: 2018-08-05T14:52:17-07:00
 draft: false
 weight: 70
 class: "resized-logo"
+aliases: [
+  /grpc,
+  /supported-transports,
+  /supported-transports/grpc
+]
 ---
 
 ![gRPC](/images/grpc.png)

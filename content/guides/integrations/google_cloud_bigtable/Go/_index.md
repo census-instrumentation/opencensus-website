@@ -4,6 +4,7 @@ date: 2018-07-30T18:44:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/integrations/google_cloud_bigtable/go]
 ---
 
 ![](/images/gopher.png)
@@ -46,7 +47,7 @@ And when imported in code
 {{<highlight go>}}
 import (
     "cloud.google.com/bigtable"
-    "go.opencensus.io/trace" 
+    "go.opencensus.io/trace"
 )
 {{</highlight>}}
 
