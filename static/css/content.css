@@ -138,6 +138,56 @@ article section.page.no-search div.searchbox {
   padding-right: 10px;
 }
 
+section a .lang-card {
+  color: #555;
+}
+
+.lang-card-container {
+  display: inline-block;
+  margin: 40px 10px 0 10px;
+  border-radius: 4px;
+  padding: 10px;
+  -webkit-box-shadow: 1px 2px 5px #ddd;
+  -moz-box-shadow: 1px 2px 5px #ddd;
+  -o-box-shadow: 1px 2px 5px #ddd;
+  -ms-box-shadow: 1px 2px 5px #ddd;
+  box-shadow: 1px 2px 5px #ddd;
+  transform: translateY(0);
+
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.lang-card-container:hover {
+  transform: translateY(-10px);
+  -webkit-box-shadow: 1px 8px 15px #ddd;
+  -moz-box-shadow: 1px 8px 15px #ddd;
+  -o-box-shadow: 1px 8px 15px #ddd;
+  -ms-box-shadow: 1px 8px 15px #ddd;
+  box-shadow: 1px 8px 15px #ddd;
+}
+
+.lang-card {
+  display: flex;
+}
+
+.lang-card img {
+  padding-right: 10px;
+}
+
+.lang-card h4 {
+  border-top: none;
+}
+
+.lang-card-right-panel {
+
+}
+
+.lang-card-right-panel h4 {
+  margin-top: 0;
+}
+
 article section.page div.title-card img {
   width: 100px;
   margin: 10px 0 0 0;
