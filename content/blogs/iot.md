@@ -3,6 +3,7 @@ title: "OpenCensus for IoT"
 date: 2018-08-02
 draft: false
 weight: 3
+aliases: [/blog/iot]
 ---
 
 ![](/images/IoT-GoogleCloud.jpg)
@@ -56,7 +57,7 @@ Since we implement automation of system deployment, details about package instal
 
 #### Technical detour
 
-The application consists of two individual systems.  Both systems are built on Raspberry Pi 2B+. 
+The application consists of two individual systems.  Both systems are built on Raspberry Pi 2B+.
 
 ##### System I
 
@@ -103,7 +104,7 @@ The temperature data in a day is shown as below.
 
 From the graph, we could notice the trend that temperature increases more sharply in the morning than that in the afternoon, which proves the high efficiency of air conditioner system inside Google.
 
-It is also worth mentioning that there are actually two plots in the graph, one is highlighted while the other is not. The data sources for these two plots are two individual sensors with the same model.  The difference of the plots shows that the precision and sensitivity of two sensors are quite different. 
+It is also worth mentioning that there are actually two plots in the graph, one is highlighted while the other is not. The data sources for these two plots are two individual sensors with the same model.  The difference of the plots shows that the precision and sensitivity of two sensors are quite different.
 
 The light strength data in a week is shown as below.
 
@@ -174,7 +175,7 @@ We could also use the Aggregation method to aggregate two data sources.  With mo
 
 #### Reference
 
-All the demos and source codes could be downloaded from the [link](https://github.com/census-ecosystem/opencensus-experiments). 
+All the demos and source codes could be downloaded from the [link](https://github.com/census-ecosystem/opencensus-experiments).
 
 #### Acknowledgement
 
