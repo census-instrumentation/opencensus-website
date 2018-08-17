@@ -9,6 +9,6 @@ By completing this quickstart, you will learn how to:
 
 * Collect [metrics](/core-concepts/metrics) from your services
 * [Trace](/core-concepts/tracing) a request as it passes through your services
-* [Export](/core-concepts/exporters) your data to one of our [supported backends](/supported-exporters/)
+* [Export](/core-concepts/exporters) your data to one of our [supported backends](/guides/exporters/supported-exporters/)
 
 {{<quickstart-list>}}

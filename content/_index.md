@@ -18,11 +18,11 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 ##### How can I use OpenCensus in my project?
 Our libraries support Go, Java, C++, Ruby, Erlang, Python, and PHP.
 
-Supported backends include Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/core-concepts/exporters/).
+Supported backends include Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/guides/exporters/custom-exporter/).
 
 {{<button class="btn-light" icon="true" href="/language-support">}}Language Support{{</button>}}
 
-{{<button class="btn-light" icon="true" href="/supported-exporters">}}Supported Backends{{</button>}}
+{{<button class="btn-light" icon="true" href="/guides/exporters/supported-exporters">}}Supported Backends{{</button>}}
 
 ##### Who is behind it?
 OpenCensus originates from Google, where a set of libraries called Census were used to automatically capture traces and metrics from services. Since going open source, the project is now composed of a group of cloud providers, application performance management vendors, and open source contributors. The project is hosted on GitHub and all work occurs there.
