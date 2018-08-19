@@ -101,7 +101,7 @@ def main():
 <a name="instrument-tracing"></a>
 ##### Instrumentation
 
-We will be tracing the execution as it starts in `repl`, goes to `readLine`, and finally travels through `processLine`.
+We will be tracing the execution as it starts in `readEvaluateProcessLine`, goes to `readLine`, and finally travels through `processLine`.
 
 To accomplish this, we must do two things:
 
@@ -200,7 +200,7 @@ def processInput(tracer, data):
 ##### Create Annotations
 We can add metadata to our traces to increase our post-mortem insight.
 
-Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `repl` function.
+Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcessLine` function.
 
 {{<tabs Snippet All>}}
 {{<highlight python>}}

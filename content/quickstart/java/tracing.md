@@ -378,7 +378,7 @@ We will begin by creating a private static `Tracer` as a property of our Repl cl
 private static final Tracer tracer = Tracing.getTracer();
 ```
 
-We will be tracing the execution as it flows through `repl`, `readLine`, and finally `processLine`.
+We will be tracing the execution as it flows through `readEvaluateProcessLine`, `readLine`, and finally `processLine`.
 
 To do this, we will create a [span](http://localhost:1313/core-concepts/tracing/#spans).
 
@@ -961,7 +961,7 @@ When looking at our traces on a backend (such as Stackdriver), we can add metada
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces.
 
-To do this, we'll dive in to `repl`.
+To do this, we'll dive in to `readEvaluateProcessLine`.
 
 Between `String line = readLine(in)` and `String processed = processLine(line)`, add this:
 

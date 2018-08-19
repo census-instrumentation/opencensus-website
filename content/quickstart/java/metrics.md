@@ -681,7 +681,7 @@ public class Repl {
 {{</tabs>}}
 
 ##### Recording Metrics
-Finally, we'll hook our stat recorders in to `main`, `processLine`, and `repl`:
+Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEvaluateProcessLine`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
