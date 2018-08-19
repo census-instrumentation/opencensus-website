@@ -159,9 +159,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        readEvaluateProcess()
+        readEvaluateProcessLine()
 
-def readEvaluateProcess():
+def readEvaluateProcessLine():
     line = sys.stdin.readline()
     start = time.time()
     print(line.upper())
@@ -253,9 +253,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        readEvaluateProcess()
+        readEvaluateProcessLine()
 
-def readEvaluateProcess():
+def readEvaluateProcessLine():
     line = sys.stdin.readline()
     start = time.time()
     print(line.upper())
