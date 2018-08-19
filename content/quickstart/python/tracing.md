@@ -101,7 +101,7 @@ def main():
 <a name="instrument-tracing"></a>
 ##### Instrumentation
 
-We will be tracing the execution as it starts in `readEvaluateProcess`, goes to `readLine`, and finally travels through `processLine`.
+We will be tracing the execution as it starts in `repl`, goes to `readLine`, and finally travels through `processLine`.
 
 To accomplish this, we must do two things:
 
@@ -135,9 +135,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        readEvaluateProcess()
+        repl()
 
-def readEvaluateProcess():
+def repl():
     tracer = Tracer()
     with tracer.span(name="repl") as span:
         line = sys.stdin.readline()
@@ -181,9 +181,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        readEvaluateProcess()
+        repl()
 
-def readEvaluateProcess():
+def repl():
     # For demo purposes, we are always sampling
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
     with tracer.span(name="repl") as span:
@@ -200,7 +200,7 @@ def processInput(tracer, data):
 ##### Create Annotations
 We can add metadata to our traces to increase our post-mortem insight.
 
-Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcess` function.
+Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `repl` function.
 
 {{<tabs Snippet All>}}
 {{<highlight python>}}
@@ -231,9 +231,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        readEvaluateProcess()
+        repl()
 
-def readEvaluateProcess():
+def repl():
     # For demo purposes, we are always sampling
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
     with tracer.span(name="repl") as span:

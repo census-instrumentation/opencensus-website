@@ -7,6 +7,8 @@ class: "shadowed-image lightbox"
 
 {{% notice note %}}
 This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+
+It also uses Apache Maven for dependency management and building. If you haven't already installed it, please [Click here](https://maven.apache.org/install.html) for installation instructions
 {{% /notice %}}
 
 #### Table of contents
@@ -31,6 +33,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 #### Requirements
 - Java 8+
+- [Apache Maven](https://maven.apache.org/install.html)
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
 
@@ -171,7 +174,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -194,7 +197,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = readLine(in);
@@ -334,7 +337,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -357,7 +360,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = readLine(in);
@@ -375,7 +378,7 @@ We will begin by creating a private static `Tracer` as a property of our Repl cl
 private static final Tracer tracer = Tracing.getTracer();
 ```
 
-We will be tracing the execution as it flows through `readEvaluateProcess`, `readLine`, and finally `processLine`.
+We will be tracing the execution as it flows through `repl`, `readLine`, and finally `processLine`.
 
 To do this, we will create a [span](http://localhost:1313/core-concepts/tracing/#spans).
 
@@ -410,7 +413,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -581,7 +584,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -672,7 +675,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -785,7 +788,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -890,7 +893,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -958,7 +961,7 @@ When looking at our traces on a backend (such as Stackdriver), we can add metada
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces.
 
-To do this, we'll dive in to `readEvaluateProcess`.
+To do this, we'll dive in to `repl`.
 
 Between `String line = readLine(in)` and `String processed = processLine(line)`, add this:
 
@@ -973,7 +976,8 @@ span.addAnnotation("Invoking processLine", attributes);
 
 The final state of `Repl.java` should be this:
 
-```java
+{{<tabs Repl_Java pom_xml>}}
+{{<highlight java>}}
 package io.opencensus.quickstart;
 
 import java.io.BufferedReader;
@@ -1011,7 +1015,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -1040,7 +1044,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         try (Scope ss = tracer.spanBuilder("repl").startScopedSpan()) {
             System.out.print("> ");
             System.out.flush();
@@ -1088,13 +1092,91 @@ public class Repl {
         return value;
     }
 }
-```
+{{</highlight>}}
+{{<highlight xml>}}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.opencensus.quickstart</groupId>
+    <artifactId>quickstart</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>quickstart</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-api</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-impl</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.5.0.Final</version>
+            </extension>
+        </extensions>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>1.10</version>
+                    <configuration>
+                        <programs>
+                            <program>
+                                <id>Repl</id>
+                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                            </program>
+                        </programs>
+                    </configuration>
+                </plugin>
+            </plugins>
+
+        </pluginManagement>
+
+    </build>
+</project>
+{{</highlight>}}
+{{</tabs>}}
 
 #### Viewing your Traces on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
 
-![viewing traces 1](https://cdn-images-1.medium.com/max/1600/1*v7qiO8nX8WAxpX4LjiQ2oA.png)
+![Trace list](/img/quickstart-traces-java-tracelist.png)
 
 And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine` and on clicking on it, it should show our attributes `len` and `use`.
 
-![viewing traces 2](https://cdn-images-1.medium.com/max/1600/1*SEsUxV1GXu-jM8dLQwtVMw.png)
+![Trace detail](/img/quickstart-traces-java-tracedetail.png)

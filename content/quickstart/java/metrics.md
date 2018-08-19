@@ -7,11 +7,13 @@ class: "shadowed-image lightbox"
 
 {{% notice note %}}
 This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+
+It also uses Apache Maven for dependency management and building. If you haven't already installed it, please [Click here](https://maven.apache.org/install.html) for installation instructions
 {{% /notice %}}
 
 #### Table of contents
 
-- [Requirements](#background)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)
@@ -38,6 +40,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 #### Requirements
 - Java 8+
+- [Apache Maven](https://maven.apache.org/install.html)
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
 
@@ -191,7 +194,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -202,7 +205,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -357,7 +360,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -368,7 +371,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -388,7 +391,7 @@ First, we will create the variables needed to later record our metrics.
 private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
 // Counts the number of lines read in from standard input.
-private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
 // Counts the number of non EOF(end-of-file) errors.
 private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -431,7 +434,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -450,7 +453,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -465,7 +468,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -512,7 +515,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -534,7 +537,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -549,7 +552,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -615,7 +618,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -637,7 +640,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -666,7 +669,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -678,7 +681,7 @@ public class Repl {
 {{</tabs>}}
 
 ##### Recording Metrics
-Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEvaluateProcess`:
+Finally, we'll hook our stat recorders in to `main`, `processLine`, and `repl`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -690,7 +693,7 @@ public static void main(String ...args) {
 
     while (true) {
         try {
-            readEvaluateProcess(stdin);
+            repl(stdin);
         } catch (IOException e) {
             System.err.println("EOF bye "+ e);
             return;
@@ -712,7 +715,7 @@ private static String processLine(String line) {
     }
 }
 
-private static void readEvaluateProcess(BufferedReader in) throws IOException {
+private static void repl(BufferedReader in) throws IOException {
     System.out.print("> ");
     System.out.flush();
 
@@ -720,10 +723,10 @@ private static void readEvaluateProcess(BufferedReader in) throws IOException {
         String line = in.readLine();
         String processed = processLine(line);
         System.out.println("< " + processed + "\n");
-        recordStat(M_LATENCY_MS, new Long(1));
+        recordStat(M_LINES_IN, new Long(1));
         recordStat(M_LINE_LENGTHS, new Long(line.length()));
     } catch(Exception e) {
-        recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+        recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
     }
 }
 {{</highlight>}}
@@ -755,7 +758,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -777,7 +780,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -817,7 +820,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -825,10 +828,10 @@ public class Repl {
             String line = in.readLine();
             String processed = processLine(line);
             System.out.println("< " + processed + "\n");
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 }
@@ -898,7 +901,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -920,7 +923,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -957,7 +960,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -965,10 +968,10 @@ public class Repl {
             String line = in.readLine();
             String processed = processLine(line);
             System.out.println("< " + processed + "\n");
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 }
@@ -1002,14 +1005,10 @@ private static void registerAllViews() {
 
     // Define the views
     View[] views = new View[]{
-        View.create(Name.create(
-            "demo/latency", "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD))),
-        View.create(Name.create(
-            "demo/lines_in", "The number of lines read in from standard input", M_LATENCY_MS, countAggregation, noKeys)),
-        View.create(Name.create(
-            "demo/errors", "The number of errors encountered", M_ERRORS, countAggregation, noKeys)),
-        View.create(Name.create(
-            "demo/line_length", "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys))
+        View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+        View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+        View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+        View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
     };
 
     // Create the view manager
@@ -1059,7 +1058,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -1081,7 +1080,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1121,7 +1120,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1129,10 +1128,10 @@ public class Repl {
             String line = in.readLine();
             String processed = processLine(line);
             System.out.println("< " + processed + "\n");
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1158,14 +1157,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create(
-                "demo/latency", "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD))),
-            View.create(Name.create(
-                "demo/lines_in", "The number of lines read in from standard input", M_LATENCY_MS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/errors", "The number of errors encountered", M_ERRORS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/line_length", "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys))
+            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1197,7 +1192,7 @@ public static void main(String ...args) {
 
     while (true) {
         try {
-            readEvaluateProcess(stdin);
+            repl(stdin);
         } catch (IOException e) {
             System.err.println("EOF bye "+ e);
             return;
@@ -1250,7 +1245,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN= MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -1277,7 +1272,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1317,7 +1312,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1325,10 +1320,10 @@ public class Repl {
             String line = in.readLine();
             String processed = processLine(line);
             System.out.println("< " + processed + "\n");
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1354,14 +1349,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create(
-                "demo/latency", "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD))),
-            View.create(Name.create(
-                "demo/lines_in", "The number of lines read in from standard input", M_LATENCY_MS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/errors", "The number of errors encountered", M_ERRORS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/line_length", "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys))
+            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1524,7 +1515,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -1551,7 +1542,7 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1591,7 +1582,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1599,10 +1590,10 @@ public class Repl {
             String line = in.readLine();
             String processed = processLine(line);
             System.out.println("< " + processed + "\n");
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_LATENCY_MS, new Long(1));
+            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1628,14 +1619,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create(
-                "demo/latency", "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD))),
-            View.create(Name.create(
-                "demo/lines_in", "The number of lines read in from standard input", M_LATENCY_MS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/errors", "The number of errors encountered", M_ERRORS, countAggregation, noKeys)),
-            View.create(Name.create(
-                "demo/line_length", "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys))
+            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1671,25 +1658,7 @@ private static void setupOpenCensusAndStackdriverExporter() throws IOException {
 }
 ```
 
-Let's create the helper function `envOrAlternative` to assist with getting the Google Cloud Project ID:
-
-```java
-private static String envOrAlternative(String key, String ...alternatives) {
-    String value = System.getenv().get(key);
-    if (value != null && value != "")
-        return value;
-
-    // Otherwise now look for the alternatives.
-    for (String alternative : alternatives) {
-        if (alternative != null && alternative != "") {
-            value = alternative;
-            break;
-        }
-    }
-
-    return value;
-}
-```
+Let's create the helper function `envOrAlternative` to assist with getting the Google Cloud Project ID from environment variable `GCP_PROJECT_ID`:
 
 Here is the final state of the code:
 ```java
@@ -1732,7 +1701,7 @@ public class Repl {
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
     // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LATENCY_MS = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
+    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
 
     // Counts the number of non EOF(end-of-file) errors.
     private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
@@ -1759,12 +1728,13 @@ public class Repl {
 
         while (true) {
             try {
-                readEvaluateProcess(stdin);
+                repl(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
                 recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                return;
             }
         }
     }
@@ -1805,7 +1775,7 @@ public class Repl {
         }
     }
 
-    private static void readEvaluateProcess(BufferedReader in) throws IOException {
+    private static void repl(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1813,7 +1783,7 @@ public class Repl {
         String processed = processLine(line);
         System.out.println("< " + processed + "\n");
         if (line != null && line.length() > 0) {
-            recordStat(M_LATENCY_MS, new Long(1));
+            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         }
     }
@@ -1841,7 +1811,7 @@ public class Repl {
         // Define the views
         View[] views = new View[]{
             View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LATENCY_MS, countAggregation, noKeys),
+            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
             View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, Collections.singletonList(KEY_METHOD)),
             View.create(Name.create("demo/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
@@ -1858,6 +1828,7 @@ public class Repl {
         // Firstly register the views
         registerAllViews();
 
+        // Make sure to set the environment variable "GCP_PROJECT_ID"
         String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
 
         StackdriverStatsExporter.createAndRegister(
@@ -1889,16 +1860,19 @@ With the above you should now be able to navigate to the [Google Cloud Platform 
 
 In the query box to find metrics, type `quickstart` as a prefix:
 
-![viewing metrics 1](https://cdn-images-1.medium.com/max/1600/1*kflo3l46PslT6oZDNCJ23A.png)
+![viewing metrics 1](/img/quickstart-metrics-available.png)
 
-And on selecting any of the metrics e.g. `quickstart/demo/lines_in`, we’ll get...
+And on selecting any of the metrics e.g. `OpenCensus/demo/lines_in`, we’ll get...
 
-![viewing metrics 2](https://cdn-images-1.medium.com/max/1600/1*6lUs1yCzewMgzCWv2wtbVQ.png)
+![viewing metrics 2](/img/quickstart-metrics-java-lines_in.png)
 
-Let’s examine the latency buckets:
 
-![viewing metrics 3](https://cdn-images-1.medium.com/max/1600/1*o0cPi--Y5IYrrvdQ0IJQKw.png)
+On checking out the Stacked Area display of the latency, we can see that the 99th percentile latency was 24.75ms.
 
-On checking out the Stacked Area display of the latency, we can see that the 99th percentile latency was 24.75ms. And, for `line_lengths`:
+![Latency](/img/quickstart-metrics-java-latency.png)
 
-![viewing metrics 4](https://cdn-images-1.medium.com/max/1600/1*roe_0ZNOZiMnTVs3VzG0AQ.png)
+Latency heatmap
+![Latency heatmap](/img/quickstart-metrics-java-latency-heatmap.png)
+
+And, for `line_lengths`:
+![Line lengths](/img/quickstart-metrics-java-line-length-rate.png)
