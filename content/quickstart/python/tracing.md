@@ -135,9 +135,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        repl()
+        readEvaluateProcessLine()
 
-def repl():
+def readEvaluateProcessLine():
     tracer = Tracer()
     with tracer.span(name="repl") as span:
         line = sys.stdin.readline()
@@ -181,9 +181,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        repl()
+        readEvaluateProcessLine()
 
-def repl():
+def readEvaluateProcessLine():
     # For demo purposes, we are always sampling
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
     with tracer.span(name="repl") as span:
@@ -231,9 +231,9 @@ def main():
     # 1. Read input
     # 2. process input
     while True:
-        repl()
+        readEvaluateProcessLine()
 
-def repl():
+def readEvaluateProcessLine():
     # For demo purposes, we are always sampling
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
     with tracer.span(name="repl") as span:

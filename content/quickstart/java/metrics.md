@@ -194,7 +194,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -205,7 +205,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -360,7 +360,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -371,7 +371,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -453,7 +453,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -468,7 +468,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -537,7 +537,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -552,7 +552,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -640,7 +640,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -669,7 +669,7 @@ public class Repl {
         return line.toUpperCase();
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
         String line = in.readLine();
@@ -693,7 +693,7 @@ public static void main(String ...args) {
 
     while (true) {
         try {
-            repl(stdin);
+            readEvaluateProcessLine(stdin);
         } catch (IOException e) {
             System.err.println("EOF bye "+ e);
             return;
@@ -715,7 +715,7 @@ private static String processLine(String line) {
     }
 }
 
-private static void repl(BufferedReader in) throws IOException {
+private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
     System.out.print("> ");
     System.out.flush();
 
@@ -780,7 +780,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -820,7 +820,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -923,7 +923,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("Exception "+ e);
             }
@@ -960,7 +960,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1080,7 +1080,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1120,7 +1120,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1192,7 +1192,7 @@ public static void main(String ...args) {
 
     while (true) {
         try {
-            repl(stdin);
+            readEvaluateProcessLine(stdin);
         } catch (IOException e) {
             System.err.println("EOF bye "+ e);
             return;
@@ -1272,7 +1272,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1312,7 +1312,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1542,7 +1542,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1582,7 +1582,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
@@ -1728,7 +1728,7 @@ public class Repl {
 
         while (true) {
             try {
-                repl(stdin);
+                readEvaluateProcessLine(stdin);
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
@@ -1775,7 +1775,7 @@ public class Repl {
         }
     }
 
-    private static void repl(BufferedReader in) throws IOException {
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
         System.out.print("> ");
         System.out.flush();
 
