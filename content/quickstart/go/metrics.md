@@ -7,7 +7,7 @@ class: "shadowed-image lightbox"
 
 #### Table of contents
 
-- [Requirements](#background)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)

@@ -10,7 +10,7 @@ This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
 
 #### Table of contents
 
-- [Requirements](#background)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)
