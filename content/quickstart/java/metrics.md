@@ -13,7 +13,7 @@ class: "shadowed-image lightbox"
 - [Getting started](#getting-started)
 - [Enable Metrics](#enable-metrics)
     - [Import Packages](#import-metrics-packages)
-    - [Create Metrics](#create-metrics)
+    - [Create Measures for Metrics](#create-measures-for-metrics)
     - [Create Tags](#create-tags)
     - [Inserting Tags](#inserting-tags)
     - [Recording Metrics](#recording-metrics)
@@ -45,17 +45,23 @@ For assistance setting up Apache Maven, [Click here](https://maven.apache.org/in
 {{% /notice %}}
 
 #### Installation
+We will first create the folder to house our project called `repl-app` and then use Maven's `archetype:generate` command to bootstrap the application.
+
 ```bash
 mvn archetype:generate \
   -DgroupId=io.opencensus.quickstart \
   -DartifactId=repl-app \
   -DarchetypeArtifactId=maven-archetype-quickstart \
-  -DinteractiveMode=false \
+  -DinteractiveMode=false
 
-cd repl-app/src/main/java/io/opencensus/quickstart
-
-mv App.Java Repl.java
+cd repl-app
 ```
+
+We will be removing the unused generated test file:
+```bash
+rm src/test/java/io/opencensus/quickstart/AppTest.java
+```
+
 Put this in your newly generated `pom.xml` file:
 
 ```xml
@@ -116,6 +122,14 @@ Put this in your newly generated `pom.xml` file:
 </project>
 ```
 
+Now let's rename our main application file to `Repl.java` and insert our code.
+
+```bash
+cd src/main/java/io/opencensus/quickstart
+
+mv App.java Repl.java
+```
+
 Put this in `src/main/java/io/opencensus/quickstart/Repl.java`:
 
 ```java
@@ -127,69 +141,6 @@ import java.io.InputStreamReader;
 
 public class Repl {
     public static void main(String ...args) {
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                System.out.print("> ");
-                System.out.flush();
-                String line = stdin.readLine();
-                String processed = processLine(line);
-                System.out.println("< " + processed + "\n");
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        return line.toUpperCase();
-    }
-}
-```
-
-Install required dependencies:
-```bash
-mvn install
-```
-
-#### Brief Overview
-By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
-
-1. Create quantifiable metrics (numerical) that we will record
-2. Create [tags](/core-concepts/tags) that we will associate with our metrics
-3. Organize our metrics, similar to writing a report, in to a `View`
-4. Export our views to a backend (Stackdriver in this case)
-
-#### Getting Started
-We will be creating a simple "read-evaluate-print" (REPL) app. Let's collect some metrics to observe the work that is going on within this code, such as:
-
-- Latency per processing loop
-- Number of lines read
-- Number of errors
-- Line lengths
-
-Let's first run the application and see what we have.
-```bash
-mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
-```
-You should see something like this:
-![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
-
-Now, in preparation of collecting metrics, lets abstract some of the core functionality in `main()` to a suite of helper functions:
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-public class Repl {
-    public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -213,12 +164,60 @@ public class Repl {
         System.out.println("< " + processed + "\n");
     }
 }
-{{</highlight>}}
+```
+
+Return to the project's root directory and install required dependencies:
+
+```bash
+cd ../../../../../../
+mvn install
+```
+
+#### Brief Overview
+By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
+
+1. Create quantitative [metrics](/core-concepts/metrics) that we will record
+2. Create [tags](/core-concepts/tags) that we will associate with our metrics
+3. Organize our metrics, similar to writing a report, in to a `View`
+4. Export our views to a backend (Stackdriver in this case)
+
+#### Getting Started
+The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
+```bash
+> foo
+< FOO
+```
+
+We will instrument this application to collect metrics, such as:
+
+- Latency per processing loop
+- Number of lines read
+- Number of errors
+- Line lengths
+
+Let's first run the application and see what we have.
+```bash
+mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
+```
+You will be given a text prompt. Try typing in a lowercase word and hit `enter` to receive the uppercase equivalent.
+
+You should see something like this after a few tries:
+![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
+
+To exit out of the application, hit `ctrl + c` on your keyboard.
+
+From here on out, we will be rewriting sections of `Repl.java` and `pom.xml`.
+
+You can recompile and run the application after editing it by running this command:
+
+```bash
+mvn install
+```
 
 #### Enable Metrics
 
 ##### Import Packages
-To enable metrics, we’ll declare the dependencies in your `pom.xml` file:
+To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add the following snippet of code after the `<properties>...</properties>` node.
 
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
@@ -310,7 +309,8 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file:
 {{</highlight>}}
 {{</tabs>}}
 
-Now add the import statements to your `Repl.java`:
+We will now be importing modules into `Repl.java`. Append the following snippet after the existing `import` statements:
+
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 import io.opencensus.common.Scope;
@@ -353,9 +353,6 @@ import io.opencensus.tags.TagValue;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -382,8 +379,8 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Metrics
-First, we will create the variables needed to later record our metrics.
+##### Create Measures for Metrics
+First, we will create the variables needed to later record our metrics. Place the following snippet on the line after `public class Repl {`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -446,9 +443,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -480,7 +474,9 @@ public class Repl {
 {{</tabs>}}
 
 ##### Create Tags
-Now we will create the variable later needed to add extra text meta-data to our metrics.
+Now we will create the variable later needed to record extra text meta-data.
+
+Insert the following snippet on the line before `private static final Tagger tagger = Tags.getTagger();`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -530,9 +526,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -563,16 +556,24 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-We will later use this tag, called KEY_METHOD, to record what method is being invoked. In our scenario, we will only use it to record that "repl" is calling our data.
+We will later use this tag, called `KEY_METHOD`, to record what method is being invoked. In our scenario, we will only use it to record that "repl" is calling our data.
 
-Again, this is arbitrary and purely up the user. For example, if we wanted to track what operating system a user is using, we could do so like this:
+{{% notice note %}}
+###### Example
+The value passed to `TagKey.create()` is arbitrary and purely up the user. For example, if we wanted to track what operating system a user is using, we could do so like this:
 ```java
-private static final TagKey OSKey = TagKey.create("operating_system");
+private static final TagKey OS_Key = TagKey.create("operating_system");
 ```
 
-Later, when we use OSKey, we will be given an opportunity to enter values such as "windows" or "mac".
+Later, if we used `OS_Key`, we will be given an opportunity to enter values such as "windows" or "mac".
+<br />
+<br />
+**Note**: `OS_Key` is not used in this quickstart. It is only used as an example in this text block.
+{{% /notice %}}
 
-We will now create helper functions to assist us with recording Tagged Stats.
+We will now create helper functions to assist us with recording Tagged Stats. One will record a `Long`, and the other will record a `Double`.
+
+Insert the following snippet after `private static void recordStat`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -633,9 +634,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -686,9 +684,6 @@ Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEva
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
-    // Step 1. Our OpenCensus initialization will eventually go here
-
-    // Step 2. The normal REPL.
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
     while (true) {
@@ -773,9 +768,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -839,9 +831,7 @@ public class Repl {
 {{</tabs>}}
 
 #### Enable Views
-In order to examine these stats, we’ll need to export them to the backend of our choice for processing and aggregation.
-
-To do this, we need to define a mechanism for which the backend will process and aggregate those metrics and for this we define Views to categorically describe how we’ll examine the measures.
+In order to analyze these stats, we’ll need to aggregate our data with Views.
 
 <a name="import-views-packages"></a>
 ##### Import Packages
@@ -856,12 +846,9 @@ import java.util.List;
 import io.opencensus.stats.Aggregation;
 import io.opencensus.stats.Aggregation.Distribution;
 import io.opencensus.stats.BucketBoundaries;
-import io.opencensus.stats.Stats;
-import io.opencensus.stats.View;
 import io.opencensus.stats.View.Name;
 import io.opencensus.stats.ViewManager;
 import io.opencensus.stats.View.AggregationWindow.Cumulative;
-import io.opencensus.tags.TagKey;
 {{</highlight>}}
 
 {{<highlight java>}}
@@ -916,9 +903,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -979,7 +963,7 @@ public class Repl {
 {{</tabs>}}
 
 ##### Create Views
-We now determine how our metrics will be organized by creating `Views`.
+Append this code snippet as our last function inside of `public class Repl`:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -1073,9 +1057,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -1184,7 +1165,7 @@ public static void main(String ...args) {
     try {
         setupOpenCensusAndStackdriverExporter();
     } catch (IOException e) {
-        System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+        System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
         return;
     }
 
@@ -1264,7 +1245,7 @@ public class Repl {
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
             return;
         }
 
@@ -1376,8 +1357,7 @@ public class Repl {
 #### Exporting to Stackdriver
 
 ##### Import Packages
-
-`pom.xml`
+Add the following code snippet to your `<dependencies>...</dependencies>` node in `pom.xml`:
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
 <dependency>
@@ -1466,11 +1446,9 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-`Repl.java`
+Add the following code snippet to `Repl.java`:
 {{<tabs Snippet All>}}
 {{<highlight java>}}
-import java.io.IOException;
-
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
 {{</highlight>}}
@@ -1534,7 +1512,7 @@ public class Repl {
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
             return;
         }
 
@@ -1660,6 +1638,24 @@ private static void setupOpenCensusAndStackdriverExporter() throws IOException {
 
 Let's create the helper function `envOrAlternative` to assist with getting the Google Cloud Project ID from environment variable `GCP_PROJECT_ID`:
 
+```java
+private static String envOrAlternative(String key, String ...alternatives) {
+    String value = System.getenv().get(key);
+    if (value != null && value != "")
+        return value;
+
+    // Otherwise now look for the alternatives.
+    for (String alternative : alternatives) {
+        if (alternative != null && alternative != "") {
+            value = alternative;
+            break;
+        }
+    }
+
+    return value;
+}
+```
+
 Here is the final state of the code:
 ```java
 package io.opencensus.quickstart;
@@ -1720,7 +1716,7 @@ public class Repl {
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
             return;
         }
 
