@@ -43,9 +43,9 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 #### Installation
 
-OpenCensus: `go get go.opencensus.io/*`
+OpenCensus: `go get -u -v go.opencensus.io/...`
 
-Stackdriver exporter: `go get contrib.go.opencensus.io/exporter/stackdriver`
+Stackdriver exporter: `go get -u -v contrib.go.opencensus.io/exporter/stackdriver`
 
 #### Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -62,7 +62,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 Unsure how to write and execute Go code? [Click here](https://golang.org/doc/code.html).
 {{% /notice %}}
 
-We will be a simple "read-evaluate-print" (REPL) app. In there we'll collect some metrics to observe the work that is going on within this code, such as:
+We will be a simple "read-evaluate-print-loop" (REPL) app. In there we'll collect some metrics to observe the work that is going on within this code, such as:
 
 - Latency per processing loop
 - Number of lines read
@@ -884,6 +884,7 @@ var (
 	}
 
 	LineLengthView = &view.View{
+		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
 		Measure:     MLineLengths,
 		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -954,6 +955,7 @@ var (
 	}
 
 	LineLengthView = &view.View{
+		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
 		Measure:     MLineLengths,
 		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -1111,6 +1113,7 @@ var (
 	}
 
 	LineLengthView = &view.View{
+		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
 		Measure:     MLineLengths,
 		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -1271,6 +1274,7 @@ var (
 	}
 
 	LineLengthView = &view.View{
+		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
 		Measure:     MLineLengths,
 		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -1467,6 +1471,7 @@ var (
 	}
 
 	LineLengthView = &view.View{
+		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
 		Measure:     MLineLengths,
 		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
