@@ -4,10 +4,8 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-
-This tutorial is also incomplete, pending OpenCensus Python adding Metrics exporters
+{{% notice warning %}}
+This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
 {{% /notice %}}
 
 #### Table of contents
@@ -40,7 +38,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 #### Requirements
 - Python2 and above
 - Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
+- Google Stackdriver Tracing enabled on your project
 
 #### Installation
 
@@ -111,7 +109,7 @@ import opencensus.tags import tag_value as tag_value_module
 # Create the measures
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-	
+
 # Counts the number of lines read in from standard input
 m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
 
@@ -138,7 +136,7 @@ from opencensus.tags import tag_value as tag_value_module
 # Create the measures
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-	
+
 # Counts the number of lines read in from standard input
 m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
 
@@ -209,7 +207,7 @@ from opencensus.tags import tag_value as tag_value_module
 # Create the measures
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-	
+
 # Counts the number of lines read in from standard input
 m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
 
@@ -231,7 +229,7 @@ latency_view = view_module.View("demo/latency", "The distribution of the latenci
 		# Latency in buckets:
 		# [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
 		aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
-    
+
 line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
 		[],
                 m_lines_in,
