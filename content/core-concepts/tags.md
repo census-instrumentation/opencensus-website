@@ -7,7 +7,7 @@ weight: 10
 Tags are key-value pairs of data that are associated with collected metrics, to
 provide contextual information, distinguish and group metrics during analysis and inspection.
 
-Some examples of tags could include:
+Some examples of tags are:
 
 * `frontend=ofe`
 * `user_agent="ios-10.2.12"`
@@ -44,5 +44,5 @@ are assigned to that request and propagated as it goes through layers:
 * Content Delivery Network(CDN)
 etc.
 
-and with those tags, you can uniquely identify and disambiguate which service called
+and with those tags, you can uniquely identify and break down which service called
 the downstream services, how much quota they've used, what calls are failing etc.

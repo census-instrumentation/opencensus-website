@@ -53,8 +53,8 @@ they want to collect.
 
 In order to aggregate measurements and export, users need to define views.
 A view allows recorded measurements to be aggregated with a one of the
-aggregation methods set by the user cumulatively, as well as [tags](/core-concepts/tags) to disambiguate
-metrics.
+aggregation methods set by the user cumulatively.
+All recorded measurements are broken down by user-provided [tag](/core-concepts/tags) keys.
 
 The following aggregation methods are supported:
 

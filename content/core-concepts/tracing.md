@@ -37,12 +37,13 @@ A span may or may not have a parent span:
 * A span with a parent is called a **"child span"** for example spans "auth", "cache.Get", "mysql.Query", "cache.Put"
 
 Spans are identified with a SpanID and each span belongs to a single trace.
+Each trace is uniquely identified by a TraceID which all constituent spans will share.
+
 These identifiers and options byte together are called **Span Context**.
 Inside the same process, **Span context** is propagated in a context
 object. When crossing process boundaries, it is serialized into
 protocol headers. The receiving end can read the **Span context** and create child spans.
 
-Each trace is uniquely identified by a TraceID which all constituent spans will share.
 
 #### Name
 
