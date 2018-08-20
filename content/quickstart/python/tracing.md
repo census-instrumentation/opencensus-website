@@ -36,7 +36,7 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 
 #### Installation
 
-OpenCensus: `pip install opencensus`
+OpenCensus: `pip install opencensus google-cloud-trace`
 
 #### Getting Started
 

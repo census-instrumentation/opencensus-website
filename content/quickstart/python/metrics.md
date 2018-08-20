@@ -46,7 +46,7 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 
 #### Installation
 
-OpenCensus: `pip install opencensus`
+OpenCensus: `pip install opencensus google-cloud-monitoring`
 
 #### Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
