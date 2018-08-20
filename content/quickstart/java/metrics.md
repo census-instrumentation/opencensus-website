@@ -13,8 +13,8 @@ class: "shadowed-image lightbox"
 - [Getting started](#getting-started)
 - [Enable Metrics](#enable-metrics)
     - [Import Packages](#import-metrics-packages)
-    - [Declare Metrics](#declare-metrics)
-    - [Declare Tags](#declare-tags)
+    - [Create Measures for Metrics](#create-measures-for-metrics)
+    - [Create Tags](#create-tags)
     - [Inserting Tags](#inserting-tags)
     - [Recording Metrics](#recording-metrics)
 - [Enable Views](#enable-views)
@@ -141,8 +141,6 @@ import java.io.InputStreamReader;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -214,7 +212,7 @@ From here on out, we will be rewriting sections of `Repl.java` and `pom.xml`.
 You can recompile and run the application after editing it by running this command:
 
 ```bash
-mvn compile
+mvn install
 ```
 
 #### Enable Metrics
@@ -356,8 +354,6 @@ import io.opencensus.tags.TagValue;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -385,7 +381,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Declare Metrics
+##### Create Measures for Metrics
 First, we will create the variables needed to later record our metrics. Place the following snippet on the line after `public class Repl {`:
 
 {{<tabs Snippet All>}}
@@ -449,8 +445,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -482,7 +476,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Declare Tags
+##### Create Tags
 Now we will create the variable later needed to record extra text meta-data.
 
 Insert the following snippet on the line before `private static final Tagger tagger = Tags.getTagger();`:
@@ -535,8 +529,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -646,8 +638,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -699,8 +689,6 @@ Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEva
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
-    // Step 1. Our OpenCensus initialization will eventually go here
-
     // Step 2. The normal REPL.
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -786,8 +774,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -924,8 +910,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
@@ -1081,8 +1065,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
         // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
