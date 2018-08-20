@@ -141,7 +141,6 @@ import java.io.InputStreamReader;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -354,7 +353,6 @@ import io.opencensus.tags.TagValue;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -445,7 +443,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -529,7 +526,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -638,7 +634,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -689,7 +684,6 @@ Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEva
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
-    // Step 2. The normal REPL.
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
     while (true) {
@@ -774,7 +768,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -910,7 +903,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -1065,7 +1057,6 @@ public class Repl {
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
     public static void main(String ...args) {
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
