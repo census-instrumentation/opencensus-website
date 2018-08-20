@@ -8,15 +8,6 @@ aliases: [/integrations/redis/java]
 
 ![](/images/java-opencensus.png)
 
-{{% notice note %}}
-This guide makes use of Redis. If you don't yet have an installation of Redis, please [Click here to get started](https://redis.io/topics/quickstart)
-{{% /notice %}}
-
-{{% notice note %}}
-This guide makes use of Stackdriver. If you haven't yet, please [Click here to get started with Stackdriver](/codelabs/stackdriver)
-{{% /notice %}}
-
-
 Some Redis clients were already instrumented to provide traces and metrics with OpenCensus
 
 Packages|Repository link
@@ -24,6 +15,7 @@ Packages|Repository link
 jedis|https://github.com/opencensus-integrations/jedis
 
 ## Table of contents
+- [prerequisites](#prerequisites)
 - [Generating the JAR](#generating-the-jar)
     - [Clone this repository](#clone-this-repository)
     - [Generate and install](#generate-and-install)
@@ -33,6 +25,19 @@ jedis|https://github.com/opencensus-integrations/jedis
     - [Running it](#running-it)
 - [Viewing your metrics](#viewing-your-metrics)
 - [Viewing your traces](#viewing-your-traces)
+
+#### Prerequisites
+
+You will need the following:
+
+* Redis
+* Google Stackdriver enabled on your project
+
+{{% notice tip %}}
+For assistance installing Redis, please [Click here to get started](https://redis.io/topics/quickstart)
+
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
 
 #### Generating the JAR
 

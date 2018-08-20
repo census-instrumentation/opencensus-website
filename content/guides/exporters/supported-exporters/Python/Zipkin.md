@@ -9,15 +9,15 @@ aliases: [/supported-exporters/python/zipkin]
 
 ![](/img/zipkin-logo.jpg)
 
-{{% notice note %}}
-This guide makes use of Zipkin for visualizing your data. For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
-{{% /notice %}}
-
 Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures.
 
 It manages both the collection and lookup of this data. Zipkin’s design is based on the Google Dapper paper.
 
 OpenCensus Python has support for this exporter available through package [opencensus.trace.exporters.zipkin_exporter](https://census-instrumentation.github.io/opencensus-python/trace/api/zipkin_exporter.html)
+
+{{% notice tip %}}
+For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+{{% /notice %}}
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)

@@ -9,16 +9,16 @@ aliases: [/supported-exporters/go/prometheus]
 
 ![](/img/prometheus-logo.png)
 
-{{% notice note %}}
-This guide makes use of Prometheus for receiving and visualizing your data. For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
-{{% /notice %}}
-
 Prometheus is a monitoring system that collects metrics, by scraping
 exposed endpoints at regular intervals, evaluating rule expressions.
 It can also trigger alerts if certain conditions are met.
 
 OpenCensus Go allows exporting stats to Prometheus by means of the Prometheus package
 [go.opencensus.io/exporter/prometheus](https://godoc.org/go.opencensus.io/exporter/prometheus)
+
+{{% notice tip %}}
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+{{% /notice %}}
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)

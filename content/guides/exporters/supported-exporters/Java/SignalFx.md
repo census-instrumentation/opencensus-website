@@ -9,14 +9,6 @@ aliases: [/supported-exporters/java/signalfx]
 
 ![](https://opencensus.io/img/signalFx_logo.svg)
 
-{{% notice note %}}
-This guide makes use of SignalFx.
-You'll need to have:
-
-* A [SignalFx account](https://signalfx.com/)
-* The corresponding [data ingest token](https://docs.signalfx.com/en/latest/admin-guide/tokens.html)
-{{% /notice %}}
-
 SignalFx is a real-time monitoring solution for cloud and distributed applications.
 SignalFx ingests that data and offers various visualizations on charts, dashboards and service maps,
 as well as real-time anomaly detection.
@@ -24,6 +16,15 @@ as well as real-time anomaly detection.
 OpenCensus Java has support for this exporter available through the package:
 
 * Stats [io.opencensus.exporter.stats.signalfx](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-signalfx)
+
+{{% notice tip %}}
+This guide makes use of SignalFx.
+You'll need to have:
+
+* A [SignalFx account](https://signalfx.com/)
+* The corresponding [data ingest token](https://docs.signalfx.com/en/latest/admin-guide/tokens.html)
+{{% /notice %}}
+
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)
