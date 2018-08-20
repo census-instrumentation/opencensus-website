@@ -4,46 +4,45 @@ weight: 10
 ---
 
 
-Tags allow us to associate contextual key-value pairs with collected data.
+Tags are key-value pairs of data that are associated with collected metrics, to
+provide contextual information, distinguish and group metrics during analysis and inspection.
 
-After collection, tags can later be used as dimensions to break down the data and
-analyze it from various different perspectives to target specific
-cases in isolation even in highly complex systems.
+Some examples of tags are:
 
-Tags have keys and values. Examples of tags:
-
-* `{frontend: "web-0.12"}`
-* `{frontend: "ios-10.2.12"}`
-* `{http_endpoint: "server:8909/api/users"}`
-
-Frontend tag allow users to breakdown the data between web, iOS and Android users.
-HTTP endpoint allows to filter or group by a specific endpoint when
-looking at the HTTP latency data.
+* `frontend=ofe`
+* `user_agent="ios-10.2.12"`
+* `method="push"`
+* `value=12`
+* `customer_id=44ca62e0-44a3-4c67-9955-33805d551d01`
 
 #### Propagation
 
-Tags may be defined in one service and used in a view in a different
-service; they are propagated on the wire.
+Tags can be defined in one service's requests and then serialized on the wire to downstream services
+that the request progresses through.
 
-In distributed systems, a service is likely to be depending
-on many of other services.
-This results in many challenges when analyzing the data
-collected at the lower ends of the stack.
-Instrumentation at lower layer might not be very valuable
-if data is not recorded with enough context.
+In distributed systems, a single request could touch a wide range of isolated services.
+For example a file upload request can invoke the authentication and billing service, the data storage
+service, the caching service etc. which might all be isolated and invokable by [Remote Procedure Calls (RPCs)](https://en.wikipedia.org/wiki/Remote_procedure_call)
 
-Lower ends of the systems cannot have additional hardcoded context, this
-would leak details of higher levels services to the lower level.
-Instead, we use tag propagation.
-Higher level services produce tags, and lower-end uses them when
-recording data.
+To maintain contextual information of the specific request, tag propagation through
+your distributed system is necessary; the higher levels generate tags that are then
+passed down to the invoked lower level services and eventually those are sent to your observability systems.
 
-![Tag propagation](/img/tags-propagation.png)
+![Tag propagation](/img/tag-propagation-handdrawn.jpg)
 
-Above, frontend depends on the authentication service. Authentication
-service needs to query database that depends on the lower-level
-blob storage service. In this case the originator tag has been
-propagated as a part of the requests all through the stack. And
-blob storage can easily record data with the originator tag.
-The data analysis backends can group data by originator and blob storage service
-can tell the impact of higher level users on their service.
+From the above drawing, a request comes in through the frontend server/service,
+the tags:
+
+* `customer_id=foo_bar`
+* `originator=photoop_svc`
+
+are assigned to that request and propagated as it goes through layers:
+
+* Authentication
+* Database
+* Cloud storage
+* Content Delivery Network(CDN)
+etc.
+
+and with those tags, you can uniquely identify and break down which service called
+the downstream services, how much quota they've used, what calls are failing etc.
