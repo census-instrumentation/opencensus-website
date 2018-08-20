@@ -40,6 +40,10 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
 
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
+
 #### Installation
 
 OpenCensus: `pip install opencensus`
