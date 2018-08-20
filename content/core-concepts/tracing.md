@@ -4,7 +4,7 @@ weight: 20
 ---
 
 
-A trace tracks the progression of a single user request
+Tracing tracks the progression of a single user request
 as it is handled by other services that make up an application.
 
 Each unit work is called a span in a trace. Spans include metadata about the work,
@@ -12,7 +12,7 @@ including the time spent in the step (latency) and status.
 You can use tracing to debug errors and
 latency issues of your application.
 
-#### Spans
+#### Span
 
 A trace is a tree of spans.
 
@@ -20,32 +20,33 @@ A span is the unit work represented in a trace. A span may
 represent a HTTP request, an RPC, a server handler,
 a database query or a section customly marked in user code.
 
+For example:
+
 ![A trace](/img/trace-trace.png)
 
 Above, you see a trace with various spans. In order to respond
-to `/messages`, several other internal requests are made. First,
-we are checking if the user is authenticated, we are trying to
-get the results from the cache. It is a cache miss, hence we
-query the database for the results, we cache the results back,
-and respond back to the user.
+to `/messages`, several other internal requests are made. Firstly,
+we check if the user is authenticated. Next we check if their
+messages were cached. Since their message wasn't cached, that's
+a cache miss and we then fetch their content from MySQL, cache it
+and then provide the response containing their messages.
 
-There are two types of spans:
+A span may or may not have a parent span:
 
-* **Root span**: Root spans don't have a parent span. They are the
-  first span. `/messages` span above is a root span.
-* **Child span**: Child spans have an existing span as their parent.
+* A span without a parent is called a **"root span"** for example span "/messages"
+* A span with a parent is called a **"child span"** for example spans "auth", "cache.Get", "mysql.Query", "cache.Put"
 
-
-Spans are identified with an ID and are associated to a trace.
-These identifiers and options byte together are called span context.
-Inside the same process, span context is propagated in a context
+Spans are identified with a SpanID and each span belongs to a single trace.
+These identifiers and options byte together are called **Span Context**.
+Inside the same process, **Span context** is propagated in a context
 object. When crossing process boundaries, it is serialized into
-protocol headers. The receiving end can read the span context
-and create child spans.
+protocol headers. The receiving end can read the **Span context** and create child spans.
+
+Each trace is uniquely identified by a TraceID which all constituent spans will share.
 
 #### Name
 
-Span names represent what span does. Span names should
+Span names are symbolic of the what span does. Span names should
 be statistically meaningful. Most tracing backend and analysis
 tools use span names to auto generate reports for the
 represented work.
@@ -67,21 +68,21 @@ unsuccessful spans and helps tracing users to debug errors.
 
 ![A trace with an error span](/img/trace-errorspan.png)
 
-Above, you can see `cache.Put` is errored because of the
-violation of the key size limit. As a result of this error,
- `/messages` request responded with an error to the user.
+Above, you can see `cache.Put` errored the request violated the preset key size limit.
+As a result of this error,  `/messages` request responded with an error to the user.
 
 #### Annotations
 
 Annotations are timestamped strings with optional attributes.
-Annotations are used like log lines, but the log is per-Span.  
+Annotations are used like log lines, but centric to the span.
+Annotations contain a "Description" which help tell the story of the event that occured.
 
-Example annotations:  
+Example annotations include:
 
 * 0.001s Evaluating database failover rules.
-* 0.002s Failover replica selected. attributes:{replica:ab_001 zone:xy}
+* 0.002s Failover replica selected. attributes:`{replica:ab_001 zone:"xy"}`
 * 0.006s Response received.
-* 0.007s Response requires additional lookups. attributes:{fanout:4}
+* 0.007s Response requires additional lookups. attributes:`{fanout:4}`
 
 Annotations provide rich details to debug problems in the scope of a span.
 
@@ -117,7 +118,7 @@ There are two ways to set samplers:
 * **Global sampler**: Global sampler is the global default.
 * **Span sampler**: When starting a new span, a custom
   sampler can be provided. If no custom sampling is
-  provided, global sampler is used. Span samplers are
+  provided, the global sampler is used. Span samplers are
   useful if you want to over-sample some sections of your
   code. For example, a low throughput background service
   may use a higher sampling rate than a high-load RPC
@@ -129,6 +130,6 @@ Recorded spans will be reported by the registered exporters.
 
 Multiple exporters can be registered to upload the data to
 various different backends. Users can unregister the exporters
-if they no longer are needed.
+if they are no longer needed.
 
-See [exporters](/core-concepts/exporters) to learn more.
+Please visit the page [exporters](/core-concepts/exporters) to learn more about exporters.
