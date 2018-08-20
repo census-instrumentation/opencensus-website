@@ -7,7 +7,7 @@ class: "shadowed-image lightbox"
 
 #### Table of contents
 
-- [Requirements](#background)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Getting started](#getting-started)
 - [Enable Tracing](#enable-tracing)
