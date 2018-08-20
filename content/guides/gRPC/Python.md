@@ -8,13 +8,6 @@ aliases: [/grpc/python]
 
 ![](/images/python-grpc-opencensus.png)
 
-{{% notice note %}}
-Before beginning, if you haven't already:
-
-* Setup gRPC for Python by visiting this quickstart page [https://grpc.io/docs/quickstart/python.html](https://grpc.io/docs/quickstart/python.html)
-* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
-{{% / notice %}}
-
 ## Table of contents
 - [Overview](#overview)
 - [Setup](#setup)
@@ -33,6 +26,13 @@ Our service takes in a payload containing bytes and capitalizes them.
 
 Using OpenCensus, we can collect traces of our system and export them to the backend
 of our choice, to give observability to our distributed systems.
+
+{{% notice tip %}}
+Before beginning, if you haven't already:
+
+* Setup gRPC for Python by visiting this quickstart page [https://grpc.io/docs/quickstart/python.html](https://grpc.io/docs/quickstart/python.html)
+* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
+{{% / notice %}}
 
 ## Setup
 Make sure to setup your `GOOGLE_APPLICATION_CREDENTIALS` environment variable. Visit [here](https://cloud.google.com/docs/authentication/production) for instructions on how to do so.

@@ -9,10 +9,6 @@ aliases: [/supported-exporters/go/stackdriver]
 
 ![](/images/logo_gcp_vertical_rgb.png)
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-{{% /notice %}}
-
 Stackdriver Trace is a distributed tracing system that collects latency data from your applications and displays it in the Google Cloud Platform Console.
 You can track how requests propagate through your application and receive detailed near real-time performance insights.
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
@@ -25,6 +21,10 @@ Stackdriver ingests that data and generates insights via dashboards, charts, and
 integrating with Slack, PagerDuty, HipChat, Campfire, and more.
 
 OpenCensus Go has support for this exporter available through package [contrib.go.opencensus.io/exporter/stackdriver](https://godoc.org/contrib.go.opencensus.io/exporter/stackdriver)
+
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)

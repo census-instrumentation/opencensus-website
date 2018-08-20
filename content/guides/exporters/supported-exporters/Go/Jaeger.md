@@ -9,10 +9,6 @@ aliases: [/supported-exporters/jaeger]
 
 ![](https://www.jaegertracing.io/img/jaeger-logo.png)
 
-{{% notice note %}}
-This guide makes use of Jaeger for visualizing your data. For assistance setting up Jaeger, [Click here](/codelabs/jaeger) for a guided codelab.
-{{% /notice %}}
-
 Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing system released as open source by Uber Technologies.
 It is used for monitoring and troubleshooting microservices-based distributed systems, including:
 
@@ -23,6 +19,10 @@ It is used for monitoring and troubleshooting microservices-based distributed sy
 * Performance / latency optimization
 
 OpenCensus Go has support for this exporter available through package [go.opencensus.io/exporter/jaeger](https://godoc.org/go.opencensus.io/exporter/jaeger)
+
+{{% notice tip %}}
+For assistance setting up Jaeger, [Click here](/codelabs/jaeger) for a guided codelab.
+{{% /notice %}}
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)

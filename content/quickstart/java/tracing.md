@@ -5,12 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-
-It also uses Apache Maven for dependency management and building. If you haven't already installed it, please [Click here](https://maven.apache.org/install.html) for installation instructions
-{{% /notice %}}
-
 #### Table of contents
 
 - [Requirements](#background)
@@ -35,7 +29,13 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 - Java 8+
 - [Apache Maven](https://maven.apache.org/install.html)
 - Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
+- Google Stackdriver Tracing enabled on your project
+
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+
+For assistance setting up Apache Maven, [Click here](https://maven.apache.org/install.html) for instructions.
+{{% /notice %}}
 
 #### Installation
 ```bash

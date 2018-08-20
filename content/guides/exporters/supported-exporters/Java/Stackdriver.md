@@ -9,10 +9,6 @@ aliases: [/supported-exporters/java/stackdriver]
 
 ![](/images/logo_gcp_vertical_rgb.png)
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-{{% /notice %}}
-
 Stackdriver Trace is a distributed tracing system that collects latency data from your applications and displays it in the Google Cloud Platform Console.
 You can track how requests propagate through your application and receive detailed near real-time performance insights.
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
@@ -27,6 +23,10 @@ integrating with Slack, PagerDuty, HipChat, Campfire, and more.
 OpenCensus Java has support for this exporter available through packages:
 * Stats [io.opencensus.exporter.stats.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-stackdriver)
 * Trace [io.opencensus.exporter.trace.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-stackdriver)
+
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
 
 #### Table of contents
 - [Creating the exporters](#creating-the-exporters)

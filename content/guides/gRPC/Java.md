@@ -8,13 +8,6 @@ aliases: [/grpc/java]
 
 ![](/images/java-grpc-opencensus.png)
 
-{{% notice note %}}
-Before beginning, if you haven't already:
-
-* Setup gRPC for Java by visiting this quickstart page [https://grpc.io/docs/quickstart/java.html](https://grpc.io/docs/quickstart/java.html)
-* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
-{{% / notice %}}
-
 #### Table of contents
 - [Overview](#overview)
     - [Protobuf definition](#protobuf-definition)
@@ -33,6 +26,13 @@ Our serivce takes in a payload containing bytes and capitalizes them.
 Using OpenCensus, we can collect traces and metrics of our system and export them to the backend of our choice, to give observability to our distributed systems.
 
 grpc-Java has already been instrumented [gRPC-Core](https://github.com/grpc/grpc-java) with OpenCensus for tracing and metrics. Application users just need to add a runtime dependency on OpenCensus-Java impl, and the instrumentations should just work.
+
+{{% notice tip %}}
+Before beginning, if you haven't already:
+
+* Setup gRPC for Java by visiting this quickstart page [https://grpc.io/docs/quickstart/java.html](https://grpc.io/docs/quickstart/java.html)
+* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
+{{% / notice %}}
 
 As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download), the respective inclusions to our build systems are:
 

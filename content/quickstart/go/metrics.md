@@ -5,10 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-{{% /notice %}}
-
 #### Table of contents
 
 - [Requirements](#background)
@@ -39,7 +35,11 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 #### Requirements
 - Go 1.9 or above
 - Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project (Need help? [Click here](/codelabs/stackdriver))
+- Google Stackdriver Tracing enabled on your project
+
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
 
 #### Installation
 

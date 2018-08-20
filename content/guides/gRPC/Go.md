@@ -8,13 +8,6 @@ aliases: [/grpc/go]
 
 ![](/images/go-grpc-opencensus.png)
 
-{{% notice note %}}
-Before beginning, if you haven't already:
-
-* Setup gRPC for Go by visiting this quickstart page [https://grpc.io/docs/quickstart/go.html](https://grpc.io/docs/quickstart/go.html)
-* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
-{{% / notice %}}
-
 #### Table of contents
 - [Overview](#overview)
     - [Protobuf definition](#protobuf-definition)
@@ -56,6 +49,13 @@ Server handler|[go.opencensus.io/plugin/ocgrpc.ServerHandler](https://godoc.org/
 Client handler|[go.opencensus.io/plugin/ocgrpc.ClientHandler](https://godoc.org/go.opencensus.io/plugin/ocgrpc#ServerHandler)
 Server gRPC metrics/views|[https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultServerViews](https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultServerViews)
 Client gRPC metrics/views|[https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultClientViews](https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultClientViews)
+
+{{% notice tip %}}
+Before beginning, if you haven't already:
+
+* Setup gRPC for Go by visiting this quickstart page [https://grpc.io/docs/quickstart/go.html](https://grpc.io/docs/quickstart/go.html)
+* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
+{{% / notice %}}
 
 #### Requirements
 
