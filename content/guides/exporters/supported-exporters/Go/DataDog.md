@@ -1,5 +1,5 @@
 ---
-title: "DataDog (Stats and Tracing)"
+title: "Datadog (Stats and Tracing)"
 date: 2018-07-21T14:27:35-07:00
 draft: false
 weight: 3
@@ -9,9 +9,9 @@ aliases: [/supported-exporters/go/datadog]
 
 ![](https://datadog-prod.imgix.net/img/press-logo-v-purpleb.png)
 
-[DataDog](https://www.datadoghq.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
+[Datadog](https://www.datadoghq.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
 
-Its OpenCensus Go exporter is available at [https://godoc.org/github.com/DataDog/opencensus-go-exporter-datadog](https://godoc.org/github.com/DataDog/opencensus-go-exporter-datadog)
+Its OpenCensus Go exporter is available at [https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog](https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog)
 
 #### Table of contents
 - [Creating the exporter](#creating-the-exporter)
@@ -21,18 +21,18 @@ Its OpenCensus Go exporter is available at [https://godoc.org/github.com/DataDog
 ##### Creating the exporter
 
 To create the exporter, we'll need:
-* DataDog credentials which you can get from [Here](https://docs.datadoghq.com/getting_started/)
+* Datadog credentials which you can get from [Here](https://docs.datadoghq.com/getting_started/)
 * Create an exporter in code
 
 This is possible by importing the exporter
 
 {{<highlight go>}}
-import "github.com/DataDog/opencensus-go-exporter-datadog"
+import "github.com/Datadog/opencensus-go-exporter-datadog"
 
 // then create the actual exporter
 dd, err := datadog.NewExporter(datadog.Options{})
 if err != nil {
-    log.Fatalf("Failed to create the DataDog exporter: %v", err)
+    log.Fatalf("Failed to create the Datadog exporter: %v", err)
 }
 {{</highlight>}}
 
@@ -52,7 +52,7 @@ import (
 func main() {
   dd, err := datadog.NewExporter(datadog.Options{})
   if err != nil {
-    log.Fatalf("Failed to create the DataDog exporter: %v", err)
+    log.Fatalf("Failed to create the Datadog exporter: %v", err)
   }
   // It is imperative to invoke flush before your main function exits
   defer dd.Stop()
@@ -68,14 +68,14 @@ package main
 import (
 	"log"
 
-  "github.com/DataDog/opencensus-go-exporter-datadog"
+  "github.com/Datadog/opencensus-go-exporter-datadog"
   "go.opencensus.io/trace"
 )
 
 func main() {
   dd, err := datadog.NewExporter(datadog.Options{})
   if err != nil {
-    log.Fatalf("Failed to create the DataDog exporter: %v", err)
+    log.Fatalf("Failed to create the Datadog exporter: %v", err)
   }
   // It is imperative to invoke flush before your main function exits
   defer dd.Stop()
@@ -91,7 +91,7 @@ package main
 import (
   "log"
 
-  "github.com/DataDog/opencensus-go-exporter-datadog"
+  "github.com/Datadog/opencensus-go-exporter-datadog"
   "go.opencensus.io/stats/view"
   "go.opencensus.io/trace"
 )
@@ -99,7 +99,7 @@ import (
 func main() {
   dd, err := datadog.NewExporter(datadog.Options{})
   if err != nil {
-    log.Fatalf("Failed to create the DataDog exporter: %v", err)
+    log.Fatalf("Failed to create the Datadog exporter: %v", err)
   }
   // It is imperative to invoke flush before your main function exits
   defer dd.Stop()
