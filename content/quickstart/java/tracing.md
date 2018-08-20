@@ -22,7 +22,7 @@ class: "shadowed-image lightbox"
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 1. Trace the code using [OpenCensus Tracing](/core-concepts/tracing)
-2. Register and enable an exporter for a [backend](http://localhost:1313/core-concepts/exporters/#supported-backends) of our choice
+2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View traces on the backend of our choice
 
 #### Requirements
@@ -380,7 +380,7 @@ private static final Tracer tracer = Tracing.getTracer();
 
 We will be tracing the execution as it flows through `readEvaluateProcessLine`, `readLine`, and finally `processLine`.
 
-To do this, we will create a [span](http://localhost:1313/core-concepts/tracing/#spans).
+To do this, we will create a [span](/core-concepts/tracing/#spans).
 
 You can create a span by inserting the following line in each of the three functions:
 ```java
@@ -709,7 +709,7 @@ public class Repl {
 
 We will do three things in our `setupOpenCensusAndStackdriverExporter` function:
 
-1. Set our [sampling rate](http://localhost:1313/core-concepts/tracing/#sampling)
+1. Set our [sampling rate](/core-concepts/tracing/#sampling)
 ```java
 TraceConfig traceConfig = Tracing.getTraceConfig();
 // For demo purposes, lets always sample.
