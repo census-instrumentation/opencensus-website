@@ -14,20 +14,9 @@ This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)
-- [Enable Metrics](#enable-metrics)
-    - [Import Packages](#import-metrics-packages)
-    - [Create Metrics](#create-metrics)
-    - [Create Tags](#create-tags)
-    - [Inserting Tags](#inserting-tags)
-    - [Recording Metrics](#recording-metrics)
-- [Enable Views](#enable-views)
-    - [Import Packages](#import-views-packages)
-    - [Create Views](#create-views)
-    - [Register Views](#register-views)
+- [Create and Record Metrics](#create-and-record-metrics)
+- [Enable Views](#with-views-and-all-enabled)
 - [Exporting to Stackdriver](#exporting-to-stackdriver)
-    - [Import Packages](#import-exporting-packages)
-    - [Export Views](#export-views)
-- [Viewing your Metrics on Stackdriver](#viewing-your-metrics-on-stackdriver)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -46,7 +35,7 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 
 #### Installation
 
-OpenCensus: `pip install opencensus google-cloud-monitoring`
+OpenCensus: `pip install --upgrade opencensus google-cloud-monitoring`
 
 #### Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -89,6 +78,8 @@ def main():
     while True:
         line = sys.stdin.readline()
         print(line.upper())
+
+main()
 {{</highlight>}}
 
 You can run the code via `python repl.py`.
@@ -286,21 +277,8 @@ if __name__ == "__main__":
     main()
 ```
 
-#### Viewing your Metrics on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://app.google.stackdriver.com/metrics-explorer), select your project, and view the metrics.
+#### Exporting to Stackdriver
 
-In the query box to find metrics, type `quickstart` as a prefix:
-
-![viewing metrics 1](https://cdn-images-1.medium.com/max/1600/1*kflo3l46PslT6oZDNCJ23A.png)
-
-And on selecting any of the metrics e.g. `quickstart/demo/lines_in`, we’ll get...
-
-![viewing metrics 2](https://cdn-images-1.medium.com/max/1600/1*6lUs1yCzewMgzCWv2wtbVQ.png)
-
-Let’s examine the latency buckets:
-
-![viewing metrics 3](https://cdn-images-1.medium.com/max/1600/1*o0cPi--Y5IYrrvdQ0IJQKw.png)
-
-On checking out the Stacked Area display of the latency, we can see that the 99th percentile latency was 24.75ms. And, for `line_lengths`:
-
-![viewing metrics 4](https://cdn-images-1.medium.com/max/1600/1*roe_0ZNOZiMnTVs3VzG0AQ.png)
+{{% notice warning %}}
+This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
+{{% /notice %}}
