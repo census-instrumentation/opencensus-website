@@ -15,21 +15,23 @@ zPages can also be used to debug [exporter](/core-concepts/exporters) issues.
 
 In order to serve zPages, register their handlers and
 start a web server. Below, there is an example how to
-serve these pages from `127.0.0.1:7777/debug`.
+serve these pages from `127.0.0.1:7777`.
 
 {{<tabs Go Java>}}
   {{<highlight go>}}
+
+package main
+
 import (
     "log"
     "net/http"
-
     "go.opencensus.io/zpages"
 )
 
 func main() {
     // Using the default serve mux, but you can create your own
     mux := http.DefaultServeMux
-    zpages.Handle(mux, "/debug")
+    zpages.Handle(mux, "/")
     log.Fatal(http.ListenAndServe("127.0.0.1:7777", mux))
 }
   {{</highlight>}}
@@ -45,12 +47,12 @@ ZPageHandlers.startHttpServerAndRegisterAll(7777);
 Once handler is registered, there are various pages provided
 from the libraries:
 
-* [127.0.0.1:7777/debug/rpcz](http://127.0.0.1:7777/debug/rpcz)
-* [127.0.0.1:7777/debug/tracez](http://127.0.0.1:7777/debug/tracez)
+* [127.0.0.1:7777/rpcz](http://127.0.0.1:7777/rpcz)
+* [127.0.0.1:7777/tracez](http://127.0.0.1:7777/tracez)
 
 #### /rpcz
 
-/rpcz serves stats about sent and received RPCs. For example at [/rpcz](http://127.0.0.1:7777/debug/rpcz)
+/rpcz serves stats about sent and received RPCs. For example at [/rpcz](http://127.0.0.1:7777/rpcz)
 
 Available stats include:
 
@@ -63,7 +65,7 @@ Available stats include:
 
 #### /tracez
 
-[/tracez](http://127.0.0.1:7777/debug/tracez) serves details about
+[/tracez](http://127.0.0.1:7777/tracez) serves details about
 the trace spans collected in the process. It provides several sample spans
 per latency bucket and sample errored spans.
 
