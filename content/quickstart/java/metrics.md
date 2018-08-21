@@ -45,21 +45,16 @@ For assistance setting up Apache Maven, [Click here](https://maven.apache.org/in
 {{% /notice %}}
 
 #### Installation
-We will first create the folder to house our project called `repl-app` and then use Maven's `archetype:generate` command to bootstrap the application.
+We will first create our project directory, generate the `pom.xml`, and bootstrap our entry file.
 
 ```bash
-mvn archetype:generate \
-  -DgroupId=io.opencensus.quickstart \
-  -DartifactId=repl-app \
-  -DarchetypeArtifactId=maven-archetype-quickstart \
-  -DinteractiveMode=false
-
+mkdir repl-app
 cd repl-app
-```
 
-We will be removing the unused generated test file:
-```bash
-rm src/test/java/io/opencensus/quickstart/AppTest.java
+touch pom.xml
+
+mkdir -p src/main/java/io/opencensus/quickstart
+touch src/main/java/io/opencensus/quickstart/Repl.java
 ```
 
 Put this in your newly generated `pom.xml` file:
@@ -122,14 +117,6 @@ Put this in your newly generated `pom.xml` file:
 </project>
 ```
 
-Now let's rename our main application file to `Repl.java` and insert our code.
-
-```bash
-cd src/main/java/io/opencensus/quickstart
-
-mv App.java Repl.java
-```
-
 Put this in `src/main/java/io/opencensus/quickstart/Repl.java`:
 
 ```java
@@ -166,10 +153,10 @@ public class Repl {
 }
 ```
 
-Return to the project's root directory and install required dependencies:
+To install required dependencies, run this from your project's root directory:
 
 ```bash
-cd ../../../../../../
+# Make sure to be in your project's root directory
 mvn install
 ```
 
