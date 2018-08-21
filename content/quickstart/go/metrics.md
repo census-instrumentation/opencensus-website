@@ -1037,9 +1037,6 @@ func main() {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
-	// But also we can change the metrics reporting period to 2 seconds
-	view.SetReportingPeriod(2 * time.Second)
-
 	// repl is the read, evaluate, print, loop
 	for {
 		if err := readEvaluateProcess(br); err != nil {
@@ -1132,9 +1129,6 @@ func main() {
 	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
-
-	// But also we can change the metrics reporting period to 2 seconds
-	view.SetReportingPeriod(2 * time.Second)
 
 	// repl is the read, evaluate, print, loop
 	for {
@@ -1294,9 +1288,6 @@ func main() {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
-	// But also we can change the metrics reporting period to 2 seconds
-	view.SetReportingPeriod(2 * time.Second)
-
 	// repl is the read, evaluate, print, loop
 	for {
 		if err := readEvaluateProcess(br); err != nil {
@@ -1388,9 +1379,6 @@ func main() {
 	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
-
-	// But also we can change the metrics reporting period to 2 seconds
-	view.SetReportingPeriod(2 * time.Second)
 
 	// In a REPL:
 	//   1. Read input
@@ -1498,9 +1486,6 @@ func main() {
 	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
-
-	// But also we can change the metrics reporting period to 2 seconds
-	view.SetReportingPeriod(2 * time.Second)
 
 	// In a REPL:
 	//   1. Read input
