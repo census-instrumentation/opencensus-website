@@ -65,7 +65,7 @@ Add this to your pom.xml file:
         </dependency>
 
         <dependency>
-            <groupId>prometheus</groupId>
+            <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_httpserver</artifactId>
             <version>0.3.0</version>
         </dependency>
@@ -77,13 +77,13 @@ We also need to expose the Prometheus endpoint say on address "localhost:8888".
 {{<highlight java>}}
 package io.opencensus.tutorial.prometheus;
 
-import io.opencensus.exporter.stats.prometheus.PrometheusStatsExporter;
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
 import io.prometheus.client.exporter.HTTPServer;
 
 public class PrometheusTutorial {
     public static void main(String ...args) {
         // Register the Prometheus exporter
-        PrometheusStatsExporter.createAndRegister();
+        PrometheusStatsCollector.createAndRegister();
 
         // Run the server as a daemon on address "localhost:8888"
         HTTPServer server = new HTTPServer("localhost", 8888, true);
