@@ -38,17 +38,18 @@ For assistance setting up Apache Maven, [Click here](https://maven.apache.org/in
 {{% /notice %}}
 
 #### Installation
+We will first create our project directory, generate the `pom.xml`, and bootstrap our entry file.
+
 ```bash
-mvn archetype:generate \
-  -DgroupId=io.opencensus.quickstart \
-  -DartifactId=repl-app \
-  -DarchetypeArtifactId=maven-archetype-quickstart \
-  -DinteractiveMode=false \
+mkdir repl-app
+cd repl-app
 
-cd repl-app/src/main/java/io/opencensus/quickstart
+touch pom.xml
 
-mv App.Java Repl.java
+mkdir -p src/main/java/io/opencensus/quickstart
+touch src/main/java/io/opencensus/quickstart/Repl.java
 ```
+
 Put this in your newly generated `pom.xml` file:
 
 ```xml
@@ -117,59 +118,11 @@ package io.opencensus.quickstart;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-public class Repl {
-    public static void main(String ...args) {
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                System.out.print("> ");
-                System.out.flush();
-                String line = stdin.readLine();
-                String processed = processLine(line);
-                System.out.println("< " + processed + "\n");
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        return line.toUpperCase();
-    }
-}
-{{</highlight>}}
-
-Install required dependencies:
-```bash
-mvn install
-```
-
-#### Getting Started
-Let's first run the application and see what we have.
-```bash
-mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
-```
-We have ourselves a lower-to-UPPERCASE REPL. You should see something like this:
-![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
-
-Now, in preparation of tracing, lets abstract some of the core functionality in `main()` to a suite of helper functions:
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -207,10 +160,34 @@ public class Repl {
 }
 {{</highlight>}}
 
+To install required dependencies, run this from your project's root directory:
+
+```bash
+# Make sure to be in your project's root directory
+mvn install
+```
+
+#### Getting Started
+The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
+```bash
+> foo
+< FOO
+```
+
+Let's first run the application and see what we have.
+```bash
+mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
+```
+
+You will be given a text prompt. Try typing in a lowercase word and hit enter to receive the uppercase equivalent.
+
+You should see something like this after a few tries:
+![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
+
 #### Enable Tracing
 
 ##### Import Packages
-To enable tracing, we’ll declare the dependencies in your `pom.xml` file:
+To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Insert the following code snippet after the `<properties>...</properties>` node:
 
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
@@ -302,7 +279,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file:
 {{</highlight>}}
 {{</tabs>}}
 
-Now add the import statements to your `Repl.java`:
+We will now be importing modules into `Repl.java`. Append the following snippet after the existing import statements:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -330,9 +307,6 @@ import io.opencensus.trace.Tracing;
 
 public class Repl {
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -406,9 +380,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -441,13 +412,21 @@ public class Repl {
             return line;
         }
     }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print("> ");
+        System.out.flush();
+        String line = readLine(in);
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+    }
 }
 ```
 
 #### Exporting to Stackdriver
 
 ##### Import Packages
-To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependency in your `pom.xml`:
+To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependency in your `pom.xml`. Add the following code snippet inside of your `<dependencies>` node:
 
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
@@ -577,9 +556,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Our OpenCensus initialization will eventually go here
-
-        // Step 2. The normal REPL.
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -612,20 +588,24 @@ public class Repl {
             return line;
         }
     }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print("> ");
+        System.out.flush();
+        String line = readLine(in);
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+    }
 }
 {{</highlight>}}
 {{</tabs>}}
 
 ##### Export Traces
-
-Now it is time to implement `Step 1: OpenCensus Initialization`!
-
 We will create a function called `setupOpenCensusAndStackdriverExporter` and call it from our `main` function:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
-    // Step 1. Enable OpenCensus Tracing.
     try {
         setupOpenCensusAndStackdriverExporter();
     } catch (IOException e) {
@@ -662,7 +642,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Enable OpenCensus Tracing.
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
@@ -702,6 +681,14 @@ public class Repl {
             ss.close();
             return line;
         }
+    }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print("> ");
+        System.out.flush();
+        String line = readLine(in);
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
     }
 }
 {{</highlight>}}
@@ -775,7 +762,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Enable OpenCensus Tracing.
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
@@ -815,6 +801,14 @@ public class Repl {
             ss.close();
             return line;
         }
+    }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print("> ");
+        System.out.flush();
+        String line = readLine(in);
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
     }
 
     private static void setupOpenCensusAndStackdriverExporter() throws IOException {
@@ -880,7 +874,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Enable OpenCensus Tracing.
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
@@ -920,6 +913,14 @@ public class Repl {
             ss.close();
             return line;
         }
+    }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print("> ");
+        System.out.flush();
+        String line = readLine(in);
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
     }
 
     private static void setupOpenCensusAndStackdriverExporter() throws IOException {
@@ -1002,7 +1003,6 @@ public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Step 1. Enable OpenCensus Tracing.
         try {
             setupOpenCensusAndStackdriverExporter();
         } catch (IOException e) {
