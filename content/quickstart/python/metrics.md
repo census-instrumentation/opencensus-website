@@ -79,7 +79,8 @@ def main():
         line = sys.stdin.readline()
         print(line.upper())
 
-main()
+if __name__ == '__main__':
+      main()
 {{</highlight>}}
 
 You can run the code via `python repl.py`.
