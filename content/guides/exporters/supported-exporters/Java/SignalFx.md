@@ -9,6 +9,10 @@ aliases: [/supported-exporters/java/signalfx]
 
 ![](https://opencensus.io/img/signalFx_logo.svg)
 
+- [Introduction](#introduction)
+- [Creating the exporter](#creating-the-exporter)
+
+## Introduction
 SignalFx is a real-time monitoring solution for cloud and distributed applications.
 SignalFx ingests that data and offers various visualizations on charts, dashboards and service maps,
 as well as real-time anomaly detection.
@@ -25,11 +29,10 @@ You'll need to have:
 * The corresponding [data ingest token](https://docs.signalfx.com/en/latest/admin-guide/tokens.html)
 {{% /notice %}}
 
+## Creating the exporter
 
-#### Table of contents
-- [Creating the exporter](#creating-the-exporter)
 
-##### pom.xml
+Insert the following snippet in your `pom.xml`:
 
 ```xml
 <properties>
@@ -57,7 +60,7 @@ You'll need to have:
 </dependencies>
 ```
 
-#### Creating the exporter in code
+Instrument your application code with the following snippet:
 
 {{<highlight java>}}
 package io.opencensus.tutorial.signalfx;

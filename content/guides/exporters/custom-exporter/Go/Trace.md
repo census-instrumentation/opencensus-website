@@ -5,14 +5,13 @@ weight: 3
 aliases: [/custom_exporter/go/trace]
 ---
 
-### Table of contents
 - [Introduction](#introduction)
 - [Implementation](#implementation)
 - [Runnable example](#runnable-example)
 - [Notes](#notes)
 - [References](#references)
 
-#### Introduction
+## Introduction
 A trace exporter must conform to the interface [trace.Exporter](https://godoc.org/go.opencensus.io/trace#Exporter)
 
 which for purposes of brevity is:
@@ -27,7 +26,7 @@ type Exporter interface {
 
 whose sole method `ExportSpan` is the one in which you'll process and translate [Span Data](https://godoc.org/go.opencensus.io/trace#SpanData) into the data that your trace backend accepts.
 
-#### Implementation
+## Implementation
 
 For example, let's make a custom trace exporter that will print span data to standard output.
 
@@ -55,7 +54,7 @@ and then afterwards we must ensure that we invoke `trace.RegisterExporter` with 
 trace.RegisterExporter(new(customTraceExporter))
 ```
 
-#### Runnable example
+## Runnable example
 and now to test it out as we would in a typically linked program
 
 ```go
@@ -138,7 +137,7 @@ EndTime: 2018-08-07 23:56:29.035817031 -0700 PDT m=+0.048155109
 Annotations: [{Time:2018-08-07 23:56:29.035812 -0700 PDT m=+0.048150248 Message:Invoked it Attributes:map[invocations:1]}]
 ```
 
-#### Notes
+## Notes
 
 * Please remember to invoke [trace.RegisterExporter](https://godoc.org/go.opencensus.io/trace#RegisterExporter) so that your exporter
 will receive exported spans.
@@ -147,7 +146,7 @@ will receive exported spans.
 * If you need to do heavy processing in the `ExportSpan` method, please do it in a goroutine because ExportSpan is invoked
 on the fast path
 
-#### References
+## References
 
 Name|Link
 ---|---

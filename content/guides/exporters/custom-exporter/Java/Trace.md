@@ -5,14 +5,13 @@ weight: 3
 aliases: [/custom_exporter/java/trace]
 ---
 
-### Table of contents
 - [Introduction](#introduction)
 - [Implementation](#implementation)
 - [Runnable example](#runnable-example)
 - [Notes](#notes)
 - [References](#references)
 
-#### Introduction
+## Introduction
 
 A trace exporter must extend the abstract class [SpanExporter.Handler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.Handler.html) implementing the `export` method
 
@@ -34,7 +33,7 @@ After an exporter is created, it must be registered with [SpanExporter.registerH
 SpanExporter.registerHandler(nameOfTheExporter, anInstanceOfTheExporter);
 ```
 
-#### Implementation
+## Implementation
 
 For example, let's make a custom trace exporter that will print span data to standard output.
 
@@ -70,7 +69,7 @@ public class CustomTraceExporter extends SpanExporter.Handler {
 }
 ```
 
-#### Runnable example
+## Runnable example
 
 With the previous implementation, here is a fully runnable example, that we'll run using Maven.
 
@@ -267,13 +266,13 @@ Annotations: TimedEvents{events=[TimedEvent{timestamp=Timestamp{seconds=15337689
 
 ```
 
-#### Notes
+## Notes
 
 * Please remember to invoke [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-) for your created Trace exporter lest it won't receive exported span data
 
 * Your exporter's `export` method will receive exported span data only for spans that have been ended
 
-#### References
+## References
 
 Name|Link
 ---|---

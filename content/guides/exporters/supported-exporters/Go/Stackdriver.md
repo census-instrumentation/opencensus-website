@@ -9,16 +9,22 @@ aliases: [/supported-exporters/go/stackdriver]
 
 ![](/images/logo_gcp_vertical_rgb.png)
 
+- [Introduction](#introduction)
+- [Creating the exporter](#creating-the-exporter)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
 Stackdriver Trace is a distributed tracing system that collects latency data from your applications and displays it in the Google Cloud Platform Console.
+
 You can track how requests propagate through your application and receive detailed near real-time performance insights.
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
 and can capture traces from all of your VMs, containers, or Google App Engine projects.
 
 Stackdriver Monitoring provides visibility into the performance, uptime, and overall health of cloud-powered applications.
-Stackdriver collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services, hosted uptime probes, application instrumentation,
-and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch, and many others.
-Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by
-integrating with Slack, PagerDuty, HipChat, Campfire, and more.
+Stackdriver collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services, hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch, and many others.
+
+Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by integrating with Slack, PagerDuty, HipChat, Campfire, and more.
 
 OpenCensus Go has support for this exporter available through package [contrib.go.opencensus.io/exporter/stackdriver](https://godoc.org/contrib.go.opencensus.io/exporter/stackdriver)
 
@@ -26,12 +32,7 @@ OpenCensus Go has support for this exporter available through package [contrib.g
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Table of contents
-- [Creating the exporter](#creating-the-exporter)
-- [Viewing your metrics](#viewing-your-metrics)
-- [Viewing your traces](#viewing-your-traces)
-
-##### Creating the exporter
+## Creating the exporter
 To create the exporter, we'll need to:
 
 * Have a GCP Project ID
@@ -136,8 +137,8 @@ func main() {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
