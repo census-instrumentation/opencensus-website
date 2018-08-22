@@ -8,10 +8,12 @@ aliases: [/grpc/java]
 
 ![](/images/java-grpc-opencensus.png)
 
-#### Table of contents
 - [Overview](#overview)
+- [Creating our gRPC Service](#creating-our-grpc-service)
+    - [Import Packages](#import-packages)
     - [Protobuf definition](#protobuf-definition)
-    - [Generate the service](#generate-the-service)
+    - [Service implementation](#service-implementation)
+    - [Client implementation](#client-implementation)
 - [Instrumentation](#instrumentation)
     - [Instrumenting the server](#instrumenting-the-server)
     - [Instrumenting the client](#instrumenting-the-client)
@@ -19,7 +21,7 @@ aliases: [/grpc/java]
 - [Examining metrics](#examining-metrics)
 - [Notes](#notes)
 
-#### Overview
+## Overview
 
 Our serivce takes in a payload containing bytes and capitalizes them.
 
@@ -34,6 +36,9 @@ Before beginning, if you haven't already:
 * Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
 {{% / notice %}}
 
+## Creating our gRPC Service
+
+### Import Packages
 As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download), the respective inclusions to our build systems are:
 
 {{<tabs Maven Non-Android_Gradle Android-Gradle>}}
@@ -68,7 +73,7 @@ compile 'io.grpc:grpc-stub:1.14.0'
 {{</highlight>}}
 {{</tabs>}}
 
-#### Protobuf definition
+### Protobuf definition
 
 Make a directory structure `src/main/proto`
 
@@ -95,7 +100,7 @@ service Fetch {
 {{</highlight>}}
 
 
-#### Generate the service
+### Service implementation
 
 The source code below and the pom.xml file will be used to generate the service
 Please place the server code in file `src/main/java/io/octutorials/ocgrpc/TutorialServer.java`.
@@ -287,7 +292,7 @@ which will give such output
 
 ![](/images/java-grpc-server-plain.png)
 
-##### Client
+### Client implementation
 
 The client talks to the server via a gRPC channel, sending in bytes and getting back the output capitalized.
 
@@ -360,11 +365,11 @@ public class TutorialClient {
 which will give you such output after you've typed in
 ![](/images/ocgrpc-java-client.png)
 
-#### Instrumentation
+## Instrumentation
 
 To gain insights to our service, we'll add trace and metrics instrumentation as follows
 
-##### Instrumenting the server
+### Instrumenting the server
 
 
 We'll instrument the server by tracing as well as gRPC metrics using OpenCensus with imports such as:
@@ -764,7 +769,7 @@ public class TutorialServer {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Instrumenting the client
+### Instrumenting the client
 
 We'll instrument the client too by tracing as well as gRPC metrics using OpenCensus with imports such as:
 
@@ -1003,7 +1008,7 @@ mvn exec:java -Dexec.mainClass=io.octutorials.ocgrpc.TutorialServer
 mvn exec:java -Dexec.mainClass=io.octutorials.ocgrpc.TutorialClient
 ```
 
-#### Examining traces
+## Examining traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
 
 which will give visuals such as:
@@ -1012,7 +1017,7 @@ which will give visuals such as:
 
 ![Single trace details](/images/ocgrpc-tutorial-java-trace-details.png)
 
-#### Examining metrics
+## Examining metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
 which will give visuals such as:
@@ -1028,7 +1033,7 @@ which will give visuals such as:
 ![](/images/ocgrpc-tutorial-java-server-latency-cumulative.png)
 ![](/images/ocgrpc-tutorial-java-server-latency-p99th.png)
 
-#### References
+## References
 
 Notes|Link
 ---|---
