@@ -43,9 +43,9 @@ all now take in a context.Context object as the first argument, to allow for tra
 
 Metric|Name|Description
 ---|---|---
-Number of Cache Misses|`cache_misses`|The number of cache misses
-Number of Cache Hits|`cache_hits`|The number of cache hits
-Number of Client errors|`client_errors`|The number of general client errors
+Number of cache Misses|`cache_misses`|The number of cache misses
+Number of cache hits|`cache_hits`|The number of cache hits
+Number of client errors|`client_errors`|The number of general client errors
 Number of parse errors|`parse_errors`|The number of errors encountered while parsing
 Number of illegal keys|`illegal_keys`|The number of illegal keys encountered
 Number of compare and swap conflicts|`cas_conflicts`|The number of CAS conflicts
