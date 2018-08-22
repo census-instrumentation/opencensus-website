@@ -5,8 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
@@ -32,7 +30,8 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View the metrics on the backend of our choice
 
-#### Requirements
+## Requirements
+
 - Java 8+
 - [Apache Maven](https://maven.apache.org/install.html)
 - Google Cloud Platform account and project
@@ -44,7 +43,8 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 For assistance setting up Apache Maven, [Click here](https://maven.apache.org/install.html) for instructions.
 {{% /notice %}}
 
-#### Installation
+
+## Installation
 We will first create our project directory, generate the `pom.xml`, and bootstrap our entry file.
 
 ```bash
@@ -160,7 +160,7 @@ To install required dependencies, run this from your project's root directory:
 mvn install
 ```
 
-#### Brief Overview
+## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
 
 1. Create quantitative [metrics](/core-concepts/metrics) that we will record
@@ -168,7 +168,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 3. Organize our metrics, similar to writing a report, in to a `View`
 4. Export our views to a backend (Stackdriver in this case)
 
-#### Getting Started
+## Getting Started
 The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
 ```bash
 > foo
@@ -201,9 +201,9 @@ You can recompile and run the application after editing it by running this comma
 mvn install
 ```
 
-#### Enable Metrics
+## Enable Metrics
 
-##### Import Packages
+### Import Packages
 To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add the following snippet of code after the `<properties>...</properties>` node.
 
 {{<tabs Snippet All>}}
@@ -366,7 +366,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Measures for Metrics
+### Create Measures for Metrics
 First, we will create the variables needed to later record our metrics. Place the following snippet on the line after `public class Repl {`:
 
 {{<tabs Snippet All>}}
@@ -460,7 +460,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Tags
+### Create Tags
 Now we will create the variable later needed to record extra text meta-data.
 
 Insert the following snippet on the line before `private static final Tagger tagger = Tags.getTagger();`:
@@ -665,7 +665,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Recording Metrics
+### Recording Metrics
 Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEvaluateProcessLine`:
 
 {{<tabs Snippet All>}}
@@ -817,11 +817,12 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Enable Views
+## Enable Views
 In order to analyze these stats, we’ll need to aggregate our data with Views.
 
+
 <a name="import-views-packages"></a>
-##### Import Packages
+### Import Packages
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
@@ -949,7 +950,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Views
+### Create Views
 Append this code snippet as our last function inside of `public class Repl`:
 
 {{<tabs Snippet All>}}
@@ -1142,7 +1143,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Register Views
+### Register Views
 We will create a function called `setupOpenCensusAndStackdriverExporter` and call it from our main function:
 
 {{<tabs Snippet All>}}
@@ -1341,9 +1342,9 @@ public class Repl {
 
 
 
-#### Exporting to Stackdriver
+## Exporting to Stackdriver
 
-##### Import Packages
+### Import Packages
 Add the following code snippet to your `<dependencies>...</dependencies>` node in `pom.xml`:
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
@@ -1606,7 +1607,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Export Views
+### Export Views
 We will further expand upon `setupOpenCensusAndStackdriverExporter`:
 
 ```java
@@ -1838,7 +1839,7 @@ public class Repl {
 }
 ```
 
-#### Viewing your Metrics on Stackdriver
+## Viewing your Metrics on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://app.google.stackdriver.com/metrics-explorer), select your project, and view the metrics.
 
 In the query box to find metrics, type `quickstart` as a prefix:

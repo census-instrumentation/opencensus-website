@@ -4,11 +4,6 @@ article section.page h1:first-of-type {
   padding: 5px;
 }
 
-h1, h2, h3, h4 {
-  font-family: "Novacento Sans Wide", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-  text-transform: uppercase;
-}
-
 p {
   color: #555;
 }
@@ -40,21 +35,46 @@ article section.page h1:first-of-type {
   padding: 10px;
 }
 
+/* HEADERS */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
 h1, h2, h3, h4 {
   text-transform: none;
-  font-weight: 300;
 }
 
 h2 {
-  margin-top: 40px;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-}
-
-h4, h5 {
   border-top: 1px solid #efefef;
   padding-top: 10px;
   margin-top: 30px;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+/* HEADER SIZES */
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.15rem;
+}
+/* /HEADER SIZES */
+
+/* /HEADERS */
+
+article section.page ul:first-of-type ul li {
+  list-style-type: circle;
+  font-weight: lighter;
+  font-size: 14px;
 }
 
 p, ol, li, a {
