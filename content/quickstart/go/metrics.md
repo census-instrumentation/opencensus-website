@@ -5,8 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
@@ -32,7 +30,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View the metrics on the backend of our choice
 
-#### Requirements
+## Requirements
 - Go 1.9 or above
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
@@ -41,13 +39,13 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Installation
+## Installation
 
 OpenCensus: `go get -u -v go.opencensus.io/...`
 
 Stackdriver exporter: `go get -u -v contrib.go.opencensus.io/exporter/stackdriver`
 
-#### Brief Overview
+## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
 
 1. Create quantifiable metrics (numerical) that we will record
@@ -56,7 +54,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 4. Export our views to a backend (Stackdriver in this case)
 
 
-#### Getting Started
+## Getting Started
 
 {{% notice note %}}
 Unsure how to write and execute Go code? [Click here](https://golang.org/doc/code.html).
@@ -131,10 +129,10 @@ func processLine(in []byte) (out []byte, err error) {
 
 You can run the code via `go run repl.go`.
 
-#### Enable Metrics
+## Enable Metrics
 
 <a name="import-metrics-packages"></a>
-##### Import Packages
+### Import Packages
 
 To enable metrics, we’ll import a number of core and OpenCensus packages.
 
@@ -215,7 +213,7 @@ func processLine(in []byte) (out []byte, err error) {
 {{</tabs>}}
 
 <a name="create-metrics"></a>
-##### Create Metrics
+### Create Metrics
 
 First, we will create the variables needed to later record our metrics.
 
@@ -309,7 +307,7 @@ func processLine(in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Tags
+### Create Tags
 
 Now we will create the variable later needed to add extra text meta-data to our metrics.
 
@@ -406,7 +404,7 @@ osKey, _ := tag.NewKey("operating_system")
 
 Later, when we use osKey, we will be given an opportunity to enter values such as "windows" or "mac".
 
-##### Inserting Tags
+### Inserting Tags
 Now we will insert a specific tag called "repl". It will give us a new `context.Context ctx` which we will use while we later record our metrics. This `ctx` has all tags that have previously been inserted, thus allowing for context propagation.
 
 {{<tabs Snippet All>}}
@@ -603,7 +601,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Recording Metrics
+### Recording Metrics
 
 Now we will record the desired metrics. To do so, we will use `stats.Record` and pass in our `ctx` and [previously instantiated metrics variables](#create-metrics).
 
@@ -738,11 +736,11 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Enable Views
+## Enable Views
 We will be adding the View package: `"go.opencensus.io/stats/view"`
 
 <a name="import-views-packages"></a>
-##### Import Packages
+### Import Packages
 {{<tabs Snippet All>}}
 {{<highlight go>}}
 import (
@@ -854,7 +852,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Views
+### Create Views
 We now determine how our metrics will be organized by creating `Views`.
 
 {{<tabs Snippet All>}}
@@ -1021,7 +1019,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Register Views
+### Register Views
 We now register the views and set the reporting period.
 
 {{<tabs Snippet All>}}
@@ -1181,10 +1179,10 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Exporting to Stackdriver
+## Exporting to Stackdriver
 
 <a name="import-exporting-packages"></a>
-##### Import Packages
+### Import Packages
 We will be adding the Stackdriver package: `"contrib.go.opencensus.io/exporter/stackdriver"`
 
 {{<tabs Snippet All>}}
@@ -1339,7 +1337,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Export Views
+### Export Views
 In our `main` function, first we create the Stackdriver exporter:
 ```go
 // Create that Stackdriver stats exporter
@@ -1543,7 +1541,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your Metrics on Stackdriver
+## Viewing your Metrics on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://app.google.stackdriver.com/metrics-explorer), select your project, and view the metrics.
 
 In the query box to find metrics, type `quickstart` as a prefix:

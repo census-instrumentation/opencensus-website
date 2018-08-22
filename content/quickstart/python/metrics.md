@@ -8,8 +8,6 @@ class: "shadowed-image lightbox"
 This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
 {{% /notice %}}
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
@@ -24,7 +22,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View the metrics on the backend of our choice
 
-#### Requirements
+## Requirements
 - Python2 and above
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
@@ -33,11 +31,11 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Installation
+## Installation
 
 OpenCensus: `pip install --upgrade opencensus google-cloud-monitoring`
 
-#### Brief Overview
+## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
 
 1. Create quantifiable metrics (numerical) that we will record
@@ -46,7 +44,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 4. Export our views to a backend (Stackdriver in this case)
 
 
-#### Getting Started
+## Getting Started
 
 {{% notice note %}}
 Unsure how to write and execute Python code? [Click here](https://docs.python.org/).
@@ -85,12 +83,8 @@ if __name__ == '__main__':
 
 You can run the code via `python repl.py`.
 
-#### Create and record Metrics
-
-<a name="import-metrics-packages"></a>
-##### Import Packages
-
-To enable metrics, we’ll import a number of core and OpenCensus packages.
+## Create and record Metrics
+Now we'll import the required packages and instrument our code.
 
 {{<tabs Snippet All>}}
 {{<highlight python>}}
@@ -185,7 +179,7 @@ if __name__ == "__main__":
 {{</highlight>}}
 {{</tabs>}}
 
-#### With views and all enabled
+## With views and all enabled
 ```python
 #!/usr/bin/env python
 
@@ -278,7 +272,7 @@ if __name__ == "__main__":
     main()
 ```
 
-#### Exporting to Stackdriver
+## Exporting to Stackdriver
 
 {{% notice warning %}}
 This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
