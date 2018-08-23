@@ -45,14 +45,12 @@ Metric|Name|Description
 ---|---|---
 Number of cache Misses|`cache_misses`|The number of cache misses
 Number of cache hits|`cache_hits`|The number of cache hits
-Number of client errors|`client_errors`|The number of general client errors
-Number of parse errors|`parse_errors`|The number of errors encountered while parsing
-Number of illegal keys|`illegal_keys`|The number of illegal keys encountered
+Number of errors|`errors`|The number of general errors, disambiguated by tags "method", "reason", "type"
 Number of compare and swap conflicts|`cas_conflicts`|The number of CAS conflicts
 Number of unstored results|`unstored_results`|The number of unstored results
-Number of dial errors|`dial_errors`|The number of errors encountered while dialling
-Distribution of key lengths|`key_length`|The distributions and counts of key lengths
-Distribution of value lengths|`value_length`|The distributions and counts of value lengths
+Distribution of key lengths|`key_length`|The distributions and counts of key lengths in Bytes
+Distribution of value lengths|`value_length`|The distributions and counts of value lengths in Bytes
+Distribution of latencies in milliseconds|`latency`|The distributions and counts of latencies in milliseconds, by tag "method"
 Number of calls|`calls`|The number of calls broken down by tag key `method`
 
 ##### Using it
@@ -244,12 +242,24 @@ Opening our console will produce something like
 ##### Examining your metrics
 Please visit https://console.cloud.google.com/monitoring
 
+* Metrics list
 ![Metrics list](/img/memcache-metrics-list.png)
 
+* Latency heatmap
+![Latency heatmap](/img/memcache-metrics-latency-heatmap.png)
+
+* Latency stacked area
+![Latency stacked area](/img/memcache-metrics-latency-stackedarea.png)
+
+* Value length stacked area
 ![Metrics valuelength stacked area](/img/memcache-metrics-value_length-stacked-area.png)
 ![](/img/memcache-metrics-key_length-stacked-area.png)
 
+* Key length heatmap
 ![Metrics keylength heatmap](/img/memcache-metrics-keylength-heatmap.png)
+
+* Errors grouped by "reason" and "method"
+![Errors disambiguated](/img/memcache-metrics-errors-disambiguated.png)
 
 ##### References
 
