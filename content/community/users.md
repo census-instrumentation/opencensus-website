@@ -15,7 +15,7 @@ Some of the publicly known OpenCensus users:
 {{<user-card src="/images/users/stackdriver.svg" href="https://cloud.google.com/stackdriver/">}}
 {{<user-card src="/images/users/steeltoe.svg" href="https://steeltoe.io/">}}
 {{<user-card src="/images/users/stratumn.png" href="https://stratumn.com/">}}
-{{<user-card name="Trillian" src="/images/users/trillian.png" href="https://github.com/google/trillian">}}
+{{<user-card name="Trillian" href="https://github.com/google/trillian">}}
 {{<user-card name="Fn Project" src="/images/users/oracle.gif" href="https://github.com/fnproject">}}
 {{<user-card src="/images/users/ardan.svg" tall="true" href="https://github.com/ardanlabs/service">}}
 {{<user-card src="/images/users/orijtech.png" href="https://orijtech.com/">}}
