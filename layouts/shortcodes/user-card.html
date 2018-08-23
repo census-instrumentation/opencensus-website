@@ -2,9 +2,12 @@
   <a target="_blank" href="{{.Get "href"}}">
   {{ if .Get "name" }}
   <div class="lang-card">
+
+    {{ if .Get "src" }}
     <div class="image-container">
       <img src="{{.Get "src"}}">
     </div>
+    {{ end }}
 
     <div class="lang-card-right-panel">
       <h4>{{.Get "name"}}</h4>
