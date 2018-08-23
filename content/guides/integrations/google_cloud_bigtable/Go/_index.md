@@ -9,7 +9,26 @@ aliases: [/integrations/google_cloud_bigtable/go]
 
 ![](/images/gopher.png)
 
-For more information, you can read about it here and get started [Bigtable docs](https://cloud.google.com/bigtable/docs).
+- [Introduction](#introduction)
+- [Packages to import](#packages-to-import)
+- [Technical detour](#technical-detour)
+- [Enable Metric Reporting](#enable-metric-reporting)
+    - [Register client metric views](#register-client-metric-views)
+    - [Register server metric views](#register-server-metric-views)
+    - [Exporting traces and metrics](#exporting traces and metrics)
+    - [End to end code sample](#end-to-end-code-sample)
+- [Enable tracing](#enable-tracing)
+- [End to end code sample](#end-to-end-code-sample)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
+Cloud Bigtable (cbt) is a petabyte-scale, fully managed NoSQL database service for large analytical and operational workloads.
+For more information you can read about it here and get started [Bigtable docs](https://godoc.org/cloud.google.com/go/bigtable/)
+
+Cloud Bigtable's Go package was already instrumented for Tracing with OpenCensus.
+
+For more information, visit the [Bigtable docs](https://cloud.google.com/bigtable/docs).
 
 {{% notice note %}}
 This guide makes use of a couple of APIs
@@ -20,21 +39,7 @@ Bigtable how-to-guides|[Google Cloud Platform Bigtable how-to-guides](https://cl
 Stackdriver|[Stackdriver codelab](/codelabs/stackdriver/)
 {{% /notice %}}
 
-Cloud Bigtable (cbt) is a petabyte-scale, fully managed NoSQL database service for large analytical and operational workloads.
-For more information you can read about it here and get started [Bigtable docs](https://godoc.org/cloud.google.com/go/bigtable/)
-
-Cloud Bigtable's Go package was already instrumented for:
-
-* Tracing with OpenCensus
-
-## Table of contents
-- [Packages to import](#packages-to-import)
-- [Technical detour](#technical-detour)
-- [Enable tracing](#enable-tracing)
-- [End to end code sample](#end-to-end-code-sample)
-- [Viewing your traces](#viewing-your-traces)
-
-#### Packages to import
+## Packages to import
 
 For tracing and metrics on Bigtable, we'll import a couple of packages
 
@@ -51,12 +56,12 @@ import (
 )
 {{</highlight>}}
 
-#### Technical detour
+## Technical detour
 
 Because GCS uses HTTP to connect to Google's backend, we'll need to enable metrics and tracing using a custom client
 for Bigtable operations. The custom client will have an `ochttp` enabled transport and then the rest is simple
 
-#### Enable metric reporting
+## Enable metric reporting
 
 To enable metric reporting/exporting, we need to enable a metrics exporter, but before that we'll need
 to register and enable the views that match the HTTP metrics to collect. For a complete list of the available views
@@ -64,25 +69,25 @@ available please visit [https://godoc.org/go.opencensus.io/plugin/ochttp](https:
 
 However, for now we'll split them into client and server views
 
-##### Register client metric views
+### Register client metric views
 {{<highlight go>}}
 if err := view.Register(ochttp.DefaultClientViews...); err != nil {
     log.Fatalf("Failed to register HTTP client views: %v", err)
 }
 {{</highlight>}}
 
-##### Register server metric views
+### Register server metric views
 {{<highlight go>}}
 if err := view.Register(ochttp.DefaultServerViews...); err != nil {
     log.Fatalf("Failed to register HTTP server views: %v", err)
 }
 {{</highlight>}}
 
-##### Exporting traces and metrics
-The last step is to enable trace and metric exporting. For that we'll use say [Stackdriver Exporter](/supported-exporters/go/stackdriver) or
-any of the  [Go exporters](/supported-exporters/go/)
+### Exporting traces and metrics
+The last step is to enable trace and metric exporting. For that we'll use [Stackdriver Exporter](/supported-exporters/go/stackdriver) or
+any of the [Go exporters](/supported-exporters/go/)
 
-##### End to end code sample
+### End to end code sample
 
 With all the steps combined, we'll finally have this code snippet, adapted from [Bigtable Go helloworld](https://cloud.google.com/bigtable/docs/samples-go-hello/)
 
@@ -246,9 +251,9 @@ func sliceContains(list []string, target string) bool {
 }
 ```
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
 ![](/images/cloud_bigtable_trace.png)

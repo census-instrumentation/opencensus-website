@@ -7,9 +7,7 @@ aliases: [/integrations/sql/go]
 
 ![](/img/sql-gopher.png)
 
-We have a Go "database/sql" package/wrapper that is trace instrumented with OpenCensus!
-
-#### Table of contents
+- [Introduction](#Introduction)
 - [Installing it](#installing-it)
 - [Using it](#using-it)
   - [By registration](#by-registration)
@@ -19,15 +17,16 @@ We have a Go "database/sql" package/wrapper that is trace instrumented with Open
 - [Examining the traces](#examining-the-traces)
 - [References](#references)
 
-##### Installing it
+## Introduction
+We have a Go "database/sql" package/wrapper that is trace instrumented with OpenCensus!
 
+## Installing it
 To install the "database/sql" plugin, please run
 ```shell
 go get -u -v github.com/basvanbeek/ocsql
 ```
 
-##### Using it
-
+## Using it
 Given this simple initialization of a database/sql instance in Go:
 
 {{<highlight go>}}
@@ -50,8 +49,7 @@ func main() {
 
 We can use the OpenCensus trace-instrumented SQL driver wrapper in one of these two ways:
 
-###### By registration
-
+### By registration
 This mimicks the idiomatic recommendation to use the "database/sql" package in Go where
 we pass an implicitly registered driver to `sql.Open` which returns a [\*sql.DB handle](https://golang.org/pkg/database/sql/#DB)
 
@@ -81,8 +79,7 @@ func main() {
 }
 {{</highlight>}}
 
-###### By explicitly wrapping your driver
-
+### By explicitly wrapping your driver
 This option is useful if you'd like to be more explicit and if your database package exports
 its driver implementation.
 
@@ -97,12 +94,10 @@ func main() {
 }
 {{</highlight>}}
 
-##### Enabling OpenCensus
-
+## Enabling OpenCensus
 To examine the traces, we need to hook up our favorite Go exporter as per the [Go exporters guides](/guides/exporters/supported-exporters/go/)
 
-##### End to end example
-
+## End to end example
 And now to examine the exported traces, let's make a simple name registry app.
 For simplicitly, we use a sqlite3 database. To examine our traces, we'll use Jaeger.
 {{% notice tip %}}
@@ -219,8 +214,7 @@ func enableOpenCensusTracingAndExporting() error {
 }
 {{</highlight>}}
 
-###### Examine the traces
-
+## Examine the traces
 On visiting http://localhost:16686/ we can see something similar to below:
 
 ![Traces list](/img/ocsql-all-traces.png)
@@ -229,8 +223,7 @@ and on clicking to get details about the most recent trace
 
 ![Detailed trace](/img/ocsql-detailed-trace.png)
 
-###### References
-
+## References
 Reference|URL
 ---|---
 GoDoc|[github.com/basvanbeek/ocsql](https://godoc.org/github.com/basvanbeek/ocsql)

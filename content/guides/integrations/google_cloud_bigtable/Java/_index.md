@@ -9,7 +9,25 @@ aliases: [/integrations/google_cloud_bigtable/java]
 
 ![](/images/java.png)
 
-For more information, you can read about it here and get started [Bigtable docs](https://cloud.google.com/bigtable/docs).
+- [Introduction](#introduction)
+- [Packages to import](#packages-to-import)
+- [Enable Reporting](#enable-reporting)
+    - [Import packages](#import-packages)
+    - [Adding tracing](#adding-tracing)
+    - [End to end code sample](#end-to-end-code-sample)
+- [Running it](#running-it)
+    - [Maven install](#maven-install)
+    - [Run the code](#run-the-code)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
+Cloud Bigtable (cbt) is a petabyte-scale, fully managed NoSQL database service for large analytical and operational workloads.
+For more information you can read about it here and get started [Bigtable docs](https://cloud.google.com/bigtable/docs/how-to/)
+
+Cloud Bigtable's Java package was already instrumented for Tracing with OpenCensus.
+
+For more information, visit the [Bigtable docs](https://cloud.google.com/bigtable/docs).
 
 {{% notice note %}}
 This guide makes use of a couple of APIs
@@ -20,21 +38,9 @@ Bigtable how-to-guides|[Google Cloud Platform Bigtable how-to-guides](https://cl
 Stackdriver|[Stackdriver codelab](/codelabs/stackdriver/)
 {{% /notice %}}
 
-Cloud Bigtable (cbt) is a petabyte-scale, fully managed NoSQL database service for large analytical and operational workloads.
-For more information you can read about it here and get started [Bigtable docs](https://cloud.google.com/bigtable/docs/how-to/)
+## Enable Reporting
 
-Cloud Bigtable's Java package was already instrumented for:
-
-* Tracing with OpenCensus
-
-## Table of contents
-- [Packages to import](#packages-to-import)
-- [Enable tracing](#enable-tracing)
-- [End to end code sample](#end-to-end-code-sample)
-- [Viewing your traces](#viewing-your-traces)
-
-#### Packages to import
-
+### Import packages
 For tracing and metrics on Bigtable, we'll import a couple of packages
 
 Package Name|Package link
@@ -45,7 +51,7 @@ The OpenCensus Java gRPC views|[io.opencensus.contrib.grpc.metrics.RpcViews](htt
 
 For the source code, please see [Java BigTable Hello world](https://cloud.google.com/bigtable/docs/samples-java-hello)
 
-##### Adding tracing
+### Adding tracing
 
 ```java
 import io.opencensus.common.Scope;
@@ -85,7 +91,7 @@ private void enableOpenCensusObservability() throws IOException {
 }
 ```
 
-##### End to end code sample
+### End to end code sample
 
 With all the steps combined, we'll finally have this code snippet, adapted from [Bigtable Java helloworld](https://cloud.google.com/bigtable/docs/samples-java-hello/)
 
@@ -408,19 +414,19 @@ public class BigtableOpenCensus implements AutoCloseable {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Running it
-##### Maven install
+## Running it
+### Maven install
 ```shell
 mvn install
 ```
 
-##### Run the code
+### Run the code
 ```shell
 mvn exec:java -Dexec.mainClass=io.opencensus.tutorials.bigtable.BigtableOpenCensus
 ```
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)

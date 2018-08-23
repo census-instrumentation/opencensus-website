@@ -8,25 +8,26 @@ aliases: [/integrations/redis/java]
 
 ![](/images/java-opencensus.png)
 
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Generating the JAR](#generating-the-jar)
+    - [Clone this repository](#clone-this-repository)
+    - [Generate and install](#generate-and-install)
+- [Enabling observability](#enabling-observability)
+- [Available metrics](#available-metrics)
+- [End to end example](#end-to-end-example)
+    - [Running it](#running-it)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
 Some Redis clients were already instrumented to provide traces and metrics with OpenCensus
 
 Packages|Repository link
 ---|---
 jedis|https://github.com/opencensus-integrations/jedis
 
-## Table of contents
-- [prerequisites](#prerequisites)
-- [Generating the JAR](#generating-the-jar)
-    - [Clone this repository](#clone-this-repository)
-    - [Generate and install](#generate-and-install)
-- [Available metrics](#available-metrics)
-- [Enabling observability](#enabling-observability)
-- [End to end example](#end-to-end-example)
-    - [Running it](#running-it)
-- [Viewing your metrics](#viewing-your-metrics)
-- [Viewing your traces](#viewing-your-traces)
-
-#### Prerequisites
+## Prerequisites
 
 You will need the following:
 
@@ -39,14 +40,14 @@ For assistance installing Redis, please [Click here to get started](https://redi
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Generating the JAR
+## Generating the JAR
 
-##### Clone this repository
+### Clone this repository
 ```shell
 git clone https://github.com/opencensus-integrations
 ```
 
-##### Generating the JAR
+### Generate and install
 Inside the cloned repository's directory run
 ```shell
 mvn install:install-file -Dfile=$(pwd)/target/jedis-3.0.0-SNAPSHOT.jar \
@@ -54,7 +55,7 @@ mvn install:install-file -Dfile=$(pwd)/target/jedis-3.0.0-SNAPSHOT.jar \
 -Dpackaging=jar -DgeneratePom=true
 ```
 
-#### Enabling observability
+## Enabling observability
 To enable observability, we'll need to use Jedis normally but with one change
 
 {{<highlight java>}}
@@ -67,7 +68,7 @@ and then finally to enable metrics
 Observability.registerAllViews();
 {{</highlight>}}
 
-#### Available metrics
+## Available metrics
 Metric search suffix|Description
 ---|---
 redis/bytes_read|The number of bytes read from the Redis server
@@ -80,7 +81,7 @@ redis/roundtrip_latency|The latency spent for various Redis operations
 redis/reads|The number of reads performed
 redis/writes|The number of writes performed
 
-#### End to end example
+## End to end example
 {{<tabs Source Pom>}}
 
 {{<highlight java>}}
@@ -254,13 +255,13 @@ public class JedisOpenCensus {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Running it
+### Running it
 ```shell
 mvn install && mvn exec:java -Dexec.mainClass=io.opencensus.tutorials.jedis.JedisOpenCensus
 ```
 
-##### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-##### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)

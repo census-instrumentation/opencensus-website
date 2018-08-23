@@ -8,8 +8,6 @@ aliases: [/integrations/caddy]
 
 ![caddy logo](/img/caddyserver-logo.png)
 
-#### Table of contents
-
 - [Background](#background)
 - [Enabling Observability](#enabling-observability)
     - [Git checkout](#git-checkout)
@@ -17,8 +15,7 @@ aliases: [/integrations/caddy]
     - [Variables Table](#variables-table)
     - [Examples](#examples)
 
-#### Background
-
+## Background
 Caddy is a modern server that is deployable for modern web services.
 With the increasing complexity and style of deployment of many web services,
 examining the behavior of the entire system quickly becomes very complex,
@@ -65,14 +62,12 @@ for your teams, the project maintainers either nor should they require sophistic
 and specialized distributed systems and observability knowledge, nor should it require
 sophisicated infrastructure deployments.
 
-#### Enabling Observability
-
+## Enabling Observability
 ```shell
 caddy -observability "<sampler_rate>;exporter1:[config1Key=config1Value:config2Key=config2Value...][,]exporter2...]"
 ```
 
-##### Git checkout
-
+### Git checkout
 You can enable observability by checking out the instrumented branch of caddy
 ```shell
 go get github.com/mholt/caddy/caddy
@@ -80,8 +75,7 @@ cd $GOPATH/src/github.com/mholt/caddy
 git add orijtech git@github.com:orijtech/caddy.git && git fetch orijtech && git checkout instrument-with-opencensus && go get ./caddy
 ```
 
-##### Syntax
-
+### Syntax
 ```xml
 observability   := SamplerRate;Exporters
 SamplerRate     := float64 value
@@ -93,8 +87,7 @@ KeyToken        := string
 ValueToken      := string
 ```
 
-##### Variables Table
-
+### Variables Table
 Exporter Name|Key|Type|Notes|Example
 ---|---|---|---|---
 aws-xray|AWS_REGION|String|The region that your project is located in|`AWS_REGION=us-west-2`
@@ -112,8 +105,7 @@ zipkin|local|URL|The URL of the local endpoint|`caddy -observability "zipkin:loc
 zipkin|reporter|URL|The URL of the reporter endpoint|`caddy -observability "zipkin:reporter=http://localhost:9411/api/v2/spans"`
 zipkin|service-name|string|The name of your service|`caddy -observability "service-name=server"`
 
-##### Examples
-
+### Examples
 * Comprehensive example running with all the environment variables too
 
 ```shell

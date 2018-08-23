@@ -8,6 +8,17 @@ aliases: [/integrations/google_cloud_datastore/go]
 
 ![](/images/gopher.png)
 
+- [Introduction](#introduction)
+- [Background](#background)
+- [Packages to import](#packages-to-import)
+- [Enable tracing](#enable-tracing)
+- [Add the trace exporter](#add-the-trace-exporter)
+- [End to end code sample](#end-to-end-code-sample)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
+Cloud Datastore's Go package was already instrumented for Tracing with OpenCensus.
+
 {{% notice note %}}
 This guide makes use of a couple of APIs
 
@@ -17,24 +28,13 @@ Cloud Datastore|[Enable Cloud Datastore](https://cloud.google.com/datastore)
 Stackdriver|[Please visit the Stackdriver codelab to set it up](/codelabs/stackdriver)
 {{% /notice %}}
 
-Cloud Datastore's Go package was already instrumented for:
-
-* Tracing with OpenCensus
-
-## Table of contents
-- [Background](#background)
-- [Packages to import](#packages-to-import)
-- [Enable tracing](#enable-tracing)
-- [End to end code sample](#end-to-end-code-sample)
-- [Viewing your traces](#viewing-your-traces)
-
-#### Background
+## Background
 
 Our application is a segment of a source code mirroring service. It saves git commits and blobs to Cloud Datastore.
 With OpenCensus, we'll gain insights into how our distributed application is performing by instrumenting our application to examine
 traces.
 
-#### Packages to import
+## Packages to import
 
 For tracing on Datastore, we'll import the following packages
 
@@ -51,7 +51,7 @@ import (
 )
 {{</highlight>}}
 
-#### Enabling tracing
+## Enabling tracing
 
 To enable tracing, we'll follow the steps for tracing by:
 
@@ -64,7 +64,7 @@ defer span.End()
 _ = ctx // Use the context below
 {{</highlight>}}
 
-#### Add the trace exporter
+## Add the trace exporter
 The last step is to enable trace exporting. For that we'll use [Stackdriver Exporter](/supported-exporters/go/stackdriver)
 {{<highlight go>}}
 import (
@@ -87,7 +87,7 @@ func main() {
 {{</highlight>}}
 
 
-#### End to end code sample
+## End to end code sample
 
 With all the steps combined, we'll finally have this code snippet
 
@@ -218,7 +218,7 @@ func main() {
 }
 {{</highlight>}}
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
 
 ![](/images/cloud_datastore_trace-go.png)
