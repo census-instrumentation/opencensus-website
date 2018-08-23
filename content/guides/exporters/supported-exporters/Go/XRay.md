@@ -9,21 +9,21 @@ aliases: [/supported-exporters/go/xray]
 
 ![](https://d1.awsstatic.com/product-marketing/X-Ray/x-ray_web-app_diagram_light.21c38e4500dca09b3c8ca4cf87f896f7bbfb8a3b.png)
 
-AWS X-Ray is a distributed trace collection and analysis system from Amazon Web Services.
-
-Its support is available by means of the X-Ray package [https://godoc.org/github.com/census-instrumentation/opencensus-go-exporter-aws](https://godoc.org/github.com/census-instrumentation/opencensus-go-exporter-aws)
-
-#### Table of contents
+- [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Creating the exporter](#creating-the-exporter)
 - [Viewing your traces](#viewing-your-traces)
 
+## Introduction
+AWS X-Ray is a distributed trace collection and analysis system from Amazon Web Services.
 
-##### Requirements
+Its support is available by means of the X-Ray package [https://godoc.org/github.com/census-instrumentation/opencensus-go-exporter-aws](https://godoc.org/github.com/census-instrumentation/opencensus-go-exporter-aws)
+
+## Requirements
 You'll need to have an AWS Developer account, if you haven't yet, please visit
 In case you haven't yet enabled AWS X-Ray, please visit [https://console.aws.amazon.com/xray/home](https://console.aws.amazon.com/xray/home)
 
-##### Creating the exporter
+## Creating the exporter
 
 This is possible by importing
 
@@ -61,5 +61,5 @@ func main() {
 {{</highlight>}}
 
 
-##### Viewing your traces
+## Viewing your traces
 Please visit [https://console.aws.amazon.com/xray/home](https://console.aws.amazon.com/xray/home)

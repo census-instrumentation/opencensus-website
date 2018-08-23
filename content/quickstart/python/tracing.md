@@ -5,8 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Getting started](#getting-started)
@@ -15,7 +13,6 @@ class: "shadowed-image lightbox"
     - [Instrumentation](#instrument-tracing)
 - [Exporting to Stackdriver](#exporting-to-stackdriver)
     - [Import Packages](#import-exporting-packages)
-    - [Export Traces](#export-traces)
     - [Create Annotations](#create-annotations)
 - [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
 
@@ -25,7 +22,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View traces on the backend of our choice
 
-#### Requirements
+## Requirements
 - Python
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
@@ -34,11 +31,11 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Installation
+## Installation
 
 OpenCensus: `pip install opencensus google-cloud-trace`
 
-#### Getting Started
+## Getting Started
 
 {{% notice note %}}
 Unsure how to write and execute Python code? [Click here](https://docs.python.org/).
@@ -69,10 +66,10 @@ def main():
 
 You can run the code via `python repl.py`.
 
-#### Enable Tracing
+## Enable Tracing
 
 <a name="import-tracing-packages"></a>
-##### Import Packages
+### Import Packages
 
 To enable tracing, we’ll import the `trace.tracer` package from `opencensus`
 {{<tabs Snippet All>}}
@@ -99,7 +96,7 @@ def main():
 {{</tabs>}}
 
 <a name="instrument-tracing"></a>
-##### Instrumentation
+### Instrumentation
 
 We will be tracing the execution as it starts in `readEvaluateProcessLine`, goes to `readLine`, and finally travels through `processLine`.
 
@@ -147,10 +144,10 @@ def readEvaluateProcessLine():
 
 When creating a new span with `tracer.span("spanName")`, the package first checks if a parent Span already exists in the current thread local storage/context. If it exists, a child span is created. Otherwise, a newly created span is inserted in to the thread local storage/context to become the parent Span.
 
-#### Exporting traces to Stackdriver
+## Exporting traces to Stackdriver
 
 <a name="import-exporting-packages"></a>
-##### Import Packages
+### Import Packages
 To turn on Stackdriver Tracing, we’ll need to import the Stackdriver exporter from `opencensus.trace.exporters`
 
 {{<tabs Snippet All>}}
@@ -197,7 +194,7 @@ def processInput(tracer, data):
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Annotations
+### Create Annotations
 We can add metadata to our traces to increase our post-mortem insight.
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcessLine` function.
@@ -252,7 +249,7 @@ if __name__ == "__main__":
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your Traces on Stackdriver
+## Viewing your Traces on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
 
 ![viewing traces 1](/images/python-trace-overall.png)

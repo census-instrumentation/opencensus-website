@@ -9,6 +9,12 @@ aliases: [/supported-exporters/go/zipkin]
 
 ![](/img/zipkin-logo.jpg)
 
+- [Introduction](#introduction)
+- [Creating the exporter](#creating-the-exporter)
+- [Viewing your traces](#viewing-your-traces)
+- [Project link](#project-link)
+
+## Introduction
 Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures.
 
 It manages both the collection and lookup of this data. Zipkin’s design is based on the Google Dapper paper.
@@ -19,12 +25,7 @@ OpenCensus Go has support for this exporter available through package [go.opence
 For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
 {{% /notice %}}
 
-#### Table of contents
-- [Creating the exporter](#creating-the-exporter)
-- [Viewing your traces](#viewing-your-traces)
-- [Project link](#project-link)
-
-##### Creating the exporter
+## Creating the exporter
 To create the exporter, we'll need to:
 
 * Create an exporter in code
@@ -61,8 +62,8 @@ func main() {
 }
 {{</highlight>}}
 
-#### Viewing your traces
+## Viewing your traces
 Please visit the Zipkin UI endpoint [http://localhost:9411](http://localhost:9411)
 
-#### Project link
+## Project link
 You can find out more about the Zipkin project at [https://zipkin.io/](https://zipkin.io/)

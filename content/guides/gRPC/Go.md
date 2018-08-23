@@ -8,24 +8,25 @@ aliases: [/grpc/go]
 
 ![](/images/go-grpc-opencensus.png)
 
-#### Table of contents
 - [Overview](#overview)
-    - [Protobuf definition](#protobuf-definition)
-    - [Generate the service](#generate-the-service)
 - [Requirements](#requirements)
-    - [Go version](#go-version)
+- [Installation](#installation)
     - [Installing gRPC for Go](#installing-grpc-for-go)
     - [Installing Protocol Buffers v3](#installing-protocol-buffers-v3)
     - [Installing the protoc plugin for Go](#installing-the-protoc-plugin-for-go)
+- [Creating our gRPC Service](#creating-our-grpc-service)
+    - [Import Packages](#import-packages)
+    - [Protobuf definition](#protobuf-definition)
+    - [Generate the service](#generate-the-service)
+    - [Service implementation](#service-implementation)
+    - [Client implementation](#client-implementation)
 - [Instrumentation](#instrumentation)
-    - [Packages to import](#packages-to-import)
     - [Instrumenting the server](#instrumenting-the-server)
     - [Instrumenting the client](#instrumenting-the-client)
 - [Examining traces](#examining-traces)
 - [Examining metrics](#examining-metrics)
 
-#### Overview
-
+## Overview
 Our service takes in a payload containing bytes and capitalizes them.
 
 Using OpenCensus, we can collect traces and metrics of our system and export them to the backend
@@ -34,6 +35,49 @@ of our choice, to give observability to our distributed systems.
 The `grpc-go` implementation has already been instrumented with OpenCensus for tracing and metrics.
 To enable tracing and monitoring, we'll import and use the OpenCensus gRPC plugin
 
+{{% notice tip %}}
+Before beginning, if you haven't already:
+
+* Setup gRPC for Go by visiting this quickstart page [https://grpc.io/docs/quickstart/go.html](https://grpc.io/docs/quickstart/go.html)
+* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
+{{% / notice %}}
+
+## Requirements
+Go for use with gRPC and OpenCensus is best with any version >= 1.8.
+
+Just in case you haven't installed Go, please visit [Installing Go](https://golang.org/doc/install/)
+
+## Installation
+
+### Installing gRPC for Go
+Please run this command
+```shell
+go get -u google.golang.org/grpc
+```
+
+### Installing Protocol Buffers v3
+You'll need to install the protoc compiler to generate gRPC service code.
+
+As per [gRPC docs for Go](https://grpc.io/docs/quickstart/go.html#install-protocol-buffers-v3)
+
+Please visit https://github.com/google/protobuf/releases for protoc binaries and select the version for your operating system.
+
+### Installing the protoc plugin for Go
+Please run this command
+```shell
+go get -u github.com/golang/protobuf/protoc-gen-go
+```
+
+## Creating our gRPC Service
+Let's implement the project, let's create a directory under our `$GOPATH`
+
+```shell
+cd $GOPATH/src && mkdir -p oc.tutorials/ocgrpc && cd oc.tutorials/ocgrpc
+```
+
+and for quick reference the working directory that you'll be using is `$GOPATH/src/oc.tutorials.ocgrpc`
+
+### Import Packages
 To enable tracing, we'll use the following:
 
 Package|Import path
@@ -50,57 +94,7 @@ Client handler|[go.opencensus.io/plugin/ocgrpc.ClientHandler](https://godoc.org/
 Server gRPC metrics/views|[https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultServerViews](https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultServerViews)
 Client gRPC metrics/views|[https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultClientViews](https://godoc.org/go.opencensus.io/plugin/ocgrpc#DefaultClientViews)
 
-{{% notice tip %}}
-Before beginning, if you haven't already:
-
-* Setup gRPC for Go by visiting this quickstart page [https://grpc.io/docs/quickstart/go.html](https://grpc.io/docs/quickstart/go.html)
-* Setup [Stackdriver Tracing and Monitoring](/codelabs/stackdriver/)
-{{% / notice %}}
-
-#### Requirements
-
-To be able to use gRPC with Go we'll need to have
-
-##### Go version
-
-Go for use with gRPC and OpenCensus is best with any version >= 1.8.
-
-Just in case you haven't installed Go, please visit [Installing Go](https://golang.org/doc/install/)
-
-##### Installing gRPC for Go
-
-Please run this command
-```shell
-go get -u google.golang.org/grpc
-```
-
-##### Installing Protocol Buffers v3
-
-You'll need to install the protoc compiler to generate gRPC service code.
-
-As per [gRPC docs for Go](https://grpc.io/docs/quickstart/go.html#install-protocol-buffers-v3)
-
-Please visit https://github.com/google/protobuf/releases for protoc binaries and select the version for your operating system.
-
-##### Installing the protoc plugin for Go
-
-Please run this command
-```shell
-go get -u github.com/golang/protobuf/protoc-gen-go
-```
-
-##### Code
-
-Let's implement the project, let's create a directory under our `$GOPATH`
-
-```shell
-cd $GOPATH/src && mkdir -p oc.tutorials/ocgrpc && cd oc.tutorials/ocgrpc
-```
-
-and for quick reference the working directory that you'll be using is `$GOPATH/src/oc.tutorials.ocgrpc`
-
-##### Protobuf definition
-
+### Protobuf definition
 Make a directory called `rpc`
 ```shell
 mkdir -p rpc
@@ -123,8 +117,7 @@ service Fetch {
 }
 {{</highlight>}}
 
-##### Generate the service
-
+### Generate the service
 ```shell
 protoc -I rpc rpc/defs.proto --go_out=plugins=grpc:rpc
 ```
@@ -139,8 +132,7 @@ rpc
 defs.pb.go	defs.proto
 ```
 
-##### Service implementation
-
+### Service implementation
 In order to use the gRPC service, we need to implement the server.
 
 Create a file called `server.go` containing this code
@@ -192,7 +184,7 @@ which you can run by
 go run server.go
 ```
 
-##### Client
+### Client implementation
 
 The client talks to the server via a gRPC channel, sending in bytes and getting back the output capitalized.
 
@@ -250,11 +242,11 @@ and from typing you should be able to get back a response such as
 
 ![](/images/ocgrpc-client.png)
 
-#### Instrumentation
+## Instrumentation
 
 To gain insights to our service, we'll add trace and metrics instrumentation as follows
 
-##### Instrumenting the server
+### Instrumenting the server
 
 We'll instrument the server by tracing as well as extracting gRPC metrics using the `ServerHandler`
 which will be registered as a grpc StatsHandler.
@@ -357,7 +349,7 @@ func main() {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Instrumenting the client
+### Instrumenting the client
 
 We'll instrument the client by tracing as well as extracting gRPC metrics using the `ClientHandler`
 which will be registered as a grpc StatsHandler.
@@ -464,7 +456,7 @@ func main() {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Examining traces
+## Examining traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
 
 which will give visuals such as:
@@ -473,7 +465,7 @@ which will give visuals such as:
 
 ![Single trace details](/images/ocgrpc-tutorial-trace-details.png)
 
-#### Examining metrics
+## Examining metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
 which will give visuals such as:

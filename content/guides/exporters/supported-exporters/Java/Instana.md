@@ -9,6 +9,11 @@ aliases: [/supported-exporters/instana]
 
 ![](/images/instana.png)
 
+- [Introduction](#introduction)
+- [Creating the exporters](#creating-the-exporters)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
 Instant provides AI Powered Application and Infrastructure Monitoring, allowing you to
 deliver Faster With Confidence, and automatic Analysis and Optimization.
 
@@ -16,19 +21,14 @@ OpenCensus Java has support for this exporter available through package [io.open
 
 More information can be found at the [Instana website](https://www.instana.com/)
 
-#### Table of contents
-- [Creating the exporters](#creating-the-exporters)
-- [Viewing your traces](#viewing-your-traces)
-
-##### Creating the trace exporter
+## Creating the trace exporter
 To create the trace exporter, you'll need to:
 
 * Have Instana credentials
 * Use Maven setup your pom.xml file
 * Create the exporter in code
 
-##### pom.xml
-
+`pom.xml`
 ```xml
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,7 +56,7 @@ To create the trace exporter, you'll need to:
     </dependencies>
 ```
 
-##### Creating the exporter in code
+## Creating the exporter in code
 
 {{<highlight java>}}
 package io.opencensus.tutorial.instana;

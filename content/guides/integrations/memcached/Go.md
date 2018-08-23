@@ -7,7 +7,6 @@ aliases: [/integrations/memcached/go]
 
 ![memcached logo](/img/memcached-gopher.png)
 
-### Table of contents
 - [Introduction](#introduction)
 - [Features](#features)
     - [Trace updates](#trace-updates)
@@ -21,24 +20,22 @@ aliases: [/integrations/memcached/go]
 - [Examining your metrics](#enabling-your-metrics)
 - [References](#references)
 
-#### Introduction
-
+## Introduction
 [Memcached](https://memcached.org) is one of the most used server caching and scaling technologies.
 
-It was created by [Brad Fitzpatrick](https://en.wikipedia.org/wiki/Brad_Fitzpatrick) in 2003 as a 
+It was created by [Brad Fitzpatrick](https://en.wikipedia.org/wiki/Brad_Fitzpatrick) in 2003 as a
 solution to scale his social media product [Live Journal](https://www.livejournal.com/)
 
-#### Features
+## Features
 
-##### Trace updates
+### Trace updates
 OpenCensus Go was used to instrument Brad's original Memcache client, with 2 major changes:
 
 * `Set`, `Get`, `GetMulti`, `Add`, `Replace`, `Delete`, `DeleteAll`, `Decrement`, `CompareAndSwap`, `Touch`, `Each`
 
 all now take in a context.Context object as the first argument, to allow for trace propagation.
 
-##### Available metrics
-
+### Available metrics
 * Also a couple of metrics have been added:
 
 Metric|Name|Description
@@ -53,17 +50,15 @@ Distribution of value lengths|`value_length`|The distributions and counts of val
 Distribution of latencies in milliseconds|`latency`|The distributions and counts of latencies in milliseconds, by tag "method"
 Number of calls|`calls`|The number of calls broken down by tag key `method`
 
-##### Using it
-
+## Using it
 ```shell
 go get -u -v github.com/orijtech/gomemcache/memcache
 ```
 
-##### Enabling OpenCensus
-
+## Enabling OpenCensus
 To provide observability we'll enable OpenCensus tracing and metrics
 
-###### Enabling Metrics
+### Enabling Metrics
 {{<highlight go>}}
 package main
 
@@ -82,11 +77,10 @@ func main() {
 }
 {{</highlight>}}
 
-###### Enabling Tracing
+### Enabling Tracing
 You'll just to enable any of the trace exporter in [Go exporters](/guides/exporters/supported-exporters/go/)
 
-##### End to end example
-
+## End to end example
 {{% notice tip %}}
 For assistance installing Memcached, please visit the [Memcached Installation wiki](https://github.com/memcached/memcached/wiki/Install)
 {{% /notice %}}
@@ -231,7 +225,7 @@ func enableOpenCensusTracingAndMetrics() (func(), error) {
 }
 {{</highlight>}}
 
-##### Examining your traces
+## Examining your traces
 
 Please visit https://console.cloud.google.com/traces
 
@@ -239,7 +233,7 @@ Opening our console will produce something like
 
 ![Trace](/img/memcache-trace-comparison.png)
 
-##### Examining your metrics
+## Examining your metrics
 Please visit https://console.cloud.google.com/monitoring
 
 * Metrics list
@@ -261,7 +255,7 @@ Please visit https://console.cloud.google.com/monitoring
 * Errors grouped by "reason" and "method"
 ![Errors disambiguated](/img/memcache-metrics-errors-disambiguated.png)
 
-##### References
+## References
 
 Resource|URL
 ---|---

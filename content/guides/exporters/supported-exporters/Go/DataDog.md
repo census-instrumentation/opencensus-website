@@ -9,16 +9,18 @@ aliases: [/supported-exporters/go/datadog]
 
 ![](https://datadog-prod.imgix.net/img/press-logo-v-purpleb.png)
 
-[Datadog](https://www.datadoghq.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
-
-Its OpenCensus Go exporter is available at [https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog](https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog)
-
-#### Table of contents
+- [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)
 - [Viewing your metrics](#viewing-your-metrics)
 - [Viewing your traces](#viewing-your-traces)
 
-##### Creating the exporter
+## Introduction
+[Datadog](https://www.datadoghq.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
+
+Its OpenCensus Go exporter is available at [https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog](https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog)
+
+
+## Creating the exporter
 
 To create the exporter, we'll need:
 * Datadog credentials which you can get from [Here](https://docs.datadoghq.com/getting_started/)
@@ -113,8 +115,8 @@ func main() {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://docs.datadoghq.com/graphing/](https://docs.datadoghq.com/graphing/)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://docs.datadoghq.com/tracing/](https://docs.datadoghq.com/tracing/)

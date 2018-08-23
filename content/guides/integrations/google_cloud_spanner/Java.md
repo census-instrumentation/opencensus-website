@@ -9,6 +9,23 @@ aliases: [/integrations/google_cloud_spanner/java]
 
 ![](/images/java.png)
 
+- [Introduction](#introduction)
+- [Packages to import](#packages-to-import)
+- [Enable metric reporting](#register-views)
+    - [Register gRPC views](#register-grpc-views)
+    - [Exporting traces and metrics](#exporting-traces-and-metrics)
+    - [End to end code sample](#end-to-end-code-sample)
+- [Running it](#running-it)
+    - [Maven install](#maven-install)
+    - [Run the code](#run-the-code)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
+Cloud Spanner's Java package was already instrumented for:
+* Tracing with OpenCensus
+* Metrics with gRPC
+
 {{% notice note %}}
 This guide makes use of a couple of APIs
 
@@ -18,25 +35,7 @@ Spanner|[Spanner codelab](/codelabs/spanner)
 Stackdriver |[Stackdriver codelab](/codelabs/stackdriver)
 {{% /notice %}}
 
-Cloud Spanner's Java package was already instrumented for:
-* Tracing with OpenCensus
-* Metrics with gRPC
-
-## Table of contents
-- [Packages to import](#packages-to-import)
-    - [Pom.xml](#pom.xml)
-- [Enable metric reporting](#register-views)
-    - [Register client metric views](#register-client-metric-views)
-    - [Register server metric views](#register-server-metric-views)
-- [Enable tracing](#enable-tracing)
-- [End to end code sample](#end-to-end-code-sample)
-- [Running it](#running-it)
-    - [Maven install](#maven-install)
-    - [Run the code](#run-the-code)
-- [Viewing your traces](#viewing-your-traces)
-- [Viewing your metrics](#viewing-your-metrics)
-
-#### Packages to import
+## Packages to import
 
 For tracing and metrics on Spanner, we'll import a couple of packages
 
@@ -54,7 +53,7 @@ import io.opencensus.contrib.grpc.metrics.RpcViews;
 import io.opencensus.trace.Tracing;
 ```
 
-#### Enable metric reporting
+## Enable metric reporting
 
 To enable metric reporting/exporting, we need to enable a metrics exporter, but before that we'll need
 to register and enable the views that match the metrics to collect. For a complete list of the available views
@@ -62,17 +61,17 @@ available please visit [io.opencensus.contrib.grpc.metrics.RpcViews](https://git
 
 Finally, we'll register all the views
 
-##### Register gRPC views
+### Register gRPC views
 
 ```java
 RpcViews.registerAllGrpcViews();
 ```
 
-##### Exporting traces and metrics
+### Exporting traces and metrics
 The last step is to enable trace and metric exporting. For that we'll use say [Stackdriver Exporter](/supported-exporters/java/stackdriver) or
 any of the  [Java exporters](/supported-exporters/java/)
 
-##### End to end code sample
+### End to end code sample
 With all the steps combined, we'll finally have this code snippet
 
 {{<tabs Source Pom_xml>}}
@@ -283,19 +282,19 @@ public class SpannerOpenCensusTutorial {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Running it
-##### Maven install
+### Maven install
+## Running it
 ```shell
 mvn install
 ```
 
-##### Run the code
+### Run the code
 ```shell
 mvn exec:java -Dexec.mainClass=com.opencensus.tutorials.spanner -Dexec.args="census-demos demo1"
 ```
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)

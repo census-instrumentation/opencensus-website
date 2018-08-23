@@ -5,8 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Getting started](#getting-started)
@@ -25,7 +23,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View traces on the backend of our choice
 
-#### Requirements
+## Requirements
 - Java 8+
 - [Apache Maven](https://maven.apache.org/install.html)
 - Google Cloud Platform account and project
@@ -37,7 +35,7 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 For assistance setting up Apache Maven, [Click here](https://maven.apache.org/install.html) for instructions.
 {{% /notice %}}
 
-#### Installation
+## Installation
 We will first create our project directory, generate the `pom.xml`, and bootstrap our entry file.
 
 ```bash
@@ -167,7 +165,7 @@ To install required dependencies, run this from your project's root directory:
 mvn install
 ```
 
-#### Getting Started
+## Getting Started
 The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
 ```bash
 > foo
@@ -184,9 +182,9 @@ You will be given a text prompt. Try typing in a lowercase word and hit enter to
 You should see something like this after a few tries:
 ![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
 
-#### Enable Tracing
+## Enable Tracing
 
-##### Import Packages
+### Import Packages
 To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Insert the following code snippet after the `<properties>...</properties>` node:
 
 {{<tabs Snippet All>}}
@@ -345,7 +343,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Instrumentation
+### Instrumentation
 We will begin by creating a private static `Tracer` as a property of our Repl class.
 
 ```java
@@ -423,9 +421,9 @@ public class Repl {
 }
 ```
 
-#### Exporting to Stackdriver
+## Exporting to Stackdriver
 
-##### Import Packages
+### Import Packages
 To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependency in your `pom.xml`. Add the following code snippet inside of your `<dependencies>` node:
 
 {{<tabs Snippet All>}}
@@ -600,7 +598,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Export Traces
+### Export Traces
 We will create a function called `setupOpenCensusAndStackdriverExporter` and call it from our `main` function:
 
 {{<tabs Snippet All>}}
@@ -957,7 +955,7 @@ public class Repl {
 {{</tabs>}}
 
 
-##### Create Annotations
+### Create Annotations
 When looking at our traces on a backend (such as Stackdriver), we can add metadata to our traces to increase our post-mortem insight.
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces.
@@ -1172,7 +1170,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your Traces on Stackdriver
+## Viewing your Traces on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
 
 ![Trace list](/img/quickstart-traces-java-tracelist.png)

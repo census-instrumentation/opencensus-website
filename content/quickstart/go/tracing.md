@@ -5,8 +5,6 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-#### Table of contents
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Getting started](#getting-started)
@@ -25,7 +23,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View traces on the backend of our choice
 
-#### Requirements
+## Requirements
 - Go 1.9 or above
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
@@ -34,13 +32,13 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Installation
+## Installation
 
 OpenCensus: `go get go.opencensus.io/*`
 
 Stackdriver exporter: `go get contrib.go.opencensus.io/exporter/stackdriver`
 
-#### Getting Started
+## Getting Started
 
 {{% notice note %}}
 Unsure how to write and execute Go code? [Click here](https://golang.org/doc/code.html).
@@ -116,10 +114,10 @@ func processLine(in []byte) (out []byte, err error) {
 
 You can run the code via `go run repl.go`.
 
-#### Enable Tracing
+## Enable Tracing
 
 <a name="import-tracing-packages"></a>
-##### Import Packages
+### Import Packages
 
 To enable tracing, we’ll import the context package (`context`) as well as the OpenCensus Trace package (`go.opencensus.io/trace`). Your import statement will look like this:
 
@@ -201,7 +199,7 @@ func processLine(in []byte) (out []byte, err error) {
 {{</tabs>}}
 
 <a name="instrument-tracing"></a>
-##### Instrumentation
+### Instrumentation
 
 We will be tracing the execution as it starts in `readEvaluateProcess`, goes to `readLine`, and finally travels through `processLine`.
 
@@ -341,10 +339,10 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 When creating a new span with `trace.StartSpan(context.Context, "spanName")`, the package first checks if a parent Span already exists in the `context.Context` argument. If it exists, a child span is created. Otherwise, a newly created span is inserted in to `context` to become the parent Span so that subsequent reuse of `context.Context` will have that span.
 
-#### Exporting to Stackdriver
+## Exporting to Stackdriver
 
 <a name="import-exporting-packages"></a>
-##### Import Packages
+### Import Packages
 To turn on Stackdriver Tracing, we’ll need to import the Stackdriver exporter from `contrib.go.opencensus.io/exporter/stackdriver`.
 
 {{<tabs Snippet All>}}
@@ -438,7 +436,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Export Traces
+### Export Traces
 To get our code ready to export, we will be adding a few lines of code to our `main` function.
 
 1. We want to make our traces export to Stackdriver
@@ -581,7 +579,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-##### Create Annotations
+### Create Annotations
 When looking at our traces on a backend (such as Stackdriver), we can add metadata to our traces to increase our post-mortem insight.
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcess` function.
@@ -715,7 +713,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-#### Viewing your Traces on Stackdriver
+## Viewing your Traces on Stackdriver
 With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
 
 ![viewing traces 1](https://cdn-images-1.medium.com/max/1600/1*v7qiO8nX8WAxpX4LjiQ2oA.png)

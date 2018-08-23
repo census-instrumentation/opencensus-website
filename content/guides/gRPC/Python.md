@@ -8,7 +8,6 @@ aliases: [/grpc/python]
 
 ![](/images/python-grpc-opencensus.png)
 
-## Table of contents
 - [Overview](#overview)
 - [Setup](#setup)
     - [Installation](#installation)
@@ -37,7 +36,7 @@ Before beginning, if you haven't already:
 ## Setup
 Make sure to setup your `GOOGLE_APPLICATION_CREDENTIALS` environment variable. Visit [here](https://cloud.google.com/docs/authentication/production) for instructions on how to do so.
 
-##### Installation
+### Installation
 This walkthrough will be using [Python 3](https://www.python.org/download/releases/3.0/).
 
 Install the required modules by running this command in your terminal:
@@ -62,7 +61,7 @@ Our working directory will now look like this:
 ./proto/defs.proto
 ```
 
-##### Protobuf Definition
+### Protobuf Definition
 Copy and paste the following code inside of `./proto/defs.proto`:
 
 ```proto
@@ -100,7 +99,7 @@ This will create two new files. Your working directory will be:
 ./proto/defs.proto
 ```
 
-##### Generate the Client
+### Generate the Client
 Copy and paste the following code inside of `./capitalizeClient.py`:
 
 ```py
@@ -122,7 +121,7 @@ if __name__ == '__main__':
     main()
 ```
 
-##### Generate the Service
+### Generate the Service
 Copy and paste the following code inside of `./capitalizeServer.py`:
 
 ```py
@@ -156,7 +155,7 @@ if __name__ == '__main__':
     main()
 ```
 
-##### Run the Application
+### Run the Application
 Let's now run two of our python files at once. You may need to open a second terminal tab.
 
 In one terminal tab, run `python3 capitalizeServer.py`.
@@ -169,7 +168,7 @@ Try typing in some text and hitting enter in the tab running `capitalizeClient.p
 
 ## Instrumentation
 
-##### Tracing
+### Tracing
 Open `./capitalizeServer.py`.
 
 First let's import the required packages:
@@ -334,7 +333,7 @@ if __name__ == '__main__':
 {{</highlight>}}
 {{</tabs>}}
 
-##### Exporting
+### Exporting
 Import the required packages:
 
 {{<tabs Snippet All>}}

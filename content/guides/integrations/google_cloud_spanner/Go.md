@@ -9,6 +9,21 @@ aliases: [/integrations/google_cloud_spanner/go]
 
 ![](/images/gopher.png)
 
+- [Introduction](#introduction)
+- [Packages to import](#packages-to-import)
+- [Enable metric reporting](#register-views)
+    - [Register client metric views](#register-client-metric-views)
+    - [Register server metric views](#register-server-metric-views)
+    - [Exporting traces and metrics](#exporting-traces-and-metrics)
+    - [End to end code sample](#end-to-end-code-sample)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
+Cloud Spanner's Go package was already instrumented for:
+* Tracing with OpenCensus
+* Metrics with gRPC
+
 {{% notice note %}}
 This guide makes use of a couple of APIs
 
@@ -18,21 +33,7 @@ Spanner|[Spanner codelab](/codelabs/spanner)
 Stackdriver |[Stackdriver codelab](/codelabs/stackdriver)
 {{% /notice %}}
 
-Cloud Spanner's Go package was already instrumented for:
-* Tracing with OpenCensus
-* Metrics with gRPC
-
-## Table of contents
-- [Packages to import](#packages-to-import)
-- [Enable metric reporting](#register-views)
-    - [Register client metric views](#register-client-metric-views)
-    - [Register server metric views](#register-server-metric-views)
-- [Enable tracing](#enable-tracing)
-- [End to end code sample](#end-to-end-code-sample)
-- [Viewing your traces](#viewing-your-traces)
-- [Viewing your metrics](#viewing-your-metrics)
-
-#### Packages to import
+## Packages to import
 
 For tracing and metrics on Spanner, we'll import a couple of packages
 
@@ -53,7 +54,7 @@ import (
 )
 {{</highlight>}}
 
-#### Enable metric reporting
+## Enable metric reporting
 
 To enable metric reporting/exporting, we need to enable a metrics exporter, but before that we'll need
 to register and enable the views that match the metrics to collect. For a complete list of the available views
@@ -61,25 +62,25 @@ available please visit [https://godoc.org/go.opencensus.io/plugin/ocgrpc](https:
 
 However, for now we'll split them into client and server views
 
-##### Register client metric views
+### Register client metric views
 {{<highlight go>}}
 if err := view.Register(ocgrcp.DefaultClientViews...); err != nil {
     log.Fatalf("Failed to register gRPC client views: %v", err)
 }
 {{</highlight>}}
 
-##### Register server metric views
+### Register server metric views
 {{<highlight go>}}
 if err := view.Register(ocgrcp.DefaultServerViews...); err != nil {
     log.Fatalf("Failed to register gRPC server views: %v", err)
 }
 {{</highlight>}}
 
-##### Exporting traces and metrics
+### Exporting traces and metrics
 The last step is to enable trace and metric exporting. For that we'll use say [Stackdriver Exporter](/supported-exporters/go/stackdriver) or
 any of the  [Go exporters](/supported-exporters/go/)
 
-##### End to end code sample
+### End to end code sample
 With all the steps combined, we'll finally have this code snippet
 {{<highlight go>}}
 package main
@@ -186,8 +187,8 @@ func newPlayers(ctx context.Context, client *spanner.Client, players ...*Player)
 }
 {{</highlight>}}
 
-#### Viewing your metrics
+## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)

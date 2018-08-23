@@ -5,14 +5,13 @@ weight: 3
 aliases: [/custom_exporter/go/metrics]
 ---
 
-### Table of contents
 - [Introduction](#introduction)
 - [Implementation](#implementation)
 - [Runnable example](#runnable-example)
 - [Notes](#notes)
 - [References](#references)
 
-#### Introduction
+## Introduction
 A metrics/stats exporter must conform to the interface [stats/view.Exporter](https://godoc.org/go.opencensus.io/stats/view#Exporter) which for purposes of brevity is:
 
 ```go
@@ -25,7 +24,7 @@ type Exporter interface {
 
 whose sole method `ExportView` is the one in which you'll process and translate [View Data](https://godoc.org/go.opencensus.io/stats/view#Data) into the data that your metrics backend accepts.
 
-#### Implementation
+## Implementation
 
 For example, let's create a custom metrics/stats exporter that will print view data to standard output.
 
@@ -57,7 +56,7 @@ and then afterwards we must ensure that we invoke `view.RegisterExporter` with a
 view.RegisterExporter(new(customMetricsExporter))
 ```
 
-#### Runnable example
+## Runnable example
 and now to test it out as we would in a typically linked program
 
 ```go
@@ -145,14 +144,14 @@ vd.View: &{Name:demo/loop_iterations Description:Number of loop iterations TagKe
 StartTime: 2018-08-08 00:31:02.096592 -0700 PDT EndTime: 2018-08-08 00:31:02.498909 -0700 PDT
 ```
 
-#### Notes
+## Notes
 
 * Please remember to invoke [view.RegisterExporter](https://godoc.org/go.opencensus.io/stats/view#RegisterExporter) so that your exporter
 will receive exported view data.
 
 * To change the frequency at which your view data will be exported, please see [view.SetReportingPeriod](https://godoc.org/go.opencensus.io/stats/view#SetReportingPeriod)
 
-#### References
+## References
 
 Name|Link
 ---|---

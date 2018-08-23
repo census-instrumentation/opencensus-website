@@ -9,16 +9,24 @@ aliases: [/supported-exporters/java/stackdriver]
 
 ![](/images/logo_gcp_vertical_rgb.png)
 
+- [Introduction](#introduction)
+- [Creating the exporters](#creating-the-exporters)
+    - [Import Packages](#import-packages)
+    - [Instrument Metrics and Traces](#instrument-metrics-and-traces)
+    - [All Exporters Combined](#all-exporters-combined)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+
+## Introduction
 Stackdriver Trace is a distributed tracing system that collects latency data from your applications and displays it in the Google Cloud Platform Console.
+
 You can track how requests propagate through your application and receive detailed near real-time performance insights.
-Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
-and can capture traces from all of your VMs, containers, or Google App Engine projects.
+Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations, and can capture traces from all of your VMs, containers, or Google App Engine projects.
 
 Stackdriver Monitoring provides visibility into the performance, uptime, and overall health of cloud-powered applications.
-Stackdriver collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services, hosted uptime probes, application instrumentation,
-and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch, and many others.
-Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by
-integrating with Slack, PagerDuty, HipChat, Campfire, and more.
+Stackdriver collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services, hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch, and many others.
+
+Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by integrating with Slack, PagerDuty, HipChat, Campfire, and more.
 
 OpenCensus Java has support for this exporter available through packages:
 * Stats [io.opencensus.exporter.stats.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-stackdriver)
@@ -28,12 +36,7 @@ OpenCensus Java has support for this exporter available through packages:
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
 {{% /notice %}}
 
-#### Table of contents
-- [Creating the exporters](#creating-the-exporters)
-- [Viewing your metrics](#viewing-your-metrics)
-- [Viewing your traces](#viewing-your-traces)
-
-##### Creating the exporters
+## Creating the exporters
 To create the exporters, you'll need to:
 
 * Have a GCP Project ID
@@ -41,8 +44,8 @@ To create the exporters, you'll need to:
 * Use Maven setup your pom.xml file
 * Create the exporters in code
 
-##### pom.xml
-
+### Import Packages
+Insert the following snippet in your `pom.xml`:
 ```xml
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,9 +78,12 @@ To create the exporters, you'll need to:
         </dependency>
     </dependencies>
 ```
+### Instrument Metrics and Traces
+Instrument your code with the following snippets:
 
-##### Creating the exporters in code
-* To enable each of the respective APIs, please click on the respective tabs and then on "ALL" at the end
+{{% notice tip %}}
+To enable each of the respective APIs, please click on the respective tabs and then refer to [the final section](http://localhost:1313/guides/exporters/supported-exporters/java/stackdriver/#all-exporters-combined).
+{{% /notice %}}
 
 {{<tabs Tracing Metrics>}}
 {{<highlight java>}}
@@ -102,8 +108,10 @@ StackdriverStatsExporter.createAndRegister(
 {{</tabs>}}
 
 
-##### All exporters combined
-* Finally, combining tracing and stats exporters together, we should now have
+### All exporters combined
+Finally, we will combine tracing and stats exporters together.
+
+Our final code snippet is the following:
 
 {{<highlight java>}}
 package io.opencensus.tutorial.stackdriver;

@@ -9,6 +9,13 @@ aliases: [/supported-exporters/java/prometheus]
 
 ![](/img/prometheus-logo.png)
 
+- [Introduction](#introduction)
+- [Creating the exporter](#creating-the-exporter)
+- [Running Prometheus](#running-prometheus)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Project link](#project-link)
+
+## Introduction
 Prometheus is a monitoring system that collects metrics, by scraping
 exposed endpoints at regular intervals, evaluating rule expressions.
 It can also trigger alerts if certain conditions are met.
@@ -20,13 +27,7 @@ OpenCensus Java allows exporting stats to Prometheus by means of the Prometheus 
 For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
 {{% /notice %}}
 
-#### Table of contents
-- [Creating the exporter](#creating-the-exporter)
-- [Running Prometheus](#running-prometheus)
-- [Viewing your metrics](#viewing-your-metrics)
-- [Project link](#project-link)
-
-##### Creating the exporter
+## Creating the exporter
 To create the exporter, we'll need to:
 
 * Import and use the Prometheus exporter package
@@ -34,10 +35,7 @@ To create the exporter, we'll need to:
 * Expose a port on which we shall run a `/metrics` endpoint
 * With the defined port, we'll need a Promethus configuration file so that Prometheus can scrape from this endpoint
 
-
-#### pom.xml
-
-Add this to your pom.xml file:
+Add this to your `pom.xml` file:
 
 ```xml
     <properties>
@@ -109,14 +107,14 @@ scrape_configs:
       - targets: ['localhost:8888']
 ```
 
-##### Running Prometheus
+## Running Prometheus
 And then run Prometheus with your configuration
 ```shell
 prometheus --config.file=prometheus.yaml
 ```
 
-##### Viewing your metrics
+## Viewing your metrics
 Please visit [http://localhost:9090](http://localhost:9090)
 
-#### Project link
+## Project link
 You can find out more about the Prometheus project at [https://prometheus.io/](https://prometheus.io/)
