@@ -19,5 +19,5 @@ However, this guide is to enable anyone and any vendor to implement their custom
 
 <abbr class="stats-exporter teal white-text">S</abbr> Stats guide available
 
-{{<card target-url="go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
-{{<card target-url="java" src="/images/java-icon.png" lang="Java" tracing="true">}}
+{{<card-exporter target-url="go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
+{{<card-exporter target-url="java" src="/images/java-icon.png" lang="Java" tracing="true">}}

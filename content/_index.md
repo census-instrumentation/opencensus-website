@@ -50,5 +50,16 @@ OpenCensus originates from Google, where a set of libraries called Census were u
 {{<button class="btn-light" icon="true" href="https://github.com/census-instrumentation/">}}Contribute{{</button>}}
 
 ##### Partners & Contributors
-
-{{<partners>}}
+{{<card-vendor href="https://google.com" src="/img/partners/google_logo.svg">}}
+{{<card-vendor href="https://www.datadoghq.com/" src="/img/partners/datadog_logo.svg">}}
+{{<card-vendor href="https://orijtech.com/" src="/img/partners/orijtech_logo.png">}}
+{{<card-vendor href="https://signalfx.com/" src="/img/partners/signalFx_logo.svg">}}
+{{<card-vendor href="https://www.cesar.org.br/" src="/img/partners/cesar_logo.svg">}}
+{{<card-vendor href="http://thecreativefew.com/" src="/img/partners/creative_few_logo.svg">}}
+{{<card-vendor href="https://www.microsoft.com/" src="/img/partners/microsoft_logo.svg">}}
+{{<card-vendor href="https://www.jaegertracing.io/" src="/img/partners/jaeger_logo.svg">}}
+{{<card-vendor href="https://zipkin.io/" src="/img/partners/zipkin_logo.svg">}}
+{{<card-vendor href="https://www.solarwinds.com/" src="/img/partners/solarwinds_logo.svg">}}
+{{<card-vendor href="https://cloud.google.com/stackdriver/" src="/img/partners/stackdriver_logo.svg">}}
+{{<card-vendor href="https://prometheus.io/" src="/img/partners/prometheus_logo.svg">}}
+{{<card-vendor href="https://www.instana.com/" src="/img/partners/instana_logo.svg">}}
