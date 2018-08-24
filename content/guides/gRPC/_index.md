@@ -20,7 +20,7 @@ OpenCensus is integrated with gRPC in the following languages:
 
 <abbr class="stats-exporter teal white-text">S</abbr> Supports Stats
 
-{{<card target-url="go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
-{{<card target-url="java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
-{{<card target-url="python" src="/images/python-icon.png" lang="Python" tracing="true">}}
-{{<card target-url="cplusplus" src="/images/cpp.png" lang="C++" tracing="true" stats="true">}}
+{{<card-exporter target-url="go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
+{{<card-exporter target-url="java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
+{{<card-exporter target-url="python" src="/images/python-icon.png" lang="Python" tracing="true">}}
+{{<card-exporter target-url="cplusplus" src="/images/cpp.png" lang="C++" tracing="true" stats="true">}}
