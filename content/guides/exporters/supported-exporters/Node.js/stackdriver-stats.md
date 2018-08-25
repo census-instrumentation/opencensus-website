@@ -43,8 +43,6 @@ export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
 {{</highlight>}}
 
 * Create the exporters in code
-
-## Creating the exporter
 {{<highlight javascript>}}
 var opencensus = require('@opencensus/core');
 var stackdriver = require('@opencensus/exporter-stackdriver');

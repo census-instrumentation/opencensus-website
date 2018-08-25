@@ -21,11 +21,6 @@ You can track how requests propagate through your application and receive detail
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
 and can capture traces from all of your VMs, containers, or Google App Engine projects.
 
-Stackdriver Monitoring provides visibility into the performance, uptime, and overall health of cloud-powered applications.
-Stackdriver collects metrics, events, and metadata from Google Cloud Platform, Amazon Web Services, hosted uptime probes, application instrumentation, and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch, and many others.
-
-Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by integrating with Slack, PagerDuty, HipChat, Campfire, and more.
-
 OpenCensus Node.js has support for this exporter available, distributed through NPM package [@opencensus/exporter-stackdriver](https://www.npmjs.com/package/@opencensus/exporter-stackdriver)
 
 {{% notice tip %}}
