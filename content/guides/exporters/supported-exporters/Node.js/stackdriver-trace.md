@@ -1,32 +1,33 @@
 ---
-title: "Stackdriver (Trace)"
+title: "Stackdriver (Tracing)"
 date: 2018-07-22T23:47:14-07:00
 draft: false
 weight: 3
-class: "resized-logo"
 ---
 
 ![](/images/logo_gcp_vertical_rgb.png)
 
-{{% notice note %}}
-This guide makes use of Stackdriver for visualizing your data. For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-{{% /notice %}}
+- [Introduction](#introduction)
+- [Installing the exporter](#installing-the-exporter)
+- [Creating the exporter](#creating-the-exporter)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Viewing your traces](#viewing-your-traces)
+- [References](#references)
 
+## Introduction
 Stackdriver Trace is a distributed tracing system that collects latency data from your applications and displays it in the Google Cloud Platform Console.
+
 You can track how requests propagate through your application and receive detailed near real-time performance insights.
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations,
 and can capture traces from all of your VMs, containers, or Google App Engine projects.
 
-OpenCensus Node has support for this exporter available through package:
+OpenCensus Node.js has support for this exporter available, distributed through NPM package [@opencensus/exporter-stackdriver](https://www.npmjs.com/package/@opencensus/exporter-stackdriver)
 
-* [OpenCensus for Node.js](https://github.com/census-instrumentation/opencensus-node/tree/master/packages/opencensus-nodejs)
+{{% notice tip %}}
+For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+{{% /notice %}}
 
-#### Table of contents
-- [Installing the exporters](#installing-the-exporters)
-- [Creating the exporters](#creating-the-exporters)
-- [Viewing your traces](#viewing-your-traces)
-
-#### Instalign the exporters
+## Installing the exporter
 Install OpenCensus Stackdriver Exporter with:
 
 {{<highlight bash>}}
@@ -34,8 +35,8 @@ npm install @opencensus/nodejs
 npm install @opencensus/exporter-stackdriver
 {{</highlight>}}
 
-#### Creating the exporters
-To create the exporters, you'll need to:
+## Creating the exporter
+To create the exporter, you'll need to:
 
 * Have a GCP Project ID
 * Have already enabled [Stackdriver Tracing](https://cloud.google.com/trace/docs/quickstart), if not, please visit the [Code lab](/codelabs/stackdriver)
@@ -45,9 +46,8 @@ To create the exporters, you'll need to:
 export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
 {{</highlight>}}
 
-* Create the exporters in code
+To create the exporter, in code:
 
-#### Creating the exporter in code
 {{<highlight javascript>}}
 var tracing = require('@opencensus/nodejs');
 var stackdriver = require('@opencensus/exporter-stackdriver');
@@ -58,5 +58,13 @@ var exporter = new stackdriver.StackdriverTraceExporter({projectId: "your-projec
 tracing.registerExporter(exporter).start();
 {{</highlight>}}
 
-#### Viewing your traces
+## Viewing your traces
 Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
+
+## References
+
+Resource|URL
+---|---
+NPM: @opencensus/exporter-stackdriver|https://www.npmjs.com/package/@opencensus/exporter-stackdriver
+NPM: @opencensus/nodejs|https://www.npmjs.com/package/@opencensus/nodejs
+Github: OpenCensus for Node.js|https://github.com/census-instrumentation/opencensus-node/tree/master/packages/opencensus-nodejs

@@ -1,5 +1,5 @@
 ---
-title: "Node"
+title: "Node.js"
 draft: false
 weight: 3
 class: "resized-logo"

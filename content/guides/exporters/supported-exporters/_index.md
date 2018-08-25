@@ -15,3 +15,4 @@ OpenCensus' language implementations have support for various exporters.
 {{<card-exporter target-url="go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
 {{<card-exporter target-url="java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
 {{<card-exporter target-url="python" src="/images/python-icon.png" lang="Python" tracing="true">}}
+{{<card-exporter target-url="node.js" src="/images/nodejs.png" lang="Node" tracing="true" stats="true">}}
