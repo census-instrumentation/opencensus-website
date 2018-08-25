@@ -12,6 +12,7 @@ aliases: [/integrations/mongodb]
 
 * [Go Driver](https://github.com/orijtech/mongo-go-driver)
 * [Java Driver](https://github.com/orijtech/mongo-java-driver/pull/1)
+* [Node Driver](https://github.com/census-instrumentation/opencensus-node/tree/master/packages/opencensus-instrumentation-mongodb)
 
 #### Tutorials
 
