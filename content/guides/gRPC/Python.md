@@ -221,7 +221,7 @@ Now let's modify our `Capitalize` function to create our span:
 {{<tabs Snippet All>}}
 {{<highlight python>}}
 def Capitalize(self, request, context):
-  tracer = Tracer(sampler=always_on.AlwaysSampler())
+  tracer = Tracer(sampler=always_on.AlwaysOnSampler())
   with tracer.span(name='Capitalize') as span:
     data = request.data
     span.add_annotation('Data in', len=len(data))
@@ -245,7 +245,7 @@ class CapitalizeServer(proto.FetchServicer):
         super(CapitalizeServer, self).__init__()
 
      def Capitalize(self, request, context):
-        tracer = Tracer(sampler=always_on.AlwaysSampler())
+        tracer = Tracer(sampler=always_on.AlwaysOnSampler())
         with tracer.span(name='Capitalize') as span:
             data = request.data
             span.add_annotation('Data in', len=len(data))
@@ -303,7 +303,7 @@ class CapitalizeServer(proto.FetchServicer):
         super(CapitalizeServer, self).__init__()
 
      def Capitalize(self, request, context):
-        tracer = Tracer(sampler=always_on.AlwaysSampler())
+        tracer = Tracer(sampler=always_on.AlwaysOnSampler())
         with tracer.span(name='Capitalize') as span:
             data = request.data
             span.add_annotation('Data in', len=len(data))
@@ -363,7 +363,7 @@ class CapitalizeServer(proto.FetchServicer):
         super(CapitalizeServer, self).__init__()
 
      def Capitalize(self, request, context):
-        tracer = Tracer(sampler=always_on.AlwaysSampler())
+        tracer = Tracer(sampler=always_on.AlwaysOnSampler())
         with tracer.span(name='Capitalize') as span:
             data = request.data
             span.add_annotation('Data in', len=len(data))
@@ -428,7 +428,7 @@ class CapitalizeServer(proto.FetchServicer):
         super(CapitalizeServer, self).__init__()
 
      def Capitalize(self, request, context):
-        tracer = Tracer(sampler=always_on.AlwaysSampler())
+        tracer = Tracer(sampler=always_on.AlwaysOnSampler())
         with tracer.span(name='Capitalize') as span:
             data = request.data
             span.add_annotation('Data in', len=len(data))
@@ -463,7 +463,7 @@ Implement the exporter:
 {{<tabs Snippet All>}}
 {{<highlight python>}}
 def Capitalize(self, request, context):
-  tracer = Tracer(sampler=always_on.AlwaysSampler(), exporter=exporter)
+  tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=exporter)
 
 def main():
   tracer_interceptor = server_interceptor.OpenCensusServerInterceptor(
@@ -495,7 +495,7 @@ class CapitalizeServer(proto.FetchServicer):
         super(CapitalizeServer, self).__init__()
 
      def Capitalize(self, request, context):
-        tracer = Tracer(sampler=always_on.AlwaysSampler(), exporter=exporter)
+        tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=exporter)
         with tracer.span(name='Capitalize') as span:
             data = request.data
             span.add_annotation('Data in', len=len(data))
