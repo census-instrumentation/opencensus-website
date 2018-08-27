@@ -75,8 +75,8 @@ stdin.addListener("data", readEvaluateProcessLine);
 ## Getting Started
 The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
 ```bash
-> foo
-< FOO
+foo
+FOO
 ```
 
 Let's first run the application and see what we have.
@@ -633,7 +633,7 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: 'test-210722'});
+const exporter = new stackdriver.StackdriverTraceExporter({projectId: 'your-project-id'});
 
 const tracer = tracing.start().tracer;
 tracer.registerSpanEventListener(exporter);
