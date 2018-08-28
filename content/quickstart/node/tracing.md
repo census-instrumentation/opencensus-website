@@ -53,7 +53,7 @@ function readEvaluateProcessLine(input) {
   const text = readLine(input);
   const upperCase = processLine(text);
 
-  console.log(upperCase);
+  process.stdout.write('< ' + upperCase + '\n> ');
 }
 
 function readLine(input) {
@@ -70,13 +70,14 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 
 ## Getting Started
 The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
 ```bash
-foo
-FOO
+> foo
+< FOO
 ```
 
 Let's first run the application and see what we have.
@@ -119,7 +120,7 @@ function readEvaluateProcessLine(input) {
   const text = readLine(input);
   const upperCase = processLine(text);
 
-  console.log(upperCase);
+  process.stdout.write('< ' + upperCase + '\n> ');
 }
 
 function readLine(input) {
@@ -136,6 +137,7 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -175,7 +177,7 @@ function readEvaluateProcessLine(input) {
   const text = readLine(input);
   const upperCase = processLine(text);
 
-  console.log(upperCase);
+  process.stdout.write('< ' + upperCase + '\n> ');
 }
 
 function readLine(input) {
@@ -192,6 +194,7 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -206,7 +209,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
 
     rootSpan.end();
   });
@@ -229,7 +232,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
 
     rootSpan.end();
   });
@@ -249,6 +252,7 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -304,7 +308,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
   });
 }
 
@@ -334,6 +338,7 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -378,7 +383,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
   });
 }
 
@@ -410,10 +415,20 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
-## Exporting traces to Stackdriver
+## Exporting to Stackdriver
+To create the exporter, you'll need to:
+
+* Have a GCP Project ID
+* Have already enabled [Stackdriver Trace](https://cloud.google.com/trace/docs/quickstart), if not, please visit the [Code lab](/codelabs/stackdriver)
+* Enable your [Application Default Credentials](https://cloud.google.com/docs/authentication/getting-started) for authentication with:
+
+{{<highlight bash>}}
+export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
+{{</highlight>}}
 
 <a name="import-exporting-packages"></a>
 ### Import Packages
@@ -448,7 +463,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
   });
 }
 
@@ -480,16 +495,19 @@ function processLine(text) {
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
 ### Create the Exporter
 
-First we will initialize the exporter. **You will need to edit the following code snippet to incorporate your Google Cloud project id.**
+First we will retrieve your Google Cloud Project ID by placing this function at the end of our file:
 
-{{% tabs Snippet All %}}
+{{% tabs Snippet All%}}
 ```js
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: "your-project-id"});
+function getProjectId() {
+  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
+}
 ```
 
 ```js
@@ -502,8 +520,6 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: "your-project-id"});
-
 const tracer = tracing.start().tracer;
 
 function readEvaluateProcessLine(input) {
@@ -511,7 +527,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
   });
 }
 
@@ -537,12 +553,83 @@ function processLine(text) {
   return upperCaseText;
 }
 
+function getProjectId() {
+  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
+}
+
 /*
  * In a REPL:
  * 1. Read input
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
+```
+{{% /tabs %}}
+
+Next, we will initialize the exporter.
+
+{{% tabs Snippet All %}}
+```js
+const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+```
+
+```js
+const tracing = require('@opencensus/nodejs');
+const stackdriver = require('@opencensus/exporter-stackdriver');
+const stdin = process.openStdin();
+
+const defaultConfig = {
+  name: 'readEvaulateProcessLine',
+  samplingRate: 1.0  // always sample
+};
+
+const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+
+const tracer = tracing.start().tracer;
+
+function readEvaluateProcessLine(input) {
+  tracer.startRootSpan(defaultConfig, rootSpan => {
+    const text = readLine(input);
+    const upperCase = processLine(text);
+
+    process.stdout.write('< ' + upperCase + '\n> ');
+  });
+}
+
+function readLine(input) {
+  const span = tracer.startChildSpan('readLine');
+  span.start();
+
+  const text = input.toString().trim();
+  span.addAttribute('length', text.length);
+  span.addAttribute('text', text);
+
+  span.end();
+  return text;
+}
+
+function processLine(text) {
+  const span = tracer.startChildSpan('processLine');
+  span.start();
+
+  const upperCaseText = text.toUpperCase();
+
+  span.end();
+  return upperCaseText;
+}
+
+function getProjectId() {
+  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
+}
+
+/*
+ * In a REPL:
+ * 1. Read input
+ * 2. process input
+ */
+stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -563,7 +650,7 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: "your-project-id"});
+const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
 
 const tracer = tracing.start().tracer;
 tracer.registerSpanEventListener(exporter);
@@ -573,7 +660,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
   });
 }
 
@@ -599,12 +686,17 @@ function processLine(text) {
   return upperCaseText;
 }
 
+function getProjectId() {
+  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
+}
+
 /*
  * In a REPL:
  * 1. Read input
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
@@ -647,7 +739,7 @@ function readEvaluateProcessLine(input) {
     const text = readLine(input);
     const upperCase = processLine(text);
 
-    console.log(upperCase);
+    process.stdout.write('< ' + upperCase + '\n> ');
 
     rootSpan.end();
   });
@@ -679,12 +771,17 @@ function processLine(text) {
   return upperCaseText;
 }
 
+function getProjectId() {
+  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
+}
+
 /*
  * In a REPL:
  * 1. Read input
  * 2. process input
  */
 stdin.addListener("data", readEvaluateProcessLine);
+process.stdout.write('> ');
 ```
 
 ## Viewing your Traces on Stackdriver
