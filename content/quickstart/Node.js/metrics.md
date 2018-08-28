@@ -34,9 +34,19 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 
 ## Installation
 
-OpenCensus: `npm install @opencensus/nodejs`
+First, let's create a folder called `repl-app` for our project and navigate inside it:
 
-Stackdriver exporter: `npm install @opencensus/exporter-stackdriver`
+```bash
+mkdir repl-app
+cd repl-app
+```
+
+Then, let's install the OpenCensus and Stackdriver packages with:
+
+```bash
+npm install @opencensus/core
+npm install @opencensus/exporter-stackdriver
+```
 
 ## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -58,7 +68,13 @@ We will be a simple "read-evaluate-print-loop" (REPL) app. In there we'll collec
 - Number of lines read
 - Line lengths
 
-First, create a file called `repl.js`. Next, put the following code inside of `repl.js`:
+First, create a file called `repl.js`:
+
+```bash
+touch repl.js
+```
+
+Next, put the following code inside of `repl.js`:
 
 {{<highlight javascript>}}
 import * as fs from "fs";
@@ -86,7 +102,24 @@ function processLine(line) {
 }
 {{</highlight>}}
 
-You can run the code via `node repl.js`.
+Then, let's create our text file that we'll feed the REPL. LEt's call it `test.txt`:
+
+```bash
+touch test.txt
+```
+
+And put the following lines inside of `test.txt`:
+
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+```
+
+Now, you can run the code via `node repl.js` and see it working.
 
 ## Enable Metrics
 
@@ -96,11 +129,11 @@ To enable metrics, we'll import a few items from OpenCensus Core package.
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 
 import * as fs from "fs";
 import * as readline from "readline";
@@ -148,7 +181,7 @@ const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.B
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 
 import * as fs from "fs";
 import * as readline from "readline";
@@ -229,7 +262,7 @@ const lineLengthView = stats.createView(
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 
 import * as fs from "fs";
 import * as readline from "readline";
@@ -334,7 +367,7 @@ stats.record({
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 
 import * as fs from "fs";
 import * as readline from "readline";
@@ -442,7 +475,7 @@ We will be adding the Stackdriver package: `@opencensus/exporter-stackdriver`, c
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 import { StackdriverStatsExporter } from "@opencensus/exporter-stackdriver";
 
 import * as fs from "fs";
@@ -459,7 +492,7 @@ stats.registerExporter(exporter);
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/opencensus-core";
+import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
 import { StackdriverStatsExporter } from "@opencensus/exporter-stackdriver";
 
 import * as fs from "fs";
