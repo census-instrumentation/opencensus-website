@@ -3,6 +3,7 @@ title: "Tracing"
 date: 2018-07-22T20:29:06-07:00
 draft: false
 class: "shadowed-image lightbox"
+url: quickstart/nodejs/tracing
 ---
 
 - [Requirements](#requirements)
@@ -24,7 +25,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 3. View traces on the backend of our choice
 
 ## Requirements
-- Node
+- [Node.js](https://nodejs.org/) 6 or above and `npm` (already comes with Node.js)
 - Google Cloud Platform account and project
 - Google Stackdriver Tracing enabled on your project
 
@@ -725,7 +726,7 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: 'your-project-id'});
+const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
 
 const tracer = tracing.start().tracer;
 tracer.registerSpanEventListener(exporter);
