@@ -11,7 +11,7 @@ logo: /images/instana.png
 - [Creating the exporter](#creating-the-exporter)
 
 ## Introduction
-Instant provides AI Powered Application and Infrastructure Monitoring, allowing you to
+Instanta provides AI Powered Application and Infrastructure Monitoring, allowing you to
 deliver Faster With Confidence, and automatic Analysis and Optimization.
 
 OpenCensus Node.js has support for this exporter available, distributed through NPM package [@opencensus/exporter-instana](https://www.npmjs.com/package/@opencensus/exporter-instana)
