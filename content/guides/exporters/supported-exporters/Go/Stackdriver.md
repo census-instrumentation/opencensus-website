@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/go/stackdriver]
+logo: /images/logo_gcp_vertical_rgb.png
 ---
-
-![](/images/logo_gcp_vertical_rgb.png)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)

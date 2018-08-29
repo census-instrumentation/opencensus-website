@@ -5,9 +5,8 @@ draft: false
 weight: 2
 class: "resized-logo"
 aliases: [/supported-exporters/java]
+logo: /images/java.png
 ---
-
-![](/images/java.png)
 
 For full reference, you can visit:
 

@@ -3,9 +3,8 @@ title: "Go"
 draft: false
 weight: 3
 class: "resized-logo"
+logo: /images/gopher.png
 ---
-
-![](/images/gopher.png)
 
 #### Introduction
 As already introduced in section [Core Concepts/Exporters](/core-concepts/exporters/), exporters

@@ -3,9 +3,8 @@ title: "Java"
 date: 2018-07-16T14:29:15-07:00
 draft: false
 class: "resized-logo"
+logo: /images/java-opencensus.png
 ---
-
-![](/images/java-opencensus.png)
 
 In this quickstart, using OpenCensus Java, you will gain hands-on experience with:
 {{% children %}}

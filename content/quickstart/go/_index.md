@@ -3,9 +3,8 @@ title: "Go"
 date: 2018-07-16T14:29:03-07:00
 draft: false
 class: "resized-logo"
+logo: /images/go-opencensus.png
 ---
-
-![](/images/go-opencensus.png)
 
 In this quickstart, using OpenCensus Go, you will gain hands-on experience with:
 {{% children %}}

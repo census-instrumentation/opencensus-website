@@ -9,9 +9,8 @@ aliases: [
   /supported-transports,
   /supported-transports/grpc
 ]
+logo: /images/grpc.png
 ---
-
-![gRPC](/images/grpc.png)
 
 gRPC is a high performance, open-source universal RPC framework.
 OpenCensus is integrated with gRPC in the following languages:

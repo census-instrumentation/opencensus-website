@@ -3,9 +3,8 @@ title: "GoMemache"
 date: 2018-08-22T04:30:16-07:00
 draft: false
 aliases: [/integrations/memcached/go]
+logo: /img/memcached-gopher.png
 ---
-
-![memcached logo](/img/memcached-gopher.png)
 
 - [Introduction](#introduction)
 - [Features](#features)

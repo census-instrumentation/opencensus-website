@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_spanner]
+logo: /images/cloud_spanner.png
 ---
-
-![](/images/cloud_spanner.png)
 
 Cloud Spanner is a fully managed, mission-critical, relational database service that offers transactional consistency at
 global scale, schemas, SQL (ANSI 2011 with extensions), and automatic, synchronous replication for high availability.

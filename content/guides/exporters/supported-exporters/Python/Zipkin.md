@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/python/zipkin]
+logo: /img/zipkin-logo.jpg
 ---
-
-![](/img/zipkin-logo.jpg)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)

@@ -4,9 +4,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/custom_exporter/java]
+logo: /images/java.png
 ---
-
-![](/images/java.png)
 
 #### Introduction
 As already introduced in section [Core Concepts/Exporters](/core-concepts/exporters/), exporters

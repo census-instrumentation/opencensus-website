@@ -3,9 +3,8 @@ title: "Go"
 date: 2018-08-22T03:11:37-07:00
 draft: false
 aliases: [/integrations/sql/go]
+logo: /img/sql-gopher.png
 ---
-
-![](/img/sql-gopher.png)
 
 - [Introduction](#Introduction)
 - [Installing it](#installing-it)

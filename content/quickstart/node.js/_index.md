@@ -4,9 +4,8 @@ date: 2018-07-16T14:29:03-07:00
 draft: false
 class: "resized-logo"
 url: quickstart/nodejs
+logo: /images/node-opencensus.png
 ---
-
-![](/images/node-opencensus.png)
 
 In this quickstart, using OpenCensus Node, you will gain hands-on experience with:
 {{% children %}}

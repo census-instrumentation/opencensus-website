@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/java/signalfx]
+logo: /img/partners/signalFx_logo.svg
 ---
-
-![](https://opencensus.io/img/signalFx_logo.svg)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)

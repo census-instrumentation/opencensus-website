@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/java/prometheus]
+logo: /img/prometheus-logo.png
 ---
-
-![](/img/prometheus-logo.png)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)
