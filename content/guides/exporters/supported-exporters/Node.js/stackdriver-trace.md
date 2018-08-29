@@ -9,7 +9,6 @@ logo: /images/logo_gcp_vertical_rgb.png
 - [Introduction](#introduction)
 - [Installing the exporter](#installing-the-exporter)
 - [Creating the exporter](#creating-the-exporter)
-- [Viewing your metrics](#viewing-your-metrics)
 - [Viewing your traces](#viewing-your-traces)
 - [References](#references)
 
