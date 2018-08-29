@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_bigtable]
+logo: /images/cloud_bigtable.png
 ---
-
-![](/images/cloud_bigtable.png)
 
 Cloud Bigtable is a petabyte-scale, fully managed NoSQL database service for large analytical and operational workloads.
 

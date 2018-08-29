@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_spanner/java]
+logo: /images/java.png
 ---
-
-![](/images/java.png)
 
 - [Introduction](#introduction)
 - [Packages to import](#packages-to-import)

@@ -3,9 +3,8 @@ title: "Node.js"
 draft: false
 weight: 3
 class: "resized-logo"
+logo: /images/nodejs.png
 ---
-
-![](/images/nodejs.png)
 
 #### Introduction
 As already introduced in section [Core Concepts/Exporters](/core-concepts/exporters/), exporters

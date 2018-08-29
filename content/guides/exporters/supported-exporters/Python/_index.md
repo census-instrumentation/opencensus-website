@@ -5,9 +5,8 @@ draft: false
 weight: 2
 class: "resized-logo"
 aliases: [/supported-exporters/python]
+logo: /images/python-opencensus.png
 ---
-
-![](/images/python-opencensus.png)
 
 OpenCensus Python provides support for various exporters like:
 

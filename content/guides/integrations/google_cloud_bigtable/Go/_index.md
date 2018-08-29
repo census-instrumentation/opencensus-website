@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_bigtable/go]
+logo: /images/gopher.png
 ---
-
-![](/images/gopher.png)
 
 - [Introduction](#introduction)
 - [Packages to import](#packages-to-import)

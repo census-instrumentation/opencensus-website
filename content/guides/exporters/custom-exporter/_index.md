@@ -4,9 +4,8 @@ draft: false
 weight: 56
 class: "resized-logo"
 aliases: [/custom_exporter]
+logo: /images/opencensus-logo.png
 ---
-
-![](/images/opencensus-logo.png)
 
 As already introduced, OpenCensus is a vendor-agnostic library that allows you collect traces and metrics, allowing you
 to export that data to backends of your choice, in your applications.

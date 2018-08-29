@@ -4,9 +4,8 @@ date: 2018-08-15T14:58:07-07:00
 draft: false
 weight: 3
 aliases: [/grpc/python]
+logo: /images/python-grpc-opencensus.png
 ---
-
-![](/images/python-grpc-opencensus.png)
 
 - [Overview](#overview)
 - [Setup](#setup)

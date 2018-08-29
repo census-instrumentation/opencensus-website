@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/jaeger]
+logo: /img/partners/jaeger_logo.svg
 ---
-
-![](https://www.jaegertracing.io/img/jaeger-logo.png)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)

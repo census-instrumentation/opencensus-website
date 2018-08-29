@@ -4,9 +4,8 @@ date: 2018-08-08T16:10:31-07:00
 draft: false
 weight: 2
 aliases: [/grpc/java]
+logo: /images/java-grpc-opencensus.png
 ---
-
-![](/images/java-grpc-opencensus.png)
 
 - [Overview](#overview)
 - [Creating our gRPC Service](#creating-our-grpc-service)

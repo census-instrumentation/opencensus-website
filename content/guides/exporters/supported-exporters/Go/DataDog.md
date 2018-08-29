@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/go/datadog]
+logo: /img/partners/datadog_logo.svg
 ---
-
-![](https://datadog-prod.imgix.net/img/press-logo-v-purpleb.png)
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)

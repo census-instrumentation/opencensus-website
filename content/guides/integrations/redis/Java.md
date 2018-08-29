@@ -4,9 +4,8 @@ date: 2018-07-25T09:38:03-07:00
 draft: false
 class: "integration-page"
 aliases: [/integrations/redis/java]
+logo: /images/java-opencensus.png
 ---
-
-![](/images/java-opencensus.png)
 
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)

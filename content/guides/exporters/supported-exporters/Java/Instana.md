@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/instana]
+logo: /images/instana.png
 ---
-
-![](/images/instana.png)
 
 - [Introduction](#introduction)
 - [Creating the exporters](#creating-the-exporters)

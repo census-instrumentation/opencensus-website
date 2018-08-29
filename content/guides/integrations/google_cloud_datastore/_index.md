@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_datastore]
+logo: /images/google_cloud_datastore.jpeg
 ---
-
-![](/images/google_cloud_datastore.jpeg)
 
 Google Cloud Datastore is a NoSQL document database built for automatic scaling, high performance, and ease of application development. While the Cloud Datastore interface has many of the same features as traditional databases, as a NoSQL database it differs from them in the way it describes relationships between data objects.
 

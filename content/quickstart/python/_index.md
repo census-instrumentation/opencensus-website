@@ -3,9 +3,8 @@ title: "Python"
 date: 2018-07-16T14:29:03-07:00
 draft: false
 class: "resized-logo"
+logo: /images/python-opencensus.png
 ---
-
-![](/images/python-opencensus.png)
 
 In this quickstart, using OpenCensus Python, you will gain hands-on experience with:
 {{% children %}}

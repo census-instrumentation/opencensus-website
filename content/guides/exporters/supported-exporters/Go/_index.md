@@ -5,9 +5,8 @@ draft: false
 weight: 2
 class: "resized-logo"
 aliases: [/supported-exporters/go]
+logo: /images/gopher.png
 ---
-
-![](/images/gopher.png)
 
 OpenCensus Go provides support for various exporters like:
 

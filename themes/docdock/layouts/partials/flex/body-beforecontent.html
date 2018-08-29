@@ -65,4 +65,13 @@
     {{- end}}
 
 
-    {{if not .IsHome}}<h1>{{.Title}}</h1>{{end}}
+    {{if not .IsHome}}
+      <div class="header-container">
+        <h1>{{.Title}}</h1>
+        {{if .Params.logo}}
+          <div class="header-logo-container">
+            <img class="header-logo" src="{{.Params.logo}}"/>
+          </div>
+        {{end}}
+      </div>
+    {{end}}

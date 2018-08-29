@@ -3,9 +3,8 @@ title: "PyMemache"
 date: 2018-08-24T01:00:08-07:00
 draft: false
 aliases: [/integrations/memcached/python]
+logo: /img/memcached-python.png
 ---
-
-![memcached logo](/img/memcached-python.png)
 
 - [Introduction](#introduction)
 - [Features](#features)

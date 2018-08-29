@@ -5,9 +5,8 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/integrations/google_cloud_storage]
+logo: /images/cloud_storage.png
 ---
-
-![](/images/cloud_storage.png)
 
 
 Cloud Storage is a unified object storage for developers and enterprises, managed by Google.
