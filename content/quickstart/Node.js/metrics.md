@@ -3,6 +3,7 @@ title: "Metrics"
 date: 2018-08-20T07:12:03-13:00
 draft: false
 class: "shadowed-image lightbox"
+url: quickstart/nodejs/metrics
 ---
 
 - [Requirements](#requirements)
@@ -429,10 +430,10 @@ let startTime = new Date();
 lineReader.on("line", function (line) {       // Read
   const processedLine = processLine(line);    // Evaluate
   console.log(processedLine);                // Print
-  
+
   // Registers the end of our REPL
   const endTime = new Date();
-  
+
   const tags = { "method": "repl" };
 
   // Records a new line
@@ -441,7 +442,7 @@ lineReader.on("line", function (line) {       // Read
     tags,
     value: 1
   });
-  
+
   stats.record({
     measure: mLineLengths,
     tags,
@@ -561,10 +562,10 @@ let startTime = new Date();
 lineReader.on("line", function (line) {       // Read
   const processedLine = processLine(line);    // Evaluate
   console.log(processedLine);                // Print
-  
+
   // Registers the end of our REPL
   const endTime = new Date();
-  
+
   const tags = { "method": "repl" };
 
   // Records a new line
@@ -573,7 +574,7 @@ lineReader.on("line", function (line) {       // Read
     tags,
     value: 1
   });
-  
+
   stats.record({
     measure: mLineLengths,
     tags,
