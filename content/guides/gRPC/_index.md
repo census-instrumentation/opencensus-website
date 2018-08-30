@@ -23,3 +23,4 @@ OpenCensus is integrated with gRPC in the following languages:
 {{<card-exporter target-url="java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
 {{<card-exporter target-url="python" src="/images/python-icon.png" lang="Python" tracing="true">}}
 {{<card-exporter target-url="cplusplus" src="/images/cpp.png" lang="C++" tracing="true" stats="true">}}
+{{<card-exporter target-url="nodejs" src="/images/node-icon.png" lang="Node" tracing="true">}}
