@@ -26,7 +26,6 @@ OpenCensus Go allows exporting stats to Prometheus by means of the Prometheus pa
 For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
 {{% /notice %}}
 
-
 ## Creating the exporter
 To create the exporter, we'll need to:
 

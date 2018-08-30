@@ -9,7 +9,7 @@ logo: /images/logo_gcp_vertical_rgb.png
 - [Introduction](#introduction)
 - [Installing the exporter](#installing-the-exporter)
 - [Creating the exporters](#creating-the-exporter)
-- [Viewing your traces](#viewing-your-traces)
+- [Viewing your metrics](#viewing-your-metrics)
 - [References](#references)
 
 
@@ -54,8 +54,8 @@ var stats = new opencensus.Stats();
 stats.registerExporter(exporter);
 {{</highlight>}}
 
-## Viewing your traces
-Please visit [https://console.cloud.google.com/tracing/traces](https://console.cloud.google.com/tracing/traces)
+## Viewing your metrics
+Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
 
 ## References
 
