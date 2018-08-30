@@ -4,7 +4,7 @@ date: 2018-08-03T22:00:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/integrations/google_cloud_datastore]
+aliases: [/integrations/google_cloud_datastore, /guides/integrations/google_cloud_datastore]
 logo: /images/google_cloud_datastore.jpeg
 ---
 

@@ -3,7 +3,7 @@ title: "Go"
 date: 2018-08-02T20:59:20-07:00
 draft: false
 weight: 3
-aliases: [/integrations/google_cloud_datastore/go]
+aliases: [/integrations/google_cloud_datastore/go, /guides/integrations/google_cloud_datastore/go]
 logo: /images/gopher.png
 ---
 

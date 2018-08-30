@@ -5,6 +5,7 @@ draft: false
 class: "integration-page"
 aliases: [/integrations/caddy]
 logo: /images/caddy-lock.png
+weight: 5
 ---
 
 - [Background](#background)
