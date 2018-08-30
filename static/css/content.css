@@ -175,10 +175,11 @@ section a .lang-card {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
   transition: all 200ms;
+
+  width: 200px;
 }
 
 .user-card-container {
-  width: 200px;
   height: 140px;
   position: relative;
 }
