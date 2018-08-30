@@ -4,7 +4,7 @@ date: 2018-07-24T14:20:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/integrations/google_cloud_spanner]
+aliases: [/integrations/google_cloud_spanner, /guides/integrations/google_cloud_spanner]
 logo: /images/cloud_spanner.png
 ---
 

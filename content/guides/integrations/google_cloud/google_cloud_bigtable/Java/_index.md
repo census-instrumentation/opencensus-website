@@ -4,7 +4,7 @@ date: 2018-07-30T18:44:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/integrations/google_cloud_bigtable/java]
+aliases: [/integrations/google_cloud_bigtable/java, /guides/integrations/google_cloud_bigtable/java]
 logo: /images/java.png
 ---
 
