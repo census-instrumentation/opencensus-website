@@ -47,8 +47,9 @@ import (
 )
 
 func main() {
+	// Port details: https://www.jaegertracing.io/docs/getting-started/
 	agentEndpointURI := "localhost:6831"
-	collectorEndpointURI := "http://localhost:9411"
+	collectorEndpointURI := "http://localhost:14268"
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: agentEndpointURI,
