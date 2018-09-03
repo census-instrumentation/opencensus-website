@@ -5,6 +5,7 @@ draft: false
 class: "resized-logo"
 url: quickstart/nodejs
 logo: /images/node-opencensus.png
+aliases: [/quickstart/node.js]
 ---
 
 In this quickstart, using OpenCensus Node, you will gain hands-on experience with:
