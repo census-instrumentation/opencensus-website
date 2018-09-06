@@ -19,3 +19,4 @@ Some of the publicly known OpenCensus users:
 {{<card-vendor name="Fn Project" src="/images/users/oracle.gif" href="https://github.com/fnproject">}}
 {{<card-vendor src="/images/users/ardan.svg" tall="true" href="https://github.com/ardanlabs/service">}}
 {{<card-vendor src="/images/users/orijtech.png" href="https://orijtech.com/">}}
+{{<card-vendor src="/images/users/streak.png" href="https://www.streak.com/">}}
