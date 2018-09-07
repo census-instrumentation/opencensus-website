@@ -63,3 +63,4 @@ OpenCensus originates from Google, where a set of libraries called Census were u
 {{<card-vendor href="https://cloud.google.com/stackdriver/" src="/img/partners/stackdriver_logo.svg">}}
 {{<card-vendor href="https://prometheus.io/" src="/img/partners/prometheus_logo.svg">}}
 {{<card-vendor href="https://www.instana.com/" src="/img/partners/instana_logo.svg">}}
+{{<card-vendor href="https://omnition.io/" src="/img/partners/omnition_logo.svg">}}
