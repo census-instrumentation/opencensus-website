@@ -16,7 +16,7 @@ Python|https://github.com/census-instrumentation/opencensus-python
 PHP|https://github.com/census-instrumentation/opencensus-php
 Node.js|https://github.com/census-instrumentation/opencensus-node
 C#|https://github.com/census-instrumentation/opencensus-csharp
-Erlang|https://github.com/census-instrumentation/opencensus-erlang
+Erlang/Elixir|https://github.com/census-instrumentation/opencensus-erlang
 
 For all other issues, please send an email to
 [census-developers@googlegroups.com](mailto:census-developers@googlegroups.com).
