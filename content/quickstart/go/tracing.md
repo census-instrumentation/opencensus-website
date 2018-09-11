@@ -209,15 +209,15 @@ To accomplish this, we must do two things:
 
 You can create a span by inserting the following two lines in each of the three functions:
 ```go
-ctx, span := trace.StartSpan(context.Context ctx, "spanName")
+ctx, span := trace.StartSpan(ctx, "spanName")
 defer span.End()
 ```
 
-**2. Provide `context.Context ctx` to all spans**
+**2. Provide `context.Context` to all spans**
 
 In order to trace each span, we will provide the **ctx returned from the first `StartSpan` function to all future `StartSpan` functions**.
 
-This means that we will modify the `readLine` and `processLine` functions so they accept a `context.Context ctx` argument.
+This means that we will modify the `readLine` and `processLine` functions so they accept a `context.Context` argument.
 
 
 {{<tabs Snippet All>}}
