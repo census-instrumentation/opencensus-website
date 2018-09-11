@@ -330,6 +330,7 @@ func main() {
 	defer sd.Flush()
 	trace.RegisterExporter(sd)
 	view.RegisterExporter(sd)
+	view.SetReportingPeriod(60 * time.Second)
 	// For demo purposes let's always sample
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 

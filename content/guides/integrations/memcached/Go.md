@@ -121,7 +121,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to enable OpenCensus: %v", err)
 	}
-	defer flushFn()
+	defer func() {
+		// Wait for 60 seconds before exiting to allow metrics to be flushed
+		log.Println("Waiting for ~60s to allow metrics to be exported")
+		<-time.After(62 * time.Second)
+		flushFn()
+	}()
+
 
 	mc := memcache.New("localhost:11211")
 	log.SetFlags(0)
@@ -210,7 +216,7 @@ func enableOpenCensusTracingAndMetrics() (func(), error) {
 
 	// Register as a metrics exporter
 	view.RegisterExporter(sd)
-	view.SetReportingPeriod(50 * time.Millisecond)
+	view.SetReportingPeriod(60 * time.Second)
 	if err := view.Register(memcache.AllViews...); err != nil {
 		return nil, err
 	}

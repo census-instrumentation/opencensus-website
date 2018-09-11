@@ -10,6 +10,7 @@ logo: /img/partners/signalFx_logo.svg
 
 - [Introduction](#introduction)
 - [Creating the exporter](#creating-the-exporter)
+- [References](#references)
 
 ## Introduction
 SignalFx is a real-time monitoring solution for cloud and distributed applications.
@@ -65,8 +66,8 @@ Instrument your application code with the following snippet:
 package io.opencensus.tutorial.signalfx;
 
 import io.opencensus.common.Duration;
-import io.opencensus.exporter.stats.stackdriver.SignalFxStatsConfiguration;
-import io.opencensus.exporter.stats.stackdriver.SignalFxStatsExporter;
+import io.opencensus.exporter.stats.signalfx.SignalFxStatsConfiguration;
+import io.opencensus.exporter.stats.signalfx.SignalFxStatsExporter;
 
 public class SignalFxTutorial {
     public static void main(String ...args) {
@@ -81,3 +82,9 @@ public class SignalFxTutorial {
     }
 }
 {{</highlight>}}
+
+## References
+
+Resource|URL
+---|---
+SignalFx stats exporter JavaDoc|https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-signalfx

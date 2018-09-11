@@ -43,6 +43,10 @@ To create the exporters, you'll need to:
 * Use Maven setup your pom.xml file
 * Create the exporters in code
 
+{{% notice warning %}}
+Stackdriver's minimum stats reporting period must be >= 60 seconds. Find out why at this [official Stackdriver advisory](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#writing-ts)
+{{% /notice %}}
+
 ### Import Packages
 Insert the following snippet in your `pom.xml`:
 ```xml

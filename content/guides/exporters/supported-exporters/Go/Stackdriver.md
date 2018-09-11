@@ -49,12 +49,17 @@ if err != nil {
 }
 {{</highlight>}}
 
+{{% notice warning %}}
+Stackdriver's minimum stats reporting period must be >= 60 seconds. Find out why at this [official Stackdriver advisory](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#writing-ts)
+{{% /notice %}}
+
 {{<tabs Stats Tracing All>}}
 {{<highlight go>}}
 package main
 
 import (
 	"log"
+	"time"
 
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/stats/view"
@@ -74,6 +79,7 @@ func main() {
 
 	// Register it as a metrics exporter
 	view.RegisterExporter(sd)
+	view.SetReportingPeriod(60 * time.Second)
 }
 {{</highlight>}}
 
@@ -109,6 +115,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/stats/view"
@@ -129,6 +136,7 @@ func main() {
 
 	// Register it as a metrics exporter
 	view.RegisterExporter(sd)
+	view.SetReportingPeriod(60 * time.Second)
 
 	// Register it as a trace exporter
 	trace.RegisterExporter(sd)

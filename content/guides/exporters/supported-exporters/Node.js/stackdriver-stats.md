@@ -42,6 +42,11 @@ export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
 {{</highlight>}}
 
 * Create the exporters in code
+
+{{% notice warning %}}
+Stackdriver's minimum stats reporting period must be >= 60 seconds. Find out why at this [official Stackdriver advisory](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#writing-ts)
+{{% /notice %}}
+
 {{<highlight javascript>}}
 var opencensus = require('@opencensus/core');
 var stackdriver = require('@opencensus/exporter-stackdriver');

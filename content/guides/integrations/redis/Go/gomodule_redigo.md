@@ -166,7 +166,7 @@ func enableOpenCensus() (func(), error) {
 		return nil, err
 	}
 	view.RegisterExporter(sd)
-	view.SetReportingPeriod(50 * time.Millisecond)
+	view.SetReportingPeriod(60 * time.Second)
 
 	return sd.Flush, nil
 }
@@ -205,8 +205,9 @@ func main() {
 		log.Fatalf("Failed to enable OpenCensus exporting: %v", err)
 	}
 	defer func() {
-		// Wait for 2 seconds before exiting to allow metrics to be flushed
-		<-time.After(2 * time.Second)
+		// Wait for ~60 seconds before exiting to allow metrics to be flushed
+		log.Println("Waiting for ~60s to allow metrics to be exported")
+		<-time.After(62 * time.Second)
 		flushFn()
 	}()
 
