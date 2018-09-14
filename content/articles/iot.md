@@ -3,7 +3,8 @@ title: "OpenCensus for IoT"
 date: 2018-08-02
 draft: false
 weight: 3
-aliases: [/blog/iot]
+aliases: [/blog/iot, /blogs/iot]
+hidden: true
 ---
 
 ![](/images/IoT-GoogleCloud.jpg)
