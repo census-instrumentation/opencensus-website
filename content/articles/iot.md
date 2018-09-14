@@ -5,6 +5,7 @@ draft: false
 weight: 3
 aliases: [/blog/iot, /blogs/iot]
 hidden: true
+logo: /img/logo-sm.svg
 ---
 
 ![](/images/IoT-GoogleCloud.jpg)
