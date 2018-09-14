@@ -16,7 +16,9 @@ Need a refresher on Exporters? [Click here](/core-concepts/exporters)
 {{<card-exporter target-url="supported-exporters/go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
 {{<card-exporter target-url="supported-exporters/java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
 {{<card-exporter target-url="supported-exporters/python" src="/images/python-icon.png" lang="Python" tracing="true">}}
+{{<card-exporter target-url="supported-exporters/node.js" src="/images/nodejs.png" lang="Node.js" tracing="true" stats="true">}}
 
 **Writing a Custom Exporter**
 {{<card-exporter target-url="custom-exporter/go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
 {{<card-exporter target-url="custom-exporter/java" src="/images/java-icon.png" lang="Java" tracing="true">}}
+{{<card-exporter target-url="custom-exporter/node.js" src="/images/nodejs.png" lang="Node.js" tracing="true" stats="true">}}

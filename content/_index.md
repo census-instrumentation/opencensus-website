@@ -16,7 +16,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 {{<button class="btn-light" icon="true" href="/quickstart">}}Quickstart{{</button>}}
 
 ##### How can I use OpenCensus in my project?
-Our libraries support Go, Java, C++, Ruby, Erlang/Elixir, Python, and PHP.
+Our libraries support Go, Java, Node.js, C++, Ruby, Erlang/Elixir, Python, and PHP.
 
 Supported backends include Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/guides/exporters/custom-exporter/).
 
