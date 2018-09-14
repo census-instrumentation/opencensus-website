@@ -25,14 +25,6 @@ This post will describe how to code your own monitoring probes, similar in funct
 
 ##### June 13, 2018
 
-#### [Redis clients instrumented by OpenCensus in Java and Go](https://medium.com/@orijtech/redis-clients-instrumented-by-opencensus-in-java-and-go-402470d92c5c)
-
-In this post we’ll examine Redis clients instrumented with OpenCensus in Java and Go, and apply them directly to use Redis in a media search service to alleviate costs, throttling, load… [\[read more\]](https://medium.com/@orijtech/redis-clients-instrumented-by-opencensus-in-java-and-go-402470d92c5c)
-
----
-
-##### June 13, 2018
-
 #### [Microsoft joins the OpenCensus project](https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/)
 
 We are happy to announce that Microsoft is joining the open source OpenCensus project, and they are excited to help it achieve the goal of “a single distribution of libraries for metrics and distributed tracing”… [\[read more\]](https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/)
@@ -44,14 +36,6 @@ We are happy to announce that Microsoft is joining the open source OpenCensus pr
 #### [Hit the Ground Running with Distributed Tracing Core Concepts](https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058)
 
 Wondering what Distributed Tracing is, or having trouble making it work? Understanding its core concepts is a critical first step. Monolithic service architectures for large backend applications… [\[read more\]](https://medium.com/nikeengineering/hit-the-ground-running-with-distributed-tracing-core-concepts-ff5ad47c7058)
-
----
-
-##### May 13, 2018
-
-#### [OpenCensus for Go gRPC developers](https://medium.com/@orijtech/opencensus-for-go-grpc-developers-7f3ee1ac3d6d)
-
-In this tutorial, we’ll examine how to use OpenCensus in your gRPC projects in the Go programming language for observability both into your server and then client! We’ll then examine how we can integrate with… [\[read more\]](https://medium.com/@orijtech/opencensus-for-go-grpc-developers-7f3ee1ac3d6d)
 
 ---
 
@@ -68,14 +52,6 @@ We recently blogged about the value of OpenCensus and how Google uses Census int
 #### [Practical and Useful Latency Analysis using Istio and OpenCenus](https://www.youtube.com/watch?v=ME-EhOKqFOY)
 
 Want to view more sessions and keep the conversations going? Join us for KubeCon + CloudNativeCon North America in Seattle, December 11 - 13, 2018 [\[read more\]](https://www.youtube.com/watch?v=ME-EhOKqFOY)
-
----
-
-##### April 30, 2018
-
-#### [Memcached clients instrumented with OpenCensus in Go and Python](https://medium.com/@orijtech/memcached-clients-instrumented-with-opencensus-in-go-and-python-dacbd01b269c)
-
-One of the most used server caching and scaling technologies is Memcached [http://memcached.org/](http://memcached.org/) Memcached is a high performance, free and open… [\[read more\]](https://medium.com/@orijtech/memcached-clients-instrumented-with-opencensus-in-go-and-python-dacbd01b269c)
 
 ---
 
@@ -149,14 +125,6 @@ This post is the second in a series about OpenCensus. You can find the first pos
 #### [OpenCensus Tracing w/ Stackdriver](https://medium.com/google-cloud/opencensus-tracing-w-stackdriver-a079fae52499)
 
 A customer’s engineers asked how they could combine OpenCensus tracing w/ App Engine Flexible in their Java apps and surface the results in Stackdriver. [\[read more\]](https://medium.com/google-cloud/opencensus-tracing-w-stackdriver-a079fae52499)
-
----
-
-##### March 8, 2018
-
-#### [Cloud Spanner, instrumented by OpenCensus and exported to Stackdriver](https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e)
-
-In this post, we’ll explore the power of OpenCensus’ exporters, using the Google Cloud Spanner package for both the Go and Java programming languages. [\[read more\]](https://medium.com/@orijtech/cloud-spanner-instrumented-by-opencensus-and-exported-to-stackdriver-6ed61ed6ab4e)
 
 ---
 
