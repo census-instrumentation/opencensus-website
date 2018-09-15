@@ -4,15 +4,31 @@ weight: 20
 ---
 
 
+- [Introduction](#introduction)
+- [Span](#span)
+    - [Name](#name)
+    - [Status](#status)
+    - [Annotations](#annotations)
+    - [Message event](#message-event)
+    - [Attributes](#attributes)
+    - [Link](#link)
+    - [SpanKind](#spankind)
+    - [Time events](#time-events)
+    - [Tracestate](#tracestate)
+- [Sampling](#sampling)
+- [References](#references)
+
+### Introduction
+
 Tracing tracks the progression of a single user request
 as it is handled by other services that make up an application.
 
-Each unit work is called a span in a trace. Spans include metadata about the work,
-including the time spent in the step (latency) and status.
+Each unit work is called a [span](#span) in a [trace](#trace). Spans include metadata about the work,
+including the time spent in the step (latency), status, time events, attributes, links.
 You can use tracing to debug errors and
 latency issues of your application.
 
-#### Span
+### Span
 
 A trace is a tree of spans.
 
@@ -105,7 +121,67 @@ users to filter large volume tracing data. For example, you can
 filter the traces by HTTP status code or availability zone by
 using the example attributes above.
 
-#### Sampling
+#### Message event
+
+Message event describes a message sent/received between spans.
+It consists of fields:
+
+* Type, which is an enumeration of `SENT`, `RECEIVED` or `UNSPECIFIED`
+* Id
+* Uncompressed size, in bytes
+* Compressed size, in bytes
+* Value, which can either be an [Annotation](#annotation) or another [Message Event](#message-event)
+
+#### Link
+
+A link describes a cross-relationship between spans in either the same or different trace.
+For example if a batch operation were performed, comprising of different traces or different
+processes, a link from one span to another can help correlate related spans.
+
+It consists of fields:
+
+* TraceID
+* SpanID
+* Type which can either be `CHILD`, `PARENT` or `UNKNOWN`
+* [Attributes](#attributes)
+
+#### SpanKind
+
+SpanKind details the relationships between spans in addition to the parent/child relationship.
+SpanKind is enumerated by the following values:
+
+* `SERVER`
+* `CLIENT`
+* `UNKNOWN`
+
+For example given two spans that share the same name and traceID, if a trace starts
+on the client and then progresses to the server for continuity, their `SpanKind`-s
+can be set as `CLIENT` and `SERVER` respectively
+
+#### Time events
+Time events consist of time-stamped annotations on a span, which could either be
+user supplied key-value pairs or [Message Events](#message-event) sent between spans.
+A time event consists of a description and the various [attribues](#attribute), for example:
+
+Description: "Cache hit"
+
+Attributes:
+
+    - driver: "memcached"
+    - authenticated: false
+    - timeout_ms: 97
+
+#### Tracestate
+Tracestate conveys information about the position/ordering of a request in multiple distributed tracing graphs.
+It consists of a list of at most 32 ordered [Tracestate entries](#tracestate-entry).
+
+##### Tracestate entry
+A tracestate entry is a key-value pair used to annotate a positional state. It consists of:
+
+* Key: a collection of characters that MUST begin with a lower case letter, can contain lowercase alphanumeric, dashes, asteriks and forward slashes 
+* Value: a collection of printable ASCII characters
+
+### Sampling
 
 Trace data is often very large in size and is expensive to collect.
 This is why rather than collecting traces for every request, downsampling
@@ -125,7 +201,7 @@ There are two ways to set samplers:
   may use a higher sampling rate than a high-load RPC
   server.
 
-#### Exporting
+### Exporting
 
 Recorded spans will be reported by the registered exporters.
 
@@ -134,3 +210,10 @@ various different backends. Users can unregister the exporters
 if they are no longer needed.
 
 Please visit the page [exporters](/core-concepts/exporters) to learn more about exporters.
+
+### References
+
+Resource|URL
+---|---
+OpenCensus specification|https://github.com/census-instrumentation/opencensus-specs
+OpenCensus Proto definitions|https://github.com/census-instrumentation/opencensus-proto
