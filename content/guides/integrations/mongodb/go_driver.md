@@ -17,7 +17,7 @@ logo: /images/mongodb-go.png
 
 ### Introduction
 
-The [new MongoDB Go driver](https://github.com/mongodb/mongo-go-driver) has been instrumented with OpenCensus for Tracing and metrics at [](https://github.com/opencensus-integrations/mongo-go-driver)
+The [new MongoDB Go driver](https://github.com/mongodb/mongo-go-driver) has been instrumented with OpenCensus for Tracing and metrics at [https://github.com/opencensus-integrations/mongo-go-driver](https://github.com/opencensus-integrations/mongo-go-driver)
 
 We have spoken to MongoDB about merging these changes upstream into their driver but for now that's stalled
 due to the rapid pace of development on their new driver, but also pending an evaluation by their Go driver team.
