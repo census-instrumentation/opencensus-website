@@ -13,6 +13,8 @@ logo: /images/gokit-logo.png
     - [Service implementation](#3-service-implementation)
     - [Application bootstrap](#6-application-bootstrap)
     - [OpenCensus instrumentation](#7-opencensus-instrumentation)
+- [Running the example](#running-the-example)
+    - [Examine the traces](#examine-the-traces)
 - [Resources](#resources)
     - [Other Examples](#other-examples)
 
@@ -38,8 +40,8 @@ this step by step guide will also provide you with the needed background to get
 it done.
 
 ##### 1. Service definition
-We start by first creating our [Go kit] service definition for kitgen to use and
-save it as `service.go`:
+We start by first creating our [Go kit] service definition for [kitgen] to use
+and save it as `service.go`:
 
 ```go
 package kitoc
@@ -125,7 +127,7 @@ func (s Service) Hello(ctx context.Context, firstName string, lastName string) (
 
 ##### 4. Failer implementation
 
-To include business error messages as annotations in OpenCensus spans we need
+To include business error messages as annotations in [OpenCensus] spans we need
 the [Go kit] Response structs to implement the `endpoint.Failer` interface. An
 [issue report](https://github.com/go-kit/kit/issues/762) has been filed so this
 next step might become deprecated in the (near) future. To manually add the
@@ -136,8 +138,8 @@ func (r HelloResponse) Failed() error { return r.Err }
 
 ##### 5. Go kit server options
 
-[Kitgen] omits the ability to inject transport options into Go kit servers.
-Let's fix this first so we can attach our OpenCensus handler, server error
+[Kitgen] omits the ability to inject transport options into [Go kit] servers.
+Let's fix this first so we can attach our [OpenCensus] handler, server error
 logger and other generic server options later. Change the following generated
 code in `hello/http/http.go`:
 ```go
@@ -260,11 +262,75 @@ func main() {
 
 ##### 7. OpenCensus instrumentation
 
-We now have a complete runnable Go kit service. To add OpenCensus tracing to
+We now have a complete runnable Go kit service. To add [OpenCensus] tracing to
 our app we need to add `transport` and `endpoint` middleware. [Go kit] provides
-the OpenCensus middleware as part of its core middleware.
+the [OpenCensus tracing middleware] as part of its core middleware.
 
-Update the `cmd/hello/main.go` code to this:
+In this example we'll be using a [Zipkin] tracing backend. To start a local
+[Zipkin] server you can either do:
+
+```sh
+# run a local Zipkin server (needs Java 8 or higher installed)
+curl -sSL https://zipkin.io/quickstart.sh | bash -s
+java -jar zipkin.jar
+```
+
+or:
+
+```sh
+# run Zipkin in Docker
+docker run -d -p 9411:9411 openzipkin/zipkin
+```
+
+When Zipkin has finished starting up you can look at the [Zipkin] dashboard
+here: [http://localhost:9411](http://localhost:9411)
+
+We need to add the following imports to our application bootstrap code:
+
+```go
+import (
+    kitoc "github.com/go-kit/kit/tracing/opencensus"
+    zipkin "github.com/openzipkin/zipkin-go"
+	httpreporter "github.com/openzipkin/zipkin-go/reporter/http"
+	oczipkin "go.opencensus.io/exporter/zipkin"
+	"go.opencensus.io/trace"
+)
+```
+
+Add our [OpenCensus] configuration with [Zipkin] backend:
+
+```go
+// Set-up our OpenCensus instrumentation with Zipkin backend
+var (
+    zipkinURL        = "http://localhost:9411/api/v2/spans"
+	reporter         = httpreporter.NewReporter(zipkinURL)
+	localEndpoint, _ = zipkin.NewEndpoint(serviceName, ":0")
+	exporter         = oczipkin.NewExporter(reporter, localEndpoint)
+)
+defer reporter.Close()
+
+// Always sample our traces for this demo.
+trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+
+// Register our trace exporter.
+trace.RegisterExporter(exporter)
+```
+
+Add the [Go kit] endpoint middleware for [OpenCensus]:
+
+```go
+// Wrap our service endpoints with OpenCensus tracing middleware.
+endpoints.Hello = kitoc.TraceEndpoint("gokit:endpoint hello")(endpoints.Hello)
+```
+
+Add the [Go kit] HTTP transport middleware for [OpenCensus]:
+
+```go
+// Add the GO kit HTTP transport middleware to our serverOptions.
+serverOptions = append(serverOptions, kitoc.HTTPServerTrace())
+```
+
+The complete updated `cmd/hello/main.go` code looks like this:
 ```go
 package main
 
@@ -385,22 +451,79 @@ func main() {
 }
 ```
 
+The hello service example as provided here can be found at: [https://github.com/opencensus-integrations/go-kit-example](https://github.com/opencensus-integrations/go-kit-example)
+
+Each step in this guide is a separate commit in the repository so it is easy to
+see the changes made per step by comparing commits like this:
+[step 7: add OC middleware](https://github.com/opencensus-integrations/go-kit-example/commit/0a9de88b167e7a306e353695ecde56291ece4c94?diff=unified)
+
+### Running the example
+
+To run our example we can simply use `go run` or do a `go build` followed by
+calling the just compiled executable. Once our service is running, it will
+display a message including the listen address:
+```sh
+$ go run cmd/hello/main.go
+svc=oc-gokit-example msg="service start" transport=http address=[::]:49269
+```
+
+Now we can use `curl` to call the service API and receive responses:
+```sh
+~ $ curl -X POST -d '{}' http://localhost:49269/hello
+{"Greeting":"","Err":"missing required name information"}
+
+~ $ curl -X POST -d '{"FirstName":"John"}' http://localhost:49269/hello
+{"Greeting":"Hello John, nice to meet you. Do you have a last name?","Err":null}
+
+~ $ curl -X POST -d '{"LastName":"Doe"}' http://localhost:49269/hello
+{"Greeting":"Hello Mr./Ms. Doe, nice to meet you. Do you have a first name?","Err":null}
+
+~ $ curl -X POST -d '{"FirstName":"John","LastName":"Doe"}' http://localhost:49269/hello
+{"Greeting":"Hello John Doe, nice to meet you.","Err":null}
+```
+
+### Examine the traces
+
+To look at the traces from our service open the [Zipkin] dashboard at: http://localhost:9411
+
+![Traces list](/images/go-kit-integration-guide/zipkin_traces.png)
+
+By clicking on displayed traces we can see their details:
+
+![Trace 1](/images/go-kit-integration-guide/zipkin_trace_1.png)
+
+And clicking on spans we can see the span details:
+![Trace 1 detail](/images/go-kit-integration-guide/zipkin_trace_1_detail.png)
+
+![Trace 2](/images/go-kit-integration-guide/zipkin_trace_2.png)
+
+![Trace 2 detail](/images/go-kit-integration-guide/zipkin_trace_2_detail.png)
+
 ### Resources
 
-* [Go kit]
-* [kitgen]
-* [Go kit example]
+* [OpenCensus] website
+* [OpenCensus Go] documentation
+* [Go kit website]
+* [Go kit] github page
+* Go kit [kitgen] source
+* [Go kit example] github page
+* [Zipkin] website
 
 #### Other Examples
 
-A very comprehensive example of Go kit including OpenCensus instrumentation can
-be found here: https://github.com/basvanbeek/opencensus-gokit-example. It
-contains a couple of backend microservices and an API frontend service,
-including the ability to run as an elegant monolith, highlighting many micro
-services concepts when stripped from the networking aspect still make sense;
-including OpenCensus observability.
+A very comprehensive example of [Go kit] including [OpenCensus] instrumentation
+can be found here: https://github.com/basvanbeek/opencensus-gokit-example. It
+contains a couple of backend microservices and an API frontend service.
+It also shows the ability to run all services together in an elegant monolith.
+The elegant monolith highlights how many microservice concepts when stripped
+from their networking aspect still make sense, including OpenCensus
+observability.
 
+[Zipkin]: https://zipkin.io
+[OpenCensus]: https://opencensus.io
+[OpenCensus Go]: https://godoc.org/go.opencensus.io
 [OpenCensus tracing middleware]: https://github.com/go-kit/kit/tree/master/tracing/opencensus
 [Go kit]: https://github.com/go-kit/kit
+[Go kit website]: https://gokit.io
 [kitgen]: https://github.com/go-kit/kit/tree/master/cmd/kitgen
 [Go kit example]: https://github.com/opencensus-integrations/go-kit-example
