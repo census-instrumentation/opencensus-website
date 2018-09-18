@@ -19,10 +19,10 @@ class: "shadowed-image lightbox"
     - [Import Packages](#import-views-packages)
     - [Create Views](#create-views)
     - [Register Views](#register-views)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
+- [Exporting stats](#exporting-stats)
     - [Import Packages](#import-exporting-packages)
     - [Export Views](#export-views)
-- [Viewing your Metrics on Stackdriver](#viewing-your-metrics-on-stackdriver)
+- [Viewing your metrics](#viewing-your-metrics)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -34,18 +34,22 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 - Java 8+
 - [Apache Maven](https://maven.apache.org/install.html)
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
-
 For assistance setting up Apache Maven, [Click here](https://maven.apache.org/install.html) for instructions.
+{{% /notice %}}
+
+- Prometheus as our choice of metrics backend: we are picking it beause it is free, open source and easy to setup
+
+{{% notice tip %}}
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+
+You can swap out any other exporter from the [list of Java exporters](/guides/exporters/supported-exporters/java)
 {{% /notice %}}
 
 
 ## Installation
-We will first create our project directory, generate the `pom.xml`, and bootstrap our entry file.
+We will first create our project directory, add our `pom.xml`, and our source code.
 
 ```bash
 mkdir repl-app
@@ -53,8 +57,8 @@ cd repl-app
 
 touch pom.xml
 
-mkdir -p src/main/java/io/opencensus/quickstart
-touch src/main/java/io/opencensus/quickstart/Repl.java
+mkdir -p src/main/java/io/opencensus/metrics/quickstart
+touch src/main/java/io/opencensus/metrics/quickstart/Repl.java
 ```
 
 Put this in your newly generated `pom.xml` file:
@@ -63,7 +67,7 @@ Put this in your newly generated `pom.xml` file:
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.metrics.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -104,7 +108,7 @@ Put this in your newly generated `pom.xml` file:
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.metrics.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -117,10 +121,10 @@ Put this in your newly generated `pom.xml` file:
 </project>
 ```
 
-Put this in `src/main/java/io/opencensus/quickstart/Repl.java`:
+Put this in `src/main/java/io/opencensus/metrics/quickstart/Repl.java`:
 
 ```java
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -166,7 +170,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 1. Create quantitative [metrics](/core-concepts/metrics) that we will record
 2. Create [tags](/core-concepts/tags) that we will associate with our metrics
 3. Organize our metrics, similar to writing a report, in to a `View`
-4. Export our views to a backend (Stackdriver in this case)
+4. Export our views to a backend (Prometheus in this case)
 
 ## Getting Started
 The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
@@ -184,7 +188,7 @@ We will instrument this application to collect metrics, such as:
 
 Let's first run the application and see what we have.
 ```bash
-mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
+mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
 ```
 You will be given a text prompt. Try typing in a lowercase word and hit `enter` to receive the uppercase equivalent.
 
@@ -193,7 +197,7 @@ You should see something like this after a few tries:
 
 To exit out of the application, hit `ctrl + c` on your keyboard.
 
-From here on out, we will be rewriting sections of `Repl.java` and `pom.xml`.
+From here on out, we will be rewriting sections of `src/main/java/io/opencensus/metrics/quickstart/Repl.java` and `pom.xml`.
 
 You can recompile and run the application after editing it by running this command:
 
@@ -203,6 +207,7 @@ mvn install
 
 ## Enable Metrics
 
+<a name="import-metrics-packages"></a>
 ### Import Packages
 To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add the following snippet of code after the `<properties>...</properties>` node.
 
@@ -227,7 +232,7 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.metrics.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -282,7 +287,7 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.metrics.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -296,9 +301,8 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
 {{</highlight>}}
 {{</tabs>}}
 
-We will now be importing modules into `Repl.java`. Append the following snippet after the existing `import` statements:
+We will now be importing modules into `src/main/java/io/opencensus/metrics/quickstart/Repl.java`. Append the following snippet after the existing `import` statements:
 
-{{<tabs Snippet All>}}
 {{<highlight java>}}
 import io.opencensus.common.Scope;
 import io.opencensus.stats.Stats;
@@ -315,56 +319,6 @@ import io.opencensus.tags.TagContextBuilder;
 import io.opencensus.tags.TagKey;
 import io.opencensus.tags.TagValue;
 {{</highlight>}}
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import io.opencensus.common.Scope;
-import io.opencensus.stats.Stats;
-import io.opencensus.stats.Measure;
-import io.opencensus.stats.Measure.MeasureLong;
-import io.opencensus.stats.Measure.MeasureDouble;
-import io.opencensus.stats.Stats;
-import io.opencensus.stats.StatsRecorder;
-import io.opencensus.stats.View;
-import io.opencensus.tags.Tags;
-import io.opencensus.tags.Tagger;
-import io.opencensus.tags.TagContext;
-import io.opencensus.tags.TagContextBuilder;
-import io.opencensus.tags.TagKey;
-import io.opencensus.tags.TagValue;
-
-public class Repl {
-    public static void main(String ...args) {
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                readEvaluateProcessLine(stdin);
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        return line.toUpperCase();
-    }
-
-    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-        System.out.print("> ");
-        System.out.flush();
-        String line = in.readLine();
-        String processed = processLine(line);
-        System.out.println("< " + processed + "\n");
-    }
-}
-{{</highlight>}}
-{{</tabs>}}
 
 ### Create Measures for Metrics
 First, we will create the variables needed to later record our metrics. Place the following snippet on the line after `public class Repl {`:
@@ -392,7 +346,7 @@ private static void recordStat(MeasureLong ml, Long n) {
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -472,7 +426,7 @@ private static final TagKey KEY_METHOD = TagKey.create("method");
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -580,7 +534,7 @@ private static void recordTaggedStat(TagKey key, String value, MeasureDouble md,
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -714,7 +668,7 @@ private static void readEvaluateProcessLine(BufferedReader in) throws IOExceptio
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -840,7 +794,7 @@ import io.opencensus.stats.View.AggregationWindow.Cumulative;
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -977,10 +931,10 @@ private static void registerAllViews() {
 
     // Define the views
     View[] views = new View[]{
-        View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-        View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-        View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-        View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+        View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+        View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+        View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+        View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
     };
 
     // Create the view manager
@@ -994,7 +948,7 @@ private static void registerAllViews() {
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1126,10 +1080,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1144,16 +1098,16 @@ public class Repl {
 {{</tabs>}}
 
 ### Register Views
-We will create a function called `setupOpenCensusAndStackdriverExporter` and call it from our main function:
+We will create a function called `setupOpenCensusAndPrometheusExporter` and call it from our main function:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
     // Step 1. Enable OpenCensus Metrics.
     try {
-        setupOpenCensusAndStackdriverExporter();
+        setupOpenCensusAndPrometheusExporter();
     } catch (IOException e) {
-        System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
+        System.err.println("Failed to create and register OpenCensus Prometheus Stats exporter "+ e);
         return;
     }
 
@@ -1171,14 +1125,14 @@ public static void main(String ...args) {
     }
 }
 
-private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+private static void setupOpenCensusAndPrometheusExporter() throws IOException {
     // Firstly register the views
     registerAllViews();
 }
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1231,9 +1185,9 @@ public class Repl {
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Metrics.
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndPrometheusExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Prometheus Stats exporter "+ e);
             return;
         }
 
@@ -1318,10 +1272,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1332,26 +1286,34 @@ public class Repl {
             vmgr.registerView(view);
     }
 
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+    private static void setupOpenCensusAndPrometheusExporter() throws IOException {
         // Firstly register the views
         registerAllViews();
+
+        // Start the Prometheus exporter here...
     }
 }
 {{</highlight>}}
 {{</tabs>}}
 
 
+## Exporting stats
 
-## Exporting to Stackdriver
-
+<a name="import-exporting-packages"></a>
 ### Import Packages
 Add the following code snippet to your `<dependencies>...</dependencies>` node in `pom.xml`:
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
 <dependency>
     <groupId>io.opencensus</groupId>
-    <artifactId>opencensus-exporter-stats-stackdriver</artifactId>
+    <artifactId>opencensus-exporter-stats-prometheus</artifactId>
     <version>${opencensus.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>io.prometheus</groupId>
+    <artifactId>simpleclient_httpserver</artifactId>
+    <version>0.4.0</version>
 </dependency>
 {{</highlight>}}
 
@@ -1359,7 +1321,7 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.metrics.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -1386,8 +1348,14 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
 
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-stats-stackdriver</artifactId>
+            <artifactId>opencensus-exporter-stats-prometheus</artifactId>
             <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>0.4.0</version>
         </dependency>
     </dependencies>
 
@@ -1420,7 +1388,7 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.metrics.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -1434,15 +1402,18 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
 {{</highlight>}}
 {{</tabs>}}
 
-Add the following code snippet to `Repl.java`:
+We also need to expose the Prometheus endpoint say on address "localhost:8889" in order for Prometheus to scrape our application.
+Please add the following to our Java code
+
+Add the following code snippet to `src/main/java/io/opencensus/metrics/quickstart/Repl.java`:
 {{<tabs Snippet All>}}
 {{<highlight java>}}
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.prometheus.client.exporter.HTTPServer;
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1453,8 +1424,9 @@ import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.prometheus.client.exporter.HTTPServer;
+
 import io.opencensus.common.Scope;
 import io.opencensus.stats.Stats;
 import io.opencensus.stats.Measure;
@@ -1498,9 +1470,9 @@ public class Repl {
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Metrics.
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndPrometheusExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Prometheus Stats exporter "+ e);
             return;
         }
 
@@ -1585,10 +1557,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("demo/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1599,7 +1571,7 @@ public class Repl {
             vmgr.registerView(view);
     }
 
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+    private static void setupOpenCensusAndPrometheusExporter() throws IOException {
         // Firstly register the views
         registerAllViews();
     }
@@ -1608,45 +1580,25 @@ public class Repl {
 {{</tabs>}}
 
 ### Export Views
-We will further expand upon `setupOpenCensusAndStackdriverExporter`:
+We will further expand upon `setupOpenCensusAndPrometheusExporter`:
 
 ```java
-private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+private static void setupOpenCensusAndPrometheusExporter() throws IOException {
     // Firstly register the views
     registerAllViews();
 
-    String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
+    // Create and register the Prometheus exporter
+    PrometheusStatsCollector.createAndRegister();
 
-    StackdriverStatsExporter.createAndRegister(
-            StackdriverStatsConfiguration.builder()
-            .setProjectId(gcpProjectId)
-            .build());
-}
-```
-
-Let's create the helper function `envOrAlternative` to assist with getting the Google Cloud Project ID from environment variable `GCP_PROJECT_ID`:
-
-```java
-private static String envOrAlternative(String key, String ...alternatives) {
-    String value = System.getenv().get(key);
-    if (value != null && value != "")
-        return value;
-
-    // Otherwise now look for the alternatives.
-    for (String alternative : alternatives) {
-        if (alternative != null && alternative != "") {
-            value = alternative;
-            break;
-        }
-    }
-
-    return value;
+    // Run the server as a daemon on address "localhost:8889"
+    HTTPServer server = new HTTPServer("localhost", 8889, true);
 }
 ```
 
 Here is the final state of the code:
-```java
-package io.opencensus.quickstart;
+{{<tabs Repl_Java Pom_xml>}}
+{{<highlight java>}}
+package io.opencensus.metrics.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1655,6 +1607,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.prometheus.client.exporter.HTTPServer;
 
 import io.opencensus.common.Scope;
 import io.opencensus.stats.Aggregation;
@@ -1677,8 +1632,6 @@ import io.opencensus.stats.View;
 import io.opencensus.stats.View.Name;
 import io.opencensus.stats.ViewManager;
 import io.opencensus.stats.View.AggregationWindow.Cumulative;
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
 
 public class Repl {
     // The latency in milliseconds
@@ -1702,9 +1655,9 @@ public class Repl {
     public static void main(String ...args) {
         // Step 1. Enable OpenCensus Metrics.
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndPrometheusExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Stats exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Prometheus Stats exporter "+ e);
             return;
         }
 
@@ -1794,10 +1747,10 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("demo/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("demo/errors"), "The number of errors encountered", M_ERRORS, countAggregation, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("demo/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1808,55 +1761,166 @@ public class Repl {
             vmgr.registerView(view);
     }
 
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+    private static void setupOpenCensusAndPrometheusExporter() throws IOException {
         // Firstly register the views
         registerAllViews();
 
-        // Make sure to set the environment variable "GCP_PROJECT_ID"
-        String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
+        // Create and register the Prometheus exporter
+        PrometheusStatsCollector.createAndRegister();
 
-        StackdriverStatsExporter.createAndRegister(
-                StackdriverStatsConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
-    }
-
-    private static String envOrAlternative(String key, String ...alternatives) {
-        String value = System.getenv().get(key);
-        if (value != null && value != "")
-            return value;
-
-        // Otherwise now look for the alternatives.
-        for (String alternative : alternatives) {
-            if (alternative != null && alternative != "") {
-                value = alternative;
-                break;
-            }
-        }
-
-        return value;
+        // Run the server as a daemon on address "localhost:8889"
+        HTTPServer server = new HTTPServer("localhost", 8889, true);
     }
 }
+{{</highlight>}}
+
+{{<highlight xml>}}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.opencensus.metrics.quickstart</groupId>
+    <artifactId>quickstart</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>quickstart</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-api</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-impl</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-exporter-stats-prometheus</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.5.0.Final</version>
+            </extension>
+        </extensions>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>1.10</version>
+                    <configuration>
+                        <programs>
+                            <program>
+                                <id>Repl</id>
+                                <mainClass>io.opencensus.metrics.quickstart.Repl</mainClass>
+                            </program>
+                        </programs>
+                    </configuration>
+                </plugin>
+            </plugins>
+
+        </pluginManagement>
+
+    </build>
+</project>
+{{</highlight>}}
+{{</tabs>}}
+
+### Running the tutorial
+
+This step involves running the tutorial application in one terminal and then Prometheus itself in another terminal.
+
+Having properly installed Java and Maven, in one terminal, please run
+
+```shell
+mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
 ```
 
-## Viewing your Metrics on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://app.google.stackdriver.com/metrics-explorer), select your project, and view the metrics.
+### Prometheus configuration file
 
-In the query box to find metrics, type `quickstart` as a prefix:
+To allow Prometheus to scrape from our application, we have to point it towards the tutorial application whose
+server is running on "localhost:8889".
 
-![viewing metrics 1](/img/quickstart-metrics-available.png)
+To do this, we firstly need to create a YAML file with the configuration e.g. `promconfig.yaml`
+whose contents are:
+```yaml
+scrape_configs:
+  - job_name: 'ocjavametricstutorial'
 
-And on selecting any of the metrics e.g. `OpenCensus/demo/lines_in`, we’ll get...
+    scrape_interval: 10s
 
-![viewing metrics 2](/img/quickstart-metrics-java-lines_in.png)
+    static_configs:
+      - targets: ['localhost:8889']
+```
+
+### Running Prometheus
+
+With that file saved as `promconfig.yaml` we should now be able to run Prometheus like this
+
+```shell
+prometheus --config.file=promconfig.yaml
+```
+
+and then return to the terminal that's running the Java metrics quickstart and generate some work by typing inside it and it will look something like:
 
 
-On checking out the Stacked Area display of the latency, we can see that the 99th percentile latency was 24.75ms.
+## Viewing your metrics
+With the above you should now be able to navigate to the Prometheus UI at http://localhost:9090
 
-![Latency](/img/quickstart-metrics-java-latency.png)
+which should show:
 
-Latency heatmap
-![Latency heatmap](/img/quickstart-metrics-java-latency-heatmap.png)
+* Available metrics
+![](/images/metrics-java-prometheus-all-metrics.png)
 
-And, for `line_lengths`:
-![Line lengths](/img/quickstart-metrics-java-line-length-rate.png)
+* Lines-in counts
+![](/images/metrics-java-prometheus-lines_in.png)
+
+* Latency distributions
+![](/images/metrics-java-prometheus-latency-distribution.png)
+
+* Line lengths distributions
+![](/images/metrics-java-prometheus-line_lengths-distribution.png)
+
+
+## References
+
+Resource|URL
+---|---
+Prometheus project|https://prometheus.io/
+Setting up Prometheus|[Prometheus Codelab](/codelabs/prometheus)
+Prometheus Java exporter|https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-prometheus
+Java exporters|[Java exporters](/guides/exporters/supported-exporters/java)
+OpenCensus Java Stats package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/

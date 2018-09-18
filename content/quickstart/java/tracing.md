@@ -11,11 +11,13 @@ class: "shadowed-image lightbox"
 - [Enable Tracing](#enable-tracing)
     - [Import Packages](#import-tracing-packages)
     - [Instrumentation](#instrument-tracing)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
-    - [Import Packages](#import-exporting-packages)
+- [Exporting traces](#exporting-traces)
+    - [Initialize the exporter](#initialize-the-exporter)
     - [Export Traces](#export-traces)
     - [Create Annotations](#create-annotations)
-- [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
+- [End to end code](#end-to-end-code)
+- [Viewing your traces](#viewing-your-traces)
+- [References](#references)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -26,13 +28,12 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 ## Requirements
 - Java 8+
 - [Apache Maven](https://maven.apache.org/install.html)
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
 
-For assistance setting up Apache Maven, [Click here](https://maven.apache.org/install.html) for instructions.
+You can swap out any other exporter from the [list of Java exporters](/guides/exporters/supported-exporters/java)
 {{% /notice %}}
 
 ## Installation
@@ -44,17 +45,17 @@ cd repl-app
 
 touch pom.xml
 
-mkdir -p src/main/java/io/opencensus/quickstart
-touch src/main/java/io/opencensus/quickstart/Repl.java
+mkdir -p src/main/java/io/opencensus/tracing/quickstart
+touch src/main/java/io/opencensus/tracing/quickstart/Repl.java
 ```
 
-Put this in your newly generated `pom.xml` file:
+Please add this content to your `pom.xml` file:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.tracing.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -95,7 +96,7 @@ Put this in your newly generated `pom.xml` file:
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.tracing.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -108,10 +109,10 @@ Put this in your newly generated `pom.xml` file:
 </project>
 ```
 
-Put this in `src/main/java/io/opencensus/quickstart/Repl.java`:
+Put this in `src/main/java/io/opencensus/tracing/quickstart/Repl.java`:
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.tracing.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -174,16 +175,17 @@ The Repl application takes input from users, converts any lower-case letters int
 
 Let's first run the application and see what we have.
 ```bash
-mvn exec:java -Dexec.mainClass=io.opencensus.quickstart.Repl
+mvn exec:java -Dexec.mainClass=io.opencensus.tracing.quickstart.Repl
 ```
 
 You will be given a text prompt. Try typing in a lowercase word and hit enter to receive the uppercase equivalent.
 
-You should see something like this after a few tries:
+You should see something like this after a few runs:
 ![java image 1](https://cdn-images-1.medium.com/max/1600/1*VFN-txsDL6qYkN_UH3VwhA.png)
 
 ## Enable Tracing
 
+<a name="import-tracing-packages"></a>
 ### Import Packages
 To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Insert the following code snippet after the `<properties>...</properties>` node:
 
@@ -208,7 +210,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.tracing.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -263,7 +265,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.tracing.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -279,7 +281,6 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
 
 We will now be importing modules into `Repl.java`. Append the following snippet after the existing import statements:
 
-{{<tabs Snippet All>}}
 {{<highlight java>}}
 import io.opencensus.common.Scope;
 import io.opencensus.trace.Span;
@@ -287,61 +288,6 @@ import io.opencensus.trace.Status;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
 {{</highlight>}}
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import io.opencensus.common.Scope;
-import io.opencensus.trace.Span;
-import io.opencensus.trace.Status;
-import io.opencensus.trace.Tracer;
-import io.opencensus.trace.Tracing;
-
-public class Repl {
-    public static void main(String ...args) {
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                readEvaluateProcessLine(stdin);
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        return line.toUpperCase();
-    }
-
-    private static String readLine(BufferedReader in) {
-        String line = "";
-
-        try {
-            line = in.readLine();
-        } catch (Exception e) {
-            System.err.println("Failed to read line "+ e);
-        } finally {
-            return line;
-        }
-    }
-
-    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-        System.out.print("> ");
-        System.out.flush();
-        String line = readLine(in);
-        String processed = processLine(line);
-        System.out.println("< " + processed + "\n");
-    }
-}
-{{</highlight>}}
-{{</tabs>}}
 
 ### Instrumentation
 We will begin by creating a private static `Tracer` as a property of our Repl class.
@@ -362,7 +308,7 @@ Scope ss = tracer.spanBuilder("repl").startScopedSpan();
 Here is our updated state of `Repl.java`:
 
 ```java
-package io.opencensus.quickstart;
+package io.opencensus.tracing.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -421,16 +367,16 @@ public class Repl {
 }
 ```
 
-## Exporting to Stackdriver
+## Exporting traces
 
-### Import Packages
-To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependency in your `pom.xml`. Add the following code snippet inside of your `<dependencies>` node:
+### Initialize the exporter
+To enable trace exporting to Zipkin, we’ll need to declare the Zipkin exporter dependency in your `pom.xml`. Add the following code snippet inside of your `<dependencies>` node:
 
 {{<tabs Snippet All>}}
 {{<highlight xml>}}
 <dependency>
     <groupId>io.opencensus</groupId>
-    <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+    <artifactId>opencensus-exporter-trace-zipkin</artifactId>
     <version>${opencensus.version}</version>
 </dependency>
 {{</highlight>}}
@@ -439,7 +385,7 @@ To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependen
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.tracing.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -466,7 +412,7 @@ To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependen
 
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+            <artifactId>opencensus-exporter-trace-zipkin</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
     </dependencies>
@@ -500,7 +446,7 @@ To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependen
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.tracing.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -516,7 +462,6 @@ To turn on Stackdriver Tracing, we’ll need to declare the Stackdriver dependen
 
 Now add the import statements to your `Repl.java`:
 
-{{<tabs Snippet All>}}
 {{<highlight java>}}
 import java.util.HashMap;
 import java.util.Map;
@@ -525,89 +470,19 @@ import io.opencensus.trace.AttributeValue;
 import io.opencensus.trace.config.TraceConfig;
 import io.opencensus.trace.samplers.Samplers;
 
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
 {{</highlight>}}
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import io.opencensus.common.Scope;
-import io.opencensus.trace.AttributeValue;
-import io.opencensus.trace.config.TraceConfig;
-import io.opencensus.trace.samplers.Samplers;
-import io.opencensus.trace.Span;
-import io.opencensus.trace.Status;
-import io.opencensus.trace.Tracer;
-import io.opencensus.trace.Tracing;
-
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
-
-public class Repl {
-    private static final Tracer tracer = Tracing.getTracer();
-
-    public static void main(String ...args) {
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                readEvaluateProcessLine(stdin);
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
-            return line.toUpperCase();
-        }
-    }
-
-    private static String readLine(BufferedReader in) {
-        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
-
-        String line = "";
-
-        try {
-            line = in.readLine();
-        } catch (Exception e) {
-            Span span = tracer.getCurrentSpan();
-            span.setStatus(Status.INTERNAL.withDescription(e.toString()));
-        } finally {
-            ss.close();
-            return line;
-        }
-    }
-
-    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-        System.out.print("> ");
-        System.out.flush();
-        String line = readLine(in);
-        String processed = processLine(line);
-        System.out.println("< " + processed + "\n");
-    }
-}
-{{</highlight>}}
-{{</tabs>}}
 
 ### Export Traces
-We will create a function called `setupOpenCensusAndStackdriverExporter` and call it from our `main` function:
+We will create a function called `setupOpenCensusAndZipkinExporter` and call it from our `main` function:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
 public static void main(String ...args) {
     try {
-        setupOpenCensusAndStackdriverExporter();
+        setupOpenCensusAndZipkinExporter();
     } catch (IOException e) {
-        System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+        System.err.println("Failed to create and register OpenCensus Zipkin Trace exporter "+ e);
         return;
     }
 
@@ -616,7 +491,7 @@ public static void main(String ...args) {
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.tracing.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -633,17 +508,16 @@ import io.opencensus.trace.Status;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
 
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
 
 public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndZipkinExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Zipkin Trace exporter "+ e);
             return;
         }
 
@@ -692,7 +566,7 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-We will do three things in our `setupOpenCensusAndStackdriverExporter` function:
+We will do 2 things in our `setupOpenCensusAndZipkinExporter` function:
 
 1. Set our [sampling rate](/core-concepts/tracing/#sampling)
 ```java
@@ -702,41 +576,28 @@ traceConfig.updateActiveTraceParams(
         traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 ```
 
-2. Retrieve our Google Cloud Project ID
+2. Export our Traces to Zipkin:
+For this we'll initialize the Zipkin exporter which will send traces to the endpoint that the Zipkin server is running
 ```java
-// Implementation will come later
-String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
-```
-
-3. Export our Traces to Stackdriver
-```java
-StackdriverTraceExporter.createAndRegister(
-        StackdriverTraceConfiguration.builder()
-        .setProjectId(gcpProjectId)
-        .build());
+ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjavaquickstart");
 ```
 
 The function ends up looking like this:
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
-private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+private static void setupOpenCensusAndZipkinExporter() throws IOException {
     TraceConfig traceConfig = Tracing.getTraceConfig();
     // For demo purposes, lets always sample.
     traceConfig.updateActiveTraceParams(
             traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 
-    String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
-
-    StackdriverTraceExporter.createAndRegister(
-            StackdriverTraceConfiguration.builder()
-            .setProjectId(gcpProjectId)
-            .build());
+    ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjavaquickstart");
 }
 {{</highlight>}}
 
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.tracing.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -753,17 +614,16 @@ import io.opencensus.trace.Status;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
 
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
 
 public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndZipkinExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Zipkin Trace exporter "+ e);
             return;
         }
 
@@ -809,154 +669,20 @@ public class Repl {
         System.out.println("< " + processed + "\n");
     }
 
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+    private static void setupOpenCensusAndZipkinExporter() throws IOException {
         TraceConfig traceConfig = Tracing.getTraceConfig();
         // For demo purposes, lets always sample.
         traceConfig.updateActiveTraceParams(
                 traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 
-        String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
-
-        StackdriverTraceExporter.createAndRegister(
-                StackdriverTraceConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
+        ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjavaquickstart");
     }
 }
 {{</highlight>}}
 {{</tabs>}}
-
-Now we will handle our implementation of `envOrAlternative`:
-
-{{<tabs Snippet All>}}
-{{<highlight java>}}
-private static String envOrAlternative(String key, String ...alternatives) {
-  String value = System.getenv().get(key);
-  if (value != null && value != "")
-  return value;
-
-  // Otherwise now look for the alternatives.
-  for (String alternative : alternatives) {
-    if (alternative != null && alternative != "") {
-      value = alternative;
-      break;
-    }
-  }
-
-  return value;
-}
-{{</highlight>}}
-
-{{<highlight java>}}
-package io.opencensus.quickstart;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import io.opencensus.common.Scope;
-import io.opencensus.trace.AttributeValue;
-import io.opencensus.trace.config.TraceConfig;
-import io.opencensus.trace.samplers.Samplers;
-import io.opencensus.trace.Span;
-import io.opencensus.trace.Status;
-import io.opencensus.trace.Tracer;
-import io.opencensus.trace.Tracing;
-
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
-
-public class Repl {
-    private static final Tracer tracer = Tracing.getTracer();
-
-    public static void main(String ...args) {
-        try {
-            setupOpenCensusAndStackdriverExporter();
-        } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
-            return;
-        }
-
-        // Step 2. The normal REPL.
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-        while (true) {
-            try {
-                readEvaluateProcessLine(stdin);
-            } catch (IOException e) {
-                System.err.println("Exception "+ e);
-            }
-        }
-    }
-
-    private static String processLine(String line) {
-        try (Scope ss = tracer.spanBuilder("processLine").startScopedSpan()) {
-            return line.toUpperCase();
-        }
-    }
-
-    private static String readLine(BufferedReader in) {
-        Scope ss = tracer.spanBuilder("readLine").startScopedSpan();
-
-        String line = "";
-
-        try {
-            line = in.readLine();
-        } catch (Exception e) {
-            Span span = tracer.getCurrentSpan();
-            span.setStatus(Status.INTERNAL.withDescription(e.toString()));
-        } finally {
-            ss.close();
-            return line;
-        }
-    }
-
-    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-        System.out.print("> ");
-        System.out.flush();
-        String line = readLine(in);
-        String processed = processLine(line);
-        System.out.println("< " + processed + "\n");
-    }
-
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
-        TraceConfig traceConfig = Tracing.getTraceConfig();
-        // For demo purposes, lets always sample.
-        traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
-
-        String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
-
-        StackdriverTraceExporter.createAndRegister(
-                StackdriverTraceConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
-    }
-
-    private static String envOrAlternative(String key, String ...alternatives) {
-      String value = System.getenv().get(key);
-      if (value != null && value != "")
-      return value;
-
-      // Otherwise now look for the alternatives.
-      for (String alternative : alternatives) {
-        if (alternative != null && alternative != "") {
-          value = alternative;
-          break;
-        }
-      }
-
-      return value;
-    }
-}
-{{</highlight>}}
-{{</tabs>}}
-
 
 ### Create Annotations
-When looking at our traces on a backend (such as Stackdriver), we can add metadata to our traces to increase our post-mortem insight.
+When looking at our traces on a backend (such as Zipkin as we have used), we can add metadata to our traces to increase our post-mortem insight.
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces.
 
@@ -973,11 +699,13 @@ Span span = tracer.getCurrentSpan();
 span.addAnnotation("Invoking processLine", attributes);
 ```
 
-The final state of `Repl.java` should be this:
+## End to end code
+
+Collectively the final versions of `src/main/java/io/opencensus/tracing/quickstart/Repl.java` and `pom.xml` should be as in the tabs below:
 
 {{<tabs Repl_Java pom_xml>}}
 {{<highlight java>}}
-package io.opencensus.quickstart;
+package io.opencensus.tracing.quickstart;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -994,17 +722,16 @@ import io.opencensus.trace.Status;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
 
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
 
 public class Repl {
     private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
         try {
-            setupOpenCensusAndStackdriverExporter();
+            setupOpenCensusAndZipkinExporter();
         } catch (IOException e) {
-            System.err.println("Failed to create and register OpenCensus Stackdriver Trace exporter "+ e);
+            System.err.println("Failed to create and register OpenCensus Zipkin Trace exporter "+ e);
             return;
         }
 
@@ -1060,34 +787,13 @@ public class Repl {
         }
     }
 
-    private static void setupOpenCensusAndStackdriverExporter() throws IOException {
+    private static void setupOpenCensusAndZipkinExporter() throws IOException {
         TraceConfig traceConfig = Tracing.getTraceConfig();
         // For demo purposes, lets always sample.
         traceConfig.updateActiveTraceParams(
                 traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 
-        String gcpProjectId = envOrAlternative("GCP_PROJECT_ID");
-
-        StackdriverTraceExporter.createAndRegister(
-                StackdriverTraceConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
-    }
-
-    private static String envOrAlternative(String key, String ...alternatives) {
-        String value = System.getenv().get(key);
-        if (value != null && value != "")
-            return value;
-
-        // Otherwise now look for the alternatives.
-        for (String alternative : alternatives) {
-            if (alternative != null && alternative != "") {
-                value = alternative;
-                break;
-            }
-        }
-
-        return value;
+        ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjavaquickstart");
     }
 }
 {{</highlight>}}
@@ -1095,7 +801,7 @@ public class Repl {
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.opencensus.quickstart</groupId>
+    <groupId>io.opencensus.tracing.quickstart</groupId>
     <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -1122,7 +828,7 @@ public class Repl {
 
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+            <artifactId>opencensus-exporter-trace-zipkin</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
     </dependencies>
@@ -1156,7 +862,7 @@ public class Repl {
                         <programs>
                             <program>
                                 <id>Repl</id>
-                                <mainClass>io.opencensus.quickstart.Repl</mainClass>
+                                <mainClass>io.opencensus.tracing.quickstart.Repl</mainClass>
                             </program>
                         </programs>
                     </configuration>
@@ -1170,11 +876,34 @@ public class Repl {
 {{</highlight>}}
 {{</tabs>}}
 
-## Viewing your Traces on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
+## Running the code
 
-![Trace list](/img/quickstart-traces-java-tracelist.png)
+Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
-And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine` and on clicking on it, it should show our attributes `len` and `use`.
+```shell
+mvn exec:java -Dexec.mainClass=io.opencensus.tracing.quickstart.Repl
+```
+## Viewing your traces
+With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411
 
-![Trace detail](/img/quickstart-traces-java-tracedetail.png)
+which will produce such a screenshot:
+![](/images/trace-java-zipkin-all-traces.png)
+
+And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine`
+![](/images/trace-java-zipkin-single-trace.png)
+
+whose annotation looks like
+![](/images/trace-java-zipkin-annotation.png)
+
+And on clicking on `More info` we should see
+![](/images/trace-java-zipkin-all-details.png)
+
+## References
+
+Resource|URL
+---|---
+Zipkin project|https://zipkin.io/
+Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
+Zipkin Java exporter|https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-zipkin
+Java exporters|[Java exporters](/guides/exporters/supported-exporters/java)
+OpenCensus Java Trace package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
