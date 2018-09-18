@@ -19,31 +19,37 @@ class: "shadowed-image lightbox"
     - [Import Packages](#import-views-packages)
     - [Create Views](#create-views)
     - [Register Views](#register-views)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
+- [Exporting stats](#exporting-stats)
     - [Import Packages](#import-exporting-packages)
-    - [Export Views](#export-views)
-- [Viewing your Metrics on Stackdriver](#viewing-your-metrics-on-stackdriver)
+    - [Create the exporter](#create-the-exporter)
+    - [Register the exporter](#register-the-exporter)
+- [End to end code](#end-to-end-code)
+    - [Running the tutorial](#running-the-tutorial)
+    - [Prometheus configuration file](#prometheus-configuration-file)
+    - [Running Prometheus](#running-prometheus)
+- [Viewing your metrics](#viewing-your-metrics)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
-2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
+2. Register and enable an exporter for any [backend](/core-concepts/exporters/#supported-backends) of our choice
 3. View the metrics on the backend of our choice
 
 ## Requirements
 - Go 1.9 or above
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Prometheus as our choice of metrics backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+
+You can swap out any other exporter from the [list of Go exporters](/guides/exporters/supported-exporters/go)
 {{% /notice %}}
 
 ## Installation
 
 OpenCensus: `go get -u -v go.opencensus.io/...`
 
-Stackdriver exporter: `go get -u -v contrib.go.opencensus.io/exporter/stackdriver`
+Prometheus exporter: `go get -u -v go.opencensus.io/exporter/prometheus`
 
 ## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -51,7 +57,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 1. Create quantifiable metrics (numerical) that we will record
 2. Create [tags](/core-concepts/tags) that we will associate with our metrics
 3. Organize our metrics, similar to writing a report, in to a `View`
-4. Export our views to a backend (Stackdriver in this case)
+4. Export our views to a backend (Prometheus in this case)
 
 
 ## Getting Started
@@ -134,7 +140,7 @@ You can run the code via `go run repl.go`.
 <a name="import-metrics-packages"></a>
 ### Import Packages
 
-To enable metrics, we’ll import a number of core and OpenCensus packages.
+To enable metrics, we’ll import a couple of packages:
 
 {{<tabs Snippet All>}}
 {{<highlight go>}}
@@ -406,6 +412,13 @@ Later, when we use osKey, we will be given an opportunity to enter values such a
 
 ### Inserting Tags
 Now we will insert a specific tag called "repl". It will give us a new `context.Context ctx` which we will use while we later record our metrics. This `ctx` has all tags that have previously been inserted, thus allowing for context propagation.
+
+For example
+```go
+        ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+```
+
+and for complete usage:
 
 {{<tabs Snippet All>}}
 {{<highlight go>}}
@@ -1179,30 +1192,69 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 {{</highlight>}}
 {{</tabs>}}
 
-## Exporting to Stackdriver
+## Exporting stats
+
+### Register the views
+
+```go
+	// Register the views
+	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+		log.Fatalf("Failed to register views: %v", err)
+	}
+
+```
 
 <a name="import-exporting-packages"></a>
 ### Import Packages
-We will be adding the Stackdriver package: `"contrib.go.opencensus.io/exporter/stackdriver"`
+We will be adding the Prometheus Go exporter package package: `"go.opencensus.io/exporter/prometheus"`
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+### Create the exporter
+In order for our metrics to be exported to Prometheus, our application needs to be exposed as a scrape endpoint.
+The OpenCensus Go Prometheus exporter is an [http.Handler](golang.org/pkg/net/http#Handler) that MUST be attached
+to http endpoint "/metrics".
+
+```go
 import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"io"
-	"log"
-	"os"
-	"time"
+        "log"
+        "net/http"
 
-	"contrib.go.opencensus.io/exporter/stackdriver"
-	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"
-	"go.opencensus.io/tag"
+        "go.opencensus.io/exporter/prometheus"
+        "go.opencensus.io/stats/view"
 )
-{{</highlight>}}
+
+func main() {
+        pe, err := prometheus.NewExporter(prometheus.Options{
+                Namespace: "ocmetricstutorial",
+        })
+        if err != nil {
+                log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
+        }
+
+        // Register the Prometheus exporters as a stats exporter.
+        view.RegisterExporter(pe)
+
+        // Now finally run the Prometheus exporter as a scrape endpoint.
+        // We'll run the server on port 8888.
+        go func() {
+                mux := http.NewServeMux()
+                mux.Handle("/metrics", pe)
+                if err := http.ListenAndServe(":8888", mux); err != nil {
+                        log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
+                }
+        }()
+}
+```
+
+### Register the exporter
+```go
+        // Register the Prometheus exporter.
+        // This step is needed so that metrics can be exported.
+        view.RegisterExporter(pe)
+```
+
+
+## End to end code
+Collectively the code will be
 
 {{<highlight go>}}
 package main
@@ -1214,10 +1266,11 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
-	"contrib.go.opencensus.io/exporter/stackdriver"
+	"go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
@@ -1276,6 +1329,33 @@ var (
 )
 
 func main() {
+	// Register the views, it is imperative that this step exists
+	// lest recorded metrics will be dropped and never exported.
+	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+		log.Fatalf("Failed to register the views: %v", err)
+	}
+
+	// Create the Prometheus exporter.
+	pe, err := prometheus.NewExporter(prometheus.Options{
+		Namespace: "ocmetricstutorial",
+	})
+	if err != nil {
+		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
+	}
+	// Register the Prometheus exporter.
+	// This step is needed so that metrics can be exported.
+	view.RegisterExporter(pe)
+
+	// Now finally run the Prometheus exporter as a scrape endpoint.
+	// We'll run the server on port 8888.
+	go func() {
+		mux := http.NewServeMux()
+		mux.Handle("/metrics", pe)
+		if err := http.ListenAndServe(":8888", mux); err != nil {
+			log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
+		}
+	}()
+
 	// In a REPL:
 	//   1. Read input
 	//   2. process input
@@ -1335,227 +1415,67 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
 {{</highlight>}}
-{{</tabs>}}
 
-### Export Views
-In our `main` function, first we create the Stackdriver exporter:
-```go
-// Create that Stackdriver stats exporter
-sd, err := stackdriver.NewExporter(stackdriver.Options{
-	ProjectID:    os.Getenv("GCP_PROJECT_ID"),
-	MetricPrefix: os.Getenv("GCP_METRIC_PREFIX"),
-})
-if err != nil {
-  log.Fatalf("Failed to create the Stackdriver stats exporter: %v", err)
-}
-defer sd.Flush()
+
+### Running the tutorial
+
+This step involves running the tutorial application in one terminal and then Prometheus itself in another terminal.
+
+Having properly installed go, in one terminal, please run
+```shell
+go run repl.go
 ```
 
-Then we register the views with Stackdriver:
-```go
-// Register the stats exporter
-view.RegisterExporter(sd)
+### Prometheus configuration file
+
+To enable Prometheus to scrape from your application, we have to point it towards the tutorial application whose
+server is running on "localhost:8888".
+
+To do this, we firstly need to create a YAML file with the configuration e.g. `promconfig.yaml`
+whose contents are:
+```yaml
+scrape_configs:
+  - job_name: 'ocmetricstutorial'
+
+    scrape_interval: 10s
+
+    static_configs:
+      - targets: ['localhost:8888']
 ```
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
-func main() {
-	// Create that Stackdriver stats exporter
-	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		ProjectID:    os.Getenv("GCP_PROJECT_ID"),
-		MetricPrefix: os.Getenv("GCP_METRIC_PREFIX"),
-	})
-	if err != nil {
-		log.Fatalf("Failed to create the Stackdriver stats exporter: %v", err)
-	}
-	defer sd.Flush()
+### Running Prometheus
 
-	// Register the stats exporter
-	view.RegisterExporter(sd)
+With that file saved as `promconfig.yaml` we should now be able to run Prometheus like this
 
-	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
-		log.Fatalf("Failed to register views: %v", err)
-	}
+```shell
+prometheus --config.file=promconfig.yaml
+```
 
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
+and then return to the terminal that's running the Go metrics tutorial and generate some work by typing inside it and it will look something like:
+![](/images/metrics-prometheus-sample-repl.png)
 
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			if err == io.EOF {
-				return
-			}
-			log.Fatal(err)
-		}
-	}
-}
-{{</highlight>}}
+## Viewing your metrics
+With the above you should now be able to navigate to the Prometheus UI at http://localhost:9090
 
-{{<highlight go>}}
-package main
+which should show:
 
-import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"io"
-	"log"
-	"os"
-	"time"
+* Available metrics
+![](/images/metrics-go-prometheus-all-metrics.png)
 
-	"contrib.go.opencensus.io/exporter/stackdriver"
-	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"
-	"go.opencensus.io/tag"
-)
+* Lines-in counts
+![](/images/metrics-go-prometheus-lines_in.png)
 
-var (
-	// The latency in milliseconds
-	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+* Latency distributions
+![](/images/metrics-go-prometheus-latency-distribution.png)
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
+* Line lengths distributions
+![](/images/metrics-go-prometheus-line_lengths-distribution.png)
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
-	// Counts/groups the lengths of lines read in.
-	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
-)
-
-var (
-	KeyMethod, _ = tag.NewKey("method")
-)
-
-var (
-	LatencyView = &view.View{
-		Name:        "demo/latency",
-		Measure:     MLatencyMs,
-		Description: "The distribution of the latencies",
-
-		// Latency in buckets:
-		// [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
-		Aggregation: view.Distribution(0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000),
-		TagKeys:     []tag.Key{KeyMethod}}
-
-	LineCountView = &view.View{
-		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
-		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
-		Aggregation: view.Count(),
-	}
-
-	LineLengthView = &view.View{
-		Name:        "demo/line_lengths",
-		Description: "Groups the lengths of keys in buckets",
-		Measure:     MLineLengths,
-		// Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
-		Aggregation: view.Distribution(0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000),
-	}
-)
-
-func main() {
-	// Create that Stackdriver stats exporter
-	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		ProjectID:    os.Getenv("GCP_PROJECT_ID"),
-		MetricPrefix: os.Getenv("GCP_METRIC_PREFIX"),
-	})
-	if err != nil {
-		log.Fatalf("Failed to create the Stackdriver stats exporter: %v", err)
-	}
-	defer sd.Flush()
-
-	// Register the stats exporter
-	view.RegisterExporter(sd)
-
-	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
-		log.Fatalf("Failed to register views: %v", err)
-	}
-
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
-
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			if err == io.EOF {
-				return
-			}
-			log.Fatal(err)
-		}
-	}
-}
-
-// readEvaluateProcess reads a line from the input reader and
-// then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
-	if err != nil {
-		return err
-	}
-
-	fmt.Printf("> ")
-	line, _, err := br.ReadLine()
-	if err != nil {
-		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
-		}
-		return err
-	}
-
-	out, err := processLine(ctx, line)
-	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
-		return err
-	}
-	fmt.Printf("< %s\n\n", out)
-	return nil
-}
-
-// processLine takes in a line of text and
-// transforms it. Currently it just capitalizes it.
-func processLine(ctx context.Context, in []byte) (out []byte, err error) {
-	startTime := time.Now()
-	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
-	}()
-
-	return bytes.ToUpper(in), nil
-}
-{{</highlight>}}
-{{</tabs>}}
-
-## Viewing your Metrics on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://app.google.stackdriver.com/metrics-explorer), select your project, and view the metrics.
-
-In the query box to find metrics, type `quickstart` as a prefix:
-
-![viewing metrics 1](https://cdn-images-1.medium.com/max/1600/1*kflo3l46PslT6oZDNCJ23A.png)
-
-And on selecting any of the metrics e.g. `quickstart/demo/lines_in`, we’ll get...
-
-![viewing metrics 2](https://cdn-images-1.medium.com/max/1600/1*6lUs1yCzewMgzCWv2wtbVQ.png)
-
-Let’s examine the latency buckets:
-
-![viewing metrics 3](https://cdn-images-1.medium.com/max/1600/1*o0cPi--Y5IYrrvdQ0IJQKw.png)
-
-On checking out the Stacked Area display of the latency, we can see that the 99th percentile latency was 24.75ms. And, for `line_lengths`:
-
-![viewing metrics 4](https://cdn-images-1.medium.com/max/1600/1*roe_0ZNOZiMnTVs3VzG0AQ.png)
+Resource|URL
+---|---
+Prometheus project|https://prometheus.io/
+Prometheus Go exporter|https://godoc.org/go.opencensus.io/exporter/prometheus
+Go exporters|[Go exporters](/guides/exporters/supported-exporters/go)
+OpenCensus Go Stats package|https://godoc.org/go.opencensus.io/stats
+OpenCensus Go Views package|https://godoc.org/go.opencensus.io/stats/view
