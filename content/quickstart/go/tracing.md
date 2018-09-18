@@ -27,7 +27,7 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 ## Requirements
 - Go 1.9 or above
-- Zipkin as our choice of metrics backend: we are picking it because it is free, open source and easy to setup
+- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
 For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
