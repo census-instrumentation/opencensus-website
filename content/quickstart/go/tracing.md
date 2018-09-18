@@ -11,11 +11,13 @@ class: "shadowed-image lightbox"
 - [Enable Tracing](#enable-tracing)
     - [Import Packages](#import-tracing-packages)
     - [Instrumentation](#instrument-tracing)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
-    - [Import Packages](#import-exporting-packages)
+- [Exporting traces](#exporting-traces)
+    - [Create the exporter](#create-the-exporter)
     - [Export Traces](#export-traces)
     - [Create Annotations](#create-annotations)
-- [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
+- [End to end code](#end-to-end-code)
+- [Viewing your traces](#viewing-your-traces)
+- [References](#references)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -25,18 +27,19 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 ## Requirements
 - Go 1.9 or above
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Zipkin as our choice of metrics backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+
+You can swap out any other exporter from the [list of Go exporters](/guides/exporters/supported-exporters/go)
 {{% /notice %}}
 
 ## Installation
 
 OpenCensus: `go get go.opencensus.io/*`
 
-Stackdriver exporter: `go get contrib.go.opencensus.io/exporter/stackdriver`
+Zipkin exporter: `go get go.opencensus.io/exporter/zipkin`
 
 ## Getting Started
 
@@ -121,8 +124,7 @@ You can run the code via `go run repl.go`.
 
 To enable tracing, we’ll import the context package (`context`) as well as the OpenCensus Trace package (`go.opencensus.io/trace`). Your import statement will look like this:
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+```go
 import (
 	"bufio"
 	"bytes"
@@ -133,70 +135,7 @@ import (
 
 	"go.opencensus.io/trace"
 )
-{{</highlight>}}
-
-{{<highlight go>}}
-package main
-
-import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"log"
-	"os"
-
-	"go.opencensus.io/trace"
-)
-
-func main() {
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
-
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
-// readEvaluateProcess reads a line from the input reader and
-// then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	fmt.Printf("> ")
-
-	line, err := readLine(br)
-	if err != nil {
-		return err
-	}
-
-	out, err := processLine(line)
-	if err != nil {
-		return err
-	}
-	fmt.Printf("< %s\n\n", out)
-	return nil
-}
-
-func readLine(br *bufio.Reader) ([]byte, error) {
-	line, _, err := br.ReadLine()
-	if err != nil {
-		return nil, err
-	}
-
-	return line, err
-}
-
-// processLine takes in a line of text and
-// transforms it. Currently it just capitalizes it.
-func processLine(in []byte) (out []byte, err error) {
-	return bytes.ToUpper(in), nil
-}
-{{</highlight>}}
-{{</tabs>}}
+```
 
 <a name="instrument-tracing"></a>
 ### Instrumentation
@@ -339,252 +278,53 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 When creating a new span with `trace.StartSpan(context.Context, "spanName")`, the package first checks if a parent Span already exists in the `context.Context` argument. If it exists, a child span is created. Otherwise, a newly created span is inserted in to `context` to become the parent Span so that subsequent reuse of `context.Context` will have that span.
 
-## Exporting to Stackdriver
+## Exporting traces
 
 <a name="import-exporting-packages"></a>
-### Import Packages
-To turn on Stackdriver Tracing, we’ll need to import the Stackdriver exporter from `contrib.go.opencensus.io/exporter/stackdriver`.
+### Import packages
+To enable exporting of traces to Zipkin, we'll need to import a couple of packages
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
-import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"io"
-	"log"
-	"os"
-
-	"contrib.go.opencensus.io/exporter/stackdriver"
-	"go.opencensus.io/trace"
-)
-{{</highlight>}}
-
-{{<highlight go>}}
-package main
-
-import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"io"
-	"log"
-	"os"
-
-	"contrib.go.opencensus.io/exporter/stackdriver"
-	"go.opencensus.io/trace"
-)
-
-func main() {
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
-
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
-// readEvaluateProcess reads a line from the input reader and
-// then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, span := trace.StartSpan(context.Background(), "repl")
-	defer span.End()
-
-	fmt.Printf("> ")
-
-	_, line, err := readLine(ctx, br)
-	if err != nil {
-		return err
-	}
-
-	out, err := processLine(ctx, line)
-	if err != nil {
-		return err
-	}
-	fmt.Printf("< %s\n\n", out)
-	return nil
-}
-
-func readLine(ctx context.Context, br *bufio.Reader) (context.Context, []byte, error) {
-	ctx, span := trace.StartSpan(ctx, "readLine")
-	defer span.End()
-
-	line, _, err := br.ReadLine()
-	if err != nil {
-		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
-		return ctx, nil, err
-	}
-
-	return ctx, line, err
-}
-
-// processLine takes in a line of text and
-// transforms it. Currently it just capitalizes it.
-func processLine(ctx context.Context, in []byte) (out []byte, err error) {
-	_, span := trace.StartSpan(ctx, "processLine")
-	defer span.End()
-
-	return bytes.ToUpper(in), nil
-}
-{{</highlight>}}
-{{</tabs>}}
-
-### Export Traces
-To get our code ready to export, we will be adding a few lines of code to our `main` function.
-
-1. We want to make our traces export to Stackdriver
 ```go
-stackdriver.NewExporter
-trace.RegisterExporter
+import (
+        "log"
+
+        "go.opencensus.io/exporter/zipkin"
+        "go.opencensus.io/trace"
+
+        openzipkin "github.com/openzipkin/zipkin-go"
+        zipkinHTTP "github.com/openzipkin/zipkin-go/reporter/http"
+)
 ```
 
-2. We want to trace a large percentage of executions (this is called [sampling](/core-concepts/tracing/#sampling))
+### Create and register the exporter
 ```go
-trace.ApplyConfig
+func main() {
+        // Create the Zipkin exporter.
+        localEndpoint, err := openzipkin.NewEndpoint("octracequickstart", "192.168.1.5:5454")
+        if err != nil {
+                log.Fatalf("Failed to create the local zipkinEndpoint: %v", err)
+        }
+        reporter := zipkinHTTP.NewReporter("http://localhost:9411/api/v2/spans")
+        ze := zipkin.NewExporter(reporter, localEndpoint)
+        // Register the Zipkin exporter.
+        // This step is needed so that traces can be exported.
+        trace.RegisterExporter(ze)
+}
 ```
 
-Now, let's look at what our `main` function will look like:
-{{<tabs Snippet All>}}
-{{<highlight go>}}
-func main() {
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
+2. For demo purposes, we would like to see the largest percentage of traces -- this is called [sampling](/core-concepts/tracing/#sampling)
+```go
+        // For demo purposes, we are always sampling.
+        trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+```
+in production, you probably want to use a probability sampler.
 
-	// Enable the Stackdriver Tracing exporter
-	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		ProjectID: os.Getenv("GCP_PROJECTID"),
-	})
-	if err != nil {
-		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
-	}
-	defer sd.Flush()
-
-	// Register/enable the trace exporter
-	trace.RegisterExporter(sd)
-
-	// For demo purposes, set the trace sampling probability to be high
-	trace.ApplyConfig(trace.Config{DefaultSampler: trace.ProbabilitySampler(1.0)})
-
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			if err == io.EOF {
-				return
-			}
-			log.Fatal(err)
-		}
-	}
-}
-{{</highlight>}}
-
-{{<highlight go>}}
-package main
-
-import (
-	"bufio"
-	"bytes"
-	"context"
-	"fmt"
-	"io"
-	"log"
-	"os"
-
-	"contrib.go.opencensus.io/exporter/stackdriver"
-	"go.opencensus.io/trace"
-)
-
-func main() {
-	// In a REPL:
-	//   1. Read input
-	//   2. process input
-	br := bufio.NewReader(os.Stdin)
-
-	// Enable the Stackdriver Tracing exporter
-	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		ProjectID: os.Getenv("GCP_PROJECTID"),
-	})
-	if err != nil {
-		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
-	}
-	defer sd.Flush()
-
-	// Register/enable the trace exporter
-	trace.RegisterExporter(sd)
-
-	// For demo purposes, set the trace sampling probability to be high
-	trace.ApplyConfig(trace.Config{DefaultSampler: trace.ProbabilitySampler(1.0)})
-
-	// repl is the read, evaluate, print, loop
-	for {
-		if err := readEvaluateProcess(br); err != nil {
-			if err == io.EOF {
-				return
-			}
-			log.Fatal(err)
-		}
-	}
-}
-
-// readEvaluateProcess reads a line from the input reader and
-// then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, span := trace.StartSpan(context.Background(), "repl")
-	defer span.End()
-
-	fmt.Printf("> ")
-
-	_, line, err := readLine(ctx, br)
-	if err != nil {
-		return err
-	}
-
-	out, err := processLine(ctx, line)
-	if err != nil {
-		return err
-	}
-	fmt.Printf("< %s\n\n", out)
-	return nil
-}
-
-func readLine(ctx context.Context, br *bufio.Reader) (context.Context, []byte, error) {
-	ctx, span := trace.StartSpan(ctx, "readLine")
-	defer span.End()
-
-	line, _, err := br.ReadLine()
-	if err != nil {
-		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
-		return ctx, nil, err
-	}
-
-	return ctx, line, err
-}
-
-// processLine takes in a line of text and
-// transforms it. Currently it just capitalizes it.
-func processLine(ctx context.Context, in []byte) (out []byte, err error) {
-	_, span := trace.StartSpan(ctx, "processLine")
-	defer span.End()
-
-	return bytes.ToUpper(in), nil
-}
-{{</highlight>}}
-{{</tabs>}}
 
 ### Create Annotations
 When looking at our traces on a backend (such as Stackdriver), we can add metadata to our traces to increase our post-mortem insight.
 
-Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcess` function.
+We'll record the length of each requested string so that it is available to view when examining our traces. To accomplish this, we'll `annotate` the function `readEvaluateProcess`.
 
-{{<tabs Snippet All>}}
 {{<highlight go>}}
 func readEvaluateProcess(br *bufio.Reader) error {
 	fmt.Printf("> ")
@@ -613,7 +353,10 @@ func readEvaluateProcess(br *bufio.Reader) error {
 }
 {{</highlight>}}
 
-{{<highlight go>}}
+## End to end code
+Collectively our code will look this:
+
+```go
 package main
 
 import (
@@ -625,30 +368,32 @@ import (
 	"log"
 	"os"
 
-	"contrib.go.opencensus.io/exporter/stackdriver"
+	"go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/trace"
+
+	openzipkin "github.com/openzipkin/zipkin-go"
+	zipkinHTTP "github.com/openzipkin/zipkin-go/reporter/http"
 )
 
 func main() {
+	// Create the Zipkin exporter.
+	localEndpoint, err := openzipkin.NewEndpoint("octracequickstart", "192.168.1.5:5454")
+	if err != nil {
+		log.Fatalf("Failed to create the local zipkinEndpoint: %v", err)
+	}
+	reporter := zipkinHTTP.NewReporter("http://localhost:9411/api/v2/spans")
+	ze := zipkin.NewExporter(reporter, localEndpoint)
+	// Register the Zipkin exporter.
+	// This step is needed so that traces can be exported.
+	trace.RegisterExporter(ze)
+
+	// For demo purposes, we are always sampling.
+	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+
 	// In a REPL:
 	//   1. Read input
 	//   2. process input
 	br := bufio.NewReader(os.Stdin)
-
-	// Enable the Stackdriver Tracing exporter
-	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		ProjectID: os.Getenv("GCP_PROJECTID"),
-	})
-	if err != nil {
-		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
-	}
-	defer sd.Flush()
-
-	// Register/enable the trace exporter
-	trace.RegisterExporter(sd)
-
-	// For demo purposes, set the trace sampling probability to be high
-	trace.ApplyConfig(trace.Config{DefaultSampler: trace.ProbabilitySampler(1.0)})
 
 	// repl is the read, evaluate, print, loop
 	for {
@@ -661,8 +406,6 @@ func main() {
 	}
 }
 
-// readEvaluateProcess reads a line from the input reader and
-// then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) error {
 	fmt.Printf("> ")
 	// Not timing from: prompt to when we read a
@@ -710,14 +453,37 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
 
-## Viewing your Traces on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
+### Running the code
 
-![viewing traces 1](https://cdn-images-1.medium.com/max/1600/1*v7qiO8nX8WAxpX4LjiQ2oA.png)
+Having already succesfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
-And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine` and on clicking on it, it should show our attributes `len` and `use`.
+```shell
+go run repl.go
+```
 
-![viewing traces 2](https://cdn-images-1.medium.com/max/1600/1*SEsUxV1GXu-jM8dLQwtVMw.png)
+## Viewing your traces
+With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411
+
+which will produce such a screenshot:
+![](/images/trace-go-zipkin-all-traces.png)
+
+And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine`
+![](/images/trace-go-zipkin-single-trace.png)
+
+whose annotation looks like
+![](/images/trace-go-zipkin-annotation.png)
+
+And on clicking on `More info` we should see
+![](/images/trace-go-zipkin-all-details.png)
+
+## References
+
+Resource|URL
+---|---
+Zipkin project|https://zipkin.io/
+Zipkin Go exporter|https://godoc.org/go.opencensus.io/exporter/zipkin
+Go exporters|[Go exporters](/guides/exporters/supported-exporters/go)
+OpenCensus Go Trace package|https://godoc.org/go.opencensus.io/trace
+Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
