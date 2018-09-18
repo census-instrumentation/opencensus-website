@@ -289,8 +289,8 @@ We need to add the following imports to our application bootstrap code:
 
 ```go
 import (
-    kitoc "github.com/go-kit/kit/tracing/opencensus"
-    zipkin "github.com/openzipkin/zipkin-go"
+	kitoc "github.com/go-kit/kit/tracing/opencensus"
+	zipkin "github.com/openzipkin/zipkin-go"
 	httpreporter "github.com/openzipkin/zipkin-go/reporter/http"
 	oczipkin "go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/trace"
@@ -302,7 +302,7 @@ Add our [OpenCensus] configuration with [Zipkin] backend:
 ```go
 // Set-up our OpenCensus instrumentation with Zipkin backend
 var (
-    zipkinURL        = "http://localhost:9411/api/v2/spans"
+	zipkinURL        = "http://localhost:9411/api/v2/spans"
 	reporter         = httpreporter.NewReporter(zipkinURL)
 	localEndpoint, _ = zipkin.NewEndpoint(serviceName, ":0")
 	exporter         = oczipkin.NewExporter(reporter, localEndpoint)
