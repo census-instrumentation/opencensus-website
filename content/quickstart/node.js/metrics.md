@@ -79,8 +79,8 @@ touch repl.js
 Next, put the following code inside of `repl.js`:
 
 {{<highlight javascript>}}
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Creates a stream to read our file
 const stream = fs.createReadStream("./test.txt");
@@ -131,14 +131,14 @@ To enable metrics, we'll import a few items from OpenCensus Core package.
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Creates a stream to read our file
 const stream = fs.createReadStream("./test.txt");
@@ -183,10 +183,10 @@ const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.B
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Our Stats manager
 const stats = new Stats();
@@ -264,10 +264,10 @@ const lineLengthView = stats.createView(
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Our Stats manager
 const stats = new Stats();
@@ -369,10 +369,10 @@ stats.record({
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Our Stats manager
 const stats = new Stats();
@@ -477,11 +477,11 @@ We will be adding the Stackdriver package: `@opencensus/exporter-stackdriver`, c
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
-import { StackdriverStatsExporter } from "@opencensus/exporter-stackdriver";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
+const { StackdriverStatsExporter } = require('@opencensus/exporter-stackdriver');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Our Stats manager
 const stats = new Stats();
@@ -494,11 +494,11 @@ stats.registerExporter(exporter);
 {{</highlight>}}
 
 {{<highlight javascript>}}
-import { Stats, MeasureUnit, AggregationType } from "@opencensus/core";
-import { StackdriverStatsExporter } from "@opencensus/exporter-stackdriver";
+const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
+const { StackdriverStatsExporter } = require('@opencensus/exporter-stackdriver');
 
-import * as fs from "fs";
-import * as readline from "readline";
+const fs = require('fs');
+const readline = require('readline');
 
 // Our Stats manager
 const stats = new Stats();
