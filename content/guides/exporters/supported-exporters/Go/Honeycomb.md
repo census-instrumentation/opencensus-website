@@ -15,9 +15,11 @@ logo: /img/honeycomb-logo.jpg
 
 ## Introduction
 
-Honeycomb is a saas tool that provides real-time system debugging. Visualize individual traces to deeply understand request execution. Break down, filter, and aggregate trace data to uncover patterns, find outliers, and understand historical trends.
+[Honeycomb](www.honeycomb.io) is a hosted service for debugging your software in production. Capture traces or individual events, then speedily slice and dice your data to uncover patterns, find outliers, and understand historical trends.
 
-Honeycomb aggregates data at read time, so you don’t have to predict ahead of time which metrics matter. You can fluidly go between time-series graphs, traces, and raw rows to get answers, without having to switch context between tools.
+Honeycomb Tracing offers an unparalleled ability to run high-level queries in order to identify which traces are worth investigating, before digging deep into the details of an individual exemplar trace. Easily go from insights on your application from a bird's eye view, to a classic waterfall view of a specific trace, and back. For a walkthrough of this flow in action, [visit our blog](https://www.honeycomb.io/blog/2018/07/there-and-back-again-a-honeycomb-tracing-story/).
+
+Its OpenCensus Go exporter is available at [https://github.com/honeycombio/opencensus-exporter](https://github.com/honeycombio/opencensus-exporter)
 
 ## Creating the exporter
 
@@ -49,8 +51,10 @@ defer exporter.Close()
 
 ## Viewing your traces
 
-Please visit [honeycomb.io](https://ui.honeycomb.io/) to view your traces
+Please visit [the Honeycomb UI](https://ui.honeycomb.io/) to view your traces.
+
+Learn more about exploring your trace data [here](https://docs.honeycomb.io/working-with-data/tracing/explore-trace-data/), or play around with some of our data [here](play.honeycomb.io/tracing).
 
 ## Project link
 
-You can find out more about the Honeycomb at [https://www.honeycomb.io/](https://www.honeycomb.io/)
+You can find out more about Honeycomb at [https://www.honeycomb.io/](https://www.honeycomb.io/)
