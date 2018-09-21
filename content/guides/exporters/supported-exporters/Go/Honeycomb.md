@@ -33,16 +33,15 @@ To create the exporter, we'll need to:
 package main
 
 import (
-"log"
+    "log"
 
     honeycomb "github.com/honeycombio/opencensus-exporter/honeycomb"
     "go.opencensus.io/trace"
-
 )
 
 func main() {
-exporter := honeycomb.NewExporter("YOUR-HONEYCOMB-WRITE-KEY", "YOUR-DATASET-NAME")
-defer exporter.Close()
+    exporter := honeycomb.NewExporter("YOUR-HONEYCOMB-WRITE-KEY", "YOUR-DATASET-NAME")
+    defer exporter.Close()
 
     trace.RegisterExporter(exporter)
 
