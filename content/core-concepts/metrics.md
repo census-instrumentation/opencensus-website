@@ -69,7 +69,7 @@ export their own views and claim the view names by registering them.
 #### Sampling
 
 Stats are NOT sampled to be able to represent uncommon
-cases hence, stats are ALWAYS recorded unless [\[1\] dropped](#[1]-dropped).
+cases hence, stats are ALWAYS recorded unless [\[1\] dropped](#1-dropped).
 
 The reasoning behind this is that outlier statistics such as "99th latency event"
 occur rarely but also occur unpredictably. If our recording system has a low sampling,
