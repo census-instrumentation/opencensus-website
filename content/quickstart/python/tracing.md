@@ -11,10 +11,11 @@ class: "shadowed-image lightbox"
 - [Enable Tracing](#enable-tracing)
     - [Import Packages](#import-tracing-packages)
     - [Instrumentation](#instrument-tracing)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
+- [Exporting Traces to Zipkin](#exporting-traces-to-zipkin)
     - [Import Packages](#import-exporting-packages)
     - [Create Annotations](#create-annotations)
-- [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
+- [Running the code](#running-the-code)
+- [Viewing your Traces](#viewing-your-traces)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -24,16 +25,17 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 ## Requirements
 - Python
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+
+You can swap out any other exporter from the [list of Python exporters](/guides/exporters/supported-exporters/python)
 {{% /notice %}}
 
 ## Installation
 
-OpenCensus: `pip install opencensus google-cloud-trace`
+OpenCensus: `pip install opencensus`
 
 ## Getting Started
 
@@ -144,16 +146,15 @@ def readEvaluateProcessLine():
 
 When creating a new span with `tracer.span("spanName")`, the package first checks if a parent Span already exists in the current thread local storage/context. If it exists, a child span is created. Otherwise, a newly created span is inserted in to the thread local storage/context to become the parent Span.
 
-## Exporting traces to Stackdriver
+## Exporting traces to Zipkin
 
 <a name="import-exporting-packages"></a>
 ### Import Packages
-To turn on Stackdriver Tracing, we’ll need to import the Stackdriver exporter from `opencensus.trace.exporters`
+To turn on Zipkin tracing, we’ll need to import the Zipkin exporter from `opencensus.trace.exporters`
 
 {{<tabs Snippet All>}}
 {{<highlight python>}}
-from opencensus.trace.exporters import stackdriver_exporter
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
 from opencensus.trace.samplers import always_on
 {{</highlight>}}
 
@@ -164,12 +165,14 @@ import os
 import sys
 
 from opencensus.trace.tracer import Tracer
+from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
+from opencensus.trace.samplers import always_on
 
 # Firstly create the exporter
-sde = stackdriver_exporter.StackdriverExporter(
-    project_id=os.environ.get("GCP_PROJECT_ID"),
-    transport=BackgroundThreadTransport
-)
+ze = ZipkinExporter(service_name="ocpythonquick",
+                                host_name='localhost',
+                                port=9411,
+                                endpoint='/api/v2/spans')
 
 def main():
     # Firstly enable the exporter
@@ -182,7 +185,7 @@ def main():
 
 def readEvaluateProcessLine():
     # For demo purposes, we are always sampling
-    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
+    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=ze)
     with tracer.span(name="repl") as span:
         line = sys.stdin.readline()
         out = processInput(tracer, line)
@@ -211,15 +214,15 @@ import os
 import sys
 
 from opencensus.trace.tracer import Tracer
-from opencensus.trace.exporters import stackdriver_exporter
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
 from opencensus.trace.samplers import always_on
 
 # Firstly create the exporter
-sde = stackdriver_exporter.StackdriverExporter(
-    project_id=os.environ.get("GCP_PROJECT_ID"),
-    transport=BackgroundThreadTransport
-)
+ze = ZipkinExporter(service_name="ocpythonquick",
+                                host_name='localhost',
+                                port=9411,
+                                endpoint='/api/v2/spans')
+
 
 def main():
     # Firstly enable the exporter
@@ -232,7 +235,7 @@ def main():
 
 def readEvaluateProcessLine():
     # For demo purposes, we are always sampling
-    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=sde)
+    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=ze)
     with tracer.span(name="repl") as span:
         line = sys.stdin.readline()
         span.add_annotation("Invoking processLine", len_=len(line), use="repl")
@@ -249,11 +252,28 @@ if __name__ == "__main__":
 {{</highlight>}}
 {{</tabs>}}
 
-## Viewing your Traces on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
+## Running the code
 
-![viewing traces 1](/images/python-trace-overall.png)
+Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
-And on clicking on one of the traces, we should be able to see the annotation whose description `isInvoking processLine` and on clicking on it, it should show our attributes `len` and `use`.
+```shell
+python repl.py
+```
 
-![viewing traces 2](/images/python-trace-attributes.png)
+## Viewing your Traces
+With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411, which will produce such a screenshot:
+![](/images/trace-python-zipkin-all-traces.png)
+
+On clicking on one of the traces, we should be able to see the following:
+![](/images/trace-python-zipkin-single-trace.png)
+
+And on clicking on `More info` we should see
+![](/images/trace-python-zipkin-all-details.png)
+
+## References
+
+Resource|URL
+---|---
+Zipkin project|https://zipkin.io/
+Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
+Python exporters|[Python exporters](/guides/exporters/supported-exporters/python)
