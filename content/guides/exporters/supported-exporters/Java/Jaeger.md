@@ -75,7 +75,7 @@ public class JaegerTutorial {
 {{</highlight>}}
 
 ## Viewing your traces
-Please visit the Jaeger UI endpoint [http://localhost:6831](http://localhost:6831)
+Please visit the Jaeger UI endpoint [http://localhost:16686](http://localhost:16686)
 
 ## Project link
 You can find out more about the Jaeger project at [https://www.jaegertracing.io/](https://www.jaegertracing.io/)
