@@ -30,14 +30,14 @@ the Application Insights [Live
 Metrics Stream](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream).
 
 ![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
-Insights and Open Census](images/ms-ignite-kyenote.gif).
+Insights and Open Census](ms-ignite-2018-images/ms-ignite-kyenote.gif).
 
 Link to the [video](https://mediastream.microsoft.com/events/2018/1809/Ignite/player/tracks/track2.html?start=17300).
 
 Looking at demo application you may see that it is powered by [Open
 Census](https://github.com/Azure-Samples/virtual-node-autoscale).
 
-![](images/keynote-demo-app-uses-open-census.png)
+![](ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
 
 Open Census allows to instrument an app once and use various backends to
 visualize and analyze the data. As was said during this demo - if you
