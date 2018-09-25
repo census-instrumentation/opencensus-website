@@ -7,6 +7,17 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### September 25, 2018
+
+#### [OpenCensus at Microsoft Ignite](/articles/ms-ignite-2018)
+
+Just 3 month passed since the announcement that Microsoft is joining the
+OpenCensus project. This week at [Microsoft
+Ignite](https://www.microsoft.com/ignite) a Open Census were part of
+many conversation... [\[read more\]](/articles/ms-ignite-2018)
+
+---
+
 ##### August 9, 2018
 
 #### [OpenCensus for IoT](/articles/iot)
