@@ -35,7 +35,7 @@ Using Apache Maven, please add the following to your pom.xml file
 
 ```xml
 <dependency>
-    <groupId>io.opencensus.integraion</groupId>
+    <groupId>io.opencensus.integration</groupId>
     <artifactId>opencensus-ocjdbc</artifactId>
     <version>0.0.2</version>
 </dependency>
@@ -70,10 +70,32 @@ public static void enableObservability() {
 }
 ```
 
+#### Annotating traces with the various SQL statements
+We also provide an option for your spans to be annotated with the SQL that accompanies an `exec*`.
+
+However, please note that this is optional and could be a security concern due to Personally Identifiable Information(PII)
+being used in the SQL query.
+
+This option is available via `Observability.OPTION_ANNOTATE_TRACES_WITH_SQL` which is passed into the constructors for:
+* Connection
+* CallableStatement
+* PreparedStatement
+* Statement
+
+thus when used to create the wrapped `java.sql.Connection`:
+```java
+    java.sql.Connection conn = new Connection(originalConn,
+                                        // And passing this option to allow the spans
+                                        // to be annotated with the SQL queries.
+                                        // Please note that this could be a security concern
+                                        // since it could reveal personally identifying information.
+                                        Observability.OPTION_ANNOTATE_TRACES_WITH_SQL);
+```
+
 ## Enabling OpenCensus
 To enable observability with OpenCensus, you need to have enabled trace and metrics exporters e.g.
 ```java
-import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
+import io.opencensus.exporter.trace.jaeger.JaegerTraceExporter;
 import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
 import io.prometheus.client.exporter.HTTPServer;
 import io.opencensus.trace.samplers.Samplers;
@@ -92,7 +114,7 @@ public static void enableObservability() throws Exception {
             traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 
     // The trace exporter.
-    ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjdbc-demo");
+    JaegerTraceExporter.createAndRegister("http://127.0.0.1:14268/api/traces", "ocjdbc-demo");
 
     // The metrics exporter.
     PrometheusStatsCollector.createAndRegister();
@@ -105,7 +127,7 @@ public static void enableObservability() throws Exception {
 ## End to end example
 In this example, we'll just wrap a MySQL Connector/J app as below. Please place the file in `src/main/java/io/opencensus/tutorial/ocjdbc/App.java`. It uses exporters:
 
-* Zipkin for trace exporting
+* Jaeger for trace exporting
 * Prometheus for stats exporting
 * MySQL server -- please have one running locally or take a look at https://dev.mysql.com/doc/mysql-getting-started/en/
 
@@ -119,7 +141,7 @@ package io.opencensus.tutorial.ocjdbc;
 import io.opencensus.integration.ocjdbc.Connection;
 import io.opencensus.integration.ocjdbc.Observability;
 
-import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
+import io.opencensus.exporter.trace.jaeger.JaegerTraceExporter;
 import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
 import io.prometheus.client.exporter.HTTPServer;
 import io.opencensus.trace.samplers.Samplers;
@@ -139,6 +161,16 @@ public class App {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
             java.sql.Connection originalConn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/repro?user=root&useSSL=false&serverTimezone=UTC");
+            /*
+             Optionally enable annotation of spans with the accompanying SQL statements.
+             java.sql.Connection conn = new Connection(originalConn,
+                                        // And passing this option to allow the spans
+                                        // to be annotated with the SQL queries.
+                                        // Please note that this could be a security concern
+                                        // since it could reveal personally identifying information.
+                                        Observability.OPTION_ANNOTATE_TRACES_WITH_SQL);
+             */
+
             // Then create/wrap it with the instrumented Connection from "io.opencensus.integration.ocjdbc".
             java.sql.Connection conn = new Connection(originalConn);
             doWork(conn);
@@ -177,7 +209,7 @@ public class App {
                 traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
 
         // The trace exporter.
-        ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "ocjdbc-demo");
+        JaegerTraceExporter.createAndRegister("http://127.0.0.1:14268/api/traces", "ocjdbc-demo");
 
         // The metrics exporter.
         PrometheusStatsCollector.createAndRegister();
@@ -241,7 +273,7 @@ public class App {
 
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-trace-zipkin</artifactId>
+            <artifactId>opencensus-exporter-trace-jaeger</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
     </dependencies>
@@ -307,11 +339,11 @@ we can now do
 mvn install && mvn exec:java -Dexec.mainClass=io.opencensus.tutorial.ocjdbc.App
 ```
 
-and then start up Zipkin and Prometheus as per
+and then start up Jaeger and Prometheus as per
 
 Starter|URL
 ---|---
-Zipkin|https://opencensus.io/codelabs/zipkin
+Jaeger|https://opencensus.io/codelabs/jaeger
 Prometheus|https://opencensus.io/codelabs/prometheus
 
 in another terminal, please run Prometheus as per
@@ -342,14 +374,31 @@ Iteration #16
 ```
 
 ## Examining the traces
-With Zipkin running, we can navigate to the Zipkin UI at http://localhost:9411/zipkin
+With Jaeger running, we can navigate to the Jaeger UI at http://localhost:16686/search
 you should be able to see such visuals
 
 * All traces
 ![](/images/ocjdbc-tracing-all.png)
 
-* An individual trace
-![](/images/ocjdbc-tracing-single.png)
+* An individual trace with option `Observability.OPTION_ANNOTATE_TRACES_WITH_SQL` disabled
+```java
+    // Then create/wrap it with the instrumented Connection from "io.opencensus.ocjdbc".
+    java.sql.Connection conn = new Connection(originalConn);
+```
+![](/images/ocjdbc-tracing-single-without-sql.png)
+
+* An individual trace with option  `Observability.OPTION_ANNOTATE_TRACES_WITH_SQL` enabled
+
+```java
+    java.sql.Connection conn = new Connection(originalConn,
+                                        // And passing this option to allow the spans
+                                        // to be annotated with the SQL queries.
+                                        // Please note that this could be a security concern
+                                        // since it could reveal personally identifying information.
+                                        Observability.OPTION_ANNOTATE_TRACES_WITH_SQL);
+```
+giving
+![](/images/ocjdbc-tracing-single-with-sql.png)
 
 ## Examining the metrics
 With Prometheus running, we can navigate to the Prometheus UI at http://localhost:9090/graph
