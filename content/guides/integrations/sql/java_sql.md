@@ -35,9 +35,9 @@ Using Apache Maven, please add the following to your pom.xml file
 
 ```xml
 <dependency>
-    <groupId>io.opencensus</groupId>
-    <artifactId>ocjdbc</artifactId>
-    <version>0.0.1</version>
+    <groupId>io.opencensus.integraion</groupId>
+    <artifactId>opencensus-ocjdbc</artifactId>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -216,9 +216,9 @@ public class App {
         </dependency>
       
         <dependency>
-            <groupId>io.opencensus</groupId>
-            <artifactId>ocjdbc</artifactId>
-            <version>0.0.1</version>
+            <groupId>io.opencensus.integration</groupId>
+            <artifactId>opencensus-ocjdbc</artifactId>
+            <version>0.0.2</version>
         </dependency>
  
         <dependency>
