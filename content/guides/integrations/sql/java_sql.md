@@ -26,7 +26,7 @@ to empower Java developers that use any sort of a database/data source with a JD
 
 ocjdbc is a type-4 JDBC wrapper for the Java language. We've instrumented it with OpenCensus to provide
 observability with tracing and metrics. It works by wrapping your already obtained JDBC Connection using
-the class `ocjdbc.Connection`. It wraps any JDBC driver. It is hosted on our integrations page on 
+the class `ocjdbc.Connection`. It wraps any JDBC driver. It is hosted on our integrations page on
 Github at https://github.com/opencensus-integrations/ocjdbc
 but also distributed as a Maven artifact as you'll shortly see below.
 
@@ -35,9 +35,9 @@ Using Apache Maven, please add the following to your pom.xml file
 
 ```xml
 <dependency>
-    <groupId>io.opencensus</groupId>
-    <artifactId>ocjdbc</artifactId>
-    <version>0.0.1</version>
+    <groupId>io.opencensus.integraion</groupId>
+    <artifactId>opencensus-ocjdbc</artifactId>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -45,8 +45,8 @@ Using Apache Maven, please add the following to your pom.xml file
 Using it simply requires you to just wrap your already created JDBC connection and it wraps every method
 to provide observability by metrics and tracing. For example
 ```java
-import io.opencensus.ocjdbc.Connection;
-import io.opencensus.ocjdbc.Observability;
+import io.opencensus.integration.ocjdbc.Connection;
+import io.opencensus.integration.ocjdbc.Observability;
 
 public static void main(String ...args) {
     // Load and use the MySQL Connector/J driver.
@@ -54,9 +54,9 @@ public static void main(String ...args) {
 
     java.sql.Connection originalConn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/test?useSSL=false&serverTimezone=UTC");
 
-    // Then create/wrap it with the instrumented Connection from "io.opencensus.ocjdbc".
+    // Then create/wrap it with the instrumented Connection from "io.opencensus.integration.ocjdbc".
     java.sql.Connection conn = new Connection(originalConn);
-    
+
     // Use conn like you would normally below as per your original program
 }
 
@@ -116,8 +116,8 @@ In this example, we'll just wrap a MySQL Connector/J app as below. Please place 
 // Please place the file in: src/main/java/io/opencensus/tutorial/ocjdbc/App.java
 package io.opencensus.tutorial.ocjdbc;
 
-import io.opencensus.ocjdbc.Connection;
-import io.opencensus.ocjdbc.Observability;
+import io.opencensus.integration.ocjdbc.Connection;
+import io.opencensus.integration.ocjdbc.Observability;
 
 import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
 import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
@@ -139,7 +139,7 @@ public class App {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
             java.sql.Connection originalConn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/repro?user=root&useSSL=false&serverTimezone=UTC");
-            // Then create/wrap it with the instrumented Connection from "io.opencensus.ocjdbc".
+            // Then create/wrap it with the instrumented Connection from "io.opencensus.integration.ocjdbc".
             java.sql.Connection conn = new Connection(originalConn);
             doWork(conn);
         } catch (Exception e) {
@@ -162,7 +162,7 @@ public class App {
             } finally {
                 ss.close();
             }
-                
+
             Thread.sleep(4000);
         }
     }
@@ -208,19 +208,19 @@ public class App {
             <artifactId>opencensus-api</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
- 
+
         <dependency>
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
-      
+
         <dependency>
-            <groupId>io.opencensus</groupId>
-            <artifactId>ocjdbc</artifactId>
-            <version>0.0.1</version>
+            <groupId>io.opencensus.integration</groupId>
+            <artifactId>opencensus-ocjdbc</artifactId>
+            <version>0.0.2</version>
         </dependency>
- 
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
