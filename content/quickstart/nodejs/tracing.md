@@ -3,7 +3,6 @@ title: "Tracing"
 date: 2018-07-22T20:29:06-07:00
 draft: false
 class: "shadowed-image lightbox"
-url: quickstart/nodejs/tracing
 aliases: [/quickstart/node.js/tracing]
 ---
 

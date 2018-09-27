@@ -3,7 +3,6 @@ title: "Metrics"
 date: 2018-08-20T07:12:03-13:00
 draft: false
 class: "shadowed-image lightbox"
-url: quickstart/nodejs/metrics
 aliases: [/quickstart/node.js/metrics]
 ---
 

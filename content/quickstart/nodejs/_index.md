@@ -3,7 +3,6 @@ title: "Node.js"
 date: 2018-07-16T14:29:03-07:00
 draft: false
 class: "resized-logo"
-url: quickstart/nodejs
 logo: /images/node-opencensus.png
 aliases: [/quickstart/node.js]
 ---
