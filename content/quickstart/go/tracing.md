@@ -331,7 +331,7 @@ func readEvaluateProcess(br *bufio.Reader) error {
 	ctx, span := trace.StartSpan(context.Background(), "repl")
 	defer span.End()
 
-        _, line, err := readLine(ctx, br)
+	_, line, err := readLine(ctx, br)
 	if err != nil {
 		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
 		return err
@@ -408,7 +408,7 @@ func readEvaluateProcess(br *bufio.Reader) error {
 	ctx, span := trace.StartSpan(context.Background(), "repl")
 	defer span.End()
 
-        _, line, err := readLine(ctx, br)
+	_, line, err := readLine(ctx, br)
 	if err != nil {
 		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
 		return err
