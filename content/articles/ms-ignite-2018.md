@@ -1,6 +1,6 @@
 ---
 title: "OpenCensus at Microsoft Ignite"
-date: 2018-09-25
+date: 2018-10-01
 draft: false
 weight: 3
 aliases: [/blog/ms-ignite-2018]
@@ -13,70 +13,42 @@ logo: /img/logo-sm.svg
 ![](http://appanacdn.blob.core.windows.net/cdn/icons/aic.png)
 
 ### Introduction
+Just three months ago [we announced that Microsoft joined the OpenCensus project](https://open.microsoft.com/2018/06/13/microsoft-joins-the-opencensus-project/), and last week at [Microsoft Ignite](https://www.microsoft.com/ignite) we were able to share a few more details about how OpenCensus will be leveraged and advanced.
 
-Just 3 month passed since the announcement that Microsoft is joining the
-OpenCensus project. This week at [Microsoft
-Ignite](https://www.microsoft.com/ignite) a Open Census were part of
-many conversation. It makes the goal of building a standardized platform
-for instrumenting metrics and distributed traces that work across
-various programming languages and technologies closer.
+### OpenCensus spotlight
 
-### Keynote
-
-As part of a keynote Microsoft announced support of Virtual Nodes by
-Azure Kubernetes Service. Virtual Nodes allow to scale your app faster,
-in a matter of minutes. What's the best way to demonstrate this if not
-the Application Insights [Live
+During one of Ignite's keynotes, Microsoft announced support for Azure Kubernetes Service (AKS) Virtual Nodes. Virtual Nodes allow applications to scale more quickly, in a matter of mere minutes. The demonstration included a highlight of Azure Monitor for Application's [Live
 Metrics Stream](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream).
 
-![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
-Insights and Open Census](ms-ignite-2018-images/ms-ignite-kyenote.gif).
+[![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
+Insights and Open Census](ms-ignite-2018-images/ms-ignite-kyenote.gif)](https://mediastream.microsoft.com/events/2018/1809/Ignite/player/tracks/track2.html?start=17300)
 
-Link to the [video](https://mediastream.microsoft.com/events/2018/1809/Ignite/player/tracks/track2.html?start=17300).
+The keen eyed among you may have noticed that this demo is powered by [OpenCensus](https://github.com/Azure-Samples/virtual-node-autoscale)!
 
-Looking at demo application you may see that it is powered by [Open
-Census](https://github.com/Azure-Samples/virtual-node-autoscale).
+![OpenCensus in Ignite Keynote](ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
 
-![](ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
+As mentioned in the demo itself, OpenCensus's vendor neutral instrumentation provides users the freedom to either leverage the features and power built into Azure Monitor, or to easily provide their own tooling within Azure. This is the benefit of OpenCensus and its community oriented approach.
 
-Open Census allows to instrument an app once and use various backends to
-visualize and analyze the data. As was said during this demo - if you
-want to use Azure with your own tooling - this is OK. You can bring your
-tooling and build the same experience as was shown with Application
-Insights. With Azure it's easy.
+Along with being featured in one of the keynote demos, Microsoft made a few other OpenCensus related announcements at Ignite.
 
 ### Better Go and Python support
 
-With Open Census - Application Insights delivers a better support for Go
-and Python. Azure Monitor
-[announcement](https://azure.microsoft.com/blog/new-full-stack-monitoring-capabilities-in-azure-monitor/)
-calls out that Python & Go apps monitoring are now supported by
-Application Insights thru Open Census and Local Forwarder.
+Included in the detailed list of ["new monitoring capabilities"](https://azure.microsoft.com/blog/new-full-stack-monitoring-capabilities-in-azure-monitor/) is the note that Azure Monitor for Applications now delivers better support for Go and Python applications. This is accomplished through the combination of OpenCensus and Microsoft's telemetry routing agent called Local Forwarder.
 
-You can find details documentation at
-[docs.microsoft.com](https://docs.microsoft.com/azure/application-insights/distributed-tracing#enable-via-opencensus).
+Details are available in [Azure Monitor's distributed tracing documentation](https://docs.microsoft.com/azure/application-insights/distributed-tracing#enable-via-opencensus).
 
-This is an important milestone. It not only simply enables new apps
-support for Microsoft customers. It enables community to achieve more
-thru collaboration and combined scenarios.
+This announcement represents an important milestone: It not only enables support for Python and Go developers within Azure, but it also marks the first major contribution and collaboration between Microsoft and the OpenCensus community.
+
+But this is not the only OpenCensus related news coming out of Microsoft.
 
 ### Call for standardization
 
-Open Census and Local Forwarder approach simplifies the design of
-monitoring system and opens door for new scenarios and innovations. All
-those scenarios are only possible with the standardized and unified
-implementation for metrics and distributed tracing data collection.
+OpenCensus simplifies the design of monitoring systems and opens the door for expanded polyglot scenarios and innovation. The power of these scenarios is of course amplified with support from the open source community, but also through efforts to bring unification and standardization across observability vendors.
 
-As a fundamental principle of Open Census we strive for consistency in
-data collection in SDKs thru specifications and test cases across
-languages. We build test cases for [propagation
-protocols](https://github.com/w3c/distributed-tracing) and data
-collection specifications.
+To that end, it is a fundamental principle of OpenCensus to strive for consistency across our libraries thru specifications. Microsoft has contributed to those efforts by contributing a test harness to help ensure compliance with the [Trace Context](https://github.com/w3c/distributed-tracing) propagation format, as well as Trace Context implementation to several OpenCensus language libraries. Microsoft will continue to champion open standards through participation in the W3C Distributed Tracing Working Group and W3C TPAC event in France this month.
 
 ### Summary
 
-We in Microsoft are set on the path for better monitoring and
-observability for everybody. We thank everybody in Open Census community
-for support and collaboration! The future is looking bright!
+We at Microsoft are excited to be traveling down this path towards better monitoring and observability for everybody. We thank all those in the OpenCensus community for the support and collaboration! The future is looking bright!
 
 By Sergey Kanzhelev and Nik Molnar, Microsoft.
