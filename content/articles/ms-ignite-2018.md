@@ -17,7 +17,7 @@ Just three months ago [we announced that Microsoft joined the OpenCensus project
 
 ### OpenCensus spotlight
 
-During one of Ignite's keynotes, Microsoft announced support for Azure Kubernetes Service (AKS) Virtual Nodes. Virtual Nodes allow applications to scale more quickly, in a matter of mere minutes. The demonstration included a highlight of Azure Monitor for Application's [Live
+During Ignite's keynote, Microsoft announced support for Azure Kubernetes Service (AKS) Virtual Nodes. Virtual Nodes allow applications to scale more quickly, in a matter of mere minutes. The demonstration included a highlight of Azure Monitor for Application's [Live
 Metrics Stream](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream).
 
 [![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
@@ -27,7 +27,7 @@ The keen eyed among you may have noticed that this demo is powered by [OpenCensu
 
 ![OpenCensus in Ignite Keynote](ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
 
-As mentioned in the demo itself, OpenCensus's vendor neutral instrumentation provides users the freedom to either leverage the features and power built into Azure Monitor, or to easily provide their own tooling within Azure. This is the benefit of OpenCensus and its community oriented approach.
+As mentioned in the demo itself, Azure provides users the freedom to either leverage the features and power built into Azure Monitor, or to easily provide their own tooling within Azure. This aligns perfectly with the the benefits of OpenCensus and its community oriented, vendor neutral approach.
 
 Along with being featured in one of the keynote demos, Microsoft made a few other OpenCensus related announcements at Ignite.
 
