@@ -7,7 +7,7 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
-##### September 25, 2018
+##### October 3, 2018
 
 #### [OpenCensus at Microsoft Ignite](/articles/ms-ignite-2018)
 
