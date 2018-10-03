@@ -17,7 +17,7 @@ Just three months ago [we announced that Microsoft joined the OpenCensus project
 
 ### OpenCensus spotlight
 
-During Ignite's keynote, Microsoft announced support for Azure Kubernetes Service (AKS) Virtual Nodes. Virtual Nodes allow applications to scale more quickly, in a matter of mere minutes. The demonstration included a highlight of Azure Monitor for Application's [Live
+During Ignite's keynote, Microsoft announced support for Azure Kubernetes Service (AKS) Virtual Nodes. Virtual Nodes allow applications to scale more quickly, in a matter of mere minutes. The demonstration included a highlight of Azure Monitor [Live
 Metrics Stream](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream).
 
 [![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
@@ -33,7 +33,7 @@ Along with being featured in one of the keynote demos, Microsoft made a few othe
 
 ### Better Go and Python support
 
-Included in the detailed list of ["new monitoring capabilities"](https://azure.microsoft.com/blog/new-full-stack-monitoring-capabilities-in-azure-monitor/) is the note that Azure Monitor for Applications now delivers better support for Go and Python applications. This is accomplished through the combination of OpenCensus and Microsoft's telemetry routing agent called Local Forwarder.
+Included in the detailed list of ["new monitoring capabilities"](https://azure.microsoft.com/blog/new-full-stack-monitoring-capabilities-in-azure-monitor/) is the note that [Azure Monitor for Applications](https://docs.microsoft.com/azure/azure-monitor/overview#application-insights) now delivers better support for Go and Python applications. This is accomplished through the combination of OpenCensus and Microsoft's telemetry routing agent called Local Forwarder.
 
 Details are available in [Azure Monitor's distributed tracing documentation](https://docs.microsoft.com/azure/application-insights/distributed-tracing#enable-via-opencensus).
 
