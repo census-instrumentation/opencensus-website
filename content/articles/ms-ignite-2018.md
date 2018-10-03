@@ -21,11 +21,11 @@ During Ignite's keynote, Microsoft announced support for Azure Kubernetes Servic
 Metrics Stream](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream).
 
 [![Microsoft Ignite 2018 keynote AKS Virtual Nodes with Application
-Insights and Open Census](ms-ignite-2018-images/ms-ignite-kyenote.gif)](https://mediastream.microsoft.com/events/2018/1809/Ignite/player/tracks/track2.html?start=17300)
+Insights and Open Census](/images/ms-ignite-2018-images/ms-ignite-kyenote.gif)](https://mediastream.microsoft.com/events/2018/1809/Ignite/player/tracks/track2.html?start=17300)
 
 The keen eyed among you may have noticed that this demo is powered by [OpenCensus](https://github.com/Azure-Samples/virtual-node-autoscale)!
 
-![OpenCensus in Ignite Keynote](ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
+![OpenCensus in Ignite Keynote](/images/ms-ignite-2018-images/keynote-demo-app-uses-open-census.png)
 
 As mentioned in the demo itself, Azure provides users the freedom to either leverage the features and power built into Azure Monitor, or to easily provide their own tooling within Azure. This aligns perfectly with the the benefits of OpenCensus and its community oriented, vendor neutral approach.
 
