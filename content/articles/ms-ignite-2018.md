@@ -1,6 +1,6 @@
 ---
 title: "OpenCensus at Microsoft Ignite"
-date: 2018-10-01
+date: 2018-10-03
 draft: false
 weight: 3
 aliases: [/blog/ms-ignite-2018]
