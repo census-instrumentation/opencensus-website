@@ -8,8 +8,6 @@ hidden: true
 logo: /img/logo-sm.svg
 ---
 
-## Open Census at Microsoft Ignite
-
 ![](http://appanacdn.blob.core.windows.net/cdn/icons/aic.png)
 
 ### Introduction
