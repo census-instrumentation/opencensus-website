@@ -9,11 +9,12 @@ logo: /img/memcached-python.png
 - [Introduction](#introduction)
 - [Features](#features)
 - [Using it](#using-it)
-    - [Git clone it](#git-clone-it)
-    - [Build it](#build-it)
+    - [Pip install it](#pip-install-it)
+    - [In codeit](#in-code)
 - [Problem statement](#problem-statement)
 - [Enabling OpenCensus](#enabling-opencensus)
     - [Enabling tracing](#enabling-tracing)
+    - [Enabling metrics](#enabling-metrics)
 - [End to end example](#end-to-end-example)
 - [Examining your traces](#enabling-your-traces)
 - [References](#references)
@@ -24,36 +25,79 @@ logo: /img/memcached-python.png
 It was created by [Brad Fitzpatrick](https://en.wikipedia.org/wiki/Brad_Fitzpatrick) in 2003 as a
 solution to scale his social media product [Live Journal](https://www.livejournal.com/)
 
-Pinterest's Python [PyMemcache](https://github.com/pinterest/pymemcache) client has been forked and [instrumented with OpenCensus tracing](https://github.com/opencensus-integrations/pymemcache)
+Pinterest's Python [PyMemcache](https://github.com/pinterest/pymemcache) client has been wrapped and instrumented with OpenCensus for tracing and metrics
 
 ## Features
-Trace instrumentation of all the methods
+* Trace instrumentation of all the methods
+* Metrics such as "latency", "calls" which are both tagged by keys "method", "status", "error"
 
 ## Using it
-To get started with using it, firstly we'll need to git clone the [trace instrumented fork](https://github.com/opencensus-integrations/pymemcache)
 
-### Git clone it
+### Pip install it
+The package is available on pip at https://pypi.org/project/ocpymemcache/
+and is installable by
 ```shell
-git clone https://github.com/opencensus-integrations/pymemcache
+pip install ocpymemcache
 ```
 
-### Build it
-Change directory to the newly forked pymemcache repository and in there run
-```shell
-python setup.py install
+### In code
+
+And then like you normally would create a pymemcache client, just replace the import
+```python
+from pymemcache.client.base import Client
+```
+with
+```python
+from ocpymemcache.client import OCPyMemcacheClient
 ```
 
-and then use it normally like you would have used the original package!
+and then finally replace `Client` with `OCPyMemcacheClient`
+to give
+```python
+client = OCPyMemcacheClient(('localhost', 11211,))
+```
 
-However, for a guided example,  please continue reading below.
+instead of
+```python
+client = Client(('localhost', 11211,))
+```
+
+The same applies for hashclient, please replace
+```python
+from pymemcache.client.hash import HashClient
+```
+
+with
+```python
+from ocpymemcache.client import OCPyMemcacheHashClient
+```
+
+and finally
+```python
+client = HashClient([
+    ('127.0.0.1', 11211),
+    ('127.0.0.1', 11212),
+])
+```
+with
+```python
+client = OCPyMemcacheHashClient([
+    ('127.0.0.1', 11211),
+    ('127.0.0.1', 11212),
+])
+```
+
+Use it normally like you would have used the original package!
+
+For a guided example,  please continue reading below.
 
 ## Problem statement
 
-Our sample is an application excerpt from a distributed prime factorization engine that needs to calculate square roots of big numbers but would
-like to reuse expensively calculated results since square roots of such numbers are CPU intensive.
+Our sample is an application excerpt from a distributed prime factorization engine that needs to calculate fibonacci numbers but would
+like to reuse expensively calculated results since fibonacci numbers since the computations of such numbers are CPU intensive.
 
 To share/memoize results amongst our distributed applications, we’ll use Memcache.
-However, to examine our changes in a distributed systems deployment with numerous microservices, it is useful to have tracing to verify our optimizations
+However, to examine our changes in a distributed systems deployment with numerous microservices, it is useful to have tracing and metrics to verify our optimizations
 and inspect the state of the system.
 
 This is what the code original looks like
@@ -67,50 +111,61 @@ Please run your Memcached server, for this example we'll run it locally on port 
 {{<highlight python>}}
 #!/usr/bin/env python
 
-import math
 import os
+import time
 
-from pymemcache.client.base import Client as MemcacheClient
+from ocpymemcache.client import OCPyMemcacheClient
+from ocpymemcache.observability import enable_metrics_views
 
-def numAsStr(num): return '%f'%(num)
+def numAsStr(num): return '%d'%(num)
 
 def main():
-    mc = MemcacheClient(("localhost", 11211,))
+    # Create the Memcache client
+    mc = OCPyMemcacheClient(("localhost", 11211,))
 
+    doWork(mc)
+
+    time.sleep(5)
+
+def doWork(mc):
     values = [
-        9999999183838328567567689828757567669797060958585737272727311111199911188888889953113,
-        9082782799999992727727272727272727272727272727838383285677272727399917272728373799422229,
-        987773333733799999999475786161616373683838328567727272739991727272837378888888881322229,
-        99999999999999999999998899919191919191919192828727737368383832856772727273999172727283737671626262269222848,
-        991818178171928287277373683838328567727272739991727272837377827272727272727272727711119,
+        30, 33,
     ]
 
     for value in values:
         for i in range(0, 2):
-            sqrt = calculateSQRT(mc, value)
-            print("%-100.10f ==> %-100.10f"%(value, sqrt))
+            nf = nthFibonacci(mc, value)
+            print("Fibonacci %d ==> %d"%(value, nf))
 
         # Afterwards, clean up to ensure repeatability of the test
         mc.delete(numAsStr(value))
 
-def calculateSQRT(mc, num):
+def fib(n):
+    if n <= 0:
+        return 1
+
+    return fib(n-2) + fib(n-1)
+
+def nthFibonacci(mc, n):
     # Firstly check if we've cached it
-    numStr = numAsStr(num)
+    numStr = numAsStr(n)
+
     res = mc.get(numStr)
     if res is not None:
         try: # Try parsing it as a float
-            return float(res)
-        except ValueError:
+            return int(res)
+        except ValueError as e:
             # Failed to parse it
             _ = 0
 
     # Otherwise this was a cache miss, so go on
-    sqrt = math.sqrt(num)
+    value = fib(n)
 
-    sqrtStr = numAsStr(sqrt)
+    asStr = numAsStr(value)
+
     # Now cache it for a cache hit later on
-    mc.set(numStr, sqrtStr)
-    return sqrt
+    mc.set(numStr, asStr)
+    return value
 
 if __name__ == '__main__':
     main()
@@ -140,8 +195,48 @@ For assistance setting up Stackdriver, please visit this [Stackdriver setup guid
 {{% /notice %}}
 
 {{<highlight python>}}
+import os
+
 from opencensus.trace.exporters import stackdriver_exporter
 from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+
+def main():
+    gcp_project_id = os.environ.get('PROJECT_ID', 'census-demos')
+
+    # Enable tracing
+    texp = stackdriver_trace.StackdriverExporter(
+            project_id=gcp_project_id,
+            transport=BackgroundThreadTransport)
+    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=texp)
+{{</highlight>}}
+
+### Enabling metrics
+Enabling any of the [Python OpenCensus stats exporters](/guides/exporters/supported-exporters/python/)
+
+For this example, we'll use Stackdriver Monitoring.
+
+{{% notice tip %}}
+For assistance setting up Stackdriver, please visit this [Stackdriver setup guided codelab](/codelabs/stackdriver)
+{{% /notice %}}
+
+{{<highlight python>}}
+import os
+
+from ocpymemcache.observability import enable_metrics_views
+
+from opencensus.stats import stats as stats_module
+from opencensus.stats.exporters import stackdriver_exporter as stackdriver_stats
+
+def main():
+    gcp_project_id = os.environ.get('PROJECT_ID', 'census-demos')
+
+    # Enable metrics
+    mexp = stackdriver_stats.new_stats_exporter(
+            stackdriver_stats.Options(project_id=gcp_project_id))
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+    view_manager.register_exporter(mexp)
+    enable_metrics_views()
 {{</highlight>}}
 
 ## End to end example
@@ -149,67 +244,103 @@ from opencensus.trace.exporters.transports.background_thread import BackgroundTh
 {{<highlight python>}}
 #!/usr/bin/env python
 
-import math
 import os
+import time
 
-from pymemcache.client.base import Client as MemcacheClient
+from ocpymemcache.client import OCPyMemcacheClient
+from ocpymemcache.observability import enable_metrics_views
 
 # Observability from OpenCensus
-from opencensus.trace.samplers import always_on
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.exporters import stackdriver_exporter
+from opencensus.stats import stats as stats_module
+from opencensus.stats.exporters import stackdriver_exporter as stackdriver_stats
+from opencensus.trace import execution_context
+from opencensus.trace.exporters import stackdriver_exporter as stackdriver_trace
 from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+from opencensus.trace.samplers import always_on
+from opencensus.trace.status import Status
+from opencensus.trace.tracer import Tracer
 
-def numAsStr(num): return '%f'%(num)
+def numAsStr(num): return '%d'%(num)
 
 def main():
-    exporter = stackdriver_exporter.StackdriverExporter(
-            project_id=os.environ.get('PROJECT_ID', 'census-demos'),
+    gcp_project_id = os.environ.get('PROJECT_ID', 'census-demos')
+
+    # Enable tracing
+    texp = stackdriver_trace.StackdriverExporter(
+            project_id=gcp_project_id,
             transport=BackgroundThreadTransport)
+    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=texp)
 
-    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=exporter)
-    mc = MemcacheClient(("localhost", 11211,))
+    # Enable metrics
+    mexp = stackdriver_stats.new_stats_exporter(
+            stackdriver_stats.Options(project_id=gcp_project_id))
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+    view_manager.register_exporter(mexp)
+    enable_metrics_views()
 
-    with tracer.span(name='MemcachePythonUsage'):
-        doWork(tracer, mc)
+    # Create the Memcache client
+    mc = OCPyMemcacheClient(("localhost", 11211,))
 
-def doWork(tracer, mc):
+    with tracer.span(name='MemcachePythonUsage') as span:
+        doWork(mc)
+
+    time.sleep(5)
+
+def doWork(mc):
     values = [
-        9999999183838328567567689828757567669797060958585737272727311111199911188888889953113,
-        9082782799999992727727272727272727272727272727838383285677272727399917272728373799422229,
-        987773333733799999999475786161616373683838328567727272739991727272837378888888881322229,
-        99999999999999999999998899919191919191919192828727737368383832856772727273999172727283737671626262269222848,
-        991818178171928287277373683838328567727272739991727272837377827272727272727272727711119,
+        30, 33,
     ]
 
+    tracer = execution_context.get_opencensus_tracer()
     for value in values:
-        with tracer.span(name='CalculateSquareRoot-%d'%(value)):
+        with tracer.span(name='CalculateFibonacci-%d'%(value)) as cspan:
             for i in range(0, 2):
                 with tracer.span(name='Round-%d'%(i+1)) as span:
-                    sqrt = calculateSQRT(mc, value)
-                    print("%-100.10f ==> %-100.10f"%(value, sqrt))
+                    nf = nthFibonacci(tracer, mc, value)
+                    print("Fibonacci %d ==> %d"%(value, nf))
 
             # Afterwards, clean up to ensure repeatability of the test
             mc.delete(numAsStr(value))
+            cspan.finish()
 
-def calculateSQRT(mc, num):
+def fib(n):
+    if n <= 0:
+        return 1
+
+    return fib(n-2) + fib(n-1)
+
+def nthFibonacci(tracer, mc, n):
+    with tracer.span('nthFibonacci') as span:
+        return doNthFibonacci(tracer, span, mc, n)
+
+def doNthFibonacci(tracer, parent_span, mc, n):
     # Firstly check if we've cached it
-    numStr = numAsStr(num)
+    with tracer.span('serialize-num'):
+        numStr = numAsStr(n)
+
     res = mc.get(numStr)
     if res is not None:
-        try: # Try parsing it as a float
-            return float(res)
-        except ValueError:
-            # Failed to parse it
-            _ = 0
+        with tracer.span('try-deserialize') as span:
+            try: # Try parsing it as a float
+                span.add_annotation('Cache hit', key=numStr, value=res)
+                return int(res)
+            except ValueError as e:
+                # Failed to parse it
+                span.status = Status.from_exception(e)
 
-    # Otherwise this was a cache miss, so go on
-    sqrt = math.sqrt(num)
+    parent_span.add_annotation('Cache miss', key=numStr)
+    with tracer.span('Fib'):
+        # Otherwise this was a cache miss, so go on
+        value = fib(n)
+        # time.sleep(0.7) # Artificial delay
 
-    sqrtStr = numAsStr(sqrt)
+    with tracer.span('serialize-num'):
+        asStr = numAsStr(value)
+
     # Now cache it for a cache hit later on
-    mc.set(numStr, sqrtStr)
-    return sqrt
+    mc.set(numStr, asStr)
+    return value
 
 if __name__ == '__main__':
     main()
@@ -217,17 +348,14 @@ if __name__ == '__main__':
 
 We'll then run the code by `python main.py` which will produce output such as
 ```shell
-9999999183838328830477549585914919136257122817306613949097784006693497575493559386112.0000000000     ==> 3162277531121885532860585114766575939878912.0000000000                                              
-9999999183838328830477549585914919136257122817306613949097784006693497575493559386112.0000000000     ==> 3162277531121885532860585114766575939878912.0000000000                                              
-9082782799999992571273946221330069928133619983609556332968382885487451489900307089981440.0000000000  ==> 95303634768040146909822412874821250270101504.0000000000                                             
-9082782799999992571273946221330069928133619983609556332968382885487451489900307089981440.0000000000  ==> 95303634768040146909822412874821250270101504.0000000000                                             
-987773333733800031722651862358926786090489695103100157824970637048114282057670804373504.0000000000   ==> 31428861476894133536071865177459482504986624.0000000000                                             
-987773333733800031722651862358926786090489695103100157824970637048114282057670804373504.0000000000   ==> 31428861476894133536071865177459482504986624.0000000000                                             
-99999999999999996881384047029926983435371269061279689406644211752791525136670645395254002395395884805259264.0000000000 ==> 316227766016837944250003086594998818305721102128644096.0000000000                                   
-99999999999999996881384047029926983435371269061279689406644211752791525136670645395254002395395884805259264.0000000000 ==> 316227766016837944250003086594998818305721102128644096.0000000000                                   
-991818178171928327889547990399264675836644805154307643454461449383681749517143654793216.0000000000   ==> 31493144939366222011734031026709120927399936.0000000000                                             
-991818178171928327889547990399264675836644805154307643454461449383681749517143654793216.0000000000   ==> 31493144939366222011734031026709120927399936.0000000000                                             
+Background thread started.
+Fibonacci 30 ==> 2178309
+Fibonacci 30 ==> 2178309
+Fibonacci 33 ==> 9227465
+Fibonacci 33 ==> 9227465
 Sending all pending spans before terminated.
+Background thread exited.
+Sent all pending spans.
 ```
 
 ## Examining your traces
@@ -245,6 +373,7 @@ and for the details of a single trace
 
 Resource|URL
 ---|---
+OCPyMemcache on Github|https://github.com/opencensus-integrations/ocpymemcache
+OCPyMemcache on PyPi|https://pypi.org/project/ocpymemcache
 Memcached|https://memcached.org/
 OpenCensus Python on Github|https://github.com/census-instrumentation/opencensus-python
-Traced PyMemcache on Github|https://github.com/opencensus-integrations/pymemcache
