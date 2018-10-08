@@ -7,6 +7,14 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### October 7, 2018
+
+#### [Distributed Tracing and Monitoring using OpenCensus](https://medium.com/@rghetia/distributed-tracing-and-monitoring-using-opencensus-fe5f6e9479fb)
+
+This post shows how easy it is to instrument your distributed application with OpenCensus (OC). It uses a distributed demo app consisting 10 micro-services implemented in 5 languages. You can run the app locally and visualize the benefits of OC stats on pre-configured Grafana Dashboards and OC tracing on Jaeger UI.
+
+---
+
 ##### October 3, 2018
 
 #### [OpenCensus at Microsoft Ignite](/articles/ms-ignite-2018)
