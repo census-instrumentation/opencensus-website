@@ -27,7 +27,7 @@ In case you haven't yet enabled AWS X-Ray, please visit [https://console.aws.ama
 This is possible by importing
 
 {{<highlight go>}}
-import xray "github.com/census-instrumentation/opencensus-go-exporter-aws"
+import xray "contrib.go.opencensus.io/exporter/aws"
 
 // Then create the actual exporter
 xe, err := xray.NewExporter(xray.WithVersion("latest"))
@@ -43,7 +43,7 @@ package main
 import (
 	"log"
 
-	xray "github.com/census-instrumentation/opencensus-go-exporter-aws"
+	xray "contrib.go.opencensus.io/exporter/aws"
 	"go.opencensus.io/trace"
 )
 
