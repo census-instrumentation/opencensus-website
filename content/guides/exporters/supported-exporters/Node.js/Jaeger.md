@@ -53,7 +53,7 @@ var jaegerOptions = {
   maxPacketSize: 1000
 };
 
-var exporter = new jaeger.JaegerTraceExporter();
+var exporter = new jaeger.JaegerTraceExporter(jaegerOptions);
 
 tracing.registerExporter(exporter).start();
 ```
