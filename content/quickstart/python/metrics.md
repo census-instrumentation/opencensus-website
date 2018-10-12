@@ -4,17 +4,13 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-{{% notice warning %}}
-This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
-{{% /notice %}}
-
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)
 - [Create and Record Metrics](#create-and-record-metrics)
 - [Enable Views](#with-views-and-all-enabled)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
+- [Exporting to Prometheus](#exporting-to-prometheus)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -24,16 +20,20 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 ## Requirements
 - Python2 and above
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Prometheus as our choice of metrics backend: we are picking it beause it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+
+You can swap out any other exporter from the [list of Python exporters](/guides/exporters/supported-exporters/python)
 {{% /notice %}}
 
 ## Installation
 
-OpenCensus: `pip install --upgrade opencensus google-cloud-monitoring`
+OpenCensus: `pip install opencensus`
+
+Prometheus-Client: `pip install prometheus-client`
+
 
 ## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -41,7 +41,7 @@ By the end of this tutorial, we will do these four things to obtain metrics usin
 1. Create quantifiable metrics (numerical) that we will record
 2. Create [tags](/core-concepts/tags) that we will associate with our metrics
 3. Organize our metrics, similar to writing a report, in to a `View`
-4. Export our views to a backend (Stackdriver in this case)
+4. Export our views to a backend (Prometheus in this case)
 
 
 ## Getting Started
@@ -180,7 +180,10 @@ if __name__ == "__main__":
 {{</tabs>}}
 
 ## With views and all enabled
-```python
+
+In order to analyze these stats, we'll need to aggregate our data with Views.
+
+{{<highlight python>}}
 #!/usr/bin/env python
 
 import sys
@@ -270,10 +273,327 @@ def readEvaluateProcessLine():
 
 if __name__ == "__main__":
     main()
+
+{{</highlight>}}
+
+### Register Views
+We will create a function called `setupOpenCensusAndPrometheusExporter` and call it from our main function:
+
+{{<tabs Snippet All>}}
+{{<highlight python>}}
+def main():
+    setupOpenCensusAndPrometheusExporter()
+    while True:
+        readEvaluateProcessLine()
+
+def registerAllViews(view_manager):
+    view_manager.register_view(latency_view)
+    view_manager.register_view(line_count_view)
+    view_manager.register_view(error_count_view)
+    view_manager.register_view(line_length_view)
+
+def setupOpenCensusAndPrometheusExporter():
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+
+    registerAllViews(view_manager)
+{{</highlight>}}
+
+{{<highlight python>}}
+#!/usr/bin/env python
+
+import sys
+import time
+
+from opencensus.stats import stats
+from opencensus.stats.exporters import prometheus_exporter as prometheus
+
+from opencensus.stats import aggregation as aggregation_module
+from opencensus.stats import measure as measure_module
+from opencensus.stats import view as view_module
+from opencensus.stats import stats as stats_module
+from opencensus.tags import tag_key as tag_key_module
+from opencensus.tags import tag_map as tag_map_module
+from opencensus.tags import tag_value as tag_value_module
+
+
+# Create the measures
+# The latency in milliseconds
+m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+
+# Counts the number of lines read in from standard input
+m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
+
+# Encounters the number of non EOF(end-of-file) errors.
+m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
+
+# Counts/groups the lengths of lines read in.
+m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+
+# The stats recorder
+stats_recorder = stats.Stats().stats_recorder
+
+# Create the tag key
+key_method = tag_key_module.TagKey("method")
+
+latency_view = view_module.View("demo/latency", "The distribution of the latencies",
+[key_method],
+m_latency_ms,
+# Latency in buckets:
+# [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
+aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
+
+line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
+[],
+m_lines_in,
+aggregation_module.CountAggregation())
+
+error_count_view = view_module.View("demo/errors", "The number of errors encountered",
+[key_method],
+m_errors,
+aggregation_module.CountAggregation())
+
+line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
+[],
+m_line_lengths,
+# Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
+aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
+
+def main():
+    # In a REPL:
+    # 1. Read input
+    # 2. process input
+    setupOpenCensusAndPrometheusExporter()
+    while True:
+        readEvaluateProcessLine()
+
+def registerAllViews(view_manager):
+    view_manager.register_view(latency_view)
+    view_manager.register_view(line_count_view)
+    view_manager.register_view(error_count_view)
+    view_manager.register_view(line_length_view)
+
+
+
+def setupOpenCensusAndPrometheusExporter():
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+    registerAllViews(view_manager)
+
+
+def readEvaluateProcessLine():
+    line = sys.stdin.readline()
+    start = time.time()
+    print(line.upper())
+
+    # Now record the stats
+    # Create the measure_map into which we'll insert the measurements
+    mmap = stats_recorder.new_measurement_map()
+    end_ms = (time.time() - start) * 1000.0 # Seconds to milliseconds
+
+    # Record the latency
+    mmap.measure_float_put(m_latency_ms, end_ms)
+
+    # Record the number of lines in
+    mmap.measure_int_put(m_lines_in, 1)
+
+    # Record the number of errors in
+    mmap.measure_int_put(m_errors, 1)
+
+    # Record the line length
+    mmap.measure_int_put(m_line_lengths, len(line))
+
+    tmap = tag_map_module.TagMap()
+    tmap.insert(key_method, tag_value_module.TagValue("repl"))
+
+    # Insert the tag map finally
+    print tmap
+    mmap.record(tmap)
+
+if __name__ == "__main__":
+    main()
+
+{{</highlight>}}
+{{</tabs>}}
+
+
+
+## Exporting to Prometheus
+
+We need to expose the Prometheus endpoint say on address "localhost:8000" in order for Prometheus to scrape our application by expanding `setupOpenCensusAndPrometheusExporter` , like so:
+
+```python
+def setupOpenCensusAndPrometheusExporter():
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+
+    exporter = prometheus.new_stats_exporter(prometheus.Options(namespace="oc_python", port=8000))
+
+    view_manager.register_exporter(exporter)
+    registerAllViews(view_manager)
 ```
 
-## Exporting to Stackdriver
+Here is the final state of the code:
 
-{{% notice warning %}}
-This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
-{{% /notice %}}
+```python
+
+#!/usr/bin/env python
+
+import sys
+import time
+
+from opencensus.stats import stats
+from opencensus.stats.exporters import prometheus_exporter as prometheus
+
+from opencensus.stats import aggregation as aggregation_module
+from opencensus.stats import measure as measure_module
+from opencensus.stats import view as view_module
+from opencensus.stats import stats as stats_module
+from opencensus.tags import tag_key as tag_key_module
+from opencensus.tags import tag_map as tag_map_module
+from opencensus.tags import tag_value as tag_value_module
+
+
+# Create the measures
+# The latency in milliseconds
+m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+
+# Counts the number of lines read in from standard input
+m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
+
+# Encounters the number of non EOF(end-of-file) errors.
+m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
+
+# Counts/groups the lengths of lines read in.
+m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+
+# The stats recorder
+stats_recorder = stats.Stats().stats_recorder
+
+# Create the tag key
+key_method = tag_key_module.TagKey("method")
+
+latency_view = view_module.View("demo/latency", "The distribution of the latencies",
+[key_method],
+m_latency_ms,
+# Latency in buckets:
+# [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
+aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
+
+line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
+[],
+m_lines_in,
+aggregation_module.CountAggregation())
+
+error_count_view = view_module.View("demo/errors", "The number of errors encountered",
+[key_method],
+m_errors,
+aggregation_module.CountAggregation())
+
+line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
+[],
+m_line_lengths,
+# Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
+aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
+
+def main():
+    # In a REPL:
+    # 1. Read input
+    # 2. process input
+    setupOpenCensusAndPrometheusExporter()
+    while True:
+        readEvaluateProcessLine()
+
+def registerAllViews(view_manager):
+    view_manager.register_view(latency_view)
+    view_manager.register_view(line_count_view)
+    view_manager.register_view(error_count_view)
+    view_manager.register_view(line_length_view)
+
+
+
+def setupOpenCensusAndPrometheusExporter():
+    stats = stats_module.Stats()
+    view_manager = stats.view_manager
+
+    exporter = prometheus.new_stats_exporter(prometheus.Options(namespace="oc_python", port=8000))
+
+    view_manager.register_exporter(exporter)
+    registerAllViews(view_manager)
+
+
+def readEvaluateProcessLine():
+    line = sys.stdin.readline()
+    start = time.time()
+    print(line.upper())
+
+    # Now record the stats
+    # Create the measure_map into which we'll insert the measurements
+    mmap = stats_recorder.new_measurement_map()
+    end_ms = (time.time() - start) * 1000.0 # Seconds to milliseconds
+
+    # Record the latency
+    mmap.measure_float_put(m_latency_ms, end_ms)
+
+    # Record the number of lines in
+    mmap.measure_int_put(m_lines_in, 1)
+
+    # Record the number of errors in
+    mmap.measure_int_put(m_errors, 1)
+
+    # Record the line length
+    mmap.measure_int_put(m_line_lengths, len(line))
+
+    tmap = tag_map_module.TagMap()
+    tmap.insert(key_method, tag_value_module.TagValue("repl"))
+
+    # Insert the tag map finally
+    print tmap
+    mmap.record(tmap)
+
+if __name__ == "__main__":
+    main()
+```
+
+### Prometheus configuration file
+
+To allow Prometheus to scrape from our application, we have to point it towards the tutorial application whose
+server is running on "localhost:8000".
+
+To do this, we firstly need to create a YAML file with the configuration e.g. `promconfig.yaml`
+whose contents are:
+```yaml
+scrape_configs:
+- job_name: 'ocpythonmetricstutorial'
+
+scrape_interval: 10s
+
+static_configs:
+- targets: ['localhost:8000']
+```
+
+### Running Prometheus
+
+With that file saved as `promconfig.yaml` we should now be able to run Prometheus like this
+
+```shell
+prometheus --config.file=promconfig.yaml
+```
+
+and then return to the terminal that's running the Python metrics quickstart and generate some work by typing inside it.
+
+## Viewing your metrics
+With the above you should now be able to navigate to the Prometheus endpoint at http://localhost:8000
+
+which should show:
+
+![](/images/metrics-python-prometheus-all-metrics.png)
+
+## References
+
+Resource|URL
+---|---
+Prometheus project|https://prometheus.io/
+Setting up Prometheus|[Prometheus Codelab](/codelabs/prometheus)
+Python exporters|[Python exporters](/guides/exporters/supported-exporters/python)
+
