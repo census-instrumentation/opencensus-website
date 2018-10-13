@@ -16,7 +16,7 @@ logo: /img/memcached-python.png
     - [Enabling tracing](#enabling-tracing)
     - [Enabling metrics](#enabling-metrics)
 - [End to end example](#end-to-end-example)
-- [Examining your traces](#enabling-your-traces)
+- [Examining your traces](#examining-your-traces)
 - [References](#references)
 
 ## Introduction
@@ -111,34 +111,30 @@ Please run your Memcached server, for this example we'll run it locally on port 
 {{<highlight python>}}
 #!/usr/bin/env python
 
-import os
 import time
-
 from ocpymemcache.client import OCPyMemcacheClient
-from ocpymemcache.observability import enable_metrics_views
 
-def numAsStr(num): return '%d'%(num)
+def num_as_str(num): return '%d' % num
 
 def main():
     # Create the Memcache client
     mc = OCPyMemcacheClient(("localhost", 11211,))
-
-    doWork(mc)
+    do_work(mc)
 
     time.sleep(5)
 
-def doWork(mc):
+def do_work(mc):
     values = [
         30, 33,
     ]
 
     for value in values:
         for i in range(0, 2):
-            nf = nthFibonacci(mc, value)
+            nf = nth_fibonacci(mc, value)
             print("Fibonacci %d ==> %d"%(value, nf))
 
         # Afterwards, clean up to ensure repeatability of the test
-        mc.delete(numAsStr(value))
+        mc.delete(num_as_str(value))
 
 def fib(n):
     if n <= 0:
@@ -146,13 +142,13 @@ def fib(n):
 
     return fib(n-2) + fib(n-1)
 
-def nthFibonacci(mc, n):
+def nth_fibonacci(mc, n):
     # Firstly check if we've cached it
-    numStr = numAsStr(n)
+    num_str = num_as_str(n)
 
-    res = mc.get(numStr)
+    res = mc.get(num_str)
     if res is not None:
-        try: # Try parsing it as a float
+        try:  # Try parsing it as a float
             return int(res)
         except ValueError as e:
             # Failed to parse it
@@ -161,10 +157,10 @@ def nthFibonacci(mc, n):
     # Otherwise this was a cache miss, so go on
     value = fib(n)
 
-    asStr = numAsStr(value)
+    as_str = num_as_str(value)
 
     # Now cache it for a cache hit later on
-    mc.set(numStr, asStr)
+    mc.set(num_str, as_str)
     return value
 
 if __name__ == '__main__':
@@ -172,6 +168,14 @@ if __name__ == '__main__':
 {{</highlight>}}
 
 ## Enabling OpenCensus
+
+### Installation
+```shell
+pip install opencensus
+pip install google-cloud-trace
+pip install google-cloud-monitoring
+```
+
 To provide observability, we'll enable tracing by importing OpenCensus Python's tracing package
 
 {{<highlight python>}}
@@ -260,7 +264,7 @@ from opencensus.trace.samplers import always_on
 from opencensus.trace.status import Status
 from opencensus.trace.tracer import Tracer
 
-def numAsStr(num): return '%d'%(num)
+def num_as_str(num): return '%d' % num
 
 def main():
     gcp_project_id = os.environ.get('PROJECT_ID', 'census-demos')
@@ -283,63 +287,62 @@ def main():
     mc = OCPyMemcacheClient(("localhost", 11211,))
 
     with tracer.span(name='MemcachePythonUsage') as span:
-        doWork(mc)
+        do_work(mc)
 
     time.sleep(5)
 
-def doWork(mc):
+def do_work(mc):
     values = [
         30, 33,
     ]
 
     tracer = execution_context.get_opencensus_tracer()
     for value in values:
-        with tracer.span(name='CalculateFibonacci-%d'%(value)) as cspan:
+        with tracer.span(name='CalculateFibonacci-%d' % value) as cspan:
             for i in range(0, 2):
-                with tracer.span(name='Round-%d'%(i+1)) as span:
-                    nf = nthFibonacci(tracer, mc, value)
-                    print("Fibonacci %d ==> %d"%(value, nf))
+                with tracer.span(name='Round-%d' % (i+1)) as span:
+                    nf = nth_fibonacci(tracer, mc, value)
+                    print("Fibonacci %d ==> %d" % (value, nf))
 
             # Afterwards, clean up to ensure repeatability of the test
-            mc.delete(numAsStr(value))
+            mc.delete(num_as_str(value))
             cspan.finish()
 
 def fib(n):
     if n <= 0:
         return 1
-
     return fib(n-2) + fib(n-1)
 
-def nthFibonacci(tracer, mc, n):
+def nth_fibonacci(tracer, mc, n):
     with tracer.span('nthFibonacci') as span:
-        return doNthFibonacci(tracer, span, mc, n)
+        return do_nth_fibonacci(tracer, span, mc, n)
 
-def doNthFibonacci(tracer, parent_span, mc, n):
+def do_nth_fibonacci(tracer, parent_span, mc, n):
     # Firstly check if we've cached it
     with tracer.span('serialize-num'):
-        numStr = numAsStr(n)
+        num_str = num_as_str(n)
 
-    res = mc.get(numStr)
+    res = mc.get(num_str)
     if res is not None:
         with tracer.span('try-deserialize') as span:
             try: # Try parsing it as a float
-                span.add_annotation('Cache hit', key=numStr, value=res)
+                span.add_annotation('Cache hit', key=num_str, value=res)
                 return int(res)
             except ValueError as e:
                 # Failed to parse it
                 span.status = Status.from_exception(e)
 
-    parent_span.add_annotation('Cache miss', key=numStr)
+    parent_span.add_annotation('Cache miss', key=num_str)
     with tracer.span('Fib'):
         # Otherwise this was a cache miss, so go on
         value = fib(n)
         # time.sleep(0.7) # Artificial delay
 
     with tracer.span('serialize-num'):
-        asStr = numAsStr(value)
+        as_str = num_as_str(value)
 
     # Now cache it for a cache hit later on
-    mc.set(numStr, asStr)
+    mc.set(num_str, as_str)
     return value
 
 if __name__ == '__main__':
