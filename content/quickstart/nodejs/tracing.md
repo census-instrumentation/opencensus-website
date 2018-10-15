@@ -546,10 +546,6 @@ function processLine(text) {
   return upperCaseText;
 }
 
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
-}
-
 /*
  * In a REPL:
  * 1. Read input
@@ -615,10 +611,6 @@ function processLine(text) {
 
   span.end();
   return upperCaseText;
-}
-
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
 }
 
 /*
@@ -704,10 +696,6 @@ function processLine(text) {
 
   span.end();
   return upperCaseText;
-}
-
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
 }
 
 /*
