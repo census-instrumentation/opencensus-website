@@ -12,11 +12,11 @@ aliases: [/quickstart/node.js/tracing]
 - [Enable Tracing](#enable-tracing)
     - [Import Packages](#import-tracing-packages)
     - [Instrumentation](#instrument-tracing)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
-    - [Import Packages](#import-exporting-packages)
+- [Exporting to Zipkin](#exporting-to-zipkin)
     - [Create the Exporter](#create-the-exporter)
 - [Optional: Add a Delay](#optional-add-a-delay)
-- [Viewing your Traces on Stackdriver](#viewing-your-traces-on-stackdriver)
+- [Running the code](#running-the-code)
+- [Viewing your Traces on Zipkin](#viewing-your-traces-on-zipkin)
 
 In this quickstart, we’ll gleam insights from code segments and learn how to:
 
@@ -26,11 +26,12 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 
 ## Requirements
 - [Node.js](https://nodejs.org/) 6 or above and `npm` (already comes with Node.js)
-- Google Cloud Platform account and project
-- Google Stackdriver Tracing enabled on your project
+- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+
+You can swap out any other exporter from the [list of Node.js exporters](/guides/exporters/supported-exporters/node.js)
 {{% /notice %}}
 
 ## Installation
@@ -349,10 +350,6 @@ We can add metadata to our traces to increase our post-mortem insight.
 
 Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by modifying our `readLine` function.
 
-{{% notice warning %}}
-While the latest version of the [Stackdriver exporter on the Github repository](https://github.com/census-instrumentation/opencensus-node/tree/master/packages/opencensus-exporter-stackdriver) exports attributes, the version found on `npm` as of the time of writing **does not**. This will be resolved soon. In the meantime, you can clone [opencensus-node](https://github.com/census-instrumentation/opencensus-node).
-{{% /notice %}}
-
 {{% tabs Snippet All %}}
 ```js
 function readLine(input) {
@@ -420,36 +417,23 @@ process.stdout.write('> ');
 ```
 {{% /tabs %}}
 
-## Exporting to Stackdriver
-To create the exporter, you'll need to:
-
-* Have a GCP Project ID
-* Have already enabled [Stackdriver Trace](https://cloud.google.com/trace/docs/quickstart), if not, please visit the [Code lab](/codelabs/stackdriver)
-* Enable your [Application Default Credentials](https://cloud.google.com/docs/authentication/getting-started) for authentication with:
-
-{{<highlight bash>}}
-export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
-{{</highlight>}}
-
-<a name="import-exporting-packages"></a>
-### Import Packages
-To turn on Stackdriver Tracing, we’ll need to install a new package.
+## Exporting to Zipkin
 
 Enter the following code snippet in your terminal:
 
 ```bash
-npm install --save @opencensus/exporter-stackdriver
+npm install --save @opencensus/exporter-zipkin
 ```
 Append and modify the following code snippet to your `require` statements:
 
 {{% tabs Snippet All %}}
 ```js
-const stackdriver = require('@opencensus/exporter-stackdriver');
+var exporter = require('@opencensus/exporter-zipkin');
 ```
 
 ```js
 const tracing = require('@opencensus/nodejs');
-const stackdriver = require('@opencensus/exporter-stackdriver');
+const zipkin = require('@opencensus/exporter-zipkin');
 const stdin = process.openStdin();
 
 const defaultConfig = {
@@ -502,82 +486,20 @@ process.stdout.write('> ');
 
 ### Create the Exporter
 
-First we will retrieve your Google Cloud Project ID by placing this function at the end of our file:
-
-{{% tabs Snippet All%}}
-```js
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
-}
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const stackdriver = require('@opencensus/exporter-stackdriver');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-Next, we will initialize the exporter.
+We start by initilazing the exporter with a configuration, like so:
 
 {{% tabs Snippet All %}}
 ```js
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+var options = {
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+};
+var exporter = new zipkin.ZipkinTraceExporter(options);
 ```
 
 ```js
 const tracing = require('@opencensus/nodejs');
-const stackdriver = require('@opencensus/exporter-stackdriver');
+const zipkin = require('@opencensus/exporter-zipkin');
 const stdin = process.openStdin();
 
 const defaultConfig = {
@@ -585,7 +507,11 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+var options = {
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+};
+var exporter = new zipkin.ZipkinTraceExporter(options);
 
 const tracer = tracing.start().tracer;
 
@@ -618,10 +544,6 @@ function processLine(text) {
 
   span.end();
   return upperCaseText;
-}
-
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
 }
 
 /*
@@ -643,7 +565,7 @@ tracer.registerSpanEventListener(exporter);
 
 ```js
 const tracing = require('@opencensus/nodejs');
-const stackdriver = require('@opencensus/exporter-stackdriver');
+const zipkin = require('@opencensus/exporter-zipkin');
 const stdin = process.openStdin();
 
 const defaultConfig = {
@@ -651,7 +573,11 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+var options = {
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+};
+var exporter = new zipkin.ZipkinTraceExporter(options);
 
 const tracer = tracing.start().tracer;
 tracer.registerSpanEventListener(exporter);
@@ -685,10 +611,6 @@ function processLine(text) {
 
   span.end();
   return upperCaseText;
-}
-
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
 }
 
 /*
@@ -718,7 +640,7 @@ The following snippet of code represents the final state of `index.js`:
 
 ```js
 const tracing = require('@opencensus/nodejs');
-const stackdriver = require('@opencensus/exporter-stackdriver');
+const zipkin = require('@opencensus/exporter-zipkin');
 const stdin = process.openStdin();
 
 const defaultConfig = {
@@ -726,7 +648,11 @@ const defaultConfig = {
   samplingRate: 1.0  // always sample
 };
 
-const exporter = new stackdriver.StackdriverTraceExporter({projectId: getProjectId()});
+var options = {
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+}
+var exporter = new zipkin.ZipkinTraceExporter(options);
 
 const tracer = tracing.start().tracer;
 tracer.registerSpanEventListener(exporter);
@@ -772,10 +698,6 @@ function processLine(text) {
   return upperCaseText;
 }
 
-function getProjectId() {
-  return require(process.env.GOOGLE_APPLICATION_CREDENTIALS).project_id;
-}
-
 /*
  * In a REPL:
  * 1. Read input
@@ -785,11 +707,29 @@ stdin.addListener("data", readEvaluateProcessLine);
 process.stdout.write('> ');
 ```
 
-## Viewing your Traces on Stackdriver
-With the above you should now be able to navigate to the [Google Cloud Platform console](https://console.cloud.google.com/traces/traces), select your project, and view the traces.
+## Running the code
 
-![viewing traces 1](/images/node-trace-overall.png)
+Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
-And on clicking on the `readLine` span, we should be able to see the attributes.
+```shell
+node index.js
+```
 
-![viewing traces 2](/images/node-trace-attributes.png)
+## Viewing your Traces on Zipkin
+With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411, which will produce such a screenshot:
+![](/images/trace-node-zipkin-all-traces.png)
+
+On clicking on one of the traces, we should be able to see the following:
+![](/images/trace-node-zipkin-single-trace.png)
+
+And on clicking on `More info` we should see
+![](/images/trace-node-zipkin-all-details.png)
+
+## References
+
+Resource|URL
+---|---
+Zipkin project|https://zipkin.io/
+Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
+Node.js exporters|[Node.js exporters](/guides/exporters/supported-exporters/node.js)
+
