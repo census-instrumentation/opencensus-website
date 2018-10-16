@@ -881,6 +881,7 @@ public class Repl {
 Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
 ```shell
+mvn install
 mvn exec:java -Dexec.mainClass=io.opencensus.tracing.quickstart.Repl
 ```
 ## Viewing your traces

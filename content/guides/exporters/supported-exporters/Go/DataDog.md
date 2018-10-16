@@ -31,10 +31,7 @@ This is possible by importing the exporter
 import "github.com/Datadog/opencensus-go-exporter-datadog"
 
 // then create the actual exporter
-dd, err := datadog.NewExporter(datadog.Options{})
-if err != nil {
-    log.Fatalf("Failed to create the Datadog exporter: %v", err)
-}
+dd := datadog.NewExporter(datadog.Options{})
 {{</highlight>}}
 
 and then to add stats, tracing and then collectively

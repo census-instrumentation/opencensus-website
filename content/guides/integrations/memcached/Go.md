@@ -1,5 +1,5 @@
 ---
-title: "GoMemache"
+title: "GoMemcache"
 date: 2018-08-22T04:30:16-07:00
 draft: false
 aliases: [/integrations/memcached/go]
@@ -16,7 +16,7 @@ logo: /img/memcached-gopher.png
     - [Enabling tracing](#enabling-tracing)
 - [End to end example](#end-to-end-example)
 - [Examining your traces](#enabling-your-traces)
-- [Examining your metrics](#enabling-your-metrics)
+- [Examining your metrics](#examining-your-metrics)
 - [References](#references)
 
 ## Introduction

@@ -1866,6 +1866,7 @@ This step involves running the tutorial application in one terminal and then Pro
 Having properly installed Java and Maven, in one terminal, please run
 
 ```shell
+mvn install
 mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
 ```
 

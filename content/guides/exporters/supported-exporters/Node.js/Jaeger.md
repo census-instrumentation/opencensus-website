@@ -49,11 +49,11 @@ var jaegerOptions = {
   port: 6832,
   tags: [{key: 'opencensus-exporter-jeager', value: '0.0.1'}],
   bufferTimeout: 10, // time in milliseconds
-  logger: core.logger('debug'),
+  logger: core.logger.logger('debug'),
   maxPacketSize: 1000
 };
 
-var exporter = new jaeger.JaegerTraceExporter();
+var exporter = new jaeger.JaegerTraceExporter(jaegerOptions);
 
 tracing.registerExporter(exporter).start();
 ```

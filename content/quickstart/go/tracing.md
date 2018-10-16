@@ -328,13 +328,10 @@ We'll record the length of each requested string so that it is available to view
 {{<highlight go>}}
 func readEvaluateProcess(br *bufio.Reader) error {
 	fmt.Printf("> ")
-	// Not timing from: prompt to when we read a
-	// line, because you can infinitely wait on stdin.
-	line, _, err := br.ReadLine()
-
 	ctx, span := trace.StartSpan(context.Background(), "repl")
 	defer span.End()
 
+	_, line, err := readLine(ctx, br)
 	if err != nil {
 		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
 		return err
@@ -408,13 +405,10 @@ func main() {
 
 func readEvaluateProcess(br *bufio.Reader) error {
 	fmt.Printf("> ")
-	// Not timing from: prompt to when we read a
-	// line, because you can infinitely wait on stdin.
-	line, _, err := br.ReadLine()
-
 	ctx, span := trace.StartSpan(context.Background(), "repl")
 	defer span.End()
 
+	_, line, err := readLine(ctx, br)
 	if err != nil {
 		span.SetStatus(trace.Status{Code: trace.StatusCodeUnknown, Message: err.Error()})
 		return err
