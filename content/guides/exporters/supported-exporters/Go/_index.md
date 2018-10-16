@@ -10,8 +10,8 @@ logo: /images/gopher.png
 
 OpenCensus Go provides support for various exporters like:
 
-* [Application Insights](/supported-exporters/go/applicationinsights/)
 * [AWS X-Ray](/supported-exporters/go/xray/)
+* [Azure Monitor](/supported-exporters/go/applicationinsights/)
 * [Google Stackdriver Tracing and Monitoring](/supported-exporters/go/stackdriver/)
 * [DataDog APM and Tracing](/supported-exporters/go/datadog/)
 * [Prometheus Monitoring](/supported-exporters/go/prometheus/)

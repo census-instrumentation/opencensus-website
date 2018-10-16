@@ -1,5 +1,5 @@
 ---
-title: "Application Insights"
+title: "Azure Monitor"
 date: 2018-10-15
 draft: false
 weight: 3
@@ -13,12 +13,12 @@ logo: /img/partners/microsoft_logo.svg
 - [Viewing your traces](#viewing-your-traces)
 
 ## Introduction
-Application Insights is an extensible Application Performance Management (APM) service for web developers on multiple platforms. Offered by Microsoft Azure, it's a complete at-scale telemetry and monitoring solution.
+Azure Monitor is an extensible Application Performance Management (APM) service for web developers on multiple platforms. Offered by Microsoft Azure, it's a complete at-scale telemetry and monitoring solution.
 
-If you don't have an Application Insights account yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
+If you don't have an Azure account yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
 
 ## Creating the exporter
-Application Insights does not need a dedicated exporter to work with OpenCensus. Instead, it uses the readily available default exporter along with a dedicated agent known as Local Forwarder. 
+Azure Monitor does not need a dedicated exporter to work with OpenCensus. Instead, it uses the readily available default exporter along with a dedicated agent known as Local Forwarder. 
 
 To learn about Local Forwarder and how to set it up, visit [this link](https://docs.microsoft.com/en-us/azure/application-insights/opencensus-local-forwarder).
 
@@ -82,4 +82,4 @@ func main() {
 
 
 ## Viewing your traces
-You must have an Application Insights account to view your data. If you don't have one yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
+You must have an Azure account to view your data. If you don't have one yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
