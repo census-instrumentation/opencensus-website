@@ -1,6 +1,6 @@
 ---
 title: "Honeycomb.io (Tracing)"
-date: 2018-09-19
+date: 2018-10-16
 draft: false
 weight: 3
 class: "resized-logo"
@@ -33,8 +33,6 @@ To create the exporter, we'll need to:
 package main
 
 import (
-    "log"
-
     honeycomb "github.com/honeycombio/opencensus-exporter/honeycomb"
     "go.opencensus.io/trace"
 )
@@ -43,8 +41,14 @@ func main() {
     exporter := honeycomb.NewExporter("YOUR-HONEYCOMB-WRITE-KEY", "YOUR-DATASET-NAME")
     defer exporter.Close()
 
-    trace.RegisterExporter(exporter)
+    sampleFraction := 0.5
+    trace.ApplyConfig(trace.Config{DefaultSampler: trace.ProbabilitySampler(sampleFraction)})
+    // If you use the Open Census Probability Sampler, be sure to pass that sampleFraction to the exporter
+    // so that Honeycomb can pick it up and make sure we handle your sampling properly.
+    exporter.SampleFraction = sampleFraction
 
+    trace.RegisterExporter(exporter)
+    // ...
 }
 {{</highlight>}}
 
