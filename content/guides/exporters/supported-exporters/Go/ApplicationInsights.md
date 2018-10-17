@@ -31,7 +31,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	os "os"
+	"os"
+	"io/ioutil"
 
 	ocagent "contrib.go.opencensus.io/exporter/ocagent"
 	"go.opencensus.io/plugin/ochttp"
@@ -57,24 +58,30 @@ func main() {
 
 	trace.RegisterExporter(exporter)
 
+	// Since we're sending data to Local Forwarder, we will always sample in order for Live Metrics Stream to work properly
+	// If your application is sending high volumes of data and you're not using Live Metrics Stream, provide more conservative value here
+	// Local Forwarder https://docs.microsoft.com/en-us/azure/application-insights/opencensus-local-forwarder
+	// Live Metrics Stream https://docs.microsoft.com/en-us/azure/application-insights/app-insights-live-stream
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 
 	client := &http.Client{Transport: &ochttp.Transport{Propagation: &tracecontext.HTTPFormat{}}}
 
 	http.HandleFunc("/call", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprintf(w, "hello world from %s", serviceName)
-
-		r, _ := http.NewRequest("GET", "http://blank.org", nil)
+		newReq, _ := http.NewRequest("GET", "http://blank.org", nil)
 
 		// Propagate the trace header info in the outgoing requests.
-		r = r.WithContext(req.Context())
-		resp, err := client.Do(r)
-		if err != nil {
-			log.Println(err)
-		} else {
-			// TODO: handle response
+		newReq = newReq.WithContext(req.Context())
+		msg := "Hello world from " + serviceName
+		resp, err := client.Do(newReq)
+		if err == nil {
+			blob, _ := ioutil.ReadAll(resp.Body)
 			resp.Body.Close()
+			msg = fmt.Sprintf("%s\n%s", blob)
+		} else {
+			msg = fmt.Sprintf("%s Error: %v", msg, err)
 		}
+
+		fmt.Fprintf(w, msg)
 	})
 	log.Fatal(http.ListenAndServe(":50030", &ochttp.Handler{Propagation: &tracecontext.HTTPFormat{}}))
 }
