@@ -64,7 +64,7 @@ func main() {
 package main
 
 import (
-	"log"
+   "log"
 
   "github.com/Datadog/opencensus-go-exporter-datadog"
   "go.opencensus.io/trace"
