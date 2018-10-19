@@ -76,7 +76,7 @@ func main() {
 		if err == nil {
 			blob, _ := ioutil.ReadAll(resp.Body)
 			resp.Body.Close()
-			msg = fmt.Sprintf("%s\n%s", blob)
+                      msg = fmt.Sprintf("%s\n%s", msg, blob)
 		} else {
 			msg = fmt.Sprintf("%s Error: %v", msg, err)
 		}
