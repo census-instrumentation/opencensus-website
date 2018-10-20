@@ -23,6 +23,7 @@ class: "shadowed-image lightbox"
     - [Single trace](#single-trace)
     - [Root span](#root-span)
     - [Child span](#child-span)
+- [References](#references)
 
 In this quickstart, we’ll learn how to:
 
@@ -31,8 +32,8 @@ In this quickstart, we’ll learn how to:
 
 ## Requirements
 - g++
-- Zipkin
-- Bazel
+- [Zipkin](https://zipkin.io)
+- [Bazel](https://bazel.build/)
 
 ## Brief overview
 By the end of this tutorial, we would have done these two things using OpenCensus:
@@ -42,9 +43,10 @@ By the end of this tutorial, we would have done these two things using OpenCensu
 
 ## Getting started
 Our application is an interactive commandline application that:
-a) accepts input from standard input
-b) capitalizes the input
-c) prints out the capitalized data to standard output
+
+- accepts input from standard input
+- capitalizes the input
+- prints out the capitalized data to standard output
 
 To get started, we'll create a file `tracing.cc`
 ```cpp
@@ -70,17 +72,18 @@ int main(int argc, char **argv) {
 }
 ```
 
-and to run it, we'll run it, we'll use this command
+and to run it, we'll use this command
+
 ```shell
-g++ -std=c++11 main.cc -o main.o && ./main.o 
+g++ -std=c++11 tracing.cc -o tracing && ./tracing
 ```
 
-which will print out such as as
+which will produce output such as:
 
 ```shell
 
-> bigger than nino
-< BIGGER THAN NINO
+> bigger than this
+< BIGGER THAN THIS
 
 > this is the quickstart
 < THIS IS THE QUICKSTART
@@ -92,6 +95,7 @@ which will print out such as as
 ```
 
 With the application running, we might want to know:
+
 a) How do the parts of the program coordinate?
 b) How long do the various parts take?
 
@@ -109,13 +113,15 @@ For assistance setting up Bazel Build, please [click here](https://docs.bazel.bu
 Please install bazel first. After that, please proceed below.
 
 To add tracing with OpenCensus, firstly we'll need to use Bazel build to setup a couple of imports for:
+
 * [Abseil C++](https://abseil.io/)
 * [OpenCensus C++](https://github.com/census-instrumentation/opencensus-cpp)
 
 After installing bazel, we'll need to make two files in the same working directory as the `tracing.cc`
 that is:
-a) WORKSPACE
-b) BUILD
+
+- WORKSPACE
+- BUILD
 
 
 #### <a name="enable-tracing-workspace-file"></a>WORKSPACE
@@ -492,3 +498,13 @@ From the annotation in the function `processLine`
 given `C++ here we come`
 we can now see the recorded capitalized annotation `C++ HERE WE COME`
 ![](/images/cpp-trace-single-child-span.png)
+
+## References
+
+Resource|URL
+---|---
+OpenCensus C++|https://github.com/census-instrumentation/opencensus-cpp
+Zipkin project|https://zipkin.io/
+Zipkin C++ exporter|[Github link](https://github.com/census-instrumentation/opencensus-cpp/tree/master/opencensus/exporters/trace/zipkin)
+Setting up Zipkin|[Zipkin codelab](/codelabs/zipkin)
+Bazel build system|https://bazel.build/

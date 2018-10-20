@@ -13,4 +13,4 @@ For full API references, please take a look at:
 
 Resource|Link
 ---|---
-Github repository|https://github.com/census-instrumentation/opencensus-cpp
+OpenCensus C++|https://github.com/census-instrumentation/opencensus-cpp
