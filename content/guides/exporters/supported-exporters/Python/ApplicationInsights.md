@@ -1,6 +1,6 @@
 ---
 title: "Azure Monitor"
-date: 2018-10-15
+date: 2018-10-22
 draft: false
 weight: 3
 class: "resized-logo"
@@ -15,12 +15,12 @@ logo: /img/partners/microsoft_logo.svg
 ## Introduction
 Azure Monitor is an extensible Application Performance Management (APM) service for web developers on multiple platforms. Offered by Microsoft Azure, it's a complete at-scale telemetry and monitoring solution.
 
-If you don't have an Azure account yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
+If you don't have an Azure account yet, [click here](https://docs.microsoft.com/azure/application-insights/app-insights-overview) to start.
 
 ## Creating the exporter
 Azure Monitor does not need a dedicated exporter to work with OpenCensus. Instead, it uses the readily available default exporter along with a dedicated agent known as Local Forwarder. 
 
-To learn about Local Forwarder and how to set it up, visit [this link](https://docs.microsoft.com/en-us/azure/application-insights/opencensus-local-forwarder).
+To learn about Local Forwarder and how to set it up, visit [this link](https://docs.microsoft.com/azure/application-insights/opencensus-local-forwarder).
 
 Here's an example of setting things up on the OpenCensus side (see [Local Forwarder repo](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/examples/opencensus/python-app/app/views.py) for the most up-to-date example):
 
@@ -58,4 +58,4 @@ def call(request):
 
 
 ## Viewing your traces
-You must have an Azure account to view your data. If you don't have one yet, [click here](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview) to start.
+You must have an Azure account to view your data. If you don't have one yet, [click here](https://docs.microsoft.com/azure/application-insights/app-insights-overview) to start.
