@@ -9,18 +9,20 @@ class: "shadowed-image lightbox"
 - [Brief Overview](#brief-overview)
 - [Getting started](#getting-started)
 - [Enable metrics](#enable-metrics)
-    - [Import packages](#import-metrics-packages)
-    - [Create metrics](#create-metrics)
-    - [Create tags](#create-tags)
-    - [Inserting tags](#inserting-tags)
-    - [Recording metrics](#recording-metrics)
-- [Enable views](#enable-views)
-    - [Import packages](#import-views-packages)
-    - [Create views](#create-views)
-    - [Register views](#register-views)
-- [Exporting to Stackdriver](#exporting-to-stackdriver)
-    - [Import packages](#import-exporting-packages)
-    - [Export views](#export-views)
+    - [Build system](#build-system)
+    - [BUILD file](#enable-metrics-build-file)
+    - [WORKSPACE file](#enable-metrics-workspace-file)
+    - [Measures](#measures)
+    - [Views](#views)
+- [Instrumenting your functions](#instrumenting-your-functions)
+    - [Start timer](#start-timer)
+    - [End timer](#end-timer)
+    - [Record latencies against tags](#record-latencies-against-tags)
+- [Exporting to Prometheus](#exporting-to-prometheus)
+    - [BUILD file](#exporting-build-file)
+    - [WORKSPACE file](#exporting-workspace-file)
+    - [Prometheus exporter source code](#exporting-prometheus-code)
+- [End to end code](#end-to-end-code)
 - [Examining your metrics on Prometheus](#examining-your-metrics-on-prometheus)
     - [Available metrics](#available-metrics)
     - [Lines in counts](#lines-in-counts)
@@ -114,7 +116,7 @@ To answer the above questions, please read along:
 
 ## Enable metrics
 
-To enable tracing, we'll need to use the OpenCensus C++ library.
+To enable metrics, we'll need to use the OpenCensus C++ library.
 
 The library requires the [Bazel build system](https://bazel.build/)
 
@@ -126,13 +128,13 @@ For assistance setting up Bazel Build, please [click here](https://docs.bazel.bu
 
 Please install bazel first. After that, please proceed below.
 
-To add tracing with OpenCensus, firstly we'll need to use Bazel build to setup a couple of imports for:
+To add metrics with OpenCensus, firstly we'll need to use Bazel build to setup a couple of imports for:
 
 * [Abseil C++](https://abseil.io/)
 * [OpenCensus C++](https://github.com/census-instrumentation/opencensus-cpp)
 * [Prometheus C++ client](https://github.com/jupp0r/prometheus-cpp)
 
-After installing bazel, we'll need to make two files in the same working directory as the `tracing.cc`
+After installing bazel, we'll need to make two files in the same working directory as the `metrics.cc`
 that is:
 
 - WORKSPACE
@@ -162,12 +164,12 @@ http_archive(
 Please add the content below to a file `BUILD`:
 ```shell
 cc_binary(
-        name = "tracing",
-        srcs = ["tracing.cc"],
+        name = "metrics",
+        srcs = ["metrics.cc"],
         linkopts = ["-pthread"],
         deps = [
             "@com_google_absl//absl/time",
-            "@io_opencensus_cpp//opencensus/trace:trace",
+            "@io_opencensus_cpp//opencensus/stats:stats",
         ],
 )
 ```
@@ -175,14 +177,13 @@ cc_binary(
 * `deps` is a list of libraries that our binary depends on. Alongside linking these libraries, bazel will also
 make their headers available to the compiler.
 * `@io_opencensus_cpp` refers to an external subrepository
-* `//opencensus/trace` is a directory path within that subdirectory
-* `:trace` is the name of a "cc_library" target in that directory
+* `//opencensus/stats` is a directory path within that subdirectory
+* `:metrics` is the name of a "cc_library" target in that directory
 
 From the compiler's point of view, all of the sources and dependencies' headers are merged into a single hierarchy i.e.
 ```shell
-tracing.cc
+metrics.cc
 absl/
-opencensus/trace/span.h
 ```
 
 ### Measures
@@ -281,91 +282,25 @@ int main(int argc, char **argv) {
 }
 ```
 
-### Enabling the exporter
 
-To examine our metrics, we'll use Prometheus.
-
-{{% notice tip %}}
-For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
-{{% /notice %}}
-
-To use the Prometheus exporter for OpenCensus C++, we'll need to update our `BUILD`, `WORKSPACE` and `metrics.cc` files
-as below:
-
-#### BUILD
-```shell
-cc_binary(
-        name = "metrics",
-        srcs = ["metrics.cc"],
-        linkopts = ["-pthread"],
-        deps = [
-            "@io_opencensus_cpp//opencensus/stats:stats",
-            "@io_opencensus_cpp//opencensus/exporters/stats/prometheus:prometheus_exporter",
-            "@com_google_absl//absl/base:core_headers",
-            "@com_google_absl//absl/memory",
-            "@com_google_absl//absl/strings",
-            "@com_github_jupp0r_prometheus_cpp//core",
-            "@com_github_jupp0r_prometheus_cpp//pull",
-        ],
-)
-```
-
-#### WORKSPACE
-```shell
-http_archive(
-    name = "io_opencensus_cpp",
-    strip_prefix = "opencensus-cpp-master",
-    urls = ["https://github.com/census-instrumentation/opencensus-cpp/archive/master.zip"],
-)
-
-# OpenCensus depends on Abseil so we have to explicitly to pull it in.
-# This is how diamond dependencies are prevented.
-http_archive(
-    name = "com_google_absl",
-    strip_prefix = "abseil-cpp-master",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"]
-)
-
-# OpenCensus depends on jupp0r/prometheus-cpp
-http_archive(
-    name = "com_github_jupp0r_prometheus_cpp",
-    strip_prefix = "prometheus-cpp-master",
-    urls = ["https://github.com/jupp0r/prometheus-cpp/archive/master.zip"],
-)
-
-load("@com_github_jupp0r_prometheus_cpp//:repositories.bzl", "prometheus_cpp_repositories")
-prometheus_cpp_repositories()
-```
-
-#### Prometheus exporter source code
-```cpp
-#include "opencensus/exporters/stats/prometheus/prometheus_exporter.h"
-#include "prometheus/exposer.h"
-
-int main(int argc, char **argv) {
-    auto exporter =
-        std::make_shared<opencensus::exporters::stats::PrometheusExporter>();
-    // Expose Prometheus on :8888
-    prometheus::Exposer exposer("127.0.0.1:8888");
-    exposer.RegisterCollectable(exporter);
-}
-```
-
-#### Instrumenting source code
+#### Instrumenting your functions
 
 To capture latencies, number of lines and line lengths, we'll need to run the following steps:
 
+##### <a name="start-timer"></a> Start timer
 a) On entry into any function, we'll start a timer
 ```cpp
     absl::Time start = absl::Now();
 ```
 
+##### <a name="end-timer"></a>End timer
 b) On completion of the capitalization, we end the timer and retrieve the latency in milliseconds
 ```cpp
     absl::Time end = absl::Now();
     double latency_ms = absl::ToDoubleMilliseconds(end-start);
 ```
 
+##### <a name="record-latencies-against-tags"></a>Record latencies against tags
 c) Record latencies against the respective measures and tagKey "method"
 ```cpp
     opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, methodName}});
@@ -414,6 +349,78 @@ std::string processLine(std::string in) {
 }
 ```
 
+### Exporting to Prometheus
+
+To examine our metrics, we'll use Prometheus.
+
+{{% notice tip %}}
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+{{% /notice %}}
+
+To use the Prometheus exporter for OpenCensus C++, we'll need to update our `BUILD`, `WORKSPACE` and `metrics.cc` files
+as below:
+
+#### <a name="exporting-build-file"></a> BUILD
+
+```shell
+cc_binary(
+        name = "metrics",
+        srcs = ["metrics.cc"],
+        linkopts = ["-pthread"],
+        deps = [
+            "@io_opencensus_cpp//opencensus/stats:stats",
+            "@io_opencensus_cpp//opencensus/exporters/stats/prometheus:prometheus_exporter",
+            "@com_google_absl//absl/base:core_headers",
+            "@com_google_absl//absl/memory",
+            "@com_google_absl//absl/strings",
+            "@com_github_jupp0r_prometheus_cpp//core",
+            "@com_github_jupp0r_prometheus_cpp//pull",
+        ],
+)
+```
+
+#### <a name="exporting-workspace-file"></a>WORKSPACE
+
+```shell
+http_archive(
+    name = "io_opencensus_cpp",
+    strip_prefix = "opencensus-cpp-master",
+    urls = ["https://github.com/census-instrumentation/opencensus-cpp/archive/master.zip"],
+)
+
+# OpenCensus depends on Abseil so we have to explicitly to pull it in.
+# This is how diamond dependencies are prevented.
+http_archive(
+    name = "com_google_absl",
+    strip_prefix = "abseil-cpp-master",
+    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"]
+)
+
+# OpenCensus depends on jupp0r/prometheus-cpp
+http_archive(
+    name = "com_github_jupp0r_prometheus_cpp",
+    strip_prefix = "prometheus-cpp-master",
+    urls = ["https://github.com/jupp0r/prometheus-cpp/archive/master.zip"],
+)
+
+load("@com_github_jupp0r_prometheus_cpp//:repositories.bzl", "prometheus_cpp_repositories")
+prometheus_cpp_repositories()
+```
+
+#### <a name="exporting-prometheus-code"></a>Prometheus exporter source code
+
+```cpp
+#include "opencensus/exporters/stats/prometheus/prometheus_exporter.h"
+#include "prometheus/exposer.h"
+
+int main(int argc, char **argv) {
+    auto exporter =
+        std::make_shared<opencensus::exporters::stats::PrometheusExporter>();
+    // Expose Prometheus on :8888
+    prometheus::Exposer exposer("127.0.0.1:8888");
+    exposer.RegisterCollectable(exporter);
+}
+```
 ### End to end code
 
 Our final code should now look like this
