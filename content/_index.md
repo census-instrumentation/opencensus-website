@@ -18,7 +18,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 ##### How can I use OpenCensus in my project?
 Our libraries support Go, Java, Node.js, C++, Ruby, Erlang/Elixir, Python, and PHP.
 
-Supported backends include Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/guides/exporters/custom-exporter/).
+Supported backends include Azure Monitor, Datadog, Instana, Jaeger, SignalFX, Stackdriver, and Zipkin. You can also [add support for other backends](/guides/exporters/custom-exporter/).
 
 {{<button class="btn-light" icon="true" href="/language-support">}}Language Support{{</button>}}
 
