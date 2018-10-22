@@ -22,7 +22,7 @@ We have a Go "database/sql" package/wrapper that is trace instrumented with Open
 ## Installing it
 To install the "database/sql" plugin, please run
 ```shell
-go get -u -v github.com/basvanbeek/ocsql
+go get -u -v contrib.go.opencensus.io/integrations/ocsql
 ```
 
 ## Using it
@@ -59,7 +59,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/basvanbeek/ocsql"
+	"contrib.go.opencensus.io/integrations/ocsql"
 )
 
 func main() {
@@ -85,7 +85,7 @@ its driver implementation.
 {{<highlight go>}}
 package main
 
-import "github.com/basvanbeek/ocsql"
+import "contrib.go.opencensus.io/integrations/ocsql"
 
 func main() {
 	db := ocsql.Wrap(&theDBObjectInstance{}, ocsql.WithAllTraceOptions())
@@ -117,7 +117,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/basvanbeek/ocsql"
+	"contrib.go.opencensus.io/integrations/ocsql"
 	"go.opencensus.io/exporter/jaeger"
 	"go.opencensus.io/trace"
 
@@ -225,5 +225,5 @@ and on clicking to get details about the most recent trace
 ## References
 Reference|URL
 ---|---
-GoDoc|[github.com/basvanbeek/ocsql](https://godoc.org/github.com/basvanbeek/ocsql)
+GoDoc|[contrib.go.opencensus.io/integrations/ocsql](https://godoc.org/contrib.go.opencensus.io/integrations/ocsql)
 Medium blogpost|[OpenCensus and Go database/sql by Bas van Beek](https://medium.com/@bas.vanbeek/opencensus-and-go-database-sql-322a26be5cc5)
