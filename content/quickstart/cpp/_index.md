@@ -9,8 +9,10 @@ logo: /images/cpp-opencensus.png
 In this quickstart, using OpenCensus C++, you will gain hands-on experience with:
 {{% children %}}
 
-For full API references, please take a look at:
+Further reading:
 
-Resource|Link
----|---
-OpenCensus C++|https://github.com/census-instrumentation/opencensus-cpp
+* [OpenCensus C++](https://github.com/census-instrumentation/opencensus-cpp)
+* [Metrics API](https://github.com/census-instrumentation/opencensus-cpp/tree/master/opencensus/stats)
+* [Tracing API](https://github.com/census-instrumentation/opencensus-cpp/tree/master/opencensus/trace)
+* [Context user guide](https://github.com/census-instrumentation/opencensus-cpp/blob/master/opencensus/doc/context.md)
+* [Example gRPC server](https://github.com/census-instrumentation/opencensus-cpp/tree/master/examples/grpc)
