@@ -1,5 +1,5 @@
 ---
-title: "Exporters"
+title: "Trace exporter"
 date: 2018-10-22T17:31:12-07:00
 draft: false
 class: "shadowed-image lightbox"
