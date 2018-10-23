@@ -347,26 +347,26 @@ as below:
 
 #### <a name="exporting-build-file"></a> BUILD
 
-```shell
+```python
 cc_binary(
-        name = "metrics",
-        srcs = ["metrics.cc"],
-        linkopts = ["-pthread"],
-        deps = [
-            "@io_opencensus_cpp//opencensus/stats:stats",
-            "@io_opencensus_cpp//opencensus/exporters/stats/prometheus:prometheus_exporter",
-            "@com_google_absl//absl/base:core_headers",
-            "@com_google_absl//absl/memory",
-            "@com_google_absl//absl/strings",
-            "@com_github_jupp0r_prometheus_cpp//core",
-            "@com_github_jupp0r_prometheus_cpp//pull",
-        ],
+    name = "metrics",
+    srcs = ["metrics.cc"],
+    linkopts = ["-pthread"],
+    deps = [
+        "@com_github_jupp0r_prometheus_cpp//pull",
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/strings",
+        "@io_opencensus_cpp//opencensus/exporters/stats/prometheus:prometheus_exporter",
+        "@io_opencensus_cpp//opencensus/stats",
+        "@io_opencensus_cpp//opencensus/tags",
+    ],
 )
 ```
 
 #### <a name="exporting-workspace-file"></a>WORKSPACE
 
-```shell
+```python
 http_archive(
     name = "io_opencensus_cpp",
     strip_prefix = "opencensus-cpp-master",
@@ -411,117 +411,136 @@ int main(int argc, char **argv) {
 Our final code should now look like this
 ```cpp
 #include <iostream>
-#include "absl/time/clock.h"
+
 #include "absl/strings/string_view.h"
-#include "opencensus/stats/stats.h"
+#include "absl/time/clock.h"
 #include "opencensus/exporters/stats/prometheus/prometheus_exporter.h"
+#include "opencensus/stats/stats.h"
+#include "opencensus/tags/tag_key.h"
 #include "prometheus/exposer.h"
 
-ABSL_CONST_INIT const absl::string_view kLatencyMeasureName     = "repl/latency";
-ABSL_CONST_INIT const absl::string_view kLatencyViewName        = "ocquickstart.io/latency";
-ABSL_CONST_INIT const absl::string_view kLinesCountViewName     = "ocquickstart.io/lines_in";
-ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName = "repl/line_lengths";
-ABSL_CONST_INIT const absl::string_view kLineLengthsViewName    = "ocquickstart.io/line_lengths";
+namespace {
 
-static const opencensus::stats::MeasureDouble m_latency_ms =
-                    opencensus::stats::MeasureDouble::Register(
-                            kLatencyMeasureName, "The latency in milliseconds", "ms");
+ABSL_CONST_INIT const absl::string_view kLatencyMeasureName = "repl/latency";
+ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName =
+    "repl/line_lengths";
 
-static const opencensus::stats::MeasureInt64 m_line_lengths =
-                    opencensus::stats::MeasureInt64::Register(
-                            kLineLengthsMeasureName, "The distributions of line lengths", "By");
+// Measures and TagKeys are not POD. Treat them as singletons and initialize on
+// demand in order to avoid initialization order issues.
 
-static const opencensus::tags::TagKey key_method =
-                    opencensus::tags::TagKey::Register("method");
-
-std::string processLine(std::string in) {
-    absl::Time start = absl::Now();
-    std::string out(in);
-
-    for (auto it = out.begin(); it != out.end(); it++)
-        *it = std::toupper(*it);
-
-    absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end - start);
-
-    opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "processLine"}});
-
-    return out;
+opencensus::stats::MeasureDouble LatencyMsMeasure() {
+  static const auto measure = opencensus::stats::MeasureDouble::Register(
+      kLatencyMeasureName, "The latency in milliseconds", "ms");
+  return measure;
 }
 
-void registerAsView(opencensus::stats::ViewDescriptor vd) {
-    opencensus::stats::View view(vd);
-    vd.RegisterForExport();
+opencensus::stats::MeasureInt64 LineLengthsMeasure() {
+  static const auto measure = opencensus::stats::MeasureInt64::Register(
+      kLineLengthsMeasureName, "The distributions of line lengths", "By");
+  return measure;
+}
+
+opencensus::tags::TagKey MethodKey() {
+  static const auto key = opencensus::tags::TagKey::Register("method");
+  return key;
+}
+
+std::string processLine(const std::string& in) {
+  absl::Time start = absl::Now();
+  std::string out(in);
+
+  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
+
+  absl::Time end = absl::Now();
+  double latency_ms = absl::ToDoubleMilliseconds(end - start);
+
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms}},
+                            {{MethodKey(), "processLine"}});
+  return out;
+}
+
+void registerAsView(const opencensus::stats::ViewDescriptor& vd) {
+  opencensus::stats::View view(vd);
+  vd.RegisterForExport();
 }
 
 std::string getLine() {
-    absl::Time start = absl::Now();
+  absl::Time start = absl::Now();
 
-    std::string input;
+  std::string input;
 
-    // Get the line
-    std::getline(std::cin, input);
+  // Get the line
+  std::getline(std::cin, input);
 
-    absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end-start);
+  absl::Time end = absl::Now();
+  double latency_ms = absl::ToDoubleMilliseconds(end - start);
 
-    opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "getLine"}});
-    opencensus::stats::Record({{m_line_lengths, input.length()}}, {{key_method, "getLine"}});
-
-    return input;
+  // Record both measures at once.
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms},
+                             {LineLengthsMeasure(), input.length()}},
+                            {{MethodKey(), "getLine"}});
+  return input;
 }
 
-int main(int argc, char **argv) {
-    // Firstly enable the Prometheus exporter
-    auto exporter =
-        std::make_shared<opencensus::exporters::stats::PrometheusExporter>();
-    // Expose Prometheus on :8888
-    prometheus::Exposer exposer("127.0.0.1:8888");
-    exposer.RegisterCollectable(exporter);
+}  // namespace
 
-    // Let's create the various views
-    // 1. Latency view
-    const opencensus::stats::ViewDescriptor latency_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLatencyViewName)
-                .set_description("The various methods' latencies in milliseconds")
-                .set_measure(kLatencyMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Distribution(
-                    opencensus::stats::BucketBoundaries::Explicit(
-                        {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000})))
-                .add_column(key_method);
+int main(int argc, char** argv) {
+  // Firstly enable the Prometheus exporter
+  auto exporter =
+      std::make_shared<opencensus::exporters::stats::PrometheusExporter>();
+  // Expose Prometheus on :8888
+  prometheus::Exposer exposer("127.0.0.1:8888");
+  exposer.RegisterCollectable(exporter);
 
-    // 2. Lines count: just a count aggregation on the latency measurement
-    const opencensus::stats::ViewDescriptor lines_count_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLinesCountViewName)
-                .set_description("The number of lines read in")
-                .set_measure(kLineLengthsMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Count())
-                .add_column(key_method);
+  // Register Measures.
+  LatencyMsMeasure();
+  LineLengthsMeasure();
 
-    // 3. The line lengths:
-    const opencensus::stats::ViewDescriptor line_lengths_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLineLengthsViewName)
-                .set_description("The length of the lines read in")
-                .set_measure(kLineLengthsMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Distribution(
-                    opencensus::stats::BucketBoundaries::Explicit(
-                        {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000})))
-                .add_column(key_method);
+  // Let's create the various views
+  // 1. Latency view
+  const opencensus::stats::ViewDescriptor latency_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/latency")
+          .set_description("The various methods' latencies in milliseconds")
+          .set_measure(kLatencyMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Distribution(
+              opencensus::stats::BucketBoundaries::Explicit(
+                  {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
+                   6000})))
+          .add_column(MethodKey());
 
-    // Register the views to enable stats aggregation.
-    registerAsView(latency_view);
-    registerAsView(lines_count_view);
-    registerAsView(line_lengths_view);
+  // 2. Lines count: just a count aggregation on the latency measurement
+  const opencensus::stats::ViewDescriptor lines_count_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/lines_in")
+          .set_description("The number of lines read in")
+          .set_measure(kLineLengthsMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Count())
+          .add_column(MethodKey());
 
-    while (1) {
-        std::cout << "\n> ";
-        std::string input = getLine();
-        std::string upper = processLine(input);
-        std::cout << "< " << upper << std::endl;
-    }
+  // 3. The line lengths:
+  const opencensus::stats::ViewDescriptor line_lengths_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/line_lengths")
+          .set_description("The length of the lines read in")
+          .set_measure(kLineLengthsMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Distribution(
+              opencensus::stats::BucketBoundaries::Explicit(
+                  {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
+                   1000})))
+          .add_column(MethodKey());
+
+  // Register the views to enable stats aggregation.
+  registerAsView(latency_view);
+  registerAsView(lines_count_view);
+  registerAsView(line_lengths_view);
+
+  while (1) {
+    std::cout << "\n> ";
+    std::string input = getLine();
+    std::string upper = processLine(input);
+    std::cout << "< " << upper << std::endl;
+  }
 }
 ```
 
