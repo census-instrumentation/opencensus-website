@@ -37,12 +37,12 @@ In this quickstart, we’ll gleam insights from code segments and learn how to:
 3. View the metrics on the backend of our choice
 
 ## Requirements
-- g++
+- A compiler: g++ or clang
 - [Bazel](https://bazel.build/)
 - [Prometheus](https://prometheus.io)
 
 {{% notice tip %}}
-For assistance setting up Bazel Build, please [click here](https://docs.bazel.build/versions/master/install.html)
+For assistance setting up Bazel Build, please [click here](https://docs.bazel.build/versions/master/install.html).
 {{% /notice %}}
 
 ## Brief overview
@@ -60,7 +60,7 @@ Our application is an interactive commandline application that:
 - capitalizes the input
 - prints out the capitalized data to standard output
 
-In order to gain observability into the state of our application we shall collect the following metrics
+In order to gain observability into the state of our application we shall collect the following metrics:
 
 - Latency per processing loop
 - Number of lines read
@@ -112,13 +112,11 @@ which will produce output such as:
 > 
 ```
 
-To answer the above questions, please read along:
-
 ## Enable metrics
 
 To enable metrics, we'll need to use the OpenCensus C++ library.
 
-The library requires the [Bazel build system](https://bazel.build/)
+The library requires the [Bazel build system](https://bazel.build/).
 
 ### Build system
 
@@ -130,9 +128,9 @@ Please install bazel first. After that, please proceed below.
 
 To add metrics with OpenCensus, firstly we'll need to use Bazel build to setup a couple of imports for:
 
-* [Abseil C++](https://abseil.io/)
-* [OpenCensus C++](https://github.com/census-instrumentation/opencensus-cpp)
-* [Prometheus C++ client](https://github.com/jupp0r/prometheus-cpp)
+* [Abseil C++ library](https://abseil.io/)
+* [OpenCensus C++ library](https://github.com/census-instrumentation/opencensus-cpp)
+* [Prometheus C++ client library](https://github.com/jupp0r/prometheus-cpp)
 
 After installing bazel, we'll need to make two files in the same working directory as the `metrics.cc`
 that is:
@@ -181,9 +179,10 @@ make their headers available to the compiler.
 * `:metrics` is the name of a "cc_library" target in that directory
 
 From the compiler's point of view, all of the sources and dependencies' headers are merged into a single hierarchy i.e.
-```shell
+```
 metrics.cc
-absl/
+absl/...
+opencensus/...
 ```
 
 ### Measures
@@ -192,11 +191,11 @@ We'll collect some metrics by using OpenCensus' measures:
 
 * Latency of every call
 * Length of each line
-* Number of lines 
+* Number of lines
 
-For each of the measurement that we make against each measure, we'll tag them with the respective methods that processed them
+For each of the measurement that we make against each measure, we'll tag them with the respective methods that processed them.
 
-To enable that, we'll create the measures
+To enable that, we'll create the measures:
 ```cpp
 #include "absl/strings/string_view.h"
 #include "opencensus/stats/stats.h"
@@ -204,25 +203,20 @@ To enable that, we'll create the measures
 ABSL_CONST_INIT const absl::string_view kLatencyMeasureName     = "repl/latency";
 ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName = "repl/line_lengths";
 
-static const opencensus::stats::MeasureDouble m_latency_ms = \
+static const opencensus::stats::MeasureDouble m_latency_ms =
                     opencensus::stats::MeasureDouble::Register(
                             kLatencyMeasureName, "The latency in milliseconds", "ms");
 
-static const opencensus::stats::MeasureInt64 m_line_lengths = \
+static const opencensus::stats::MeasureInt64 m_line_lengths =
                     opencensus::stats::MeasureInt64::Register(
                             "repl/line_lengths", "The distributions of line lengths", "By");
-
-static const opencensus::tags::TagKey key_method = \
-                    opencensus::tags::TagKey::Register("method");
 ```
 
 ### Tags
 
-We'll create a tag "method"
+We'll create a tag called "method":
 ```cpp
-#include "opencensus/stats/stats.h"
-
-static const opencensus::tags::TagKey key_method = \
+static const opencensus::tags::TagKey key_method =
                     opencensus::tags::TagKey::Register("method");
 ```
 
@@ -230,22 +224,20 @@ static const opencensus::tags::TagKey key_method = \
 
 To aggregate recorded measurements with tags against measures, we'll need to make a couple of views:
 
-* Latency of every call: each call will be tagged with "method" and contains a distribution of the various latencies in milliseconds
-* Length of each line: each call will be tagged with "method" and contains a distribution of the various line lengths in bytes
-* Number of lines: just a count aggregation of the `m_line_lengths` measure
+* Latency of every call: each call will be tagged with "method" and contain a distribution of the various latencies in milliseconds.
+* Length of each line: each call will be tagged with "method" and contain a distribution of the various line lengths in bytes.
+* Number of lines: just a count aggregation of the `m_line_lengths` measure.
 
 and for that, the code will look like this:
 
 ```cpp
-#include "opencensus/stats/stats.h"
-
 void registerAsView(opencensus::stats::ViewDescriptor vd) {
     opencensus::stats::View view(vd);
     vd.RegisterForExport();
 }
 
 int main(int argc, char **argv) {
-    const opencensus::stats::ViewDescriptor latency_view = \
+    const opencensus::stats::ViewDescriptor latency_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLatencyViewName)
                 .set_description("The various methods' latencies in milliseconds")
@@ -256,7 +248,7 @@ int main(int argc, char **argv) {
                 .add_column(key_method);
 
     // 2. Lines count: just a count aggregation on the latency measurement
-    const opencensus::stats::ViewDescriptor lines_count_view = \
+    const opencensus::stats::ViewDescriptor lines_count_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLinesCountViewName)
                 .set_description("The number of lines read in")
@@ -265,7 +257,7 @@ int main(int argc, char **argv) {
                 .add_column(key_method);
 
     // 3. The line lengths:
-    const opencensus::stats::ViewDescriptor line_lengths_view = \
+    const opencensus::stats::ViewDescriptor line_lengths_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLineLengthsViewName)
                 .set_description("The length of the lines read in")
@@ -282,34 +274,31 @@ int main(int argc, char **argv) {
 }
 ```
 
-
 #### Instrumenting your functions
 
 To capture latencies, number of lines and line lengths, we'll need to run the following steps:
 
 ##### <a name="start-timer"></a> Start timer
-a) On entry into any function, we'll start a timer
+a) On entry into any function, we'll start a timer:
 ```cpp
     absl::Time start = absl::Now();
 ```
 
 ##### <a name="end-timer"></a>End timer
-b) On completion of the capitalization, we end the timer and retrieve the latency in milliseconds
+b) On completion of the capitalization, we end the timer and retrieve the latency in milliseconds:
 ```cpp
     absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end-start);
+    double latency_ms = absl::ToDoubleMilliseconds(end - start);
 ```
 
 ##### <a name="record-latencies-against-tags"></a>Record latencies against tags
-c) Record latencies against the respective measures and tagKey "method"
+c) Record latencies against the respective measures and tagKey "method":
 ```cpp
     opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, methodName}});
     opencensus::stats::Record({{m_line_lengths, out.length()}}, {{key_method, methodName}});
 ```
 
-which collectively then makes our helper functions `getLine` and `processLine` look like this
-
-* `getLine`
+which collectively then makes our helper functions `getLine` and `processLine` look like this:
 
 ```cpp
 std::string getLine() {
@@ -321,18 +310,14 @@ std::string getLine() {
     std::getline(std::cin, input);
 
     absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end-start);
+    double latency_ms = absl::ToDoubleMilliseconds(end - start);
 
     opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "getLine"}});
     opencensus::stats::Record({{m_line_lengths, input.length()}}, {{key_method, "getLine"}});
 
     return input;
 }
-```
 
-* `processLine`
-
-```cpp
 std::string processLine(std::string in) {
     absl::Time start = absl::Now();
     std::string out(in);
@@ -354,7 +339,7 @@ std::string processLine(std::string in) {
 To examine our metrics, we'll use Prometheus.
 
 {{% notice tip %}}
-For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+For assistance setting up Prometheus, [click here](/codelabs/prometheus) for a guided codelab.
 {{% /notice %}}
 
 To use the Prometheus exporter for OpenCensus C++, we'll need to update our `BUILD`, `WORKSPACE` and `metrics.cc` files
@@ -438,17 +423,17 @@ ABSL_CONST_INIT const absl::string_view kLinesCountViewName     = "ocquickstart.
 ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName = "repl/line_lengths";
 ABSL_CONST_INIT const absl::string_view kLineLengthsViewName    = "ocquickstart.io/line_lengths";
 
-static const opencensus::stats::MeasureDouble m_latency_ms = \
+static const opencensus::stats::MeasureDouble m_latency_ms =
                     opencensus::stats::MeasureDouble::Register(
                             kLatencyMeasureName, "The latency in milliseconds", "ms");
 
-static const opencensus::stats::MeasureInt64 m_line_lengths = \
+static const opencensus::stats::MeasureInt64 m_line_lengths =
                     opencensus::stats::MeasureInt64::Register(
                             kLineLengthsMeasureName, "The distributions of line lengths", "By");
 
-static const opencensus::tags::TagKey key_method = \
+static const opencensus::tags::TagKey key_method =
                     opencensus::tags::TagKey::Register("method");
-    
+
 std::string processLine(std::string in) {
     absl::Time start = absl::Now();
     std::string out(in);
@@ -457,7 +442,7 @@ std::string processLine(std::string in) {
         *it = std::toupper(*it);
 
     absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end-start);
+    double latency_ms = absl::ToDoubleMilliseconds(end - start);
 
     opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "processLine"}});
 
@@ -496,7 +481,7 @@ int main(int argc, char **argv) {
 
     // Let's create the various views
     // 1. Latency view
-    const opencensus::stats::ViewDescriptor latency_view = \
+    const opencensus::stats::ViewDescriptor latency_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLatencyViewName)
                 .set_description("The various methods' latencies in milliseconds")
@@ -507,7 +492,7 @@ int main(int argc, char **argv) {
                 .add_column(key_method);
 
     // 2. Lines count: just a count aggregation on the latency measurement
-    const opencensus::stats::ViewDescriptor lines_count_view = \
+    const opencensus::stats::ViewDescriptor lines_count_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLinesCountViewName)
                 .set_description("The number of lines read in")
@@ -516,7 +501,7 @@ int main(int argc, char **argv) {
                 .add_column(key_method);
 
     // 3. The line lengths:
-    const opencensus::stats::ViewDescriptor line_lengths_view = \
+    const opencensus::stats::ViewDescriptor line_lengths_view =
                 opencensus::stats::ViewDescriptor()
                 .set_name(kLineLengthsViewName)
                 .set_description("The length of the lines read in")
@@ -535,7 +520,6 @@ int main(int argc, char **argv) {
         std::cout << "\n> ";
         std::string input = getLine();
         std::string upper = processLine(input);
-
         std::cout << "< " << upper << std::endl;
     }
 }
@@ -565,7 +549,7 @@ bazel build :metrics && ./bazel-bin/metrics
 
 and after interacting with the terminal by typing in content and hitting enter
 
-```shell
+```
 $ ./bazel-bin/metrics
 *** 1540010354.263193000 1540010354263193000 140736248275840 mg_start:14260: [listening_ports] -> [127.0.0.1:8888]
 *** 1540010354.263233000        40000 140736248275840 mg_start:14260: [num_threads] -> [2]
@@ -599,7 +583,9 @@ $ ./bazel-bin/metrics
 
 ### Examining your metrics on Prometheus
 
-On navigating to the Prometheus UI at http://localhost:9090
+By navigating to the Prometheus UI at http://localhost:9090
+
+You can also see the raw metrics at http://localhost:8888/metrics
 
 #### Available metrics
 
