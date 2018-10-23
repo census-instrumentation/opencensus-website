@@ -286,7 +286,8 @@ cc_binary(
         srcs = ["tracing.cc"],
         linkopts = ["-pthread"],
         deps = [
-            "@io_opencensus_cpp//opencensus/trace:trace",
+            "@io_opencensus_cpp//opencensus/trace",
+            "@io_opencensus_cpp//opencensus/exporters/trace/zipkin:zipkin_exporter",
             "@com_google_absl//absl/base:core_headers",
             "@com_google_absl//absl/memory",
             "@com_google_absl//absl/strings",
@@ -394,62 +395,62 @@ With the above adjustments our sample alongside the updated `BUILD` and `WORKSPA
 
 ```cpp
 #include <iostream>
+
+#include "absl/strings/string_view.h"
+#include "opencensus/exporters/trace/zipkin/zipkin_exporter.h"
 #include "opencensus/trace/sampler.h"
 #include "opencensus/trace/span.h"
-#include "opencensus/exporters/trace/zipkin/zipkin_exporter.h"
 
-std::string processLine(opencensus::trace::Span &parentSpan, std::string in) {
-    opencensus::trace::Span span = \
-                    opencensus::trace::Span::StartSpan("processLine", &parentSpan);
+std::string processLine(const opencensus::trace::Span& parentSpan,
+                        const std::string& in) {
+  auto span = opencensus::trace::Span::StartSpan("processLine", &parentSpan);
+  std::string out(in);
 
-    std::string out(in);
+  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
 
-    for (auto it = out.begin(); it != out.end(); it++)
-        *it = std::toupper(*it);
+  // Add a custom annotation to examine later on.
+  span.AddAnnotation(out);
 
-    // Just add a custom annotation to examine later on.
-    span.AddAnnotation(out);
-
-    span.End();
-    return out;
+  span.End();
+  return out;
 }
 
-int main(int argc, char **argv) {
-    // Samplers are potentially expensive to construct. Use one long-lived
-    // sampler instead of constructing one for every Span.
-    static opencensus::trace::AlwaysSampler sampler;
+int main(int argc, char** argv) {
+  // Samplers are potentially expensive to construct. Use one long-lived
+  // sampler instead of constructing one for every Span.
+  static opencensus::trace::AlwaysSampler sampler;
 
-    // Initialize and enable the Zipkin trace exporter.
-    std::string endpointURL = "http://localhost:9411/api/v2/spans";
-    absl::string_view endpoint = endpointURL;
-    opencensus::exporters::trace::ZipkinExporterOptions opts(endpoint);
-    opencensus::exporters::trace::ZipkinExporter::Register(opts);
-    
-    while (1) {
-        opencensus::trace::Span replSpan = \
-                    opencensus::trace::Span::StartSpan("repl", nullptr, {&sampler});
-                                                
-        std::cout << "\n> ";
-        std::string input;
+  // Initialize and enable the Zipkin trace exporter.
+  const absl::string_view endpoint = "http://localhost:9411/api/v2/spans";
+  opencensus::exporters::trace::ZipkinExporter::Register(
+      opencensus::exporters::trace::ZipkinExporterOptions(endpoint));
 
-        opencensus::trace::Span readLineSpan = \
-                    opencensus::trace::Span::StartSpan("readLine", &replSpan);
-                                                            
-        std::getline(std::cin, input);
-        readLineSpan.End();
+  while (1) {
+    opencensus::trace::Span replSpan = opencensus::trace::Span::StartSpan(
+        "repl", /* parent = */ nullptr, {&sampler});
 
-        // Let's annotate the span
-        replSpan.AddAnnotation("Invoking processLine");
-        std::string upper = processLine(replSpan, input);
+    std::cout << "\n> ";
+    std::string input;
 
-        std::cout << "< " << upper << std::endl;
-        // Ending the replSpan explicitly.
-        replSpan.End();
-    }
+    opencensus::trace::Span readLineSpan =
+        opencensus::trace::Span::StartSpan("readLine", &replSpan);
+    std::getline(std::cin, input);
+    readLineSpan.End();
+
+    // Let's annotate the span.
+
+    replSpan.AddAnnotation("Invoking processLine");
+    const std::string upper = processLine(replSpan, input);
+
+    std::cout << "< " << upper << std::endl;
+
+    // Always explicitly End() every Span.
+    replSpan.End();
+  }
 }
 ```
 
-and when rebuilt and run
+and when rebuilt and run:
 ```shell
 bazel build :tracing && ./bazel-bin/tracing
 ```
@@ -480,6 +481,11 @@ INFO: Build completed successfully, 3 total actions
 ```
 
 And on navigating to the Zipkin UI at http://localhost:9411/zipkin
+
+Alternatively, listen on the Zipkin port to see the exported data:
+```shell
+$ nc -l -p 9411
+```
 
 ### All traces
 ![](/images/cpp-trace-all.png)
