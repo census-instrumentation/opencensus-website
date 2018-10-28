@@ -2,7 +2,7 @@
 title: "Introduction"
 date: 2018-07-16T14:28:03-07:00
 draft: false
-weight: 10
+weight: 1
 ---
 
 {{<title>}} is a vendor-agnostic single distribution of libraries to provide observability for your microservices and monoliths alike. OpenCensus is an open source community developed project. Its origins stem from the rewrite of what has been Google's observability systems for the past 10 years.
