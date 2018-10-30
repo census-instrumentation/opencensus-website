@@ -25,3 +25,28 @@ header::after {
 .logo span {
   color: #BF2A32;
 }
+
+.header-survey {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-survey a {
+  text-transform: none;
+}
+
+.header-survey a.btn.btn-light {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .header-survey {
+    display: none;
+  }
+}
