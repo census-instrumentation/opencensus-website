@@ -43,6 +43,13 @@ header::after {
 
 .header-survey a.btn.btn-light {
   margin-bottom: 0;
+  color: #75af00;
+  border: 1px solid #75af00;
+}
+
+.header-survey a.btn.btn-light:hover {
+  color: #fff;
+  background: #75af00;
 }
 
 @media (max-width: 640px) {
