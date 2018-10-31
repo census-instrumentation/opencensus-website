@@ -43,7 +43,8 @@ a.btn.btn-light.survey-button {
 
 a.btn.btn-light.survey-button {
   margin-bottom: 0;
-  color: #75af00;
+  color: #fff;
+  background: #75af00;
   border: 1px solid #75af00;
 }
 
