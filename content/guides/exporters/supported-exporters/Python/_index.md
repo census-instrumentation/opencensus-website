@@ -10,7 +10,4 @@ logo: /images/python-opencensus.png
 
 OpenCensus Python provides support for various exporters like:
 
-* [Azure Monitor](/supported-exporters/python/applicationinsights)
-* [Google Stackdriver Tracing](/supported-exporters/python/stackdriver/)
-* [Jaeger](/supported-exporters/python/jaeger)
-* [Zipkin](/supported-exporters/python/zipkin)
+{{% children %}}

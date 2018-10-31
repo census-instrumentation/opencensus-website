@@ -15,10 +15,4 @@ For full reference, you can visit:
 
 OpenCensus Java provides support for various exporters like:
 
-* [Google Stackdriver Tracing and Monitoring](/supported-exporters/java/stackdriver)
-* [Instana](/supported-exporters/java/instana)
-* [Prometheus Monitoring](/supported-exporters/java/prometheus)
-* [Zipkin](/supported-exporters/java/zipkin)
-* [Jaeger](/supported-exporters/java/jaeger)
-* [SignalFX](/supported-exporters/java/signalfx)
-* [Logging](/supported-exporters/java/logging)
+{{% children %}}
