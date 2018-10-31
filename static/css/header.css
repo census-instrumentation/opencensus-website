@@ -37,23 +37,38 @@ header::after {
   justify-content: center;
 }
 
-.header-survey a {
+a.btn.btn-light.survey-button {
   text-transform: none;
 }
 
-.header-survey a.btn.btn-light {
+a.btn.btn-light.survey-button {
   margin-bottom: 0;
   color: #75af00;
   border: 1px solid #75af00;
 }
 
-.header-survey a.btn.btn-light:hover {
+a.btn.btn-light.survey-button:hover {
   color: #fff;
   background: #75af00;
 }
 
-@media (max-width: 640px) {
-  .header-survey {
+.mobile-survey {
+  display: none;
+  margin-bottom: 1rem;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.mobile-survey .survey-button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  header .header-survey {
     display: none;
+  }
+
+  .mobile-survey {
+    display: block;
   }
 }
