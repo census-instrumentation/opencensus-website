@@ -25,3 +25,50 @@ header::after {
 .logo span {
   color: #BF2A32;
 }
+
+.header-survey {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.btn.btn-light.survey-button {
+  text-transform: none;
+}
+
+a.btn.btn-light.survey-button {
+  margin-bottom: 0;
+  color: #75af00;
+  border: 1px solid #75af00;
+}
+
+a.btn.btn-light.survey-button:hover {
+  color: #fff;
+  background: #75af00;
+}
+
+.mobile-survey {
+  display: none;
+  margin-bottom: 1rem;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.mobile-survey .survey-button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  header .header-survey {
+    display: none;
+  }
+
+  .mobile-survey {
+    display: block;
+  }
+}
