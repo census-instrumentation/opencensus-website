@@ -21,7 +21,7 @@ You can track how requests propagate through your application and receive detail
 Stackdriver Trace automatically analyzes all of your application's traces to generate in-depth latency reports to surface performance degradations, and can capture traces from all of your VMs, containers, or Google App Engine projects.
 
 OpenCensus Java has support for this exporter available through packages:
-* Trace [io.opencensus.exporter.trace.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-stackdriver)
+* Exporters/Trace [io.opencensus.exporter.trace.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-stackdriver)
 
 {{% notice tip %}}
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
@@ -171,6 +171,7 @@ Insert the following snippet in your `pom.xml`:
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

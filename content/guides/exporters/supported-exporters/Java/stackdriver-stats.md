@@ -25,7 +25,7 @@ Stackdriver collects metrics, events, and metadata from Google Cloud Platform, A
 Stackdriver ingests that data and generates insights via dashboards, charts, and alerts. Stackdriver alerting helps you collaborate by integrating with Slack, PagerDuty, HipChat, Campfire, and more.
 
 OpenCensus Java has support for this exporter available through packages:
-* Stats [io.opencensus.exporter.stats.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-stackdriver)
+* Exporters/Stats [io.opencensus.exporter.stats.stackdriver](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-stackdriver)
 
 ## Creating the exporters
 To create the exporters, you'll need to:
@@ -116,6 +116,9 @@ public final class StackdriverExample {
       Thread.sleep(1000);
     }
     
+    // Wait for a duration longer than reporting duration (1min) to ensure all stats are exported.
+    Thread.sleep(60 * 1000);
+
     System.out.println("Done recording metrics");
   }
 }
@@ -140,6 +143,7 @@ Insert the following snippet in your `pom.xml`:
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
