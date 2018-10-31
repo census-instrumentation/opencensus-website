@@ -196,4 +196,4 @@ Resource|URL
 ---|---
 Setting up Stackdriver|[Stackdriver Codelab](/codelabs/stackdriver)
 Stackdriver Java exporter|https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-stackdriver
-OpenCensius Java Trace package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
+OpenCensus Java Trace package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/

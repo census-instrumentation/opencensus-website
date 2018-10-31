@@ -168,4 +168,4 @@ Resource|URL
 ---|---
 Setting up Stackdriver|[Stackdriver Codelab](/codelabs/stackdriver)
 Stackdriver Java exporter|https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-stats-stackdriver
-OpenCensius Java Stats package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
+OpenCensus Java Stats package|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
