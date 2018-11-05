@@ -29,7 +29,7 @@ class: "shadowed-image lightbox"
     - [Running Prometheus](#running-prometheus)
 - [Viewing your metrics](#viewing-your-metrics)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for any [backend](/core-concepts/exporters/#supported-backends) of our choice
