@@ -203,7 +203,7 @@ To enable that, we'll create the measures:
 ABSL_CONST_INIT const absl::string_view kLatencyMeasureName     = "repl/latency";
 ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName = "repl/line_lengths";
 
-// Measures and TagKeys are not POD. Treat them as singletons and initialize on
+// Treat Measures and TagKeys as singletons and initialize on
 // demand in order to avoid initialization order issues.
 
 opencensus::stats::MeasureDouble LatencyMsMeasure() {
@@ -449,7 +449,7 @@ ABSL_CONST_INIT const absl::string_view kLatencyMeasureName = "repl/latency";
 ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName =
     "repl/line_lengths";
 
-// Measures and TagKeys are not POD. Treat them as singletons and initialize on
+// Treat Measures and TagKeys as singletons and initialize on
 // demand in order to avoid initialization order issues.
 
 opencensus::stats::MeasureDouble LatencyMsMeasure() {
