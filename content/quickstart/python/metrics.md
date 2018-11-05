@@ -16,7 +16,7 @@ This tutorial is incomplete, pending OpenCensus Python adding Metrics exporters
 - [Enable Views](#with-views-and-all-enabled)
 - [Exporting to Stackdriver](#exporting-to-stackdriver)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
