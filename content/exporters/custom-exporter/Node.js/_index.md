@@ -3,6 +3,7 @@ title: "Node.js"
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/custom_exporter/nodejs, /custom_exporter/node.js, /guides/exporters/custom-exporter/nodejs, /guides/exporters/custom-exporter/node.js]
 logo: /images/nodejs.png
 ---
 

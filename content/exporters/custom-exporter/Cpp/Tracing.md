@@ -2,6 +2,7 @@
 title: "Trace exporter"
 date: 2018-10-22T17:31:12-07:00
 draft: false
+aliases: [/custom_exporter/cpp/tracing, /guides/exporters/custom-exporter/cpp/tracing]
 class: "shadowed-image lightbox"
 ---
 

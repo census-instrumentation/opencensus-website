@@ -3,7 +3,7 @@ title: "Java"
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/custom_exporter/java]
+aliases: [/custom_exporter/java, /guides/custom_exporter/java]
 logo: /images/java.png
 ---
 

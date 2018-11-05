@@ -3,7 +3,7 @@ title: "Writing a custom exporter"
 draft: false
 weight: 56
 class: "resized-logo"
-aliases: [/custom_exporter]
+aliases: [/custom_exporter, /guides/exporters/custom-exporter]
 logo: /images/opencensus-logo.png
 ---
 

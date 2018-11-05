@@ -3,6 +3,7 @@ title: "C++"
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/custom_exporter/cpp, /guides/exporters/custom-exporter/cpp]
 logo: /images/cpp-opencensus.png
 ---
 

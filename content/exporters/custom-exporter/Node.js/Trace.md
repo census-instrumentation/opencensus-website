@@ -2,6 +2,7 @@
 title: "Trace exporter"
 draft: false
 weight: 3
+aliases: [/custom_exporter/nodejs/trace, /custom_exporter/node.js/trace, /guides/exporters/custom-exporter/nodejs/trace, /guides/exporters/custom-exporter/node.js/trace]
 ---
 
 ### Table of contents

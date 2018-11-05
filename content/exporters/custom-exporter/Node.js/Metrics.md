@@ -2,6 +2,7 @@
 title: "Stats exporter"
 draft: false
 weight: 3
+aliases: [/custom_exporter/nodejs/metrics, /custom_exporter/node.js/metrics, /guides/exporters/custom-exporter/nodejs/metrics, /guides/exporters/custom-exporter/node.js/metrics]
 ---
 
 ### Table of contents

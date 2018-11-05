@@ -3,6 +3,7 @@ title: "Go"
 draft: false
 weight: 3
 class: "resized-logo"
+aliases: [/custom_exporter/go, /guides/exporters/custom-exporter/go]
 logo: /images/gopher.png
 ---
 

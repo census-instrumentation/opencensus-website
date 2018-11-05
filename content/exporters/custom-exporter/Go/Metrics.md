@@ -2,7 +2,7 @@
 title: "Metrics exporter"
 draft: false
 weight: 3
-aliases: [/custom_exporter/go/metrics]
+aliases: [/custom_exporter/go/metrics, /guides/exporters/custom-exporter/go/metrics]
 ---
 
 - [Introduction](#introduction)

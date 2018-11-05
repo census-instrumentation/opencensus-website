@@ -2,7 +2,7 @@
 title: "Trace exporter"
 draft: false
 weight: 3
-aliases: [/custom_exporter/go/trace]
+aliases: [/custom_exporter/go/trace, /guides/exporters/custom-exporter/go/trace]
 ---
 
 - [Introduction](#introduction)
