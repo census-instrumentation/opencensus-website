@@ -1,7 +1,7 @@
 ---
 title: "View"
 weight: 3
-aliases: [/core-concepts/metrics/views]
+aliases: [/core-concepts/metrics/views, /stats/views]
 ---
 
 - [View](#view)
