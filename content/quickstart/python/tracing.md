@@ -17,7 +17,7 @@ class: "shadowed-image lightbox"
 - [Running the code](#running-the-code)
 - [Viewing your Traces](#viewing-your-traces)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Trace the code using [OpenCensus Tracing](/core-concepts/tracing)
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
