@@ -19,6 +19,7 @@ By the end of this tutorial, we would have done these two things using OpenCensu
 
 ## Getting started
 The exporter has two components:
+
 - An API that lets the user register it.
 - An internal implementation that implements the `Handler` interface.
 
@@ -46,8 +47,10 @@ And the implementation in `latency_exporter.cc`:
 
 namespace {
 
+// Implement the Handler interface.
 class Handler : public ::opencensus::trace::exporter::SpanExporter::Handler {
  public:
+  // OpenCensus will call Export() periodically with a batch of spans.
   void Export(const std::vector<::opencensus::trace::exporter::SpanData>& spans)
       override {
     // Export each span we were given.
