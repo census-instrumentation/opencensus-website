@@ -31,7 +31,7 @@ In this quickstart, we’ll learn how to:
 2. Enabling an exporter to our C++ application
 
 ## Requirements
-- g++
+- A compiler: g++ or clang
 - [Zipkin](https://zipkin.io)
 - [Bazel](https://bazel.build/)
 
@@ -81,7 +81,6 @@ g++ -std=c++11 tracing.cc -o tracing && ./tracing
 which will produce output such as:
 
 ```shell
-
 > bigger than this
 < BIGGER THAN THIS
 
@@ -91,7 +90,7 @@ which will produce output such as:
 > introductions
 < INTRODUCTIONS
 
-> 
+>
 ```
 
 With the application running, we might want to know:
@@ -126,7 +125,7 @@ that is:
 
 #### <a name="enable-tracing-workspace-file"></a>WORKSPACE
 Please update your `WORKSPACE` file to:
-```shell
+```python
 http_archive(
     name = "io_opencensus_cpp",
     strip_prefix = "opencensus-cpp-master",
@@ -146,7 +145,7 @@ http_archive(
 
 #### <a name="enable-tracing-build-file"></a>BUILD
 Please update your `BUILD` file to:
-```shell
+```python
 cc_binary(
         name = "tracing",
         srcs = ["tracing.cc"],
@@ -167,68 +166,72 @@ make their headers available to the compiler.
 From the compiler's point of view, all of the sources and dependencies' headers are merged into a single hierarchy i.e.
 ```shell
 tracing.cc
-absl/
+absl/...
 opencensus/trace/span.h
 ```
 
 ### Instrumenting your code
 
-To add traces, we'll start and stop spans using the `opencensus::trace::Span::StartSpan` function
-and at the end invoke `opencensus::trace::Span.End` on each span
+To add traces, we'll start spans using the `opencensus::trace::Span::StartSpan` function
+and at the end invoke `opencensus::trace::Span::End` on each span, e.g.:
 
 ```cpp
 auto span = opencensus::trace::Span::StartSpan("name", &parentSpan, {&sampler});
-// Do work
+// Do work.
 // ...
 // Finally explicitly end the span.
 span.End();
 ```
 
-which then fully becomes
+which then fully becomes:
+
 ```cpp
 #include <iostream>
 #include "opencensus/trace/sampler.h"
 #include "opencensus/trace/span.h"
 
-std::string processLine(opencensus::trace::Span &parentSpan, std::string in) {
-    opencensus::trace::Span span = \
-                                opencensus::trace::Span::StartSpan("processLine", &parentSpan);
+std::string processLine(const opencensus::trace::Span& parentSpan,
+                        const std::string& in) {
+  auto span = opencensus::trace::Span::StartSpan("processLine", &parentSpan);
+  std::string out(in);
 
-    std::string out(in);
+  for (auto it = out.begin(); it != out.end(); it++) {
+    *it = std::toupper(*it);
+  }
 
-    for (auto it = out.begin(); it != out.end(); it++)
-        *it = std::toupper(*it);
+  // Add a custom annotation to examine later on.
+  span.AddAnnotation(out);
 
-    span.End();
-    return out;
+  span.End();
+  return out;
 }
 
-int main(int argc, char **argv) {
-    // Samplers are potentially expensive to construct. Use one long-lived
-    // sampler instead of constructing one for every Span.
-    static opencensus::trace::AlwaysSampler sampler;
-    
-    while (1) {
-        opencensus::trace::Span replSpan = \
-                        opencensus::trace::Span::StartSpan("repl", nullptr, {&sampler});
-                                                
-        std::cout << "\n> ";
-        std::string input;
+int main(int argc, char** argv) {
+  // Samplers are potentially expensive to construct. Use one long-lived
+  // sampler instead of constructing one for every Span.
+  static opencensus::trace::AlwaysSampler sampler;
 
-        opencensus::trace::Span readLineSpan = \
-                                opencensus::trace::Span::StartSpan("readLine", &replSpan);
-                                                            
-        std::getline(std::cin, input);
-        readLineSpan.End();
+  while (1) {
+    opencensus::trace::Span replSpan = opencensus::trace::Span::StartSpan(
+        "repl", /* parent = */ nullptr, {&sampler});
 
-        // Let's annotate the span
-        replSpan.AddAnnotation("Invoking processLine");
-        std::string upper = processLine(replSpan, input);
+    std::cout << "\n> ";
+    std::string input;
 
-        std::cout << "< " << upper << std::endl;
-        // Ending the replSpan explicitly.
-        replSpan.End();
-    }
+    opencensus::trace::Span readLineSpan =
+        opencensus::trace::Span::StartSpan("readLine", &replSpan);
+    std::getline(std::cin, input);
+    readLineSpan.End();
+
+    // Let's annotate the span.
+    replSpan.AddAnnotation("Invoking processLine");
+    const std::string upper = processLine(replSpan, input);
+
+    std::cout << "< " << upper << std::endl;
+
+    // Always explicitly End() every Span.
+    replSpan.End();
+  }
 }
 ```
 
@@ -243,7 +246,8 @@ and then run it like this
 ./bazel-bin/tracing
 ```
 
-which will produece such output:
+which will produce such output:
+
 ```shell
 ./bazel-bin/tracing
 
@@ -271,16 +275,15 @@ After successfully instrumenting our code, we now need to extract and visually e
 
 For that we'll use Zipkin tracing
 {{% notice tip %}}
-For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+For assistance setting up Zipkin, [click here](/codelabs/zipkin) for a guided codelab.
 {{% /notice %}}
 
 For that we'll update both our files `BUILD` and `WORKSPACE`:
 
-
 ### <a name="exporting-build-file"></a>Updated BUILD file
 `BUILD`
 
-```shell
+```python
 cc_binary(
         name = "tracing",
         srcs = ["tracing.cc"],
@@ -297,9 +300,7 @@ cc_binary(
 
 ### <a name="exporting-workspace-file"></a>Updated WORKSPACE file
 
-`WORKSPACE`
-
-```shell
+```python
 http_archive(
     name = "io_opencensus_cpp",
     strip_prefix = "opencensus-cpp-master",
@@ -382,11 +383,12 @@ To use the Zipkin exporter, we'll just need these lines
 #include "opencensus/exporters/trace/zipkin/zipkin_exporter.h"
 
 int main(int argc, char **argv) {
-    // Initialize and enable the Zipkin trace exporter.
-    std::string endpointURL = "http://localhost:9411/api/v2/spans";
-    absl::string_view endpoint = endpointURL;
-    opencensus::exporters::trace::ZipkinExporterOptions opts(endpoint);
-    opencensus::exporters::trace::ZipkinExporter::Register(opts);
+  // Initialize and enable the Zipkin trace exporter.
+  const absl::string_view endpoint = "http://localhost:9411/api/v2/spans";
+  opencensus::exporters::trace::ZipkinExporter::Register(
+      opencensus::exporters::trace::ZipkinExporterOptions(endpoint));
+
+  // ...
 ```
 
 ## End to end code
@@ -406,7 +408,9 @@ std::string processLine(const opencensus::trace::Span& parentSpan,
   auto span = opencensus::trace::Span::StartSpan("processLine", &parentSpan);
   std::string out(in);
 
-  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
+  for (auto it = out.begin(); it != out.end(); it++) {
+    *it = std::toupper(*it);
+  }
 
   // Add a custom annotation to examine later on.
   span.AddAnnotation(out);
@@ -438,7 +442,6 @@ int main(int argc, char** argv) {
     readLineSpan.End();
 
     // Let's annotate the span.
-
     replSpan.AddAnnotation("Invoking processLine");
     const std::string upper = processLine(replSpan, input);
 
@@ -457,7 +460,7 @@ bazel build :tracing && ./bazel-bin/tracing
 
 ## Viewing your traces on Zipkin
 
-After interactng with our application
+After interacting with our application
 ```shell
 $ bazel build :tracing && ./bazel-bin/tracing
 INFO: Analysed target //:tracing (0 packages loaded).
@@ -477,7 +480,7 @@ INFO: Build completed successfully, 3 total actions
 > C++ here we come
 < C++ HERE WE COME
 
-> 
+>
 ```
 
 And on navigating to the Zipkin UI at http://localhost:9411/zipkin

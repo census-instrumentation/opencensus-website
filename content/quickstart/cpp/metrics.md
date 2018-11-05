@@ -203,21 +203,30 @@ To enable that, we'll create the measures:
 ABSL_CONST_INIT const absl::string_view kLatencyMeasureName     = "repl/latency";
 ABSL_CONST_INIT const absl::string_view kLineLengthsMeasureName = "repl/line_lengths";
 
-static const opencensus::stats::MeasureDouble m_latency_ms =
-                    opencensus::stats::MeasureDouble::Register(
-                            kLatencyMeasureName, "The latency in milliseconds", "ms");
+// Measures and TagKeys are not POD. Treat them as singletons and initialize on
+// demand in order to avoid initialization order issues.
 
-static const opencensus::stats::MeasureInt64 m_line_lengths =
-                    opencensus::stats::MeasureInt64::Register(
-                            "repl/line_lengths", "The distributions of line lengths", "By");
+opencensus::stats::MeasureDouble LatencyMsMeasure() {
+  static const auto measure = opencensus::stats::MeasureDouble::Register(
+      kLatencyMeasureName, "The latency in milliseconds", "ms");
+  return measure;
+}
+
+opencensus::stats::MeasureInt64 LineLengthsMeasure() {
+  static const auto measure = opencensus::stats::MeasureInt64::Register(
+      kLineLengthsMeasureName, "The distributions of line lengths", "By");
+  return measure;
+}
 ```
 
 ### Tags
 
 We'll create a tag called "method":
 ```cpp
-static const opencensus::tags::TagKey key_method =
-                    opencensus::tags::TagKey::Register("method");
+opencensus::tags::TagKey MethodKey() {
+  static const auto key = opencensus::tags::TagKey::Register("method");
+  return key;
+}
 ```
 
 ### Views
@@ -232,45 +241,55 @@ and for that, the code will look like this:
 
 ```cpp
 void registerAsView(opencensus::stats::ViewDescriptor vd) {
-    opencensus::stats::View view(vd);
-    vd.RegisterForExport();
+  opencensus::stats::View view(vd);
+  vd.RegisterForExport();
 }
 
 int main(int argc, char **argv) {
-    const opencensus::stats::ViewDescriptor latency_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLatencyViewName)
-                .set_description("The various methods' latencies in milliseconds")
-                .set_measure(kLatencyMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Distribution(
-                    opencensus::stats::BucketBoundaries::Explicit(
-                        {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000})))
-                .add_column(key_method);
+  // Register Measures.
+  LatencyMsMeasure();
+  LineLengthsMeasure();
 
-    // 2. Lines count: just a count aggregation on the latency measurement
-    const opencensus::stats::ViewDescriptor lines_count_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLinesCountViewName)
-                .set_description("The number of lines read in")
-                .set_measure(kLineLengthsMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Count())
-                .add_column(key_method);
+  // Let's create the various views
+  // 1. Latency view
+  const opencensus::stats::ViewDescriptor latency_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/latency")
+          .set_description("The various methods' latencies in milliseconds")
+          .set_measure(kLatencyMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Distribution(
+              opencensus::stats::BucketBoundaries::Explicit(
+                  {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
+                   6000})))
+          .add_column(MethodKey());
 
-    // 3. The line lengths:
-    const opencensus::stats::ViewDescriptor line_lengths_view =
-                opencensus::stats::ViewDescriptor()
-                .set_name(kLineLengthsViewName)
-                .set_description("The length of the lines read in")
-                .set_measure(kLineLengthsMeasureName)
-                .set_aggregation(opencensus::stats::Aggregation::Distribution(
-                    opencensus::stats::BucketBoundaries::Explicit(
-                        {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000})))
-                .add_column(key_method);
+  // 2. Lines count: just a count aggregation on the latency measurement
+  const opencensus::stats::ViewDescriptor lines_count_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/lines_in")
+          .set_description("The number of lines read in")
+          .set_measure(kLineLengthsMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Count())
+          .add_column(MethodKey());
 
-    // Register the views to enable stats aggregation.
-    registerAsView(latency_view);
-    registerAsView(lines_count_view);
-    registerAsView(line_lengths_view);
+  // 3. The line lengths:
+  const opencensus::stats::ViewDescriptor line_lengths_view =
+      opencensus::stats::ViewDescriptor()
+          .set_name("ocquickstart.io/line_lengths")
+          .set_description("The length of the lines read in")
+          .set_measure(kLineLengthsMeasureName)
+          .set_aggregation(opencensus::stats::Aggregation::Distribution(
+              opencensus::stats::BucketBoundaries::Explicit(
+                  {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
+                   1000})))
+          .add_column(MethodKey());
+
+  // Register the views to enable stats aggregation.
+  registerAsView(latency_view);
+  registerAsView(lines_count_view);
+  registerAsView(line_lengths_view);
+
+  // ...
 }
 ```
 
@@ -279,58 +298,59 @@ int main(int argc, char **argv) {
 To capture latencies, number of lines and line lengths, we'll need to run the following steps:
 
 ##### <a name="start-timer"></a> Start timer
-a) On entry into any function, we'll start a timer:
+On entry into any function, we'll start a timer:
 ```cpp
     absl::Time start = absl::Now();
 ```
 
 ##### <a name="end-timer"></a>End timer
-b) On completion of the capitalization, we end the timer and retrieve the latency in milliseconds:
+On completion of the capitalization, we end the timer and retrieve the latency in milliseconds:
 ```cpp
     absl::Time end = absl::Now();
     double latency_ms = absl::ToDoubleMilliseconds(end - start);
 ```
 
 ##### <a name="record-latencies-against-tags"></a>Record latencies against tags
-c) Record latencies against the respective measures and tagKey "method":
+Record latencies against the respective measures and tagKey "method":
 ```cpp
-    opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, methodName}});
-    opencensus::stats::Record({{m_line_lengths, out.length()}}, {{key_method, methodName}});
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms},
+                             {LineLengthsMeasure(), input.length()}},
+                            {{MethodKey(), "getLine"}});
 ```
 
 which collectively then makes our helper functions `getLine` and `processLine` look like this:
 
 ```cpp
 std::string getLine() {
-    absl::Time start = absl::Now();
+  absl::Time start = absl::Now();
 
-    std::string input;
+  std::string input;
 
-    // Get the line
-    std::getline(std::cin, input);
+  // Get the line
+  std::getline(std::cin, input);
 
-    absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end - start);
+  absl::Time end = absl::Now();
+  double latency_ms = absl::ToDoubleMilliseconds(end - start);
 
-    opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "getLine"}});
-    opencensus::stats::Record({{m_line_lengths, input.length()}}, {{key_method, "getLine"}});
-
-    return input;
+  // Record both measures at once.
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms},
+                             {LineLengthsMeasure(), input.length()}},
+                            {{MethodKey(), "getLine"}});
+  return input;
 }
 
-std::string processLine(std::string in) {
-    absl::Time start = absl::Now();
-    std::string out(in);
+std::string processLine(const std::string& in) {
+  absl::Time start = absl::Now();
+  std::string out(in);
 
-    for (auto it = out.begin(); it != out.end(); it++)
-        *it = std::toupper(*it);
+  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
 
-    absl::Time end = absl::Now();
-    double latency_ms = absl::ToDoubleMilliseconds(end-start);
+  absl::Time end = absl::Now();
+  double latency_ms = absl::ToDoubleMilliseconds(end - start);
 
-    opencensus::stats::Record({{m_latency_ms, latency_ms}}, {{key_method, "processLine"}});
-
-    return out;
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms}},
+                            {{MethodKey(), "processLine"}});
+  return out;
 }
 ```
 
@@ -404,6 +424,8 @@ int main(int argc, char **argv) {
     // Expose Prometheus on :8888
     prometheus::Exposer exposer("127.0.0.1:8888");
     exposer.RegisterCollectable(exporter);
+
+    // ...
 }
 ```
 ### End to end code
@@ -445,20 +467,6 @@ opencensus::tags::TagKey MethodKey() {
   return key;
 }
 
-std::string processLine(const std::string& in) {
-  absl::Time start = absl::Now();
-  std::string out(in);
-
-  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
-
-  absl::Time end = absl::Now();
-  double latency_ms = absl::ToDoubleMilliseconds(end - start);
-
-  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms}},
-                            {{MethodKey(), "processLine"}});
-  return out;
-}
-
 void registerAsView(const opencensus::stats::ViewDescriptor& vd) {
   opencensus::stats::View view(vd);
   vd.RegisterForExport();
@@ -480,6 +488,20 @@ std::string getLine() {
                              {LineLengthsMeasure(), input.length()}},
                             {{MethodKey(), "getLine"}});
   return input;
+}
+
+std::string processLine(const std::string& in) {
+  absl::Time start = absl::Now();
+  std::string out(in);
+
+  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
+
+  absl::Time end = absl::Now();
+  double latency_ms = absl::ToDoubleMilliseconds(end - start);
+
+  opencensus::stats::Record({{LatencyMsMeasure(), latency_ms}},
+                            {{MethodKey(), "processLine"}});
+  return out;
 }
 
 }  // namespace
