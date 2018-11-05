@@ -4,7 +4,7 @@ date: 2018-07-21T14:27:35-07:00
 draft: false
 weight: 2
 class: "resized-logo"
-aliases: [/supported-exporters/go]
+aliases: [/guides/exporters/supported-exporters/go]
 logo: /images/gopher.png
 ---
 

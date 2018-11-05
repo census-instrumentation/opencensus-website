@@ -4,7 +4,7 @@ date: 2018-10-16
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/go/honeycomb]
+aliases: [/guides/exporters/supported-exporters/go/honeycomb]
 logo: /img/honeycomb-logo.jpg
 ---
 

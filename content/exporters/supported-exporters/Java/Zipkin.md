@@ -4,7 +4,7 @@ date: 2018-07-22T17:20:12-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/java/zipkin]
+aliases: [/supported-exporters/java/zipkin, /guides/exporters/supported-exporters/java/zipkin]
 logo: /img/zipkin-logo.jpg
 ---
 

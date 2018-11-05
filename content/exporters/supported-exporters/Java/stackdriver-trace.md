@@ -3,7 +3,7 @@ title: "Stackdriver (Tracing)"
 date: 2018-07-21T14:27:35-07:00
 draft: false
 class: "shadowed-image lightbox"
-aliases: [/supported-exporters/java/stackdriver]
+aliases: [/guides/exporters/supported-exporters/java/stackdriver-trace]
 logo: /images/logo_gcp_vertical_rgb.png
 ---
 

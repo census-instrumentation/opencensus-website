@@ -4,7 +4,7 @@ date: 2018-07-22T14:27:35-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/java/prometheus]
+aliases: [/supported-exporters/java/prometheus, /guides/exporters/supported-exporters/java/prometheus]
 logo: /img/prometheus-logo.png
 ---
 

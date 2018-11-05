@@ -4,7 +4,7 @@ date: 2018-07-22T17:35:15-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/jaeger]
+aliases: [/supported-exporters/jaeger, /guides/exporters/supported-exporters/java/jaeger]
 logo: /img/partners/jaeger_logo.svg
 ---
 

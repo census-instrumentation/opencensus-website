@@ -4,7 +4,7 @@ date: 2018-10-22
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/go/applicationinsights]
+aliases: [/supported-exporters/go/applicationinsights, /guides/exporters/supported-exporters/go/applicationinsights]
 logo: /img/partners/microsoft_logo.svg
 ---
 

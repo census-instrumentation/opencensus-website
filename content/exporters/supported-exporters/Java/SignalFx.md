@@ -4,7 +4,7 @@ date: 2018-07-22T16:58:03-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/java/signalfx]
+aliases: [/supported-exporters/java/signalfx, /guides/exporters/supported-exporters/java/signalfx]
 logo: /img/partners/signalFx_logo.svg
 ---
 
