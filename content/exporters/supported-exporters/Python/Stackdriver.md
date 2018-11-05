@@ -4,7 +4,7 @@ date: 2018-07-22T23:47:14-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/python/stackdriver]
+aliases: [/supported-exporters/python/stackdriver, /guides/exporters/supported-exporters/python/stackdriver]
 logo: /images/logo_gcp_vertical_rgb.png
 ---
 

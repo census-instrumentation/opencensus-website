@@ -4,7 +4,7 @@ date: 2018-10-22
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/python/applicationinsights]
+aliases: [/supported-exporters/python/applicationinsights, /guides/exporters/supported-exporters/python/applicationinsights]
 logo: /img/partners/microsoft_logo.svg
 ---
 

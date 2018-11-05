@@ -4,7 +4,7 @@ date: 2018-07-22T23:12:15-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/supported-exporters/python/zipkin]
+aliases: [/supported-exporters/python/zipkin, /guides/exporters/supported-exporters/python/zipkin]
 logo: /img/zipkin-logo.jpg
 ---
 

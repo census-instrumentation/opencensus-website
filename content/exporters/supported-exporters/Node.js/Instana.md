@@ -3,6 +3,7 @@ title: "Instana (Tracing)"
 date: 2018-08-29T15:29:53-07:00
 draft: false
 class: "resized-logo"
+aliases: [/guides/exporters/supported-exporters/node.js/instana, /guides/exporters/supported-exporters/nodejs/instana]
 logo: /images/instana.png
 ---
 

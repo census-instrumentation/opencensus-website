@@ -3,6 +3,7 @@ title: "Jaeger (Tracing)"
 date: 2018-08-29T15:29:53-07:00
 draft: false
 class: "resized-logo"
+aliases: [/guides/exporters/supported-exporters/node.js/jaeger]
 logo: /img/partners/jaeger_logo.svg
 ---
 
