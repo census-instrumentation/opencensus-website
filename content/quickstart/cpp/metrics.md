@@ -343,7 +343,9 @@ std::string processLine(const std::string& in) {
   absl::Time start = absl::Now();
   std::string out(in);
 
-  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
+  for (auto it = out.begin(); it != out.end(); it++) {
+    *it = std::toupper(*it);
+  }
 
   absl::Time end = absl::Now();
   double latency_ms = absl::ToDoubleMilliseconds(end - start);
@@ -494,7 +496,9 @@ std::string processLine(const std::string& in) {
   absl::Time start = absl::Now();
   std::string out(in);
 
-  for (auto it = out.begin(); it != out.end(); it++) *it = std::toupper(*it);
+  for (auto it = out.begin(); it != out.end(); it++) {
+    *it = std::toupper(*it);
+  }
 
   absl::Time end = absl::Now();
   double latency_ms = absl::ToDoubleMilliseconds(end - start);
