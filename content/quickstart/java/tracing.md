@@ -64,7 +64,7 @@ Please add this content to your `pom.xml` file:
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <build>
@@ -202,6 +202,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
         <groupId>io.opencensus</groupId>
         <artifactId>opencensus-impl</artifactId>
         <version>${opencensus.version}</version>
+        <scope>runtime</scope>
     </dependency>
 </dependencies>
 {{</highlight>}}
@@ -219,7 +220,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -233,6 +234,7 @@ To enable tracing, we’ll declare the dependencies in your `pom.xml` file. Inse
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -394,7 +396,7 @@ To enable trace exporting to Zipkin, we’ll need to declare the Zipkin exporter
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -408,6 +410,7 @@ To enable trace exporting to Zipkin, we’ll need to declare the Zipkin exporter
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -810,7 +813,7 @@ public class Repl {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -824,6 +827,7 @@ public class Repl {
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

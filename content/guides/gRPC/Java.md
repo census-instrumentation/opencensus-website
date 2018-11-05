@@ -619,7 +619,7 @@ public class TutorialServer {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The version of OpenCensus to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The version of OpenCensus to use -->
         <grpc.version>1.12.0</grpc.version> <!-- The gRPC version to use with the version of OpenCensus -->
     </properties>
 
@@ -1037,7 +1037,7 @@ which will give visuals such as:
 Notes|Link
 ---|---
 OpenCensus Java gRPC metrics|https://www.javadoc.io/doc/io.opencensus/opencensus-contrib-grpc-metrics
-Trace JavaDoc|[io.opencensus.trace.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/package-summary.html)
-Stats JavaDoc|[io.opencensus.stats.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/stats/package-summary.html)
+Trace JavaDoc|[io.opencensus.trace.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/package-summary.html)
+Stats JavaDoc|[io.opencensus.stats.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/stats/package-summary.html)
 OpenCensus JavaDoc|[io.opencensus.*](https://www.javadoc.io/doc/io.opencensus/opencensus-api/)
 OpenCensus Java exporters|[Some OpenCensus Java exporters](/supported-exporters/java/)
