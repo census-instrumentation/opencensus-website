@@ -38,7 +38,8 @@ If you’ve got a Maven application, you’ll need to add opencensus-contrib-dro
 </dependencies>
 ```
 
-And you can find its latest version here.
+And you can find its latest version [\[here\]](https://mvnrepository.com/artifact/io.opencensus/opencensus-contrib-dropwizard).
+
 
 For Gradle add to your dependencies:
 ```xml
@@ -88,7 +89,7 @@ public class YourClass {
 {{</highlight>}}
 
 ##### 4. Viewing your metrics
-Here are few sample charts created out of data exported by OpenCensus using Prometheus exporter.
+Here are a few sample charts created out of data exported by OpenCensus using Prometheus exporter.
 
 http://localhost:9090
 ![](/images/prometheus-graph.png)
