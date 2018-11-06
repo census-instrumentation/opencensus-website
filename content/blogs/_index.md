@@ -7,6 +7,14 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### November 5, 2018
+
+#### [Export Dropwizard Metrics to OpenCensus](https://medium.com/@mayurkale22/export-dropwizard-metrics-to-opencensus-1e98851693f8)
+
+This post shows how to export Dropwizard Metrics to OpenCensus with minimal changes. [\[read more\]](/guides/integrations/dropwizard)
+
+---
+
 ##### October 7, 2018
 
 #### [Distributed Tracing and Monitoring using OpenCensus](https://medium.com/@rghetia/distributed-tracing-and-monitoring-using-opencensus-fe5f6e9479fb)
