@@ -8,24 +8,29 @@ weight: 5
 ---
 
 - [Background](#background)
-- [How it works](#how-it-works)
-    - [Prerequisites](#1-prerequisites)
-    - [Add the dependencies to your project](#2-add-the-dependencies-to-your-project)
-    - [And the following code](#3-and-the-following-code)
-    - [Viewing your metrics](#4-viewing-your-metrics)
+- [Prerequisities](#prerequisites)
+- [Adding dependencies](#adding-dependencies)
+- [Enable an exporter](#enable-an-exporter)
+- [End to end example](#end-to-end-example)
+- [Visuals](#visuals)
 
 ## Background
 Dropwizard Metrics is a popular solution used by Java developers to capture JVM and application-level metrics from their services. In addition to distributed tracing, OpenCensus also captures application-level metrics from Java services, and interoperability between Dropwizard and OpenCensus has been one of our most asked for Java features. 
 
 We have good news: OpenCensus now provides an easy way to export and migrate Dropwizard metrics to OpenCensus, and then on to your backend of choice.
 
-## How it works
-We will follow four steps to complete the work.
+## Prerequisites
+- Assuming, you already have both the OpenCensus and Dropwizard client libraries setup and working inside your application.
 
-##### 1. Prerequisites
-Assuming, you already have both the OpenCensus and Dropwizard client libraries setup and working inside your application.
+- Prometheus as our choice of metrics backend: we are picking it beause it is free, open source and easy to setup
 
-##### 2. Add the dependencies to your project
+{{% notice tip %}}
+For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
+
+You can swap out any other exporter from the [list of Java exporters](/guides/exporters/supported-exporters/java)
+{{% /notice %}}
+
+## Adding dependencies
 If you’ve got a Maven application, you’ll need to add opencensus-contrib-dropwizard as a dependency.
 
 ```xml
@@ -40,13 +45,40 @@ If you’ve got a Maven application, you’ll need to add opencensus-contrib-dro
 
 And you can find its latest version [\[here\]](https://mvnrepository.com/artifact/io.opencensus/opencensus-contrib-dropwizard).
 
-
 For Gradle add to your dependencies:
 ```xml
 compile ‘io.opencensus:opencensus-dropwizard:0.17.0’
 ```
 
-##### 3. And the following code
+## Enable an exporter
+Add the following code snippet to your `<dependencies>...</dependencies>` node in `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.opencensus</groupId>
+    <artifactId>opencensus-exporter-stats-prometheus</artifactId>
+    <version>0.17.0</version>
+</dependency>
+
+<dependency>
+    <groupId>io.prometheus</groupId>
+    <artifactId>simpleclient_httpserver</artifactId>
+    <version>0.4.0</version>
+</dependency>
+```
+We also need to expose the Prometheus endpoint say on address “localhost:8888” in order for Prometheus to scrape our application. Please add the following to our Java code.
+
+{{<highlight java>}}
+private static void setupOpenCensusAndPrometheusExporter() throws IOException {
+  // Register the Prometheus exporter
+  PrometheusStatsCollector.createAndRegister();
+
+  // Run the server as a daemon on address "localhost:8888"
+  HTTPServer server = new HTTPServer("localhost", 8888, true);
+}
+{{</highlight>}}
+
+## End to end example
 
 {{<highlight java>}}
 import java.util.Collections;
@@ -88,7 +120,7 @@ public class YourClass {
 }
 {{</highlight>}}
 
-##### 4. Viewing your metrics
+## Visuals
 Here are a few sample charts created out of data exported by OpenCensus using Prometheus exporter.
 
 http://localhost:9090
