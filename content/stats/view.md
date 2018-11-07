@@ -43,6 +43,7 @@ package main
 
 import (
 	"go.opencensus.io/stats/view"
+	"go.opencensus.io/tag"
 )
 
 func enableViews() error {
