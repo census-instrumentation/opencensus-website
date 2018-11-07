@@ -13,6 +13,7 @@ weight: 5
 - [Enable an exporter](#enable-an-exporter)
 - [End to end example](#end-to-end-example)
 - [Visuals](#visuals)
+- [References](#references)
 
 ## Background
 Dropwizard Metrics is a popular solution used by Java developers to capture JVM and application-level metrics from their services. In addition to distributed tracing, OpenCensus also captures application-level metrics from Java services, and interoperability between Dropwizard and OpenCensus has been one of our most asked for Java features. 
@@ -22,7 +23,7 @@ We have good news: OpenCensus now provides an easy way to export and migrate Dro
 ## Prerequisites
 - Assuming, you already have both the OpenCensus and Dropwizard client libraries setup and working inside your application.
 
-- Prometheus as our choice of metrics backend: we are picking it beause it is free, open source and easy to setup
+- Prometheus as our choice of metrics backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
 For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
@@ -107,7 +108,8 @@ public class YourClass {
             Collections.singletonList(codahaleRegistry)));
     
     setupOpenCensusAndPrometheusExporter();
-    ...
+
+    //...Continue with the rest of your application here
   }
 
   private static void setupOpenCensusAndPrometheusExporter() throws IOException {
@@ -132,4 +134,9 @@ Prometheus “codahale_requests_counter”
 ![](/images/prometheus-gauge-graph.png)
 Prometheus “codahale_get_requests_duration_size_gauge”
 
+## References
+Resource|URL
+---|---
+Dropwizard Project|https://www.dropwizard.io
+OpenCensus-Dropwizard on Maven Central|https://mvnrepository.com/artifact/io.opencensus/opencensus-contrib-dropwizard
 
