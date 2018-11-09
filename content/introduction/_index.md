@@ -46,4 +46,4 @@ While OpenCensus is an open source project with an incredibly active community, 
 OpenCensus is used in production at some of the largest companies in the world, and as such it strives to have as small of a performance impact as possible.
 
 #### Backend Support
-OpenCensus can upload data to almost any backend with its various exporter implementations. If you're using a backend that isn't supported yet (such as an analysis system built specifically for your organization), you can also implement your own quickly and easily. [Read more](/core-concepts/exporters/).
+OpenCensus can upload data to almost any backend with its various exporter implementations. If you're using a backend that isn't supported yet (such as an analysis system built specifically for your organization), you can also implement your own quickly and easily. [Read more](/exporters).
