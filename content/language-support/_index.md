@@ -6,8 +6,6 @@ weight: 50
 class: "resized-logo"
 ---
 
-![](/images/opencensus-supported-languages.png)
-
 Language|API reference
 ---|---
 Go|https://godoc.org/go.opencensus.io
