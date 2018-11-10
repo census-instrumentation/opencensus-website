@@ -5,7 +5,7 @@ draft: false
 weight: 1
 ---
 
-{{<title>}} makes getting critical telemetry out of your services easy and automatic. OpenCensus currently provides libraries for a number of languages that allow you to capture, manipulate, and export metrics and distributed traces to the backend(s) of your choice. OpenCensus works great with all software systems, from client applications, large monoliths, or highly-distributed microservices. OpenCensus started at Google but is now developed by a broad community of service developers, cloud vendors, and community contributors. OpenCensus isn't tied to any particular vendor's backend or analysis system.
+{{<title>}} makes getting critical telemetry out of your services easy and seamless. OpenCensus currently provides libraries for a number of languages that allow you to capture, manipulate, and export metrics and distributed traces to the backend(s) of your choice. OpenCensus works great with all software systems, from client applications, large monoliths, or highly-distributed microservices. OpenCensus started at Google but is now developed by a broad community of service developers, cloud vendors, and community contributors. OpenCensus isn't tied to any particular vendor's backend or analysis system.
 
 In this section we will walk through what OpenCensus is, what problems it solves, and how it can help your project.
 
@@ -22,22 +22,22 @@ After instrumenting your code with OpenCensus, you will equip yourself with the 
 
 # Features
 
-#### Automatic Context Propagation
+#### Context Propagation
 In order to correlate activities and requests between services with an initial customer action, context (usually in the form of trace or correlation ID) must be propagated throughout your systems. Performing this automatically can be quite difficult, and a lack of automatic context propagation is often identified as the biggest blocker to an organization adopting distributed tracing. OpenCensus provides automatic context propagation across its supported languages and frameworks, and provides simple APIs for manually propagating or manipulating context.
 
 OpenCensus supports several different context propagation formats, and is the reference implementation of the official W3C HTTP tracing header.
 
-#### Automatic Distributed Trace Collection
-OpenCensus automatically captures and propagates distributed traces through your system, allowing you to visualize how customer requests flow across services, rapidly perform deep root cause analysis, and better analyze latency across a highly distributed set of services. OpenCensus includes functionality like context propagation and sampling out of the box and can interoperate with a variety of tracing systems. You can learn more about OpenCensus' distributed tracing support [here](/tracing).
+#### Distributed Trace Collection
+OpenCensus captures and propagates distributed traces through your system, allowing you to visualize how customer requests flow across services, rapidly perform deep root cause analysis, and better analyze latency across a highly distributed set of services. OpenCensus includes functionality like context propagation and sampling out of the box and can interoperate with a variety of tracing systems. You can learn more about OpenCensus' distributed tracing support [here](/tracing).
 
-#### Automatic Time-series Metrics Collection
-OpenCensus automatically captures critical time series statistics from your application, including the latency, request count, and request size for each endpoint. Once captured, these individual statistics can be aggregated into metrics with time windows and dimensions of your choosing.
+#### Time-series Metrics Collection
+OpenCensus captures critical time series statistics from your application, including the latency, request count, and request size for each endpoint. Once captured, these individual statistics can be aggregated into metrics with time windows and dimensions of your choosing.
 
 #### APIs
 OpenCensus provides APIs for all telemetry types. For example, you can use these to define and capture custom metrics, add additional spans or annotations to traces, define custom trace sampling policy, switch context propagation formats, etc.
 
 #### Integrations
-OpenCensus contains an incredible amount of integrations out of the box. These allow traces and metrics to be captured automatically from popular RPC systems, web frameworks, and storage clients.
+OpenCensus contains an incredible amount of integrations out of the box. These allow traces and metrics to be captured from popular RPC systems, web frameworks, and storage clients.
 
 #### Single Project and Implementation
 While OpenCensus is an open source project with an incredibly active community, it also benefits from maintaining a single distribution for each language. This means that contributions are focused, that efforts are wasted on multiple competing implementations (particularly important for integrations), and that as much functionality is available out of the box as possible.
