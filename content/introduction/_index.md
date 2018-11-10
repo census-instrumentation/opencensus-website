@@ -5,7 +5,7 @@ draft: false
 weight: 1
 ---
 
-{{<title>}} makes getting critical telemetry out of your services easy and automatic. Its origins stem from the rewrite of what has been Google's observability systems for the past 10 years. OpenCensus currently provides libraries for a number of languages that allow you to capture, manipulate, and export metrics and distributed traces to the backend(s) of your choice.
+{{<title>}} makes getting critical telemetry out of your services easy and automatic. OpenCensus currently provides libraries for a number of languages that allow you to capture, manipulate, and export metrics and distributed traces to the backend(s) of your choice. OpenCensus works great with all software systems, from client applications, large monoliths, or highly-distributed microservices. OpenCensus started at Google but is now developed by a broad community of service developers, cloud vendors, and community contributors.
 
 In this section we will walk through what OpenCensus is, what problems it solves, and how it can help your project.
 
