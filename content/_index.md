@@ -9,7 +9,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 ##### What is OpenCensus?
 
-{{<title>}} is a single distribution of libraries that automatically collect **metrics** and **distributed traces** from your services
+{{<title>}} is a single distribution of libraries that collect **metrics** and **distributed traces** from your services
 
 {{<button class="btn-light" icon="true" href="/introduction/overview">}}Overview{{</button>}}
 
