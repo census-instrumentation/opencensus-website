@@ -7,6 +7,14 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### November 9, 2018
+
+#### [Correlating traces and logs with OpenCensus](https://medium.com/@sebright/correlating-traces-and-logs-with-opencensus-ac95d9b14b18)
+
+This post demonstrates debugging a simple issue using OpenCensus distributed tracing and log correlation.
+
+---
+
 ##### November 5, 2018
 
 #### [Export Dropwizard Metrics to OpenCensus](https://medium.com/@mayurkale22/export-dropwizard-metrics-to-opencensus-1e98851693f8)
