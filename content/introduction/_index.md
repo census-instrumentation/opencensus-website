@@ -40,7 +40,7 @@ OpenCensus provides APIs for all telemetry types. For example, you can use these
 OpenCensus contains an incredible amount of integrations out of the box. These allow traces and metrics to be captured from popular RPC systems, web frameworks, and storage clients.
 
 #### Single Project and Implementation
-While OpenCensus is an open source project with an incredibly active community, it also benefits from maintaining a single distribution for each language. This means that contributions are focused, that efforts are wasted on multiple competing implementations (particularly important for integrations), and that as much functionality is available out of the box as possible.
+While OpenCensus is an open source project with an incredibly active community, it also benefits from maintaining a single distribution for each language. This means that contributions are focused, that efforts are not wasted on multiple competing implementations (particularly important for integrations), and that as much functionality is available out of the box as possible.
 
 #### Low Overhead
 OpenCensus is used in production at some of the largest companies in the world, and as such it strives to have as small of a performance impact as possible.
