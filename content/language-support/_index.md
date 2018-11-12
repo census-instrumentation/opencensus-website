@@ -10,6 +10,7 @@ Language|API reference
 ---|---
 Go|https://godoc.org/go.opencensus.io
 Java|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
+C#|https://github.com/census-instrumentation/opencensus-csharp/
 C++|https://github.com/census-instrumentation/opencensus-cpp
 Node.js|https://github.com/census-instrumentation/opencensus-node
 Ruby|https://www.rubydoc.info/gems/opencensus
