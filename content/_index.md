@@ -11,7 +11,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 {{<title>}} is a single distribution of libraries that collect **metrics** and **distributed traces** from your services
 
-{{<button class="btn-light" icon="true" href="/introduction/overview">}}Overview{{</button>}}
+{{<button class="btn-light" icon="true" href="/introduction/#overview">}}Overview{{</button>}}
 
 {{<button class="btn-light" icon="true" href="/quickstart">}}Quickstart{{</button>}}
 
