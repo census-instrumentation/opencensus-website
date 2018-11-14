@@ -8,7 +8,7 @@ weight: 110
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers of OpenCensus pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation. People violating this code of conduct may be banned from the community and all its events.
 
 #### Our Standards and Values
-- Be honest
+- Be honest: be open and transparent in your dealings with other community members. Be clear about your goals, motivations, and thoughts.
 - Be friendly and patient: remember you might not be communicating in someone else's primary spoken or programming language, and others may not have your level of understanding.
 - Be welcoming: our communities welcome and support people of all backgrounds and identities. This includes, but is not limited to members of any race, ethnicity, culture, national origin, color, immigration status, social and economic class, educational level, sex, sexual orientation, gender identity and expression, age, size, family status, political belief, religion, and mental and physical ability.
 - Be respectful: we are a world-wide community of professionals, and we conduct ourselves professionally. Disagreement is no excuse for poor behavior and poor manners. Disrespectful and unacceptable behavior includes, but is not limited to:
