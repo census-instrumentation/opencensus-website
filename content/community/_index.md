@@ -17,4 +17,4 @@ Any questions or suggestions? You can reach us via email: [census-developers@goo
 Join other developers and users on the OpenCensus [Gitter channel](https://gitter.im/census-instrumentation/Lobby).
 
 #### Code of Conduct
-The OpenCensus community values respect and inclusiveness, and enforces a [Code of Conduct](https://github.com/census-instrumentation/opencensus-specs/blob/master/code-of-conduct.md) in all interactions.
+The OpenCensus community values respect and inclusiveness, and enforces a [Code of Conduct](/conduct) in all interactions.
