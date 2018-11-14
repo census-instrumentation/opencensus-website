@@ -15,7 +15,7 @@ logo: /img/honeycomb-logo.jpg
 
 ## Introduction
 
-[Honeycomb](www.honeycomb.io) is a hosted service for debugging your software in production. Capture traces or individual events, then speedily slice and dice your data to uncover patterns, find outliers, and understand historical trends.
+[Honeycomb](https://www.honeycomb.io) is a hosted service for debugging your software in production. Capture traces or individual events, then speedily slice and dice your data to uncover patterns, find outliers, and understand historical trends.
 
 Honeycomb Tracing offers an unparalleled ability to run high-level queries in order to identify which traces are worth investigating, before digging deep into the details of an individual exemplar trace. Easily go from insights on your application from a bird's eye view, to a classic waterfall view of a specific trace, and back. For a walkthrough of this flow in action, [visit our blog](https://www.honeycomb.io/blog/2018/07/there-and-back-again-a-honeycomb-tracing-story/).
 
