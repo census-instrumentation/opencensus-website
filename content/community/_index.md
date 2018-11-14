@@ -15,3 +15,9 @@ Any questions or suggestions? You can reach us via email: [census-developers@goo
 
 #### Gitter Channel
 Join other developers and users on the OpenCensus [Gitter channel](https://gitter.im/census-instrumentation/Lobby).
+
+#### Community Meetings
+We hold community meetings once per month, and they're open to all contributors. Meeting invites can be accessed from our [public Google Calendar](https://calendar.google.com/calendar?cid=Z29vZ2xlLmNvbV9iNzllM2U5MGo3YmJzYTJuMnA1YW41bGY2MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t), and we keep public notes in the agenda document available [here](https://docs.google.com/document/d/1sG3MAwHzYTlv5PrIBBpjZBTiShOpmzmPlLRe8NXZKnM/edit).
+
+#### Code of Conduct
+The OpenCensus code of conduct governs interactions between community members. You can access it [here](/community/codeofconduct).
