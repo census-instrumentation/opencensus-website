@@ -13,7 +13,7 @@ aliases: [/custom_exporter/java/trace, /guides/custom_exporter/java/trace]
 
 ## Introduction
 
-A trace exporter must extend the abstract class [SpanExporter.Handler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.Handler.html) implementing the `export` method
+A trace exporter must extend the abstract class [SpanExporter.Handler](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/export/SpanExporter.Handler.html) implementing the `export` method
 
 which for purposes of brevity is:
 
@@ -25,9 +25,9 @@ import io.opencensus.trace.export.SpanData;
 public void export(Collection<SpanData> spanDataList);
 ```
 
-The sole method `export` will be used to process and translate a collection of [SpanData](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanData.html) to your desired trace backend's data.
+The sole method `export` will be used to process and translate a collection of [SpanData](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/export/SpanData.html) to your desired trace backend's data.
 
-After an exporter is created, it must be registered with [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-)
+After an exporter is created, it must be registered with [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-)
 
 ```java
 SpanExporter.registerHandler(nameOfTheExporter, anInstanceOfTheExporter);
@@ -156,7 +156,7 @@ public class CustomTraceExporter extends SpanExporter.Handler {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -268,7 +268,7 @@ Annotations: TimedEvents{events=[TimedEvent{timestamp=Timestamp{seconds=15337689
 
 ## Notes
 
-* Please remember to invoke [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-) for your created Trace exporter lest it won't receive exported span data
+* Please remember to invoke [SpanExporter.registerHandler](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/export/SpanExporter.html#registerHandler-java.lang.String-io.opencensus.trace.export.SpanExporter.Handler-) for your created Trace exporter lest it won't receive exported span data
 
 * Your exporter's `export` method will receive exported span data only for spans that have been ended
 
@@ -276,6 +276,6 @@ Annotations: TimedEvents{events=[TimedEvent{timestamp=Timestamp{seconds=15337689
 
 Name|Link
 ---|---
-Trace JavaDoc |[io.opencensus.trace.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.15.0/io/opencensus/trace/package-summary.html)
+Trace JavaDoc |[io.opencensus.trace.*](https://static.javadoc.io/io.opencensus/opencensus-api/0.17.0/io/opencensus/trace/package-summary.html)
 OpenCensus JavaDoc|[io.opencensus.*](https://www.javadoc.io/doc/io.opencensus/opencensus-api/)
 OpenCensus Java exporters|[Some OpenCensus Java exporters](/supported-exporters/java/)

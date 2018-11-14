@@ -76,7 +76,7 @@ Put this in your newly generated `pom.xml` file:
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <build>
@@ -224,6 +224,7 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-impl</artifactId>
       <version>${opencensus.version}</version>
+      <scope>runtime</scope>
   </dependency>
 </dependencies>
 {{</highlight>}}
@@ -241,7 +242,7 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -255,6 +256,7 @@ To enable metrics, we’ll declare the dependencies in your `pom.xml` file. Add 
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -1330,7 +1332,7 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -1344,6 +1346,7 @@ Add the following code snippet to your `<dependencies>...</dependencies>` node i
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -1787,7 +1790,7 @@ public class Repl {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -1801,6 +1804,7 @@ public class Repl {
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

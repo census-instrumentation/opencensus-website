@@ -39,7 +39,7 @@ Add this to your `pom.xml` file:
 ```xml
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+        <opencensus.version>0.17.0</opencensus.version> <!-- The OpenCensus version to use -->
     </properties>
 
     <dependencies>
@@ -53,6 +53,7 @@ Add this to your `pom.xml` file:
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
             <version>${opencensus.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
