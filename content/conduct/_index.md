@@ -4,6 +4,13 @@ draft: false
 weight: 110
 ---
 
+- [Our pledge](#our-pledge)
+- [Our Standards and Values](#our-standards-and-values)
+- [Our Responsibilities](#our-responsibilities)
+- [Scope](#scope)
+- [Enforcement](#enforcement)
+- [Attribution](#attribution)
+
 #### Our Pledge
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers of OpenCensus pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation. People violating this code of conduct may be banned from the community and all its events.
 
