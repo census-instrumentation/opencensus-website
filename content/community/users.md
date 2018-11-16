@@ -21,3 +21,4 @@ Some of the publicly known OpenCensus users:
 {{<card-vendor src="/images/users/orijtech.png" href="https://orijtech.com/">}}
 {{<card-vendor src="/images/users/streak.png" href="https://www.streak.com/">}}
 {{<card-vendor src="/images/users/holidaycheck.png" href="http://www.holidaycheck.de/">}}
+{{<card-vendor src="/images/users/namely.png" href="https://namely.com/">}}
