@@ -28,17 +28,17 @@ the user's span
 
 {{% tabs Go Java Python Node %}}
 ```go
-_, span := trace.StartSpan(context.Background(), "Span A")
-spanContext := span.SpanContext()
-span.End()
+_, spanA := trace.StartSpan(context.Background(), "Span A")
+spanContext := spanA.SpanContext()
+spanA.End()
 
-_, span := trace.StartSpan(context.Background(), "Linked to Span A")
-span.AddLink(trace.Link{
+_, spanB := trace.StartSpan(context.Background(), "Linked to Span A")
+spanB.AddLink(trace.Link{
   TraceID: spanContext.TraceID,
   SpanID:  spanContext.SpanID,
   Type:    trace.LinkTypeChild,
 })
-span.End()
+spanB.End()
 ```
 
 ```java
