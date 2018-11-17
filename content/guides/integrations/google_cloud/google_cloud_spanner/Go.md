@@ -63,14 +63,14 @@ However, for now we'll split them into client and server views
 
 ### Register client metric views
 {{<highlight go>}}
-if err := view.Register(ocgrcp.DefaultClientViews...); err != nil {
+if err := view.Register(ocgrpc.DefaultClientViews...); err != nil {
     log.Fatalf("Failed to register gRPC client views: %v", err)
 }
 {{</highlight>}}
 
 ### Register server metric views
 {{<highlight go>}}
-if err := view.Register(ocgrcp.DefaultServerViews...); err != nil {
+if err := view.Register(ocgrpc.DefaultServerViews...); err != nil {
     log.Fatalf("Failed to register gRPC server views: %v", err)
 }
 {{</highlight>}}
@@ -124,11 +124,11 @@ func main() {
 
 	// Register all the gRPC client views
 	if err := view.Register(ocgrpc.DefaultClientViews...); err != nil {
-		log.Fatalf("Failed to register gRCP default client views for metrics: %v", err)
+		log.Fatalf("Failed to register gRPC default client views for metrics: %v", err)
 	}
 	// Register all the gRPC server views
 	if err := view.Register(ocgrpc.DefaultServerViews...); err != nil {
-		log.Fatalf("Failed to register gRCP default server views for metrics: %v", err)
+		log.Fatalf("Failed to register gRPC default server views for metrics: %v", err)
 	}
 
 	// Enable the trace sampler.
