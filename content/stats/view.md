@@ -37,8 +37,8 @@ export their own views and claim the view names by registering them.
 Multiple views can use the same measure but only if they have different aggregations for the same measure
 
 ### Source code example
-{{<tabs Go Java Python CplusPlus>}}
-{{<highlight go>}}
+{{% tabs Go Java Python CplusPlus NodeJS %}}
+```go
 package main
 
 import (
@@ -57,7 +57,7 @@ func enableViews() error {
 
 	lineCountView = &view.View{
 		Name:        "myapp/lines_in",
-		Measure:     mLatencyMs,
+		Measure:     mLines,
 		Description: "The number of lines that were received",
 		TagKeys:     []tag.Key{keyMethod},
 		// Notice that the measure "mLatencyMs" is the same as
@@ -70,9 +70,9 @@ func enableViews() error {
         // that measurements won't be dropped.
 	return view.Register(latencyView, lineCountView)
 }
-{{</highlight>}}
+```
 
-{{<highlight java>}}
+```java
 package io.opencensus.metrics.snippet;
 
 import io.opencensus.stats.Stats;
@@ -102,7 +102,7 @@ public class JavaSnippet {
 
             View.create(Name.create("myapp/lines_in"),
                         "The number of lines that were received",
-                        M_LATENCY_MS,
+                        M_LINES,
                         Count.create(),
                         Collections.singletonList(KEY_METHOD)),
 	};
@@ -114,9 +114,9 @@ public class JavaSnippet {
             manager.registerView(view);
     }
 }
-{{</highlight>}}
+```
 
-{{<highlight python>}}
+```py
 #/usr/bin/env python
 
 from opencensus.stats import aggregation
@@ -134,7 +134,7 @@ def enable_views():
     line_count_view = view.View("myapp/lines_in",
                              "The number of liens that were received",
                              [key_method],
-                             m_latency_ms,
+                             m_lines,
                              aggregation.CountAggregation())
 
     # Ensure that they are registered so
@@ -142,9 +142,9 @@ def enable_views():
     view_manager = stats.Stats().view_manager
     view_manager.register_view(latency_view)
     view_manager.register_view(line_count_view)
-{{</highlight>}}
+```
 
-{{<highlight cpp>}}
+```cpp
 #include "opencensus/stats/stats.h"
 
 void registerAsView(opencensus::stats::ViewDescriptor vd) {
@@ -177,7 +177,37 @@ void enableViews() {
     registerAsView(latency_view);
     registerAsView(lines_count_view);
 }
-{{</highlight>}}
+```
+
+```js
+const { Stats, AggregationType } = require('@opencensus/core');
+
+// Our Stats manager
+const stats = new Stats();
+const tagKey = "method";
+
+const latencyView = stats.createView(
+  "myapp/latency",
+  mLatencyMs,
+  AggregationType.DISTRIBUTION,
+  [tagKey],
+  "The distribution of the latencies",
+  // Bucket Boundaries:
+  // [>=0ms, >=25ms, >=100ms, >=200ms, >=400ms, >=800ms, >=1000ms]
+  [0, 25, 100, 200, 400, 800, 1000]
+);
+
+const lineCountView = stats.createView(
+  "demo/lines_in",
+  mLinesIn,
+  AggregationType.COUNT,
+  [tagKey],
+  "The number of lines from standard input"
+);
+
+stats.registerView(latencyView);
+stats.registerView(lineCountView);
+```
 {{</tabs>}}
 
 ### References
@@ -189,3 +219,4 @@ Go views|[Views package](https://godoc.org/go.opencensus.io/stats/view)
 Java views|[Views package](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/stats/View.html)
 Python views|[Views API](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/stats/view.py#L16-L66)
 C++ views|[stats/view.h](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/stats/view.h#L15-L63)
+Node.js views|[stats.View](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/stats/view.ts)
