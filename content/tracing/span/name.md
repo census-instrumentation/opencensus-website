@@ -23,26 +23,32 @@ Names are usually created in the span's constructor.
 
 We'll create a span with the Name "cache.Get", below:
 
-{{<tabs Java Go Python CplusPlus>}}
-{{<highlight java>}}
+{{% tabs Java Go Python CplusPlus NodeJS %}}
+```java
 try (Scope ss = TRACER.spanBuilder("cache.Get").startScopedSpan()) {
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 ctx, span := trace.StartSpan(ctx, "cache.Get")
-{{</highlight>}}
+```
 
-{{<highlight python>}}
+```py
 with tracer.span(name="cache.get") as span:
     pass
-{{</highlight>}}
+```
 
-{{<highlight cpp>}}
+```cpp
 opencensus::trace::Span span = opencensus::trace::Span::StartSpan(
                                             "cache.Get", nullptr, {&sampler});
-{{</highlight>}}
-{{</tabs>}}
+```
+
+```js
+tracer.startRootSpan({name: 'cache.Get'}, rootSpan => {
+});
+```
+
+{{% /tabs %}}
 
 ### Visuals
 
