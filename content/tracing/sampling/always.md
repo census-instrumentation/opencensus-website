@@ -9,26 +9,32 @@ aliases: [/core-concepts/tracing/sampling/always]
 The Always sampler always returns a decision of True for any sampling decision
 
 ### Code samples
-{{<tabs Go Java Python CplusPlus>}}
-{{<highlight go>}}
+{{% tabs Go Java Python CplusPlus NodeJS %}}
+```go
 import "go.opencensus.io/trace"
 
 _ = trace.AlwaysSample()
-{{</highlight>}}
+```
 
-{{<highlight java>}}
+```java
 Samplers.alwaysSample();
-{{</highlight>}}
+```
 
-{{<highlight python>}}
-{{</highlight>}}
+```py
+```
 
-{{<highlight cpp>}}
+```cpp
 // Samplers are potentially expensive to construct. Use one long-lived
 // sampler instead of constructing one for every Span.
 static opencensus::trace::AlwaysSampler sampler;
-{{</highlight>}}
-{{</tabs>}}
+```
+
+```js
+const root = new RootSpan(tracer);
+const sampler = SamplerBuilder.getSampler(1); // Always samples when value is >= 1
+const samplerShouldSample = sampler.shouldSample(root.traceId);
+```
+{{% /tabs %}}
 
 ### Reference
 Resource|URL

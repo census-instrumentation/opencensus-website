@@ -25,8 +25,8 @@ Attributes|A set of attributes to articulate the annotate
 
 We'll add an annotation to a span in the excerpts with a couple of languages:
 
-{{<tabs Go Java CplusPlus Python>}}
-{{<highlight go>}}
+{{% tabs Go Java CplusPlus Python NodeJS %}}
+```go
 import "go.opencensus.io/trace"
 
 span.Annotate([]trace.Attribute{
@@ -34,9 +34,9 @@ span.Annotate([]trace.Attribute{
     trace.BoolAttribute("cache_miss", true),
     trace.Int64Attribute("age_ns", 13488999),
 }, "Cache miss during GC")
-{{</highlight>}}
+```
 
-{{<highlight java>}}
+```java
 import io.opencensus.trace.AttributeValue;
 import java.util.HashMap;
 
@@ -46,18 +46,26 @@ map.put("cache_miss", AttributeValue.booleanAttributeValue(true));
 map.put("age_ns", AttributeValue.int64AttributeValue(13488999));
 
 span.addAnnotation(Annotation.fromDescription("Cache miss during GC", map));
-{{</highlight>}}
+```
 
-{{<highlight cpp>}}
+```cpp
 span.AddAnnotation("Cache miss during GC",  {{"store", "memcache"}},
                                         {{"cache_miss", True}}, {{"age_ns", 13488999}});
-                                            
-{{</highlight>}}
 
-{{<highlight python>}}
+```
+
+```py
 span.add_annotation("Cache miss during GC", store="memcache", cache_miss=true, age_ns=13488999)
-{{</highlight>}}
-{{</tabs>}}
+```
+
+```js
+rootSpan.addAnnotation(
+  'Cache miss during GC',
+  {store: 'memcache', cache_miss: true},
+  13488999
+);
+```
+{{% /tabs %}}
 
 ### Visual representation
 ![](/images/span-annotation-sample.png)

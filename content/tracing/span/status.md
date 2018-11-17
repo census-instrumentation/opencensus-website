@@ -45,23 +45,27 @@ UNAUTHENTICATED|16|The requester doesn't have valid authentication credentials f
 
 ### Source code samples
 
-{{<tabs Go Java Python CplusPlus>}}
-{{<highlight go>}}
+{{% tabs Go Java Python CplusPlus NodeJS %}}
+```go
 span.SetStatus(trace.Status{Code: int32(trace.StatusCodeNotFound), Message: "Cache miss"})
-{{</highlight>}}
+```
 
-{{<highlight java>}}
+```java
 span.setStatus(status.NOT_FOUND.withDescription("Cache miss"))
-{{</highlight>}}
+```
 
-{{<highlight python>}}
+```py
 span.status = Status(5, "Cache miss")
-{{</highlight>}}
+```
 
-{{<highlight cpp>}}
+```cpp
 span.SetStatus(StatusCode.NOT_FOUND, "Cache miss");
-{{</highlight>}}
-{{</tabs>}}
+```
+
+```js
+// Not implemented at this time
+```
+{{ % /tabs %}}
 
 ### Visuals
 * Not found on cache miss
