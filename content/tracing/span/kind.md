@@ -81,3 +81,4 @@ SpanKind proto|[proto/trace/v1.Span.SpanKind](https://github.com/census-instrume
 Go API|[WithSpanKind option](https://godoc.org/go.opencensus.io/trace#WithSpanKind)
 Java API|[Span.Kind JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/trace/Span.Kind.html)
 Python API|[span.SpanKind](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/trace/span.py#L29-L32)
+Node.js API|[span.SpanKind](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L73)

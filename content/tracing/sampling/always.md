@@ -41,4 +41,5 @@ Resource|URL
 ---|---
 Go AlwaysSample|[trace.AlwaysSample](https://godoc.org/go.opencensus.io/trace#AlwaysSample)
 Java AlwaysSample|[trace.AlwaysSample](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/trace/samplers/Samplers.html#alwaysSample--)
-C++ AlwaysSample[trace.AlwaysSample](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/trace/sampler.h#L69)
+C++ AlwaysSample|[trace.AlwaysSample](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/trace/sampler.h#L69)
+Node.js TracerConfig|[trace.TracerConfig](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/config/types.ts#L35)
