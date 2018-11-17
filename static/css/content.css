@@ -185,7 +185,7 @@ section a .lang-card {
 }
 
 .user-card-container.talks {
-  height: 160px;
+  height: 200px;
 }
 
 .lang-card-container:hover,
@@ -266,6 +266,7 @@ article section.page .lang-card img {
 
 .user-card-container.talks p {
     font-size: 14px;
+    height: 44px;
 }
 
 .user-card-container.talks img {
