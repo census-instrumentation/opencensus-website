@@ -199,7 +199,7 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLatencyMs,
   AggregationType.COUNT,
   [tagKey],
   "The number of lines from standard input"
