@@ -48,16 +48,16 @@ The number of compressed bytes sent or received. If this value is zero, it is as
 
 ### Source code samples
 
-{{% tabs Go Java CplusPlus Python NodeJS %}}
-```go
+{{<tabs Go Java CplusPlus Python NodeJS>}}
+{{<highlight go>}}
 // On the client
 span.AddMessageReceiveEvent(seqNumber, 1024, 512)
 
 // On the server
 span.AddMessageSendEvent(seqNumber, 1024, 512)
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 import io.opencensus.trace.MessageEvent;
 import io.opencensus.trace.MessageEvent.Type;
 
@@ -74,17 +74,17 @@ MessageEvent serverEvent = MessageEvent.builder(Type.SENT, seqNumber)
                                  .setUncompressedMessageSize(1024)
                                  .build();
 serverSpan.addMessageEvent(serverEvent);
-```
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 // On the client
 span.AddReceivedMessageEvent(seqNumber, 512, 1024);
 
 // On the server
 span.AddSentMessageEvent(seqNumber, 512, 1024);
-```
+{{</highlight>}}
 
-```py
+{{<highlight python>}}
 import datetime
 
 clientEvent = time_event.MessageEvent(seqNumber, type=time_event.Type.RECEIVED,
@@ -95,8 +95,11 @@ span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), clientEvent
 serverEvent = time_event.MessageEvent(seqNumber, type=time_event.Type.SENT,
                 uncompressed_size_bytes=1024, compressed_size_bytes=512)
 span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), serverEvent))
-```
-{{% /tabs %}}
+{{</highlight>}}
+
+{{<highlight js>}}
+{{</highlight>}}
+{{</tabs>}}
 
 ### Visuals
 

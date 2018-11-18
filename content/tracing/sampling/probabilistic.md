@@ -12,28 +12,28 @@ The probabilistic sampler probabilistically returns True or False for whether a 
 By default, the probabilistic sampling rate is 1 in 10,000
 
 ### Code samples
-{{% tabs Go Java CplusPlus NodeJS %}}
-```go
+{{<tabs Go Java CplusPlus NodeJS>}}
+{{<highlight go>}}
 import "go.opencensus.io/trace"
 
 theSampler = trace.ProbabilitySampler(1/1000.0);
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 Samplers.probabilitySampler(1/1000.0);
-```
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 // Samplers are potentially expensive to construct. Use one long-lived
 // sampler instead of constructing one for every Span.
 static opencensus::trace::ProbabilitySampler sampler(1/1000.0);
-```
+{{</highlight>}}
 
-```js
+{{<highlight js>}}
 const root = new RootSpan(tracer);
 const sampler = SamplerBuilder.getSampler(0.01);
 const samplerProbability = sampler.shouldSample(root.traceId);
-```
+{{</highlight>}}
 {{</tabs>}}
 
 ### Reference

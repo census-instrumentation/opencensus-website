@@ -37,8 +37,8 @@ export their own views and claim the view names by registering them.
 Multiple views can use the same measure but only if they have different aggregations for the same measure
 
 ### Source code example
-{{% tabs Go Java Python CplusPlus NodeJS %}}
-```go
+{{<tabs Go Java Python CplusPlus NodeJS>}}
+{{<highlight go>}}
 package main
 
 import (
@@ -70,9 +70,9 @@ func enableViews() error {
         // that measurements won't be dropped.
 	return view.Register(latencyView, lineCountView)
 }
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 package io.opencensus.metrics.snippet;
 
 import io.opencensus.stats.Stats;
@@ -114,9 +114,9 @@ public class JavaSnippet {
             manager.registerView(view);
     }
 }
-```
+{{</highlight>}}
 
-```py
+{{<highlight python>}}
 #/usr/bin/env python
 
 from opencensus.stats import aggregation
@@ -142,9 +142,9 @@ def enable_views():
     view_manager = stats.Stats().view_manager
     view_manager.register_view(latency_view)
     view_manager.register_view(line_count_view)
-```
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 #include "opencensus/stats/stats.h"
 
 void registerAsView(opencensus::stats::ViewDescriptor vd) {
@@ -177,9 +177,9 @@ void enableViews() {
     registerAsView(latency_view);
     registerAsView(lines_count_view);
 }
-```
+{{</highlight>}}
 
-```js
+{{<highlight js>}}
 const { Stats, AggregationType } = require('@opencensus/core');
 
 // Our Stats manager
@@ -207,7 +207,7 @@ const lineCountView = stats.createView(
 
 stats.registerView(latencyView);
 stats.registerView(lineCountView);
-```
+{{</highlight>}}
 {{</tabs>}}
 
 ### References

@@ -26,16 +26,16 @@ can be set as `CLIENT` and `SERVER` respectively
 
 ### Source code example
 
-{{% tabs Go Java Python CplusPlus NodeJS %}}
-```go
+{{<tabs Go Java Python CplusPlus NodeJS>}}
+{{<highlight go>}}
 // Started on the client
 ctx, cSpan := trace.StartSpan(ctx, "SpanStarted", trace.WithSpanKind(trace.SpanKindClient))
 
 // Received from the server
 ctx, sSpan := trace.StartSpan(ctx, "SpanStarted", trace.WithSpanKind(trace.SpanKindServer))
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 import io.opencensus.common.Scope;
 import io.opencensus.trace.Span.Kind;
 
@@ -46,9 +46,9 @@ try (Scope ss = TRACER.spanBuilder("SpanStarted").setSpanKind(Kind.CLIENT).start
 // Started on the server
 try (Scope ss = TRACER.spanBuilder("SpanStarted").setSpanKind(Kind.SERVER).startSpan()) {
 }
-```
+{{</highlight>}}
 
-```py
+{{<highlight python>}}
 from opencensus.trace.span import SpanKind
 
 // Started on the client
@@ -58,21 +58,21 @@ with tracer.span("SpanStarted", span_kind=SpanKind.CLIENT) as span:
 // Started on the server
 with tracer.span("SpanStarted", span_kind=SpanKind.SERVER) as span:
     pass
-```
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 // Not yet available as per
 // https://github.com/census-instrumentation/opencensus-cpp/issues/231
-```
+{{</highlight>}}
 
-```js
+{{<highlight js>}}
 tracer.startRootSpan({name: 'SpanStarted', kind: 'SERVER'}, rootSpan => {
 });
 
 tracer.startRootSpan({name: 'SpanStarted', kind: 'CLIENT'}, rootSpan => {
 });
-```
-{{% /tabs %}}
+{{</highlight>}}
+{{</tabs>}}
 
 ### References
 Resource|URL

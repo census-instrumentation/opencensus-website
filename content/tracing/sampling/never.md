@@ -8,32 +8,32 @@ aliases: [/core-concepts/tracing/sampling/never]
 ### Never sampler
 The Never sampler never returns a decision of False for any sampling decision
 
-{{% tabs Go Java Python CplusPlus NodeJS %}}
-```go
+{{<tabs Go Java Python CplusPlus NodeJS>}}
+{{<highlight go>}}
 import "go.opencensus.io/trace"
 
 _ = trace.NeverSample()
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 Samplers.neverSample();
-```
+{{</highlight>}}
 
-```py
-```
+{{<highlight python>}}
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 // Samplers are potentially expensive to construct. Use one long-lived
 // sampler instead of constructing one for every Span.
 static opencensus::trace::NeverSampler sampler;
-```
+{{</highlight>}}
 
-```js
+{{<highlight js>}}
 const root = new RootSpan(tracer);
 const sampler = SamplerBuilder.getSampler(0); // Never samples when value is <= 0
 const samplerShouldNotSample = sampler.shouldSample(root.traceId);
-```
-{{% /tabs %}}
+{{</highlight>}}
+{{</tabs>}}
 
 ### Reference
 Resource|URL

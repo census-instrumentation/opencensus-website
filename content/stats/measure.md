@@ -41,8 +41,8 @@ Float64|Records float-like values
 
 ### Source code example
 
-{{% tabs Go Java Python CplusPlus NodeJS %}}
-```go
+{{<tabs Go Java Python CplusPlus NodeJS>}}
+{{<highlight go>}}
 package main
 
 import (
@@ -61,9 +61,9 @@ func main() {
 		mLines.M(238),
 		mBytesIn.M(7000))
 }
-```
+{{</highlight>}}
 
-```java
+{{<highlight java>}}
 package io.opencensus.metrics.snippet;
 
 import io.opencensus.stats.Measure.MeasureDouble;
@@ -87,9 +87,9 @@ public class JavaSnippet {
                 .record();
     }
 }
-```
+{{</highlight>}}
 
-```py
+{{<highlight python>}}
 #/usr/bin/env python
 
 from opencensus.stats import stats
@@ -110,9 +110,9 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
+{{</highlight>}}
 
-```cpp
+{{<highlight cpp>}}
 #include "opencensus/stats/stats.h"
 
 opencensus::stats::MeasureDouble LatencyMsMeasure() {
@@ -139,9 +139,9 @@ int main(int argc, char** argv) {
             {{LinesMeasure(), 238}},
             {{BytesInMeasure(), 7000}});
 }
-```
+{{</highlight>}}
 
-```js
+{{<highlight js>}}
 import { Stats, MeasureUnit } from "@opencensus/core";
 
 // Our Stats manager
@@ -163,7 +163,7 @@ stats.record({
   measure: mBytesIn,
   value: 7000
 });
-```
+{{</highlight>}}
 {{</tabs>}}
 
 ### Relation to Measurements
