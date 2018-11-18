@@ -48,7 +48,7 @@ The number of compressed bytes sent or received. If this value is zero, it is as
 
 ### Source code samples
 
-{{<tabs Go Java CplusPlus Python>}}
+{{<tabs Go Java CplusPlus Python NodeJS>}}
 {{<highlight go>}}
 // On the client
 span.AddMessageReceiveEvent(seqNumber, 1024, 512)
@@ -86,7 +86,7 @@ span.AddSentMessageEvent(seqNumber, 512, 1024);
 
 {{<highlight python>}}
 import datetime
-        
+
 clientEvent = time_event.MessageEvent(seqNumber, type=time_event.Type.RECEIVED,
                 uncompressed_size_bytes=1024, compressed_size_bytes=512)
 span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), clientEvent))
@@ -95,6 +95,9 @@ span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), clientEvent
 serverEvent = time_event.MessageEvent(seqNumber, type=time_event.Type.SENT,
                 uncompressed_size_bytes=1024, compressed_size_bytes=512)
 span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), serverEvent))
+{{</highlight>}}
+
+{{<highlight js>}}
 {{</highlight>}}
 {{</tabs>}}
 

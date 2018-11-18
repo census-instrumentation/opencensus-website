@@ -37,7 +37,7 @@ export their own views and claim the view names by registering them.
 Multiple views can use the same measure but only if they have different aggregations for the same measure
 
 ### Source code example
-{{<tabs Go Java Python CplusPlus>}}
+{{<tabs Go Java Python CplusPlus NodeJS>}}
 {{<highlight go>}}
 package main
 
@@ -178,6 +178,36 @@ void enableViews() {
     registerAsView(lines_count_view);
 }
 {{</highlight>}}
+
+{{<highlight js>}}
+const { Stats, AggregationType } = require('@opencensus/core');
+
+// Our Stats manager
+const stats = new Stats();
+const tagKey = "method";
+
+const latencyView = stats.createView(
+  "myapp/latency",
+  mLatencyMs,
+  AggregationType.DISTRIBUTION,
+  [tagKey],
+  "The distribution of the latencies",
+  // Bucket Boundaries:
+  // [>=0ms, >=25ms, >=100ms, >=200ms, >=400ms, >=800ms, >=1000ms]
+  [0, 25, 100, 200, 400, 800, 1000]
+);
+
+const lineCountView = stats.createView(
+  "demo/lines_in",
+  mLatencyMs,
+  AggregationType.COUNT,
+  [tagKey],
+  "The number of lines from standard input"
+);
+
+stats.registerView(latencyView);
+stats.registerView(lineCountView);
+{{</highlight>}}
 {{</tabs>}}
 
 ### References
@@ -189,3 +219,4 @@ Go views|[Views package](https://godoc.org/go.opencensus.io/stats/view)
 Java views|[Views package](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/stats/View.html)
 Python views|[Views API](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/stats/view.py#L16-L66)
 C++ views|[stats/view.h](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/stats/view.h#L15-L63)
+Node.js views|[stats.View](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/stats/view.ts)

@@ -41,7 +41,7 @@ Float64|Records float-like values
 
 ### Source code example
 
-{{<tabs Go Java Python CplusPlus>}}
+{{<tabs Go Java Python CplusPlus NodeJS>}}
 {{<highlight go>}}
 package main
 
@@ -140,6 +140,25 @@ int main(int argc, char** argv) {
             {{BytesInMeasure(), 7000}});
 }
 {{</highlight>}}
+
+{{<highlight js>}}
+import { Stats, MeasureUnit } from "@opencensus/core";
+
+// Our Stats manager
+const stats = new Stats();
+
+const mLatencyMs = stats.createMeasureDouble("latency", MeasureUnit.MS, "The latency in milliseconds");
+const mBytesIn = stats.createMeasureInt64("size", MeasureUnit.BYTE, "The number of bytes received");
+
+stats.record({
+  measure: mLatencyMs,
+  value: 17
+});
+stats.record({
+  measure: mBytesIn,
+  value: 7000
+});
+{{</highlight>}}
 {{</tabs>}}
 
 ### Relation to Measurements
@@ -158,3 +177,4 @@ Go Measures|[stats.Measure](https://godoc.org/go.opencensus.io/stats#Measure)
 Java Measures|[stats.Measure](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/stats/Measure.html)
 Python Measures|[stats.measure.Measure](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/stats/measure.py#L51-L60)
 C++ Measures|[stats/measure.h](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/stats/measure.h#L33-L122)
+Node.js Measures|[stats.Measure](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/stats/types.ts)

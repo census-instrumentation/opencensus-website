@@ -25,7 +25,7 @@ Attributes|A set of attributes to articulate the annotate
 
 We'll add an annotation to a span in the excerpts with a couple of languages:
 
-{{<tabs Go Java CplusPlus Python>}}
+{{<tabs Go Java CplusPlus Python NodeJS>}}
 {{<highlight go>}}
 import "go.opencensus.io/trace"
 
@@ -51,11 +51,18 @@ span.addAnnotation(Annotation.fromDescription("Cache miss during GC", map));
 {{<highlight cpp>}}
 span.AddAnnotation("Cache miss during GC",  {{"store", "memcache"}},
                                         {{"cache_miss", True}}, {{"age_ns", 13488999}});
-                                            
 {{</highlight>}}
 
-{{<highlight python>}}
+{{<highlight py>}}
 span.add_annotation("Cache miss during GC", store="memcache", cache_miss=true, age_ns=13488999)
+{{</highlight>}}
+
+{{<highlight js>}}
+rootSpan.addAnnotation(
+  'Cache miss during GC',
+  {store: 'memcache', cache_miss: true},
+  13488999
+);
 {{</highlight>}}
 {{</tabs>}}
 

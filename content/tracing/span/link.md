@@ -55,7 +55,7 @@ Name|Description
 SpanA|Started from an untrusted boundary e.g. a client request to your cloud
 SpanB|Started from a trusted boundary e.g. from the frontend server of your service/cloud
 
-{{% tabs Go Java Python Node %}}
+{{% tabs Go Java Python NodeJS %}}
 ```go
 // SpanA started say on the client side
 _, spanA := trace.StartSpan(context.Background(), "SpanA")

@@ -26,7 +26,7 @@ can be set as `CLIENT` and `SERVER` respectively
 
 ### Source code example
 
-{{<tabs Go Java Python CplusPlus>}}
+{{<tabs Go Java Python CplusPlus NodeJS>}}
 {{<highlight go>}}
 // Started on the client
 ctx, cSpan := trace.StartSpan(ctx, "SpanStarted", trace.WithSpanKind(trace.SpanKindClient))
@@ -36,7 +36,7 @@ ctx, sSpan := trace.StartSpan(ctx, "SpanStarted", trace.WithSpanKind(trace.SpanK
 {{</highlight>}}
 
 {{<highlight java>}}
-import io.opencensus.common.Scope; 
+import io.opencensus.common.Scope;
 import io.opencensus.trace.Span.Kind;
 
 // Started on the client
@@ -64,6 +64,14 @@ with tracer.span("SpanStarted", span_kind=SpanKind.SERVER) as span:
 // Not yet available as per
 // https://github.com/census-instrumentation/opencensus-cpp/issues/231
 {{</highlight>}}
+
+{{<highlight js>}}
+tracer.startRootSpan({name: 'SpanStarted', kind: 'SERVER'}, rootSpan => {
+});
+
+tracer.startRootSpan({name: 'SpanStarted', kind: 'CLIENT'}, rootSpan => {
+});
+{{</highlight>}}
 {{</tabs>}}
 
 ### References
@@ -73,3 +81,4 @@ SpanKind proto|[proto/trace/v1.Span.SpanKind](https://github.com/census-instrume
 Go API|[WithSpanKind option](https://godoc.org/go.opencensus.io/trace#WithSpanKind)
 Java API|[Span.Kind JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/trace/Span.Kind.html)
 Python API|[span.SpanKind](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/trace/span.py#L29-L32)
+Node.js API|[span.SpanKind](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L73)
