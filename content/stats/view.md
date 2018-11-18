@@ -57,7 +57,7 @@ func enableViews() error {
 
 	lineCountView = &view.View{
 		Name:        "myapp/lines_in",
-		Measure:     mLines,
+		Measure:     mLatencyMs,
 		Description: "The number of lines that were received",
 		TagKeys:     []tag.Key{keyMethod},
 		// Notice that the measure "mLatencyMs" is the same as
@@ -102,7 +102,7 @@ public class JavaSnippet {
 
             View.create(Name.create("myapp/lines_in"),
                         "The number of lines that were received",
-                        M_LINES,
+                        M_LATENCY_MS,
                         Count.create(),
                         Collections.singletonList(KEY_METHOD)),
 	};
@@ -134,7 +134,7 @@ def enable_views():
     line_count_view = view.View("myapp/lines_in",
                              "The number of liens that were received",
                              [key_method],
-                             m_lines,
+                             m_latency_ms,
                              aggregation.CountAggregation())
 
     # Ensure that they are registered so

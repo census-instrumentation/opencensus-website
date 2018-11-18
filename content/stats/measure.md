@@ -148,16 +148,11 @@ import { Stats, MeasureUnit } from "@opencensus/core";
 const stats = new Stats();
 
 const mLatencyMs = stats.createMeasureDouble("latency", MeasureUnit.MS, "The latency in milliseconds");
-const mLinesIn = stats.createMeasureInt64("size", MeasureUnit.UNIT, "The number of lines processed");
 const mBytesIn = stats.createMeasureInt64("size", MeasureUnit.BYTE, "The number of bytes received");
 
 stats.record({
   measure: mLatencyMs,
   value: 17
-});
-stats.record({
-  measure: mLinesIn,
-  value: 238
 });
 stats.record({
   measure: mBytesIn,
