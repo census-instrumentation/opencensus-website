@@ -1,5 +1,5 @@
 ---
-title: "Tracing"
+title: "Tracing (Intermediate)"
 date: 2018-07-22T20:29:06-07:00
 draft: false
 class: "shadowed-image lightbox"
@@ -732,4 +732,3 @@ Resource|URL
 Zipkin project|https://zipkin.io/
 Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
 Node.js exporters|[Node.js exporters](/guides/exporters/supported-exporters/node.js)
-
