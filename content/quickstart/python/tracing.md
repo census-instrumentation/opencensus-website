@@ -25,7 +25,7 @@ class: "shadowed-image lightbox"
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
 
-![](python-tracing-zipkin.png)
+![](/images/python-tracing-zipkin.png)
 
 #### How does it work?
 ```py

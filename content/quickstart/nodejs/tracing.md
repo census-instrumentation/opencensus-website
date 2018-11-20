@@ -28,7 +28,7 @@ aliases: [/quickstart/node.js/tracing]
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
 
-![](node-tracing-zipkin.png)
+![](/images/node-tracing-zipkin.png)
 
 #### How does it work?
 ```js
