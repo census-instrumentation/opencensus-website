@@ -14,7 +14,7 @@ class: "shadowed-image lightbox"
 - [Create a child span](#create-a-child-span)
 - [References](#references)
 
-### Run it locally
+#### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/python/tracing-to-zipkin`
 3. Install dependencies: `pip install opencensus`
@@ -27,7 +27,7 @@ class: "shadowed-image lightbox"
 
 ![](python-tracing-zipkin.png)
 
-### How does it work?
+#### How does it work?
 ```py
 #!/usr/bin/env python
 

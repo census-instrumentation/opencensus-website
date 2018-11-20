@@ -49,7 +49,7 @@ class: "shadowed-image lightbox"
 
 ![](/images/java-tracing-zipkin.png)
 
-### How does it work?
+#### How does it work?
 
 ```java
 public static void main(String[] args) {

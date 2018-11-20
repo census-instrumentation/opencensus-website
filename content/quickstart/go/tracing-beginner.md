@@ -13,7 +13,7 @@ class: "shadowed-image lightbox"
 - [End the spans](#end-the-spans)
 - [References](#references)
 
-### Run it locally
+#### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/go/tracing-to-zipkin`
 3. Install dependencies: `go get go.opencensus.io/* && go get go.opencensus.io/exporter/zipkin`
@@ -26,7 +26,7 @@ class: "shadowed-image lightbox"
 
 ![](go-tracing-zipkin.png)
 
-### How does it work?
+#### How does it work?
 ```go
 func main() {
 	// 1. Configure exporter to export traces to Zipkin.

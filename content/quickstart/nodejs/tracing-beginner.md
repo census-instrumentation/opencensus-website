@@ -17,7 +17,7 @@ aliases: [/quickstart/node.js/tracing]
 - [End the spans](#end-the-spans)
 - [References](#references)
 
-### Run it locally
+#### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/node.js`
 3. Install dependencies: `npm install`
@@ -30,7 +30,7 @@ aliases: [/quickstart/node.js/tracing]
 
 ![](node-tracing-zipkin.png)
 
-### How does it work?
+#### How does it work?
 ```js
 const tracing = require('@opencensus/nodejs');
 const zipkin = require('@opencensus/exporter-zipkin');
