@@ -18,7 +18,7 @@ aliases: [/quickstart/node.js/tracing]
 - [References](#references)
 
 #### Run it locally
-1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
+1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/node.js`
 3. Install dependencies: `npm install`
 4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
