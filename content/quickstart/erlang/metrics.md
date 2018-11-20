@@ -138,15 +138,14 @@ To start the applications when running the rebar3 shell for development you'll a
 First, we will create the measures needed to later record our metrics.
 
 {{<tabs Snippet All>}}
-{{<highlight go>}}
+{{<highlight erlang>}}
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", millisecond),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_lengths', "The distribution of line lengths", bytes).
 {{</highlight>}}
 
-{{<highlight go>}}
+{{<highlight erlang>}}
 -module(repl).
 
 -export([run/0]).
@@ -156,39 +155,19 @@ run() ->
     read_eval_process().
 
 read_eval_process() ->
-    ocp:with_child_span("repl"),
-
     Line = read_line(),
-
-    Annotation = oc_span:annotation( <<"Invoking process_line/1">>,
-                                     #{<<"len">> => length(Line),
-                                       <<"use">> => <<"repl">>}),
-    ocp:add_time_event(Annotation),
-
     Out = process_line(Line),
     io:format("< ~s~n~n", [Out]),
-
-    ocp:finish_span(),
-
     read_eval_process().
 
 read_line() ->
-    ocp:with_child_span("read_line"),
-    try io:get_line("> ")
-    after
-        ocp:finish_span()
-    end.
+    io:get_line("> ").
 
 process_line(Line) ->
-    ocp:with_child_span("process_line"),
-    try string:uppercase(Line)
-    after
-        ocp:finish_span()
-    end.
+    string:uppercase(Line).
 
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", millisecond),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_lengths', "The distribution of line lengths", bytes).
 {{</highlight>}}
@@ -199,11 +178,11 @@ measures() ->
 Now we will insert a specific tag called "repl" into the process dictionary.
 
 {{<tabs Snippet All>}}
-{{<highlight go>}}
+{{<highlight erlang>}}
 ocp:with_tags(#{method => "repl"})
 {{</highlight>}}
 
-{{<highlight go>}}
+{{<highlight erlang>}}
 -module(repl).
 
 -export([run/0]).
@@ -228,7 +207,6 @@ process_line(Line) ->
 
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", millisecond),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_lengths', "The distribution of line lengths", bytes).
 {{</highlight>}}
@@ -239,9 +217,8 @@ measures() ->
 Now we will record the desired metrics tagged with the tags we set above. To do so, we will use `ocp:record/2`.
 
 {{<tabs Snippet All>}}
-{{<highlight go>}}
+{{<highlight erlang>}}
 process_line(Line) ->
-    ocp:record('repl/lines_in', 1),
     Start = erlang:monotonic_time(),
     Upper = string:uppercase(Line),
     ocp:record('repl/latency', erlang:convert_time_unit(erlang:monotonic_time() - Start,
@@ -250,7 +227,7 @@ process_line(Line) ->
     Upper.
 {{</highlight>}}
 
-{{<highlight go>}}
+{{<highlight erlang>}}
 -module(repl).
 
 -export([run/0]).
@@ -271,7 +248,6 @@ read_line() ->
     io:get_line("> ").
 
 process_line(Line) ->
-    ocp:record('repl/lines_in', 1),
     Start = erlang:monotonic_time(),
     Upper = string:uppercase(Line),
     ocp:record('repl/latency', erlang:convert_time_unit(erlang:monotonic_time() - Start,
@@ -281,7 +257,6 @@ process_line(Line) ->
 
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", milliseconds),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_lengths', "The distribution of line lengths", bytes).
 {{</highlight>}}
@@ -293,7 +268,7 @@ measures() ->
 We now determine how our metrics will be organized by creating `Views`.
 
 {{<tabs Snippet All>}}
-{{<highlight go>}}
+{{<highlight erlang>}}
 views() ->
     Views = [#{name => "demo/latency",
                description => "The distribution of the latencies",
@@ -302,8 +277,8 @@ views() ->
                aggregation => latency_distribution()},
              #{name => "demo/lines_in",
                description => "The number of lines from standard input",
-               tags => [],
-               measure => 'repl/lines_in',
+               tags => [method],
+               measure => 'repl/line_length',
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/errors",
                description => "The number of errors encountered",
@@ -312,14 +287,14 @@ views() ->
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/line_length",
                description => "Groups the lengths of keys in buckets",
-               tags => [],
+               tags => [method],
                measure => 'repl/line_length',
                aggregation => size_distribution()}],
 
     [oc_stat_view:subscribe(V) || V <- Views].
 {{</highlight>}}
 
-{{<highlight go>}}
+{{<highlight erlang>}}
 -module(repl).
 
 -export([run/0]).
@@ -341,7 +316,6 @@ read_line() ->
     io:get_line("> ").
 
 process_line(Line) ->
-    ocp:record('repl/lines_in', 1),
     Start = erlang:monotonic_time(),
     Upper = string:uppercase(Line),
     ocp:record('repl/latency', erlang:convert_time_unit(erlang:monotonic_time() - Start,
@@ -351,7 +325,6 @@ process_line(Line) ->
 
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", milliseconds),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_lengths', "The distribution of line lengths", bytes).
 
@@ -363,8 +336,8 @@ views() ->
                aggregation => latency_distribution()},
              #{name => "demo/lines_in",
                description => "The number of lines from standard input",
-               tags => [],
-               measure => 'repl/lines_in',
+               tags => [method],
+               measure => 'repl/line_length',
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/errors",
                description => "The number of errors encountered",
@@ -373,7 +346,7 @@ views() ->
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/line_length",
                description => "Groups the lengths of keys in buckets",
-               tags => [],
+               tags => [method],
                measure => 'repl/line_length',
                aggregation => size_distribution()}],
 
@@ -471,7 +444,7 @@ prometheus_registry:register_collector(oc_stat_exporter_prometheus)
 ## End to end code
 Collectively the code will be
 
-{{<highlight go>}}
+{{<highlight erlang>}}
 -module(repl).
 
 -export([run/0]).
@@ -495,7 +468,6 @@ read_line() ->
     io:get_line("> ").
 
 process_line(Line) ->
-    ocp:record('repl/lines_in', 1),
     Start = erlang:monotonic_time(),
     Upper = string:uppercase(Line),
     ocp:record('repl/latency', erlang:convert_time_unit(erlang:monotonic_time() - Start,
@@ -505,7 +477,6 @@ process_line(Line) ->
 
 measures() ->
     oc_stat_measure:new('repl/latency', "The latency in milliseconds per REPL loop", milliseconds),
-    oc_stat_measure:new('repl/lines_in', "The number of lines read in", none),
     oc_stat_measure:new('repl/errors', "The number of errors encountered", none),
     oc_stat_measure:new('repl/line_length', "The distribution of line lengths", bytes).
 
@@ -517,8 +488,8 @@ views() ->
                aggregation => latency_distribution()},
              #{name => "demo/lines_in",
                description => "The number of lines from standard input",
-               tags => [],
-               measure => 'repl/lines_in',
+               tags => [method],
+               measure => 'repl/line_length',
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/errors",
                description => "The number of errors encountered",
@@ -527,7 +498,7 @@ views() ->
                aggregation => oc_stat_aggregation_count},
              #{name => "demo/line_lengths",
                description => "Groups the lengths of keys in buckets",
-               tags => [],
+               tags => [method],
                measure => 'repl/line_length',
                aggregation => size_distribution()}],
 
