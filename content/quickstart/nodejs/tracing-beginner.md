@@ -17,7 +17,7 @@ aliases: [/quickstart/node.js/tracing]
 - [End the spans](#end-the-spans)
 - [References](#references)
 
-#### Run it locally
+### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/node.js`
 3. Install dependencies: `npm install`
@@ -28,9 +28,9 @@ aliases: [/quickstart/node.js/tracing]
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
 
-![](/images/node-tracing-zipkin.png)
+![](node-tracing-zipkin.png)
 
-#### How does it work?
+### How does it work?
 ```js
 const tracing = require('@opencensus/nodejs');
 const zipkin = require('@opencensus/exporter-zipkin');
@@ -143,6 +143,13 @@ span.end();
 
 // 6b. End the spans
 rootSpan.end();
+```
+
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
+```js
+// 6. Annotate our span to capture metadata about our operation
+span.addAnnotation('invoking doWork')
 ```
 
 #### References

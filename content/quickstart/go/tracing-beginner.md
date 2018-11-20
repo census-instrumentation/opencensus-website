@@ -13,7 +13,7 @@ class: "shadowed-image lightbox"
 - [End the spans](#end-the-spans)
 - [References](#references)
 
-#### Run it locally
+### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/go/tracing-to-zipkin`
 3. Install dependencies: `go get go.opencensus.io/* && go get go.opencensus.io/exporter/zipkin`
@@ -24,9 +24,9 @@ class: "shadowed-image lightbox"
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
 
-![](/images/go-tracing-zipkin.png)
+![](go-tracing-zipkin.png)
 
-#### How does it work?
+### How does it work?
 ```go
 func main() {
 	// 1. Configure exporter to export traces to Zipkin.
@@ -92,7 +92,22 @@ func doWork(ctx context.Context) {
 	defer span.End()
 
 	fmt.Println("doing busy work")
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(80 * time.Millisecond)
+	buf := bytes.NewBuffer([]byte{0xFF, 0x00, 0x00, 0x00})
+	num, err := binary.ReadVarint(buf)
+	if err != nil {
+		// 6. Set status upon error
+		span.SetStatus(trace.Status{
+			Code:    trace.StatusCodeUnknown,
+			Message: err.Error(),
+		})
+	}
+
+	// 7. Annotate our span to capture metadata about our operation
+	span.Annotate([]trace.Attribute{
+		trace.Int64Attribute("bytes to int", num),
+	}, "Invoking doWork")
+	time.Sleep(20 * time.Millisecond)
 }
 ```
 
@@ -104,6 +119,25 @@ defer span.End()
 
 // 5b. Make the span close at the end of this function.
 defer span.End()
+```
+
+#### Set the Status of the span
+We can set the [status](https://opencensus.io/tracing/span/status/) of our span to create more observability of our traced operations.
+```go
+// 6. Set status upon error
+span.SetStatus(trace.Status{
+	Code:    trace.StatusCodeUnknown,
+	Message: err.Error(),
+})
+```
+
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
+```go
+// 7. Annotate our span to capture metadata about our operation
+span.Annotate([]trace.Attribute{
+	trace.Int64Attribute("bytes to int", num),
+}, "Invoking doWork")
 ```
 
 

@@ -165,6 +165,22 @@ Traces are queued up in memory and flushed to the trace store \(in this case, Zi
 Tracing.getExportComponent().shutdown();
 ```
 
+#### Set the Status of the span
+We can set the [status](https://opencensus.io/tracing/span/status/) of our span to create more observability of our traced operations.
+```java
+// 6. Set status upon error
+span.setStatus(Status.INTERNAL.withDescription(e.toString()));
+```
+
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
+```java
+// 7. Annotate our span to capture metadata about our operation
+Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
+attributes.put("use", AttributeValue.stringAttributeValue("demo"));
+span.addAnnotation("InvokiÂng doWork", attributes);
+```
+
 #### References
 
 Resource|URL

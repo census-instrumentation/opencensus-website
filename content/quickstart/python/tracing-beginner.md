@@ -14,7 +14,7 @@ class: "shadowed-image lightbox"
 - [Create a child span](#create-a-child-span)
 - [References](#references)
 
-#### Run it locally
+### Run it locally
 1. Clone the example repository: `git clone https://github.com/hvent90/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/python/tracing-to-zipkin`
 3. Install dependencies: `pip install opencensus`
@@ -25,9 +25,9 @@ class: "shadowed-image lightbox"
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
 
-![](/images/python-tracing-zipkin.png)
+![](python-tracing-zipkin.png)
 
-#### How does it work?
+### How does it work?
 ```py
 #!/usr/bin/env python
 
@@ -97,6 +97,20 @@ def doWork():
     with tracer.span(name="doWork"):
         print("doing busy work")
         time.sleep(0.1)
+```
+
+#### Set the Status of the span
+We can set the [status](https://opencensus.io/tracing/span/status/) of our span to create more observability of our traced operations.
+```py
+# 6. Set status upon error
+span.status = Status(5, "Error occurred")
+```
+
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
+```py
+# 7. Annotate our span to capture metadata about our operation
+span.add_annotation("invoking doWork")
 ```
 
 #### References
