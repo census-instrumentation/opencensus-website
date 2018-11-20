@@ -138,21 +138,30 @@ The `main` method calls `doWork` a number of times. Each invocation also generat
 
 ```java
 private static void doWork(int i) {
-	// 6. Get the global singleton Tracer object.
-	Tracer tracer = Tracing.getTracer();
+  // 6. Get the global singleton Tracer object.
+  Tracer tracer = Tracing.getTracer();
 
-	// 7. Start another span. If antoher span was already started, it'll use that span as the parent span.
-	// In this example, the main method already started a span, so that'll be the parent span, and this will be
-	// a child span.
-	try (Scope scope = tracer.spanBuilder("doWork").startScopedSpan()) {
-		// Simulate some work.
-		try {
-			System.out.println("doing busy work");
-			Thread.sleep(100L);
-		}
-		catch (InterruptedException e) {
-		}
-	}
+  // 7. Start another span. If antoher span was already started, it'll use that span as the parent span.
+  // In this example, the main method already started a span, so that'll be the parent span, and this will be
+  // a child span.
+  try (Scope scope = tracer.spanBuilder("doWork").startScopedSpan()) {
+    // Simulate some work.
+    Span span = tracer.getCurrentSpan();
+
+    try {
+      System.out.println("doing busy work");
+      Thread.sleep(100L);
+    }
+    catch (InterruptedException e) {
+      // 6. Set status upon error
+      span.setStatus(Status.INTERNAL.withDescription(e.toString()));
+    }
+
+    // 7. Annotate our span to capture metadata about our operation
+    Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
+    attributes.put("use", AttributeValue.stringAttributeValue("demo"));
+    span.addAnnotation("Invoking doWork", attributes);
+  }
 }
 ```
 
@@ -178,8 +187,9 @@ An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tell
 // 7. Annotate our span to capture metadata about our operation
 Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
 attributes.put("use", AttributeValue.stringAttributeValue("demo"));
-span.addAnnotation("InvokiÂng doWork", attributes);
+span.addAnnotation("Invoking doWork", attributes);
 ```
+
 
 #### References
 

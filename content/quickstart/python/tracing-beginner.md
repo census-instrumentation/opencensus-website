@@ -94,9 +94,16 @@ The `main` method calls `doWork` a number of times. Each invocation also generat
 def doWork():
     # 5. Start another span. Because this is within the scope of the "main" span,
     # this will automatically be a child span.
-    with tracer.span(name="doWork"):
+    with tracer.span(name="doWork") as span:
         print("doing busy work")
-        time.sleep(0.1)
+        try:
+            time.sleep(0.1)
+        except:
+            # 6. Set status upon error
+            span.status = Status(5, "Error occurred")
+
+        # 7. Annotate our span to capture metadata about our operation
+        span.add_annotation("invoking doWork")
 ```
 
 #### Set the Status of the span

@@ -140,7 +140,6 @@ span.Annotate([]trace.Attribute{
 }, "Invoking doWork")
 ```
 
-
 #### References
 
 Resource|URL
