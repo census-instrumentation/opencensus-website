@@ -55,6 +55,7 @@ import (
 	"net/http"
 
 	"go.opencensus.io/exporter/prometheus"
+	"go.opencensus.io/stats/view"
 )
 
 func main() {
@@ -64,6 +65,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create Prometheus exporter: %v", err)
 	}
+
+	// Ensure that we register it as a stats exporter.
+	view.RegisterExporter(pe)
+
 	go func() {
 		mux := http.NewServeMux()
 		mux.Handle("/metrics", pe)
