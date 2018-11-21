@@ -7,729 +7,134 @@ aliases: [/quickstart/node.js/tracing]
 ---
 
 - [Requirements](#requirements)
-- [Installation](#installation)
-- [Getting started](#getting-started)
-- [Enable Tracing](#enable-tracing)
-    - [Import Packages](#import-tracing-packages)
-    - [Instrumentation](#instrument-tracing)
-- [Exporting to Zipkin](#exporting-to-zipkin)
-    - [Create the Exporter](#create-the-exporter)
-- [Optional: Add a Delay](#optional-add-a-delay)
-- [Running the code](#running-the-code)
-- [Viewing your Traces on Zipkin](#viewing-your-traces-on-zipkin)
+- [Run it locally](#run-it-locally)
+- [How does it work?](#how-does-it-work?)
+- [Using the Tracer](#using-the-tracer)
+- [Configure Sampler](#configure-sampler)
+- [Configure Exporter](#configure-exporter)
+- [Create a span](#create-a-span)
+- [Create a child span](#create-a-child-span)
+- [End the spans](#end-the-spans)
+- [References](#references)
 
-In this quickstart, we’ll glean insights from code segments and learn how to:
+#### Run it locally
+1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts`
+2. Change to the example directory: `cd opencensus-quickstarts/node.js`
+3. Install dependencies: `npm install`
+4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
+5. Start Zipkin: `java -jar zipkin.jar`
+6. Run the code: `node tracing-to-zipkin/tracingtozipkin.js`
+7. Navigate to Zipkin Web UI: http://localhost:9411
+8. Click Find Traces, and you should see a trace.
+9. Click into that, and you should see the details.
 
-1. Trace the code using [OpenCensus Tracing](/core-concepts/tracing)
-2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
-3. View traces on the backend of our choice
+![](/images/node-tracing-zipkin.png)
 
-## Requirements
-- [Node.js](https://nodejs.org/) 6 or above and `npm` (already comes with Node.js)
-- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
-
-{{% notice tip %}}
-For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
-
-You can swap out any other exporter from the [list of Node.js exporters](/guides/exporters/supported-exporters/node.js)
-{{% /notice %}}
-
-## Installation
-We will first create our project directory, initialize our project, and bootstrap our entry file.
-
-```bash
-mkdir repl-app
-cd repl-app
-
-npm init -y
-
-touch index.js
-```
-
-Put this in your newly generated `index.js` file:
-
+#### How does it work?
 ```js
-const stdin = process.openStdin();
+// 1. Get the global singleton Tracer object
+// 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+const tracer = tracing.start({samplingRate: 1}).tracer;
 
-function readEvaluateProcessLine(input) {
-  const text = readLine(input);
-  const upperCase = processLine(text);
+// 3. Configure exporter to export traces to Zipkin.
+tracer.registerSpanEventListener(new zipkin.ZipkinTraceExporter({
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+}));
 
-  process.stdout.write('< ' + upperCase + '\n> ');
-}
+function main() {
+  // 4. Create a scoped span, a scoped span will automatically end when closed.
+  tracer.startRootSpan({name: 'main'}, rootSpan => {
+    for (let i = 0; i < 10; i++) {
+      doWork(i);
+    }
 
-function readLine(input) {
-  return input.toString().trim();
-}
-
-function processLine(text) {
-  return text.toUpperCase();
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-
-## Getting Started
-The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:
-```bash
-> foo
-< FOO
-```
-
-Let's first run the application and see what we have.
-```bash
-node index.js
-```
-
-You will be given a text prompt. Try typing in a lowercase word and hit enter to receive the uppercase equivalent.
-
-You should see something like this after a few tries:
-![node image 1](/images/node-quickstart-tracing-1.png)
-
-To exit out of the application, hit ctrl + c on your keyboard.
-
-From here on out, we will be rewriting sections of index.js.
-
-## Enable Tracing
-
-<a name="import-tracing-packages"></a>
-### Import Packages
-
-To enable tracing, we’ll import the `@opencensus/nodejs` package from `opencensus`.
-
-Enter the following in your command line:
-```bash
-npm install --save @opencensus/nodejs
-```
-Insert the following snippet in the beginning of `index.js`:
-
-{{% tabs Snippet All %}}
-```js
-const tracing = require('@opencensus/nodejs');
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const stdin = process.openStdin();
-
-function readEvaluateProcessLine(input) {
-  const text = readLine(input);
-  const upperCase = processLine(text);
-
-  process.stdout.write('< ' + upperCase + '\n> ');
-}
-
-function readLine(input) {
-  return input.toString().trim();
-}
-
-function processLine(text) {
-  return text.toUpperCase();
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-<a name="instrument-tracing"></a>
-### Instrumentation
-
-We will be tracing the execution as it starts in `readEvaluateProcessLine`, goes to `readLine`, and finally travels through `processLine`.
-
-To accomplish this, we must do four things:
-
-**1. Initialize the Tracer and Tracing Configuration**
-
-Insert the following snippet after the `require` statements:
-
-{{% tabs Snippet All %}}
-```js
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  const text = readLine(input);
-  const upperCase = processLine(text);
-
-  process.stdout.write('< ' + upperCase + '\n> ');
-}
-
-function readLine(input) {
-  return input.toString().trim();
-}
-
-function processLine(text) {
-  return text.toUpperCase();
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-**2. Create a Root Span**
-
-We will modify our `readEvaluateProcessLine` function to create a root span:
-
-{{% tabs Snippet All %}}
-```js
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-
+    // 6b. End the spans
     rootSpan.end();
   });
 }
 ```
 
+#### Using the Tracer
+To start a trace, you first need to get a reference to the `Tracer` (3). It can be retrieved as a global singleton.
 ```js
-const tracing = require('@opencensus/nodejs');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-
-    rootSpan.end();
-  });
-}
-
-function readLine(input) {
-  return input.toString().trim();
-}
-
-function processLine(text) {
-  return text.toUpperCase();
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
+// 1. Get the global singleton Tracer object
+// 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+const tracer = tracing.start({samplingRate: 1}).tracer;
 ```
-{{% /tabs %}}
 
-**3. Create a span in each of the three functions**
-
-We will create a child span in `readLine` and `processLine`. To create a child span, use the following snippet:
-
+#### Configure Sampler
+Configure 100% sample rate, otherwise, few traces will be sampled.
 ```js
-const span = tracer.startChildSpan('spanName');
-span.start();
-// code
+// 1. Get the global singleton Tracer object
+// 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+const tracer = tracing.start({samplingRate: 1}).tracer;
+```
+
+#### Configure Exporter
+OpenCensus can export traces to different distributed tracing stores (such as Zipkin, Jeager, Stackdriver Trace). In (3), we configure OpenCensus to export to Zipkin, which is listening on `localhost` port `9411`, and all of the traces from this program will be associated with a service name `node.js-quickstart`.
+```js
+// 3. Configure exporter to export traces to Zipkin.
+tracer.registerSpanEventListener(new zipkin.ZipkinTraceExporter({
+    url: 'http://localhost:9411/api/v2/spans',
+    serviceName: 'node.js-quickstart'
+}));
+```
+
+#### Create a span
+To create a span in a trace, we used the `Tracer` to start a new span (4). A span must be closed in order to mark the end of the span.
+```js
+// 4. Create a scoped span, a scoped span will automatically end when closed.
+tracer.startRootSpan({name: 'main'}, rootSpan => {
+  for (let i = 0; i < 10; i++) {
+    doWork(i);
+  }
+
+  rootSpan.end();
+});
+```
+
+#### Create a child span
+The `main` method calls `doWork` a number of times. Each invocation also generates a child span. Take a look at the `doWork` method.
+```js
+function doWork() {
+  // 5. Start another span. In this example, the main method already started a span,
+  // so that'll be the parent span, and this will be a child span.
+  const span = tracer.startChildSpan('doWork');
+  span.start();
+
+  console.log('doing busy work');
+  for (let i = 0; i <= 40000000; i++) {} // short delay
+
+  // 6. Annotate our span to capture metadata about our operation
+  span.addAnnotation('invoking doWork')
+  for (let i = 0; i <= 20000000; i++) {} // short delay
+
+  span.end();
+}
+```
+
+#### End the spans
+We must end the spans so they becomes available for exporting.
+```js
+// 6a. End the spans
 span.end();
+
+// 6b. End the spans
+rootSpan.end();
 ```
 
-Our two instrumented functions, `readLine` and `processLine`, have become the following:
-
-{{% tabs Snippet All %}}
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
 ```js
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
+// 6. Annotate our span to capture metadata about our operation
+span.addAnnotation('invoking doWork')
 ```
 
-```js
-const tracing = require('@opencensus/nodejs');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-**4. Add Attributes**
-
-We can add metadata to our traces to increase our post-mortem insight.
-
-Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by modifying our `readLine` function.
-
-{{% tabs Snippet All %}}
-```js
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-## Exporting to Zipkin
-
-Enter the following code snippet in your terminal:
-
-```bash
-npm install --save @opencensus/exporter-zipkin
-```
-Append and modify the following code snippet to your `require` statements:
-
-{{% tabs Snippet All %}}
-```js
-var exporter = require('@opencensus/exporter-zipkin');
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const zipkin = require('@opencensus/exporter-zipkin');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-### Create the Exporter
-
-We start by initilazing the exporter with a configuration, like so:
-
-{{% tabs Snippet All %}}
-```js
-var options = {
-    url: 'http://localhost:9411/api/v2/spans',
-    serviceName: 'node.js-quickstart'
-};
-var exporter = new zipkin.ZipkinTraceExporter(options);
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const zipkin = require('@opencensus/exporter-zipkin');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-var options = {
-    url: 'http://localhost:9411/api/v2/spans',
-    serviceName: 'node.js-quickstart'
-};
-var exporter = new zipkin.ZipkinTraceExporter(options);
-
-const tracer = tracing.start().tracer;
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-Now we will invoke our `exporter` after we instantiate `tracer`.
-
-{{% tabs Snippet All %}}
-```js
-tracer.registerSpanEventListener(exporter);
-```
-
-```js
-const tracing = require('@opencensus/nodejs');
-const zipkin = require('@opencensus/exporter-zipkin');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-var options = {
-    url: 'http://localhost:9411/api/v2/spans',
-    serviceName: 'node.js-quickstart'
-};
-var exporter = new zipkin.ZipkinTraceExporter(options);
-
-const tracer = tracing.start().tracer;
-tracer.registerSpanEventListener(exporter);
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-{{% /tabs %}}
-
-## Optional: Add a Delay
-To illustrate the concepts of tracing, let's add a slight delay to each span.
-
-Our delay function:
-
-```js
-function delay() {
-  for (let i = 0; i < 1000000; i++) {}
-}
-```
-
-Add the delay function to `readLine` and `processLine`.
-
-The following snippet of code represents the final state of `index.js`:
-
-```js
-const tracing = require('@opencensus/nodejs');
-const zipkin = require('@opencensus/exporter-zipkin');
-const stdin = process.openStdin();
-
-const defaultConfig = {
-  name: 'readEvaulateProcessLine',
-  samplingRate: 1.0  // always sample
-};
-
-var options = {
-    url: 'http://localhost:9411/api/v2/spans',
-    serviceName: 'node.js-quickstart'
-}
-var exporter = new zipkin.ZipkinTraceExporter(options);
-
-const tracer = tracing.start().tracer;
-tracer.registerSpanEventListener(exporter);
-
-function delay() {
-  for (let i = 0; i < 1000000; i++) {}
-}
-
-function readEvaluateProcessLine(input) {
-  tracer.startRootSpan(defaultConfig, rootSpan => {
-    const text = readLine(input);
-    const upperCase = processLine(text);
-
-    process.stdout.write('< ' + upperCase + '\n> ');
-
-    rootSpan.end();
-  });
-}
-
-function readLine(input) {
-  const span = tracer.startChildSpan('readLine');
-  span.start();
-
-  const text = input.toString().trim();
-  span.addAttribute('length', text.length);
-  span.addAttribute('text', text);
-
-  delay();
-
-  span.end();
-  return text;
-}
-
-function processLine(text) {
-  const span = tracer.startChildSpan('processLine');
-  span.start();
-
-  const upperCaseText = text.toUpperCase();
-
-  delay();
-
-  span.end();
-  return upperCaseText;
-}
-
-/*
- * In a REPL:
- * 1. Read input
- * 2. process input
- */
-stdin.addListener("data", readEvaluateProcessLine);
-process.stdout.write('> ');
-```
-
-## Running the code
-
-Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
-
-```shell
-node index.js
-```
-
-## Viewing your Traces on Zipkin
-With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411, which will produce such a screenshot:
-![](/images/trace-node-zipkin-all-traces.png)
-
-On clicking on one of the traces, we should be able to see the following:
-![](/images/trace-node-zipkin-single-trace.png)
-
-And on clicking on `More info` we should see
-![](/images/trace-node-zipkin-all-details.png)
-
-## References
+#### References
 
 Resource|URL
 ---|---
 Zipkin project|https://zipkin.io/
 Setting up Zipkin|[Zipkin Codelab](/codelabs/zipkin)
 Node.js exporters|[Node.js exporters](/guides/exporters/supported-exporters/node.js)
-

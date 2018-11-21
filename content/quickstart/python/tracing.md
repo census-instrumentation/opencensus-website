@@ -5,272 +5,122 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Getting started](#getting-started)
-- [Enable Tracing](#enable-tracing)
-    - [Import Packages](#import-tracing-packages)
-    - [Instrumentation](#instrument-tracing)
-- [Exporting Traces to Zipkin](#exporting-traces-to-zipkin)
-    - [Import Packages](#import-exporting-packages)
-    - [Create Annotations](#create-annotations)
-- [Running the code](#running-the-code)
-- [Viewing your Traces](#viewing-your-traces)
+- [Run it locally](#run-it-locally)
+- [How does it work?](#how-does-it-work?)
+- [Configure Exporter](#configure-exporter)
+- [Configure Sampler](#configure-sampler)
+- [Using the Tracer](#using-the-tracer)
+- [Create a span](#create-a-span)
+- [Create a child span](#create-a-child-span)
+- [References](#references)
 
-In this quickstart, we’ll glean insights from code segments and learn how to:
+#### Run it locally
+1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts`
+2. Change to the example directory: `cd opencensus-quickstarts/python/tracing-to-zipkin`
+3. Install dependencies: `pip install opencensus`
+4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
+5. Start Zipkin: `java -jar zipkin.jar`
+6. Run the code: `pyton tracingtozipkin.py`
+7. Navigate to Zipkin Web UI: http://localhost:9411
+8. Click Find Traces, and you should see a trace.
+9. Click into that, and you should see the details.
 
-1. Trace the code using [OpenCensus Tracing](/core-concepts/tracing)
-2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
-3. View traces on the backend of our choice
+![](/images/python-tracing-zipkin.png)
 
-## Requirements
-- Python
-- Zipkin as our choice of tracing backend: we are picking it because it is free, open source and easy to setup
-
-{{% notice tip %}}
-For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
-
-You can swap out any other exporter from the [list of Python exporters](/guides/exporters/supported-exporters/python)
-{{% /notice %}}
-
-## Installation
-
-OpenCensus: `pip install opencensus`
-
-## Getting Started
-
-{{% notice note %}}
-Unsure how to write and execute Python code? [Click here](https://docs.python.org/).
-{{% /notice %}}
-
-It would be nice if we could trace the following code, thus giving us observability in to how the code functions.
-
-First, create a file called `repl.py`.
-```bash
-touch repl.py
-```
-
-Next, put the following code inside of `repl.py`:
-
-{{<highlight python>}}
-#!/usr/bin/env python
-
-import sys
-
-def main():
-    # In a REPL:
-    #1. Read input
-    #2. process input
-    while True:
-        line = sys.stdin.readline()
-        print(line.upper())
-{{</highlight>}}
-
-You can run the code via `python repl.py`.
-
-## Enable Tracing
-
-<a name="import-tracing-packages"></a>
-### Import Packages
-
-To enable tracing, we’ll import the `trace.tracer` package from `opencensus`
-{{<tabs Snippet All>}}
-{{<highlight python>}}
-from opencensus.trace.tracer import Tracer
-{{</highlight>}}
-
-{{<highlight python>}}
-#!/usr/bin/env python
-
-import sys
-
-from opencensus.trace.tracer import Tracer
-
-def main():
-    # In a REPL:
-    #1. Read input
-    #2. process input
-    while True:
-        line = sys.stdin.readline()
-        print(line.upper())
-
-{{</highlight>}}
-{{</tabs>}}
-
-<a name="instrument-tracing"></a>
-### Instrumentation
-
-We will be tracing the execution as it starts in `readEvaluateProcessLine`, goes to `readLine`, and finally travels through `processLine`.
-
-To accomplish this, we must do two things:
-
-**1. Create a span in each of the three functions**
-
-You can create a span by inserting the following two lines in each of the three functions:
-```python
-with tracer.span(name=name):
-    # Code here
-    pass
-```
-
-{{<tabs Snippet All>}}
-{{<highlight python>}}
-from opencensus.trace.tracer import Tracer
-
-tracer = Tracer()
-with tracer.span(name="repl") as span:
-    print(line.upper())
-{{</highlight>}}
-
-{{<highlight python>}}
-#!/usr/bin/env python
-
-import sys
-
-from opencensus.trace.tracer import Tracer
-
-def main():
-    # In a REPL:
-    # 1. Read input
-    # 2. process input
-    while True:
-        readEvaluateProcessLine()
-
-def readEvaluateProcessLine():
-    tracer = Tracer()
-    with tracer.span(name="repl") as span:
-        line = sys.stdin.readline()
-        print(line.upper())
-{{</highlight>}}
-{{</tabs>}}
-
-When creating a new span with `tracer.span("spanName")`, the package first checks if a parent Span already exists in the current thread local storage/context. If it exists, a child span is created. Otherwise, a newly created span is inserted in to the thread local storage/context to become the parent Span.
-
-## Exporting traces to Zipkin
-
-<a name="import-exporting-packages"></a>
-### Import Packages
-To turn on Zipkin tracing, we’ll need to import the Zipkin exporter from `opencensus.trace.exporters`
-
-{{<tabs Snippet All>}}
-{{<highlight python>}}
-from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
-from opencensus.trace.samplers import always_on
-{{</highlight>}}
-
-{{<highlight python>}}
+#### How does it work?
+```py
 #!/usr/bin/env python
 
 import os
+import time
 import sys
 
 from opencensus.trace.tracer import Tracer
 from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
 from opencensus.trace.samplers import always_on
 
-# Firstly create the exporter
-ze = ZipkinExporter(service_name="ocpythonquick",
+# 1a. Setup the exporter
+ze = ZipkinExporter(service_name="python-quickstart",
                                 host_name='localhost',
                                 port=9411,
                                 endpoint='/api/v2/spans')
+# 1b. Set the tracer to use the exporter
+# 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+# 3. Get the global singleton Tracer object
+tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
 
 def main():
-    # Firstly enable the exporter
-
-    # In a REPL:
-    # 1. Read input
-    # 2. process input
-    while True:
-        readEvaluateProcessLine()
-
-def readEvaluateProcessLine():
-    # For demo purposes, we are always sampling
-    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=ze)
-    with tracer.span(name="repl") as span:
-        line = sys.stdin.readline()
-        out = processInput(tracer, line)
-        print("< %s"%(out))
-
-def processInput(tracer, data):
-    with tracer.span(name='processInput') as span:
-        return data.upper()
-{{</highlight>}}
-{{</tabs>}}
-
-### Create Annotations
-We can add metadata to our traces to increase our post-mortem insight.
-
-Let's record the length of each requested string so that it is available to view when we are looking at our traces. We can do this by annotating our `readEvaluateProcessLine` function.
-
-{{<tabs Snippet All>}}
-{{<highlight python>}}
-span.add_annotation("Invoking processLine", len=len(line), use="repl")
-{{</highlight>}}
-
-{{<highlight python>}}
-#!/usr/bin/env python
-
-import os
-import sys
-
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
-from opencensus.trace.samplers import always_on
-
-# Firstly create the exporter
-ze = ZipkinExporter(service_name="ocpythonquick",
-                                host_name='localhost',
-                                port=9411,
-                                endpoint='/api/v2/spans')
-
-
-def main():
-    # Firstly enable the exporter
-
-    # In a REPL:
-    # 1. Read input
-    # 2. process input
-    while True:
-        readEvaluateProcessLine()
-
-def readEvaluateProcessLine():
-    # For demo purposes, we are always sampling
-    tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=ze)
-    with tracer.span(name="repl") as span:
-        line = sys.stdin.readline()
-        span.add_annotation("Invoking processLine", len_=len(line), use="repl")
-        out = processInput(tracer, line)
-        print("< %s"%(out))
-        span.finish()
-
-def processInput(tracer, data):
-    with tracer.span(name='processInput'):
-        return data.upper()
-
-if __name__ == "__main__":
-    main()
-{{</highlight>}}
-{{</tabs>}}
-
-## Running the code
-
-Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
-
-```shell
-python repl.py
+    # 4. Create a scoped span. The span will close at the end of the block.
+    with tracer.span(name="main") as span:
+        for i in range(0, 10):
+            doWork()
 ```
 
-## Viewing your Traces
-With the above you should now be able to navigate to the Zipkin UI at http://localhost:9411, which will produce such a screenshot:
-![](/images/trace-python-zipkin-all-traces.png)
+#### Configure Exporter
+OpenCensus can export traces to different distributed tracing stores (such as Zipkin, Jeager, Stackdriver Trace). In (1), we configure OpenCensus to export to Zipkin, which is listening on `localhost` port `9411`, and all of the traces from this program will be associated with a service name `python-quickstart`.
+```py
+# 1a. Setup the exporter
+ze = ZipkinExporter(service_name="python-quickstart",
+                                host_name='localhost',
+                                port=9411,
+                                endpoint='/api/v2/spans')
+# 1b. Set the tracer to use the exporter
+tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
+```
+#### Configure Sampler
+Configure 100% sample rate, otherwise, few traces will be sampled.
+```py
+# 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
+```
 
-On clicking on one of the traces, we should be able to see the following:
-![](/images/trace-python-zipkin-single-trace.png)
+#### Using the Tracer
+To start a trace, you first need to get a reference to the `Tracer` (3). It can be retrieved as a global singleton.
+```py
+# 3. Get the global singleton Tracer object
+tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
+```
 
-And on clicking on `More info` we should see
-![](/images/trace-python-zipkin-all-details.png)
+#### Create a span
+To create a span in a trace, we used the `Tracer` to start a new span (4). A span will automatically close at the end of the block.
+```py
+# 4. Create a scoped span. The span will close at the end of the block.
+with tracer.span(name="main") as span:
+```
 
-## References
+#### Create a child span
+The `main` method calls `doWork` a number of times. Each invocation also generates a child span. Take a look at the `doWork` method.
+```py
+def doWork():
+    # 5. Start another span. Because this is within the scope of the "main" span,
+    # this will automatically be a child span.
+    with tracer.span(name="doWork") as span:
+        print("doing busy work")
+        try:
+            time.sleep(0.1)
+        except:
+            # 6. Set status upon error
+            span.status = Status(5, "Error occurred")
+
+        # 7. Annotate our span to capture metadata about our operation
+        span.add_annotation("invoking doWork")
+```
+
+#### Set the Status of the span
+We can set the [status](https://opencensus.io/tracing/span/status/) of our span to create more observability of our traced operations.
+```py
+# 6. Set status upon error
+span.status = Status(5, "Error occurred")
+```
+
+#### Create an Annotation
+An [annotation](https://opencensus.io/tracing/span/time_events/annotation/) tells a descriptive story in text of an event that occurred during a span’s lifetime.
+```py
+# 7. Annotate our span to capture metadata about our operation
+span.add_annotation("invoking doWork")
+```
+
+#### References
 
 Resource|URL
 ---|---
