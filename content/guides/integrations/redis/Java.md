@@ -1,6 +1,6 @@
 ---
 title: "Java"
-date: 2018-07-25T09:38:03-07:00
+date: 2018-11-26T01:04:03-07:00
 draft: false
 class: "integration-page"
 aliases: [/integrations/redis/java]
@@ -9,9 +9,8 @@ logo: /images/java-opencensus.png
 
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
-- [Generating the JAR](#generating-the-jar)
-    - [Clone this repository](#clone-this-repository)
-    - [Generate and install](#generate-and-install)
+- [How it works](#how-it-works)
+- [Imports](#imports)
 - [Enabling observability](#enabling-observability)
 - [Available metrics](#available-metrics)
 - [End to end example](#end-to-end-example)
@@ -19,142 +18,155 @@ logo: /images/java-opencensus.png
 - [Viewing your metrics](#viewing-your-metrics)
 - [Viewing your traces](#viewing-your-traces)
 
-## Introduction
-Some Redis clients were already instrumented to provide traces and metrics with OpenCensus
+### Introduction
+To provide client side observability, a Java Redis client [Jedis](https://github.com/xetorthio/jedis) has been instrumented
+with OpenCensus for tracing and metrics.
 
-Packages|Repository link
+Resource|Repository link
 ---|---
-jedis|https://github.com/opencensus-integrations/jedis
+Jedis wrapper on Github|https://github.com/orijtech/ocjedis
+Maven Central URL|https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis
 
-## Prerequisites
+### Prerequisites
 
 You will need the following:
 
-* Redis
-* Google Stackdriver enabled on your project
+* Redis server
+* Prometheus
+* Zipkin
 
 {{% notice tip %}}
-For assistance installing Redis, please [Click here to get started](https://redis.io/topics/quickstart)
+Before proceeding we'll need to firstly install the following
 
-For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
+Requirement|Guide
+---|---
+Redis server|https://redis.io/topics/quickstart
+Prometheus|[Prometheus codelab](/codelabs/prometheus)
+Zipkin|[Zipkin codelab](/codelabs/zipkin)
 {{% /notice %}}
 
-## Generating the JAR
+### How it works
 
-### Clone this repository
-```shell
-git clone https://github.com/opencensus-integrations
+The integration extends [redis.clients.jedis.Jedis](https://static.javadoc.io/redis.clients/jedis/2.9.0/redis/clients/jedis/Jedis.html) by wrapping most methods with instrumentation that enables tracing and metrics.
+
+### Imports
+One just needs to import the integration and use it like they would for Jedis
+
+```java
+import io.orijtech.integrations.ocjedis.OcWrapJedis;
+import io.orijtech.integrations.ocjedis.Observability;
+
+private static final OcWrapJedis jedis = new OcWrapJedis(redisHost);
 ```
 
-### Generate and install
-Inside the cloned repository's directory run
-```shell
-mvn install:install-file -Dfile=$(pwd)/target/jedis-3.0.0-SNAPSHOT.jar \
--DgroupId=redis.clients -DartifactId=jedis -Dversion=3.0.0 \
--Dpackaging=jar -DgeneratePom=true
-```
-
-## Enabling observability
-To enable observability, we'll need to use Jedis normally but with one change
-
-{{<highlight java>}}
-import redis.clients.jedis.Observability;
-{{</highlight>}}
-
-and then finally to enable metrics
+### Enabling observability
+We'll need to enable stats by registering and enabling all available views
 {{<highlight java>}}
 // Enable exporting of all the Jedis specific metrics and views
 Observability.registerAllViews();
 {{</highlight>}}
 
-## Available metrics
-Metric search suffix|Description
----|---
-redis/bytes_read|The number of bytes read from the Redis server
-redis/bytes_written|The number of bytes written out to the Redis server
-redis/dials|The number of connection dials made to the Redis server
-redis/dial_latency_milliseconds|The number of milliseconds spent performing Redis operations
-redis/errors|The number of errors encountered
-redis/connections_opened|The number of new connections
-redis/roundtrip_latency|The latency spent for various Redis operations
-redis/reads|The number of reads performed
-redis/writes|The number of writes performed
+### Available metrics
 
-## End to end example
+Metric search suffix|Description|Tags
+---|---|---
+jedis/latency|The latency of the various methods|"method", "error", "status"
+jedis/calls|The calls made by various methods|"method", "error", "status"
+jedis/data_transferred|The amount of data transferred|"method", "type"
+
+
+### End to end example
+
+In this end-to-end example, we've taken an excerpt from a search service. It checks Redis server if the expensively computed response
+was already saved. If not found ("cache miss"), it'll process the response then save it to the cache for later "cache hits".
+
 {{<tabs Source Pom>}}
 
 {{<highlight java>}}
 package io.opencensus.tutorials.jedis;
 
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
-import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
-import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
+import io.opencensus.trace.Span;
+import io.opencensus.trace.Status;
 import io.opencensus.trace.config.TraceConfig;
-import io.opencensus.trace.config.TraceParams;
 import io.opencensus.trace.samplers.Samplers;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
+import io.opencensus.common.Scope;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Observability;
+// Enable the exporters.
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.opencensus.exporter.trace.zipkin.ZipkinTraceExporter;
+import io.prometheus.client.exporter.HTTPServer;
+
+import io.orijtech.integrations.ocjedis.OcWrapJedis;
+import io.orijtech.integrations.ocjedis.Observability;
 
 public class JedisOpenCensus {
-    private static final Jedis jedis = new Jedis("localhost");
+    private static final OcWrapJedis jedis = new OcWrapJedis("localhost");
+    private static final Tracer tracer = Tracing.getTracer();
 
     public static void main(String ...args) {
-        // Enable exporting of all the Jedis specific metrics and views.
-        Observability.registerAllViews();
-
         // Now enable OpenCensus exporters
-        setupOpenCensusExporters();
-
-        // Now for the repl
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            setupOpenCensusAndExporters();
+        } catch(Exception e) {
+            System.err.println("Failed to create OpenCensus exporters " + e);
+        }
 
         while (true) {
             try {
-                System.out.print("> ");
-                System.out.flush();
-                String query = stdin.readLine();
+                // Sleeping for a bit to avoid exhausting CPU.
+                Thread.sleep(1700);
+            } catch (Exception e) {
+            }
 
-                // Check Redis if we've got a hit firstly
-                String result = jedis.get(query);
+            // Add user input here.
+            String query = "This simulates user input to aid populating observability signals";
+            String result = "";
+
+            try (Scope ss = JedisOpenCensus.tracer.spanBuilder("Search").startScopedSpan()) {
+
+                Span span = JedisOpenCensus.tracer.getCurrentSpan();
+
+                // Check Redis if we've memoized the response.
+                result = jedis.get(query);
                 if (result == null || result == "") {
-                    // Cache miss so process it and memoize it
+                    // Cache miss so process and memoize it
+                    span.addAnnotation("Cache miss!");
                     result = "$" + query + "$";
                     jedis.set(query, result);
+                } else {
+                    span.addAnnotation("Cache hit!");
+                    // Clear the output so that the next search will be a Cache miss.
+                    jedis.del(query);
                 }
-                System.out.println("< " + result + "\n");
-            } catch (IOException e) {
+            } catch (Exception e) {
+                Span span = JedisOpenCensus.tracer.getCurrentSpan();
+                span.setStatus(Status.INTERNAL.withDescription(e.toString()));
                 System.err.println("Exception "+ e);
             }
+
+            // Finally print out the output.
+            System.out.println("< " + result + "\n");
         }
     }
 
-    private static void setupOpenCensusExporters() {
-        String gcpProjectId = "census-demos";
+    private static void setupOpenCensusAndExporters() throws Exception {
+        // Enable exporting of all the Jedis specific metrics.
+        Observability.registerAllViews();
 
-        try {
-            StackdriverTraceExporter.createAndRegister(
-                StackdriverTraceConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
-
-            StackdriverStatsExporter.createAndRegister(
-                StackdriverStatsConfiguration.builder()
-                .setProjectId(gcpProjectId)
-                .build());
-        } catch (Exception e) {
-            System.err.println("Failed to setup OpenCensus " + e);
-        }
-
-        // Change the sampling rate to always sample
+        // Change the sampling rate to always sample.
         TraceConfig traceConfig = Tracing.getTraceConfig();
         traceConfig.updateActiveTraceParams(
                 traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
+
+        // Next create the Zipkin trace exporter.
+        ZipkinTraceExporter.createAndRegister("http://localhost:9411/api/v2/spans", "itunes-search-client");
+
+        // And then enable the Prometheus exporter too.
+        PrometheusStatsCollector.createAndRegister();
+        // Start the Prometheus server
+        HTTPServer prometheusServer = new HTTPServer(9888, true);
     }
 }
 {{</highlight>}}
@@ -163,11 +175,11 @@ public class JedisOpenCensus {
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.ocgrpc</groupId>
-    <artifactId>ocgrpc</artifactId>
+    <groupId>io.opencensus.quickstart</groupId>
+    <artifactId>quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>ocgrpc</name>
+    <name>quickstart</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -178,12 +190,6 @@ public class JedisOpenCensus {
     <dependencies>
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-stats-stackdriver</artifactId>
-            <version>${opencensus.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.opencensus</groupId>
             <artifactId>opencensus-api</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
@@ -191,22 +197,34 @@ public class JedisOpenCensus {
         <dependency>
             <groupId>io.opencensus</groupId>
             <artifactId>opencensus-impl</artifactId>
-            <version>${opencensus.version}</version>
             <scope>runtime</scope>
+            <version>${opencensus.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.opencensus</groupId>
+            <artifactId>opencensus-exporter-stats-prometheus</artifactId>
+            <version>${opencensus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>0.3.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.opencensus</groupId>
-            <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+            <artifactId>opencensus-exporter-trace-zipkin</artifactId>
             <version>${opencensus.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis -->
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.0.0</version>
+            <groupId>io.orijtech.integrations</groupId>
+            <artifactId>ocjedis</artifactId>
+            <version>0.0.2</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -219,48 +237,79 @@ public class JedisOpenCensus {
         </extensions>
 
         <pluginManagement>
-          <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-          </plugins>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>1.10</version>
+                    <configuration>
+                        <programs>
+                            <program>
+                                <id>JedisOpenCensus</id>
+                                <mainClass>io.opencensus.tutorials.jedis.JedisOpenCensus</mainClass>
+                            </program>
+                        </programs>
+                    </configuration>
+                </plugin>
+            </plugins>
+
         </pluginManagement>
 
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.10</version>
-                <configuration>
-                    <programs>
-                        <program>
-                            <id>JedisOpenCensus</id>
-                            <mainClass>io.opencensus.tutorials.jedis.JedisOpenCensus</mainClass>
-                        </program>
-                    </programs>
-                </configuration>
-            </plugin>
-
-        </plugins>
     </build>
-
 </project>
 {{</highlight>}}
 {{</tabs>}}
 
-### Running it
+#### Running it
 ```shell
 mvn install && mvn exec:java -Dexec.mainClass=io.opencensus.tutorials.jedis.JedisOpenCensus
 ```
 
-## Viewing your metrics
-Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
+### Viewing your metrics
+Please visit the Prometheus UI at http://localhost:9090
 
-## Viewing your traces
-Please visit [https://console.cloud.google.com/traces/traces](https://console.cloud.google.com/traces/traces)
+* All metrics
+![](/images/ocjedis-metrics-all.png)
+
+* Calls
+![](/images/ocjedis-metrics-calls.png)
+
+* Latency, with errors too
+![](/images/ocjedis-metrics-latency-with-errors.png)
+
+* Data transferred
+![](/images/ocjedis-metrics-data_transferred.png)
+
+### Viewing your traces
+Please visit the Zipkin UI at http://localhost:9411/zipkin
+
+* All traces
+![](/images/ocjedis-trace-all.png)
+
+* Single trace without error
+![](/images/ocjedis-trace-single.png)
+
+* Single trace with error
+![](/images/ocjedis-trace-with-error.png)
+
+* Single trace with error detail
+![](/images/ocjedis-trace-with-error-detail.png)
+
+### References
+
+Resource|URL
+---|---
+OCJedis integration on Github|https://github.com/orijtech/ocjedis
+OCJedis on Maven Central|https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis
+Jedis project Javadoc|https://www.javadoc.io/doc/redis.clients/jedis
+Jedis project Github|https://github.com/xetorthio/jedis
