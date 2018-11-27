@@ -111,7 +111,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -195,7 +195,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -229,9 +229,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
@@ -258,9 +255,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
@@ -284,7 +278,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -315,6 +309,8 @@ Now we will create the variable later needed to add extra text meta-data to our 
 {{<highlight go>}}
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 {{</highlight>}}
 
@@ -339,15 +335,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -369,7 +364,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -406,15 +401,17 @@ Now we will insert a specific tag called "repl". It will give us a new `context.
 
 For example
 ```go
-        ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+  tag.Insert(KeyStatus, "OK"))
 ```
 
 and for complete usage:
 
 {{<tabs Snippet All>}}
 {{<highlight go>}}
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -455,15 +452,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -485,8 +481,9 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-  ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -545,15 +542,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -575,7 +571,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -605,24 +601,33 @@ Now we will record the desired metrics. To do so, we will use `stats.Record` and
 
 {{<tabs Snippet All>}}
 {{<highlight go>}}
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -634,11 +639,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 
@@ -663,15 +672,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -693,24 +701,33 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -722,11 +739,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 {{</tabs>}}
@@ -776,15 +797,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -806,24 +826,33 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -835,11 +864,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 {{</tabs>}}
@@ -867,13 +900,6 @@ var (
 		Aggregation: view.Count(),
 	}
 
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
-		Aggregation: view.Count(),
-	}
-
 	LineLengthView = &view.View{
 		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
@@ -906,15 +932,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -932,13 +957,6 @@ var (
 		Name:        "demo/lines_in",
 		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
 		Aggregation: view.Count(),
 	}
 
@@ -970,24 +988,33 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -999,11 +1026,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 {{</tabs>}}
@@ -1020,7 +1051,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1058,15 +1089,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -1087,13 +1117,6 @@ var (
 		Aggregation: view.Count(),
 	}
 
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
-		Aggregation: view.Count(),
-	}
-
 	LineLengthView = &view.View{
 		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
@@ -1110,7 +1133,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1127,24 +1150,33 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -1156,11 +1188,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 {{</tabs>}}
@@ -1171,7 +1207,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 ```go
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1253,15 +1289,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -1282,13 +1317,6 @@ var (
 		Aggregation: view.Count(),
 	}
 
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
-		Aggregation: view.Count(),
-	}
-
 	LineLengthView = &view.View{
 		Name:        "demo/line_lengths",
 		Description: "Groups the lengths of keys in buckets",
@@ -1301,7 +1329,7 @@ var (
 func main() {
 	// Register the views, it is imperative that this step exists
 	// lest recorded metrics will be dropped and never exported.
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register the views: %v", err)
 	}
 
@@ -1332,7 +1360,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1349,24 +1377,33 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
+		tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+  defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -1378,11 +1415,15 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
+}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
 {{</highlight>}}
 
