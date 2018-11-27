@@ -174,9 +174,6 @@ const stats = new Stats();
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
 
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
-
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
 {{</highlight>}}
@@ -192,9 +189,6 @@ const stats = new Stats();
 
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
-
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
 
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
@@ -244,7 +238,7 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   AggregationType.COUNT,
   [tagKey],
   "The number of lines from standard input"
@@ -274,9 +268,6 @@ const stats = new Stats();
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
 
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
-
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
 
@@ -301,7 +292,7 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   AggregationType.COUNT,
   [tagKey],
   "The number of lines from standard input"
@@ -347,13 +338,6 @@ Now we will record the desired metrics. To do so, we will use `stats.record()` a
 {{<highlight javascript>}}  
 const tags = { "method": "repl" };
 
-// Records a new line
-stats.record({
-  measure: mLinesIn,
-  tags,
-  value: 1
-});
-
 stats.record({
   measure: mLineLengths,
   tags,
@@ -379,9 +363,6 @@ const stats = new Stats();
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
 
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
-
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
 
@@ -406,7 +387,7 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   0,
   [tagKey],
   "The number of lines from standard input"
@@ -435,13 +416,6 @@ lineReader.on("line", function (line) {       // Read
   const endTime = new Date();
 
   const tags = { "method": "repl" };
-
-  // Records a new line
-  stats.record({
-    measure: mLinesIn,
-    tags,
-    value: 1
-  });
 
   stats.record({
     measure: mLineLengths,
@@ -511,9 +485,6 @@ stats.registerExporter(exporter);
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
 
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
-
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
 
@@ -538,7 +509,7 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   0,
   [tagKey],
   "The number of lines from standard input"
@@ -567,13 +538,6 @@ lineReader.on("line", function (line) {       // Read
   const endTime = new Date();
 
   const tags = { "method": "repl" };
-
-  // Records a new line
-  stats.record({
-    measure: mLinesIn,
-    tags,
-    value: 1
-  });
 
   stats.record({
     measure: mLineLengths,
