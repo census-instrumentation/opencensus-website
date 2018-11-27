@@ -100,9 +100,6 @@ import opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-# Counts the number of lines read in from standard input
-m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
-
 # Encounters the number of non EOF(end-of-file) errors.
 m_errors = measure_module.Int("repl/errors", "The number of errors encountered", "1")
 
@@ -126,9 +123,6 @@ from opencensus.tags import tag_value as tag_value_module
 # Create the measures
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-# Counts the number of lines read in from standard input
-m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
 
 # Encounters the number of non EOF(end-of-file) errors.
 m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
@@ -161,9 +155,6 @@ def readEvaluateProcessLine():
 
     # Record the latency
     mmap.measure_float_put(m_latency_ms, end_ms)
-
-    # Record the number of lines in
-    mmap.measure_int_put(m_lines_in, 1)
 
     # Record the line length
     mmap.measure_int_put(m_line_lengths, len(line))
@@ -198,9 +189,6 @@ from opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-# Counts the number of lines read in from standard input
-m_lines_in = measure_module.MeasureInt("repl/lines_in", "The number of lines read in", "1")
-
 # Encounters the number of non EOF(end-of-file) errors.
 m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
 
@@ -222,7 +210,7 @@ latency_view = view_module.View("demo/latency", "The distribution of the latenci
 
 line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
 		[],
-                m_lines_in,
+                m_line_lengths,
                 aggregation_module.CountAggregation())
 
 error_count_view = view_module.View("demo/errors", "The number of errors encountered",
@@ -255,9 +243,6 @@ def readEvaluateProcessLine():
 
     # Record the latency
     mmap.measure_float_put(m_latency_ms, end_ms)
-
-    # Record the number of lines in
-    mmap.measure_int_put(m_lines_in, 1)
 
     # Record the line length
     mmap.measure_int_put(m_line_lengths, len(line))
