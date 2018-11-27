@@ -229,9 +229,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -260,9 +257,6 @@ import (
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
 
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
@@ -344,9 +338,6 @@ import (
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
 
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
@@ -464,9 +455,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -556,9 +544,6 @@ import (
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
 
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
@@ -650,7 +635,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
@@ -677,9 +662,6 @@ import (
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
 
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
@@ -741,7 +723,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
@@ -794,9 +776,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -857,7 +836,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
@@ -883,7 +862,7 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
 		Aggregation: view.Count(),
 	}
@@ -927,9 +906,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -954,7 +930,7 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
 		Aggregation: view.Count(),
 	}
@@ -1024,7 +1000,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
@@ -1082,9 +1058,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -1109,7 +1082,7 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
 		Aggregation: view.Count(),
 	}
@@ -1184,7 +1157,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
@@ -1280,9 +1253,6 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
 	// Encounters the number of non EOF(end-of-file) errors.
 	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
@@ -1307,7 +1277,7 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
 		Aggregation: view.Count(),
 	}
@@ -1409,7 +1379,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
 		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
