@@ -100,11 +100,8 @@ import opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-# Encounters the number of non EOF(end-of-file) errors.
-m_errors = measure_module.Int("repl/errors", "The number of errors encountered", "1")
-
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.Int("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
 {{</highlight>}}
 
 {{<highlight python>}}
@@ -124,9 +121,6 @@ from opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-# Encounters the number of non EOF(end-of-file) errors.
-m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
-
 # Counts/groups the lengths of lines read in.
 m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
 
@@ -135,6 +129,10 @@ stats_recorder = stats.Stats().stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
+# Create the status key
+key_status = tag_key_module.TagKey("status")
+# Create the error key
+key_error = tag_key_module.TagKey("error")
 
 def main():
     # In a REPL:
@@ -189,9 +187,6 @@ from opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-# Encounters the number of non EOF(end-of-file) errors.
-m_errors = measure_module.MeasureInt("repl/errors", "The number of errors encountered", "1")
-
 # Counts/groups the lengths of lines read in.
 m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
 
@@ -200,29 +195,28 @@ stats_recorder = stats.Stats().stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
+# Create the status key
+key_status = tag_key_module.TagKey("status")
+# Create the error key
+key_error = tag_key_module.TagKey("error")
 
 latency_view = view_module.View("demo/latency", "The distribution of the latencies",
-                [key_method],
-                m_latency_ms,
-		# Latency in buckets:
-		# [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
-		aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
+    [key_method, key_status, key_error],
+    m_latency_ms,
+    # Latency in buckets:
+    # [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
+    aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
 line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
-		[],
-                m_line_lengths,
-                aggregation_module.CountAggregation())
-
-error_count_view = view_module.View("demo/errors", "The number of errors encountered",
-                [key_method],
-                m_errors,
-                aggregation_module.CountAggregation())
+    [],
+    m_line_lengths,
+    aggregation_module.CountAggregation())
 
 line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
-                [],
-		m_line_lengths,
-		# Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
-		aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
+    [],
+    m_line_lengths,
+    # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
+    aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
 
 def main():
     # In a REPL:
@@ -249,6 +243,7 @@ def readEvaluateProcessLine():
 
     tmap = tag_map_module.TagMap()
     tmap.insert(key_method, tag_value_module.TagValue("repl"))
+    tmap.insert(key_status, tag_value_module.TagValue("OK"))
 
     # Insert the tag map finally
     mmap.record(tmap)
