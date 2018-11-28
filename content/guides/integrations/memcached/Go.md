@@ -15,7 +15,7 @@ logo: /img/memcached-gopher.png
     - [Enabling metrics](#enabling-metrics)
     - [Enabling tracing](#enabling-tracing)
 - [End to end example](#end-to-end-example)
-- [Examining your traces](#enabling-your-traces)
+- [Examining your traces](#examining-your-traces)
 - [Examining your metrics](#examining-your-metrics)
 - [References](#references)
 
@@ -37,17 +37,12 @@ all now take in a context.Context object as the first argument, to allow for tra
 ### Available metrics
 * Also a couple of metrics have been added:
 
-Metric|Name|Description
----|---|---
-Number of cache Misses|`cache_misses`|The number of cache misses
-Number of cache hits|`cache_hits`|The number of cache hits
-Number of errors|`errors`|The number of general errors, disambiguated by tags "method", "reason", "type"
-Number of compare and swap conflicts|`cas_conflicts`|The number of CAS conflicts
-Number of unstored results|`unstored_results`|The number of unstored results
-Distribution of key lengths|`key_length`|The distributions and counts of key lengths in Bytes
-Distribution of value lengths|`value_length`|The distributions and counts of value lengths in Bytes
-Distribution of latencies in milliseconds|`latency`|The distributions and counts of latencies in milliseconds, by tag "method"
-Number of calls|`calls`|The number of calls broken down by tag key `method`
+Metric|Name|Description|Tags
+---|---|---|---
+Distribution of key lengths|"gomemcache/key_length"|The distributions and counts of key lengths in Bytes|"method"
+Distribution of value lengths|"gomemcache/value_length"|The distributions and counts of value lengths in Bytes|"method"
+Distribution of latencies in milliseconds|"gomemcache/latency"|The distributions and counts of the various methods roundtrip latencies in milliseconds|"method", "error", "status"
+Number of calls|"gomemcache/calls"|The number of calls of the various methods|"method", "error", "status"
 
 ## Using it
 ```shell
@@ -104,16 +99,17 @@ import (
 	"io/ioutil"
 	"log"
 	"math/big"
+	"math/rand"
 	"net/http"
 	"net/http/httptest"
 	"time"
+
+	"github.com/orijtech/gomemcache/memcache"
 
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
-
-	"github.com/orijtech/gomemcache/memcache"
 )
 
 func main() {
@@ -124,10 +120,9 @@ func main() {
 	defer func() {
 		// Wait for 60 seconds before exiting to allow metrics to be flushed
 		log.Println("Waiting for ~60s to allow metrics to be exported")
-		<-time.After(62 * time.Second)
+		time.Sleep(62 * time.Second)
 		flushFn()
 	}()
-
 
 	mc := memcache.New("localhost:11211")
 	log.SetFlags(0)
@@ -136,8 +131,8 @@ func main() {
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			qv := r.URL.Query()
 			query := qv.Get("v")
-			ctx := r.Context()
 
+			ctx := r.Context()
 			// Check Memcached if we've computed it before
 			memoizedSQRT, err := mc.Get(ctx, query)
 			if memoizedSQRT != nil && len(memoizedSQRT.Value) > 0 && err == nil {
@@ -155,8 +150,8 @@ func main() {
 			sqrt := big.NewFloat(0).Sqrt(in)
 			out, _ := sqrt.MarshalText()
 
-                        // Pause for 3 milliseconds as a throttle to "avoid CPU saturation".
-                        <-time.After(3 * time.Millisecond)
+			// Pause for 3 milliseconds as a throttle to "avoid CPU saturation".
+			time.Sleep(3 * time.Millisecond)
 			// Lastly, memoize it for a cache hit next time
 			_ = mc.Set(ctx, &memcache.Item{Key: query, Value: out})
 			w.Write(out)
@@ -201,29 +196,27 @@ func main() {
 
 func enableOpenCensusTracingAndMetrics() (func(), error) {
 	sd, err := stackdriver.NewExporter(stackdriver.Options{
-		MetricPrefix: "sqrtapp",
-		ProjectID:    "census-demos", // Please change this as needed
+		// Please change these as needed.
+		MetricPrefix: "demosqrtcache",
+		ProjectID:    "census-demos",
 	})
 	if err != nil {
 		return nil, err
 	}
 
-	// Enable tracing: for demo purposes, we'll always trace
+	// Enable tracing: for demo purposes, we'll always trace.
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 
-	// Register as a tracing exporter
+	// Register as a tracing exporter.
 	trace.RegisterExporter(sd)
 
-	// Register as a metrics exporter
+	// Register as a metrics exporter.
 	view.RegisterExporter(sd)
+
 	view.SetReportingPeriod(60 * time.Second)
+
+	// Most importantly register all the views for GoMemcache.
 	if err := view.Register(memcache.AllViews...); err != nil {
-		return nil, err
-	}
-	if err := view.Register(ochttp.DefaultServerViews...); err != nil {
-		return nil, err
-	}
-	if err := view.Register(ochttp.DefaultClientViews...); err != nil {
 		return nil, err
 	}
 	return sd.Flush, nil
@@ -236,29 +229,34 @@ Please visit https://console.cloud.google.com/traces
 
 Opening our console will produce something like
 
-![Trace](/img/memcache-trace-comparison.png)
+![Trace](/img/gomemcache-trace-comparison.png)
 
 ## Examining your metrics
 Please visit https://console.cloud.google.com/monitoring
 
 * Metrics list
-![Metrics list](/img/memcache-metrics-list.png)
+![Metrics list](/img/gomemcache-metrics-list.png)
 
 * Latency heatmap
-![Latency heatmap](/img/memcache-metrics-latency-heatmap.png)
+![Latency heatmap](/img/gomemcache-metrics-latency-heatmap.png)
 
-* Latency stacked area
-![Latency stacked area](/img/memcache-metrics-latency-stackedarea.png)
+* Latency stacked area, grouped by "status" and "error"
+![Latency stacked area](/img/gomemcache-metrics-latency-stacked-area-grouped-by-status-error.png)
+
+* Calls grouped by "method"
+![Errors disambiguated](/img/gomemcache-metrics-calls-grouped-by-method.png)
+
+* Calls grouped by "status"
+![Errors disambiguated](/img/gomemcache-metrics-calls-grouped-by-status.png)
 
 * Value length stacked area
-![Metrics valuelength stacked area](/img/memcache-metrics-value_length-stacked-area.png)
-![](/img/memcache-metrics-key_length-stacked-area.png)
+![Metrics valuelength stacked area](/img/gomemcache-metrics-value_length-stacked-area.png)
 
 * Key length heatmap
-![Metrics keylength heatmap](/img/memcache-metrics-keylength-heatmap.png)
+![Metrics keylength heatmap](/img/gomemcache-metrics-key_length-heatmap.png)
 
-* Errors grouped by "reason" and "method"
-![Errors disambiguated](/img/memcache-metrics-errors-disambiguated.png)
+* Key length stacked area
+![](/img/gomemcache-metrics-key_length-stacked-area.png)
 
 ## References
 
