@@ -103,7 +103,7 @@ function processLine(line) {
 }
 {{</highlight>}}
 
-Then, let's create our text file that we'll feed the REPL. LEt's call it `test.txt`:
+Then, let's create our text file that we'll feed the REPL. Let's call it `test.txt`:
 
 ```bash
 touch test.txt
