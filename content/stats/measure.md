@@ -122,22 +122,23 @@ opencensus::stats::MeasureDouble LatencyMsMeasure() {
 }
 
 opencensus::stats::MeasureInt64 LinesMeasure() {
-    static const auto measure = opencensus::stats::MeasureDouble::Register(
+    static const auto measure = opencensus::stats::MeasureInt64::Register(
             "lines_in", "The number of lines processed", "1");
     return measure;
 }
 
 opencensus::stats::MeasureInt64 BytesInMeasure() {
-    static const auto measure = opencensus::stats::MeasureDouble::Register(
+    static const auto measure = opencensus::stats::MeasureInt64::Register(
             "bytes_in", "The number of bytes received", "By");
     return measure;
 }
 
 int main(int argc, char** argv) {
-    opencensus::stats::Record(
-            {{LatencyMsMeasure(), 17.0}},
-            {{LinesMeasure(), 238}},
-            {{BytesInMeasure(), 7000}});
+    opencensus::stats::Record({
+            {LatencyMsMeasure(), 17.0},
+            {LinesMeasure(), 238},
+            {BytesInMeasure(), 7000}
+    });
 }
 {{</highlight>}}
 
