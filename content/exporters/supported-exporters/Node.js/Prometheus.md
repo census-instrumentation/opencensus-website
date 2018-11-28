@@ -34,17 +34,22 @@ npm install @opencensus/exporter-prometheus
 Now let's use the Prometheus exporter:
 
 ```js
-var {AggregationType, Measure, MeasureUnit, Stats} = require('@opencensus/core');
-var prometheus = require('@opencensus/exporter-prometheus');
+const { Stats } = require('@opencensus/core');
+const { PrometheusStatsExporter } = require('@opencensus/exporter-prometheus');
 
-var stats = new Stats();
-
-var exporter = new prometheus.PrometheusTraceExporter({
+// Add your port and startServer to the Prometheus options
+const exporter = new PrometheusStatsExporter({
   port: 9464,
   startServer: false
 });
+
+// Our Stats manager
+const stats = new Stats();
+
+// Pass the created exporter to Stats
 stats.registerExporter(exporter);
 
+// Run the server
 exporter.startServer(function callback() {
   // Callback
 });
