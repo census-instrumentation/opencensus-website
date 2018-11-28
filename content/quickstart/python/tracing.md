@@ -28,14 +28,35 @@ class: "shadowed-image lightbox"
 ![](/images/python-tracing-zipkin.png)
 
 #### How does it work?
+{{% tabs Snippet All %}}
+```py
+# 1a. Setup the exporter
+ze = ZipkinExporter(service_name="python-quickstart",
+                                host_name='localhost',
+                                port=9411,
+                                endpoint='/api/v2/spans')
+# 1b. Set the tracer to use the exporter
+# 2. Configure 100% sample rate, otherwise, few traces will be sampled.
+# 3. Get the global singleton Tracer object
+tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
+
+def main():
+    # 4. Create a scoped span. The span will close at the end of the block.
+    with tracer.span(name="main") as span:
+        for i in range(0, 10):
+            doWork()
+```
+
 ```py
 #!/usr/bin/env python
 
 import os
+from datetime import datetime
 import time
 import sys
 
 from opencensus.trace.tracer import Tracer
+from opencensus.trace import time_event as time_event_module
 from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
 from opencensus.trace.samplers import always_on
 
@@ -54,7 +75,25 @@ def main():
     with tracer.span(name="main") as span:
         for i in range(0, 10):
             doWork()
+
+def doWork():
+    # 5. Start another span. Because this is within the scope of the "main" span,
+    # this will automatically be a child span.
+    with tracer.span(name="doWork") as span:
+        print("doing busy work")
+        try:
+            time.sleep(0.1)
+        except:
+            # 6. Set status upon error
+            span.status = Status(5, "Error occurred")
+
+        # 7. Annotate our span to capture metadata about our operation
+        span.add_annotation("invoking doWork")
+
+if __name__ == "__main__":
+    main()
 ```
+{{% /tabs %}}
 
 #### Configure Exporter
 OpenCensus can export traces to different distributed tracing stores (such as Zipkin, Jeager, Stackdriver Trace). In (1), we configure OpenCensus to export to Zipkin, which is listening on `localhost` port `9411`, and all of the traces from this program will be associated with a service name `python-quickstart`.
