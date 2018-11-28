@@ -219,36 +219,38 @@ function processLine(line) {
 ## Record and Aggregate Data
 
 ### Create Views and Tags
-We now determine how our metrics will be organized by creating `Views`. We will also create the variable needed to add extra text meta-data to our metrics, `tagKey`.
+We now determine how our metrics will be organized by creating `Views`. We will also create the variable needed to add extra text meta-data to our metrics -- `methodTagKey`, `statusTagKey`, and `errorTagKey`.
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-const tagKey = "method";
+const methodTagKey = "method";
+const statusTagKey = "status";
+const errorTagKey = "error";
 
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
-  AggregationType.DISTRIBUTION,
-  [tagKey],
+  3,
+  [methodTagKey, statusTagKey, errorTagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
   // [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
   [0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]
 );
-
+1
 const lineCountView = stats.createView(
   "demo/lines_in",
   mLineLengths,
-  AggregationType.COUNT,
-  [tagKey],
+  0,
+  [methodTagKey],
   "The number of lines from standard input"
 )
 
 const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
-  AggregationType.DISTRIBUTION,
-  [tagKey],
+  3,
+  [methodTagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
   // [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -277,32 +279,34 @@ const stream = fs.createReadStream("./test.txt");
 // Creates an interface to read and process our file line by line
 const lineReader = readline.createInterface({ input: stream });
 
-const tagKey = "method";
+const methodTagKey = "method";
+const statusTagKey = "status";
+const errorTagKey = "error";
 
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
-  AggregationType.DISTRIBUTION,
-  [tagKey],
+  3,
+  [methodTagKey, statusTagKey, errorTagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
   // [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
   [0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]
 );
-
+1
 const lineCountView = stats.createView(
   "demo/lines_in",
   mLineLengths,
-  AggregationType.COUNT,
-  [tagKey],
+  0,
+  [methodTagKey],
   "The number of lines from standard input"
 )
 
 const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
-  AggregationType.DISTRIBUTION,
-  [tagKey],
+  3,
+  [methodTagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
   // [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -335,19 +339,33 @@ Again, this is arbitrary and purely up the user. For example, if we wanted to tr
 Now we will record the desired metrics. To do so, we will use `stats.record()` and pass in our measurements.
 
 {{<tabs Snippet All>}}
-{{<highlight javascript>}}  
-const tags = { "method": "repl" };
+{{<highlight javascript>}}
+lineReader.on("line", function (line) {
+    try {
+        // ...
+        const tags = {method: "repl", status: "OK"};
 
-stats.record({
-  measure: mLineLengths,
-  tags,
-  value: processedLine.length
-});
+        stats.record({
+          measure: mLineLengths,
+          tags,
+          value: processedLine.length
+        });
 
-stats.record({
-  measure: mLatencyMs,
-  tags,
-  value: endTime.getTime() - startTime.getTime()
+        stats.record({
+          measure: mLatencyMs,
+          tags,
+          value: endTime.getTime() - startTime.getTime()
+        });
+    } catch (err) {
+        stats.record({
+          measure: mLatencyMs,
+          {method: "repl", status: "ERROR", error: err.message},
+          value: (new Date()) - startTime.getTime()
+        });
+    }
+
+    // Restarts the start time for the REPL
+    startTime = endTime;
 });
 {{</highlight>}}
 
@@ -409,25 +427,33 @@ let startTime = new Date();
 
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
-  const processedLine = processLine(line);    // Evaluate
-  console.log(processedLine);                // Print
+  try {
+    const processedLine = processLine(line);    // Evaluate
+    console.log(processedLine);                // Print
 
-  // Registers the end of our REPL
-  const endTime = new Date();
+    // Registers the end of our REPL
+    const endTime = new Date();
 
-  const tags = { "method": "repl" };
+    const tags = {method: "repl", status: "OK"};
 
-  stats.record({
-    measure: mLineLengths,
-    tags,
-    value: processedLine.length
-  });
+    stats.record({
+      measure: mLineLengths,
+      tags,
+      value: processedLine.length
+    });
 
-  stats.record({
-    measure: mLatencyMs,
-    tags,
-    value: endTime.getTime() - startTime.getTime()
-  });
+    stats.record({
+      measure: mLatencyMs,
+      tags,
+      value: endTime.getTime() - startTime.getTime()
+    });
+  } catch (err) {
+    stats.record({
+      measure: mLatencyMs,
+      {method: "repl", status: "ERROR", error: err.message},
+      value: (new Date()) - startTime.getTime()
+    });
+  }
 
   // Restarts the start time for the REPL
   startTime = endTime;
@@ -531,25 +557,33 @@ let startTime = new Date();
 
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
-  const processedLine = processLine(line);    // Evaluate
-  console.log(processedLine);                // Print
+  try {
+    const processedLine = processLine(line);    // Evaluate
+    console.log(processedLine);                // Print
 
-  // Registers the end of our REPL
-  const endTime = new Date();
+    // Registers the end of our REPL
+    const endTime = new Date();
 
-  const tags = { "method": "repl" };
+    const tags = {method: "repl", status: "OK"};
 
-  stats.record({
-    measure: mLineLengths,
-    tags,
-    value: processedLine.length
-  });
+    stats.record({
+      measure: mLineLengths,
+      tags,
+      value: processedLine.length
+    });
 
-  stats.record({
-    measure: mLatencyMs,
-    tags,
-    value: endTime.getTime() - startTime.getTime()
-  });
+    stats.record({
+      measure: mLatencyMs,
+      tags,
+      value: endTime.getTime() - startTime.getTime()
+    });
+  } catch (err) {
+    stats.record({
+      measure: mLatencyMs,
+      {method: "repl", status: "ERROR", error: err.message},
+      value: (new Date()) - startTime.getTime()
+    });
+  }
 
   // Restarts the start time for the REPL
   startTime = endTime;
