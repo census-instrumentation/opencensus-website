@@ -32,7 +32,7 @@ Type enumerates the various states of a message event. It can be either of these
 Type|Value|Description
 ---|---|---
 SENT|1|Indicates that this message was sent
-RECEIVED|2|Indicates that this message was sent
+RECEIVED|2|Indicates that this message was received
 UNKNOWN|0|Unknown event type or default value
 
 ### ID
