@@ -50,9 +50,13 @@ TagContext tagCtx = TAGGER.currentBuilder().
 
 {{<highlight cpp>}}
 #include "opencensus/tags/tag_key.h"
+#include "opencensus/tags/tag_map.h"
 
-static const opencensus::tags::TagKey key_method =
-                    opencensus::tags::TagKey::Register("method");
+void Get() {
+  static const auto method = opencensus::tags::TagKey::Register("method");
+  opencensus::tags::TagMap tm({{method, "memcache.Client.Get"}});
+  // ...
+}
 {{</highlight>}}
 
 {{<highlight nodejs>}}

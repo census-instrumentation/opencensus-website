@@ -36,14 +36,12 @@ TagValue value = TagValue.create("memcache.Client.Get");
 {{</highlight>}}
 
 {{<highlight cpp>}}
-#include "opencensus/tags/tag_key.h"
-
-static const opencensus::tags::TagKey key_method =
-                    opencensus::tags::TagKey::Register("method");
+ABSL_CONST_INIT const absl::string_view kGetMethod =
+    "memcache.Client.Get";
 {{</highlight>}}
 
 {{<highlight nodejs>}}
-const keyMethod = "method";
+const methodValue = "memcache.Client.Get";
 {{</highlight>}}
 {{</tabs>}}
 
