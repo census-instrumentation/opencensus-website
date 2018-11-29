@@ -40,7 +40,7 @@ private static final TagKey KEY_METHOD = TagKey.create("method");
 #include "opencensus/tags/tag_key.h"
 
 // Initialize on demand in order to avoid initialization order issues.
-opencensus::tags::TagKey MethodKey()_{
+opencensus::tags::TagKey MethodKey() {
   static const auto key = opencensus::tags::TagKey::Register("method");
   return key;
 }
