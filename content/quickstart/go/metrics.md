@@ -80,7 +80,7 @@ touch repl.go
 
 Next, put the following code inside of `repl.go`:
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -131,7 +131,8 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
+
+```
 
 You can run the code via `go run repl.go`.
 
@@ -142,8 +143,8 @@ You can run the code via `go run repl.go`.
 
 To enable metrics, we’ll import a couple of packages:
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 import (
 	"bufio"
 	"bytes"
@@ -157,9 +158,9 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -215,16 +216,16 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 <a name="create-metrics"></a>
 ### Create Metrics
 
 First, we will create the variables needed to later record our metrics.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
@@ -232,9 +233,9 @@ var (
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -298,23 +299,23 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ### Create Tags
 
 Now we will create the variable later needed to add extra text meta-data to our metrics.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	KeyMethod, _ = tag.NewKey("method")
 	KeyStatus, _ = tag.NewKey("status")
 	KeyError, _  = tag.NewKey("error")
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -384,8 +385,8 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 We will later use this tag, called KeyMethod, to record what method is being invoked. In our scenario, we will only use it to record that "repl" is calling our data.
 
@@ -401,17 +402,15 @@ Now we will insert a specific tag called "repl". It will give us a new `context.
 
 For example
 ```go
-ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-  tag.Insert(KeyStatus, "OK"))
+ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 ```
 
 and for complete usage:
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -429,9 +428,9 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("< %s\n\n", out)
 	return nil
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -482,8 +481,7 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -507,21 +505,23 @@ func readEvaluateProcess(br *bufio.Reader) (terr error) {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 When recording metrics, we will need the `ctx` from `tag.New`. We will be recording metrics in `processLine`, so let's go ahead and make `ctx` available now.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 // ...
 out, err := processLine(ctx, line)
 
 // ...
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
-{{</highlight>}}
+  // ...
+}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -592,23 +592,23 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+```
+{{% /tabs %}}
 
 ### Recording Metrics
 
 Now we will record the desired metrics. To do so, we will use `stats.Record` and pass in our `ctx` and [previously instantiated metrics variables](#create-metrics).
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -649,9 +649,9 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -702,13 +702,12 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -749,16 +748,16 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ## Enable Views
 We will be adding the View package: `"go.opencensus.io/stats/view"`
 
 <a name="import-views-packages"></a>
 ### Import Packages
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 import (
 	"bufio"
 	"bytes"
@@ -773,9 +772,9 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -827,13 +826,12 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -874,14 +872,14 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ### Create Views
 We now determine how our metrics will be organized by creating `Views`.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	LatencyView = &view.View{
 		Name:        "demo/latency",
@@ -908,9 +906,9 @@ var (
 		Aggregation: view.Distribution(0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000),
 	}
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -989,13 +987,12 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -1036,14 +1033,14 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ### Register Views
 We now register the views and set the reporting period.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 func main() {
 	// In a REPL:
 	//   1. Read input
@@ -1065,9 +1062,9 @@ func main() {
 		}
 	}
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -1151,13 +1148,12 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -1198,19 +1194,18 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ## Exporting stats
 
 ### Register the views
 
 ```go
-	// Register the views
-	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
-		log.Fatalf("Failed to register views: %v", err)
-	}
-
+// Register the views
+if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
+	log.Fatalf("Failed to register views: %v", err)
+}
 ```
 
 <a name="import-exporting-packages"></a>
@@ -1224,48 +1219,48 @@ to http endpoint "/metrics".
 
 ```go
 import (
-        "log"
-        "net/http"
+	"log"
+	"net/http"
 
-        "go.opencensus.io/exporter/prometheus"
-        "go.opencensus.io/stats/view"
+	"go.opencensus.io/exporter/prometheus"
+	"go.opencensus.io/stats/view"
 )
 
 func main() {
-        pe, err := prometheus.NewExporter(prometheus.Options{
-                Namespace: "ocmetricstutorial",
-        })
-        if err != nil {
-                log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
-        }
+	pe, err := prometheus.NewExporter(prometheus.Options{
+		Namespace: "ocmetricstutorial",
+	})
+	if err != nil {
+		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
+	}
 
-        // Register the Prometheus exporters as a stats exporter.
-        view.RegisterExporter(pe)
+	// Register the Prometheus exporters as a stats exporter.
+	view.RegisterExporter(pe)
 
-        // Now finally run the Prometheus exporter as a scrape endpoint.
-        // We'll run the server on port 8888.
-        go func() {
-                mux := http.NewServeMux()
-                mux.Handle("/metrics", pe)
-                if err := http.ListenAndServe(":8888", mux); err != nil {
-                        log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
-                }
-        }()
+	// Now finally run the Prometheus exporter as a scrape endpoint.
+	// We'll run the server on port 8888.
+	go func() {
+		mux := http.NewServeMux()
+		mux.Handle("/metrics", pe)
+		if err := http.ListenAndServe(":8888", mux); err != nil {
+			log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
+		}
+	}()
 }
 ```
 
 ### Register the exporter
 ```go
-        // Register the Prometheus exporter.
-        // This step is needed so that metrics can be exported.
-        view.RegisterExporter(pe)
+// Register the Prometheus exporter.
+// This step is needed so that metrics can be exported.
+view.RegisterExporter(pe)
 ```
 
 
 ## End to end code
 Collectively the code will be
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -1378,13 +1373,12 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
-  ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"),
-		tag.Insert(KeyStatus, "OK"))
+	ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
 
-  defer func() {
+	defer func() {
 		if terr != nil {
 			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
 				tag.Upsert(KeyError, terr.Error()))
@@ -1425,7 +1419,7 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 func sinceInMilliseconds(startTime time.Time) float64 {
 	return float64(time.Since(startTime).Nanoseconds()) / 1e6
 }
-{{</highlight>}}
+```
 
 
 ### Running the tutorial
