@@ -36,6 +36,8 @@ TagValue value = TagValue.create("memcache.Client.Get");
 {{</highlight>}}
 
 {{<highlight cpp>}}
+#include "absl/strings/string_view.h"
+
 ABSL_CONST_INIT const absl::string_view kGetMethod =
     "memcache.Client.Get";
 {{</highlight>}}
