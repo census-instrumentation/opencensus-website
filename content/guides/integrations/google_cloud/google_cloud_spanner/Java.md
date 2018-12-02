@@ -22,8 +22,9 @@ logo: /images/java.png
 
 ## Introduction
 Cloud Spanner's Java package was already instrumented for:
+
 * Tracing with OpenCensus
-* Metrics with gRPC
+* Metrics with OpenCensus by way of gRPC metrics
 
 {{% notice note %}}
 This guide makes use of a couple of APIs

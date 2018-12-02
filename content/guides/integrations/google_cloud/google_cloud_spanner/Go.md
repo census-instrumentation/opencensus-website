@@ -20,8 +20,9 @@ logo: /images/gopher.png
 
 ## Introduction
 Cloud Spanner's Go package was already instrumented for:
+
 * Tracing with OpenCensus
-* Metrics with gRPC
+* Metrics with OpenCensus by way of gRPC metrics
 
 {{% notice note %}}
 This guide makes use of a couple of APIs
@@ -38,7 +39,7 @@ For tracing and metrics on Spanner, we'll import a couple of packages
 
 Package Name|Package link
 ---|---
-The Cloud Spanner Go package|[cloud.google.com/spanner](https://godoc.org/cloud.google.com/spanner)
+The Cloud Spanner Go package|[cloud.google.com/go/spanner](https://godoc.org/cloud.google.com/go/spanner)
 The OpenCensus trace package|[go.opencensus.io/trace](https://godoc.org/go.opencensus.io/trace)
 The OpenCensus metrics views package|[go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats)
 The OpenCensus gRPC plugin|[go.opencensus.io/plugin/ocgrpc](https://godoc.org/go.opencensus.io/plugin/ocgrpc)
