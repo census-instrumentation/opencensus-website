@@ -49,10 +49,30 @@ TagContext tagCtx = TAGGER.currentBuilder().
 {{</highlight>}}
 
 {{<highlight cpp>}}
+#include "absl/strings/string_view.h"
 #include "opencensus/tags/tag_key.h"
+#include "opencensus/tags/tag_map.h"
 
-static const opencensus::tags::TagKey key_method =
-                    opencensus::tags::TagKey::Register("method");
+ABSL_CONST_INIT const absl::string_view kGetMethod = "memcache.Client.Get";
+
+opencensus::tags::TagKey MethodKey() {
+  static const auto method = opencensus::tags::TagKey::Register("method");
+  return method;
+}
+
+void Get() {
+  opencensus::tags::TagMap tm({{MethodKey(), kGetMethod}});
+  // ...
+}
+
+void Put() {
+  // If the number of tags is variable, we can construct them from a vector.
+  std::vector<std::pair<opencensus::tags::TagKey, std::string>> tags;
+  // The tag value can also just be a string literal.
+  tags.emplace_back(MethodKey(), "memcache.Client.Put");
+  opencensus::tags::TagMap tm(std::move(tags));
+  // ...
+}
 {{</highlight>}}
 
 {{<highlight nodejs>}}
