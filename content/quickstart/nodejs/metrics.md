@@ -342,28 +342,30 @@ Now we will record the desired metrics. To do so, we will use `stats.record()` a
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
 lineReader.on("line", function (line) {
-    const tags = {method: "repl", status: "OK"};
-    try {
-        // ...
+  // Registers the Tags for our measurements
+  const tags = {method: "repl", status: "OK"};
 
-        stats.record({
-          measure: mLineLengths,
-          tags,
-          value: processedLine.length
-        });
-    } catch (err) {
-        tags.status = "ERROR";
-        tags.error = err.message;
-    }
+  try {
+    // ...
 
     stats.record({
-      measure: mLatencyMs,
+      measure: mLineLengths,
       tags,
-      value: endTime.getTime() - startTime.getTime()
+      value: processedLine.length
     });
+  } catch (err) {
+    tags.status = "ERROR";
+    tags.error = err.message;
+  }
 
-    // Restarts the start time for the REPL
-    startTime = endTime;
+  stats.record({
+    measure: mLatencyMs,
+    tags,
+    value: (new Date()) - startTime.getTime()
+  });
+
+  // Restarts the start time for the REPL
+  startTime = new Date();
 });
 {{</highlight>}}
 
@@ -426,13 +428,12 @@ let endTime;
 
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
+  // Registers the Tags for our measurements
   const tags = {method: "repl", status: "OK"};
+
   try {
     const processedLine = processLine(line);    // Evaluate
     console.log(processedLine);                // Print
-
-    // Registers the end of our REPL
-    endTime = new Date();
 
     stats.record({
       measure: mLineLengths,
@@ -447,11 +448,11 @@ lineReader.on("line", function (line) {       // Read
   stats.record({
     measure: mLatencyMs,
     tags,
-    value: endTime.getTime() - startTime.getTime()
+    value: (new Date()) - startTime.getTime()
   });
 
   // Restarts the start time for the REPL
-  startTime = endTime;
+  startTime = new Date();
 });
 
 /**
@@ -555,13 +556,12 @@ let startTime = new Date();
 let endTime;
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
+  // Registers the Tags for our measurements
   const tags = {method: "repl", status: "OK"};
+
   try {
     const processedLine = processLine(line);    // Evaluate
     console.log(processedLine);                // Print
-
-    // Registers the end of our REPL
-    endTime = new Date();
 
     stats.record({
       measure: mLineLengths,
@@ -576,11 +576,11 @@ lineReader.on("line", function (line) {       // Read
   stats.record({
     measure: mLatencyMs,
     tags,
-    value: endTime.getTime() - startTime.getTime()
+    value: (new Date()) - startTime.getTime()
   });
 
   // Restarts the start time for the REPL
-  startTime = endTime;
+  startTime = new Date();
 });
 
 /**
