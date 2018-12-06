@@ -342,9 +342,9 @@ Now we will record the desired metrics. To do so, we will use `stats.record()` a
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
 lineReader.on("line", function (line) {
+    const tags = {method: "repl", status: "OK"};
     try {
         // ...
-        const tags = {method: "repl", status: "OK"};
 
         stats.record({
           measure: mLineLengths,
@@ -426,14 +426,13 @@ let endTime;
 
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
+  const tags = {method: "repl", status: "OK"};
   try {
     const processedLine = processLine(line);    // Evaluate
     console.log(processedLine);                // Print
 
     // Registers the end of our REPL
     endTime = new Date();
-
-    const tags = {method: "repl", status: "OK"};
 
     stats.record({
       measure: mLineLengths,
@@ -556,14 +555,13 @@ let startTime = new Date();
 let endTime;
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
+  const tags = {method: "repl", status: "OK"};
   try {
     const processedLine = processLine(line);    // Evaluate
     console.log(processedLine);                // Print
 
     // Registers the end of our REPL
     endTime = new Date();
-
-    const tags = {method: "repl", status: "OK"};
 
     stats.record({
       measure: mLineLengths,
