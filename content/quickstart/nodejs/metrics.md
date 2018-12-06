@@ -351,19 +351,16 @@ lineReader.on("line", function (line) {
           tags,
           value: processedLine.length
         });
-
-        stats.record({
-          measure: mLatencyMs,
-          tags,
-          value: endTime.getTime() - startTime.getTime()
-        });
     } catch (err) {
-        stats.record({
-          measure: mLatencyMs,
-          {method: "repl", status: "ERROR", error: err.message},
-          value: (new Date()) - startTime.getTime()
-        });
+        tags.status = "ERROR";
+        tags.error = err.message;
     }
+
+    stats.record({
+      measure: mLatencyMs,
+      tags,
+      value: endTime.getTime() - startTime.getTime()
+    });
 
     // Restarts the start time for the REPL
     startTime = endTime;
@@ -443,19 +440,16 @@ lineReader.on("line", function (line) {       // Read
       tags,
       value: processedLine.length
     });
-
-    stats.record({
-      measure: mLatencyMs,
-      tags,
-      value: endTime.getTime() - startTime.getTime()
-    });
   } catch (err) {
-    stats.record({
-      measure: mLatencyMs,
-      {method: "repl", status: "ERROR", error: err.message},
-      value: (new Date()) - startTime.getTime()
-    });
+      tags.status = "ERROR";
+      tags.error = err.message;
   }
+
+  stats.record({
+    measure: mLatencyMs,
+    tags,
+    value: endTime.getTime() - startTime.getTime()
+  });
 
   // Restarts the start time for the REPL
   startTime = endTime;
@@ -576,19 +570,16 @@ lineReader.on("line", function (line) {       // Read
       tags,
       value: processedLine.length
     });
-
-    stats.record({
-      measure: mLatencyMs,
-      tags,
-      value: endTime.getTime() - startTime.getTime()
-    });
   } catch (err) {
-    stats.record({
-      measure: mLatencyMs,
-      {method: "repl", status: "ERROR", error: err.message},
-      value: (new Date()) - startTime.getTime()
-    });
+      tags.status = "ERROR";
+      tags.error = err.message;
   }
+
+  stats.record({
+    measure: mLatencyMs,
+    tags,
+    value: endTime.getTime() - startTime.getTime()
+  });
 
   // Restarts the start time for the REPL
   startTime = endTime;
