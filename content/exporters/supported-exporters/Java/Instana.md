@@ -13,7 +13,7 @@ logo: /images/instana.png
 - [Viewing your traces](#viewing-your-traces)
 
 ## Introduction
-Instant provides AI Powered Application and Infrastructure Monitoring, allowing you to
+Instana provides AI Powered Application and Infrastructure Monitoring, allowing you to
 deliver Faster With Confidence, and automatic Analysis and Optimization.
 
 OpenCensus Java has support for this exporter available through package [io.opencensus.exporter.trace.instana](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-instana)
