@@ -64,3 +64,4 @@ OpenCensus can upload data to almost any backend with its various exporter imple
 {{<card-vendor href="https://www.instana.com/" src="/img/partners/instana_logo.svg">}}
 {{<card-vendor href="https://omnition.io/" src="/img/partners/omnition_logo.svg">}}
 {{<card-vendor href="https://www.honeycomb.io/" src="/img/partners/honeycomb_logo.svg">}}
+{{<card-vendor href="https://corporate.comcast.com/" src="/img/partners/comcast_logo.jpg">}}
