@@ -20,7 +20,7 @@ class: "shadowed-image lightbox"
 3. Install dependencies: `pip install opencensus`
 4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
 5. Start Zipkin: `java -jar zipkin.jar`
-6. Run the code: `pyton tracingtozipkin.py`
+6. Run the code: `python tracingtozipkin.py`
 7. Navigate to Zipkin Web UI: http://localhost:9411
 8. Click Find Traces, and you should see a trace.
 9. Click into that, and you should see the details.
