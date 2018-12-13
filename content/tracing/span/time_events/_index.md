@@ -8,7 +8,7 @@ aliases: [/core-concepts/tracing/span/time_events]
 ### Time event
 
 It describes an event that happened at a point in time during a span's lifetime.
-A time event can consist of EITHER OR of these fields but NOT BOTH
+A time event can consist of EITHER of these fields but NOT BOTH
 {{% children %}}
 
 #### Time events
