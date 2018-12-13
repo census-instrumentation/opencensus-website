@@ -23,3 +23,4 @@ Some of the publicly known OpenCensus users:
 {{<card-vendor src="/images/users/holidaycheck.png" href="http://www.holidaycheck.de/">}}
 {{<card-vendor src="/images/users/namely.png" href="https://namely.com/">}}
 {{<card-vendor src="/images/users/comcast_logo.jpg" href="https://corporate.comcast.com/">}}
+{{<card-vendor src="/images/users/postmates_logo.png" href="https://postmates.com/">}}
