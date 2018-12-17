@@ -26,7 +26,7 @@ Constituent|Description|Example|Restrictions
 ---|---|---|---
 Name|a string by which the measure will be referred to by|"rpc_server_latency", "vm_cpu_cycles"|MUST be unique within the library. It is recommended to use names compatible with the intended end usage e.g. use host/path pattern
 Description|a string detailing the purpose of the measure|"RPC latency in milliseconds", "Virtual cycles executed on a VM|
-Unit|a string descriptive of the unit of the Measure|"By", "1", "ms"|MUST follow [Unified code for units of measure](http://unitsofmeasure.org/ucum.html)
+Unit|a string descriptive of the unit of the Measure|"By", "1", "ms"|MUST follow [Unified code for units of </br> measure](http://unitsofmeasure.org/ucum.html)
 
 ### Types
 OpenCensus currently supports two types of measures
