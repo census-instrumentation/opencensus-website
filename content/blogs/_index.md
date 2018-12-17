@@ -7,6 +7,14 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### December 16, 2018
+
+#### [Web Metrics with OpenCensus and Stackdriver](https://medium.com/@alexamies/web-metrics-with-opencenus-and-stackdriver-525af8069ce6)
+
+This post describes an approach to measuring and understanding application health as experienced by the population of users of a web application in near realtime.
+
+---
+
 ##### November 9, 2018
 
 #### [Correlating traces and logs with OpenCensus](https://medium.com/@sebright/correlating-traces-and-logs-with-opencensus-ac95d9b14b18)
