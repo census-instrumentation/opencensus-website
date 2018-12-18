@@ -18,7 +18,7 @@ this span.
 - A span with a ParentSpanID is called a "Child span"
 - Many spans can have the same ParentSpanID and they are all children of the parent
 - A span can ONLY have one parent
-- A child span can also a parent span that it spawns
+- A child span can also be a parent of a span that it spawns
 
 ### References
 
