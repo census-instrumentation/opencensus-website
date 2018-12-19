@@ -20,6 +20,15 @@ EndTime is a timestamp that records when the span's operation has been ended
 ### Latency
 Latency is the difference between the [EndTime](#endtime) and [StartTime](#starttime)
 
+### Span Lifetime
+
+Span lifetime represents the process of recording the start and the end timestamps to the Span object:
+
+1. The start time is recorded when the Span is created. A span is only alive iff its [StartTime](#starttime) has been recorded.
+2. The end time needs to be recorded when the operation is ended. It is important that a span be ended after its tracking operation ends.
+
+The life of a span during an RPC or HTTP request is discussed under [context propagation](/advanced-concepts/context-propagation).
+
 ### Visual
 The visual below shows a span "Recv./players" whose StartTime was `2018-11-01 (01:28:03.165)` and
 
