@@ -1,0 +1,20 @@
+{
+  "environment": "web",
+  "source": "nodemetrics.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-12-25T01:39:51+07:00",
+  "id": "nodemetrics",
+  "duration": 6,
+  "title": "Node.js Metrics Quickstart",
+  "author": "Emmanuel Odeke and Henry Ventura",
+  "summary": "Setup and configure Zipkin",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": [
+    "web"
+  ],
+  "url": "nodemetrics"
+}
