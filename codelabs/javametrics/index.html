@@ -54,59 +54,59 @@ touch src/main/java/io/opencensus/metrics/quickstart/Repl.java
 </code></pre>
 <p>Put this in your newly generated <code>pom.xml</code> file:</p>
 <pre><code>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
-xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&#34;&gt;
-&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-&lt;groupId&gt;io.opencensus.metrics.quickstart&lt;/groupId&gt;
-&lt;artifactId&gt;quickstart&lt;/artifactId&gt;
-&lt;packaging&gt;jar&lt;/packaging&gt;
-&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-&lt;name&gt;quickstart&lt;/name&gt;
-&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&#34;&gt;
+        &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+        &lt;groupId&gt;io.opencensus.metrics.quickstart&lt;/groupId&gt;
+        &lt;artifactId&gt;quickstart&lt;/artifactId&gt;
+        &lt;packaging&gt;jar&lt;/packaging&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+        &lt;name&gt;quickstart&lt;/name&gt;
+        &lt;url&gt;http://maven.apache.org&lt;/url&gt;
 
-&lt;properties&gt;
-&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-&lt;opencensus.version&gt;0.15.0&lt;/opencensus.version&gt; &lt;!-- The OpenCensus version to use --&gt;
-&lt;/properties&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;opencensus.version&gt;0.15.0&lt;/opencensus.version&gt; &lt;!-- The OpenCensus version to use --&gt;
+    &lt;/properties&gt;
 
-&lt;build&gt;
-&lt;extensions&gt;
-&lt;extension&gt;
-&lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
-&lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
-&lt;version&gt;1.5.0.Final&lt;/version&gt;
-&lt;/extension&gt;
-&lt;/extensions&gt;
+    &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.5.0.Final&lt;/version&gt;
+                &lt;/extension&gt;
+            &lt;/extensions&gt;
 
-&lt;pluginManagement&gt;
-&lt;plugins&gt;
-&lt;plugin&gt;
-&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-&lt;version&gt;3.7.0&lt;/version&gt;
-&lt;configuration&gt;
-&lt;source&gt;1.8&lt;/source&gt;
-&lt;target&gt;1.8&lt;/target&gt;
-&lt;/configuration&gt;
-&lt;/plugin&gt;
+        &lt;pluginManagement&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;3.7.0&lt;/version&gt;
+                    &lt;configuration&gt;
+                        &lt;source&gt;1.8&lt;/source&gt;
+                        &lt;target&gt;1.8&lt;/target&gt;
+                    &lt;/configuration&gt;
+                &lt;/plugin&gt;
 
-&lt;plugin&gt;
-&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-&lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
-&lt;version&gt;1.10&lt;/version&gt;
-&lt;configuration&gt;
-&lt;programs&gt;
-&lt;program&gt;
-&lt;id&gt;Repl&lt;/id&gt;
-&lt;mainClass&gt;io.opencensus.metrics.quickstart.Repl&lt;/mainClass&gt;
-&lt;/program&gt;
-&lt;/programs&gt;
-&lt;/configuration&gt;
-&lt;/plugin&gt;
-&lt;/plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                    &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;1.10&lt;/version&gt;
+                    &lt;configuration&gt;
+                        &lt;programs&gt;
+                            &lt;program&gt;
+                                &lt;id&gt;Repl&lt;/id&gt;
+                                &lt;mainClass&gt;io.opencensus.metrics.quickstart.Repl&lt;/mainClass&gt;
+                            &lt;/program&gt;
+                        &lt;/programs&gt;
+                    &lt;/configuration&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
 
-&lt;/pluginManagement&gt;
+        &lt;/pluginManagement&gt;
 
-&lt;/build&gt;
+    &lt;/build&gt;
 &lt;/project&gt;
 </code></pre>
 <p>Put this in <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code>:</p>
@@ -117,29 +117,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Repl {
-public static void main(String ...args) {
-BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String ...args) {
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
-while (true) {
-try {
-readEvaluateProcessLine(stdin);
-} catch (IOException e) {
-System.err.println(&#34;Exception &#34;+ e);
-}
-}
-}
+        while (true) {
+            try {
+                readEvaluateProcessLine(stdin);
+            } catch (IOException e) {
+                System.err.println(&#34;Exception &#34;+ e);
+            }
+        }
+    }
 
-private static String processLine(String line) {
-return line.toUpperCase();
-}
+    private static String processLine(String line) {
+        return line.toUpperCase();
+    }
 
-private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-System.out.print(&#34;&gt; &#34;);
-System.out.flush();
-String line = in.readLine();
-String processed = processLine(line);
-System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
-}
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print(&#34;&gt; &#34;);
+        System.out.flush();
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
+    }
 }
 </code></pre>
 <p>To install required dependencies, run this from your project&#39;s root directory:</p>
@@ -180,17 +180,17 @@ mvn install
         <h2>Import Packages</h2>
 <p>To enable metrics, we&#39;ll declare the dependencies in your <code>pom.xml</code> file. Add the following snippet of code after the <code>&lt;properties&gt;...&lt;/properties&gt;</code> node.</p>
 <pre><code>&lt;dependencies&gt;
-&lt;dependency&gt;
-&lt;groupId&gt;io.opencensus&lt;/groupId&gt;
-&lt;artifactId&gt;opencensus-api&lt;/artifactId&gt;
-&lt;version&gt;${opencensus.version}&lt;/version&gt;
-&lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+        &lt;artifactId&gt;opencensus-api&lt;/artifactId&gt;
+        &lt;version&gt;${opencensus.version}&lt;/version&gt;
+    &lt;/dependency&gt;
 
-&lt;dependency&gt;
-&lt;groupId&gt;io.opencensus&lt;/groupId&gt;
-&lt;artifactId&gt;opencensus-impl&lt;/artifactId&gt;
-&lt;version&gt;${opencensus.version}&lt;/version&gt;
-&lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+        &lt;artifactId&gt;opencensus-impl&lt;/artifactId&gt;
+        &lt;version&gt;${opencensus.version}&lt;/version&gt;
+    &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </code></pre>
 <p>We will now be importing modules into <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code>. Append the following snippet after the existing <code>import</code> statements:</p>
@@ -221,7 +221,7 @@ private static final Tagger tagger = Tags.getTagger();
 private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
 
 private static void recordStat(MeasureLong ml, Long n) {
-statsRecorder.newMeasureMap().put(ml, n);
+    statsRecorder.newMeasureMap().put(ml, n);
 }
 </code></pre>
 <h2>Create Tags</h2>
@@ -236,80 +236,80 @@ private static final TagKey KEY_ERROR = TagKey.create(&#34;error&#34;);
 <p>We will now create helper functions to assist us with recording Tagged Stats. One will record a <code>Long</code>, another a <code>Double</code>, and finally an array of <code>Doubles</code>.</p>
 <p>Insert the following snippet after <code>private static void recordStat</code>:</p>
 <pre><code>private static void recordTaggedStat(TagKey key, String value, MeasureLong ml, Long n) {
-TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
-try (Scope ss = tagger.withTagContext(tctx)) {
-statsRecorder.newMeasureMap().put(ml, n).record();
-}
+    TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(ml, n).record();
+    }
 }
 
 private static void recordTaggedStat(TagKey key, String value, MeasureDouble md, Double d) {
-TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
-try (Scope ss = tagger.withTagContext(tctx)) {
-statsRecorder.newMeasureMap().put(md, d).record();
-}
+    TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(md, d).record();
+    }
 }
 
 private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
-TagContextBuilder builder = tagger.emptyBuilder();
-for (int i = 0; i &lt; keys.length; i++) {
-builder.put(keys[i], TagValue.create(values[i]));
-}
-TagContext tctx = builder.build();
+    TagContextBuilder builder = tagger.emptyBuilder();
+    for (int i = 0; i &lt; keys.length; i++) {
+        builder.put(keys[i], TagValue.create(values[i]));
+    }
+    TagContext tctx = builder.build();
 
-try (Scope ss = tagger.withTagContext(tctx)) {
-statsRecorder.newMeasureMap().put(md, d).record();
-}
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(md, d).record();
+    }
 }
 </code></pre>
 <h2>Recording Metrics</h2>
 <p>Finally, we&#39;ll hook our stat recorders in to <code>main</code>, <code>processLine</code>, and <code>readEvaluateProcessLine</code>:</p>
 <pre><code>while (true) {
-long startTimeNs = System.nanoTime();
+    long startTimeNs = System.nanoTime();
 
-try {
-readEvaluateProcessLine(stdin);
-TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
-String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
-recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
-sinceInMilliseconds(startTimeNs));
-} catch (IOException e) {
-System.err.println(&#34;EOF bye &#34;+ e);
-return;
-} catch (Exception e) {
-TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
-String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
-recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
-sinceInMilliseconds(startTimeNs));
-return;
-}
+    try {
+        readEvaluateProcessLine(stdin);
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+        sinceInMilliseconds(startTimeNs));
+    } catch (IOException e) {
+        System.err.println(&#34;EOF bye &#34;+ e);
+        return;
+    } catch (Exception e) {
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+        String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+        sinceInMilliseconds(startTimeNs));
+        return;
+    }
 }
 
 private static String processLine(String line) {
-long startTimeNs = System.nanoTime();
+    long startTimeNs = System.nanoTime();
 
-try {
-return line.toUpperCase();
-} finally {
-TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
-String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
-recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
-}
+    try {
+        return line.toUpperCase();
+    } finally {
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
+    }
 }
 
 private static double sinceInMilliseconds(long startTimeNs) {
-return (new Double(System.nanoTime() - startTimeNs))/1e6;
+    return (new Double(System.nanoTime() - startTimeNs))/1e6;
 }
 
 private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
-System.out.print(&#34;&gt; &#34;);
-System.out.flush();
+    System.out.print(&#34;&gt; &#34;);
+    System.out.flush();
 
-String line = in.readLine();
-String processed = processLine(line);
-System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
-if (line != null &amp;&amp; line.length() &gt; 0) {
-recordStat(M_LINE_LENGTHS, new Long(line.length()));
-}
+    String line = in.readLine();
+    String processed = processLine(line);
+    System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
+    if (line != null &amp;&amp; line.length() &gt; 0) {
+        recordStat(M_LINE_LENGTHS, new Long(line.length()));
+    }
 }
 </code></pre>
 
@@ -334,79 +334,80 @@ import io.opencensus.stats.View.AggregationWindow.Cumulative;
 <h2>Create Views</h2>
 <p>Append this code snippet as our last function inside of <code>public class Repl</code>:</p>
 <pre><code>private static void registerAllViews() {
-// Defining the distribution aggregations
-Aggregation latencyDistribution = Distribution.create(BucketBoundaries.create(
-Arrays.asList(
-// [&gt;=0ms, &gt;=25ms, &gt;=50ms, &gt;=75ms, &gt;=100ms, &gt;=200ms, &gt;=400ms, &gt;=600ms, &gt;=800ms, &gt;=1s, &gt;=2s, &gt;=4s, &gt;=6s]
-0.0, 25.0, 50.0, 75.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0, 2000.0, 4000.0, 6000.0)
-));
+    // Defining the distribution aggregations
+    Aggregation latencyDistribution = Distribution.create(BucketBoundaries.create(
+        Arrays.asList(
+            // [&gt;=0ms, &gt;=25ms, &gt;=50ms, &gt;=75ms, &gt;=100ms, &gt;=200ms, &gt;=400ms, &gt;=600ms, &gt;=800ms, &gt;=1s,&gt;=2s, &gt;=4s, &gt;=6s]
+            0.0, 25.0, 50.0, 75.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0, 2000.0, 4000.0, 6000.0)
+        ));
 
-Aggregation lengthsDistribution = Distribution.create(BucketBoundaries.create(
-Arrays.asList(
-// [&gt;=0B, &gt;=5B, &gt;=10B, &gt;=20B, &gt;=40B, &gt;=60B, &gt;=80B, &gt;=100B, &gt;=200B, &gt;=400B, &gt;=600B, &gt;=800B, &gt;=1000B]
-0.0, 5.0, 10.0, 20.0, 40.0, 60.0, 80.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0)
-));
+    Aggregation lengthsDistribution =
+        Distribution.create(BucketBoundaries.create(
+            Arrays.asList(
+                // [&gt;=0B, &gt;=5B, &gt;=10B, &gt;=20B, &gt;=40B, &gt;=60B, &gt;=80B, &gt;=100B, &gt;=200B, &gt;=400B, &gt;=600B, &gt;=800B, &gt;=1000B]
+                0.0, 5.0, 10.0, 20.0, 40.0, 60.0, 80.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0)
+            ));
 
-// Define the count aggregation
-Aggregation countAggregation = Aggregation.Count.create();
+    // Define the count aggregation
+    Aggregation countAggregation = Aggregation.Count.create();
 
-// So tagKeys
-List&lt;TagKey&gt; noKeys = new ArrayList&lt;TagKey&gt;();
+    // So tagKeys
+    List&lt;TagKey&gt; noKeys = new ArrayList&lt;TagKey&gt;();
 
-// Define the views
-View[] views = new View[]{
-View.create(Name.create(&#34;ocjavametrics/latency&#34;), &#34;The distribution of latencies&#34;, M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
-View.create(Name.create(&#34;ocjavametrics/lines_in&#34;), &#34;The number of lines read in from standard input&#34;, M_LINE_LENGTHS, countAggregation, noKeys),
-View.create(Name.create(&#34;ocjavametrics/line_lengths&#34;), &#34;The distribution of line lengths&#34;, M_LINE_LENGTHS, lengthsDistribution, noKeys)
-};
+    // Define the views
+    View[] views = new View[]{
+        View.create(Name.create(&#34;ocjavametrics/latency&#34;), &#34;The distribution of latencies&#34;, M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+        View.create(Name.create(&#34;ocjavametrics/lines_in&#34;), &#34;The number of lines read in from standard input&#34;, M_LINE_LENGTHS, countAggregation, noKeys),
+        View.create(Name.create(&#34;ocjavametrics/line_lengths&#34;), &#34;The distribution of line lengths&#34;, M_LINE_LENGTHS, lengthsDistribution, noKeys)
+    };
 
-// Create the view manager
-ViewManager vmgr = Stats.getViewManager();
+    // Create the view manager
+    ViewManager vmgr = Stats.getViewManager();
 
-// Then finally register the views
-for (View view : views) {
-vmgr.registerView(view);
-}
+    // Then finally register the views
+    for (View view : views) {
+        vmgr.registerView(view);
+    }
 }
 </code></pre>
 <h2>Register Views</h2>
 <p>We will create a function called <code>setupOpenCensusAndPrometheusExporter</code> and call it from our main function:</p>
 <pre><code>public static void main(String ...args) {
-// Step 1. Enable OpenCensus Metrics.
-try {
-setupOpenCensusAndPrometheusExporter();
-} catch (IOException e) {
-System.err.println(&#34;Failed to create and register OpenCensus Prometheus Stats exporter &#34;+ e);
-return;
-}
+    // Step 1. Enable OpenCensus Metrics.
+    try {
+        setupOpenCensusAndPrometheusExporter();
+    } catch (IOException e) {
+        System.err.println(&#34;Failed to create and register OpenCensus Prometheus Stats exporter &#34;+ e);
+        return;
+    }
 
-BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
-while (true) {
-long startTimeNs = System.nanoTime();
+    while (true) {
+        long startTimeNs = System.nanoTime();
 
-try {
-readEvaluateProcessLine(stdin);
-TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
-String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
-recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
-sinceInMilliseconds(startTimeNs));
-} catch (IOException e) {
-System.err.println(&#34;EOF bye &#34;+ e);
-return;
-} catch (Exception e) {
-TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
-String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
-recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
-sinceInMilliseconds(startTimeNs));
-return;
-}
-}
+        try {
+            readEvaluateProcessLine(stdin);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
+        } catch (IOException e) {
+            System.err.println(&#34;EOF bye &#34;+ e);
+            return;
+        } catch (Exception e) {
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+            String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
+            return;
+        }
+    }
 }
 
 private static void setupOpenCensusAndPrometheusExporter() throws IOException {
-// Firstly register the views
-registerAllViews();
+    // Firstly register the views
+    registerAllViews();
 }
 </code></pre>
 
@@ -417,15 +418,15 @@ registerAllViews();
         <h2>Import Packages</h2>
 <p>Add the following code snippet to your <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> node in <code>pom.xml</code>:</p>
 <pre><code>&lt;dependency&gt;
-&lt;groupId&gt;io.opencensus&lt;/groupId&gt;
-&lt;artifactId&gt;opencensus-exporter-stats-prometheus&lt;/artifactId&gt;
-&lt;version&gt;${opencensus.version}&lt;/version&gt;
+    &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+    &lt;artifactId&gt;opencensus-exporter-stats-prometheus&lt;/artifactId&gt;
+    &lt;version&gt;${opencensus.version}&lt;/version&gt;
 &lt;/dependency&gt;
 
 &lt;dependency&gt;
-&lt;groupId&gt;io.prometheus&lt;/groupId&gt;
-&lt;artifactId&gt;simpleclient_httpserver&lt;/artifactId&gt;
-&lt;version&gt;0.4.0&lt;/version&gt;
+    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;
+    &lt;artifactId&gt;simpleclient_httpserver&lt;/artifactId&gt;
+    &lt;version&gt;0.4.0&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
 <p>We also need to expose the Prometheus endpoint say on address &#34;localhost:8889&#34; in order for Prometheus to scrape our application.<br>Please add the following to our Java code</p>
@@ -436,14 +437,14 @@ import io.prometheus.client.exporter.HTTPServer;
 <h2>Export Views</h2>
 <p>We will further expand upon <code>setupOpenCensusAndPrometheusExporter</code>:</p>
 <pre><code>private static void setupOpenCensusAndPrometheusExporter() throws IOException {
-// Firstly register the views
-registerAllViews();
+    // Firstly register the views
+    registerAllViews();
 
-// Create and register the Prometheus exporter
-PrometheusStatsCollector.createAndRegister();
+    // Create and register the Prometheus exporter
+    PrometheusStatsCollector.createAndRegister();
 
-// Run the server as a daemon on address &#34;localhost:8889&#34;
-HTTPServer server = new HTTPServer(&#34;localhost&#34;, 8889, true);
+    // Run the server as a daemon on address &#34;localhost:8889&#34;
+    HTTPServer server = new HTTPServer(&#34;localhost&#34;, 8889, true);
 }
 </code></pre>
 <h2>Running the tutorial</h2>
@@ -456,12 +457,12 @@ mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
 <p>To allow Prometheus to scrape from our application, we have to point it towards the tutorial application whose<br>server is running on &#34;localhost:8889&#34;.</p>
 <p>To do this, we firstly need to create a YAML file with the configuration e.g. <code>promconfig.yaml</code><br>whose contents are:</p>
 <pre><code>scrape_configs:
-- job_name: &#39;ocjavametricstutorial&#39;
+    - job_name: &#39;ocjavametricstutorial&#39;
 
-scrape_interval: 10s
+    scrape_interval: 10s
 
-static_configs:
-- targets: [&#39;localhost:8889&#39;]
+    static_configs:
+    - targets: [&#39;localhost:8889&#39;]
 </code></pre>
 <h2>Running Prometheus</h2>
 <p>With that file saved as <code>promconfig.yaml</code> we should now be able to run Prometheus like this</p>
