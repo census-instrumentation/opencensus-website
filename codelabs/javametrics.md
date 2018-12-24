@@ -1,4 +1,4 @@
-author:            Emmanuel Odeke and Henry Ventura
+author:            Prakriti Bansal
 summary:           Java Metrics Quickstart
 environments:      Web
 id:                javametrics
@@ -10,8 +10,8 @@ Duration: 0:10
 
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
 
-1. Create quantitative [metrics](/core-concepts/metrics) that we will record
-2. Create [tags](/core-concepts/tags) that we will associate with our metrics
+1. Create quantitative [metrics](/stats) that we will record
+2. Create [tags](/tag) that we will associate with our metrics
 3. Organize our metrics, similar to writing a report, in to a `View`
 4. Export our views to a backend (Prometheus in this case)
 
@@ -521,7 +521,7 @@ With that file saved as `promconfig.yaml` we should now be able to run Prometheu
 prometheus --config.file=promconfig.yaml
 ```
 
-and then return to the terminal that's running the Java metrics quickstart and generate some work by typing inside it and it will look something like:
+and then return to the terminal that's running the Java metrics quickstart and generate some work by typing inside it.
 
 
 ## Viewing your metrics
@@ -542,4 +542,3 @@ which should show:
 
 * Line lengths distributions
 ![](./javametrics/img/metrics-java-prometheus-line_lengths-distribution.png)
-

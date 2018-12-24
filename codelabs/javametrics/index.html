@@ -27,8 +27,8 @@
       <google-codelab-step label="Overview of the tutorial" duration="1">
         <p>By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:</p>
 <ol type="1">
-<li>Create quantitative <a href="/core-concepts/metrics" target="_blank">metrics</a> that we will record</li>
-<li>Create <a href="/core-concepts/tags" target="_blank">tags</a> that we will associate with our metrics</li>
+<li>Create quantitative <a href="/stats" target="_blank">metrics</a> that we will record</li>
+<li>Create <a href="/tag" target="_blank">tags</a> that we will associate with our metrics</li>
 <li>Organize our metrics, similar to writing a report, in to a <code>View</code></li>
 <li>Export our views to a backend (Prometheus in this case)</li>
 </ol>
@@ -468,7 +468,7 @@ mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
 <p>With that file saved as <code>promconfig.yaml</code> we should now be able to run Prometheus like this</p>
 <pre><code>prometheus --config.file=promconfig.yaml
 </code></pre>
-<p>and then return to the terminal that&#39;s running the Java metrics quickstart and generate some work by typing inside it and it will look something like:</p>
+<p>and then return to the terminal that&#39;s running the Java metrics quickstart and generate some work by typing inside it.</p>
 
 
       </google-codelab-step>
