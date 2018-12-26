@@ -24,7 +24,7 @@ Samplers.alwaysSample();
 from opencensus.trace.samplers import always_on
 from opencensus.trace import tracer as tracer_module
 
-#This is the default sampler
+# This is the default sampler
 sampler = always_on.AlwaysOnSampler()
 tracer = tracer_module.Tracer(sampler=sampler)
 {{</highlight>}}
