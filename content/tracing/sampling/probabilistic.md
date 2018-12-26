@@ -12,7 +12,7 @@ The probabilistic sampler probabilistically returns True or False for whether a 
 By default, the probabilistic sampling rate is 1 in 10,000
 
 ### Code samples
-{{<tabs Go Java CplusPlus NodeJS>}}
+{{<tabs Go Java Python CplusPlus NodeJS>}}
 {{<highlight go>}}
 import "go.opencensus.io/trace"
 
@@ -21,6 +21,15 @@ theSampler = trace.ProbabilitySampler(1/1000.0);
 
 {{<highlight java>}}
 Samplers.probabilitySampler(1/1000.0);
+{{</highlight>}}
+
+{{<highlight python>}}
+from opencensus.trace.samplers import probability
+from opencensus.trace import tracer as tracer_module
+
+# Sampling the requests at the rate equals 0.5
+sampler = probability.ProbabilitySampler(rate=0.5)
+tracer = tracer_module.Tracer(sampler=sampler)
 {{</highlight>}}
 
 {{<highlight cpp>}}
@@ -41,6 +50,7 @@ Resource|URL
 ---|---
 Probability sampler in specs|https://github.com/census-instrumentation/opencensus-specs/blob/master/trace/Sampling.md#what-kind-of-samplers-does-opencensus-support
 Go ProbabilitySample|[trace.ProbabilitySampler](https://godoc.org/go.opencensus.io/trace#ProbabilitySampler)
+Python samplers|[trace.samplers](https://github.com/census-instrumentation/opencensus-python/blob/master/opencensus/trace/samplers/probability.py)
 Java ProbabilitySampler|[trace.ProbabilitySampler](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/trace/samplers/Samplers.html#probabilitySampler--)
 C++ ProbabilitySampler|[trace.ProbabilitySampler](https://github.com/census-instrumentation/opencensus-cpp/blob/c5e59c48a3c40a7da737391797423b88e93fd4bb/opencensus/trace/sampler.h#L53)
 Node.js TracerConfig|[trace.TracerConfig](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/config/types.ts#L35)
