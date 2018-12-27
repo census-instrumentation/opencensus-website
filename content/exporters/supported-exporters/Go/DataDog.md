@@ -48,10 +48,7 @@ import (
 )
 
 func main() {
-  dd, err := datadog.NewExporter(datadog.Options{})
-  if err != nil {
-    log.Fatalf("Failed to create the Datadog exporter: %v", err)
-  }
+  dd := datadog.NewExporter(datadog.Options{})
   // It is imperative to invoke flush before your main function exits
   defer dd.Stop()
 
