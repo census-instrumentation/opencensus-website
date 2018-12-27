@@ -118,8 +118,8 @@ Please select your target Go trace and metrics exporters from [Go exporters](/gu
 
 Metric|Query Suffix|Description|Aggregation|Tags
 ---|---|---|---|---
-Latency|"mongo/client/latency"|The latencies of the various calls in milliseconds|[Distribution](/stats/view/aggregation)|"method", "status", "error"
-Calls|"mongo/client/calls"|The various calls|[Count](/stats/view/aggregation)|"method", "status", "error"
+Latency|"mongo/client/latency"|The latencies of the various calls in milliseconds|[Distribution](/stats/view/#aggregations)|"method", "status", "error"
+Calls|"mongo/client/calls"|The various calls|[Count](/stats/view/#aggregations)|"method", "status", "error"
 
 
 #### Tags
