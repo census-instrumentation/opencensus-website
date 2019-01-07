@@ -5,7 +5,7 @@ draft: false
 class: "shadowed-image lightbox"
 ---
 
-- [Maven Configuration](#maven-configuration)
+- [Prerequisites](#prerequisites)
 - [Run it locally](#run-it-locally)
 - [Configure Exporter](#configure-exporter)
 - [Configure Sampler](#configure-sampler)
@@ -15,40 +15,27 @@ class: "shadowed-image lightbox"
 - [Shutdown the Tracer](#shutdown-the-tracer)
 - [References](#references)
 
-#### Maven Configuration
-```xml
-<dependency>
-    <groupId>io.opencensus</groupId>
-    <artifactId>opencensus-api</artifactId>
-    <version>${opencensus.version}</version>
-</dependency>
+#### Prerequisites
 
-<dependency>
-    <groupId>io.opencensus</groupId>
-    <artifactId>opencensus-impl</artifactId>
-    <version>${opencensus.version}</version>
-</dependency>
-
-<dependency>
-    <groupId>io.opencensus</groupId>
-    <artifactId>opencensus-exporter-trace-zipkin</artifactId>
-    <version>${opencensus.version}</version>
-</dependency>
+1. [.NET Core 2.0+](https://dotnet.microsoft.com/download/dotnet-core/2.1) .NET Framework 4.6.1+ is also supported.
+2. [Docker for Desktop](https://www.docker.com/products/docker-desktop)
 ```
 
 #### Run it locally
 
 1. Clone the Opencensus C# repository: `git clone https://github.com/opencensus-csharp`
 2. Change to the example directory: `cd src/Samples`
-3. Run Zipkin in Docker container: `docker run -d -p 9411:9411 openzipkin/zipkin`
-4. If you don't have "Docker for Desktop" installed, follow this: `https://zipkin.io/pages/quickstart`
-5. Navigate to Zipkin Web UI: `http://localhost:9411`
-6. Click _Find Traces_, and you should see a trace.
-7. Click into that, and you should see the details.
+3. Build the sample by `dotnet build`
+4. Run Zipkin in Docker container: `docker run -d -p 9411:9411 openzipkin/zipkin`
+5. If you don't have "Docker for Desktop" installed, follow this: `https://zipkin.io/pages/quickstart`
+6. `dotnet run zipkin --uri=http://localhost:9411/api/v2/spans`
+7. Navigate to Zipkin Web UI: `http://localhost:9411`
+8. Click _Find Traces_, and you should see a trace.
+9. Click into that, and you should see the details.
 
 ![](/images/java-tracing-zipkin.png)
 
-#### How does it work?
+#### How does it work
 
 {{% tabs Snippet All %}}
 ```csharp
