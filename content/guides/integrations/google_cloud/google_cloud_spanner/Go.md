@@ -54,6 +54,13 @@ import (
 )
 {{</highlight>}}
 
+Install these packages with the commands
+```bash
+go get -u cloud.google.com/go/...
+go get -u go.opencensus.io/...
+go get -u contrib.go.opencensus.io/exporter/stackdriver
+```
+
 ## Enable metric reporting
 
 To enable metric reporting/exporting, we need to enable a metrics exporter, but before that we'll need
@@ -93,7 +100,7 @@ import (
 	"cloud.google.com/go/spanner"
 	"golang.org/x/net/context"
 
-	"go.opencensus.io/exporter/stackdriver"
+	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
@@ -186,6 +193,19 @@ func newPlayers(ctx context.Context, client *spanner.Client, players ...*Player)
 	return err
 }
 {{</highlight>}}
+
+Before running the code create the schema in the cloud console. Navigate to 
+Spanner | Instance name | Database name and click on **Create table**. Select
+**Edit as text** and enter the text below
+
+```bash
+CREATE TABLE Players (
+  email STRING(1024) NOT NULL,
+  first_name STRING(1024) NOT NULL,
+  last_name STRING(1024) NOT NULL,
+  uuid STRING(1024))
+PRIMARY KEY (email)
+```
 
 ## Viewing your metrics
 Please visit [https://console.cloud.google.com/monitoring](https://console.cloud.google.com/monitoring)
