@@ -1,9 +1,9 @@
 ---
 title: "C#"
-date: 2018-07-16T14:29:15-07:00
+date: 2019-01-07T00:01:21-07:00
 draft: false
 class: "resized-logo"
-logo: /images/java-opencensus.png
+logo: /images/dotnetcore.png
 ---
 
 In this quickstart, using OpenCensus C#, you will gain hands-on experience with:

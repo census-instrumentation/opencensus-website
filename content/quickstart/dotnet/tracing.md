@@ -1,6 +1,6 @@
 ---
 title: "Tracing"
-date: 2019-01-07T12:01:21-07:00
+date: 2019-01-07T00:01:21-07:00
 draft: false
 class: "shadowed-image lightbox"
 ---
