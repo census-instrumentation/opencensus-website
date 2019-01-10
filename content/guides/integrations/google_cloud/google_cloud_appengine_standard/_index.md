@@ -18,7 +18,7 @@ used directly.
 
 AppEngine Standard is evolving and to provide better support for external
 communication that will enable the use of the standard libraries. As that work
-progress, we will re-evaluate OpenCensus support for the framework.
+progresses, we will re-evaluate OpenCensus support for the framework.
 
 
 
