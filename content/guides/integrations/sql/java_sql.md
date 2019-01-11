@@ -31,22 +31,38 @@ Github at https://github.com/opencensus-integrations/ocjdbc
 but also distributed as a Maven artifact as you'll shortly see below.
 
 ## Installing it
-Using Apache Maven, please add the following to your pom.xml file
 
-```xml
+{{<tabs Maven Gradle Ivy Buildr>}}
+{{<highlight xml>}}
 <dependency>
-    <groupId>io.opencensus.integration</groupId>
-    <artifactId>opencensus-ocjdbc</artifactId>
+    <groupId>io.orijtech.integrations</groupId>
+    <artifactId>ocjdbc</artifactId>
     <version>0.0.2</version>
 </dependency>
-```
+{{</highlight>}}
+
+{{<highlight gradle>}}
+// https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
+compile group: 'io.orijtech.integrations', name: 'ocjdbc', version: '0.0.2'
+{{</highlight>}}
+
+{{<highlight xml>}}
+<!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc -->
+<dependency org="io.orijtech.integrations" name="ocjdbc" rev="0.0.2"/>
+{{</highlight>}}
+
+{{<highlight python>}}
+# https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
+'io.orijtech.integrations:ocjdbc:jar:0.0.2'
+{{</highlight>}}
+{{</tabs>}}
 
 ## Using it
 Using it simply requires you to just wrap your already created JDBC connection and it wraps every method
 to provide observability by metrics and tracing. For example
 ```java
-import io.opencensus.integration.ocjdbc.Connection;
-import io.opencensus.integration.ocjdbc.Observability;
+import io.orijtech.integrations.ocjdbc.Connection;
+import io.orijtech.integrations.ocjdbc.Observability;
 
 public static void main(String ...args) {
     // Load and use the MySQL Connector/J driver.
@@ -54,7 +70,7 @@ public static void main(String ...args) {
 
     java.sql.Connection originalConn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/test?useSSL=false&serverTimezone=UTC");
 
-    // Then create/wrap it with the instrumented Connection from "io.opencensus.integration.ocjdbc".
+    // Then create/wrap it with the instrumented Connection from "io.orijtech.integrations.ocjdbc".
     java.sql.Connection conn = new Connection(originalConn);
 
     // Use conn like you would normally below as per your original program
@@ -138,8 +154,8 @@ In this example, we'll just wrap a MySQL Connector/J app as below. Please place 
 // Please place the file in: src/main/java/io/opencensus/tutorial/ocjdbc/App.java
 package io.opencensus.tutorial.ocjdbc;
 
-import io.opencensus.integration.ocjdbc.Connection;
-import io.opencensus.integration.ocjdbc.Observability;
+import io.orijtech.integrations.ocjdbc.Connection;
+import io.orijtech.integrations.ocjdbc.Observability;
 
 import io.opencensus.exporter.trace.jaeger.JaegerTraceExporter;
 import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
@@ -171,7 +187,7 @@ public class App {
                                         Observability.OPTION_ANNOTATE_TRACES_WITH_SQL);
              */
 
-            // Then create/wrap it with the instrumented Connection from "io.opencensus.integration.ocjdbc".
+            // Then create/wrap it with the instrumented Connection from "io.orijtech.integrations.ocjdbc".
             java.sql.Connection conn = new Connection(originalConn);
             doWork(conn);
         } catch (Exception e) {
@@ -248,8 +264,8 @@ public class App {
         </dependency>
 
         <dependency>
-            <groupId>io.opencensus.integration</groupId>
-            <artifactId>opencensus-ocjdbc</artifactId>
+            <groupId>io.orijtech.integrations</groupId>
+            <artifactId>ocjdbc</artifactId>
             <version>0.0.2</version>
         </dependency>
 
