@@ -2,7 +2,6 @@
 title: "Java"
 date: 2018-11-26T01:04:03-07:00
 draft: false
-class: "integration-page"
 aliases: [/integrations/redis/java]
 logo: /images/java-opencensus.png
 ---
@@ -10,6 +9,7 @@ logo: /images/java-opencensus.png
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
 - [How it works](#how-it-works)
+- [Dependency listing](#dependency-listing)
 - [Imports](#imports)
 - [Enabling observability](#enabling-observability)
 - [Available metrics](#available-metrics)
@@ -47,7 +47,36 @@ Zipkin|[Zipkin codelab](/codelabs/zipkin)
 
 ### How it works
 
-The integration extends [redis.clients.jedis.Jedis](https://static.javadoc.io/redis.clients/jedis/2.9.0/redis/clients/jedis/Jedis.html) by wrapping most methods with instrumentation that enables tracing and metrics.
+The integration extends [redis.clients.jedis.Jedis](https://static.javadoc.io/redis.clients/jedis/3.0.1/redis/clients/jedis/Jedis.html) by wrapping most methods with instrumentation that enables tracing and metrics.
+
+### Dependency listing
+
+{{<tabs Maven Gradle Ivy Buildr>}}
+{{<highlight xml>}}
+<!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis -->
+<dependency>
+  <groupId>io.orijtech.integrations</groupId>
+  <artifactId>ocjedis</artifactId>
+  <version>0.0.3</version>
+</dependency>
+{{</highlight>}}
+
+{{<highlight gradle>}}
+// https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis
+compile group: 'io.orijtech.integrations', name: 'ocjedis', version: '0.0.3'
+{{</highlight>}}
+
+{{<highlight xml>}}
+<!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis -->
+<dependency org="io.orijtech.integrations" name="ocjedis" rev="0.0.3"/>
+{{</highlight>}}
+
+{{<highlight python>}}
+# https://mvnrepository.com/artifact/io.orijtech.integrations/ocjedis
+'io.orijtech.integrations:ocjedis:jar:0.0.3'
+{{</highlight>}}
+
+{{</tabs>}}
 
 ### Imports
 One just needs to import the integration and use it like they would for Jedis
@@ -223,7 +252,7 @@ public class JedisOpenCensus {
         <dependency>
             <groupId>io.orijtech.integrations</groupId>
             <artifactId>ocjedis</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
     </dependencies>
 
