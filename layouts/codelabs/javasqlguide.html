@@ -27,8 +27,8 @@
       <google-codelab-step label="Overview of the tutorial" duration="1">
         <h2>Introduction</h2>
 <p>The Java Database Connectivity(JDBC) API provides universal data access from the Java programming language as<br>documented at https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/</p>
-<p>Using OpenCensus, we&#39;ve combined the best of both worlds: observability with distributed tracing and metrics<br>to empower Java developers that use any sort of a database/data source with a JDBC driver.</p>
-<p><a href="https://github.com/opencensus-integrations/ocjdbc" target="_blank">ocjdbc</a> is a type-4 JDBC wrapper for the Java language. We&#39;ve instrumented it with OpenCensus to provide<br>observability with tracing and metrics. It works by wrapping your already obtained JDBC Connection using<br>the class <code>ocjdbc.Connection</code>. It wraps any JDBC driver. It is hosted on our integrations page on<br>Github at https://github.com/opencensus-integrations/ocjdbc<br>but also distributed as a Maven artifact.</p>
+<p>Using OpenCensus, we&#39;ve combined the best of both worlds: observability with distributed tracing and metrics<br>to empower Java developers that use any sort of a database/data source with a <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/" target="_blank">JDBC</a> driver.</p>
+<p><a href="https://github.com/opencensus-integrations/ocjdbc" target="_blank">ocjdbc</a> is a type-4 JDBC wrapper for the Java language. We&#39;ve instrumented it with OpenCensus to provide<br>observability with tracing and metrics. It works by wrapping your already obtained JDBC Connection using<br>the class <code>ocjdbc.OcWrapConnection</code>. It wraps any JDBC driver. It is hosted on our integrations page on<br>Github at https://github.com/opencensus-integrations/ocjdbc<br>but also distributed as a Maven, Gradle, Ivy and Builder artifacts.</p>
 <h2>Objectives:</h2>
 <p>By the end of this tutorial, we will be able to achieve the following:</p>
 <ul>
@@ -204,68 +204,84 @@ touch src/main/java/io/opencensus/tutorial/ocjdbc/App.java
         <p>Using ocjdbc simply requires you to just wrap your already created JDBC connection and it wraps every method<br>to provide observability by metrics and tracing.<br>In this example, we&#39;ll just wrap a MySQL Connector/J app as below.</p>
 <pre><code>package io.opencensus.tutorial.ocjdbc;
 
-import io.orijtech.integrations.ocjdbc.Connection;
 import io.orijtech.integrations.ocjdbc.Observability;
+import io.orijtech.integrations.ocjdbc.OcWrapConnection;
+import java.util.EnumSet;
 
 public class App {
-    private static final Tracer tracer = Tracing.getTracer();
+  private static final Tracer tracer = Tracing.getTracer();
 
-    public static void main(String ...args) {
+  public static void main(String... args) {
+    java.sql.Connection conn = null;
+
+    try {
+      enableObservability();
+
+      // Load and use the MySQL Connector/J driver.
+      Class.forName(&#34;com.mysql.cj.jdbc.Driver&#34;).newInstance();
+
+      java.sql.Connection originalConn =
+          java.sql.DriverManager.getConnection(
+              &#34;jdbc:mysql://localhost/repro?user=root&amp;useSSL=false&amp;serverTimezone=UTC&#34;);
+
+      // Then create/wrap it with the instrumented Connection from
+      // &#34;io.orijtech.integrations.ocjdbc&#34;.
+      conn = new OcWrapConnection(originalConn, EnumSet.of(Observability.TraceOption.NONE));
+      doWork(conn);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println(String.format(&#34;Failed to create SQLDriver: %s&#34;, e));
+      return;
+    } finally {
+      // Finally close the connection when done.
+      if (conn != null) {
         try {
-            enableObservability();
-
-            // Load and use the MySQL Connector/J driver.
-            Class.forName(&#34;com.mysql.cj.jdbc.Driver&#34;).newInstance();
-
-            java.sql.Connection originalConn = java.sql.DriverManager.getConnection(&#34;jdbc:mysql://localhost/repro?user=root&amp;useSSL=false&amp;serverTimezone=UTC&#34;);
-
-            // Then create/wrap it with the instrumented Connection from &#34;io.orijtech.integrations.ocjdbc&#34;.
-            java.sql.Connection conn = new Connection(originalConn);
-            doWork(conn);
+          conn.close();
         } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(String.format(&#34;Failed to create SQLDriver: %s&#34;, e));
-            return;
+          e.printStackTrace();
+          System.err.println(String.format(&#34;Failed to close conn: %s&#34;, e));
         }
+      }
     }
+  }
 
-    public static void doWork(java.sql.Connection conn) throws Exception {
-        System.out.println(&#34;Hello OCJDBC!&#34;);
+  public static void doWork(java.sql.Connection conn) throws Exception {
+    System.out.println(&#34;Hello OCJDBC!&#34;);
 
-        for (int i = 0; i &lt; 200; i++) {
-            Scope ss = tracer.spanBuilder(String.format(&#34;DoWork-%d&#34;, i)).startScopedSpan();
-            try {
-                java.sql.Statement stmt = conn.createStatement();
-                java.sql.ResultSet rs = stmt.executeQuery(&#34;SELECT * from repro&#34;);
-                rs.close();
-                System.out.println(&#34;Iteration #&#34; + i);
-            } finally {
-                ss.close();
-            }
+    for (int i = 0; i &lt; 200; i++) {
+      Scope ss = tracer.spanBuilder(String.format(&#34;DoWork-%d&#34;, i)).startScopedSpan();
+      try {
+        java.sql.Statement stmt = conn.createStatement();
+        java.sql.ResultSet rs = stmt.executeQuery(&#34;SELECT * from repro&#34;);
+        rs.close();
+        System.out.println(&#34;Iteration #&#34; + i);
+      } finally {
+        ss.close();
+      }
 
-            Thread.sleep(4000);
-        }
+      Thread.sleep(4000);
     }
+  }
 }
 </code></pre>
 <p>Place the above code in <code>App.java</code> and save the file.</p>
 <h2>Annotating traces with the various SQL statements</h2>
 <p>We also provide an option for your spans to be annotated with the SQL that accompanies an <code>exec*</code>.</p>
 <p>However, please note that this is optional and could be a security concern due to Personally Identifiable Information(PII)<br>being used in the SQL query.</p>
-<p>This option is available via <code>Observability.OPTION_ANNOTATE_TRACES_WITH_SQL</code> which is passed into the constructors for:</p>
+<p>This option is available via <code>TraceOption</code> of <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> which is passed into the constructors for:</p>
 <ul>
-<li>Connection</li>
-<li>CallableStatement</li>
-<li>PreparedStatement</li>
-<li>Statement</li>
+<li>OcWrapConnection</li>
+<li>OcWrapCallableStatement</li>
+<li>OcWrapPreparedStatement</li>
+<li>OcWrapStatement</li>
 </ul>
 <p>thus when used to create the wrapped <code>java.sql.Connection</code>:</p>
-<pre><code>java.sql.Connection conn = new Connection(originalConn,
-                                    // And passing this option to allow the spans
-                                    // to be annotated with the SQL queries.
-                                    // Please note that this could be a security concern
-                                    // since it could reveal personally identifying information.
-                                    Observability.OPTION_ANNOTATE_TRACES_WITH_SQL);
+<pre><code>java.sql.Connection conn = new OcWrapConnection(originalConn,
+                                // And passing this option to allow the spans
+                                // to be annotated with the SQL queries.
+                                // Please note that this could be a security concern
+                                // since it could reveal personally identifying information.
+                                EnumSet.of(Observability.TraceOption.ANNOTATE_TRACES_WITH_SQL));
 </code></pre>
 
 
@@ -341,8 +357,8 @@ Iteration #16
         <p>With Jaeger running, we can navigate to the Jaeger UI at http://localhost:16686/search.<br>You should be able to see such visuals.</p>
 <ul>
 <li>All traces<br><img src="./../../img/5b02aa02a4af395a.png"></li>
-<li>An individual trace with option <code>Observability.OPTION_ANNOTATE_TRACES_WITH_SQL</code> disabled<br><img src="./../../img/3676c3d8dd19b9d2.png"></li>
-<li>An individual trace with option  <code>Observability.OPTION_ANNOTATE_TRACES_WITH_SQL</code> enabled<br><img src="./../../img/92b1d8c08b0553c2.png"></li>
+<li>An individual trace with option <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> disabled<br><img src="./../../img/3676c3d8dd19b9d2.png"></li>
+<li>An individual trace with option  <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> enabled<br><img src="./../../img/92b1d8c08b0553c2.png"></li>
 </ul>
 
 
