@@ -1,0 +1,409 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Java SQL Integration Guide</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Java SQL Integration Guide"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <h2>Introduction</h2>
+<p>The Java Database Connectivity(JDBC) API provides universal data access from the Java programming language as<br>documented at https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/</p>
+<p>Using OpenCensus, we&#39;ve combined the best of both worlds: observability with distributed tracing and metrics<br>to empower Java developers that use any sort of a database/data source with a <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/" target="_blank">JDBC</a> driver.</p>
+<p><a href="https://github.com/opencensus-integrations/ocjdbc" target="_blank">ocjdbc</a> is a type-4 JDBC wrapper for the Java language. We&#39;ve instrumented it with OpenCensus to provide<br>observability with tracing and metrics. It works by wrapping your already obtained JDBC Connection using<br>the class <code>ocjdbc.OcWrapConnection</code>. It wraps any JDBC driver. It is hosted on our integrations page on<br>Github at https://github.com/opencensus-integrations/ocjdbc<br>but also distributed as a Maven, Gradle, Ivy and Builder artifacts.</p>
+<h2>Objectives:</h2>
+<p>By the end of this tutorial, we will be able to achieve the following:</p>
+<ul>
+<li>Use ocjdbc driver with MySQL applications</li>
+<li>Export metrics to backend (Prometheus in this case)</li>
+<li>Export traces to backend (Jaeger in this case)</li>
+</ul>
+<h2>Requirements:</h2>
+<ul>
+<li>Java 8+</li>
+<li><a href="https://maven.apache.org/install.html" target="_blank">Apache Maven</a></li>
+<li>Prometheus for stats exporting <a href="https://prometheus.io/docs/introduction/first_steps/" target="_blank">Install Prometheus</a></li>
+<li>Jaeger for trace exporting</li>
+<li>MySQL server <a href="https://dev.mysql.com/doc/mysql-getting-started/en/" target="_blank">Install MySQL</a></li>
+</ul>
+<aside class="special"><p>For assistance setting up Prometheus, <a href="/codelabs/prometheus" target="_blank">Click here</a> for a guided codelab.</p>
+</aside>
+<aside class="special"><p>For assistance setting up Jaeger, <a href="/codelabs/jaeger" target="_blank">Click here</a> for a guided codelab.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installing ocjdbc" duration="1">
+        <p>The ocjdbc can be installed in one of the following ways.</p>
+<h2>Maven</h2>
+<pre><code>&lt;dependency&gt;
+&lt;groupId&gt;io.orijtech.integrations&lt;/groupId&gt;
+&lt;artifactId&gt;ocjdbc&lt;/artifactId&gt;
+&lt;version&gt;0.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2>Gradle</h2>
+<pre><code>// https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
+compile group: &#39;io.orijtech.integrations&#39;, name: &#39;ocjdbc&#39;, version: &#39;0.0.2&#39;
+</code></pre>
+<h2>Ivy</h2>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc --&gt;
+&lt;dependency org=&#34;io.orijtech.integrations&#34; name=&#34;ocjdbc&#34; rev=&#34;0.0.2&#34;/&gt;
+</code></pre>
+<h2>Buildr</h2>
+<pre><code># https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
+&#39;io.orijtech.integrations:ocjdbc:jar:0.0.2&#39;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Getting started" duration="1">
+        <p>We will first create our project directory:</p>
+<pre><code>mkdir sql-app
+cd sql-app
+
+touch pom.xml
+
+mkdir -p src/main/java/io/opencensus/tutorial/ocjdbc
+touch src/main/java/io/opencensus/tutorial/ocjdbc/App.java
+</code></pre>
+<p>Add the following code to pom.xml to install the required dependencies. Save and close the file.</p>
+<pre><code>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+    &lt;artifactId&gt;ocjdbc-app&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;0.0.1&lt;/version&gt;
+    &lt;name&gt;ocjdbc-app&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;opencensus.version&gt;0.16.1&lt;/opencensus.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+            &lt;artifactId&gt;opencensus-api&lt;/artifactId&gt;
+            &lt;version&gt;${opencensus.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+            &lt;artifactId&gt;opencensus-impl&lt;/artifactId&gt;
+            &lt;version&gt;${opencensus.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.orijtech.integrations&lt;/groupId&gt;
+            &lt;artifactId&gt;ocjdbc&lt;/artifactId&gt;
+            &lt;version&gt;0.0.2&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;8.0.12&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+            &lt;artifactId&gt;opencensus-exporter-stats-prometheus&lt;/artifactId&gt;
+            &lt;version&gt;${opencensus.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.prometheus&lt;/groupId&gt;
+            &lt;artifactId&gt;simpleclient_httpserver&lt;/artifactId&gt;
+            &lt;version&gt;0.4.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+            &lt;artifactId&gt;opencensus-exporter-trace-jaeger&lt;/artifactId&gt;
+            &lt;version&gt;${opencensus.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.5.0.Final&lt;/version&gt;
+            &lt;/extension&gt;
+        &lt;/extensions&gt;
+
+        &lt;pluginManagement&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;3.7.0&lt;/version&gt;
+                    &lt;configuration&gt;
+                        &lt;source&gt;1.8&lt;/source&gt;
+                        &lt;target&gt;1.8&lt;/target&gt;
+                    &lt;/configuration&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/pluginManagement&gt;
+
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.10&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;programs&gt;
+                        &lt;program&gt;
+                            &lt;id&gt;SQLApp&lt;/id&gt;
+                            &lt;mainClass&gt;io.opencensus.tutorials.ocjdbc.App&lt;/mainClass&gt;
+                        &lt;/program&gt;
+                    &lt;/programs&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<p>Now modify the Prometheus config.yaml saved in <code>config.yaml</code> as follows:</p>
+<pre><code>scrape_configs:
+  - job_name: &#39;ocjavametricstutorial&#39;
+
+    scrape_interval: 10s
+
+    static_configs:
+      - targets: [&#39;localhost:8889&#39;]
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using ocjdbc" duration="1">
+        <p>Using ocjdbc simply requires you to just wrap your already created JDBC connection and it wraps every method<br>to provide observability by metrics and tracing.<br>In this example, we&#39;ll just wrap a MySQL Connector/J app as below.</p>
+<pre><code>package io.opencensus.tutorial.ocjdbc;
+
+import io.orijtech.integrations.ocjdbc.Observability;
+import io.orijtech.integrations.ocjdbc.OcWrapConnection;
+import java.util.EnumSet;
+
+public class App {
+  private static final Tracer tracer = Tracing.getTracer();
+
+  public static void main(String... args) {
+    java.sql.Connection conn = null;
+
+    try {
+      enableObservability();
+
+      // Load and use the MySQL Connector/J driver.
+      Class.forName(&#34;com.mysql.cj.jdbc.Driver&#34;).newInstance();
+
+      java.sql.Connection originalConn =
+          java.sql.DriverManager.getConnection(
+              &#34;jdbc:mysql://localhost/repro?user=root&amp;useSSL=false&amp;serverTimezone=UTC&#34;);
+
+      // Then create/wrap it with the instrumented Connection from
+      // &#34;io.orijtech.integrations.ocjdbc&#34;.
+      conn = new OcWrapConnection(originalConn, EnumSet.of(Observability.TraceOption.NONE));
+      doWork(conn);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println(String.format(&#34;Failed to create SQLDriver: %s&#34;, e));
+      return;
+    } finally {
+      // Finally close the connection when done.
+      if (conn != null) {
+        try {
+          conn.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+          System.err.println(String.format(&#34;Failed to close conn: %s&#34;, e));
+        }
+      }
+    }
+  }
+
+  public static void doWork(java.sql.Connection conn) throws Exception {
+    System.out.println(&#34;Hello OCJDBC!&#34;);
+
+    for (int i = 0; i &lt; 200; i++) {
+      Scope ss = tracer.spanBuilder(String.format(&#34;DoWork-%d&#34;, i)).startScopedSpan();
+      try {
+        java.sql.Statement stmt = conn.createStatement();
+        java.sql.ResultSet rs = stmt.executeQuery(&#34;SELECT * from repro&#34;);
+        rs.close();
+        System.out.println(&#34;Iteration #&#34; + i);
+      } finally {
+        ss.close();
+      }
+
+      Thread.sleep(4000);
+    }
+  }
+}
+</code></pre>
+<p>Place the above code in <code>App.java</code> and save the file.</p>
+<h2>Annotating traces with the various SQL statements</h2>
+<p>We also provide an option for your spans to be annotated with the SQL that accompanies an <code>exec*</code>.</p>
+<p>However, please note that this is optional and could be a security concern due to Personally Identifiable Information(PII)<br>being used in the SQL query.</p>
+<p>This option is available via <code>TraceOption</code> of <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> which is passed into the constructors for:</p>
+<ul>
+<li>OcWrapConnection</li>
+<li>OcWrapCallableStatement</li>
+<li>OcWrapPreparedStatement</li>
+<li>OcWrapStatement</li>
+</ul>
+<p>thus when used to create the wrapped <code>java.sql.Connection</code>:</p>
+<pre><code>java.sql.Connection conn = new OcWrapConnection(originalConn,
+                                // And passing this option to allow the spans
+                                // to be annotated with the SQL queries.
+                                // Please note that this could be a security concern
+                                // since it could reveal personally identifying information.
+                                EnumSet.of(Observability.TraceOption.ANNOTATE_TRACES_WITH_SQL));
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Enabling OpenCensus" duration="1">
+        <p>To enable observability with OpenCensus, you need to have enabled trace and metrics exporters.<br>For this, add the following import statements to <code>App.java</code></p>
+<pre><code>import io.opencensus.exporter.trace.jaeger.JaegerTraceExporter;
+import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.prometheus.client.exporter.HTTPServer;
+import io.opencensus.trace.samplers.Samplers;
+import io.opencensus.common.Scope;
+import io.opencensus.trace.Tracer;
+import io.opencensus.trace.Tracing;
+import io.opencensus.trace.config.TraceConfig;
+</code></pre>
+<p>Now, place the following method inside <code>App.java</code> to enable observability.</p>
+<pre><code>public static void enableObservability() throws Exception {
+    // Enable metrics with OpenCensus.
+    Observability.registerAllViews();
+    
+    TraceConfig traceConfig = Tracing.getTraceConfig();
+    // For demo purposes, lets always sample.
+    traceConfig.updateActiveTraceParams(
+             traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
+
+    // The trace exporter.
+    JaegerTraceExporter.createAndRegister(&#34;http://127.0.0.1:14268/api/traces&#34;, &#34;ocjdbc-demo&#34;);
+
+    // The metrics exporter.
+    PrometheusStatsCollector.createAndRegister();
+
+    // Run the server as a daeon on address &#34;localhost:8889&#34;.
+	HTTPServer server = new HTTPServer(&#34;localhost&#34;, 8889);
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Running it" duration="1">
+        <p>With the Java source code properly placed in <code>src/main/java/io/opencensus/tutorial/ocjdbc/App.java</code> and the <code>pom.xml</code> file, we can now do</p>
+<pre><code>mvn install &amp;&amp; mvn exec:java -Dexec.mainClass=io.opencensus.tutorial.ocjdbc.App
+</code></pre>
+<p>In another terminal, please run Prometheus like so:</p>
+<pre><code>prometheus --config.file=config.yaml
+</code></pre>
+<p>This should then produce such output:</p>
+<pre><code>Hello OCJDBC!
+Iteration #0
+Iteration #1
+Iteration #2
+Iteration #3
+Iteration #4
+Iteration #5
+Iteration #6
+Iteration #7
+Iteration #8
+Iteration #9
+Iteration #10
+Iteration #11
+Iteration #12
+Iteration #13
+Iteration #14
+Iteration #15
+Iteration #16
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Examining the traces" duration="1">
+        <p>With Jaeger running, we can navigate to the Jaeger UI at http://localhost:16686/search.<br>You should be able to see such visuals.</p>
+<ul>
+<li>All traces<br><img src="img/5b02aa02a4af395a.png"></li>
+<li>An individual trace with option <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> disabled<br><img src="img/3676c3d8dd19b9d2.png"></li>
+<li>An individual trace with option  <code>Observability.ANNOTATE_TRACES_WITH_SQL</code> enabled<br><img src="img/92b1d8c08b0553c2.png"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Examining the metrics" duration="1">
+        <p>With Prometheus running, we can navigate to the Prometheus UI at http://localhost:9090/graph.<br>You should be able to see such visuals.</p>
+<ul>
+<li>All metrics<br><img src="img/c20fa1957f86cd44.png"></li>
+<li>Latency buckets<br><img src="img/839c4f950e4b3243.png"></li>
+<li>Calls<br><img src="img/6ac00a8f470de39e.png"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
