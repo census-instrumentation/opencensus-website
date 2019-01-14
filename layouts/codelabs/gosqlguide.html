@@ -1,0 +1,304 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>GoSQL Integration Guide</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="GoSQL Integration Guide"
+                  environment="web"
+                  feedback-link="">
+
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <p>We have a Go &#34;database/sql&#34; package/wrapper that is trace instrumented with OpenCensus!</p>
+<h2>Objectives:</h2>
+<p>By the end of this tutorial, we will be able to achieve the following:</p>
+<ul>
+<li>Use ocsql driver with sqlite3 applications</li>
+<li>Export traces to backend (Jaeger in this case)</li>
+</ul>
+<h2>Requirements:</h2>
+<ul>
+<li>Go</li>
+<li>Jaeger for trace exporting</li>
+<li>sqlite3 <a href="https://sqlite.org/index.html" target="_blank">Install sqlite3</a></li>
+</ul>
+<aside class="special"><p>For assistance setting up Jaeger, <a href="/codelabs/jaeger" target="_blank">Click here</a> for a guided codelab.</p>
+</aside>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Installing ocsql" duration="1">
+        <p>To install the &#34;database/sql&#34; plugin, please run:</p>
+<pre><code>go get -u -v contrib.go.opencensus.io/integrations/ocsql
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Getting started" duration="1">
+        <p>We will first create a <code>go-gettable</code> directory and a file <code>main.go</code>, like so:</p>
+<pre><code>mkdir -p ocsql-e2e &amp;&amp; cd ocsql-e2e
+touch main.go
+</code></pre>
+<p>The following code gives a simple initialization of a database/sql instance in Go.</p>
+<pre><code>package main
+
+import (
+	&#34;database/sql&#34;
+	&#34;log&#34;
+)
+
+func main() {
+	var ordinaryDriverName string // For example &#34;mysql&#34;, &#34;sqlite3&#34; etc.
+
+	db, err := sql.Open(driverName, &#34;resource.db&#34;)
+	if err != nil {
+		log.Fatalf(&#34;Failed to open the SQL database: %v&#34;, err)
+	}
+	defer db.Close()
+}
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Using ocsql" duration="1">
+        <p>We can use the OpenCensus trace-instrumented SQL driver wrapper in one of these two ways:</p>
+<h2>By registration</h2>
+<p>This mimicks the idiomatic recommendation to use the &#34;database/sql&#34; package in Go where we pass an implicitly registered driver to <code>sql.Open</code> which returns a <a href="https://golang.org/pkg/database/sql/#DB" target="_blank">*sql.DB handle</a></p>
+<pre><code>package main
+
+import (
+	&#34;database/sql&#34;
+	&#34;log&#34;
+
+	&#34;contrib.go.opencensus.io/integrations/ocsql&#34;
+)
+
+func main() {
+	var ordinaryDriverName string // For example &#34;mysql&#34;, &#34;sqlite3&#34; etc.
+	// First step is to register the driver and
+	// then reuse that driver name while invoking sql.Open
+	driverName, err := ocsql.Register(ordinaryDriverName, ocsql.WithAllTraceOptions())
+	if err != nil {
+		log.Fatalf(&#34;Failed to register the ocsql driver: %v&#34;, err)
+	}
+	db, err := sql.Open(driverName, &#34;resource.db&#34;)
+	if err != nil {
+		log.Fatalf(&#34;Failed to open the SQL database: %v&#34;, err)
+	}
+	defer db.Close()
+}
+</code></pre>
+<h2>By explicitly wrapping your driver</h2>
+<p>This option is useful if you&#39;d like to be more explicit and if your database package exports its driver implementation.</p>
+<pre><code>package main
+
+import &#34;contrib.go.opencensus.io/integrations/ocsql&#34;
+
+func main() {
+	db := ocsql.Wrap(&amp;theDBObjectInstance{}, ocsql.WithAllTraceOptions())
+	_ = db
+}
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Enabling OpenCensus" duration="1">
+        <p>To enable observability with OpenCensus, we need to hook up our favorite Go exporter as per the <a href="/guides/exporters/supported-exporters/go/" target="_blank">Go exporters guides</a>.<br>This can be achieved like so (with Jaeger in this case):</p>
+<pre><code>import (
+	&#34;go.opencensus.io/exporter/jaeger&#34;
+	&#34;go.opencensus.io/trace&#34;
+)
+func enableOpenCensusTracingAndExporting() error {
+	// For demo purposes, we&#39;ll always trace
+	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+
+	je, err := jaeger.NewExporter(jaeger.Options{
+		AgentEndpoint: &#34;localhost:6831&#34;,
+		Endpoint:      &#34;http://localhost:14268&#34;,
+		ServiceName:   &#34;ocsql-demo&#34;,
+	})
+	if err == nil {
+		// On success, register it as a trace exporter
+		trace.RegisterExporter(je)
+	}
+
+	return err
+}
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="End to end code" duration="1">
+        <p>And now to examine the exported traces, let&#39;s make a simple name registry app. For simplicitly, we use a sqlite3 database.<br>Place the following code in <code>main.go</code>. Save and close the file.</p>
+<pre><code>package main
+
+import (
+	&#34;context&#34;
+	&#34;database/sql&#34;
+	&#34;log&#34;
+	&#34;time&#34;
+
+	&#34;contrib.go.opencensus.io/integrations/ocsql&#34;
+	&#34;go.opencensus.io/exporter/jaeger&#34;
+	&#34;go.opencensus.io/trace&#34;
+
+	_ &#34;github.com/mattn/go-sqlite3&#34;
+)
+
+func main() {
+	if err := enableOpenCensusTracingAndExporting(); err != nil {
+		log.Fatalf(&#34;Failed to enable OpenCensus tracing and exporting: %v&#34;, err)
+	}
+
+	driverName, err := ocsql.Register(&#34;sqlite3&#34;, ocsql.WithAllTraceOptions())
+	if err != nil {
+		log.Fatalf(&#34;Failed to register the ocsql driver: %v&#34;, err)
+	}
+	db, err := sql.Open(driverName, &#34;resource.db&#34;)
+	if err != nil {
+		log.Fatalf(&#34;Failed to open the SQL database: %v&#34;, err)
+	}
+	defer func() {
+		db.Close()
+		// Wait to 4 seconds so that the traces can be exported
+		waitTime := 4 * time.Second
+		log.Printf(&#34;Waiting for %s seconds to ensure all traces are exported before exiting&#34;, waitTime)
+		&lt;-time.After(waitTime)
+	}()
+
+	ctx, span := trace.StartSpan(context.Background(), &#34;NamesRegistryApp&#34;)
+	defer span.End()
+
+	cCtx, cSpan := trace.StartSpan(ctx, &#34;CreateTable&#34;)
+	_, err = db.ExecContext(cCtx, `CREATE TABLE names(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            first VARCHAR(256),
+            last VARCHAR(256)
+        )`)
+	cSpan.End()
+
+	if err != nil {
+		span.SetStatus(trace.Status{Code: trace.StatusCodeInternal, Message: err.Error()})
+		log.Fatalf(&#34;Failed to create table: %v&#34;, err)
+	}
+
+	defer func() {
+		// And for the cleanup
+		_, err = db.ExecContext(ctx, `DROP TABLE names`)
+		if err != nil {
+			log.Fatalf(&#34;Failed to delete the row: %v&#34;, err)
+		}
+	}()
+
+	iCtx, iSpan := trace.StartSpan(ctx, &#34;InsertNames&#34;)
+	rs, err := db.ExecContext(iCtx, `INSERT INTO names(first, last) VALUES (?, ?)`, &#34;JANE&#34;, &#34;SMITH&#34;)
+	iSpan.End()
+	if err != nil {
+		log.Fatalf(&#34;Failed to insert values into tables: %v&#34;, err)
+	}
+
+	id, err := rs.LastInsertId()
+	if err != nil {
+		log.Fatalf(&#34;Failed to retrieve lastInserted ID: %v&#34;, err)
+	}
+
+	fCtx, fSpan := trace.StartSpan(ctx, &#34;Find&#34;)
+	row := db.QueryRowContext(fCtx, `SELECT * from names where id=?`, id)
+	fSpan.End()
+	type name struct {
+		Id          int
+		First, Last string
+	}
+	n1 := new(name)
+	if err := row.Scan(&amp;n1.Id, &amp;n1.First, &amp;n1.Last); err != nil {
+		log.Fatalf(&#34;Failed to fetch row: %v&#34;, err)
+	}
+	log.Printf(&#34;Got back: %+v\n&#34;, n1)
+}
+
+func enableOpenCensusTracingAndExporting() error {
+	// For demo purposes, we&#39;ll always trace
+	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
+
+	je, err := jaeger.NewExporter(jaeger.Options{
+		AgentEndpoint: &#34;localhost:6831&#34;,
+		Endpoint:      &#34;http://localhost:14268&#34;,
+		ServiceName:   &#34;ocsql-demo&#34;,
+	})
+	if err == nil {
+		// On success, register it as a trace exporter
+		trace.RegisterExporter(je)
+	}
+
+	return err
+}
+</code></pre>
+<p>With the code above properly placed in <code>main.go</code>, we can now run:</p>
+<pre><code>go run main.go
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Examining the traces" duration="1">
+        <p>On visiting http://localhost:16686/ we can see something similar to below:</p>
+<p><img alt="Traces list" src="./../../img/eda443a7d4de703b.png"></p>
+<p>On clicking to get details about the most recent trace:</p>
+<p><img alt="Detailed trace" src="./../../img/c0c870c12bdf77d6.png"></p>
+
+
+      </google-codelab-step>
+
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
