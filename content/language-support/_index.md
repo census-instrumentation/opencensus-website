@@ -6,14 +6,14 @@ weight: 50
 class: "resized-logo"
 ---
 
-Language|API reference
----|---
-Go|https://godoc.org/go.opencensus.io
-Java|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
-C#|https://github.com/census-instrumentation/opencensus-csharp/
-C++|https://github.com/census-instrumentation/opencensus-cpp
-Node.js|https://github.com/census-instrumentation/opencensus-node
-Ruby|https://www.rubydoc.info/gems/opencensus
-Erlang/Elixir|https://hexdocs.pm/opencensus/
-Python|https://census-instrumentation.github.io/opencensus-python/trace/api/index.html
-PHP|https://packagist.org/packages/opencensus/opencensus
+Language| Status |API reference
+---|---|---
+Go|Beta|https://godoc.org/go.opencensus.io
+Java|Beta|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
+C#|Alpha|https://github.com/census-instrumentation/opencensus-csharp/
+C++|Beta|https://github.com/census-instrumentation/opencensus-cpp
+Node.js|Alpha|https://github.com/census-instrumentation/opencensus-node
+Ruby|Pre-Alpha|https://www.rubydoc.info/gems/opencensus
+Erlang/Elixir||https://hexdocs.pm/opencensus/
+Python|Beta|https://census-instrumentation.github.io/opencensus-python/trace/api/index.html
+PHP|Pre-Alpha|https://packagist.org/packages/opencensus/opencensus
