@@ -6,7 +6,7 @@ weight: 50
 class: "resized-logo"
 ---
 
-Language| Release |API reference
+Language| Status |API reference
 ---|---|---
 Go|Beta|https://godoc.org/go.opencensus.io
 Java|Beta|https://www.javadoc.io/doc/io.opencensus/opencensus-api/
