@@ -76,7 +76,7 @@ With all the steps combined, we'll finally have this code snippet
 
 {{<tabs Source Pom_xml>}}
 {{<highlight java>}}
-package com.opencensus.examples;
+  package com.opencensus.examples;
 
 import com.google.cloud.spanner.DatabaseClient;
 import com.google.cloud.spanner.DatabaseId;
@@ -90,6 +90,7 @@ import com.google.cloud.spanner.Statement;
 import io.opencensus.common.Scope;
 import io.opencensus.contrib.grpc.metrics.RpcViews;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
+import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 import io.opencensus.trace.Tracing;
 import io.opencensus.trace.samplers.Samplers;
@@ -102,17 +103,23 @@ public class SpannerOpenCensusTutorial {
     private Spanner spanner;
 
     private static String parentSpanName = "create-players";
-    public SpannerOpenCensusTutorial(String instanceId, String databaseId) throws Exception {
+    public SpannerOpenCensusTutorial(String instanceId,
+                                     String databaseId) throws Exception {
       // Instantiate the client.
       SpannerOptions options = SpannerOptions.getDefaultInstance();
-      this.spanner = options.getService();
+      spanner = options.getService();
 
       // And then create the Spanner database client.
-      this.dbClient = this.spanner.getDatabaseClient(DatabaseId.of(
+      String projectId = options.getProjectId();
+      System.out.println("Using project: " + projectId);
+      dbClient = spanner.getDatabaseClient(DatabaseId.of(
           options.getProjectId(), instanceId, databaseId));
 
       // Next up let's  install the exporter for Stackdriver tracing.
-      StackdriverTraceExporter.createAndRegister();
+      StackdriverTraceExporter.createAndRegister(
+          StackdriverTraceConfiguration.builder()
+          .setProjectId(projectId)
+          .build());
       Tracing.getExportComponent().getSampledSpanStore()
              .registerSpanNamesForCollection(Arrays.asList(parentSpanName));
 
@@ -122,45 +129,60 @@ public class SpannerOpenCensusTutorial {
     }
 
     public void close() {
-      this.spanner.close();
+      spanner.close();
     }
 
     public void warmUpRead() {
-      this.dbClient.singleUse().readRow("Players", Key.of("foo@gmail.com"), Arrays.asList("email"));
+      dbClient.singleUse().readRow("Players",
+                                   Key.of("foo@gmail.com"),
+                                   Arrays.asList("email"));
     }
 
     public static void main(String ...args) throws Exception {
       if (args.length < 2) {
-        System.err.println("Usage: ZeuSports <instance_id> <database_id>");
+        System.err.println(
+            "Usage: SpannerOpenCensusTutorial <instance_id> <database_id>");
         return;
       }
 
       try {
-        SpannerOpenCensusTutorial zdb = new SpannerOpenCensusTutorial(args[0], args[1]);
-	// Warm up the spanner client session. In normal usage
-	// you'd have hit this point after the first operation.
-	zdb.warmUpRead();
+        SpannerOpenCensusTutorial zdb = new SpannerOpenCensusTutorial(args[0],
+                                                                      args[1]);
+        // Warm up the spanner client session. In normal usage
+        // you'd have hit this point after the first operation.
+        zdb.warmUpRead();
 
-	for (int i=0; i < 3; i++) {
-	  String up = i + "-" + (System.currentTimeMillis() / 1000) + ".";
-	  List<Mutation> mutations = Arrays.asList(
-	    playerMutation("Poke", "Mon", up + "poke.mon@example.org", "f1578551-eb4b-4ecd-aee2-9f97c37e164e"),
-	    playerMutation("Go", "Census", up + "go.census@census.io", "540868a2-a1d8-456b-a995-b324e4e7957a"),
-	    playerMutation("Quick", "Sort", up + "q.sort@gmail.com", "2b7e0098-a5cc-4f32-aabd-b978fc6b9710")
-	  );
+        for (int i=0; i < 3; i++) {
+          String up = i + "-" + (System.currentTimeMillis() / 1000) + ".";
+          List<Mutation> mutations = Arrays.asList(
+            playerMutation("Poke",
+                            "Mon",
+                            up + "poke.mon@example.org",
+                            "f1578551-eb4b-4ecd-aee2-9f97c37e164e"),
+            playerMutation("Go",
+                           "Census",
+                           up + "go.census@census.io",
+                           "540868a2-a1d8-456b-a995-b324e4e7957a"),
+            playerMutation("Quick",
+                           "Sort",
+                           up + "q.sort@gmail.com",
+                           "2b7e0098-a5cc-4f32-aabd-b978fc6b9710")
+          );
 
-	  zdb.insertPlayers(mutations);
-	}
-
+          zdb.insertPlayers(mutations);
+        }
         zdb.close();
       } catch (Exception e) {
-        System.out.printf("Exception while adding player: " + e);
+        System.err.printf("Exception while adding player: " + e);
       } finally {
         System.out.println("Bye!");
       }
     }
 
-    public static Mutation playerMutation(String firstName, String lastName, String email, String uuid) {
+    public static Mutation playerMutation(String firstName,
+                                          String lastName,
+                                          String email,
+                                          String uuid) {
         return Mutation.newInsertBuilder("Players")
           .set("first_name")
           .to(firstName)
@@ -177,8 +199,8 @@ public class SpannerOpenCensusTutorial {
       try (Scope ss = Tracing.getTracer()
         .spanBuilderWithExplicitParent(parentSpanName, null)
         // Enable the trace sampler.
-        //  We are always sampling for demo purposes only: this is a very high sampling
-        // rate, but sufficient for the purpose of this quick demo.
+        // We are always sampling for demo purposes only: this is a very high
+        // sampling rate, but sufficient for the purpose of this quick demo.
         // More realistically perhaps tracing 1 in 10,000 might be more useful
         .setSampler(Samplers.alwaysSample())
         .startScopedSpan()) {
@@ -191,7 +213,8 @@ public class SpannerOpenCensusTutorial {
 {{</highlight>}}
 
 {{<highlight xml>}}
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.opencensus.tutorials</groupId>
@@ -205,23 +228,23 @@ public class SpannerOpenCensusTutorial {
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <opencensus.version>0.11.0</opencensus.version>
+    <opencensus.version>0.18.0</opencensus.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-spanner</artifactId>
-      <version>0.33.0-beta</version>
+      <version>1.4.0</version>
       <exclusions>
-	<exclusion>
-	  <groupId>com.google.guava</groupId>
-	  <artifactId>guava-jdk5</artifactId>
-	</exclusion>
-	<exclusion>
-	  <groupId>io.opencensus</groupId>
-	  <artifactId>opencensus-api</artifactId>
-	</exclusion>
+  <exclusion>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava-jdk5</artifactId>
+  </exclusion>
+  <exclusion>
+    <groupId>io.opencensus</groupId>
+    <artifactId>opencensus-api</artifactId>
+  </exclusion>
       </exclusions>
     </dependency>
 
@@ -234,32 +257,32 @@ public class SpannerOpenCensusTutorial {
     <dependency>
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-api</artifactId>
-      <version>0.11.0</version>
+      <version>0.18.0</version>
     </dependency>
 
     <dependency>
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-exporter-stats-stackdriver</artifactId>
-      <version>0.11.0</version>
+      <version>0.18.0</version>
     </dependency>
 
     <dependency>
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
-      <version>0.11.0</version>
+      <version>0.18.0</version>
     </dependency>
 
     <dependency>
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-contrib-grpc-metrics</artifactId>
-      <version>0.11.0</version>
+      <version>0.18.0</version>
     </dependency>
 
 
     <dependency>
       <groupId>io.opencensus</groupId>
       <artifactId>opencensus-impl</artifactId>
-      <version>0.11.0</version>
+      <version>0.18.0</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -268,19 +291,26 @@ public class SpannerOpenCensusTutorial {
   <build>
     <plugins>
       <plugin>
-	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>exec-maven-plugin</artifactId>
-	<version>1.4.0</version>
-	<configuration>
-	  <mainClass>com.opencensus.tutorials.spanner</mainClass>
-	</configuration>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>1.4.0</version>
+  <configuration>
+    <mainClass>com.opencensus.examples.SpannerOpenCensusTutorial</mainClass>
+    <cleanupDaemonThreads>false</cleanupDaemonThreads>
+  </configuration>
       </plugin>
     </plugins>
   </build>
 
-</project>
+</project>  
 {{</highlight>}}
 {{</tabs>}}
+
+Place the code in the directory and file below.
+```shell
+mkdir -p src/main/java/com/opencensus/examples
+touch src/main/java/com/opencensus/tutorials/spanner/SpannerOpenCensusTutorial.java
+```
 
 ### Maven install
 ## Running it
@@ -289,8 +319,12 @@ mvn install
 ```
 
 ### Run the code
+Use your own Spanner instance and database id's in place of arguments in this
+command:
 ```shell
-mvn exec:java -Dexec.mainClass=com.opencensus.tutorials.spanner -Dexec.args="census-demos demo1"
+mvn exec:java \
+  -Dexec.mainClass=com.opencensus.examples.SpannerOpenCensusTutorial \
+  -Dexec.args="census-demos demo1"
 ```
 
 ## Viewing your metrics
