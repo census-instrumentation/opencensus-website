@@ -360,7 +360,8 @@ import (
 
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/trace"
-
+	"go.opencensus.io/stats/view"
+	
 	"github.com/opencensus-integrations/redigo/redis"
 )
 
