@@ -80,6 +80,9 @@ func main() {
 
   // Register it as a metrics exporter
   trace.RegisterExporter(dd)
+
+  // Allow Datadog to calculate APM metrics and do the sampling.
+  trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 }
 {{</highlight>}}
 
@@ -107,6 +110,9 @@ func main() {
 
   // Register it as a metrics exporter
   trace.RegisterExporter(dd)
+
+  // Allow Datadog to calculate APM metrics and do the sampling.
+  trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 }
 {{</highlight>}}
 {{</tabs>}}
