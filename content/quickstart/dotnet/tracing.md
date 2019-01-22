@@ -19,11 +19,10 @@ class: "shadowed-image lightbox"
 
 1. [.NET Core 2.0+](https://dotnet.microsoft.com/download/dotnet-core/2.1) .NET Framework 4.6.1+ is also supported.
 2. [Docker for Desktop](https://www.docker.com/products/docker-desktop)
-```
 
 #### Run it locally
 
-1. Clone the Opencensus C# repository: `git clone https://github.com/opencensus-csharp`
+1. Clone the Opencensus C# repository: `git clone https://github.com/census-instrumentation/opencensus-csharp.git`
 2. Change to the example directory: `cd src/Samples`
 3. Build the sample by `dotnet build`
 4. Run Zipkin in Docker container: `docker run -d -p 9411:9411 openzipkin/zipkin`
