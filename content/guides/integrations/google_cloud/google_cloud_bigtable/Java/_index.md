@@ -100,25 +100,22 @@ With all the steps combined, we'll finally have this code snippet, adapted from 
 package io.opencensus.tutorials.bigtable;
 
 import com.google.cloud.bigtable.hbase.BigtableConfiguration;
-
 import io.opencensus.common.Scope;
 import io.opencensus.contrib.grpc.metrics.RpcViews;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
-import io.opencensus.trace.config.TraceConfig;
-import io.opencensus.trace.config.TraceParams;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
+import io.opencensus.trace.config.TraceConfig;
 import io.opencensus.trace.samplers.Samplers;
-
+import java.io.IOException;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -126,126 +123,122 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
-import java.io.IOException;
-
 public class BigtableOpenCensus implements AutoCloseable {
-    private static final String PROJECT_ID = "census-demos";
-    private static final String INSTANCE_ID = "census-demos";
-    private static final byte[] TABLE_NAME = Bytes.toBytes("Hello-Bigtable");
-    private static final byte[] COLUMN_FAMILY_NAME = Bytes.toBytes("cf1");
-    private static final byte[] COLUMN_NAME = Bytes.toBytes("greeting");
-    private static final String[] GREETINGS = {"Hello World!", "Hello Cloud Bigtable!", "Hello HBase!"};
-    private static final Tracer tracer = Tracing.getTracer();
+  private static final String PROJECT_ID = "census-demos";
+  private static final String INSTANCE_ID = "census-demos";
+  private static final byte[] TABLE_NAME = Bytes.toBytes("Hello-Bigtable");
+  private static final byte[] COLUMN_FAMILY_NAME = Bytes.toBytes("cf1");
+  private static final byte[] COLUMN_NAME = Bytes.toBytes("greeting");
+  private static final String[] GREETINGS = {
+    "Hello World!", "Hello Cloud Bigtable!", "Hello HBase!"
+  };
+  private static final Tracer tracer = Tracing.getTracer();
 
-    private Admin admin;
-    private Connection connection;
+  private Admin admin;
+  private Connection connection;
 
-    public BigtableOpenCensus(String projectId, String instanceId) throws Exception {
-        // Create the admin client to use for table creation and management
-        this.connection = BigtableConfiguration.connect(projectId, instanceId);
-        this.admin = this.connection.getAdmin();
+  public BigtableOpenCensus(String projectId, String instanceId) throws Exception {
+    // Create the admin client to use for table creation and management
+    this.connection = BigtableConfiguration.connect(projectId, instanceId);
+    this.admin = this.connection.getAdmin();
 
-        // Enable observability with OpenCensus
-        this.enableOpenCensusObservability();
+    // Enable observability with OpenCensus
+    this.enableOpenCensusObservability();
+  }
+
+  @Override
+  public void close() throws IOException {
+    this.connection.close();
+  }
+
+  public static void main(String... args) {
+    // Create the Bigtable connection
+    try (BigtableOpenCensus boc = new BigtableOpenCensus(PROJECT_ID, INSTANCE_ID)) {
+      // Now for the application code
+      try (Scope ss = tracer.spanBuilder("opencensus.Bigtable.Tutorial").startScopedSpan()) {
+        HTableDescriptor descriptor = new HTableDescriptor(TableName.valueOf(TABLE_NAME));
+
+        // Create the table
+        Table table = boc.createTable(descriptor);
+
+        // Write some data to the table
+        boc.writeRows(table, GREETINGS);
+
+        // Read the written rows
+        boc.readRows(table);
+
+        // Finally cleanup by deleting the created table
+        boc.deleteTable(table);
+      }
+    } catch (Exception e) {
+      System.err.println("Exception while running HelloWorld: " + e.getMessage());
+      e.printStackTrace();
+      System.exit(1);
     }
+  }
 
-    @Override
-    public void close() throws IOException {
-        this.connection.close();
+  private Table createTable(HTableDescriptor tableDesc) throws Exception {
+    try (Scope ss = tracer.spanBuilder("CreateTable").startScopedSpan()) {
+      tableDesc.addFamily(new HColumnDescriptor(COLUMN_FAMILY_NAME));
+      System.out.println("Create table " + tableDesc.getNameAsString());
+      this.admin.createTable(tableDesc);
+      return this.connection.getTable(TableName.valueOf(TABLE_NAME));
     }
+  }
 
-    public static void main(String ...args) {
-        // Create the Bigtable connection
-        try (BigtableOpenCensus boc = new BigtableOpenCensus(PROJECT_ID, INSTANCE_ID)) {
-            // Now for the application code
-            try (Scope ss = tracer.spanBuilder("opencensus.Bigtable.Tutorial").startScopedSpan()) {
-                HTableDescriptor descriptor = new HTableDescriptor(TableName.valueOf(TABLE_NAME));
+  private void writeRows(Table table, String[] rows) throws IOException {
+    try (Scope ss = tracer.spanBuilder("WriteRows").startScopedSpan()) {
+      System.out.println("Write rows to the table");
+      for (int i = 0; i < rows.length; i++) {
+        String rowKey = "greeting" + i;
 
-                // Create the table
-                Table table = boc.createTable(descriptor);
-
-                // Write some data to the table
-                boc.writeRows(table, GREETINGS);
-
-                // Read the written rows
-                boc.readRows(table);
-
-                // Finally cleanup by deleting the created table
-                boc.deleteTable(table);
-            }
-        } catch (Exception e) {
-            System.err.println("Exception while running HelloWorld: " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
+        Put put = new Put(Bytes.toBytes(rowKey));
+        put.addColumn(COLUMN_FAMILY_NAME, COLUMN_NAME, Bytes.toBytes(rows[i]));
+        table.put(put);
+      }
     }
+  }
 
-    private Table createTable(HTableDescriptor tableDesc) throws Exception {
-        try (Scope ss = tracer.spanBuilder("CreateTable").startScopedSpan()) {
-            tableDesc.addFamily(new HColumnDescriptor(COLUMN_FAMILY_NAME));
-            System.out.println("Create table " + tableDesc.getNameAsString());
-            this.admin.createTable(tableDesc);
-            return this.connection.getTable(TableName.valueOf(TABLE_NAME));
-        }
+  private void deleteTable(Table table) throws Exception {
+    try (Scope ss = tracer.spanBuilder("DeleteTable").startScopedSpan()) {
+      System.out.println("Deleting the table");
+      this.admin.disableTable(table.getName());
+      this.admin.deleteTable(table.getName());
     }
+  }
 
-    private void writeRows(Table table, String[] rows) throws IOException {
-        try (Scope ss = tracer.spanBuilder("WriteRows").startScopedSpan()) {
-            System.out.println("Write rows to the table");
-            for (int i = 0; i < rows.length; i++) {
-                String rowKey = "greeting" + i;
+  private void readRows(Table table) throws Exception {
+    try (Scope ss = tracer.spanBuilder("ReadRows").startScopedSpan()) {
+      System.out.println("Scan for all greetings:");
+      Scan scan = new Scan();
 
-                Put put = new Put(Bytes.toBytes(rowKey));
-                put.addColumn(COLUMN_FAMILY_NAME, COLUMN_NAME, Bytes.toBytes(rows[i]));
-                table.put(put);
-            }
-        }
+      ResultScanner scanner = table.getScanner(scan);
+      for (Result row : scanner) {
+        byte[] valueBytes = row.getValue(COLUMN_FAMILY_NAME, COLUMN_NAME);
+        System.out.println('\t' + Bytes.toString(valueBytes));
+      }
     }
+  }
 
-    private void deleteTable(Table table) throws Exception {
-        try (Scope ss = tracer.spanBuilder("DeleteTable").startScopedSpan()) {
-            System.out.println("Deleting the table");
-            this.admin.disableTable(table.getName());
-            this.admin.deleteTable(table.getName());
-        }
-    }
+  private void enableOpenCensusObservability() throws IOException {
+    // Start: enable observability with OpenCensus tracing and metrics
+    // Create and register the Stackdriver Tracing exporter
+    StackdriverTraceExporter.createAndRegister(
+        StackdriverTraceConfiguration.builder().setProjectId(PROJECT_ID).build());
 
-    private void readRows(Table table) throws Exception {
-        try (Scope ss = tracer.spanBuilder("ReadRows").startScopedSpan()) {
-            System.out.println("Scan for all greetings:");
-            Scan scan = new Scan();
+    // Create and register the Stackdriver Monitoring/Metrics exporter
+    StackdriverStatsExporter.createAndRegister(
+        StackdriverStatsConfiguration.builder().setProjectId(PROJECT_ID).build());
 
-            ResultScanner scanner = table.getScanner(scan);
-            for (Result row : scanner) {
-                byte[] valueBytes = row.getValue(COLUMN_FAMILY_NAME, COLUMN_NAME);
-                System.out.println('\t' + Bytes.toString(valueBytes));
-            }
-        }
-    }
+    // Register all the gRPC views
+    RpcViews.registerAllGrpcViews();
 
-    private void enableOpenCensusObservability() throws IOException {
-        // Start: enable observability with OpenCensus tracing and metrics
-        // Create and register the Stackdriver Tracing exporter
-        StackdriverTraceExporter.createAndRegister(
-                StackdriverTraceConfiguration.builder()
-                .setProjectId(PROJECT_ID)
-                .build());
-
-        // Create and register the Stackdriver Monitoring/Metrics exporter
-        StackdriverStatsExporter.createAndRegister(
-                StackdriverStatsConfiguration.builder()
-                .setProjectId(PROJECT_ID)
-                .build());
-
-        // Register all the gRPC views
-        RpcViews.registerAllGrpcViews();
-
-        // For demo purposes, we are enabling the always sampler
-        TraceConfig traceConfig = Tracing.getTraceConfig();
-        traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
-        // End: enable observability with OpenCensus
-    }
+    // For demo purposes, we are enabling the always sampler
+    TraceConfig traceConfig = Tracing.getTraceConfig();
+    traceConfig.updateActiveTraceParams(
+        traceConfig.getActiveTraceParams().toBuilder().setSampler(Samplers.alwaysSample()).build());
+    // End: enable observability with OpenCensus
+  }
 }
 {{</highlight>}}
 {{<highlight xml>}}
@@ -261,28 +254,15 @@ public class BigtableOpenCensus implements AutoCloseable {
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <opencensus.version>0.15.0</opencensus.version> <!-- The OpenCensus version to use -->
+    <opencensus.version>0.18.0</opencensus.version> <!-- The OpenCensus version to use -->
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.google.cloud.bigtable</groupId>
-      <artifactId>bigtable-hbase-dataflow</artifactId>
-      <version>1.4.0</version>
-      <exclusions>
-        <exclusion>
-          <groupId>io.grpc</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>io.netty</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.api.grpc</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
+     <!-- https://mvnrepository.com/artifact/com.google.cloud.bigtable/bigtable-hbase-1.x-hadoop -->
+        <groupId>com.google.cloud.bigtable</groupId>
+        <artifactId>bigtable-hbase-1.x-hadoop</artifactId>
+        <version>1.8.0</version>
     </dependency>
 
     <dependency>
@@ -323,10 +303,11 @@ public class BigtableOpenCensus implements AutoCloseable {
       <type>pom</type>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-bigtable -->
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-bigtable</artifactId>
-      <version>0.55.1-alpha</version>
+      <version>0.78.0-alpha</version>
     </dependency>
 
     <dependency>
@@ -335,17 +316,11 @@ public class BigtableOpenCensus implements AutoCloseable {
       <version>20.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-monitoring -->
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-monitoring</artifactId>
-      <version>1.37.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-tcnative-boringssl-static</artifactId>
-      <version>2.0.8.Final</version>
-      <scope>runtime</scope>
+      <version>1.60.0</version>
     </dependency>
   </dependencies>
 
