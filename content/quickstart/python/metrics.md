@@ -583,11 +583,20 @@ prometheus --config.file=promconfig.yaml
 and then return to the terminal that's running the Python metrics quickstart and generate some work by typing inside it.
 
 ## Viewing your metrics
-With the above you should now be able to navigate to the Prometheus endpoint at http://localhost:8000
-
+With the above you should now be able to navigate to the Prometheus UI at http://localhost:9090
 which should show:
 
+* Available metrics
 ![](/images/metrics-python-prometheus-all-metrics.png)
+
+* Lines-in counts
+![](/images/metrics-python-prometheus-lines_in.png)
+
+* Latency distributions
+![](/images/metrics-python-prometheus-latency-distribution.png)
+
+* Line lengths distributions
+![](/images/metrics-python-prometheus-line_lengths-distribution.png)
 
 ## References
 
