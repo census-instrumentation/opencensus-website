@@ -14,6 +14,6 @@ C#|Alpha|https://github.com/census-instrumentation/opencensus-csharp/
 C++|Beta|https://github.com/census-instrumentation/opencensus-cpp
 Node.js|Alpha|https://github.com/census-instrumentation/opencensus-node
 Ruby|Pre-Alpha|https://www.rubydoc.info/gems/opencensus
-Erlang/Elixir||https://hexdocs.pm/opencensus/
+Erlang/Elixir|Beta|https://hexdocs.pm/opencensus/
 Python|Beta|https://census-instrumentation.github.io/opencensus-python/trace/api/index.html
 PHP|Pre-Alpha|https://packagist.org/packages/opencensus/opencensus
