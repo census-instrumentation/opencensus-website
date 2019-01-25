@@ -69,3 +69,4 @@ Other types of telemetry will be added to OpenCensus as the project matures. **L
 {{<card-vendor href="https://www.honeycomb.io/" src="/img/partners/honeycomb_logo.svg">}}
 {{<card-vendor href="https://corporate.comcast.com/" src="/img/partners/comcast_logo.jpg">}}
 {{<card-vendor href="https://postmates.com/" src="/img/partners/postmates_logo.png">}}
+{{<card-vendor href="https://lightstep.com/" src="/img/partners/lightstep-logo.svg">}}
