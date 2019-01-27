@@ -41,7 +41,7 @@ For tracing and metrics on Spanner, we'll import a couple of packages
 
 Package Name|Package link
 ---|---
-The Cloud Storage Go package|[cloud.google.com/storage](https://godoc.org/cloud.google.com/go/storage)
+The Cloud Storage Go package|[cloud.google.com/go/storage](https://godoc.org/cloud.google.com/go/storage)
 The OpenCensus trace package|[go.opencensus.io/trace](https://godoc.org/go.opencensus.io/trace)
 The OpenCensus stats packages|[go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats)
 The OpenCensus HTTP plugin package|[go.opencensus.io/plugin/ochttp](https://godoc.org/go.opencensus.io/plugin/ochttp)
@@ -49,7 +49,7 @@ The OpenCensus HTTP plugin package|[go.opencensus.io/plugin/ochttp](https://godo
 And when imported in code
 {{<highlight go>}}
 import (
-    "cloud.google.com/storage"
+    "cloud.google.com/go/storage"
 
     "go.opencensus.io/plugin/ochttp"
     "go.opencensus.io/stats/view"

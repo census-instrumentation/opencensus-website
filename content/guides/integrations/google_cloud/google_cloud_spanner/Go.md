@@ -47,7 +47,7 @@ The OpenCensus gRPC plugin|[go.opencensus.io/plugin/ocgrpc](https://godoc.org/go
 And when imported in code
 {{<highlight go>}}
 import (
-    "cloud.google.com/spanner"
+    "cloud.google.com/go/spanner"
     "go.opencensus.io/plugin/ocgrpc"
     "go.opencensus.io/stats"
     "go.opencensus.io/stats/view"
