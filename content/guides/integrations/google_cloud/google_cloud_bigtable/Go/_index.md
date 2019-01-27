@@ -44,13 +44,13 @@ For tracing and metrics on Bigtable, we'll import a couple of packages
 
 Package Name|Package link
 ---|---
-The Cloud Bigtable Go package|[cloud.google.com/bigtable](https://godoc.org/cloud.google.com/go/bigtable)
+The Cloud Bigtable Go package|[cloud.google.com/go/bigtable](https://godoc.org/cloud.google.com/go/bigtable)
 The OpenCensus trace package|[go.opencensus.io/trace](https://godoc.org/go.opencensus.io/trace)
 
 And when imported in code
 {{<highlight go>}}
 import (
-    "cloud.google.com/bigtable"
+    "cloud.google.com/go/bigtable"
     "go.opencensus.io/trace"
 )
 {{</highlight>}}
