@@ -17,5 +17,5 @@ OpenCensus can be used with HTTP packages, frameworks and plugins in the followi
 
 Resource|URL
 ---|---
-HTTP guide Mozilla Developer Network|https://developer.mozilla.org/en-US/docs/Web/HTTP
-IETF RFC 2616|https://www.ietf.org/rfc/rfc2616.txt
+Go ochttp package documentation|https://godoc.org/go.opencensus.io/plugin/ochttp
+Java HTTP Servlet plugin repository|https://github.com/census-instrumentation/opencensus-java/tree/master/contrib/http_servlet
