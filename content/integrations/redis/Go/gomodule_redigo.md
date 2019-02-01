@@ -3,7 +3,7 @@ title: "gomodule/redigo"
 date: 2018-08-31T11:39:38-07:00
 draft: false
 class: "integration-page"
-aliases: [guides/integrations/redis/go/gomodule_redigo]
+aliases: [/guides/integrations/redis/go/gomodule_redigo]
 ---
 
 - [Introduction](#introduction)

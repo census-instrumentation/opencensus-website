@@ -2,7 +2,7 @@
 title: "Java"
 date: 2018-11-26T01:04:03-07:00
 draft: false
-aliases: [guides/integrations/redis/java]
+aliases: [/guides/integrations/redis/java]
 logo: /images/java-opencensus.png
 ---
 

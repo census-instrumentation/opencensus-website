@@ -3,7 +3,7 @@ title: "Dropwizard"
 date: 2018-11-05T14:42:17-07:00
 draft: false
 class: "shadowed-image lightbox"
-aliases: [guides/integrations/dropwizard]
+aliases: [/guides/integrations/dropwizard]
 weight: 5
 ---
 

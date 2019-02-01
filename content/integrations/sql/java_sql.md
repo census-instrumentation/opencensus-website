@@ -2,7 +2,7 @@
 title: "Java"
 date: 2018-09-25T00:25:42-07:00
 draft: false
-aliases: [guides/integrations/sql/java_sql, /guides/integrations/sql/ocjdbc, /guides/integrations/sql/jdbc, integrations/sql/java]
+aliases: [/guides/integrations/sql/java_sql, /guides/integrations/sql/ocjdbc, /guides/integrations/sql/jdbc, integrations/sql/java]
 logo: /img/sql-java.png
 ---
 

@@ -4,7 +4,7 @@ date: 2018-07-24T14:20:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [guides/integrations/google_cloud_appengine, /guides/integrations/google_cloud_appengine]
+aliases: [/guides/integrations/google_cloud_appengine, /guides/integrations/google_cloud_appengine]
 logo: /images/google_cloud_appengine.png
 ---
 

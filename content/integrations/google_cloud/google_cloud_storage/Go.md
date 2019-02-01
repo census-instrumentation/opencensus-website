@@ -4,7 +4,7 @@ date: 2018-07-24T23:19:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [guides/integrations/google_cloud_spanner/go, /guides/integrations/google_cloud/google_cloud_storage/go]
+aliases: [/guides/integrations/google_cloud_spanner/go, /guides/integrations/google_cloud/google_cloud_storage/go]
 logo: /images/gopher.png
 ---
 

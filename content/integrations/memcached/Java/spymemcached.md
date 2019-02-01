@@ -2,7 +2,7 @@
 title: "Spymemcached"
 date: 2019-01-15T16:15:40+07:00
 draft: false
-aliases: [guides/integrations/memcached/java/spymemcached]
+aliases: [/guides/integrations/memcached/java/spymemcached]
 ---
 
 ![Memcached OpenCensus integration logo](/img/memcached-java.png)

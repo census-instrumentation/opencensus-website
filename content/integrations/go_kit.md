@@ -2,7 +2,7 @@
 title: "Go kit"
 date: 2018-09-06T13:50:34+02:00
 draft: false
-aliases: [guides/integrations/go_kit]
+aliases: [/guides/integrations/go_kit]
 logo: /images/gokit-logo.png
 ---
 

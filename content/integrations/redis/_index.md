@@ -3,7 +3,7 @@ title: "Redis"
 date: 2018-07-16T14:42:03-07:00
 draft: false
 class: "integration-page"
-aliases: [guides/integrations/redis]
+aliases: [/guides/integrations/redis]
 weight: 1
 logo: /img/redis-logo.png
 ---

@@ -3,7 +3,7 @@ title: "Go driver"
 date: 2018-12-25T00:03:36+03:00
 draft: false
 logo: /images/mongo-gopher.png
-aliases: [guides/integrations/mongodb/go_driver]
+aliases: [/guides/integrations/mongodb/go_driver]
 ---
 
 - [Introduction](#introduction)

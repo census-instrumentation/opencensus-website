@@ -3,7 +3,7 @@ title: "mongostatusd"
 date: 2018-09-14T23:20:36-06:00
 draft: false
 logo: /images/mongo-pulse-opencensus.jpeg
-aliases: [guides/integrations/mongodb/mongostatusd]
+aliases: [/guides/integrations/mongodb/mongostatusd]
 ---
 
 - [Introduction](#introduction)

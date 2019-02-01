@@ -2,7 +2,7 @@
 title: "GoMemcache"
 date: 2018-08-22T04:30:16-07:00
 draft: false
-aliases: [guides/integrations/memcached/go]
+aliases: [/guides/integrations/memcached/go]
 logo: /img/memcached-gopher.png
 ---
 

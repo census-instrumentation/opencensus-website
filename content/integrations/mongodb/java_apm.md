@@ -3,7 +3,7 @@ title: "Java APM"
 date: 2018-09-14T23:20:36-06:00
 draft: false
 logo: /images/mongo-java.png
-aliases: [guides/integrations/mongodb/java_apm]
+aliases: [/guides/integrations/mongodb/java_apm]
 ---
 
 - [Introduction](#introduction)

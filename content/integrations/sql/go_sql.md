@@ -2,7 +2,7 @@
 title: "Go"
 date: 2018-08-22T03:11:37-07:00
 draft: false
-aliases: [guides/integrations/sql/go_sql, integrations/sql/go]
+aliases: [/guides/integrations/sql/go_sql, integrations/sql/go]
 logo: /img/sql-gopher.png
 ---
 
