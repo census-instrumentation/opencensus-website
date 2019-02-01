@@ -5,7 +5,7 @@ draft: false
 weight: 100
 ---
 
-This matrix shows feature compatibility for OpenCensus golden languages.
+This matrix shows feature compatibility for OpenCensus languages.
 {{% tabs Tracing Tags Stats Metrics Resource Exporters%}}
 
 Feature|Java|Go|Python|Nodejs
