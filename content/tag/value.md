@@ -51,7 +51,7 @@ const methodValue = "memcache.Client.Get";
 
 Resource|URL
 ---|---
-Specs reference|[specs/TagContext.TagValue](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md#tagvalue)
+Specs reference|[specs/TagContext.TagValue](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md#tagvalue)
 Go TagValue API|[TagMutator](https://godoc.org/go.opencensus.io/tag#Mutator)
 Java TagValue API|[TagValue JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/tags/TagValue.html)
 Python TagValue reference|[Github implementation](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/tags/tag_value.py#L15-L34)
