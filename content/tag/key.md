@@ -55,7 +55,7 @@ const keyMethod = "method";
 
 Resource|URL
 ---|---
-Specs definition|[specs/TagContext.TagKey](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md#tagkey)
+Specs definition|[specs/TagContext.TagKey](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md#tagkey)
 Go TagKey API|[TagKey](https://godoc.org/go.opencensus.io/tag#Key)
 Java TagKey API|[TagKey JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/tags/TagKey.html)
 Python TagKey reference|[Github implementation](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/tags/tag_key.py#L15-L34)

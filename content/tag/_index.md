@@ -64,7 +64,7 @@ Tags are key-value used to filter and group metrics while annotations are used t
 
 Resource|URL
 ---|---
-TagContext in OpenCensus specs|[TagContext API](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md)
+TagContext in OpenCensus specs|[TagContext API](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md)
 Go tag package|https://godoc.org/go.opencensus.io/tag
 Java tags package|[Tags API JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/tags/package-frame.html)
 Python tags package|[Tags API implementation](https://github.com/census-instrumentation/opencensus-python/tree/master/opencensus/tags)

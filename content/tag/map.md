@@ -84,6 +84,6 @@ const keyMethod = "method";
 
 Resource|URL
 ---|---
-Specs reference|[specs.TagContext](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md#tag-context-api)
+Specs reference|[specs.TagContext](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md#tagmap)
 Go reference|[tag.New](https://godoc.org/go.opencensus.io/tag#New)
 Java reference|[TagContext](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/tags/TagContext.html)

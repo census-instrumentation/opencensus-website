@@ -23,6 +23,6 @@ The "combined size" restriction applies to deserialized tags so that the set of 
 
 Resource|URL
 ---|---
-Serialization specs reference|[specs/TagContext.Serialization](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md#serialization)
-Error handling specs reference|[specs/TagContext.Serialization.ErrorHandling](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagContext.md#error-handling)
+Serialization specs reference|[specs/TagContext.Serialization](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md#encoding)
+Error handling specs reference|[specs/TagContext.Serialization.ErrorHandling](https://github.com/census-instrumentation/opencensus-specs/blob/master/tags/TagMap.md#error-handling)
 
