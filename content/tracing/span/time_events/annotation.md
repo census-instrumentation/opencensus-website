@@ -45,7 +45,7 @@ map.put("store", AttributeValue.stringAttributeValue("memcache"));
 map.put("cache_miss", AttributeValue.booleanAttributeValue(true));
 map.put("age_ns", AttributeValue.int64AttributeValue(13488999));
 
-span.addAnnotation(Annotation.fromDescription("Cache miss during GC", map));
+span.addAnnotation(Annotation.fromDescriptionAndAttributes("Cache miss during GC", map));
 {{</highlight>}}
 
 {{<highlight cpp>}}
