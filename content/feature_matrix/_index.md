@@ -67,7 +67,7 @@ Feature|Java|Go|Python|Nodejs|PHP
 Stackdriver Monitoring|Yes|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes|<span style="color: #CF7675">No</span>
 Prometheus|Yes|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|<span style="color: #CF7675">No</span>
 <b>Tracing</b>|
-Strackdriver|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span> (using V1 API)|Yes
+Strackdriver Trace|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span> (using V1 API)|Yes
 Jaeger|Yes|Yes|Yes|Yes|Yes
 Zipkin|Yes|Yes|Yes|Yes<span style="color: #CF7675"> (missing fields)</span>|Yes
 {{% /tabs %}}
