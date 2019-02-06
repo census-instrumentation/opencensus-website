@@ -20,12 +20,12 @@ In this quickstart, we’ll glean insights from code segments and learn how to:
 
 ## Requirements
 - Python2 and above
-- Prometheus as our choice of metrics backend: we are picking it beause it is free, open source and easy to setup
+- Prometheus as our choice of metrics backend: we are picking it because it is free, open source and easy to setup
 
 {{% notice tip %}}
 For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.
 
-You can swap out any other exporter from the [list of Python exporters](/guides/exporters/supported-exporters/python)
+You can swap out any other exporter from the [list of Python exporters](/exporters/supported-exporters/python)
 {{% /notice %}}
 
 ## Installation
@@ -95,10 +95,10 @@ import opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.Int("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.Int("repl_line_lengths", "The distribution of line lengths", "By")
 {{</highlight>}}
 
 {{<highlight python>}}
@@ -116,10 +116,10 @@ from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
 stats_recorder = stats.Stats().stats_recorder
@@ -186,10 +186,10 @@ from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
 stats_recorder = stats.Stats().stats_recorder
@@ -201,19 +201,19 @@ key_status = tag_key_module.TagKey("status")
 # Create the error key
 key_error = tag_key_module.TagKey("error")
 
-latency_view = view_module.View("demo/latency", "The distribution of the latencies",
+latency_view = view_module.View("demo_latency", "The distribution of the latencies",
     [key_method, key_status, key_error],
     m_latency_ms,
     # Latency in buckets:
     # [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
-line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
+line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
     [],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
-line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
+line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
     [],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -295,10 +295,10 @@ from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
 stats_recorder = stats.Stats().stats_recorder
@@ -310,19 +310,19 @@ key_status = tag_key_module.TagKey("status")
 # Create the error key
 key_error = tag_key_module.TagKey("error")
 
-latency_view = view_module.View("demo/latency", "The distribution of the latencies",
+latency_view = view_module.View("demo_latency", "The distribution of the latencies",
     [key_method, key_status, key_error],
     m_latency_ms,
     # Latency in buckets:
     # [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
-line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
+line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
     [],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
-line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
+line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
     [],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -418,10 +418,10 @@ from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.MeasureInt("repl/line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
 stats_recorder = stats.Stats().stats_recorder
@@ -433,19 +433,19 @@ key_status = tag_key_module.TagKey("status")
 # Create the error key
 key_error = tag_key_module.TagKey("error")
 
-latency_view = view_module.View("demo/latency", "The distribution of the latencies",
+latency_view = view_module.View("demo_latency", "The distribution of the latencies",
     [key_method, key_status, key_error],
     m_latency_ms,
     # Latency in buckets:
     # [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
-line_count_view = view_module.View("demo/lines_in", "The number of lines from standard input",
+line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
     [],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
-line_length_view = view_module.View("demo/line_lengths", "Groups the lengths of keys in buckets",
+line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
     [],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -513,7 +513,7 @@ To do this, we firstly need to create a YAML file with the configuration e.g. `p
 whose contents are:
 ```yaml
 scrape_configs:
-- job_name: 'OCPYTHON'
+- job_name: 'ocpythonmetrics_tutorial'
 
 scrape_interval: 10s
 
