@@ -42,7 +42,7 @@ Record against implicit (current) context|Yes|Yes|Yes|<span style="color: #CF767
 Record with additional attachments (e.g SpanContext)|Yes|Yes|Yes|Yes
 Define and register Views|Yes|Yes|Yes|Yes|Yes
 gRPC plug-in for Metrics|Yes|Yes<span style="color: #CF7675"> (missing started_rpcs metrics)</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-HTTP plug-in for Metrics|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+HTTP plug-in for Metrics|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|Python|Nodejs|PHP
 ---|---|---|---|---|---
