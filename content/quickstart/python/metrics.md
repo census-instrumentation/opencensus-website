@@ -98,7 +98,7 @@ import opencensus.tags import tag_value as tag_value_module
 m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
-m_line_lengths = measure_module.Int("repl_line_lengths", "The distribution of line lengths", "By")
+m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 {{</highlight>}}
 
 {{<highlight python>}}
@@ -116,7 +116,7 @@ from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
-m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
+m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
 # Counts/groups the lengths of lines read in.
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
@@ -254,6 +254,7 @@ if __name__ == "__main__":
 
 {{</highlight>}}
 
+
 ### Register Views
 We will create a function called `setupOpenCensusAndPrometheusExporter` and call it from our main function:
 
@@ -297,6 +298,7 @@ from opencensus.tags import tag_value as tag_value_module
 # The latency in milliseconds
 m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milliseconds per REPL loop", "ms")
 
+
 # Counts/groups the lengths of lines read in.
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
@@ -318,12 +320,12 @@ latency_view = view_module.View("demo_latency", "The distribution of the latenci
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
 line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
 line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
     aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
@@ -554,4 +556,3 @@ Resource|URL
 Prometheus project|https://prometheus.io/
 Setting up Prometheus|[Prometheus Codelab](/codelabs/prometheus)
 Python exporters|[Python exporters](/guides/exporters/supported-exporters/python)
-

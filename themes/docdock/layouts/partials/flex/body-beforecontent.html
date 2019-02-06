@@ -14,6 +14,9 @@
         {{- end}}
     </nav>
   {{- end}}
+  <div class="header-survey">
+    <a class="survey-button btn btn-light" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe5CjLMCdTM8kYKiuHityvBq1k7APEbsd8m7SBxXW0vdHr5oA/viewform">Please take the OpenCensus user survey</a>
+  </div>
 </header>
 <article>
   <aside>
@@ -36,7 +39,9 @@
     </section>
   </aside>
   <section class="page {{ .Params.class }}">
-
+    <div class="mobile-survey">
+      <a class="btn btn-light survey-button" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe5CjLMCdTM8kYKiuHityvBq1k7APEbsd8m7SBxXW0vdHr5oA/viewform">Please take the OpenCensus user survey</a>
+    </div>
     <div class="nav-select">
       <center>Navigation :
         <select onchange="javascript:location.href = this.value;">

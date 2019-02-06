@@ -17,8 +17,9 @@ aliases: [/quickstart/node.js/metrics]
     - [Create Views and Tags](#create-views-and-tags)
     - [Recording Metrics](#recording-metrics)
 - [Exporting to Stackdriver](#exporting-to-stackdriver)
+- [Viewing your metrics](#viewing-your-metrics)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
@@ -103,7 +104,7 @@ function processLine(line) {
 }
 {{</highlight>}}
 
-Then, let's create our text file that we'll feed the REPL. LEt's call it `test.txt`:
+Then, let's create our text file that we'll feed the REPL. Let's call it `test.txt`:
 
 ```bash
 touch test.txt
@@ -174,9 +175,6 @@ const stats = new Stats();
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
 
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
-
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
 {{</highlight>}}
@@ -187,14 +185,11 @@ const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 const fs = require('fs');
 const readline = require('readline');
 
-// Our Stats manager
+// Create the Stats manager
 const stats = new Stats();
 
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
-
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
 
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
@@ -225,28 +220,30 @@ function processLine(line) {
 ## Record and Aggregate Data
 
 ### Create Views and Tags
-We now determine how our metrics will be organized by creating `Views`. We will also create the variable needed to add extra text meta-data to our metrics, `tagKey`.
+We now determine how our metrics will be organized by creating `Views`. We will also create the variable needed to add extra text meta-data to our metrics -- `methodTagKey`, `statusTagKey`, and `errorTagKey`.
 
 {{<tabs Snippet All>}}
 {{<highlight javascript>}}
-const tagKey = "method";
+const methodTagKey = "method";
+const statusTagKey = "status";
+const errorTagKey = "error";
 
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
   AggregationType.DISTRIBUTION,
-  [tagKey],
+  [methodTagKey, statusTagKey, errorTagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
   // [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
   [0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]
 );
-
+1
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   AggregationType.COUNT,
-  [tagKey],
+  [methodTagKey],
   "The number of lines from standard input"
 )
 
@@ -254,7 +251,7 @@ const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
   AggregationType.DISTRIBUTION,
-  [tagKey],
+  [methodTagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
   // [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -268,14 +265,11 @@ const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 const fs = require('fs');
 const readline = require('readline');
 
-// Our Stats manager
+// Create the Stats manager
 const stats = new Stats();
 
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
-
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
 
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
@@ -286,13 +280,15 @@ const stream = fs.createReadStream("./test.txt");
 // Creates an interface to read and process our file line by line
 const lineReader = readline.createInterface({ input: stream });
 
-const tagKey = "method";
+const methodTagKey = "method";
+const statusTagKey = "status";
+const errorTagKey = "error";
 
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
   AggregationType.DISTRIBUTION,
-  [tagKey],
+  [methodTagKey, statusTagKey, errorTagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
   // [>=0ms, >=25ms, >=50ms, >=75ms, >=100ms, >=200ms, >=400ms, >=600ms, >=800ms, >=1s, >=2s, >=4s, >=6s]
@@ -301,9 +297,9 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
+  mLineLengths,
   AggregationType.COUNT,
-  [tagKey],
+  [methodTagKey],
   "The number of lines from standard input"
 )
 
@@ -311,7 +307,7 @@ const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
   AggregationType.DISTRIBUTION,
-  [tagKey],
+  [methodTagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
   // [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
@@ -344,26 +340,32 @@ Again, this is arbitrary and purely up the user. For example, if we wanted to tr
 Now we will record the desired metrics. To do so, we will use `stats.record()` and pass in our measurements.
 
 {{<tabs Snippet All>}}
-{{<highlight javascript>}}  
-const tags = { "method": "repl" };
+{{<highlight javascript>}}
+lineReader.on("line", function (line) {
+  // Registers the Tags for our measurements
+  const tags = {method: "repl", status: "OK"};
 
-// Records a new line
-stats.record({
-  measure: mLinesIn,
-  tags,
-  value: 1
-});
+  try {
+    // ...
 
-stats.record({
-  measure: mLineLengths,
-  tags,
-  value: processedLine.length
-});
+    stats.record({
+      measure: mLineLengths,
+      tags,
+      value: processedLine.length
+    });
+  } catch (err) {
+    tags.status = "ERROR";
+    tags.error = err.message;
+  }
 
-stats.record({
-  measure: mLatencyMs,
-  tags,
-  value: endTime.getTime() - startTime.getTime()
+  stats.record({
+    measure: mLatencyMs,
+    tags,
+    value: (new Date()) - startTime.getTime()
+  });
+
+  // Restarts the start time for the REPL
+  startTime = new Date();
 });
 {{</highlight>}}
 
@@ -373,14 +375,11 @@ const { Stats, MeasureUnit, AggregationType } = require('@opencensus/core');
 const fs = require('fs');
 const readline = require('readline');
 
-// Our Stats manager
+// Create the Stats manager
 const stats = new Stats();
 
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
-
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
 
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
@@ -396,7 +395,7 @@ const tagKey = "method";
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
-  3,
+  AggregationType.DISTRIBUTION,
   [tagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
@@ -406,8 +405,8 @@ const latencyView = stats.createView(
 
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
-  0,
+  mLineLengths,
+  AggregationType.COUNT,
   [tagKey],
   "The number of lines from standard input"
 )
@@ -415,7 +414,7 @@ const lineCountView = stats.createView(
 const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
-  3,
+  AggregationType.DISTRIBUTION,
   [tagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
@@ -425,38 +424,35 @@ const lineLengthView = stats.createView(
 
 // The begining of our REPL loop
 let startTime = new Date();
+let endTime;
 
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
-  const processedLine = processLine(line);    // Evaluate
-  console.log(processedLine);                // Print
+  // Registers the Tags for our measurements
+  const tags = {method: "repl", status: "OK"};
 
-  // Registers the end of our REPL
-  const endTime = new Date();
+  try {
+    const processedLine = processLine(line);    // Evaluate
+    console.log(processedLine);                // Print
 
-  const tags = { "method": "repl" };
-
-  // Records a new line
-  stats.record({
-    measure: mLinesIn,
-    tags,
-    value: 1
-  });
-
-  stats.record({
-    measure: mLineLengths,
-    tags,
-    value: processedLine.length
-  });
+    stats.record({
+      measure: mLineLengths,
+      tags,
+      value: processedLine.length
+    });
+  } catch (err) {
+      tags.status = "ERROR";
+      tags.error = err.message;
+  }
 
   stats.record({
     measure: mLatencyMs,
     tags,
-    value: endTime.getTime() - startTime.getTime()
+    value: (new Date()) - startTime.getTime()
   });
 
   // Restarts the start time for the REPL
-  startTime = endTime;
+  startTime = new Date();
 });
 
 /**
@@ -482,7 +478,7 @@ const { StackdriverStatsExporter } = require('@opencensus/exporter-stackdriver')
 const fs = require('fs');
 const readline = require('readline');
 
-// Our Stats manager
+// Create the Stats manager
 const stats = new Stats();
 
 // Add your project id to the Stackdriver options
@@ -499,7 +495,7 @@ const { StackdriverStatsExporter } = require('@opencensus/exporter-stackdriver')
 const fs = require('fs');
 const readline = require('readline');
 
-// Our Stats manager
+// Create the Stats manager
 const stats = new Stats();
 
 // Add your project id to the Stackdriver options
@@ -510,9 +506,6 @@ stats.registerExporter(exporter);
 
 // The latency in milliseconds
 const mLatencyMs = stats.createMeasureDouble("repl/latency", MeasureUnit.MS, "The latency in milliseconds per REPL loop");
-
-// Counts the number of lines read in from standard input
-const mLinesIn = stats.createMeasureInt64("repl/lines_in", MeasureUnit.UNIT, "The number of lines read in");
 
 // Counts/groups the lengths of lines read in.
 const mLineLengths = stats.createMeasureInt64("repl/line_lengths", MeasureUnit.BYTE, "The distribution of line lengths");
@@ -525,10 +518,11 @@ const lineReader = readline.createInterface({ input: stream });
 
 const tagKey = "method";
 
+// Register the view.
 const latencyView = stats.createView(
   "demo/latency",
   mLatencyMs,
-  3,
+  AggregationType.DISTRIBUTION,
   [tagKey],
   "The distribution of the latencies",
   // Bucket Boundaries:
@@ -536,18 +530,20 @@ const latencyView = stats.createView(
   [0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]
 );
 
+// Register the view.
 const lineCountView = stats.createView(
   "demo/lines_in",
-  mLinesIn,
-  0,
+  mLineLengths,
+  AggregationType.COUNT,
   [tagKey],
   "The number of lines from standard input"
 )
 
+// Register the view.
 const lineLengthView = stats.createView(
   "demo/line_lengths",
   mLineLengths,
-  3,
+  AggregationType.DISTRIBUTION,
   [tagKey],
   "Groups the lengths of keys in buckets",
   // Bucket Boudaries:
@@ -557,38 +553,34 @@ const lineLengthView = stats.createView(
 
 // The begining of our REPL loop
 let startTime = new Date();
-
+let endTime;
 // REPL is the read, evaluate, print and loop
 lineReader.on("line", function (line) {       // Read
-  const processedLine = processLine(line);    // Evaluate
-  console.log(processedLine);                // Print
+  // Registers the Tags for our measurements
+  const tags = {method: "repl", status: "OK"};
 
-  // Registers the end of our REPL
-  const endTime = new Date();
+  try {
+    const processedLine = processLine(line);    // Evaluate
+    console.log(processedLine);                // Print
 
-  const tags = { "method": "repl" };
-
-  // Records a new line
-  stats.record({
-    measure: mLinesIn,
-    tags,
-    value: 1
-  });
-
-  stats.record({
-    measure: mLineLengths,
-    tags,
-    value: processedLine.length
-  });
+    stats.record({
+      measure: mLineLengths,
+      tags,
+      value: processedLine.length
+    });
+  } catch (err) {
+      tags.status = "ERROR";
+      tags.error = err.message;
+  }
 
   stats.record({
     measure: mLatencyMs,
     tags,
-    value: endTime.getTime() - startTime.getTime()
+    value: (new Date()) - startTime.getTime()
   });
 
   // Restarts the start time for the REPL
-  startTime = endTime;
+  startTime = new Date();
 });
 
 /**
@@ -602,4 +594,16 @@ function processLine(line) {
 {{</highlight>}}
 {{</tabs>}}
 
+## Viewing your metrics
+
 Once registed, the Stackdriver exporter will be notified on every view registered and measurement recorded. It will translate and send the collected data on its own. Now, simply go to the [monitoring console](https://app.google.stackdriver.com/) and check the collected data.
+![](/images/metrics-node-stackdriver.png)
+Each bar in the heatmap represents one run of the program, and the colored components of each bar represent part of the latency distribution.
+
+## References
+
+Resource|URL
+---|---
+NPM: @opencensus/exporter-stackdriver|https://www.npmjs.com/package/@opencensus/exporter-stackdriver
+NPM: @opencensus/nodejs|https://www.npmjs.com/package/@opencensus/nodejs
+Github: OpenCensus for Node.js|https://github.com/census-instrumentation/opencensus-node/tree/master/packages/opencensus-nodejs

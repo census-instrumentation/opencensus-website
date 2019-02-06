@@ -7,6 +7,30 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### December 16, 2018
+
+#### [Web Metrics with OpenCensus and Stackdriver](https://medium.com/@alexamies/web-metrics-with-opencenus-and-stackdriver-525af8069ce6)
+
+This post describes an approach to measuring and understanding application health as experienced by the population of users of a web application in near realtime.
+
+---
+
+##### November 9, 2018
+
+#### [Correlating traces and logs with OpenCensus](https://medium.com/@sebright/correlating-traces-and-logs-with-opencensus-ac95d9b14b18)
+
+This post demonstrates debugging a simple issue using OpenCensus distributed tracing and log correlation.
+
+---
+
+##### November 5, 2018
+
+#### [Export Dropwizard Metrics to OpenCensus](https://medium.com/@mayurkale22/export-dropwizard-metrics-to-opencensus-1e98851693f8)
+
+This post shows how to export Dropwizard Metrics to OpenCensus with minimal changes. [\[read more\]](/guides/integrations/dropwizard)
+
+---
+
 ##### October 7, 2018
 
 #### [Distributed Tracing and Monitoring using OpenCensus](https://medium.com/@rghetia/distributed-tracing-and-monitoring-using-opencensus-fe5f6e9479fb)
