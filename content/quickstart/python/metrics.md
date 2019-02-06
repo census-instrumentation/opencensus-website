@@ -209,12 +209,12 @@ latency_view = view_module.View("demo_latency", "The distribution of the latenci
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
 line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
 line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
     aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
@@ -443,12 +443,12 @@ latency_view = view_module.View("demo_latency", "The distribution of the latenci
     aggregation_module.DistributionAggregation([0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]))
 
 line_count_view = view_module.View("demo_lines_in", "The number of lines from standard input",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     aggregation_module.CountAggregation())
 
 line_length_view = view_module.View("demo_line_lengths", "Groups the lengths of keys in buckets",
-    [],
+    [key_method, key_status, key_error],
     m_line_lengths,
     # Lengths: [>=0B, >=5B, >=10B, >=15B, >=20B, >=40B, >=60B, >=80, >=100B, >=200B, >=400, >=600, >=800, >=1000]
     aggregation_module.DistributionAggregation([0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]))
