@@ -132,7 +132,7 @@ def enable_views():
                              aggregation.DistributionAggregation(0, 25, 100, 200, 400, 800, 10000))
 
     line_count_view = view.View("myapp/lines_in",
-                             "The number of liens that were received",
+                             "The number of lines that were received",
                              [key_method],
                              m_latency_ms,
                              aggregation.CountAggregation())
