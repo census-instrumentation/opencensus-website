@@ -23,7 +23,7 @@ Start/End Time|Yes|Yes|Yes|Yes
 SpanData (for exporting)|Yes|Yes|Yes|Yes
 Status|Yes|Yes|Yes|Yes
 <b>Trace Configs</b>|
-TraceParam Limits (Attributes, Annotations, etc.)|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>
+TraceParam Limits (Attributes, Annotations, etc.)|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Rate-limited Sampler|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Opreations</b>|
 Create a root span|Yes|Yes|Yes|Yes
@@ -32,9 +32,9 @@ Create a span from current context|Yes|Yes|Yes|Yes
 Create a span with explicit parent|Yes|Yes|Yes|Yes
 Add attributes, links, annotations, message events|Yes|Yes|Yes|Yes
 Register/Unregister Exporters|Yes|Yes|Yes|Yes
-Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>
 End a span with an error status|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
-Override sampling for a span|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Override sampling for a span|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>
 <b>Propagation</b>|
 Binary Format - gRPC|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
 W3C TraceContext Format - HTTP|Yes|Yes|Yes|Yes
@@ -119,7 +119,7 @@ Feature|Java|Go|Python|Nodejs|PHP
 Stackdriver Monitoring|Yes|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes|<span style="color: #CF7675">No</span>
 Prometheus|Yes|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span style="color: #CF7675"> (using ViewData)</span>|<span style="color: #CF7675">No</span>
 <b>Tracing</b>|
-Strackdriver Trace|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span> (using V1 API)|Yes
+Strackdriver Trace|Yes|Yes|Yes|Yes|Yes
 Jaeger|Yes|Yes|Yes|Yes|Yes
 Zipkin|Yes|Yes|Yes|Yes<span style="color: #CF7675"> (missing fields)</span>|Yes
 {{% /tabs %}}
