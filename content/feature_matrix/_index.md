@@ -38,7 +38,7 @@ Override sampling for a span|Yes|Yes|<span style="color: #CF7675">No</span>|<spa
 <b>Propagation</b>|
 Binary Format - gRPC|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
 W3C TraceContext Format - HTTP|Yes|Yes|Yes|Yes
-B3 Format - HTTP|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
+B3 Format - HTTP|Yes|Yes|Yes|Yes
 Google Cloud Text Format|Yes|Yes|Yes|Yes
 
 Feature|Java|Go|Python|Nodejs|PHP
@@ -112,6 +112,7 @@ Auto-detect GCE/GKE/AWS EC2 resources|Yes|Yes|Yes|Yes|<span style="color: #CF767
 Set resources for custom environment|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>
 Encode and decode resource|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>
 Merge mutiple resources|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>
+Add resource labels to span|Yes|No|Yes <span style="color: #CF7675"> (without new names)</span>|Yes|No
 
 Feature|Java|Go|Python|Nodejs|PHP
 ---|---|---|---|---|---
