@@ -10,6 +10,9 @@ logo: /img/prometheus-logo.png
 - [Introduction](#introduction)
 - [Installing the exporter](#installing-the-exporter)
 - [Creating the exporter](#creating-the-exporter)
+- [Running Prometheus](#running-prometheus)
+- [Viewing your metrics](#viewing-your-metrics)
+- [Project link](#project-link)
 
 ## Introduction
 Prometheus is a monitoring system that collects metrics, by scraping
@@ -31,26 +34,56 @@ npm install @opencensus/exporter-prometheus
 ```
 
 ## Creating the exporter
+To create the exporter, we'll need to:
+
+* Import and use the Prometheus exporter package
+* Define a namespace that will uniquely identify our metrics when viewed on Prometheus
+* Expose a port on which we shall run a `/metrics` endpoint
+* With the defined port, we'll need a Promethus configuration file so that Prometheus can scrape from this endpoint
+
 Now let's use the Prometheus exporter:
 
 ```js
-const { Stats } = require('@opencensus/core');
+const { globalStats } = require('@opencensus/core');
 const { PrometheusStatsExporter } = require('@opencensus/exporter-prometheus');
 
 // Add your port and startServer to the Prometheus options
 const exporter = new PrometheusStatsExporter({
   port: 9464,
-  startServer: false
+  startServer: true
 });
-
-// Our Stats manager
-const stats = new Stats();
 
 // Pass the created exporter to Stats
-stats.registerExporter(exporter);
-
-// Run the server
-exporter.startServer(function callback() {
-  // Callback
-});
+globalStats.registerExporter(exporter);
 ```
+
+and then for our corresponding `prometheus.yaml` file:
+
+```shell
+global:
+  scrape_interval: 10s
+
+  external_labels:
+    monitor: 'demo'
+
+scrape_configs:
+  - job_name: 'demo'
+
+    scrape_interval: 10s
+
+    static_configs:
+      - targets: ['localhost:8888']
+```
+
+## Running Prometheus
+And then run Prometheus with your configuration
+```shell
+prometheus --config.file=prometheus.yaml
+```
+
+## Viewing your metrics
+Please visit [http://localhost:9090](http://localhost:9090)
+
+## Project link
+You can find out more about the Prometheus project at [https://prometheus.io/](https://prometheus.io/)
+

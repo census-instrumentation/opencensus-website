@@ -49,15 +49,13 @@ Stackdriver's minimum stats reporting period must be >= 60 seconds. Find out why
 {{% /notice %}}
 
 {{<highlight javascript>}}
-var opencensus = require('@opencensus/core');
-var stackdriver = require('@opencensus/exporter-stackdriver');
+const { globalStats } = require('@opencensus/core');
+const { StackdriverStatsExporter } = require('@opencensus/exporter-stackdriver');
 
 // Add your project id to the Stackdriver options
-var exporter = new stackdriver.StackdriverStatsExporter({projectId: "your-project-id"});
+const exporter = new StackdriverStatsExporter({projectId: "your-project-id"});
 
-var stats = new opencensus.Stats();
-
-stats.registerExporter(exporter);
+globalStats.registerExporter(exporter);
 {{</highlight>}}
 
 ## Viewing your metrics

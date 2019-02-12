@@ -180,13 +180,11 @@ void enableViews() {
 {{</highlight>}}
 
 {{<highlight js>}}
-const { Stats, AggregationType } = require('@opencensus/core');
+const { globalStats, AggregationType, TagMap } = require('@opencensus/core');
 
-// Our Stats manager
-const stats = new Stats();
-const tagKey = "method";
+const tagKey = { name: "method" };
 
-const latencyView = stats.createView(
+const latencyView = globalStats.createView(
   "myapp/latency",
   mLatencyMs,
   AggregationType.DISTRIBUTION,
@@ -197,7 +195,7 @@ const latencyView = stats.createView(
   [0, 25, 100, 200, 400, 800, 1000]
 );
 
-const lineCountView = stats.createView(
+const lineCountView = globalStats.createView(
   "demo/lines_in",
   mLatencyMs,
   AggregationType.COUNT,
@@ -205,8 +203,9 @@ const lineCountView = stats.createView(
   "The number of lines from standard input"
 );
 
-stats.registerView(latencyView);
-stats.registerView(lineCountView);
+globalStats.registerView(latencyView);
+globalStats.registerView(lineCountView);
+
 {{</highlight>}}
 {{</tabs>}}
 

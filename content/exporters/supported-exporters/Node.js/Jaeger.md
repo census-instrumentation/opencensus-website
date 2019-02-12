@@ -10,6 +10,8 @@ logo: /img/partners/jaeger_logo.svg
 - [Introduction](#introduction)
 - [Installing the exporter](#installing-the-exporter)
 - [Creating the exporter](#creating-the-exporter)
+- [Viewing your traces](#viewing-your-traces)
+- [Project link](#project-link)
 
 ## Introduction
 Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing system released as open source by Uber Technologies.
@@ -40,21 +42,26 @@ npm install @opencensus/exporter-jaeger
 Now let's use the Jaeger exporter:
 
 ```js
-var core = require('@opencensus/core');
-var tracing = require('@opencensus/nodejs');
-var jaeger = require('@opencensus/exporter-jaeger');
+const { logger } = require('@opencensus/core');
+const { JaegerTraceExporter } = require('@opencensus/exporter-jaeger');
+const tracing = require('@opencensus/nodejs');
 
-var jaegerOptions = {
+// Add service name and jaeger options
+const jaegerOptions = {
   serviceName: 'opencensus-exporter-jaeger',
   host: 'localhost',
   port: 6832,
-  tags: [{key: 'opencensus-exporter-jeager', value: '0.0.1'}],
+  tags: [{key: 'opencensus-exporter-jeager', value: '0.0.9'}],
   bufferTimeout: 10, // time in milliseconds
-  logger: core.logger.logger('debug'),
-  maxPacketSize: 1000
+  logger: logger.logger('debug')
 };
 
-var exporter = new jaeger.JaegerTraceExporter(jaegerOptions);
-
+const exporter = new JaegerTraceExporter(jaegerOptions);
 tracing.registerExporter(exporter).start();
 ```
+
+## Viewing your traces
+Please visit the Jaeger UI endpoint [http://localhost:16686](http://localhost:16686)
+
+## Project link
+You can find out more about the Jaeger project at [https://www.jaegertracing.io/](https://www.jaegertracing.io/)

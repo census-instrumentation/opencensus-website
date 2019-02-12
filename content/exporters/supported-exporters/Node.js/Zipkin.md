@@ -10,6 +10,8 @@ logo: /img/zipkin-logo.jpg
 - [Introduction](#introduction)
 - [Installing the exporter](#installing-the-exporter)
 - [Creating the exporter](#creating-the-exporter)
+- [Viewing your traces](#viewing-your-traces)
+- [Project link](#project-link)
 
 ## Introduction
 Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures.
@@ -18,8 +20,8 @@ It manages both the collection and lookup of this data. Zipkin’s design is bas
 
 OpenCensus Node.js has support for this exporter available, distributed through NPM package [@opencensus/exporter-zipkin](https://www.npmjs.com/package/@opencensus/exporter-zipkin)
 
-{{% notice tip %}}
-For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
+{{% notice note %}}
+This guide makes use of Zipkin for visualizing your data. For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
 {{% /notice %}}
 
 ## Installing the exporter
@@ -34,16 +36,22 @@ npm install @opencensus/exporter-zipkin
 Now let's use the Zipkin exporter:
 
 ```js
-var tracing = require('@opencensus/nodejs');
-var zipkin = require('@opencensus/exporter-zipkin');
+const tracing = require('@opencensus/nodejs');
+const { ZipkinTraceExporter } = require('@opencensus/exporter-zipkin');
 
 // Add your zipkin url (ex http://localhost:9411/api/v2/spans)
 // and application name to the Zipkin options
-var options = {
+const zipkinOptions = {
   url: 'your-zipkin-url',
   serviceName: 'your-application-name'
 };
 
-var exporter = new zipkin.ZipkinTraceExporter(options);
+const exporter = new ZipkinTraceExporter(zipkinOptions);
 tracing.registerExporter(exporter).start();
 ```
+
+## Viewing your traces
+Please visit the Zipkin UI endpoint [http://localhost:9411](http://localhost:9411)
+
+## Project link
+You can find out more about the Zipkin project at [https://zipkin.io/](https://zipkin.io/)

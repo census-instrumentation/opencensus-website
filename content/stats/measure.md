@@ -143,22 +143,15 @@ int main(int argc, char** argv) {
 {{</highlight>}}
 
 {{<highlight js>}}
-import { Stats, MeasureUnit } from "@opencensus/core";
+import { globalStats, MeasureUnit } from "@opencensus/core";
 
-// Our Stats manager
-const stats = new Stats();
+const mLatencyMs = globalStats.createMeasureDouble("latency", MeasureUnit.MS, "The latency in milliseconds");
+const mBytesIn = globalStats.createMeasureInt64("size", MeasureUnit.BYTE, "The number of bytes received");
 
-const mLatencyMs = stats.createMeasureDouble("latency", MeasureUnit.MS, "The latency in milliseconds");
-const mBytesIn = stats.createMeasureInt64("size", MeasureUnit.BYTE, "The number of bytes received");
+const measurement1 = {measure: mLatencyMs, value: 17};
+const measurement2 = {measure: mBytesIn, value: 7000};
 
-stats.record({
-  measure: mLatencyMs,
-  value: 17
-});
-stats.record({
-  measure: mBytesIn,
-  value: 7000
-});
+globalStats.record([measurement1, measurement2]);
 {{</highlight>}}
 {{</tabs>}}
 

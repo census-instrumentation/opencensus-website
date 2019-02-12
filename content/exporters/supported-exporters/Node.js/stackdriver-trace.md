@@ -48,11 +48,11 @@ export GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credential.json
 To create the exporter, in code:
 
 {{<highlight javascript>}}
-var tracing = require('@opencensus/nodejs');
-var stackdriver = require('@opencensus/exporter-stackdriver');
+const tracing = require('@opencensus/nodejs');
+const { StackdriverTraceExporter } = require('@opencensus/exporter-stackdriver');
 
 // Add your project id to the Stackdriver options
-var exporter = new stackdriver.StackdriverTraceExporter({projectId: "your-project-id"});
+const exporter = new StackdriverTraceExporter({projectId: "your-project-id"});
 
 tracing.registerExporter(exporter).start();
 {{</highlight>}}
