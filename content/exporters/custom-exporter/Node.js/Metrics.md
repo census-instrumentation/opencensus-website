@@ -89,13 +89,13 @@ tags.set(myTagKey, { value: "myTagValue" });
 
 // Create and Register the view
 const view = globalStats.createView(
-  'my/view', 
+  /* name */ 'my/view',
   measure, 
   AggregationType.LAST_VALUE, 
   [myTagKey], 
-  'my view'
+  /* description */ 'my view'
 );
-globalStats..registerView(view);
+globalStats.registerView(view);
 // and our measurement
 const measurement = {measure, value: 10};
 

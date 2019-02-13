@@ -121,7 +121,7 @@ const exporter = new MyConsoleTraceExporter();
 // And start tracing with it
 tracing.registerExporter(exporter).start();
 
-// Now, lets create a simple HTTP 2 server
+// Now, lets create a simple HTTP/2 server
 const http2 = require('http2')
 const server2 = http2.createServer();
 

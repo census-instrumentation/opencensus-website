@@ -59,7 +59,7 @@ globalStats.registerExporter(exporter);
 
 and then for our corresponding `prometheus.yaml` file:
 
-```shell
+```yaml
 global:
   scrape_interval: 10s
 
