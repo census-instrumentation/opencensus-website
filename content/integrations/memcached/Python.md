@@ -201,8 +201,8 @@ For assistance setting up Stackdriver, please visit this [Stackdriver setup guid
 {{<highlight python>}}
 import os
 
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.trace.exporters import stackdriver_exporter
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
 
 def main():
     gcp_project_id = os.environ.get('PROJECT_ID', 'census-demos')
@@ -210,7 +210,7 @@ def main():
     # Enable tracing
     texp = stackdriver_trace.StackdriverExporter(
             project_id=gcp_project_id,
-            transport=BackgroundThreadTransport)
+            transport=AsyncTransport)
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=texp)
 {{</highlight>}}
 
@@ -255,11 +255,11 @@ from ocpymemcache.client import OCPyMemcacheClient
 from ocpymemcache.observability import enable_metrics_views
 
 # Observability from OpenCensus
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.stats import stats as stats_module
 from opencensus.stats.exporters import stackdriver_exporter as stackdriver_stats
 from opencensus.trace import execution_context
 from opencensus.trace.exporters import stackdriver_exporter as stackdriver_trace
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
 from opencensus.trace.samplers import always_on
 from opencensus.trace.status import Status
 from opencensus.trace.tracer import Tracer
@@ -272,7 +272,7 @@ def main():
     # Enable tracing
     texp = stackdriver_trace.StackdriverExporter(
             project_id=gcp_project_id,
-            transport=BackgroundThreadTransport)
+            transport=AsyncTransport)
     tracer = Tracer(sampler=always_on.AlwaysOnSampler(), exporter=texp)
 
     # Enable metrics

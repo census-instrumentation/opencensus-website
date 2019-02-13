@@ -28,12 +28,11 @@ Here's an example of setting things up on the OpenCensus side (see [Local Forwar
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from opencensus.common.async.transports.async_ import AsyncTransport
 from opencensus.trace import config_integration
-from opencensus.trace.exporters.ocagent import trace_exporter
 from opencensus.trace import tracer as tracer_module
+from opencensus.trace.exporters.ocagent import trace_exporter
 from opencensus.trace.propagation.trace_context_http_header_format import TraceContextPropagator
-from opencensus.trace.exporters.transports.background_thread \
-    import BackgroundThreadTransport
 
 import time
 import os
@@ -46,7 +45,7 @@ config_integration.trace_integrations(INTEGRATIONS, tracer=tracer_module.Tracer(
     exporter=trace_exporter.TraceExporter(
         service_name=service_name,
         endpoint=os.getenv('OCAGENT_TRACE_EXPORTER_ENDPOINT'),
-        transport=BackgroundThreadTransport),
+        transport=AsyncTransport),
     propagator=TraceContextPropagator()))
 
 

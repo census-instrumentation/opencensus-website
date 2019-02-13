@@ -338,7 +338,7 @@ Import the required packages:
 {{<tabs Snippet All>}}
 {{<highlight python>}}
 import os
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.trace.exporters import stackdriver_exporter
 {{</highlight>}}
 
@@ -348,11 +348,11 @@ import os
 import time
 from concurrent import futures
 
+from opencensus.common.transports.async_ import AsyncTransport
+from opencensus.trace.exporters import stackdriver_exporter
+from opencensus.trace.ext.grpc import server_interceptor
 from opencensus.trace.samplers import always_on
 from opencensus.trace.tracer import Tracer
-from opencensus.trace.ext.grpc import server_interceptor
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
-from opencensus.trace.exporters import stackdriver_exporter
 
 import defs_pb2_grpc as proto
 import defs_pb2 as pb
@@ -399,7 +399,7 @@ Setup the exporter:
 # NOTE: Replace 'YOUR_GOOGLE_PROJECT_ID_HERE' with your actual Google Project ID!
 exporter = stackdriver_exporter.StackdriverExporter(
     project_id=os.environ.get('YOUR_GOOGLE_PROJECT_ID_HERE'),
-    transport=BackgroundThreadTransport)
+    transport=AsyncTransport)
 {{</highlight>}}
 
 {{<highlight python>}}
@@ -408,10 +408,10 @@ import os
 import time
 from concurrent import futures
 
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.trace.samplers import always_on
 from opencensus.trace.tracer import Tracer
 from opencensus.trace.ext.grpc import server_interceptor
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
 from opencensus.trace.exporters import stackdriver_exporter
 
 import defs_pb2_grpc as proto
@@ -420,7 +420,7 @@ import defs_pb2 as pb
 # NOTE: Replace 'YOUR_GOOGLE_PROJECT_ID_HERE' with your actual Google Project ID!
 exporter = stackdriver_exporter.StackdriverExporter(
     project_id=os.environ.get('YOUR_GOOGLE_PROJECT_ID_HERE'),
-    transport=BackgroundThreadTransport)
+    transport=AsyncTransport)
 
 class CapitalizeServer(proto.FetchServicer):
     def __init__(self, *args, **kwargs):
@@ -478,7 +478,7 @@ from concurrent import futures
 from opencensus.trace.samplers import always_on
 from opencensus.trace.tracer import Tracer
 from opencensus.trace.ext.grpc import server_interceptor
-from opencensus.trace.exporters.transports.background_thread import BackgroundThreadTransport
+from opencensus.common.transports.async_ import AsyncTransport
 from opencensus.trace.exporters import stackdriver_exporter
 
 import defs_pb2_grpc as proto
@@ -487,7 +487,7 @@ import defs_pb2 as pb
 # NOTE: Replace 'YOUR_GOOGLE_PROJECT_ID_HERE' with your actual Google Project ID!
 exporter = stackdriver_exporter.StackdriverExporter(
     project_id=os.environ.get('YOUR_GOOGLE_PROJECT_ID_HERE'),
-    transport=BackgroundThreadTransport)
+    transport=AsyncTransport)
 
 class CapitalizeServer(proto.FetchServicer):
     def __init__(self, *args, **kwargs):
