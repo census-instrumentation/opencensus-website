@@ -98,6 +98,14 @@ span.add_time_event(time_event.TimeEvent(datetime.datetime.utcnow(), serverEvent
 {{</highlight>}}
 
 {{<highlight js>}}
+const { MessageEventType } = require('@opencensus/core');
+
+// On the client
+span.addMessageEvent(MessageEventType.RECEIVED, 'message_event_test_id');
+
+// On the server
+span.addMessageEvent(MessageEventType.SENT, 'message_event_test_id');
+
 {{</highlight>}}
 {{</tabs>}}
 
