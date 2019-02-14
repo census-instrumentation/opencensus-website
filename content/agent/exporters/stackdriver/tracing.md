@@ -1,7 +1,7 @@
 ---
 title: "Trace"
 date: 2019-02-13T19:13:58-08:00
-logo: /images/stackdriver-monitoring.svg
+logo: /images/stackdriver-logo.png
 ---
 
 - [Introduction](#introduction)
@@ -45,7 +45,7 @@ In this end-to-end example, we'll have ocagent running and a couple of Go applic
 that use the [Go ocagent-exporter](/exporters/supported-exporters/go/ocagent)
 to send over metrics and traces to ocagent and then to Stackdriver.
 
-![](/images/ocagent-exporter-stackdriver-architecture-schematic.png)
+![](/images/ocagent-exporter-stackdriver-trace-schematic.png)
 
 ### Running ocagent
 
