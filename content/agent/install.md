@@ -13,7 +13,7 @@ date: 2019-02-11T13:42:17-08:00
 
 ### Download
 For every release of the OpenCensus Agent "ocagent" we upload binaries/executables to:
-    
+
 https://github.com/census-instrumentation/opencensus-service/releases
 
 
@@ -31,6 +31,7 @@ Tool|Install URL
 Git|https://git-scm.com/downloads
 Go 1.11 and above|https://golang.org/doc/install
 GNU Make|https://www.gnu.org/software/make/
+Bazaar|http://bazaar.canonical.com/en/
 
 #### Cloning source
 To clone the source, we'll git clone and get into the repository by
