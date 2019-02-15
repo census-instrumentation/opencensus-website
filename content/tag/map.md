@@ -75,8 +75,14 @@ void Put() {
 }
 {{</highlight>}}
 
-{{<highlight nodejs>}}
-const keyMethod = "method";
+{{<highlight javascript>}}
+const { TagMap } = require('@opencensus/core');
+const methodTagKey = { name: "method" };
+const statusTagKey = { name: "status" };
+
+const tags = new TagMap();
+tags.set(methodTagKey, { value: "REPL" });
+tags.set(statusTagKey, { value: "OK" });
 {{</highlight>}}
 {{</tabs>}}
 

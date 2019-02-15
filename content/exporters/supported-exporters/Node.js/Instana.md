@@ -33,10 +33,9 @@ To use Instana as your exporter, first ensure that you have an [Instana agent ru
 Now let's use the Instana exporter:
 
 ```js
-var tracing = require('@opencensus/nodejs');
-var instana = require('@opencensus/exporter-instana');
+const tracing = require('@opencensus/nodejs');
+const { InstanaTraceExporter }= require('@opencensus/exporter-instana');
 
-var exporter = new instana.InstanaTraceExporter();
-
+const exporter = new InstanaTraceExporter();
 tracing.registerExporter(exporter).start();
 ```

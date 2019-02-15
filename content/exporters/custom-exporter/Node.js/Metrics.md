@@ -73,25 +73,34 @@ export class MyConsoleStatsExporter implements StatsEventListener {
 And now to test it out as we would in a typically linked program, let's create a `expample.js` file:
 
 {{<highlight javascript>}}
-var opencensus = require('@opencensus/core');
-var stats = new opencensus.Stats();
+const { globalStats, AggregationType, TagMap } = require('@opencensus/core');
 
 // Let's create an instance of our just created exporter
-var exporter = new MyConsoleStatsExporter();
+const exporter = new MyConsoleStatsExporter();
 // And register it
-stats.registerExporter(exporter);
+globalStats.registerExporter(exporter);
 
 // Let's create a measure
-var measure = stats.createMeasureInt64('my/measure', "1");
+const measure = globalStats.createMeasureInt64('my/measure', "1");
 // our tags
-var tags = {myTagKey: 'myTagValue'};
-// a view
-var view = stats.createView('my/view', measure, 2, ['myTagKey'], 'my view');
+const myTagKey = { name: "myTagKey" };
+const tags = new TagMap();
+tags.set(myTagKey, { value: "myTagValue" });
+
+// Create and Register the view
+const view = globalStats.createView(
+  /* name */ 'my/view',
+  measure, 
+  AggregationType.LAST_VALUE, 
+  [myTagKey], 
+  /* description */ 'my view'
+);
+globalStats.registerView(view);
 // and our measurement
-var measurement = {measure, tags, value: 10};
+const measurement = {measure, value: 10};
 
 // finaly, let's record it
-stats.record(measurement);
+globalStats.record([measurement], tags);
 {{</highlight>}}
 
 Now, run it with `node example.js` and you should see logs for our view beeing created and our measurement beeing recorded.

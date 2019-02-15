@@ -114,16 +114,16 @@ export class MyConsoleTraceExporter implements types.Exporter {
 And now to test it out as we would in a typically linked program, let's create a `expample.js` file:
 
 ```javascript
-var tracing = require('@opencensus/opencensus-nodejs');
+const tracing = require('@opencensus/opencensus-nodejs');
 
 // Let's create an instance of our just created exporter
-var exporter = new MyConsoleTraceExporter();
+const exporter = new MyConsoleTraceExporter();
 // And start tracing with it
 tracing.registerExporter(exporter).start();
 
-// Now, lets create a simple HTTP 2 server
-var http2 = require('http2')
-var server2 = http2.createServer();
+// Now, lets create a simple HTTP/2 server
+const http2 = require('http2')
+const server2 = http2.createServer();
 
 // On every call to http://localhost:8080 we will return a Hello World message
 server2.on('stream', (stream, requestHeaders) => {

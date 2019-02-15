@@ -42,8 +42,8 @@ ABSL_CONST_INIT const absl::string_view kGetMethod =
     "memcache.Client.Get";
 {{</highlight>}}
 
-{{<highlight nodejs>}}
-const methodValue = "memcache.Client.Get";
+{{<highlight javascript>}}
+const methodValue = { value: "memcache.Client.Get" };
 {{</highlight>}}
 {{</tabs>}}
 
@@ -56,3 +56,4 @@ Go TagValue API|[TagMutator](https://godoc.org/go.opencensus.io/tag#Mutator)
 Java TagValue API|[TagValue JavaDoc](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/tags/TagValue.html)
 Python TagValue reference|[Github implementation](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/tags/tag_value.py#L15-L34)
 C++ Tags reference|[Tags source](https://github.com/census-instrumentation/opencensus-cpp/tree/master/opencensus/tags)
+Node.js TagValue reference|[Github implementation](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/tags/types.ts#L23-L27)
