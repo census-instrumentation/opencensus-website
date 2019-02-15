@@ -129,7 +129,7 @@ public class TracingToZipkin {
 		// 6. Get the global singleton Tracer object.
 		Tracer tracer = Tracing.getTracer();
 
-		// 7. Start another span. If antoher span was already started, it'll use that span as the parent span.
+		// 7. Start another span. If another span was already started, it'll use that span as the parent span.
 		// In this example, the main method already started a span, so that'll be the parent span, and this will be
 		// a child span.
 		try (Scope scope = tracer.spanBuilder("doWork").startScopedSpan()) {
