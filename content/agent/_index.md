@@ -4,8 +4,6 @@ weight: 7
 logo: /images/opencensus-logo.png
 ---
 
-![](/images/agent-server.png)
-
 - [Introduction](#introduction)
 - [Benefits](#benefits)
 - [Getting started](#getting-started)
@@ -17,6 +15,8 @@ exporter implementations. Instead of traditionally taking down and configuring O
 per language library and for every single application, with the OpenCensus Agent, one just has to singly
 enable the OpenCensus Agent exporter for their target language and it will deliver stats, metrics and traces
 to the centralized point before they are exported to the target backends.
+
+![](/images/agent-server.png)
 
 By default, ocagent runs on TCP port `55678` and receives traffic from:
 
