@@ -39,7 +39,7 @@ that ocagent sends data to.
 
 ##### For Application Developers ...
 
-* Manage single expoter Your applications no longer have to locally enable each exporter per language.
+* <b>Manage single expoter.</b> Your applications no longer have to locally enable each exporter per language.
 All applications sends data to OC-Agent using OpenCensus Exporter.
 
 
