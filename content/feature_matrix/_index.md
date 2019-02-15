@@ -82,7 +82,7 @@ Define and register Views|Yes|Yes|Yes|Yes|Yes
 Apply Aggregation to Measurements according to View definitions|Yes|Yes|Yes|Yes|Yes
 Validate bucket boundaries for a Distribution|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
 Retrieve aggregated data for a given View|Yes|Yes|Yes|Yes|Yes
-<b>Stas Plug-in</b>|
+<b>Stats Plug-in</b>|
 gRPC plug-in for Metrics|Yes|Yes<span style="color: #CF7675"> (missing started_rpcs metrics)</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 HTTP plug-in for Metrics|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
