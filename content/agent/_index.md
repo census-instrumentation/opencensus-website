@@ -29,7 +29,7 @@ any application that supported by any of the "OpenCensus Agent receivers", regar
 
 ### Benefits
 
-##### For Backend Providers ...
+##### For APM Providers ...
 * <b>Implement one Exporter and get data from applications in many languages.</b>
 Developing exporters only for one language "Go" dramatically scales infrastructure development and deployment, as
 observability backends no longer have to develop exporters in [every 1 of the 9+ languages that OpenCensus supports.](/language-support)
