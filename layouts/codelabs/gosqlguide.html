@@ -134,7 +134,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: &#34;localhost:6831&#34;,
-		Endpoint:      &#34;http://localhost:14268&#34;,
+		Endpoint:      &#34;http://localhost:14268/api/traces&#34;,
 		ServiceName:   &#34;ocsql-demo&#34;,
 	})
 	if err == nil {
@@ -243,7 +243,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: &#34;localhost:6831&#34;,
-		Endpoint:      &#34;http://localhost:14268&#34;,
+		Endpoint:      &#34;http://localhost:14268/api/traces&#34;,
 		ServiceName:   &#34;ocsql-demo&#34;,
 	})
 	if err == nil {

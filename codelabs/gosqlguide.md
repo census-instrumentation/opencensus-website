@@ -31,7 +31,7 @@ To install the "database/sql" plugin, please run:
 go get -u -v contrib.go.opencensus.io/integrations/ocsql
 ```
 
-## Getting started 
+## Getting started
 Duration: 0:08
 
 We will first create a `go-gettable` directory and a file `main.go`, like so:
@@ -39,7 +39,7 @@ We will first create a `go-gettable` directory and a file `main.go`, like so:
 mkdir -p ocsql-e2e && cd ocsql-e2e
 touch main.go
 ```
-The following code gives a simple initialization of a database/sql instance in Go. 
+The following code gives a simple initialization of a database/sql instance in Go.
 ```go
 package main
 
@@ -124,7 +124,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: "localhost:6831",
-		Endpoint:      "http://localhost:14268",
+		Endpoint:      "http://localhost:14268/api/traces",
 		ServiceName:   "ocsql-demo",
 	})
 	if err == nil {
@@ -234,7 +234,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: "localhost:6831",
-		Endpoint:      "http://localhost:14268",
+		Endpoint:      "http://localhost:14268/api/traces",
 		ServiceName:   "ocsql-demo",
 	})
 	if err == nil {
@@ -251,7 +251,7 @@ With the code above properly placed in `main.go`, we can now run:
 go run main.go
 ```
 
-## Examining the traces 
+## Examining the traces
 Duration: 0:03
 
 On visiting http://localhost:16686/ we can see something similar to below:

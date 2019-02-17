@@ -16,14 +16,14 @@
       background: var(--google-codelab-background, #F8F9FA);
     }
   </style>
-  
+
 </head>
 <body unresolved class="fullbleed">
 
   <google-codelab title="GoSQL Integration Guide"
                   environment="web"
                   feedback-link="">
-    
+
       <google-codelab-step label="Overview of the tutorial" duration="1">
         <p>We have a Go &#34;database/sql&#34; package/wrapper that is trace instrumented with OpenCensus!</p>
 <h2>Objectives:</h2>
@@ -43,7 +43,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Installing ocsql" duration="1">
         <p>To install the &#34;database/sql&#34; plugin, please run:</p>
 <pre><code>go get -u -v contrib.go.opencensus.io/integrations/ocsql
@@ -51,7 +51,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Getting started" duration="1">
         <p>We will first create a <code>go-gettable</code> directory and a file <code>main.go</code>, like so:</p>
 <pre><code>mkdir -p ocsql-e2e &amp;&amp; cd ocsql-e2e
@@ -78,7 +78,7 @@ func main() {
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Using ocsql" duration="1">
         <p>We can use the OpenCensus trace-instrumented SQL driver wrapper in one of these two ways:</p>
 <h2>By registration</h2>
@@ -121,7 +121,7 @@ func main() {
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Enabling OpenCensus" duration="1">
         <p>To enable observability with OpenCensus, we need to hook up our favorite Go exporter as per the <a href="/guides/exporters/supported-exporters/go/" target="_blank">Go exporters guides</a>.<br>This can be achieved like so (with Jaeger in this case):</p>
 <pre><code>import (
@@ -134,7 +134,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: &#34;localhost:6831&#34;,
-		Endpoint:      &#34;http://localhost:14268&#34;,
+		Endpoint:      &#34;http://localhost:14268/api/traces&#34;,
 		ServiceName:   &#34;ocsql-demo&#34;,
 	})
 	if err == nil {
@@ -148,7 +148,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="End to end code" duration="1">
         <p>And now to examine the exported traces, let&#39;s make a simple name registry app. For simplicitly, we use a sqlite3 database.<br>Place the following code in <code>main.go</code>. Save and close the file.</p>
 <pre><code>package main
@@ -243,7 +243,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 	je, err := jaeger.NewExporter(jaeger.Options{
 		AgentEndpoint: &#34;localhost:6831&#34;,
-		Endpoint:      &#34;http://localhost:14268&#34;,
+		Endpoint:      &#34;http://localhost:14268/api/traces&#34;,
 		ServiceName:   &#34;ocsql-demo&#34;,
 	})
 	if err == nil {
@@ -260,7 +260,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Examining the traces" duration="1">
         <p>On visiting http://localhost:16686/ we can see something similar to below:</p>
 <p><img alt="Traces list" src="img/eda443a7d4de703b.png"></p>
@@ -269,7 +269,7 @@ func enableOpenCensusTracingAndExporting() error {
 
 
       </google-codelab-step>
-    
+
   </google-codelab>
 
   <script>
