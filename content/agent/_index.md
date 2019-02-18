@@ -34,7 +34,7 @@ any application that supported by any of the "OpenCensus Agent receivers", regar
 Developing exporters only for one language "Go" dramatically scales infrastructure development and deployment, as
 observability backends no longer have to develop exporters in [every 1 of the 9+ languages that OpenCensus supports.](/language-support)
 
-* <b>Democratizes deployments.</b> cloud providers because cloud providers can define the backends/exporters
+* <b>Democratizes deployments</b> for cloud providers because cloud providers can define the backends/exporters
 that ocagent sends data to.
 
 ##### For Application Developers ...
@@ -42,8 +42,7 @@ that ocagent sends data to.
 * <b>Manage single expoter.</b> Your applications no longer have to locally enable each exporter per language.
 All applications sends data to OC-Agent using OpenCensus Exporter.
 
-
-* <b>Democratizes deployments.</b> For customers as well as they can send the data to a backend of their choice.
+* <b>Democratizes deployments</b> for customers as well. They can send the data to a backend of their choice.
 
 * <b>Agent provides stats aggregation.</b> Some languages like PHP are a challenge to use a unified in-app concept of stats, instead each request forks independently,
 hence requires a side car approach to capture stats and traces. Enabling exporters per request is non-idle and expensive.
