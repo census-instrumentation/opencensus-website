@@ -25,7 +25,7 @@ ocagent allows one to export traces to Jaeger by sending traces to Jaeger's coll
 
 ### Configuration
 
-In the ocagent's YAML configuration file, under section "exporters" and sub-section "jaeger" configure fields: 
+In the ocagent's YAML configuration file, under section "exporters" and sub-section "jaeger" configure fields:
 
 #### Format
 ```yaml
@@ -43,7 +43,7 @@ exporters:
 exporters:
   jaeger:
     service_name: "agent_j"
-    collector_endpoint: "http://localhost:14268"
+    collector_endpoint: "http://localhost:14268/api/traces"
 ```
 
 ### End to end example
@@ -81,7 +81,7 @@ receivers:
 On running ocagent:
 
 ```shell
-$ ./bin/ocagent_darwin --config jaeger.yaml 
+$ ./bin/ocagent_darwin --config jaeger.yaml
 {"level":"info","ts":1550129670.73966,"caller":"config/config.go:424","msg":"Trace Exporter enabled","exporter":"jaeger"}
 2019/02/13 23:34:31 Running OpenCensus Trace and Metrics receivers as a gRPC service at "localhost:55678"
 2019/02/13 23:34:31 Running zPages at ":55679"
@@ -92,7 +92,7 @@ $ ./bin/ocagent_darwin --config jaeger.yaml
 And then running the `ocagent-go-exporter` [main.go](/exporters/supported-exporters/go/ocagent/#end-to-end-example) application
 
 ```shell
-$ GO111MODULE=on go run example/main.go 
+$ GO111MODULE=on go run example/main.go
 #0: LineLength: 669By
 Latency: 123.240ms
 #0: LineLength: 779By
