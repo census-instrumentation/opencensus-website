@@ -44,7 +44,7 @@ exporters:
 
 In this end-to-end example, we'll have ocagent running and a couple of Go applications
 that use the [Go ocagent-exporter](/exporters/supported-exporters/go/ocagent)
-to send over metrics and traces to ocagent and then to Stackdriver.
+to send over metrics to ocagent and then to Stackdriver.
 
 ![](/images/ocagent-exporter-stackdriver-metrics-schematic.png)
 

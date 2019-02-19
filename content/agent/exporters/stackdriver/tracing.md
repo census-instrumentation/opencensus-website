@@ -11,15 +11,12 @@ logo: /images/stackdriver-logo.png
     - [Running ocagent](#running-ocagent)
     - [Running Application code](#running-application-code)
 - [Results](#results)
-    - [All metrics](#all-metrics)
-    - [Rates for individual line length buckets](#rates-for-individual-line-length-buckets)
-    - [p99th latencies](#p99th-latencies)
-    - [Rates for line counts](#rates-for-line-counts)
+    - [All traces](#all-traces)
 - [References](#references)
 
 ### Introduction
 
-ocagent allows you to export metrics that are collected from client libraries and [receivers](/agent/receivers) to Stackdriver.
+ocagent allows you to export traces that are collected from client libraries and [receivers](/agent/receivers) to Stackdriver.
 
 {{% notice tip %}}
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
@@ -43,7 +40,7 @@ exporters:
 
 In this end-to-end example, we'll have ocagent running and a couple of Go applications
 that use the [Go ocagent-exporter](/exporters/supported-exporters/go/ocagent)
-to send over metrics and traces to ocagent and then to Stackdriver.
+to send over traces to ocagent and then to Stackdriver.
 
 ![](/images/ocagent-exporter-stackdriver-trace-schematic.png)
 
@@ -91,7 +88,7 @@ Latency: 1066.808ms
 
 On navigating to the Stackdriver Trace UI at https://console.cloud.google.com/traces
 
-####  All metrics
+####  All traces
 ![](/images/ocagent-exporter-stackdriver-all-traces.png)
 
 ### References
