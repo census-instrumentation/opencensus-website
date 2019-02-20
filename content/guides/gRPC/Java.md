@@ -297,7 +297,7 @@ which will give such output
 
 The client talks to the server via a gRPC channel, sending in bytes and getting back the output capitalized.
 
-The contents of `src/main/java/io/octutorials/ocgrpc/TutorialServer.java` are as below:
+The contents of `src/main/java/io/octutorials/ocgrpc/TutorialClient.java` are as below:
 ```java
 package io.octutorials.ocgrpc;
 
@@ -420,9 +420,9 @@ public class TutorialServer {
         // For demo purposes, always sample
         TraceConfig traceConfig = Tracing.getTraceConfig();
         traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveParams()
+                traceConfig.getActiveTraceParams()
                     .toBuilder()
-                    .setSample(Samplers.alwaysSample())
+                    .setSampler(Samplers.alwaysSample())
                     .build());
 
         // Create the Stackdriver trace exporter
@@ -444,7 +444,7 @@ import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
 
 public class TutorialServer {
-    private static void setupOpencensusAndExporters throws IOException {
+    private static void setupOpencensusAndExporters() throws IOException {
         String gcpProjectId = System.getenv().get("GCP_PROJECTID");
         if (gcpProjectId == null || gcpProjectId == "") {
             gcpProjectId = "census-demos";
@@ -809,7 +809,7 @@ public class TutorialClient {
         }
     }
 
-    private static void setupOpencensusAndExporters throws IOException {
+    private static void setupOpencensusAndExporters() throws IOException {
         String gcpProjectId = System.getenv().get("GCP_PROJECTID");
         if (gcpProjectId == null || gcpProjectId == "") {
             gcpProjectId = "census-demos";
@@ -818,9 +818,9 @@ public class TutorialClient {
         // For demo purposes, always sample
         TraceConfig traceConfig = Tracing.getTraceConfig();
         traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveParams()
+                traceConfig.getActiveTraceParams()
                     .toBuilder()
-                    .setSample(Samplers.alwaysSample())
+                    .setSampler(Samplers.alwaysSample())
                     .build());
 
         // Create the Stackdriver trace exporter
