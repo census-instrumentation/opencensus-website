@@ -25,24 +25,11 @@ public void export(Collection<Metric> metrics);
 
 The sole method `export` will be used to process and translate a collection of [Metric](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/opencensus/metrics/export/Metric.html) to your desired monitoring backend's data.
 
-After an exporter is created, it must be wrapped in a [MetricProducer](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/opencensus/metrics/export/MetricProducer.html) class, which is registered with [MetricProducerManager.add](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/opencensus/metrics/export/MetricProducerManager.html#add-io.opencensus.metrics.export.MetricProducer-). In the example constructor
-
-```java
- IntervalMetricReader.Options.Builder options = IntervalMetricReader.Options.builder();
- MetricReader reader =
-     MetricReader.create(
-         MetricReader.Options.builder()
-             .setMetricProducerManager(Metrics.getExportComponent().getMetricProducerManager())
-             .setSpanName(EXAMPLE_STATS_EXPORTER)
-             .build());
-IntervalMetricReader.create(this, reader, options.build());
-```
-
 ## Implementation
 The [Metric](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/openc\
 ensus/metrics/export/Metric.html) class contains a [MetricDescriptor](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/opencensus/metrics/export/MetricDescriptor.html), which describes the type of metric and also contains a name, description, and units. `Metric` also includes a list of [TimeSeries](https://static.javadoc.io/io.opencensus/opencensus-api/0.19.2/io/opencensus/metrics/export/TimeSeries.html) objects that contain the metric data.
 
-In this example, the metrics will be written to the log, which will out sent to the console when running from the command line
+In this example, the metrics will be written to the log, which will send output to the console when running from the command line
 
 ```java
 StringBuffer sb = new StringBuffer();
@@ -96,8 +83,6 @@ import java.util.logging.Logger;
 
 /**                                                                                                                                         
  * Example OpenCensus Stats Exporter.
- *
- * @since 0.20
  */
 public final class ExampleStatsExporter extends MetricExporter {
   public static final String EXAMPLE_STATS_EXPORTER = "ExampleStatsExporter";
