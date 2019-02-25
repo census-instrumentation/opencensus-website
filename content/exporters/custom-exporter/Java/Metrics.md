@@ -12,7 +12,7 @@ aliases: [/custom_exporter/java/stats, /guides/custom_exporter/java/stats]
 
 ## Introduction
 
-A metrics exporter must extend the abstract class [MetricExporter](https://github.com/census-instrumentation/opencensus-java/blob/master/exporters/metrics/util/src/main/java/io/opencensus/exporter/metrics/util/MetricExporter.java) implementing the `export` method:
+A metrics exporter must extend the abstract class [MetricExporter](https://static.javadoc.io/io.opencensus/opencensus-exporter-metrics-util/0.19.2/io/opencensus/exporter/metrics/util/MetricExporter.html) implementing the `export` method:
 which for purposes of brevity is:
 
 ```java
@@ -56,7 +56,7 @@ for (Point p : ts.getPoints()) {
 logger.info("Timeseries to export:\n" + sb);
 ```
 
-The [IntervalMetricReader](https://github.com/census-instrumentation/opencensus-java/blob/master/exporters/metrics/util/src/main/java/io/opencensus/exporter/metrics/util/IntervalMetricReader.java) class conveniently provides a service that runs in the background and writes out the metric values that have been received during the collection interval. It may be useful to keep a reference to it to shutdown the background thread gracefully.
+The [IntervalMetricReader](https://static.javadoc.io/io.opencensus/opencensus-exporter-metrics-util/0.19.2/io/opencensus/exporter/metrics/util/IntervalMetricReader.html) class conveniently provides a service that runs in the background and writes out the metric values that have been received during the collection interval. It may be useful to keep a reference to it to shutdown the background thread gracefully.
 
 ## Runnable example
 
@@ -307,6 +307,6 @@ Seconds Nanos   Value
 
 Name|Link
 ---|---
-Exporter Utilities at GitHub |[opencensus-java/exporters/metrics/util/](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/metrics/util)
+Exporter Utilities JavaDoc |[io.opencensus.exporter.metrics.util.*](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-metrics-util/0.19.2)
 OpenCensus JavaDoc|[io.opencensus.*](https://www.javadoc.io/doc/io.opencensus/opencensus-api/)
 OpenCensus Java exporters|[Some OpenCensus Java exporters](/supported-exporters/java/)
