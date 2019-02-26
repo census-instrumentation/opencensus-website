@@ -13,7 +13,7 @@ logo: /images/jetty-header-logo.png
 - [Enabling observability](#enabling-observability)
     - [Stats](#stats)
     - [Traces](#traces)
-    - [Extracing observability](#extracting-observability)
+    - [Extracting observability](#extracting-observability)
 - [End-to-end example](#end-to-end-example)
     - [Source code](#source-code)
     - [Running it](#running-it)
