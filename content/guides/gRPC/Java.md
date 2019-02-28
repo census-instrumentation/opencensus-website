@@ -60,15 +60,15 @@ As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-netty-shaded:1.16.1'
-compile 'io.grpc:grpc-protobuf:1.16.1'
-compile 'io.grpc:grpc-stub:1.16.1'
+implementation 'io.grpc:grpc-netty-shaded:1.16.1'
+implementation 'io.grpc:grpc-protobuf:1.16.1'
+implementation 'io.grpc:grpc-stub:1.16.1'
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-okhttp:1.16.1'
-compile 'io.grpc:grpc-protobuf-lite:1.16.1'
-compile 'io.grpc:grpc-stub:1.16.1'
+implementation 'io.grpc:grpc-okhttp:1.16.1'
+implementation 'io.grpc:grpc-protobuf-lite:1.16.1'
+implementation 'io.grpc:grpc-stub:1.16.1'
 {{</highlight>}}
 {{</tabs>}}
 
@@ -451,7 +451,7 @@ public class TutorialServer {
         }
 
         // Register all the gRPC views and enable stats
-        RpcViews.registerAllViews();
+        RpcViews.registerAllGrpcViews();
 
         // Create the Stackdriver stats exporter
         StackdriverStatsExporter.createAndRegister(
@@ -551,7 +551,7 @@ public class TutorialServer {
         }
 
         // Register all the gRPC views and enable stats
-        RpcViews.registerAllViews();
+        RpcViews.registerAllGrpcViews();
 
         // Create the Stackdriver stats exporter
         StackdriverStatsExporter.createAndRegister(
@@ -849,7 +849,7 @@ public class TutorialClient {
         }
 
         // Register all the gRPC views and enable stats
-        RpcViews.registerAllViews();
+        RpcViews.registerAllGrpcViews();
 
         // Create the Stackdriver stats exporter
         StackdriverStatsExporter.createAndRegister(
@@ -935,7 +935,7 @@ public class TutorialClient {
         }
 
         // Register all the gRPC views and enable stats
-        RpcViews.registerAllViews();
+        RpcViews.registerAllGrpcViews();
 
         // Create the Stackdriver stats exporter
         StackdriverStatsExporter.createAndRegister(
