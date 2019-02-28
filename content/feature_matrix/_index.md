@@ -14,7 +14,7 @@ Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 SpanContext|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Tracestate|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Attributes (String/Bool/Int)|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">String Only</span>|Yes
-Attributes Double/Float64|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+Attributes Double/Float64|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Link|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Annotation|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 SpanKind|Yes|Yes|Yes|Yes|Yes|Yes|Yes
@@ -24,7 +24,6 @@ SpanData (for exporting)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Status|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Trace Configs</b>|||||||
 TraceParam Limits (Attributes, Annotations, etc.)|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Rate-limited Sampler|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes<span style="color: #6bb1e0"> (requires PSR-6 cache)</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Create a root span|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Put span into/get span from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
@@ -36,7 +35,7 @@ Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="col
 End a span with an error status|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
 Override sampling for a span|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes
 <b>Propagation</b>|||||||
-Binary Format - gRPC|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">Client only</span>|Yes
+Binary Format - gRPC|Yes|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">Client only</span>|Yes
 W3C TraceContext Format - HTTP|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 B3 Format - HTTP|Yes|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>
 Google Cloud Text Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
@@ -48,7 +47,7 @@ Tag|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagKey (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagValue (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagMap|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-TagScope|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+TagScope|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Validate TagKey and TagValue|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Insert a list of Tags into current context|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|Yes
@@ -83,8 +82,8 @@ Apply Aggregation to Measurements according to View definitions|Yes|Yes|Yes|Yes|
 Validate bucket boundaries for a Distribution|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Retrieve aggregated data for a given View|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Stats Plug-in</b>|||||||
-gRPC plug-in for Metrics|Yes|Yes<span style="color: #CF7675"> (missing started_rpcs metrics)</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
-HTTP plug-in for Metrics|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+gRPC plug-in for Metrics|Yes|Yes<span style="color: #CF7675"> (missing started_rpcs metrics)</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|Yes
+HTTP plug-in for Metrics|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 ---|---|---|---|---|---|---|---
@@ -98,20 +97,20 @@ Point|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color:
 TimeSeries|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricDescriptor|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Metric|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Double and Long Gauge|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Double and Long Gauge|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricProducer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Add/remove metric producers|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Retrieve metrics from each metric producer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Register gauges to metric registry|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Register gauges to metric registry|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 ---|---|---|---|---|---|---|---
-Top-level Resource API|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Top-level Resource API|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Auto-detect GCE/GKE/AWS EC2 resources|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Set resources for custom environment|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Encode and decode resource|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Merge mutiple resources|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Set resources for custom environment|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Encode and decode resource|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Merge mutiple resources|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Add resource labels to span|Yes|No|<span style="color: #CF7675">No</span>|Yes <span style="color: #CF7675"> (without new names)</span>|Yes|No|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
@@ -122,5 +121,5 @@ Prometheus|Yes|Yes<span style="color: #CF7675"> (using ViewData)</span>|Yes<span
 <b>Tracing</b>|||||||
 Strackdriver Trace|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes
 Jaeger|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>
-Zipkin|Yes|Yes|Yes|Yes|Yes<span style="color: #CF7675"> (missing fields)</span>|Yes|Yes
+Zipkin|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 {{% /tabs %}}
