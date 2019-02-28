@@ -14,7 +14,7 @@ Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 SpanContext|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Tracestate|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Attributes (String/Bool/Int)|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">String Only</span>|Yes
-Attributes Double/Float64|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+Attributes Double/Float64|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Link|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Annotation|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 SpanKind|Yes|Yes|Yes|Yes|Yes|Yes|Yes
