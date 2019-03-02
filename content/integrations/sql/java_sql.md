@@ -37,23 +37,23 @@ but also distributed as Maven, Gradle, Ivy and Builder artifacts as you'll short
 <dependency>
     <groupId>io.orijtech.integrations</groupId>
     <artifactId>ocjdbc</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 {{</highlight>}}
 
 {{<highlight gradle>}}
 // https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
-compile group: 'io.orijtech.integrations', name: 'ocjdbc', version: '0.0.2'
+compile group: 'io.orijtech.integrations', name: 'ocjdbc', version: '0.0.3'
 {{</highlight>}}
 
 {{<highlight xml>}}
 <!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc -->
-<dependency org="io.orijtech.integrations" name="ocjdbc" rev="0.0.2"/>
+<dependency org="io.orijtech.integrations" name="ocjdbc" rev="0.0.3"/>
 {{</highlight>}}
 
 {{<highlight python>}}
 # https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
-'io.orijtech.integrations:ocjdbc:jar:0.0.2'
+'io.orijtech.integrations:ocjdbc:jar:0.0.3'
 {{</highlight>}}
 {{</tabs>}}
 
@@ -287,7 +287,7 @@ public class App {
         <dependency>
             <groupId>io.orijtech.integrations</groupId>
             <artifactId>ocjdbc</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
 
         <dependency>

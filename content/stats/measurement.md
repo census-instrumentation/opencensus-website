@@ -12,7 +12,7 @@ A measurement is just a raw statistic.
 For example, for a latency (ms) measure, 100 is a measurement that represents a 100 ms latency event. 
 
 Users collect data points on the existing measures with the current context. 
-Tags from the current context are recorded with the measurements if they are any.  
+Tags from the current context are recorded with the measurements if there are any.  
 
 Measurements are produced by [Measures](/stats/measure)
 
