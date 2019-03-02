@@ -308,7 +308,7 @@ public class HelloWorldServer extends AbstractHandler {
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.opencensus.tutorials.jetty</groupId>
-    <artifactId>jetty-client-tutorial</artifactId>
+    <artifactId>jetty-server-tutorial</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
     <name>jettyclient</name>
