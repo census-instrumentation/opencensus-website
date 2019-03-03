@@ -1,6 +1,6 @@
 ---
 title: "Tracing"
-date: 2018-07-16T14:29:21-07:00
+date: 2019-03-02T14:29:21-07:00
 draft: false
 class: "shadowed-image lightbox"
 ---
@@ -38,8 +38,8 @@ class: "shadowed-image lightbox"
 
 #### Run it locally
 
-1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-java-by-example`
-2. Change to the example directory: `cd opencensus-java-by-example/opencensus-tracing-to-zipkin`
+1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts.git
+2. Change to the example directory: `cd opencensus-quickstarts/java/opencensus-tracing-to-zipkin`
 3. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
 4. Start Zipkin: `java -jar zipkin.jar`
 5. Run the code: `mvn compile exec:java -Dexec.mainClass=com.example.TracingToZipkin`
@@ -165,7 +165,7 @@ ZipkinTraceExporter.createAndRegister(
     "http://localhost:9411/api/v2/spans", "tracing-to-zipkin-service");
 ```
 
-You can export trace data to different backends. Learn more in [OpenCensus Supported Exporters](../../exporters/supported-exporters/).
+You can export trace data to different backends. Learn more in [OpenCensus Supported Exporters](/exporters/supported-exporters/).
 
 #### Configure Sampler
 
@@ -180,7 +180,7 @@ traceConfig.updateActiveTraceParams(
 		Samplers.alwaysSample()).build());
 ```
 
-There are multiple ways to configure how OpenCensus sample traces. Learn more in  [OpenCensus Sampling](../../tracing/sampling.md).
+There are multiple ways to configure how OpenCensus sample traces. Learn more in  [OpenCensus Sampling](/tracing/sampling).
 
 #### Using the Tracer
 
