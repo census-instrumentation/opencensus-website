@@ -31,8 +31,7 @@ Create a span from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Create a span with explicit parent|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Add attributes, links, annotations, message events|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Register/Unregister Exporters|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">Register only (use Agent)</span>|
-Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|No|Yes
-End a span with an error status|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|No|Yes
 Override sampling for a span|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes
 <b>Propagation</b>|||||||
 Binary Format - gRPC|Yes|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">Client only</span>|Yes
@@ -54,7 +53,7 @@ Insert a list of Tags into current context|Yes|Yes|Yes|<span style="color: #CF76
 Get Tags from current context|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
 Update Tags in current context|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
 <b>Propagation</b>|||||||
-Binary Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
+Binary Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
 Text Format (W3C)|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
 gRPC Propagation|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 HTTP Propagation|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
@@ -100,8 +99,8 @@ Metric|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="c
 Double and Long Gauge|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricProducer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
-Add/remove metric producers|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Retrieve metrics from each metric producer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Add/remove metric producers|Yes|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Retrieve metrics from each metric producer|Yes|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Register gauges to metric registry|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
