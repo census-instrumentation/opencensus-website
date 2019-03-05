@@ -62,5 +62,5 @@ Architecture amd64
 
 Resource|URL
 ---|---
-OpenCensus Agent on Github|[Github repository](https://github.com/census-instrumentation/opencensus-service)
-OpenCensus Agent releases|https://github.com/census-instrumentation/opencensus-service/releases
+OpenCensus Service on Github|[Github repository](https://github.com/census-instrumentation/opencensus-service)
+OpenCensus Service releases|https://github.com/census-instrumentation/opencensus-service/releases
