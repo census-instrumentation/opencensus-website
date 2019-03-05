@@ -18,15 +18,16 @@ https://github.com/census-instrumentation/opencensus-service/releases
 
 ### Deployment
 
-## Kubernetes
+#### Kubernetes
 
 An example YAML file for kubernetes is provided
 [here](https://github.com/census-instrumentation/opencensus-service/blob/master/example/k8s.yaml).
 It makes use of configmaps to configure the Collector.
 
-## Docker
+#### Docker
 
 Alternatively, the Collector can be run as a standalone Docker container. In this case, you can either pass a configuration:
+
 ```shell
 $ docker run \
     --rm \
@@ -36,8 +37,9 @@ $ docker run \
     --volume $(pwd)/occollector-config.yaml:/conf/occollector-config.yaml \
     occollector \
     --config=/conf/occollector-config.yaml
-    ```
+```
 or leverage the available flags:
+
 ```text
 Usage:
   occollector [flags]
@@ -56,7 +58,7 @@ Flags:
       --receive-zipkin                Flag to run the Zipkin receiver, default settings: {Port:9411}
       --receive-zipkin-scribe         Flag to run the Zipkin Scribe receiver, default settings: {Address: Port:9410 Category:zipkin}
       --tail-sampling-always-sample   Flag to use a tail-based sampling processor with an always sample policy, unless tail sampling setting is present on configuration file.
-      ```
+```
 ### References
 
 Resource|URL
