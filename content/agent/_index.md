@@ -81,5 +81,6 @@ Resource|URL
 ---|---
 OpenCensus Agent Protocol|[ocagent-protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master/src/opencensus/proto/agent)
 OpenCensus Agent Design|[ocagent design doc](https://github.com/census-instrumentation/opencensus-service/blob/master/DESIGN.md#opencensus-agent)
+OpenCensus Collector Design|[occollector design doc](https://github.com/census-instrumentation/opencensus-service/blob/master/DESIGN.md#opencensus-collector)
 grpc-web-gateway|[grpc-web-gateway on GitHub](https://github.com/grpc-ecosystem/grpc-gateway)
 OpenCensus PHP design|[Design doc](https://docs.google.com/document/d/1CRiRq_wpzOuG9VKM_eaImcrS12Iie2V7LePnH9AwclU/)
