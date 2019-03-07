@@ -16,7 +16,7 @@ logo: /images/stackdriver-logo.png
 
 ### Introduction
 
-The OpenCensus Service allows you to export traces that are collected from client libraries and [receivers](/collector/receivers) to Stackdriver.
+The OpenCensus Service allows you to export traces that are collected from client libraries and [receivers](/service/receivers) to Stackdriver.
 
 {{% notice tip %}}
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.

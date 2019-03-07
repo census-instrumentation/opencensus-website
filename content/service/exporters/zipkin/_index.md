@@ -51,7 +51,7 @@ exporters:
 
 ### Notes
 {{% notice warning %}}
-* Please ensure that `endpoint` DOES NOT point to the same address as that of the [Zipkin receiver](/collector/receivers/zipkin/#format)
+* Please ensure that `endpoint` DOES NOT point to the same address as that of the [Zipkin receiver](/service/receivers/zipkin/#format)
 {{% /notice %}}
 
 ### End to end example
