@@ -22,11 +22,11 @@ logo: /img/zipkin-logo.jpg
 
 ### Introduction
 
-The OpenCensus Collector allows one to export traces to Zipkin
+The OpenCensus Service allows one to export traces to Zipkin
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "zipkin" configure fields: 
+In the Service's YAML configuration file, under section "exporters" and sub-section "zipkin" configure fields:
 
 #### Format
 ```yaml

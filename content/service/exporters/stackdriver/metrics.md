@@ -19,7 +19,7 @@ logo: /images/stackdriver-monitoring-logo.png
 
 ### Introduction
 
-The OpenCensus Collector allows you to export metrics that are collected from client libraries and [receivers](/collector/receivers) to Stackdriver.
+The OpenCensus Service allows you to export metrics that are collected from client libraries and [receivers](/collector/receivers) to Stackdriver.
 
 {{% notice tip %}}
 For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a guided codelab.
@@ -27,7 +27,7 @@ For assistance setting up Stackdriver, [Click here](/codelabs/stackdriver) for a
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "stackdriver" and configure
+In the Service's YAML configuration file, under section "exporters" and sub-section "stackdriver" and configure
 fields:
 
 #### Format

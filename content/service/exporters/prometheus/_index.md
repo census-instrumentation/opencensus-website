@@ -20,11 +20,11 @@ logo: /img/prometheus-logo.png
 
 ### Introduction
 
-The OpenCensus Collector allows you to export metrics that are collected to Prometheus.
+The OpenCensus Service allows you to export metrics that are collected to Prometheus.
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "prometheus"
+In the Service's YAML configuration file, under section "exporters" and sub-section "prometheus"
 
 #### Format
 With these fields below

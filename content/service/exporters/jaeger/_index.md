@@ -20,11 +20,11 @@ logo: /images/jaeger-logo.png
 
 ### Introduction
 
-The OpenCensus Collector allows one to export traces to Jaeger by sending traces to Jaeger's collector endpoint.
+The OpenCensus Service allows one to export traces to Jaeger by sending traces to Jaeger's collector endpoint.
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "jaeger" configure fields:
+In the Service's YAML configuration file, under section "exporters" and sub-section "jaeger" configure fields:
 
 #### Format
 ```yaml

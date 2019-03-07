@@ -12,11 +12,11 @@ logo: /img/honeycomb-logo.jpg
 
 ### Introduction
 
-The OpenCensus Collector allows one to export traces to Honeycomb.
+The OpenCensus Service allows one to export traces to Honeycomb.
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "honeycomb", please configure these fields:
+In the Service's YAML configuration file, under section "exporters" and sub-section "honeycomb", please configure these fields:
 
 #### Format
 ```yaml

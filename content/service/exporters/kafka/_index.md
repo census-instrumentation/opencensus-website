@@ -18,7 +18,7 @@ from high traffic apps but you'd like to do specialized batch post processing.
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "kafka", please configure these fields:
+In the Service's YAML configuration file, under section "exporters" and sub-section "kafka", please configure these fields:
 
 #### Format
 ```yaml

@@ -20,11 +20,11 @@ logo: /images/aws_xray-logo.png
 
 
 ### Introduction
-The OpenCensus Collector allows one to export traces to AWS X-Ray
+The OpenCensus Service allows one to export traces to AWS X-Ray
 
 ### Configuration
 
-In the Collector's YAML configuration file, under section "exporters" and sub-section "aws-xray" configure fields: 
+In the Service's YAML configuration file, under section "exporters" and sub-section "aws-xray" configure fields:
 
 #### Format
 

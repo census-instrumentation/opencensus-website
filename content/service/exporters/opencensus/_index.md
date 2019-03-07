@@ -15,7 +15,7 @@ logo: /images/opencensus-logo.png
 ### Introduction
 
 The OpenCensus exporter allows you to export traces and metrics from the
-OpenCensus Collector to a service of your choice.
+OpenCensus Service to a service of your choice.
 
 ### Use cases
 
@@ -28,7 +28,7 @@ connection limits with the outside world/APM backend).
 
 ### Configuration
 
-In Collectors's YAML configuration file, under section "exporters" and sub-section "opencensus", configure these fields:
+In Service's YAML configuration file, under section "exporters" and sub-section "opencensus", configure these fields:
 
 ### Format
 
