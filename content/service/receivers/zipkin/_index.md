@@ -1,6 +1,7 @@
 ---
 title: "Zipkin"
 date: 2019-02-12T17:25:23-08:00
+aliases: [/agent/receivers/zipkin]
 logo: /img/zipkin-logo.jpg
 ---
 

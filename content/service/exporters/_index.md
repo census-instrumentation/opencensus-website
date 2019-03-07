@@ -2,6 +2,7 @@
 title: "Exporters"
 weight: 4
 date: 2019-02-13T16:12:00-08:00
+aliases: [/agent/exporters]
 ---
 
 ### Introduction

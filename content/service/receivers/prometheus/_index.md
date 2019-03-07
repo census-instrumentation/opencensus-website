@@ -1,6 +1,7 @@
 ---
 title: "Prometheus"
 date: 2019-02-13T11:40:11-08:00
+aliases: [/agent/receivers/prometheus]
 logo: /img/prometheus-logo.png
 ---
 

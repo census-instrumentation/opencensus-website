@@ -1,6 +1,7 @@
 ---
 title: "OpenCensus"
 date: 2019-02-14T12:13:58-08:00
+aliases: [/agent/exporters/opencensus]
 logo: /images/opencensus-logo.png
 ---
 

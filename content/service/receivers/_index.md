@@ -1,6 +1,7 @@
 ---
 title: "Receivers"
 weight: 3
+aliases: [/agent/receivers]
 date: 2019-02-11T13:42:17-08:00
 ---
 

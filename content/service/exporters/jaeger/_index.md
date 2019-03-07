@@ -1,6 +1,7 @@
 ---
 title: "Jaeger"
 date: 2019-02-14T00:01:21-08:00
+aliases: [/agent/exporters/jaeger]
 logo: /images/jaeger-logo.png
 ---
 

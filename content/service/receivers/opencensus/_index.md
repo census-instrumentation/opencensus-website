@@ -2,6 +2,7 @@
 title: "OpenCensus"
 weight: 1
 date: 2019-02-12T18:27:23-08:00
+aliases: [/agent/receivers/opencensus]
 logo: /images/opencensus-logo.png
 ---
 

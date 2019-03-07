@@ -1,6 +1,7 @@
 ---
 title: "AWS X-Ray"
 date: 2019-02-14T18:49:58-08:00
+aliases: [/agent/exporters/aws_xray]
 logo: /images/aws_xray-logo.png
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Stackdriver"
+aliases: [/agent/exporters/stackdriver]
 date: 2019-02-13T18:25:17-08:00
 ---
 

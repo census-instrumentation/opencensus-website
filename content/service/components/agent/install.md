@@ -1,6 +1,7 @@
 ---
 title: "Installing it"
 weight: 1
+aliases: [/agent/install]
 date: 2019-02-11T13:42:17-08:00
 ---
 

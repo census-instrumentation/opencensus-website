@@ -1,6 +1,7 @@
 ---
 title: "Metrics"
 date: 2019-02-13T16:14:17-08:00
+aliases: [/agent/exporters/stackdriver/metrics]
 logo: /images/stackdriver-monitoring-logo.png
 ---
 

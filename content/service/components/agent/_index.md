@@ -1,6 +1,7 @@
 ---
 title: "Agent"
 weight: 7
+aliases: [/agent]
 logo: /images/opencensus-logo.png
 ---
 

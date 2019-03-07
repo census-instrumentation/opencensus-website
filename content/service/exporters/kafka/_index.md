@@ -1,6 +1,7 @@
 ---
 title: "Apache Kafka"
 date: 2019-02-14T13:00:58-08:00
+aliases: [/agent/exporters/kafka]
 logo: /images/kafka-logo.png
 ---
 

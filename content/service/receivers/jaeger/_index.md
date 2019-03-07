@@ -2,6 +2,7 @@
 title: "Jaeger"
 weight: 2
 date: 2019-02-13T11:51:11-08:00
+aliases: [/agent/receivers/jaeger]
 logo: /img/partners/jaeger_logo.svg
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Trace"
 date: 2019-02-13T19:13:58-08:00
+aliases: [/agent/exporters/stackdriver/traces]
 logo: /images/stackdriver-logo.png
 ---
 
