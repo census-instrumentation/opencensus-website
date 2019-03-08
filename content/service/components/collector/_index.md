@@ -82,7 +82,7 @@ relevant to you.
 Add metadata to your spans at collection time. This makes it easy to enhance
 spans with information such as the environment and region.
 
-* <b>Redicate tags.</b>
+* <b>Redact tags.</b>
 Remove or override tags contained with spans.
 
 ### Getting started
