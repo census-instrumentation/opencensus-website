@@ -34,8 +34,8 @@ will then automatically collect traces and metrics and export to any backend of
 users' choice.
 
 The OpenCensus Service consists of two components: the [OpenCensus
-Agent](/service/component/agent) and the [OpenCensus
-Collector](/service/component/collector). For the detailed design specs, please
+Agent](/service/components/agent) and the [OpenCensus
+Collector](/service/components/collector). For the detailed design specs, please
 see
 [DESIGN.md](https://github.com/census-instrumentation/opencensus-service/blob/master/DESIGN.md).
 
