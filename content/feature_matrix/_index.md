@@ -46,7 +46,7 @@ Tag|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagKey (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagValue (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagMap|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-TagScope|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+TagMetadata|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Validate TagKey and TagValue|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Insert a list of Tags into current context|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
