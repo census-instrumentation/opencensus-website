@@ -4,7 +4,7 @@ date: 2018-07-24T23:19:00-07:00
 draft: false
 weight: 3
 class: "resized-logo"
-aliases: [/guides/integrations/google_cloud_spanner/go, /guides/integrations/google_cloud/google_cloud_storage/go]
+aliases: [/guides/integrations/google_cloud_storage/go, /guides/integrations/google_cloud/google_cloud_storage/go]
 logo: /images/gopher.png
 ---
 
@@ -37,7 +37,7 @@ Stackdriver |[Stackdriver codelab](/codelabs/stackdriver)
 
 ## Packages to import
 
-For tracing and metrics on Spanner, we'll import a couple of packages
+For tracing and metrics on GCS, we'll import a couple of packages
 
 Package Name|Package link
 ---|---
@@ -59,7 +59,7 @@ import (
 
 ## Technical detour
 
-Because GCS uses HTTP to connect to Google's backend, we'll need to enable metrics and tracing using a custom client
+Because GCS can use HTTP to connect to Google's backend, we'll need to enable metrics and tracing using a custom client
 for GCP uploads. The custom client will have an `ochttp` enabled transport and then the rest is simple
 
 ## Setting up the ochttp enabled transport
