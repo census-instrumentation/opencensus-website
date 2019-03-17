@@ -106,7 +106,7 @@ func main() {
   defer dd.Stop()
 
   // Register it as a metrics exporter
-  view.RegisterExporter(sd)
+  view.RegisterExporter(dd)
 
   // Register it as a metrics exporter
   trace.RegisterExporter(dd)
