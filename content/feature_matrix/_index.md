@@ -46,17 +46,17 @@ Tag|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagKey (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagValue (restrictions apply)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 TagMap|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-TagMetadata|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+TagMetadata|Yes|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Validate TagKey and TagValue|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-Insert a list of Tags into current context|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
-Get Tags from current context|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
-Update Tags in current context|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
+Insert a list of Tags into current context|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes
+Get Tags from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
+Update Tags in current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Propagation</b>|||||||
 Binary Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
-Text Format (W3C)|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+Text Format (W3C)|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
 gRPC Propagation|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-HTTP Propagation|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+HTTP Propagation|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 ---|---|---|---|---|---|---|---
@@ -74,7 +74,7 @@ Create Int64 or Double Measurements|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Validate Measurements (no negative values)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Batch recording Measurements|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Record against explicit context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-Record against implicit (current) context|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">In Progress</span>|Yes|Yes
+Record against implicit (current) context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Record with additional attachments (e.g SpanContext)|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Define and register Views|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Apply Aggregation to Measurements according to View definitions|Yes|Yes|Yes|Yes|Yes|Yes|Yes
@@ -97,7 +97,7 @@ TimeSeries|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span styl
 MetricDescriptor|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Metric|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Double and Long Gauge|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Derived Gauge|Yes|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Derived Gauge|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricProducer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>|||||||
 Add/remove metric producers|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
