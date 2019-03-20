@@ -69,7 +69,7 @@ import io.opencensus.exporter.trace.jaeger.JaegerTraceExporter;
 
 public class JaegerTutorial {
     public static void main(String ...args) throws Exception {
-        JaegerTraceExporter.createAndRegister("http://127.0.0.1:14268/api/traces", "service-b");
+        JaegerTraceExporter.createAndRegister("http://127.0.0.1:14268/", "service-b");
     }
 }
 {{</highlight>}}
