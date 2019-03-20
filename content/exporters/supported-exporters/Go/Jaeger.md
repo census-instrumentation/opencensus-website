@@ -52,9 +52,9 @@ func main() {
 	collectorEndpointURI := "http://localhost:14268/api/traces"
 
 	je, err := jaeger.NewExporter(jaeger.Options{
-		AgentEndpoint: agentEndpointURI,
-		Endpoint:      collectorEndpointURI,
-		ServiceName:   "demo",
+		AgentEndpoint:          agentEndpointURI,
+		CollectorEndpoint:      collectorEndpointURI,
+		ServiceName:            "demo",
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Jaeger exporter: %v", err)
