@@ -213,7 +213,7 @@ globalStats.registerView(lineCountView);
 Resource|URL
 ---|---
 ViewData in specs|[specs/stats/Export-API](https://github.com/census-instrumentation/opencensus-specs/blob/master/stats/Export.md#viewdata)
-Aggregation in specs|[specs/stats/Export-API.DatagAggregation](https://github.com/census-instrumentation/opencensus-specs/blob/master/stats/DataAggregation.md#aggregation)
+Aggregation in specs|[specs/stats/Export-API.DataAggregation](https://github.com/census-instrumentation/opencensus-specs/blob/master/stats/DataAggregation.md#aggregation)
 Go views|[Views package](https://godoc.org/go.opencensus.io/stats/view)
 Java views|[Views package](https://static.javadoc.io/io.opencensus/opencensus-api/0.16.1/io/opencensus/stats/View.html)
 Python views|[Views API](https://github.com/census-instrumentation/opencensus-python/blob/fc42d70f0c9f423b22d0d6a55cc1ffb0e3e478c8/opencensus/stats/view.py#L16-L66)
