@@ -7,7 +7,7 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
-##### March 25, 2019
+##### March 27, 2019
 
 #### [Merging OpenTracing and OpenCensus: Goals and Non-Goals](https://medium.com/p/scrambled/edit)
 
