@@ -7,6 +7,19 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### March 25, 2019
+
+#### [Merging OpenTracing and OpenCensus: Goals and Non-Goals](https://medium.com/p/scrambled/edit)
+
+Two projects — OpenTracing and OpenCensus — are very similar in that they aim to
+unify app instrumentation and make observability a built-in feature in every
+modern application. Over the past few months, leaders from both communities have
+formed a technical committee to help facilitate project convergence. Read about
+overarching [goals (and non-goals) regarding this project
+merger](https://medium.com/p/scrambled/edit)...
+
+---
+
 ##### December 16, 2018
 
 #### [Web Metrics with OpenCensus and Stackdriver](https://medium.com/@alexamies/web-metrics-with-opencenus-and-stackdriver-525af8069ce6)
