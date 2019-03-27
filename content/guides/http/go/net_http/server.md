@@ -65,7 +65,7 @@ The instrumented handler records metrics automatically for each request that is 
 Metrics can be enabled by simply registering the [ochttp.DefaultServerViews](https://godoc.org/go.opencensus.io/plugin/ochttp#DefaultServerViews)
 ```go
         // In our main, register ochttp Server views
-        if err := view.Register(ochttp.DefaultServertViews...); err != nil {
+        if err := view.Register(ochttp.DefaultServerViews...); err != nil {
                 log.Fatalf("Failed to register server views for HTTP metrics: %v", err)
         }
 ```
