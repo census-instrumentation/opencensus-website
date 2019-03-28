@@ -167,9 +167,21 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
+	"go.opencensus.io/zpages"
 )
 
 func main() {
+	// For the purposes of debugging, we'll add zPages that you can
+	// use as a diagnostic to examine if stats and traces are exported
+	// out. You can learn about using zPages at https://opencensus.io/zpages/go/
+	zPagesMux := http.NewServeMux()
+	zpages.Handle(zPagesMux, "/debug")
+	go func() {
+		if err := http.ListenAndServe(":9999", zPagesMux); err != nil {
+			log.Fatalf("Failed to serve zPages")
+		}
+	} ()
+
 	oce, err := ocagent.NewExporter(
 		ocagent.WithInsecure(),
 		ocagent.WithReconnectionPeriod(5 * time.Second),
