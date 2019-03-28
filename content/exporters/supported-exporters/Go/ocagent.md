@@ -170,6 +170,14 @@ import (
 )
 
 func main() {
+	zPagesMux := http.NewServeMux()
+	zpages.Handle(zPagesMux, "/debug")
+	go func() {
+		if err := http.ListenAndServe(":9999", zPagesMux); err != nil {
+			log.Fatalf("Failed to serve zPages")
+		}
+	} ()
+
 	oce, err := ocagent.NewExporter(
 		ocagent.WithInsecure(),
 		ocagent.WithReconnectionPeriod(5 * time.Second),
