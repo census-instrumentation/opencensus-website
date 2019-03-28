@@ -172,8 +172,8 @@ import (
 
 func main() {
 	// For the purposes of debugging, we'll add zPages that you can
-  // use as a diagnostic to examine if stats and traces are exported
-  // out. You can learn about using zPages at https://opencensus.io/zpages/go/
+	// use as a diagnostic to examine if stats and traces are exported
+	// out. You can learn about using zPages at https://opencensus.io/zpages/go/
 	zPagesMux := http.NewServeMux()
 	zpages.Handle(zPagesMux, "/debug")
 	go func() {
