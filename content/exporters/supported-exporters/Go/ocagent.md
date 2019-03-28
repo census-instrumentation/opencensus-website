@@ -167,6 +167,7 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
+	"go.opencensus.io/zpages"
 )
 
 func main() {
