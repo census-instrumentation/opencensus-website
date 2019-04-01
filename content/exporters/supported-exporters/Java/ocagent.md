@@ -13,14 +13,14 @@ logo: /images/opencensus-logo.png
 - [Options](#options)
     - [Custom address](#custom-address)
     - [Insecure](#insecure)
-		- [SSL Context](#ssl-context)
+    - [SSL Context](#ssl-context)
     - [Service name](#service-name)
     - [Reconnection period](#reconnection-period)
 - [End to end example](#end-to-end-example)
 - [References](#references)
 
 ### Introduction
-The OpenCensus Agent exporter aka "ocagent-exporter" enables Java applications to send the observability
+The OpenCensus Agent exporter aka "ocagent-exporter" enables Java applications to send the observability signals
 that they've collected using OpenCensus to the [OpenCensus Agent](https://github.com/census-instrumentation/opencensus-service)
 
 This exporter connects and sends observability signals via a single HTTP/2 stream and gRPC with Protocol Buffers
@@ -55,7 +55,7 @@ For Maven add to your pom.xml:
     <artifactId>opencensus-exporter-metrics-ocagent</artifactId>
     <version>0.20.0</version>
   </dependency>
-	<dependency>
+  <dependency>
     <groupId>io.opencensus</groupId>
     <artifactId>opencensus-exporter-trace-ocagent</artifactId>
     <version>0.20.0</version>
@@ -82,7 +82,7 @@ OcAgentTraceExporter.createAndRegister(OcAgentTraceExporterConfiguration.builder
 Options allow you to customize the exporter.
 Options use a builder pattern which allows optional functional options.
 {{<highlight java>}}
-OcAgentTraceExporterConfiguration.builder().setEndPoint("localhost:8888").setUseInsecure(true).build();
+OcAgentTraceExporterConfiguration.builder().setEndPoint("localhost:55678").setUseInsecure(true).build();
 {{</highlight>}}
 
 #### Custom address
@@ -139,7 +139,7 @@ OcAgentTraceExporterConfiguration.builder().setRetryInterval(Duration.create(10,
 
 ### End to end Example
 
-This end to end example exports stats and traces to the agent. It will require you to deploy the [OpenCensus-Agent](https://github.com/census-instrumentation/opencensus-service) in order to examine the stats and traces.
+This end to end example exports stats and traces to the agent. It will require you to deploy the [OpenCensus-Agent](/service/agent) in order to examine the stats and traces.
 
 The full code snippet can also be found on the
 [OpenCensus-Java repo](https://github.com/census-instrumentation/opencensus-java/blob/master/examples/src/main/java/io/opencensus/examples/ocagent/OcAgentExportersQuickStart.java).
@@ -436,5 +436,5 @@ Resource|URL
 OCAgent Metrics Exporter Javadoc|[io.opencensus.exporter.metrics.ocagent](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-metrics-ocagent/)
 OCAgent Trace Exporter Javadoc|[io.opencensus.exporter.trace.ocagent](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-ocagent/)
 Source code|[Metrics exporter on Github](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/metrics/ocagent), [Trace exporter on Github](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/ocagent)
-OpenCensus Agent|[OpenCensus Agent on Github](https://github.com/census-instrumentation/opencensus-service)
+OpenCensus Agent|[Agent homepage](/service/agent)
 gRPC NameResolver|[io.grpc.NameResolver](https://grpc.io/grpc-java/javadoc/io/grpc/NameResolver.html)
