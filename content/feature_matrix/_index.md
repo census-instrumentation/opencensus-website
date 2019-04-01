@@ -54,9 +54,9 @@ Get Tags from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Update Tags in current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Propagation</b>|||||||
 Binary Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes
-Text Format (W3C)|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|Yes
-gRPC Propagation|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-HTTP Propagation|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Text Format (W3C)|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|<span style="color: #CF7675">No</span>|Yes
+gRPC Propagation|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+HTTP Propagation|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Erlang/Elixir
 ---|---|---|---|---|---|---|---
