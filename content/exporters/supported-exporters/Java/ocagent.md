@@ -139,7 +139,7 @@ OcAgentTraceExporterConfiguration.builder().setRetryInterval(Duration.create(10,
 
 ### End to end Example
 
-This end to end example exports stats and traces to the agent. It will require you to deploy the [OpenCensus-Agent](/service/agent) in order to examine the stats and traces.
+This end to end example exports stats and traces to the agent. It will require you to deploy the [OpenCensus-Agent](/service/components/agent) in order to examine the stats and traces.
 
 The full code snippet can also be found on the
 [OpenCensus-Java repo](https://github.com/census-instrumentation/opencensus-java/blob/master/examples/src/main/java/io/opencensus/examples/ocagent/OcAgentExportersQuickStart.java).
@@ -436,5 +436,5 @@ Resource|URL
 OCAgent Metrics Exporter Javadoc|[io.opencensus.exporter.metrics.ocagent](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-metrics-ocagent/)
 OCAgent Trace Exporter Javadoc|[io.opencensus.exporter.trace.ocagent](https://www.javadoc.io/doc/io.opencensus/opencensus-exporter-trace-ocagent/)
 Source code|[Metrics exporter on Github](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/metrics/ocagent), [Trace exporter on Github](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/ocagent)
-OpenCensus Agent|[Agent homepage](/service/agent)
+OpenCensus Agent|[Agent homepage](/service/components/agent)
 gRPC NameResolver|[io.grpc.NameResolver](https://grpc.io/grpc-java/javadoc/io/grpc/NameResolver.html)
