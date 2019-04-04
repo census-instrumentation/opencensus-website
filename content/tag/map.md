@@ -31,8 +31,8 @@ func doWork() {
 {{</highlight>}}
 
 {{<highlight python>}}
-import opencensus.tags import tag_map
-import opencensus.tags import tag_value
+from opencensus.tags import tag_map
+from opencensus.tags import tag_value
 
 # Values are inserted 
 tag_map.TagMap().insert(keyMethod, tag_value.TagValue("memcache.Client.Get"))
