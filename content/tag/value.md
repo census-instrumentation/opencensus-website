@@ -27,6 +27,7 @@ mutator = tag.Upsert(keyMethod, "memcache.Client.Get")
 {{<highlight python>}}
 import opencensus.tags import tag_value
 
+value = tag_value.TagValue('memcache.Client.Get')
 {{</highlight>}}
 
 {{<highlight java>}}
