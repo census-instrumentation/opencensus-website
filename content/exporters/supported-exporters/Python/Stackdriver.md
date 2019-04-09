@@ -46,18 +46,18 @@ Instrument your code with the following snippet:
 import os
 
 from opencensus.common.transports.async_ import AsyncTransport
-from opencensus.trace.exporters import stackdriver_exporter
+from opencensus.ext.stackdriver.trace_exporter import StackdriverExporter
 from opencensus.trace.tracer import Tracer
 
 def main():
-    sde = stackdriver_exporter.StackdriverExporter(
-                project_id=os.environ.get("GCP_PROJECT_ID"),
-                transport=AsyncTransport)
+    sde = StackdriverExporter(
+        project_id=os.environ.get("GCP_PROJECT_ID"),
+        transport=AsyncTransport)
 
     tracer = Tracer(exporter=sde)
-    with tracer.span(name='doingWork') as span:
+    with tracer.span(name="doingWork") as span:
         for i in range(10):
-            continue
+            pass
 
 if __name__ == "__main__":
     main()

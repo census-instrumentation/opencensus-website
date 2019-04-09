@@ -33,19 +33,20 @@ To create the exporter, we'll need to:
 {{<highlight python>}}
 #!/usr/bin/env python
 
-from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
+from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
 from opencensus.trace.tracer import Tracer
 
 def main():
-    ze = ZipkinExporter(service_name="service-a",
-                        host_name='localhost',
-                        port=9411,
-                        endpoint='/api/v2/spans')
+    ze = ZipkinExporter(
+        service_name="service-a",
+        host_name="localhost",
+        port=9411,
+        endpoint="/api/v2/spans")
 
     tracer = Tracer(exporter=ze)
-    with tracer.span(name='doingWork') as span:
+    with tracer.span(name="doingWork") as span:
         for i in range(10):
-            continue
+            pass
 
 if __name__ == "__main__":
     main()
