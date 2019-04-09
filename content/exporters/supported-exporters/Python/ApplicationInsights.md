@@ -25,33 +25,33 @@ To learn about Local Forwarder and how to set it up, visit [this link](https://d
 Here's an example of setting things up on the OpenCensus side (see [Local Forwarder repo](https://github.com/Microsoft/ApplicationInsights-LocalForwarder/blob/master/examples/opencensus/python-app/app/views.py) for the most up-to-date example):
 
 {{<highlight python>}}
+import os
+import time
+
 from django.http import HttpResponse
 from django.shortcuts import render
+import requests
 
 from opencensus.common.async.transports.async_ import AsyncTransport
 from opencensus.trace import config_integration
-from opencensus.trace import tracer as tracer_module
-from opencensus.trace.exporters.ocagent import trace_exporter
+from opencensus.trace.tracer import Tracer
+from opencensus.ext.ocagent.trace_exporter import TraceExporter
 from opencensus.trace.propagation.trace_context_http_header_format import TraceContextPropagator
 
-import time
-import os
-import requests
+INTEGRATIONS = ["httplib"]
 
-INTEGRATIONS = ['httplib']
-
-service_name = os.getenv('SERVICE_NAME', 'python-service')
-config_integration.trace_integrations(INTEGRATIONS, tracer=tracer_module.Tracer(
-    exporter=trace_exporter.TraceExporter(
-        service_name=service_name,
-        endpoint=os.getenv('OCAGENT_TRACE_EXPORTER_ENDPOINT'),
-        transport=AsyncTransport),
-    propagator=TraceContextPropagator()))
-
+service_name = os.getenv("SERVICE_NAME", "python-service")
+config_integration.trace_integrations(
+    INTEGRATIONS,
+    tracer=Tracer(
+        exporter=TraceExporter(
+            service_name=service_name,
+            endpoint=os.getenv("OCAGENT_TRACE_EXPORTER_ENDPOINT"),
+            transport=AsyncTransport),
+        propagator=TraceContextPropagator()))
 
 def call(request):
     requests.get("http://go-app:50030/call")
-
     return HttpResponse("hello world from " + service_name)
 {{</highlight>}}
 

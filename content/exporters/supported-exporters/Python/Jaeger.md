@@ -38,19 +38,20 @@ To create the exporter, we'll need to:
 {{<highlight python>}}
 #!/usr/bin/env python
 
-from opencensus.trace.exporters.jaeger_exporter import JaegerExporter
+from opencensus.ext.jaeger.trace_exporter import JaegerExporter
 from opencensus.trace.tracer import Tracer
 
 def main():
-    je = JaegerExporter(service_name="service-b",
-                        host_name='localhost',
-                        agent_port=6831,
-                        endpoint='/api/traces')
+    je = JaegerExporter(
+        service_name="service-b",
+        host_name="localhost",
+        agent_port=6831,
+        endpoint="/api/traces")
 
     tracer = Tracer(exporter=je)
-    with tracer.span(name='doingWork') as span:
+    with tracer.span(name="doingWork") as span:
         for i in range(10):
-            continue
+            pass
 
 if __name__ == "__main__":
     main()
