@@ -16,9 +16,11 @@ were three presenters. [Morgan McLean](https://github.com/mtwo) gave an overview
 of the OpenCensus and demonstrated new Agent system counters collection
 capabilities, [Sergey Kanzhelev](https://github.com/SergeyKanzhelev) talked
 about developments over the last year and talked about plans on logging API and
-OpenTracing merger, [Steve Flanders](https://flands) made a demo of OpenCensus
-and latest development in Agent and Collector. View [session
-recording](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602).
+OpenTracing merger, [Steve Flanders](https://github.com/flands) made a demo of
+OpenCensus and latest development in Agent and Collector. Thank you for
+everybody attended. You can view [session
+recording](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
+on demand.
 
 ---
 
