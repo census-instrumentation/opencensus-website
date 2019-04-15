@@ -98,7 +98,7 @@ MetricDescriptor|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<spa
 Metric|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Double and Long Gauge|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Derived Gauge|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Cumulative|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Cumulative|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricProducer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>||||||||
 Add/remove metric producers|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
