@@ -7,6 +7,22 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### April 16, 2019
+
+#### [Google NEXT 2019: Complete Production Observability With OpenCensus](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
+
+At Google NEXT 2019 we presented OpenCensus in one of breakout sessions. There
+were three presenters. [Morgan McLean](https://github.com/mtwo) gave an overview
+of the OpenCensus and demonstrated new Agent system counters collection
+capabilities, [Sergey Kanzhelev](https://github.com/SergeyKanzhelev) talked
+about developments over the last year and talked about plans on logging API and
+OpenTracing merger, [Steve Flanders](https://flands) made a demo of OpenCensus
+and latest development in Agent and Collector. View [session
+recording](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602).
+
+---
+
+
 ##### March 28, 2019
 
 #### [Merging OpenTracing and OpenCensus: Goals and Non-Goals](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)
