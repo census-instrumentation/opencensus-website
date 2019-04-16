@@ -157,4 +157,4 @@ Name|Link
 ---|---
 Metrics/Stats GoDoc for Measures|[https://godoc.org/go.opencensus.io/stats](https://godoc.org/go.opencensus.io/stats)
 Stats View GoDoc|[https://godoc.org/go.opencensus.io/stats/view](https://godoc.org/go.opencensus.io/stats/view)
-OpenCensus Go exporters|[Some OpenCensus Go exporters](/supported-exporters/go/)
+OpenCensus Go exporters|[Some OpenCensus Go exporters](/exporters/supported-exporters/go/)
