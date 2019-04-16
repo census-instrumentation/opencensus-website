@@ -23,9 +23,9 @@ logo: /images/java.png
 # OpenCensus Tracing and Google Cloud Pub/Sub 
 
 ## Introduction
-This article gives an overview of using [OpenCensus](https://opencensus.io/)
-Tracing with [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/)
-illustrating that OpenCensus can be used for long-lived and asynchronous jobs. 
+This article gives an overview of using [OpenCensus Tracing](/tracing) with
+[Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) illustrating that
+OpenCensus can be used for long-lived and asynchronous jobs.
 
 ## Problem
 Google’s Cloud Pub/Sub infrastructure provides a platform that allows publishers
@@ -40,13 +40,15 @@ problems for RPC systems (e.g. [gRPC](https://grpc.io/)) that we have applied to
 work similarly with Cloud Pub/Sub. 
 
 The main differences main between RPC systems and Cloud Pub/Sub are that:
+
 1. Publishers don't expect a reply from Subscribers
 2. Publishers can have thousands (or tens of thousands) of Subscribers, so a
 different approach is necessary to support this framework.
 
 ## What you get
 Following an approach similar to asynchronous RPCs, once OpenCensus is enabled
-in a Pub/Sub system,
+in a Pub/Sub system:
+
 1. Publishers will have a trace span associated with their execution and this
 span will be implicitly propagated to Subscribers and 
 2. Subscribers will process each message received as a parent link to the
@@ -65,11 +67,15 @@ On the Subscriber side, each received message is executed in `MessageReceiver`,
 an interface used to define handling of messages received from publishers. In
 our solution, we provide the `OpenCensusMessageReceiver`, which will wrap any
 `MessageReceiver` so that, when a message containing a propagated span is
-received, it will 1. create a new root span for processing the message, 2. add
-the propagated span as a parent link to the new root span, 3. set the new root
-span as the current span and 4. execute the original `MessageReceiver` in that
-context. In short, the original `MessageReceiver` will execute with a new root
-span that has the publisher’s span as a parent link.
+received, it will:
+
+1. create a new root span for processing the message
+1. add the propagated span as a parent link to the new root span
+1. set the new root span as the current span and
+1. execute the original `MessageReceiver` in that context.
+
+In short, the original `MessageReceiver` will execute with a new root span that
+has the publisher’s span as a parent link. 
 
 ### Alternative Solution
 An alternative would be to create a child span in the Subscriber of the
@@ -142,17 +148,16 @@ public static void main(String… args) throws Exception {
 }
 ```
 
-The most important change in the code is adding:
+The most important change in the code is augmenting the Publisher's builder with:
 
 ```java
 .setTransform(OpenCensusUtil.OPENCENSUS_MESSAGE_TRANSFORM)
 ```
 
-when building the Publisher, which enables the implicit propagation of the
-current OpenCensus trace span when publishing a message. Strictly speaking, this
-code change is the only required change in the Publisher code. The other changes
-add OpenCensus instrumentation to the application to give more insight about
-what’s going on during execution.
+which enables the implicit propagation of the current OpenCensus trace span when
+publishing a message. Strictly speaking, this code change is the only required
+change in the Publisher code. The other changes add OpenCensus instrumentation
+to the application to give more insight about what’s going on during execution.
 
 The first code change is in the outer try-with-resources block:
 
@@ -295,16 +300,16 @@ annotation and 4 child spans (`PublisherRoot-0` ... `PublisherRoot-3`). Each
 child span has their span id added as an annotation. For `PublisherRoot-0`,
 which sends `message-0`, the span id is `98d1b951adaeb95a`:
 
-![publisher-trace](images/publisher-trace.png)
+![publisher-trace](images/cloud-pubsub-publisher-trace.png)
 
 ### Subscriber Trace (message-0)
 For the Subscriber, if we look at the span for `message-0`:
 
-![subscriber-trace](images/subscriber-trace.png)
+![subscriber-trace](images/cloud-pubsub-subscriber-trace.png)
 
 we can see that the associated parent span link is also `98d1b951adaeb95a`:
 
-![subscriber-trace-link](images/subscriber-trace-link.png)
+![subscriber-trace-link](images/cloud-pubsub-subscriber-trace-link.png)
 
 which matches the span id where `message-0` was published, demonstrating that
 the span context was propagated with the message and set as the parent link for
