@@ -86,12 +86,14 @@ before the rpc returns) and 2. publishers can potentially have tens of thousands
 of subscribers so having a trace with so many child spans would be unwieldy.
 
 ## Example
+{{% notice tip %}}
 Our example is based on the [Pub/Sub Example Code]
 (https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/pubsub/cloud-client)
 in the Google Cloud Platform samples repository. We have modified the example by
 trace instrumenting it with OpenCensus —the complete example with our modified
 code is available here: [Complete Modified Pub/Sub Example Code]
 (https://github.com/census-ecosystem/opencensus-experiments/tree/master/java/pubsub).
+{{% / notice %}}
 
 ### Publisher Changes
 The relevant publisher code modifications are shown here and summarized below:
