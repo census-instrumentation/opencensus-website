@@ -20,7 +20,7 @@ OpenTracing merger, [Steve Flanders](https://github.com/flands) made a demo of
 OpenCensus and latest development in Agent and Collector. Thank you for
 everybody attended. You can view [session
 recording](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
-on demand.
+on demand. Slides of this session can be found [here](https://docs.google.com/presentation/d/1yFPTjNwu75VBoHmqvXTLi_5j-6UW1lADYuQeHQ4H3Zc).
 
 ---
 
