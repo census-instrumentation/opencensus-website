@@ -302,16 +302,16 @@ annotation and 4 child spans (`PublisherRoot-0` ... `PublisherRoot-3`). Each
 child span has their span id added as an annotation. For `PublisherRoot-0`,
 which sends `message-0`, the span id is `98d1b951adaeb95a`:
 
-![publisher-trace](images/cloud-pubsub-publisher-trace.png)
+![publisher-trace](/images/cloud-pubsub-publisher-trace.png)
 
 ### Subscriber Trace (message-0)
 For the Subscriber, if we look at the span for `message-0`:
 
-![subscriber-trace](images/cloud-pubsub-subscriber-trace.png)
+![subscriber-trace](/images/cloud-pubsub-subscriber-trace.png)
 
 we can see that the associated parent span link is also `98d1b951adaeb95a`:
 
-![subscriber-trace-link](images/cloud-pubsub-subscriber-trace-link.png)
+![subscriber-trace-link](/images/cloud-pubsub-subscriber-trace-link.png)
 
 which matches the span id where `message-0` was published, demonstrating that
 the span context was propagated with the message and set as the parent link for
