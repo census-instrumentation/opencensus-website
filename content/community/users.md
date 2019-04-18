@@ -26,3 +26,4 @@ Some of the publicly known OpenCensus users:
 {{<card-vendor src="/images/users/postmates_logo.png" href="https://postmates.com/">}}
 {{<card-vendor src="/images/users/teserakt_logo.png" href="https://teserakt.io/">}}
 {{<card-vendor src="/images/users/dgraph_logo.png" href="https://dgraph.io/">}}
+{{<card-vendor src="/img/partners/scalyr-logo-stacked.png" href="https://www.scalyr.com/">}}
