@@ -9,14 +9,14 @@ logo: /img/logo-sm.svg
 
 ##### April 18, 2019
 
-#### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/@tedsuooo/b074e5815289)
+#### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
 
 We are creating a new, unified set of libraries and specifications for
 observability telemetry. It will [merge the OpenTracing and
 OpenCensus](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)
 projects. Learn about [roadmap to
-convergence](https://medium.com/@tedsuooo/b074e5815289) and participate in a new
-project.
+convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
+and participate in a new project.
 
 ---
 
