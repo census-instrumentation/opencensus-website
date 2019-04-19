@@ -7,6 +7,20 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### April 19, 2019
+
+#### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
+
+We are creating a new, unified set of libraries and specifications for
+observability telemetry. It will [merge the OpenTracing and
+OpenCensus](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)
+projects. Learn about [roadmap to
+convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
+and participate in a new project.
+
+---
+
+
 ##### April 16, 2019
 
 #### [Google NEXT 2019: Complete Production Observability With OpenCensus](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
