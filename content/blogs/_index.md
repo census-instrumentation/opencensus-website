@@ -7,7 +7,7 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
-##### April 18, 2019
+##### April 19, 2019
 
 #### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
 
