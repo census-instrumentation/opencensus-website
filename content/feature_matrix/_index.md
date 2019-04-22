@@ -54,7 +54,7 @@ Get Tags from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Update Tags in current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Propagation</b>||||||||
 Binary Format|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
-Text Format (W3C)|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
+Text Format (W3C)|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes
 gRPC Propagation|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 HTTP Propagation|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #6bb1e0">In Progress</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
@@ -98,7 +98,7 @@ MetricDescriptor|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<spa
 Metric|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Double and Long Gauge|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Derived Gauge|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Cumulative|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Cumulative|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 MetricProducer|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>||||||||
 Add/remove metric producers|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
@@ -108,17 +108,17 @@ Register gauges to metric registry|Yes|Yes|<span style="color: #CF7675">No</span
 Feature|Java|Go|C#|Python|Nodejs|PHP|Ruby|Erlang/Elixir
 ---|---|---|---|---|---|---|---|---
 Top-level Resource API|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Auto-detect GCE/GKE/AWS EC2 resources|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Auto-detect GCE/K8S/AWS EC2 resources|Yes|Yes<span style="color: #CF7675">(missing K8S)</span>|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Set resources for custom environment|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Encode and decode resource|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 Merge mutiple resources|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
-Add resource labels to span|Yes|No|<span style="color: #CF7675">No</span>|Yes <span style="color: #CF7675"> (without new names)</span>|Yes|No|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Add resource labels to span|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes <span style="color: #CF7675"> (without new names)</span>|Yes|No|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
 
 Feature|Java|Go|C#|Python|Nodejs|PHP|Ruby|Erlang/Elixir
 ---|---|---|---|---|---|---|---|---
 <b>Metrics</b>||||||||
-Stackdriver Monitoring|Yes|Yes<span style="color: #CF7675"> (without Gauges)</span>|<span style="color: #CF7675">No</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|Yes|<span style="color: #CF7675">No</span>
-Prometheus|Yes|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|<span style="color: #CF7675">No</span>|Yes
+Stackdriver Monitoring|Yes|Yes|<span style="color: #CF7675">No</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|Yes|<span style="color: #CF7675">No</span>
+Prometheus|Yes|Yes|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|<span style="color: #CF7675">No</span>|Yes
 <b>Tracing</b>||||||||
 Strackdriver Trace|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes|yes
 Jaeger|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
