@@ -71,3 +71,4 @@ Other types of telemetry will be added to OpenCensus as the project matures. **L
 {{<card-vendor href="https://postmates.com/" src="/img/partners/postmates_logo.png">}}
 {{<card-vendor href="https://lightstep.com/" src="/img/partners/lightstep-logo.svg">}}
 {{<card-vendor href="https://www.scalyr.com/" src="/img/partners/scalyr-logo-stacked.png">}}
+{{<card-vendor href="https://www.wavefront.com/" src="/img/partners/wavefront_logo.svg">}}
