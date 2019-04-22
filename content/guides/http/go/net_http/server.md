@@ -109,8 +109,13 @@ import (
 	"time"
 
 	"go.opencensus.io/exporter/prometheus"
+	"go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats/view"
+	"go.opencensus.io/trace"
+
+	openzipkin "github.com/openzipkin/zipkin-go"
+	zipkinHTTP "github.com/openzipkin/zipkin-go/reporter/http"
 )
 
 func main() {
@@ -168,6 +173,16 @@ func enableObservabilityAndExporters() {
 		mux.Handle("/metrics", pe)
 		log.Fatal(http.ListenAndServe(":8888", mux))
 	}()
+
+	// Trace exporter: Zipkin
+	localEndpoint, err := openzipkin.NewEndpoint("ochttp_tutorial", "localhost:5454")
+	if err != nil {
+		log.Fatalf("Failed to create the local zipkinEndpoint: %v", err)
+	}
+	reporter := zipkinHTTP.NewReporter("http://localhost:9411/api/v2/spans")
+	ze := zipkin.NewExporter(reporter, localEndpoint)
+	trace.RegisterExporter(ze)
+	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 }
 ```
 
