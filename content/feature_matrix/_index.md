@@ -121,6 +121,6 @@ Stackdriver Monitoring|Yes|Yes|<span style="color: #CF7675">No</span>|Yes<span s
 Prometheus|Yes|Yes|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|<span style="color: #CF7675">No</span>|Yes
 <b>Tracing</b>||||||||
 Strackdriver Trace|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes|yes
-Jaeger|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>
+Jaeger|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Zipkin|Yes|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 {{% /tabs %}}
