@@ -34,7 +34,7 @@ To create the exporter, we'll need to:
 * Expose a port on which we shall run a `/metrics` endpoint
 * With the defined port, we'll need a Promethus configuration file so that Prometheus can scrape from this endpoint
 {{<highlight go>}}
-import "go.opencensus.io/exporter/prometheus"
+import "contrib.go.opencensus.io/exporter/prometheus"
 
 // Then create the actual exporter
 pe, err := prometheus.NewExporter(prometheus.Options{
@@ -54,7 +54,7 @@ import (
 	"log"
 	"net/http"
 
-	"go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats/view"
 )
 

@@ -143,8 +143,8 @@ import (
 	openzipkin "github.com/openzipkin/zipkin-go"
 	zipkinHTTP "github.com/openzipkin/zipkin-go/reporter/http"
 
-	"go.opencensus.io/exporter/prometheus"
-	"go.opencensus.io/exporter/zipkin"
+	"contrib.go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"

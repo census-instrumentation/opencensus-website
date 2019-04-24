@@ -292,7 +292,7 @@ import (
 	kitoc "github.com/go-kit/kit/tracing/opencensus"
 	zipkin "github.com/openzipkin/zipkin-go"
 	httpreporter "github.com/openzipkin/zipkin-go/reporter/http"
-	oczipkin "go.opencensus.io/exporter/zipkin"
+	oczipkin "contrib.go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/trace"
 )
 ```
@@ -348,7 +348,7 @@ import (
 	"github.com/oklog/run"
 	zipkin "github.com/openzipkin/zipkin-go"
 	httpreporter "github.com/openzipkin/zipkin-go/reporter/http"
-	oczipkin "go.opencensus.io/exporter/zipkin"
+	oczipkin "contrib.go.opencensus.io/exporter/zipkin"
 	"go.opencensus.io/trace"
 
 	"github.com/opencensus-integrations/go-kit-example/hello/endpoints"
