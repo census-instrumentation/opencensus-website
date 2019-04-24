@@ -18,7 +18,7 @@ Zipkin is a distributed tracing system. It helps gather timing data needed to tr
 
 It manages both the collection and lookup of this data. Zipkin’s design is based on the Google Dapper paper.
 
-OpenCensus Go has support for this exporter available through package [go.opencensus.io/exporter/zipkin](https://godoc.org/go.opencensus.io/exporter/zipkin)
+OpenCensus Go has support for this exporter available through package [contrib.go.opencensus.io/exporter/zipkin](https://godoc.org/contrib.go.opencensus.io/exporter/zipkin)
 
 {{% notice tip %}}
 For assistance setting up Zipkin, [Click here](/codelabs/zipkin) for a guided codelab.
