@@ -1210,7 +1210,7 @@ if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil 
 
 <a name="import-exporting-packages"></a>
 ### Import Packages
-We will be adding the Prometheus Go exporter package package: `"go.opencensus.io/exporter/prometheus"`
+We will be adding the Prometheus Go exporter package package: `"contrib.go.opencensus.io/exporter/prometheus"`
 
 ### Create the exporter
 In order for our metrics to be exported to Prometheus, our application needs to be exposed as a scrape endpoint.
@@ -1222,7 +1222,7 @@ import (
 	"log"
 	"net/http"
 
-	"go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats/view"
 )
 
@@ -1274,7 +1274,7 @@ import (
 	"os"
 	"time"
 
-	"go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
