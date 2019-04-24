@@ -49,7 +49,7 @@ You can swap out any other exporter from the [list of Go exporters](/guides/expo
 
 OpenCensus: `go get -u -v go.opencensus.io/...`
 
-Prometheus exporter: `go get -u -v go.opencensus.io/exporter/prometheus`
+Prometheus exporter: `go get -u -v contrib.go.opencensus.io/exporter/prometheus`
 
 ## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -1480,7 +1480,7 @@ which should show:
 Resource|URL
 ---|---
 Prometheus project|https://prometheus.io/
-Prometheus Go exporter|https://godoc.org/go.opencensus.io/exporter/prometheus
+Prometheus Go exporter|https://godoc.org/contrib.go.opencensus.io/exporter/prometheus
 Go exporters|[Go exporters](/guides/exporters/supported-exporters/go)
 OpenCensus Go Stats package|https://godoc.org/go.opencensus.io/stats
 OpenCensus Go Views package|https://godoc.org/go.opencensus.io/stats/view

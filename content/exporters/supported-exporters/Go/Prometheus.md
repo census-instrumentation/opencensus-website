@@ -20,7 +20,7 @@ exposed endpoints at regular intervals, evaluating rule expressions.
 It can also trigger alerts if certain conditions are met.
 
 OpenCensus Go allows exporting stats to Prometheus by means of the Prometheus package
-[go.opencensus.io/exporter/prometheus](https://godoc.org/go.opencensus.io/exporter/prometheus)
+[contrib.go.opencensus.io/exporter/prometheus](https://godoc.org/contrib.go.opencensus.io/exporter/prometheus)
 
 {{% notice tip %}}
 For assistance setting up Prometheus, [Click here](/codelabs/prometheus) for a guided codelab.

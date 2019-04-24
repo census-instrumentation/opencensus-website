@@ -23,7 +23,7 @@ It is used for monitoring and troubleshooting microservices-based distributed sy
 * Service dependency analysis
 * Performance / latency optimization
 
-OpenCensus Go has support for this exporter available through package [go.opencensus.io/exporter/jaeger](https://godoc.org/go.opencensus.io/exporter/jaeger)
+OpenCensus Go has support for this exporter available through package [contrib.go.opencensus.io/exporter/jaeger](https://godoc.org/contrib.go.opencensus.io/exporter/jaeger)
 
 {{% notice tip %}}
 For assistance setting up Jaeger, [Click here](/codelabs/jaeger) for a guided codelab.
