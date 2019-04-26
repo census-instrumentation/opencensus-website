@@ -17,7 +17,7 @@ class: "shadowed-image lightbox"
 #### Run it locally
 1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/python/tracing-to-zipkin`
-3. Install dependencies: `pip install opencensus`
+3. Install dependencies: `pip install opencensus opencensus-ext-zipkin`
 4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
 5. Start Zipkin: `java -jar zipkin.jar`
 6. Run the code: `python tracingtozipkin.py`
@@ -57,7 +57,7 @@ import sys
 
 from opencensus.trace.tracer import Tracer
 from opencensus.trace import time_event as time_event_module
-from opencensus.trace.exporters.zipkin_exporter import ZipkinExporter
+from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
 from opencensus.trace.samplers import always_on
 
 # 1a. Setup the exporter
