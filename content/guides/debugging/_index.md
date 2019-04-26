@@ -1,12 +1,22 @@
 ---
 title: "Incident Debugging Workflow"
-date: 2018-11-26T22:22:31-07:00
+date: 2019-04-25T22:22:31-07:00
 draft: false
 aliases: [/integrations/workflow]
-weight: 1
+weight: 80
 ---
 
 ##### Using OpenCensus to monitor application health and debug latency issues
+
+- [Introduction](#introduction)
+- [Workflow](#workflow)
+- [Instrument your Application](#instrument-your-application)
+- [Setup Backends for Monitoring Metrics and Trace Data](#setup-backends-for-monitoring-metrics-and-trace-data)
+- [Respond to alerts](#respond-to-alerts)
+- [Iteration](#iteration)
+- [Resources](#resources)
+
+### Introduction
 This page explains the workflow for use of OpenCensus for continuous monitoring of application health and for troubleshooting latency issues. To ensure availability to users, applications should be instrumented with monitoring metrics to track operational health. When a problem is detected then you can use metrics, traces, logs, and other tools and artifacts to find the source of the problem. The example web application from the [Go HTTP Integration Guide](/guides/http/go/net_http/server/) will be used with Prometheus and Zipkin to demonstrate the concepts discussed. The concepts apply to all languages as well as other monitoring metrics and trace backends. After reading this page you should be able to formulate an approach to detect a problem with your application before the majority of your users experience it and identify the source of the problem systematically.
 
 ### Workflow
@@ -120,7 +130,7 @@ See the [Troubleshooting](/advanced-concepts/troubleshooting/) page for more exa
 ### Iteration
 You will almost certainly not measure all the right metrics or set the right thresholds the first time around. After every outage (or near-outage) re-evaluate what you have - what signals were missing that you wished you had, did alerts fire too early or too late, what brick walls did you hit in debugging because the metrics weren’t there? Your monitoring setup should never be set in stone, but rather evolve as your service, user base, and operational understanding evolves. You should use experience during alpha and beta releases to inform supportability for a GA release.
 
-### References
+### Resources
 
 Resource|URL
 ---|---
