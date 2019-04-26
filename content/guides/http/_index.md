@@ -4,7 +4,7 @@ date: 2018-11-26T22:22:31-07:00
 draft: false
 aliases: [/integrations/http]
 logo: /images/http_logo.png
-weight: 1
+weight: 2
 ---
 
 HyperText Transfer Protocol(HTTP) is an application-layer protocol for transmitting hypermedia documents, such as HTML [[1]](https://developer.mozilla.org/en-US/docs/Web/HTTP)
