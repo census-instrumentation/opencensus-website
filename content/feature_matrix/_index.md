@@ -32,7 +32,7 @@ Create a span with explicit parent|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF76
 Add attributes, links, annotations, message events|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Register/Unregister Exporters|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">Register only (use Agent)</span>|Yes|
 Child Span Count|Yes|Yes|<span style="color: #CF7675">No</span>|<span style="color: #CF7675">No</span>|Yes|No|Yes|Yes
-Override sampling for a span|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
+Override sampling for a span|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
 <b>Propagation</b>||||||||
 Binary Format - gRPC|Yes|Yes|Yes|Yes|Yes|<span style="color: #6bb1e0">Client only</span>|<span style="color: #CF7675">No</span>|Yes
 W3C TraceContext Format - HTTP|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes
