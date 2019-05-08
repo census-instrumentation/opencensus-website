@@ -9,7 +9,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 ##### What is OpenCensus?
 
-{{<title>}} is a single distribution of libraries that collect **metrics** and **distributed traces** from your services
+{{<title>}} allows you to collect application **metrics** and **distributed traces**, then transfer the data to a backend of your choice in real time. This data can be analyzed by developers and admins to understand the health of the application and debug problems.
 
 {{<button class="btn-light" icon="true" href="/introduction/#overview">}}Overview{{</button>}}
 
