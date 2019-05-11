@@ -9,7 +9,7 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 ##### What is OpenCensus?
 
-{{<title>}} allows you to collect application **metrics** and **distributed traces**, then transfer the data to a backend of your choice in real time. This data can be analyzed by developers and admins to understand the health of the application and debug problems.
+{{<title>}} is a set of libraries for various languages that allow you to collect application **metrics** and **distributed traces**, then transfer the data to a backend of your choice in real time. This data can be analyzed by developers and admins to understand the health of the application and debug problems.
 
 {{<button class="btn-light" icon="true" href="/introduction/#overview">}}Overview{{</button>}}
 
