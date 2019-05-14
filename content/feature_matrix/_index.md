@@ -23,7 +23,7 @@ Start/End Time|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 SpanData (for exporting)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Status|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 <b>Trace Configs</b>||||||||
-TraceParam Limits (Attributes, Annotations, etc.)|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>
+TraceParam Limits (Attributes, Annotations, etc.)|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|<span style="color: #CF7675">No</span>
 <b>Basic Operations</b>||||||||
 Create a root span|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Put span into/get span from current context|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
