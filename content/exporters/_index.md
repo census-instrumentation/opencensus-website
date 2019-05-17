@@ -12,9 +12,9 @@ aliases: [/core-concepts/exporters]
 
 
 ### Exporters
-Exporters democratize consumption of traces and metrics by any backend that can consume them.
-They are the vendor agnosticity that OpenCensus touts. Collect traces and metrics once, export
-simultaneously to any backends for which an exporter can be created.
+An exporter sends traces and metrics to any backend that is capable of consuming them.
+The exporter itself can change without requiring a change in your client code. This is what makes OpenCensus truly vendor agnostic.
+Collect traces and metrics once, export simultaneously to various backends!
 
 OpenCensus exporters can be contributed by anyone, and we provide support for several
 open source backends and vendors out-of-the-box.
