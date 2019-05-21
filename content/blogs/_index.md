@@ -7,6 +7,18 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### April 21, 2019
+
+#### [OpenTelemetry: The Merger of OpenCensus and OpenTracing](https://www.cncf.io/blog/2019/05/21/a-brief-history-of-opentelemetry-so-far/)
+
+After many months of planning, discussion, prototyping, more discussion, and more planning,
+OpenTracing and OpenCensus are merging to form [OpenTelemetry](https://opentelemetry.io), which is now a CNCF sandbox project.
+The seed governance committee is composed of representatives from Google, Lightstep, Microsoft,
+and Uber, and more organizations are getting involved every day ...
+
+---
+
+
 ##### April 19, 2019
 
 #### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
