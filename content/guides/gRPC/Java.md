@@ -22,7 +22,7 @@ logo: /images/java-grpc-opencensus.png
 
 ## Overview
 
-Our serivce takes in a payload containing bytes and capitalizes them.
+Our service takes in a payload containing bytes and capitalizes them.
 
 Using OpenCensus, we can collect traces and metrics of our system and export them to the backend of our choice, to give observability to our distributed systems.
 
@@ -45,30 +45,30 @@ As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-netty-shaded</artifactId>
-  <version>1.14.0</version>
+  <version>1.16.1</version>
 </dependency>
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-protobuf</artifactId>
-  <version>1.14.0</version>
+  <version>1.16.1</version>
 </dependency>
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-stub</artifactId>
-  <version>1.14.0</version>
+  <version>1.16.1</version>
 </dependency>
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-netty-shaded:1.14.0'
-compile 'io.grpc:grpc-protobuf:1.14.0'
-compile 'io.grpc:grpc-stub:1.14.0'
+compile 'io.grpc:grpc-netty-shaded:1.16.1'
+compile 'io.grpc:grpc-protobuf:1.16.1'
+compile 'io.grpc:grpc-stub:1.16.1'
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-okhttp:1.14.0'
-compile 'io.grpc:grpc-protobuf-lite:1.14.0'
-compile 'io.grpc:grpc-stub:1.14.0'
+compile 'io.grpc:grpc-okhttp:1.16.1'
+compile 'io.grpc:grpc-protobuf-lite:1.16.1'
+compile 'io.grpc:grpc-stub:1.16.1'
 {{</highlight>}}
 {{</tabs>}}
 
@@ -132,15 +132,17 @@ public class TutorialServer {
     static class FetchImpl extends FetchGrpc.FetchImplBase {
         @Override
         public void capitalize(Payload req, StreamObserver<Payload> responseObserver) {
+            Payload resp;
             try {
                 String capitalized = req.getData().toString("UTF8").toUpperCase();
                 ByteString bs = ByteString.copyFrom(capitalized.getBytes("UTF8"));
-                Payload resp = Payload.newBuilder().setData(bs).build();
-                responseObserver.onNext(resp);
+                resp = Payload.newBuilder().setData(bs).build();
             } catch (UnsupportedEncodingException e) {
-            } finally {
-                responseObserver.onCompleted();
+                responseObserver.onError(e);
+                return;
             }
+            responseObserver.onNext(resp);
+            responseObserver.onCompleted();
         }
     }
 
@@ -295,7 +297,7 @@ which will give such output
 
 The client talks to the server via a gRPC channel, sending in bytes and getting back the output capitalized.
 
-The contents of `src/main/java/io/octutorials/ocgrpc/TutorialServer.java` are as below:
+The contents of `src/main/java/io/octutorials/ocgrpc/TutorialClient.java` are as below:
 ```java
 package io.octutorials.ocgrpc;
 
@@ -328,34 +330,25 @@ public class TutorialClient {
         this.channel.shutdown().awaitTermination(4, TimeUnit.SECONDS);
     }
 
-    public String capitalize(String data) {
-        try {
-            ByteString bs = ByteString.copyFrom(data.getBytes("UTF8"));
-            Payload in = Payload.newBuilder().setData(bs).build();
-            Payload out = this.stub.capitalize(in);
-            return out.getData().toString("UTF8");
-        } catch (UnsupportedEncodingException e) {
-            return "";
-        } catch (StatusRuntimeException e) {
-            return "";
-        }
+    public String capitalize(String data) throws Exception {
+        ByteString bs = ByteString.copyFrom(data.getBytes("UTF8"));
+        Payload in = Payload.newBuilder().setData(bs).build();
+        Payload out = this.stub.capitalize(in);
+        return out.getData().toString("UTF8");
     }
 
-    public static void main(String ...args) {
+    public static void main(String ...args) throws Exception {
         TutorialClient  cc = new TutorialClient("0.0.0.0", 9876);
 
-        try {
-            BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
-            while (true) {
-                System.out.print("> ");
-                System.out.flush();
-                String in = stdin.readLine();
+        while (true) {
+            System.out.print("> ");
+            System.out.flush();
+            String in = stdin.readLine();
 
-                String out = cc.capitalize(in);
-                System.out.println(String.format("< %s\n", out));
-            }
-        } catch (Exception e) {
+            String out = cc.capitalize(in);
+            System.out.println(String.format("< %s\n", out));
         }
     }
 }
@@ -366,7 +359,7 @@ which will give you such output after you've typed in
 
 ## Instrumentation
 
-To gain insights to our service, we'll add trace and metrics instrumentation as follows
+To gain insights to our service, we'll add trace and metrics instrumentation as follows:
 
 ### Instrumenting the server
 
@@ -427,9 +420,9 @@ public class TutorialServer {
         // For demo purposes, always sample
         TraceConfig traceConfig = Tracing.getTraceConfig();
         traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveParams()
+                traceConfig.getActiveTraceParams()
                     .toBuilder()
-                    .setSample(Samplers.alwaysSample())
+                    .setSampler(Samplers.alwaysSample())
                     .build());
 
         // Create the Stackdriver trace exporter
@@ -451,7 +444,7 @@ import io.opencensus.exporter.stats.stackdriver.StackdriverStatsConfiguration;
 import io.opencensus.exporter.stats.stackdriver.StackdriverStatsExporter;
 
 public class TutorialServer {
-    private static void setupOpencensusAndExporters throws IOException {
+    private static void setupOpencensusAndExporters() throws IOException {
         String gcpProjectId = System.getenv().get("GCP_PROJECTID");
         if (gcpProjectId == null || gcpProjectId == "") {
             gcpProjectId = "census-demos";
@@ -816,7 +809,7 @@ public class TutorialClient {
         }
     }
 
-    private static void setupOpencensusAndExporters throws IOException {
+    private static void setupOpencensusAndExporters() throws IOException {
         String gcpProjectId = System.getenv().get("GCP_PROJECTID");
         if (gcpProjectId == null || gcpProjectId == "") {
             gcpProjectId = "census-demos";
@@ -825,9 +818,9 @@ public class TutorialClient {
         // For demo purposes, always sample
         TraceConfig traceConfig = Tracing.getTraceConfig();
         traceConfig.updateActiveTraceParams(
-                traceConfig.getActiveParams()
+                traceConfig.getActiveTraceParams()
                     .toBuilder()
-                    .setSample(Samplers.alwaysSample())
+                    .setSampler(Samplers.alwaysSample())
                     .build());
 
         // Create the Stackdriver trace exporter
@@ -995,7 +988,7 @@ public class TutorialClient {
 
 {{</tabs>}}
 
-And then to run the instrumented server and client in separate terminals
+And then to run the instrumented server and client in separate terminals:
 
 * Run the server
 ```shell

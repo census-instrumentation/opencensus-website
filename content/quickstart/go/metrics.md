@@ -29,7 +29,7 @@ class: "shadowed-image lightbox"
     - [Running Prometheus](#running-prometheus)
 - [Viewing your metrics](#viewing-your-metrics)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for any [backend](/core-concepts/exporters/#supported-backends) of our choice
@@ -49,7 +49,7 @@ You can swap out any other exporter from the [list of Go exporters](/guides/expo
 
 OpenCensus: `go get -u -v go.opencensus.io/...`
 
-Prometheus exporter: `go get -u -v go.opencensus.io/exporter/prometheus`
+Prometheus exporter: `go get -u -v contrib.go.opencensus.io/exporter/prometheus`
 
 ## Brief Overview
 By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:
@@ -80,7 +80,7 @@ touch repl.go
 
 Next, put the following code inside of `repl.go`:
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -111,7 +111,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -131,7 +131,8 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
+
+```
 
 You can run the code via `go run repl.go`.
 
@@ -142,8 +143,8 @@ You can run the code via `go run repl.go`.
 
 To enable metrics, we’ll import a couple of packages:
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 import (
 	"bufio"
 	"bytes"
@@ -157,9 +158,9 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -195,7 +196,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -215,32 +216,26 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 <a name="create-metrics"></a>
 ### Create Metrics
 
 First, we will create the variables needed to later record our metrics.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -260,12 +255,6 @@ import (
 var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
-
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
 
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
@@ -290,7 +279,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -310,21 +299,23 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 ### Create Tags
 
 Now we will create the variable later needed to add extra text meta-data to our metrics.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -345,18 +336,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -378,7 +365,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -398,8 +385,8 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 We will later use this tag, called KeyMethod, to record what method is being invoked. In our scenario, we will only use it to record that "repl" is calling our data.
 
@@ -415,15 +402,15 @@ Now we will insert a specific tag called "repl". It will give us a new `context.
 
 For example
 ```go
-        ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+ctx, _ := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 ```
 
 and for complete usage:
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+{{% tabs Snippet All %}}
+```go
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -441,9 +428,9 @@ func readEvaluateProcess(br *bufio.Reader) error {
 	fmt.Printf("< %s\n\n", out)
 	return nil
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -464,18 +451,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -497,8 +480,8 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-  ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
@@ -522,21 +505,23 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(in []byte) (out []byte, err error) {
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+```
+{{% /tabs %}}
 
 When recording metrics, we will need the `ctx` from `tag.New`. We will be recording metrics in `processLine`, so let's go ahead and make `ctx` available now.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 // ...
 out, err := processLine(ctx, line)
 
 // ...
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
-{{</highlight>}}
+  // ...
+}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -557,18 +542,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -590,7 +571,7 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
@@ -611,33 +592,42 @@ func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+```
+{{% /tabs %}}
 
 ### Recording Metrics
 
 Now we will record the desired metrics. To do so, we will use `stats.Record` and pass in our `ctx` and [previously instantiated metrics variables](#create-metrics).
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+{{% tabs Snippet All %}}
+```go
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -649,15 +639,19 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
 
-{{<highlight go>}}
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
+
+```go
 package main
 
 import (
@@ -678,18 +672,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -711,24 +701,32 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -740,22 +738,26 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
+{{% /tabs %}}
 
 ## Enable Views
 We will be adding the View package: `"go.opencensus.io/stats/view"`
 
 <a name="import-views-packages"></a>
 ### Import Packages
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 import (
 	"bufio"
 	"bytes"
@@ -770,9 +772,9 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -794,18 +796,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 func main() {
@@ -827,24 +825,32 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -856,20 +862,24 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
+{{% /tabs %}}
 
 ### Create Views
 We now determine how our metrics will be organized by creating `Views`.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 var (
 	LatencyView = &view.View{
 		Name:        "demo/latency",
@@ -883,15 +893,8 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
 		Aggregation: view.Count(),
 	}
 
@@ -903,9 +906,9 @@ var (
 		Aggregation: view.Distribution(0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000),
 	}
 )
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -927,18 +930,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -954,15 +953,8 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
 		Aggregation: view.Count(),
 	}
 
@@ -994,24 +986,32 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -1023,20 +1023,24 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
+{{% /tabs %}}
 
 ### Register Views
 We now register the views and set the reporting period.
 
-{{<tabs Snippet All>}}
-{{<highlight go>}}
+{{% tabs Snippet All %}}
+```go
 func main() {
 	// In a REPL:
 	//   1. Read input
@@ -1044,7 +1048,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1058,9 +1062,9 @@ func main() {
 		}
 	}
 }
-{{</highlight>}}
+```
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -1082,18 +1086,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -1109,15 +1109,8 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
 		Aggregation: view.Count(),
 	}
 
@@ -1137,7 +1130,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1154,24 +1147,32 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -1183,30 +1184,33 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
-{{</tabs>}}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
+{{% /tabs %}}
 
 ## Exporting stats
 
 ### Register the views
 
 ```go
-	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
-		log.Fatalf("Failed to register views: %v", err)
-	}
-
+// Register the views
+if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
+	log.Fatalf("Failed to register views: %v", err)
+}
 ```
 
 <a name="import-exporting-packages"></a>
 ### Import Packages
-We will be adding the Prometheus Go exporter package package: `"go.opencensus.io/exporter/prometheus"`
+We will be adding the Prometheus Go exporter package package: `"contrib.go.opencensus.io/exporter/prometheus"`
 
 ### Create the exporter
 In order for our metrics to be exported to Prometheus, our application needs to be exposed as a scrape endpoint.
@@ -1215,48 +1219,48 @@ to http endpoint "/metrics".
 
 ```go
 import (
-        "log"
-        "net/http"
+	"log"
+	"net/http"
 
-        "go.opencensus.io/exporter/prometheus"
-        "go.opencensus.io/stats/view"
+	"contrib.go.opencensus.io/exporter/prometheus"
+	"go.opencensus.io/stats/view"
 )
 
 func main() {
-        pe, err := prometheus.NewExporter(prometheus.Options{
-                Namespace: "ocmetricstutorial",
-        })
-        if err != nil {
-                log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
-        }
+	pe, err := prometheus.NewExporter(prometheus.Options{
+		Namespace: "ocmetricstutorial",
+	})
+	if err != nil {
+		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
+	}
 
-        // Register the Prometheus exporters as a stats exporter.
-        view.RegisterExporter(pe)
+	// Register the Prometheus exporters as a stats exporter.
+	view.RegisterExporter(pe)
 
-        // Now finally run the Prometheus exporter as a scrape endpoint.
-        // We'll run the server on port 8888.
-        go func() {
-                mux := http.NewServeMux()
-                mux.Handle("/metrics", pe)
-                if err := http.ListenAndServe(":8888", mux); err != nil {
-                        log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
-                }
-        }()
+	// Now finally run the Prometheus exporter as a scrape endpoint.
+	// We'll run the server on port 8888.
+	go func() {
+		mux := http.NewServeMux()
+		mux.Handle("/metrics", pe)
+		if err := http.ListenAndServe(":8888", mux); err != nil {
+			log.Fatalf("Failed to run Prometheus scrape endpoint: %v", err)
+		}
+	}()
 }
 ```
 
 ### Register the exporter
 ```go
-        // Register the Prometheus exporter.
-        // This step is needed so that metrics can be exported.
-        view.RegisterExporter(pe)
+// Register the Prometheus exporter.
+// This step is needed so that metrics can be exported.
+view.RegisterExporter(pe)
 ```
 
 
 ## End to end code
 Collectively the code will be
 
-{{<highlight go>}}
+```go
 package main
 
 import (
@@ -1270,7 +1274,7 @@ import (
 	"os"
 	"time"
 
-	"go.opencensus.io/exporter/prometheus"
+	"contrib.go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
@@ -1280,18 +1284,14 @@ var (
 	// The latency in milliseconds
 	MLatencyMs = stats.Float64("repl/latency", "The latency in milliseconds per REPL loop", "ms")
 
-	// Counts the number of lines read in from standard input
-	MLinesIn = stats.Int64("repl/lines_in", "The number of lines read in", "1")
-
-	// Encounters the number of non EOF(end-of-file) errors.
-	MErrors = stats.Int64("repl/errors", "The number of errors encountered", "1")
-
 	// Counts/groups the lengths of lines read in.
 	MLineLengths = stats.Int64("repl/line_lengths", "The distribution of line lengths", "By")
 )
 
 var (
 	KeyMethod, _ = tag.NewKey("method")
+	KeyStatus, _ = tag.NewKey("status")
+	KeyError, _  = tag.NewKey("error")
 )
 
 var (
@@ -1307,15 +1307,8 @@ var (
 
 	LineCountView = &view.View{
 		Name:        "demo/lines_in",
-		Measure:     MLinesIn,
+		Measure:     MLineLengths,
 		Description: "The number of lines from standard input",
-		Aggregation: view.Count(),
-	}
-
-	ErrorCountView = &view.View{
-		Name:        "demo/errors",
-		Measure:     MErrors,
-		Description: "The number of errors encountered",
 		Aggregation: view.Count(),
 	}
 
@@ -1331,7 +1324,7 @@ var (
 func main() {
 	// Register the views, it is imperative that this step exists
 	// lest recorded metrics will be dropped and never exported.
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register the views: %v", err)
 	}
 
@@ -1362,7 +1355,7 @@ func main() {
 	br := bufio.NewReader(os.Stdin)
 
 	// Register the views
-	if err := view.Register(LatencyView, LineCountView, ErrorCountView, LineLengthView); err != nil {
+	if err := view.Register(LatencyView, LineCountView, LineLengthView); err != nil {
 		log.Fatalf("Failed to register views: %v", err)
 	}
 
@@ -1379,24 +1372,32 @@ func main() {
 
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
-func readEvaluateProcess(br *bufio.Reader) error {
-	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"))
+func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		if terr != nil {
+			ctx, _ = tag.New(ctx, tag.Upsert(KeyStatus, "ERROR"),
+				tag.Upsert(KeyError, terr.Error()))
+		}
+
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)))
+	}()
 
 	fmt.Printf("> ")
 	line, _, err := br.ReadLine()
 	if err != nil {
 		if err != io.EOF {
-			stats.Record(ctx, MErrors.M(1))
+			return err
 		}
-		return err
+		log.Fatal(err)
 	}
 
 	out, err := processLine(ctx, line)
 	if err != nil {
-		stats.Record(ctx, MErrors.M(1))
 		return err
 	}
 	fmt.Printf("< %s\n\n", out)
@@ -1408,13 +1409,17 @@ func readEvaluateProcess(br *bufio.Reader) error {
 func processLine(ctx context.Context, in []byte) (out []byte, err error) {
 	startTime := time.Now()
 	defer func() {
-		ms := float64(time.Since(startTime).Nanoseconds()) / 1e6
-		stats.Record(ctx, MLinesIn.M(1), MLatencyMs.M(ms), MLineLengths.M(int64(len(in))))
+		stats.Record(ctx, MLatencyMs.M(sinceInMilliseconds(startTime)),
+			MLineLengths.M(int64(len(in))))
 	}()
 
 	return bytes.ToUpper(in), nil
 }
-{{</highlight>}}
+
+func sinceInMilliseconds(startTime time.Time) float64 {
+	return float64(time.Since(startTime).Nanoseconds()) / 1e6
+}
+```
 
 
 ### Running the tutorial
@@ -1475,7 +1480,7 @@ which should show:
 Resource|URL
 ---|---
 Prometheus project|https://prometheus.io/
-Prometheus Go exporter|https://godoc.org/go.opencensus.io/exporter/prometheus
+Prometheus Go exporter|https://godoc.org/contrib.go.opencensus.io/exporter/prometheus
 Go exporters|[Go exporters](/guides/exporters/supported-exporters/go)
 OpenCensus Go Stats package|https://godoc.org/go.opencensus.io/stats
 OpenCensus Go Views package|https://godoc.org/go.opencensus.io/stats/view

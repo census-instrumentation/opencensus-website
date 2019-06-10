@@ -24,7 +24,7 @@ class: "shadowed-image lightbox"
     - [Export Views](#export-views)
 - [Viewing your metrics](#viewing-your-metrics)
 
-In this quickstart, we’ll gleam insights from code segments and learn how to:
+In this quickstart, we’ll glean insights from code segments and learn how to:
 
 1. Collect metrics using [OpenCensus Metrics](/core-concepts/metrics) and [Tags](/core-concepts/tags)
 2. Register and enable an exporter for a [backend](/core-concepts/exporters/#supported-backends) of our choice
@@ -328,12 +328,6 @@ First, we will create the variables needed to later record our metrics. Place th
 // The latency in milliseconds
 private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-// Counts the number of lines read in from standard input.
-private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-// Counts the number of non EOF(end-of-file) errors.
-private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
 // Counts/groups the lengths of lines read in.
 private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
@@ -370,12 +364,6 @@ import io.opencensus.tags.TagValue;
 public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
-
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
 
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
@@ -423,6 +411,8 @@ Insert the following snippet on the line before `private static final Tagger tag
 {{<highlight java>}}
 // The tag "method"
 private static final TagKey KEY_METHOD = TagKey.create("method");
+private static final TagKey KEY_STATUS = TagKey.create("status");
+private static final TagKey KEY_ERROR = TagKey.create("error");
 {{</highlight>}}
 
 {{<highlight java>}}
@@ -451,17 +441,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -512,7 +500,7 @@ Later, if we used `OS_Key`, we will be given an opportunity to enter values such
 **Note**: `OS_Key` is not used in this quickstart. It is only used as an example in this text block.
 {{% /notice %}}
 
-We will now create helper functions to assist us with recording Tagged Stats. One will record a `Long`, and the other will record a `Double`.
+We will now create helper functions to assist us with recording Tagged Stats. One will record a `Long`, another a `Double`, and finally an array of `Doubles`.
 
 Insert the following snippet after `private static void recordStat`:
 
@@ -527,6 +515,18 @@ private static void recordTaggedStat(TagKey key, String value, MeasureLong ml, L
 
 private static void recordTaggedStat(TagKey key, String value, MeasureDouble md, Double d) {
     TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(md, d).record();
+    }
+}
+
+private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+    TagContextBuilder builder = tagger.emptyBuilder();
+    for (int i = 0; i < keys.length; i++) {
+        builder.put(keys[i], TagValue.create(values[i]));
+    }
+    TagContext tctx = builder.build();
+
     try (Scope ss = tagger.withTagContext(tctx)) {
         statsRecorder.newMeasureMap().put(md, d).record();
     }
@@ -559,17 +559,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -604,6 +602,18 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         return line.toUpperCase();
     }
@@ -624,18 +634,24 @@ Finally, we'll hook our stat recorders in to `main`, `processLine`, and `readEva
 
 {{<tabs Snippet All>}}
 {{<highlight java>}}
-public static void main(String ...args) {
-    BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+while (true) {
+    long startTimeNs = System.nanoTime();
 
-    while (true) {
-        try {
-            readEvaluateProcessLine(stdin);
-        } catch (IOException e) {
-            System.err.println("EOF bye "+ e);
-            return;
-        } catch (Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
-        }
+    try {
+        readEvaluateProcessLine(stdin);
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {"repl", "OK"};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+            sinceInMilliseconds(startTimeNs));
+    } catch (IOException e) {
+        System.err.println("EOF bye "+ e);
+        return;
+    } catch (Exception e) {
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+        String[] tagValues = {"repl", "ERROR", e.getMessage()};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+            sinceInMilliseconds(startTimeNs));
+        return;
     }
 }
 
@@ -645,24 +661,25 @@ private static String processLine(String line) {
     try {
         return line.toUpperCase();
     } finally {
-        long totalTimeNs = System.nanoTime() - startTimeNs;
-        double timespentMs = (new Double(totalTimeNs))/1e6;
-        recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {"repl", "OK"};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
     }
+}
+
+private static double sinceInMilliseconds(long startTimeNs) {
+    return (new Double(System.nanoTime() - startTimeNs))/1e6;
 }
 
 private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
     System.out.print("> ");
     System.out.flush();
 
-    try {
-        String line = in.readLine();
-        String processed = processLine(line);
-        System.out.println("< " + processed + "\n");
-        recordStat(M_LINES_IN, new Long(1));
-        recordStat(M_LINE_LENGTHS, new Long(line.length()));
-    } catch(Exception e) {
-        recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+    String line = in.readLine();
+    String processed = processLine(line);
+    System.out.println("< " + processed + "\n");
+    if (line != null && line.length() > 0) {
+      recordStat(M_LINE_LENGTHS, new Long(line.length()));
     }
 }
 {{</highlight>}}
@@ -693,17 +710,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -712,13 +727,23 @@ public class Repl {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            long startTimeNs = System.nanoTime();
+
             try {
                 readEvaluateProcessLine(stdin);
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+                String[] tagValues = {"repl", "OK"};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
-                recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+                String[] tagValues = {"repl", "ERROR", e.getMessage()};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
+                return;
             }
         }
     }
@@ -741,15 +766,27 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
     }
 
@@ -757,14 +794,11 @@ public class Repl {
         System.out.print("> ");
         System.out.flush();
 
-        try {
-            String line = in.readLine();
-            String processed = processLine(line);
-            System.out.println("< " + processed + "\n");
-            recordStat(M_LINES_IN, new Long(1));
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+        if (line != null && line.length() > 0) {
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
-        } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 }
@@ -829,17 +863,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -874,15 +906,27 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
     }
 
@@ -890,14 +934,11 @@ public class Repl {
         System.out.print("> ");
         System.out.flush();
 
-        try {
-            String line = in.readLine();
-            String processed = processLine(line);
-            System.out.println("< " + processed + "\n");
-            recordStat(M_LINES_IN, new Long(1));
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+        if (line != null && line.length() > 0) {
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
-        } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 }
@@ -931,10 +972,9 @@ private static void registerAllViews() {
 
     // Define the views
     View[] views = new View[]{
-        View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-        View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-        View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-        View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+        View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+        View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINE_LENGTHS, countAggregation, noKeys),
+        View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
     };
 
     // Create the view manager
@@ -983,17 +1023,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -1002,13 +1040,23 @@ public class Repl {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            long startTimeNs = System.nanoTime();
+
             try {
                 readEvaluateProcessLine(stdin);
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+                String[] tagValues = {"repl", "OK"};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
-                recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+                String[] tagValues = {"repl", "ERROR", e.getMessage()};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
+                return;
             }
         }
     }
@@ -1031,15 +1079,27 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
     }
 
@@ -1047,14 +1107,11 @@ public class Repl {
         System.out.print("> ");
         System.out.flush();
 
-        try {
-            String line = in.readLine();
-            String processed = processLine(line);
-            System.out.println("< " + processed + "\n");
-            recordStat(M_LINES_IN, new Long(1));
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+        if (line != null && line.length() > 0) {
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
-        } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1080,10 +1137,9 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINE_LENGTHS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1114,13 +1170,23 @@ public static void main(String ...args) {
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
     while (true) {
+        long startTimeNs = System.nanoTime();
+
         try {
             readEvaluateProcessLine(stdin);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
         } catch (IOException e) {
             System.err.println("EOF bye "+ e);
             return;
         } catch (Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+            String[] tagValues = {"repl", "ERROR", e.getMessage()};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
+            return;
         }
     }
 }
@@ -1167,17 +1233,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN= MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -1194,13 +1258,23 @@ public class Repl {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            long startTimeNs = System.nanoTime();
+
             try {
                 readEvaluateProcessLine(stdin);
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+                String[] tagValues = {"repl", "OK"};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
-                recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+                String[] tagValues = {"repl", "ERROR", e.getMessage()};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
+                return;
             }
         }
     }
@@ -1223,15 +1297,27 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
     }
 
@@ -1239,14 +1325,11 @@ public class Repl {
         System.out.print("> ");
         System.out.flush();
 
-        try {
-            String line = in.readLine();
-            String processed = processLine(line);
-            System.out.println("< " + processed + "\n");
-            recordStat(M_LINES_IN, new Long(1));
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+        if (line != null && line.length() > 0) {
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
-        } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1272,10 +1355,9 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINE_LENGTHS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1452,17 +1534,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -1479,13 +1559,23 @@ public class Repl {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            long startTimeNs = System.nanoTime();
+
             try {
                 readEvaluateProcessLine(stdin);
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+                String[] tagValues = {"repl", "OK"};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
-                recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+                String[] tagValues = {"repl", "ERROR", e.getMessage()};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
+                return;
             }
         }
     }
@@ -1508,15 +1598,27 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
     }
 
@@ -1524,14 +1626,11 @@ public class Repl {
         System.out.print("> ");
         System.out.flush();
 
-        try {
-            String line = in.readLine();
-            String processed = processLine(line);
-            System.out.println("< " + processed + "\n");
-            recordStat(M_LINES_IN, new Long(1));
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println("< " + processed + "\n");
+        if (line != null && line.length() > 0) {
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
-        } catch(Exception e) {
-            recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
         }
     }
 
@@ -1557,10 +1656,9 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/line_length"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINE_LENGTHS, countAggregation, noKeys),
+            View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 
         // Create the view manager
@@ -1637,17 +1735,15 @@ public class Repl {
     // The latency in milliseconds
     private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create("repl/latency", "The latency in milliseconds per REPL loop", "ms");
 
-    // Counts the number of lines read in from standard input.
-    private static final MeasureLong M_LINES_IN = MeasureLong.create("repl/lines_in", "The number of lines read in", "1");
-
-    // Counts the number of non EOF(end-of-file) errors.
-    private static final MeasureLong M_ERRORS = MeasureLong.create("repl/errors", "The number of errors encountered", "1");
-
     // Counts/groups the lengths of lines read in.
     private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create("repl/line_lengths", "The distribution of line lengths", "By");
 
     // The tag "method"
     private static final TagKey KEY_METHOD = TagKey.create("method");
+    // The tag "status"
+    private static final TagKey KEY_STATUS = TagKey.create("status");
+    // The tag "error"
+    private static final TagKey KEY_ERROR = TagKey.create("error");
 
     private static final Tagger tagger = Tags.getTagger();
     private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
@@ -1664,13 +1760,22 @@ public class Repl {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
+            long startTimeNs = System.nanoTime();
+
             try {
                 readEvaluateProcessLine(stdin);
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+                String[] tagValues = {"repl", "OK"};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
             } catch (IOException e) {
                 System.err.println("EOF bye "+ e);
                 return;
             } catch (Exception e) {
-                recordTaggedStat(KEY_METHOD, "repl", M_ERRORS, new Long(1));
+                TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+                String[] tagValues = {"repl", "ERROR", e.getMessage()};
+                recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                    sinceInMilliseconds(startTimeNs));
                 return;
             }
         }
@@ -1697,19 +1802,32 @@ public class Repl {
         }
     }
 
+    private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+        TagContextBuilder builder = tagger.emptyBuilder();
+        for (int i = 0; i < keys.length; i++) {
+            builder.put(keys[i], TagValue.create(values[i]));
+        }
+        TagContext tctx = builder.build();
+
+        try (Scope ss = tagger.withTagContext(tctx)) {
+            statsRecorder.newMeasureMap().put(md, d).record();
+        }
+    }
+
     private static String processLine(String line) {
         long startTimeNs = System.nanoTime();
 
         try {
             return line.toUpperCase();
-        } catch (Exception e) {
-            recordTaggedStat(KEY_METHOD, "processLine", M_ERRORS, new Long(1));
-            return "";
         } finally {
-            long totalTimeNs = System.nanoTime() - startTimeNs;
-            double timespentMs = (new Double(totalTimeNs))/1e6;
-            recordTaggedStat(KEY_METHOD, "processLine", M_LATENCY_MS, timespentMs);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {"repl", "OK"};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
         }
+    }
+
+    private static double sinceInMilliseconds(long startTimeNs) {
+        return (new Double(System.nanoTime() - startTimeNs))/1e6;
     }
 
     private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
@@ -1720,7 +1838,6 @@ public class Repl {
         String processed = processLine(line);
         System.out.println("< " + processed + "\n");
         if (line != null && line.length() > 0) {
-            recordStat(M_LINES_IN, new Long(1));
             recordStat(M_LINE_LENGTHS, new Long(line.length()));
         }
     }
@@ -1747,9 +1864,8 @@ public class Repl {
 
         // Define the views
         View[] views = new View[]{
-            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.singletonList(KEY_METHOD)),
-            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINES_IN, countAggregation, noKeys),
-            View.create(Name.create("ocjavametrics/errors"), "The number of errors encountered", M_ERRORS, countAggregation, Collections.singletonList(KEY_METHOD)),
+            View.create(Name.create("ocjavametrics/latency"), "The distribution of latencies", M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+            View.create(Name.create("ocjavametrics/lines_in"), "The number of lines read in from standard input", M_LINE_LENGTHS, countAggregation, noKeys),
             View.create(Name.create("ocjavametrics/line_lengths"), "The distribution of line lengths", M_LINE_LENGTHS, lengthsDistribution, noKeys)
         };
 

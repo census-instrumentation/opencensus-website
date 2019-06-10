@@ -24,14 +24,14 @@
 
   <!-- {{ if not .Page.Lastmod.IsZero }}
     <div class="date">
-        <i class='fa fa-calendar'></i> {{T "last-update-on"}} {{ .Page.Lastmod.Format "02/01/2006" }}
+        <i class='fa fa-calendar'></i> {{T "last-update-on"}} {{ .Page.Lastmod.Format "2006/01/02" }}
     </div>
-    {{end}}
+    {{end}} -->
 
     <div class="github-link">
       <a href="{{ .Site.Params.editURL }}{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}" target="blank"><i class="fa fa-code-fork"></i>
         {{T "Edit-this-page"}}</a>
-    </div> -->
+    </div>
   </div>
 
 

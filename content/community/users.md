@@ -21,3 +21,9 @@ Some of the publicly known OpenCensus users:
 {{<card-vendor src="/images/users/orijtech.png" href="https://orijtech.com/">}}
 {{<card-vendor src="/images/users/streak.png" href="https://www.streak.com/">}}
 {{<card-vendor src="/images/users/holidaycheck.png" href="http://www.holidaycheck.de/">}}
+{{<card-vendor src="/images/users/namely.png" href="https://namely.com/">}}
+{{<card-vendor src="/images/users/comcast_logo.jpg" href="https://corporate.comcast.com/">}}
+{{<card-vendor src="/images/users/postmates_logo.png" href="https://postmates.com/">}}
+{{<card-vendor src="/images/users/teserakt_logo.png" href="https://teserakt.io/">}}
+{{<card-vendor src="/images/users/dgraph_logo.png" href="https://dgraph.io/">}}
+{{<card-vendor src="/img/partners/scalyr-logo-stacked.png" href="https://www.scalyr.com/">}}

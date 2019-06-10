@@ -14,30 +14,73 @@
 	</tr>
   </thead>
   <tbody>
+
 	<tr>
-		<td>Application Insights</td>
-		<td data-label="csharp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr> <abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
+		<td>AWS X-Ray</td>
+		<td data-label="csharp">-</td>
 		<td data-label="cpp">–</td>
 		<td data-label="erlang">–</td>
-		<td data-label="golang">–</td>
-		<td data-label="java">–</td>
+		<td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+		<td data-label="java"></td>
 		<td data-label="nodejs">–</td>
 		<td data-label="php">–</td>
 		<td data-label="python">–</td>
 		<td data-label="ruby">–</td>
 	</tr>
+
+	<tr>
+		<td>Azure Monitor</td>
+		<td data-label="csharp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr> <abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
+		<td data-label="cpp">–</td>
+		<td data-label="erlang">–</td>
+		<td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+		<td data-label="java"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+		<td data-label="nodejs">–</td>
+		<td data-label="php">–</td>
+		<td data-label="python"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+		<td data-label="ruby">–</td>
+	</tr>
+
 	<tr>
 		<td>Datadog</td>
 		<td data-label="csharp">–</td>
 		<td data-label="cpp">–</td>
-		<td data-label="erlang">–</td>
+		<td data-label="erlang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr> <abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
 		<td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr> <abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
-		<td data-label="java">–</td>
+		<td data-label="java"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
 		<td data-label="nodejs">–</td>
 		<td data-label="php">–</td>
 		<td data-label="python">–</td>
 		<td data-label="ruby">–</td>
 	</tr>
+
+	<tr>
+		<td>Elasticsearch</td>
+		<td data-label="csharp">-</td>
+		<td data-label="cpp">–</td>
+		<td data-label="erlang">–</td>
+		<td data-label="golang">–</td>
+		<td data-label="java"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+		<td data-label="nodejs">–</td>
+		<td data-label="php">–</td>
+		<td data-label="python">–</td>
+		<td data-label="ruby">–</td>
+	</tr>
+
+        <tr>
+	        <td>Honeycomb</td>
+	        <td data-label="csharp">–</td>
+	        <td data-label="cpp">–</td>
+	        <td data-label="erlang">–</td>
+	        <td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	        <td data-label="java">–</td>
+	        <td data-label="nodejs">–</td>
+	        <td data-label="php">–</td>
+	        <td data-label="python">–</td>
+			<td data-label="ruby">–</td>
+			
+	</tr>
+
 	<tr>
 		<td>Instana</td>
 		<td data-label="csharp">–</td>
@@ -75,16 +118,16 @@
 		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
-		<td>SignalFX</td>
-		<td data-label="csharp">–</td>
-	  <td data-label="cpp">–</td>
-	  <td data-label="erlang">–</td>
-	  <td data-label="golang">–</td>
-	  <td data-label="java"><abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
-		<td data-label="nodejs">–</td>
-		<td data-label="php">–</td>
-	  <td data-label="python">–</td>
-		<td data-label="ruby">–</td>
+	  <td>SignalFx</td>
+	  <td data-label="csharp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	  <td data-label="cpp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	  <td data-label="erlang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	  <td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr><abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
+	  <td data-label="java"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr><abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
+	  <td data-label="nodejs"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	  <td data-label="php">–</td>
+	  <td data-label="python"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
+	  <td data-label="ruby">–</td>
 	</tr>
 	<tr>
 		<td>Stackdriver</td>
@@ -99,6 +142,18 @@
 		<td data-label="ruby">–</td>
 	</tr>
 	<tr>
+		<td>Wavefront</td>
+		<td data-label="csharp">–</td>
+		<td data-label="cpp">–</td>
+		<td data-label="erlang">–</td>
+		<td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr> <abbr title="Stats Exporter" class="stats-exporter teal white-text">S</abbr></td>
+		<td data-label="java">–</td>
+		<td data-label="nodejs">–</td>
+		<td data-label="php">–</td>
+		<td data-label="python">–</td>
+		<td data-label="ruby">–</td>
+	</tr>
+	<tr>
 		<td>Zipkin</td>
 		<td data-label="csharp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
 	  <td data-label="cpp"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
@@ -108,17 +163,6 @@
 		<td data-label="nodejs"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
 		<td data-label="php">–</td>
 	  <td data-label="python"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
-		<td data-label="ruby">–</td>
-	</tr>
-	<tr>
-	  <td>Honeycomb</td>
-	  <td data-label="cpp">–</td>
-	  <td data-label="erlang">–</td>
-	  <td data-label="golang"><abbr title="Trace Exporter" class="trace-exporter blue white-text">T</abbr></td>
-	  <td data-label="java">–</td>
-		<td data-label="nodejs">–</td>
-		<td data-label="php">–</td>
-	  <td data-label="python">–</td>
 		<td data-label="ruby">–</td>
 	</tr>
   </tbody>

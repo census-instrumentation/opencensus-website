@@ -1,0 +1,520 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Java Metrics Quickstart</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Java Metrics Quickstart"
+                  environment="web"
+                  feedback-link="">
+
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <p>By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:</p>
+<ol type="1">
+<li>Create quantitative <a href="/stats" target="_blank">metrics</a> that we will record</li>
+<li>Create <a href="/tag" target="_blank">tags</a> that we will associate with our metrics</li>
+<li>Organize our metrics, similar to writing a report, in to a <code>View</code></li>
+<li>Export our views to a backend (Prometheus in this case)</li>
+</ol>
+<p>Requirements:</p>
+<ul>
+<li>Java 8+</li>
+<li><a href="https://maven.apache.org/install.html" target="_blank">Apache Maven</a></li>
+<li>An installation of Prometheus which you can get from here <a href="https://prometheus.io/docs/introduction/first_steps/" target="_blank">Install Prometheus</a></li>
+</ul>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Installation" duration="1">
+        <p>We will first create our project directory, add our <code>pom.xml</code>, and our source code.</p>
+<pre><code>mkdir repl-app
+cd repl-app
+
+touch pom.xml
+
+mkdir -p src/main/java/io/opencensus/metrics/quickstart
+touch src/main/java/io/opencensus/metrics/quickstart/Repl.java
+</code></pre>
+<p>Put this in your newly generated <code>pom.xml</code> file:</p>
+<pre><code>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+    xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&#34;&gt;
+        &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+        &lt;groupId&gt;io.opencensus.metrics.quickstart&lt;/groupId&gt;
+        &lt;artifactId&gt;quickstart&lt;/artifactId&gt;
+        &lt;packaging&gt;jar&lt;/packaging&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+        &lt;name&gt;quickstart&lt;/name&gt;
+        &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;opencensus.version&gt;0.15.0&lt;/opencensus.version&gt; &lt;!-- The OpenCensus version to use --&gt;
+    &lt;/properties&gt;
+
+    &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.5.0.Final&lt;/version&gt;
+                &lt;/extension&gt;
+            &lt;/extensions&gt;
+
+        &lt;pluginManagement&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;3.7.0&lt;/version&gt;
+                    &lt;configuration&gt;
+                        &lt;source&gt;1.8&lt;/source&gt;
+                        &lt;target&gt;1.8&lt;/target&gt;
+                    &lt;/configuration&gt;
+                &lt;/plugin&gt;
+
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                    &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;1.10&lt;/version&gt;
+                    &lt;configuration&gt;
+                        &lt;programs&gt;
+                            &lt;program&gt;
+                                &lt;id&gt;Repl&lt;/id&gt;
+                                &lt;mainClass&gt;io.opencensus.metrics.quickstart.Repl&lt;/mainClass&gt;
+                            &lt;/program&gt;
+                        &lt;/programs&gt;
+                    &lt;/configuration&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+
+        &lt;/pluginManagement&gt;
+
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<p>Put this in <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code>:</p>
+<pre><code>package io.opencensus.metrics.quickstart;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Repl {
+    public static void main(String ...args) {
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true) {
+            try {
+                readEvaluateProcessLine(stdin);
+            } catch (IOException e) {
+                System.err.println(&#34;Exception &#34;+ e);
+            }
+        }
+    }
+
+    private static String processLine(String line) {
+        return line.toUpperCase();
+    }
+
+    private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+        System.out.print(&#34;&gt; &#34;);
+        System.out.flush();
+        String line = in.readLine();
+        String processed = processLine(line);
+        System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
+    }
+}
+</code></pre>
+<p>To install required dependencies, run this from your project&#39;s root directory:</p>
+<pre><code># Make sure to be in your project&#39;s root directory
+mvn install
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Getting Started" duration="1">
+        <p>The Repl application takes input from users, converts any lower-case letters into upper-case letters, and echoes the result back to the user, for example:</p>
+<pre><code>&gt; foo
+&lt; FOO
+</code></pre>
+<p>We will instrument this application to collect metrics, such as:</p>
+<ul>
+<li>Latency per processing loop</li>
+<li>Number of lines read</li>
+<li>Number of errors</li>
+<li>Line lengths</li>
+</ul>
+<p>Let&#39;s first run the application and see what we have.</p>
+<pre><code>mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
+</code></pre>
+<p>You will be given a text prompt. Try typing in a lowercase word and hit <code>enter</code> to receive the uppercase equivalent.</p>
+<p>You should see something like this after a few tries:<br><img alt="java image 1" src="./../../img/424003701db04db5.png"></p>
+<p>To exit out of the application, hit <code>ctrl + c</code> on your keyboard.</p>
+<p>From here on out, we will be rewriting sections of <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code> and <code>pom.xml</code>.</p>
+<p>You can recompile and run the application after editing it by running this command:</p>
+<pre><code>mvn install
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Enable Metrics" duration="1">
+        <h2>Import Packages</h2>
+<p>To enable metrics, we&#39;ll declare the dependencies in your <code>pom.xml</code> file. Add the following snippet of code after the <code>&lt;properties&gt;...&lt;/properties&gt;</code> node.</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+        &lt;artifactId&gt;opencensus-api&lt;/artifactId&gt;
+        &lt;version&gt;${opencensus.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+        &lt;artifactId&gt;opencensus-impl&lt;/artifactId&gt;
+        &lt;version&gt;${opencensus.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>We will now be importing modules into <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code>. Append the following snippet after the existing <code>import</code> statements:</p>
+<pre><code>import io.opencensus.common.Scope;
+import io.opencensus.stats.Stats;
+import io.opencensus.stats.Measure;
+import io.opencensus.stats.Measure.MeasureLong;
+import io.opencensus.stats.Measure.MeasureDouble;
+import io.opencensus.stats.Stats;
+import io.opencensus.stats.StatsRecorder;
+import io.opencensus.stats.View;
+import io.opencensus.tags.Tags;
+import io.opencensus.tags.Tagger;
+import io.opencensus.tags.TagContext;
+import io.opencensus.tags.TagContextBuilder;
+import io.opencensus.tags.TagKey;
+import io.opencensus.tags.TagValue;
+</code></pre>
+<h2>Create Measures for Metrics</h2>
+<p>First, we will create the variables needed to later record our metrics. Place the following snippet on the line after <code>public class Repl {</code>:</p>
+<pre><code>// The latency in milliseconds
+private static final MeasureDouble M_LATENCY_MS = MeasureDouble.create(&#34;repl/latency&#34;, &#34;The latency in milliseconds per REPL loop&#34;, &#34;ms&#34;);
+
+// Counts/groups the lengths of lines read in.
+private static final MeasureLong M_LINE_LENGTHS = MeasureLong.create(&#34;repl/line_lengths&#34;, &#34;The distribution of line lengths&#34;, &#34;By&#34;);
+
+private static final Tagger tagger = Tags.getTagger();
+private static final StatsRecorder statsRecorder = Stats.getStatsRecorder();
+
+private static void recordStat(MeasureLong ml, Long n) {
+    statsRecorder.newMeasureMap().put(ml, n);
+}
+</code></pre>
+<h2>Create Tags</h2>
+<p>Now we will create the variable later needed to record extra text meta-data.</p>
+<p>Insert the following snippet on the line before <code>private static final Tagger tagger = Tags.getTagger();</code>:</p>
+<pre><code>// The tag &#34;method&#34;
+private static final TagKey KEY_METHOD = TagKey.create(&#34;method&#34;);
+private static final TagKey KEY_STATUS = TagKey.create(&#34;status&#34;);
+private static final TagKey KEY_ERROR = TagKey.create(&#34;error&#34;);
+</code></pre>
+<p>We will later use this tag, called <code>KEY_METHOD</code>, to record what method is being invoked. In our scenario, we will only use it to record that &#34;repl&#34; is calling our data.</p>
+<p>We will now create helper functions to assist us with recording Tagged Stats. One will record a <code>Long</code>, another a <code>Double</code>, and finally an array of <code>Doubles</code>.</p>
+<p>Insert the following snippet after <code>private static void recordStat</code>:</p>
+<pre><code>private static void recordTaggedStat(TagKey key, String value, MeasureLong ml, Long n) {
+    TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(ml, n).record();
+    }
+}
+
+private static void recordTaggedStat(TagKey key, String value, MeasureDouble md, Double d) {
+    TagContext tctx = tagger.emptyBuilder().put(key, TagValue.create(value)).build();
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(md, d).record();
+    }
+}
+
+private static void recordTaggedStat(TagKey[] keys, String[] values, MeasureDouble md, Double d) {
+    TagContextBuilder builder = tagger.emptyBuilder();
+    for (int i = 0; i &lt; keys.length; i++) {
+        builder.put(keys[i], TagValue.create(values[i]));
+    }
+    TagContext tctx = builder.build();
+
+    try (Scope ss = tagger.withTagContext(tctx)) {
+        statsRecorder.newMeasureMap().put(md, d).record();
+    }
+}
+</code></pre>
+<h2>Recording Metrics</h2>
+<p>Finally, we&#39;ll hook our stat recorders in to <code>main</code>, <code>processLine</code>, and <code>readEvaluateProcessLine</code>:</p>
+<pre><code>while (true) {
+    long startTimeNs = System.nanoTime();
+
+    try {
+        readEvaluateProcessLine(stdin);
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+        sinceInMilliseconds(startTimeNs));
+    } catch (IOException e) {
+        System.err.println(&#34;EOF bye &#34;+ e);
+        return;
+    } catch (Exception e) {
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+        String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+        sinceInMilliseconds(startTimeNs));
+        return;
+    }
+}
+
+private static String processLine(String line) {
+    long startTimeNs = System.nanoTime();
+
+    try {
+        return line.toUpperCase();
+    } finally {
+        TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+        String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+        recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS, sinceInMilliseconds(startTimeNs));
+    }
+}
+
+private static double sinceInMilliseconds(long startTimeNs) {
+    return (new Double(System.nanoTime() - startTimeNs))/1e6;
+}
+
+private static void readEvaluateProcessLine(BufferedReader in) throws IOException {
+    System.out.print(&#34;&gt; &#34;);
+    System.out.flush();
+
+    String line = in.readLine();
+    String processed = processLine(line);
+    System.out.println(&#34;&lt; &#34; + processed + &#34;\n&#34;);
+    if (line != null &amp;&amp; line.length() &gt; 0) {
+        recordStat(M_LINE_LENGTHS, new Long(line.length()));
+    }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Enable Views" duration="1">
+        <p>In order to analyze these stats, we&#39;ll need to aggregate our data with Views.</p>
+<h2>Import Packages</h2>
+<pre><code>import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import io.opencensus.stats.Aggregation;
+import io.opencensus.stats.Aggregation.Distribution;
+import io.opencensus.stats.BucketBoundaries;
+import io.opencensus.stats.View.Name;
+import io.opencensus.stats.ViewManager;
+import io.opencensus.stats.View.AggregationWindow.Cumulative;
+</code></pre>
+<h2>Create Views</h2>
+<p>Append this code snippet as our last function inside of <code>public class Repl</code>:</p>
+<pre><code>private static void registerAllViews() {
+    // Defining the distribution aggregations
+    Aggregation latencyDistribution = Distribution.create(BucketBoundaries.create(
+        Arrays.asList(
+            // [&gt;=0ms, &gt;=25ms, &gt;=50ms, &gt;=75ms, &gt;=100ms, &gt;=200ms, &gt;=400ms, &gt;=600ms, &gt;=800ms, &gt;=1s,&gt;=2s, &gt;=4s, &gt;=6s]
+            0.0, 25.0, 50.0, 75.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0, 2000.0, 4000.0, 6000.0)
+        ));
+
+    Aggregation lengthsDistribution =
+        Distribution.create(BucketBoundaries.create(
+            Arrays.asList(
+                // [&gt;=0B, &gt;=5B, &gt;=10B, &gt;=20B, &gt;=40B, &gt;=60B, &gt;=80B, &gt;=100B, &gt;=200B, &gt;=400B, &gt;=600B, &gt;=800B, &gt;=1000B]
+                0.0, 5.0, 10.0, 20.0, 40.0, 60.0, 80.0, 100.0, 200.0, 400.0, 600.0, 800.0, 1000.0)
+            ));
+
+    // Define the count aggregation
+    Aggregation countAggregation = Aggregation.Count.create();
+
+    // So tagKeys
+    List&lt;TagKey&gt; noKeys = new ArrayList&lt;TagKey&gt;();
+
+    // Define the views
+    View[] views = new View[]{
+        View.create(Name.create(&#34;ocjavametrics/latency&#34;), &#34;The distribution of latencies&#34;, M_LATENCY_MS, latencyDistribution, Collections.unmodifiableList(Arrays.asList(KEY_METHOD, KEY_STATUS, KEY_ERROR))),
+        View.create(Name.create(&#34;ocjavametrics/lines_in&#34;), &#34;The number of lines read in from standard input&#34;, M_LINE_LENGTHS, countAggregation, noKeys),
+        View.create(Name.create(&#34;ocjavametrics/line_lengths&#34;), &#34;The distribution of line lengths&#34;, M_LINE_LENGTHS, lengthsDistribution, noKeys)
+    };
+
+    // Create the view manager
+    ViewManager vmgr = Stats.getViewManager();
+
+    // Then finally register the views
+    for (View view : views) {
+        vmgr.registerView(view);
+    }
+}
+</code></pre>
+<h2>Register Views</h2>
+<p>We will create a function called <code>setupOpenCensusAndPrometheusExporter</code> and call it from our main function:</p>
+<pre><code>public static void main(String ...args) {
+    // Step 1. Enable OpenCensus Metrics.
+    try {
+        setupOpenCensusAndPrometheusExporter();
+    } catch (IOException e) {
+        System.err.println(&#34;Failed to create and register OpenCensus Prometheus Stats exporter &#34;+ e);
+        return;
+    }
+
+    BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+
+    while (true) {
+        long startTimeNs = System.nanoTime();
+
+        try {
+            readEvaluateProcessLine(stdin);
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS};
+            String[] tagValues = {&#34;repl&#34;, &#34;OK&#34;};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
+        } catch (IOException e) {
+            System.err.println(&#34;EOF bye &#34;+ e);
+            return;
+        } catch (Exception e) {
+            TagKey[] tagKeys = {KEY_METHOD, KEY_STATUS, KEY_ERROR};
+            String[] tagValues = {&#34;repl&#34;, &#34;ERROR&#34;, e.getMessage()};
+            recordTaggedStat(tagKeys, tagValues, M_LATENCY_MS,
+                sinceInMilliseconds(startTimeNs));
+            return;
+        }
+    }
+}
+
+private static void setupOpenCensusAndPrometheusExporter() throws IOException {
+    // Firstly register the views
+    registerAllViews();
+}
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Exporting stats" duration="1">
+        <h2>Import Packages</h2>
+<p>Add the following code snippet to your <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> node in <code>pom.xml</code>:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.opencensus&lt;/groupId&gt;
+    &lt;artifactId&gt;opencensus-exporter-stats-prometheus&lt;/artifactId&gt;
+    &lt;version&gt;${opencensus.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;
+    &lt;artifactId&gt;simpleclient_httpserver&lt;/artifactId&gt;
+    &lt;version&gt;0.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>We also need to expose the Prometheus endpoint say on address &#34;localhost:8889&#34; in order for Prometheus to scrape our application.<br>Please add the following to our Java code</p>
+<p>Add the following code snippet to <code>src/main/java/io/opencensus/metrics/quickstart/Repl.java</code>:</p>
+<pre><code>import io.opencensus.exporter.stats.prometheus.PrometheusStatsCollector;
+import io.prometheus.client.exporter.HTTPServer;
+</code></pre>
+<h2>Export Views</h2>
+<p>We will further expand upon <code>setupOpenCensusAndPrometheusExporter</code>:</p>
+<pre><code>private static void setupOpenCensusAndPrometheusExporter() throws IOException {
+    // Firstly register the views
+    registerAllViews();
+
+    // Create and register the Prometheus exporter
+    PrometheusStatsCollector.createAndRegister();
+
+    // Run the server as a daemon on address &#34;localhost:8889&#34;
+    HTTPServer server = new HTTPServer(&#34;localhost&#34;, 8889, true);
+}
+</code></pre>
+<h2>Running the tutorial</h2>
+<p>This step involves running the tutorial application in one terminal and then Prometheus itself in another terminal.</p>
+<p>Having properly installed Java and Maven, in one terminal, please run</p>
+<pre><code>mvn install
+mvn exec:java -Dexec.mainClass=io.opencensus.metrics.quickstart.Repl
+</code></pre>
+<h2>Prometheus configuration file</h2>
+<p>To allow Prometheus to scrape from our application, we have to point it towards the tutorial application whose<br>server is running on &#34;localhost:8889&#34;.</p>
+<p>To do this, we firstly need to create a YAML file with the configuration e.g. <code>promconfig.yaml</code><br>whose contents are:</p>
+<pre><code>scrape_configs:
+    - job_name: &#39;ocjavametricstutorial&#39;
+
+    scrape_interval: 10s
+
+    static_configs:
+    - targets: [&#39;localhost:8889&#39;]
+</code></pre>
+<h2>Running Prometheus</h2>
+<p>With that file saved as <code>promconfig.yaml</code> we should now be able to run Prometheus like this</p>
+<pre><code>prometheus --config.file=promconfig.yaml
+</code></pre>
+<p>and then return to the terminal that&#39;s running the Java metrics quickstart and generate some work by typing inside it.</p>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Viewing your metrics" duration="0">
+        <p>With the above you should now be able to navigate to the Prometheus UI at http://localhost:9090</p>
+<p>which should show:</p>
+<ul>
+<li>Available metrics<br><img src="./../../img/cbb9c54bc3e65d40.png"></li>
+<li>Lines-in counts<br><img src="./../../img/4bc7015c8f88a0b9.png"></li>
+<li>Latency distributions<br><img src="./../../img/9e6eb57ca66384a7.png"></li>
+<li>Line lengths distributions<br><img src="./../../img/d9032110aa8c5b3f.png"></li>
+</ul>
+
+
+      </google-codelab-step>
+
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

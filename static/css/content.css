@@ -184,6 +184,10 @@ section a .lang-card {
   position: relative;
 }
 
+.user-card-container.talks {
+  height: 200px;
+}
+
 .lang-card-container:hover,
 .user-card-container:hover {
   transform: translateY(-10px);
@@ -210,6 +214,17 @@ section a .lang-card {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.user-card-container.talks a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding: 10px;
+  display: block;
 }
 
 .user-card-container img {
@@ -247,6 +262,22 @@ article section.page .lang-card img {
 .user-card-container .lang-card-right-panel {
   display: flex;
   align-items: center;
+}
+
+.user-card-container.talks p {
+    font-size: 14px;
+    height: 44px;
+}
+
+.user-card-container.talks img {
+  display: block;
+  text-align: center;
+  max-height: 100px;
+}
+
+.user-card-container.talks p,
+.user-card-container.talks img {
+    margin: 0;
 }
 
 article section.page div.title-card img {

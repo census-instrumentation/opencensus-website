@@ -7,6 +7,87 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### April 21, 2019
+
+#### [OpenTelemetry: The Merger of OpenCensus and OpenTracing](https://www.cncf.io/blog/2019/05/21/a-brief-history-of-opentelemetry-so-far/)
+
+After many months of planning, discussion, prototyping, more discussion, and more planning,
+OpenTracing and OpenCensus are merging to form [OpenTelemetry](https://opentelemetry.io), which is now a CNCF sandbox project.
+The seed governance committee is composed of representatives from Google, Lightstep, Microsoft,
+and Uber, and more organizations are getting involved every day ...
+
+---
+
+
+##### April 19, 2019
+
+#### [Merging OpenTracing and OpenCensus: A Roadmap to Convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
+
+We are creating a new, unified set of libraries and specifications for
+observability telemetry. It will [merge the OpenTracing and
+OpenCensus](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)
+projects. Learn about [roadmap to
+convergence](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)
+and participate in a new project.
+
+---
+
+
+##### April 16, 2019
+
+#### [Google NEXT 2019: Complete Production Observability With OpenCensus](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
+
+At Google NEXT 2019 we presented OpenCensus in one of breakout sessions. There
+were three presenters. [Morgan McLean](https://github.com/mtwo) gave an overview
+of the OpenCensus and demonstrated new Agent system counters collection
+capabilities, [Sergey Kanzhelev](https://github.com/SergeyKanzhelev) talked
+about developments over the last year and talked about plans on logging API and
+OpenTracing merger, [Steve Flanders](https://github.com/flands) made a demo of
+OpenCensus and latest development in Agent and Collector. Thank you for
+everybody attended. You can view [session
+recording](https://cloud.withgoogle.com/next/sf/sessions?session=268946-130602)
+on demand. Slides of this session can be found [here](https://docs.google.com/presentation/d/1yFPTjNwu75VBoHmqvXTLi_5j-6UW1lADYuQeHQ4H3Zc).
+
+---
+
+
+##### March 28, 2019
+
+#### [Merging OpenTracing and OpenCensus: Goals and Non-Goals](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)
+
+Two projects — OpenTracing and OpenCensus — are very similar in that they aim to
+unify app instrumentation and make observability a built-in feature in every
+modern application. Over the past few months, leaders from both communities have
+formed a technical committee to help facilitate project convergence. Read about
+overarching [goals (and non-goals) regarding this project
+merger](https://medium.com/opentracing/merging-opentracing-and-opencensus-f0fe9c7ca6f0)...
+
+---
+
+##### December 16, 2018
+
+#### [Web Metrics with OpenCensus and Stackdriver](https://medium.com/@alexamies/web-metrics-with-opencenus-and-stackdriver-525af8069ce6)
+
+This post describes an approach to measuring and understanding application health as experienced by the population of users of a web application in near realtime.
+
+---
+
+##### November 9, 2018
+
+#### [Correlating traces and logs with OpenCensus](https://medium.com/@sebright/correlating-traces-and-logs-with-opencensus-ac95d9b14b18)
+
+This post demonstrates debugging a simple issue using OpenCensus distributed tracing and log correlation.
+
+---
+
+##### November 5, 2018
+
+#### [Export Dropwizard Metrics to OpenCensus](https://medium.com/@mayurkale22/export-dropwizard-metrics-to-opencensus-1e98851693f8)
+
+This post shows how to export Dropwizard Metrics to OpenCensus with minimal changes. [\[read more\]](/guides/integrations/dropwizard)
+
+---
+
 ##### October 7, 2018
 
 #### [Distributed Tracing and Monitoring using OpenCensus](https://medium.com/@rghetia/distributed-tracing-and-monitoring-using-opencensus-fe5f6e9479fb)
