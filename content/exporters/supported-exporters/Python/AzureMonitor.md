@@ -34,6 +34,11 @@ To create the exporters, you'll need to:
 * Put the instrumentation key in `APPINSIGHTS_INSTRUMENTATIONKEY` environment variable.
 * Create the exporters in code.
 
+{{% notice tip %}}
+For demo purpose, the example code is using 100% sample rate.
+You should specify a reasonable sample rate for production environment.
+{{% /notice %}}
+
 {{<highlight python>}}
 from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.trace.samplers import ProbabilitySampler
