@@ -9,6 +9,7 @@ logo: /img/partners/microsoft_logo.svg
 ---
 
 - [Introduction](#introduction)
+- [Installing the exporter](#installing-the-exporter)
 - [Creating the exporter](#creating-the-exporter)
 - [Viewing your traces](#viewing-your-traces)
 
