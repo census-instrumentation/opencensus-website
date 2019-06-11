@@ -1,7 +1,7 @@
 ---
 title: "Traces"
 date: 2019-06-10T18:25:17-08:00
-aliases: [/service/exporters/honeycomb/traces]
+aliases: [/agent/exporters/honeycomb/traces]
 logo: /img/honeycomb-logo.jpg
 ---
 

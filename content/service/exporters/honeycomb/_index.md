@@ -1,7 +1,7 @@
 ---
 title: "Honeycomb"
 date: 2019-06-10T18:25:17-08:00
-aliases: [/service/exporters/honeycomb]
+aliases: [/agent/exporters/honeycomb]
 logo: /img/honeycomb-logo.jpg
 ---
 
