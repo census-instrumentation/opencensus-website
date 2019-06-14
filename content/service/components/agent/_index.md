@@ -40,7 +40,7 @@ that ocagent sends data to.
 
 ##### For Application Developers ...
 
-* <b>Manage single expoter.</b> Your applications no longer have to locally enable each exporter per language.
+* <b>Manage single exporter.</b> Your applications no longer have to locally enable each exporter per language.
 All applications sends data to OC-Agent using OpenCensus Exporter.
 
 * <b>Democratizes deployments</b> for customers as well. They can send the data to a backend of their choice.
@@ -54,13 +54,13 @@ You can read more about this in [OpenCensus PHP design](https://docs.google.com/
 Drivers, servers, frameworks etc can all be instrumented and still be portable across various deployments and clouds. The customer
 can at anytime decide which backend they'd like to export to.
 An example of such a provider is [Microsoft with Azure Application Insights.](https://docs.microsoft.com/en-us/azure/azure-monitor/app/opencensus-local-forwarder)
-which has their own agent that receives OpenCensus observability signals.
+Which has their own agent that receives OpenCensus observability signals.
 
 * <b>Reduces overhead.</b> Enabling exporters in only one place dramatically reduces the need to restart and redeploy each application that produces observability.
 Only ocagent needs to be restarted and the other applications can stay deployed in production.
 
 * <b>Consolidates Observability signals.</b> To bootstrap and democratize collection and exporting of your observability data, ocagent also comes with "receivers". "receivers" make ocagent act like
-pass-through backends that then receive your telemetry and then route it to the various exporter of your choice. For example if all your applications used Zipkin or Jaeger or Prometheus,
+pass-through backends that then receive your telemetry and then route it to the exporter of your choice. For example if all your applications used Zipkin or Jaeger or Prometheus,
 ocagent can receive data from your applications and then route it to your target backend. This is particularly important if you are in a polyglot and poly-backend setup
 for which legacy applications are a pain to maintain but you'd like to consolidate your observability signals. It also means that you won't have to install every single backend's
 library and run and scale each backend. Some situations such as expensive acquisitions particularly can benefit from ocagent as described.
