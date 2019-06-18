@@ -7,6 +7,17 @@ aliases: [/blog]
 logo: /img/logo-sm.svg
 ---
 
+##### June 18, 2019
+
+#### [Easier and More Powerful Observability with the OpenCensus Agent and Collector](https://opensource.googleblog.com/2019/06/easier-and-more-powerful-observability.html)
+
+We’ve recently enhanced OpenCensus with two new components: an optional agent that can manage exporters and collect system telemetry
+from VMs and containers, and an optional collector service that offers improved trace sampling and metrics aggregation.
+While we’ve already demonstrated these components on stage at Kubecon and Next, we’re now ready to show them more broadly
+and encourage their use ...
+
+---
+
 ##### April 21, 2019
 
 #### [OpenTelemetry: The Merger of OpenCensus and OpenTracing](https://www.cncf.io/blog/2019/05/21/a-brief-history-of-opentelemetry-so-far/)
