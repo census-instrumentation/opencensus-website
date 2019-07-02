@@ -109,7 +109,7 @@ import time
 
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
-from opencensus.stats import stats
+from opencensus.stats import stats as stats_module
 from opencensus.tags import tag_key as tag_key_module
 from opencensus.tags import tag_map as tag_map_module
 from opencensus.tags import tag_value as tag_value_module
@@ -122,7 +122,7 @@ m_latency_ms = measure_module.MeasureFloat("repl/latency", "The latency in milli
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
-stats_recorder = stats.Stats().stats_recorder
+stats_recorder = stats_module.stats.stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
@@ -176,9 +176,9 @@ In order to analyze these stats, we'll need to aggregate our data with Views.
 import sys
 import time
 
-from opencensus.stats import stats
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
+from opencensus.stats import stats as stats_module
 from opencensus.stats import view as view_module
 from opencensus.tags import tag_key as tag_key_module
 from opencensus.tags import tag_map as tag_map_module
@@ -192,7 +192,7 @@ m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milli
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
-stats_recorder = stats.Stats().stats_recorder
+stats_recorder = stats_module.stats.stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
@@ -262,7 +262,7 @@ We will create a function called `setupOpenCensusAndPrometheusExporter` and call
 {{<highlight python>}}
 def main():
     setupOpenCensusAndPrometheusExporter()
-    
+
     while True:
         readEvaluateProcessLine()
 
@@ -272,7 +272,7 @@ def registerAllViews(view_manager):
     view_manager.register_view(line_length_view)
 
 def setupOpenCensusAndPrometheusExporter():
-    stats = stats_module.Stats()
+    stats = stats_module.stats
     view_manager = stats.view_manager
     registerAllViews(view_manager)
 {{</highlight>}}
@@ -283,13 +283,12 @@ def setupOpenCensusAndPrometheusExporter():
 import sys
 import time
 
-from opencensus.stats import stats
 from opencensus.stats.exporters import prometheus_exporter as prometheus
 
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
-from opencensus.stats import view as view_module
 from opencensus.stats import stats as stats_module
+from opencensus.stats import view as view_module
 from opencensus.tags import tag_key as tag_key_module
 from opencensus.tags import tag_map as tag_map_module
 from opencensus.tags import tag_value as tag_value_module
@@ -303,7 +302,7 @@ m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milli
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
-stats_recorder = stats.Stats().stats_recorder
+stats_recorder = stats_module.stats.stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
@@ -335,10 +334,10 @@ def main():
     # 1. Read input
     # 2. process input
     setupOpenCensusAndPrometheusExporter()
-    
+
     while True:
         readEvaluateProcessLine()
-        
+
 
 def registerAllViews(view_manager):
     view_manager.register_view(latency_view)
@@ -347,7 +346,7 @@ def registerAllViews(view_manager):
 
 
 def setupOpenCensusAndPrometheusExporter():
-    stats = stats_module.Stats()
+    stats = stats_module.stats
     view_manager = stats.view_manager
     registerAllViews(view_manager)
 
@@ -389,7 +388,7 @@ We need to expose the Prometheus endpoint say on address "localhost:8000" in ord
 
 ```python
 def setupOpenCensusAndPrometheusExporter():
-    stats = stats_module.Stats()
+    stats = stats_module.stats
     view_manager = stats.view_manager
 
     exporter = prometheus.new_stats_exporter(prometheus.Options(namespace="oc_python", port=8000))
@@ -407,13 +406,12 @@ Here is the final state of the code:
 import sys
 import time
 
-from opencensus.stats import stats
 from opencensus.stats.exporters import prometheus_exporter as prometheus
 
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
-from opencensus.stats import view as view_module
 from opencensus.stats import stats as stats_module
+from opencensus.stats import view as view_module
 from opencensus.tags import tag_key as tag_key_module
 from opencensus.tags import tag_map as tag_map_module
 from opencensus.tags import tag_value as tag_value_module
@@ -426,7 +424,7 @@ m_latency_ms = measure_module.MeasureFloat("repl_latency", "The latency in milli
 m_line_lengths = measure_module.MeasureInt("repl_line_lengths", "The distribution of line lengths", "By")
 
 # The stats recorder
-stats_recorder = stats.Stats().stats_recorder
+stats_recorder = stats_module.stats.stats_recorder
 
 # Create the tag key
 key_method = tag_key_module.TagKey("method")
@@ -458,10 +456,10 @@ def main():
     # 1. Read input
     # 2. process input
     setupOpenCensusAndPrometheusExporter()
-    
+
     while True:
         readEvaluateProcessLine()
-        
+
 
 def registerAllViews(view_manager):
     view_manager.register_view(latency_view)
@@ -470,7 +468,7 @@ def registerAllViews(view_manager):
 
 
 def setupOpenCensusAndPrometheusExporter():
-    stats = stats_module.Stats()
+    stats = stats_module.stats
     view_manager = stats.view_manager
 
     exporter = prometheus.new_stats_exporter(prometheus.Options(namespace="oc_python", port=8000))
