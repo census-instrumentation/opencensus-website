@@ -37,7 +37,7 @@ func main() {
 		Handler: originalHandler, // The handler you'd have used originally
 	}
 
-	// Now use the instrumnted handler
+	// Now use the instrumented handler
 	if err := http.ListenAndServe(":9999", och); err != nil {
 		log.Fatalf("Failed to run the server: %v", err)
 	}
