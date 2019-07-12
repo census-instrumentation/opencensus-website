@@ -29,7 +29,7 @@ Name|Identifies the metric being collected|grpc.io/client/completed_rpcs|Make it
 Description|The description of the metric being collected|The latency in milliseconds, The number of bytes received|Make it descriptive of the metric being collected
 Measure|The [Measure](/stats/measure) that produces measurements for this collection|[Measure](/stats/measure)|
 TagKeys|The various tagkeys used to group and filter collected metrics later on|[TagKeys](/tag/key)|These are optional
-Aggregation|The aggregationt against which measurements will be made|[Aggregation](#aggregations)|This is mandatory
+Aggregation|The aggregation against which measurements will be made|[Aggregation](#aggregations)|This is mandatory
 
 Users can dynamically create and delete views at runtime. Libraries may
 export their own views and claim the view names by registering them.  
