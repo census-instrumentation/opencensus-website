@@ -26,7 +26,7 @@ header::after {
   color: #BF2A32;
 }
 
-.header-survey {
+.opentelemetry-note {
   position: absolute;
   top: 0;
   right: 20px;
@@ -37,39 +37,39 @@ header::after {
   justify-content: center;
 }
 
-a.btn.btn-light.survey-button {
+a.btn.btn-light.opentelemetry-button {
   text-transform: none;
 }
 
-a.btn.btn-light.survey-button {
+a.btn.btn-light.opentelemetry-button {
   margin-bottom: 0;
   color: #fff;
   background: #75af00;
   border: 1px solid #75af00;
 }
 
-a.btn.btn-light.survey-button:hover {
+a.btn.btn-light.opentelemetry-button:hover {
   color: #fff;
   background: #75af00;
 }
 
-.mobile-survey {
+.mobile-opentelemetry {
   display: none;
   margin-bottom: 1rem;
   margin-left: -10px;
   margin-right: -10px;
 }
 
-.mobile-survey .survey-button {
+.mobile-opentelemetry .opentelemetry-button {
   width: 100%;
 }
 
 @media (max-width: 768px) {
-  header .header-survey {
+  header .header-opentelemetry {
     display: none;
   }
 
-  .mobile-survey {
+  .mobile-opentelemetry {
     display: block;
   }
 }
