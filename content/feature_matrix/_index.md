@@ -65,7 +65,7 @@ Measure (Int64 and Double)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Measurement (Int64 and Double)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 MeasureMap or equivalent (allow for batch recording)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 Aggregation (Count, Sum, LastValue, Distribution)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
-Bucket Boundaries (only with postive bounds)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
+Bucket Boundaries (only with positive bounds)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 AggregationData (Count, Sum, LastValue, Distribution)|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 View|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes
 ViewData|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes

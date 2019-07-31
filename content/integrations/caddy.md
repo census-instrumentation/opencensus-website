@@ -57,7 +57,7 @@ and many more
 
 However, the distributed tracing and monitoring framework should provide very low
 latency and optionality so that users of the server will not incur expensive overhead.
-Also the addition of observability the web server should not add a maintainence burden
+Also the addition of observability the web server should not add a maintenance burden
 for your teams, the project maintainers either nor should they require sophisticated
 and specialized distributed systems and observability knowledge, nor should it require
 sophisicated infrastructure deployments.

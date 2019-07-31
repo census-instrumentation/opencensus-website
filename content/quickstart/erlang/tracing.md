@@ -337,7 +337,7 @@ end
 
 ### Running the code
 
-Having already succesfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
+Having already successfully started Zipkin as in [Zipkin Codelab](/codelabs/zipkin), we can now run our code by
 
 {{<tabs Erlang Elixir>}}
 {{<highlight erlang>}}

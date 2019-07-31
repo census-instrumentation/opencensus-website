@@ -79,7 +79,7 @@ You'll just to enable any of the trace exporter in [Go exporters](/guides/export
 For assistance installing Memcached, please visit the [Memcached Installation wiki](https://github.com/memcached/memcached/wiki/Install)
 {{% /notice %}}
 
-With Memcached now installed and running, we can now start the code sample and for simplicitly examining metrics, we'll use Stackdriver Monitoring and Tracing
+With Memcached now installed and running, we can now start the code sample and for simplicity examining metrics, we'll use Stackdriver Monitoring and Tracing
 
 {{% notice tip %}}
 For assistance setting up Stackdriver, please visit this [Stackdriver setup guided codelab](/codelabs/stackdriver)

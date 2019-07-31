@@ -9,7 +9,7 @@ weight: 1
 
 HyperText Transfer Protocol(HTTP) is an application-layer protocol for transmitting hypermedia documents, such as HTML [[1]](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 
-OpenCensus can be used with HTTP packages, frameworks and plugins in the following langauges:
+OpenCensus can be used with HTTP packages, frameworks and plugins in the following languages:
 
 {{% children %}}
 

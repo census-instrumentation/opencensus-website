@@ -99,8 +99,8 @@ globalStats.registerView(view);
 // and our measurement
 const measurement = {measure, value: 10};
 
-// finaly, let's record it
+// finally, let's record it
 globalStats.record([measurement], tags);
 {{</highlight>}}
 
-Now, run it with `node example.js` and you should see logs for our view beeing created and our measurement beeing recorded.
+Now, run it with `node example.js` and you should see logs for our view being created and our measurement being recorded.

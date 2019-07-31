@@ -395,7 +395,7 @@ We will be adding the Prometheus Erlang exporter hex package to `rebar.config` a
 
 ### Create the exporter
 
-In order for our metrics to be exported to Prometheus, our application needs to be exposed as a scrape endpoint. The simplest method to acheive this is to use Erlang's included HTTP server through `prometheus_httpd`. Add the hex package to `rebar.config` and the applications to `repl.app.src`:
+In order for our metrics to be exported to Prometheus, our application needs to be exposed as a scrape endpoint. The simplest method to achieve this is to use Erlang's included HTTP server through `prometheus_httpd`. Add the hex package to `rebar.config` and the applications to `repl.app.src`:
 
 ```erlang
 {erl_opts, [debug_info]}.

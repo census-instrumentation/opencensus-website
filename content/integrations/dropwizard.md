@@ -8,7 +8,7 @@ weight: 5
 ---
 
 - [Background](#background)
-- [Prerequisities](#prerequisites)
+- [Prerequisite](#prerequisites)
 - [Adding dependencies](#adding-dependencies)
 - [Enable an exporter](#enable-an-exporter)
 - [End to end example](#end-to-end-example)
