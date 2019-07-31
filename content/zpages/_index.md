@@ -23,7 +23,7 @@ the process to be inspected is known in production.
 The Tracez route is available to examine and bucketize spans by latency buckets for example
 
 ```yaml
-(0us, 10us, 100us, 1ms, 10ms, 100ms, 1s, 10s, 1m]
+[0us, 10us, 100us, 1ms, 10ms, 100ms, 1s, 10s, 1m]
 ```
 
 They also allow you to quickly examine error samples
