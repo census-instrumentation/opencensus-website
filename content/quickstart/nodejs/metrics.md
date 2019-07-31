@@ -442,7 +442,7 @@ const lineLengthView = globalStats.createView(
 );
 globalStats.registerView(lineLengthView);
 
-// The begining of our REPL loop
+// The beginning of our REPL loop
 let startTime = new Date();
 let endTime;
 
@@ -583,7 +583,7 @@ const lineLengthView = globalStats.createView(
 );
 globalStats.registerView(lineLengthView);
 
-// The begining of our REPL loop
+// The beginning of our REPL loop
 let startTime = new Date();
 let endTime;
 // REPL is the read, evaluate, print and loop

@@ -13,7 +13,7 @@ aliases: [/custom_exporter/nodejs/trace, /custom_exporter/node.js/trace, /guides
 - [References](#references)
 
 #### Introduction
-A trace exporter must implement [Exporter](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/exporters/types.ts). Which must contain a method `onEndSpan`, that is called whenever a new span is ended. Usualy, this method writes the span to an [Exporter Buffer](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/exporters/exporter-buffer.ts#L26), allowing the Exporter to store spans and send batched data to a client. A trace exporter must also contain a `publish` method that will translate and export [root spans](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L206) and its [child spans](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L94) to the service, if an Exporter Buffer is used, it will be responsible for calling the `publish` method when it has reached its time or size capacity.
+A trace exporter must implement [Exporter](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/exporters/types.ts). Which must contain a method `onEndSpan`, that is called whenever a new span is ended. Usually, this method writes the span to an [Exporter Buffer](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/exporters/exporter-buffer.ts#L26), allowing the Exporter to store spans and send batched data to a client. A trace exporter must also contain a `publish` method that will translate and export [root spans](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L206) and its [child spans](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/types.ts#L94) to the service, if an Exporter Buffer is used, it will be responsible for calling the `publish` method when it has reached its time or size capacity.
 
 A trace exporter should also have a `onStartSpan` method, that will be called whenever a span is started. This method is useful for close to real time exporters, like zPages.
 
@@ -68,7 +68,7 @@ export class MyConsoleTraceExporter implements types.Exporter {
   }
 
   /** 
-   * Our onStartSpan will do nothing. The exporting logic will be concentraded
+   * Our onStartSpan will do nothing. The exporting logic will be concentrated
    * at the onEndSpan event.
    */
   onStartSpan(root: modelTypes.RootSpan) {}
@@ -132,4 +132,4 @@ server2.on('stream', (stream, requestHeaders) => {
 server2.listen(8080);
 ```
 
-Now, run it with `node example.js` and go to [http://localhost:8080](http://localhost:8080) on your browser. In the begining, you may see nothing in the console, but a few seconds latter, the exporter buffer kicks in and calls the publish method on your console log exporter, this will print the span info we wanted.
+Now, run it with `node example.js` and go to [http://localhost:8080](http://localhost:8080) on your browser. In the beginning, you may see nothing in the console, but a few seconds latter, the exporter buffer kicks in and calls the publish method on your console log exporter, this will print the span info we wanted.

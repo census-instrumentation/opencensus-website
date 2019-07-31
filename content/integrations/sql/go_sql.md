@@ -294,7 +294,7 @@ func main() {
 		Handler: &ochttp.Handler{Handler: mux},
 	}
 
-	// use interupt signal for graceful shutdown
+	// use interrupt signal for graceful shutdown
 	go signalHandler(srv)
 
 	// start HTTP server

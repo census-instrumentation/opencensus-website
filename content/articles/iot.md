@@ -63,7 +63,7 @@ The application consists of two individual systems.  Both systems are built on R
 
 ##### System I
 
-###### Architecutre
+###### Architecture
 
 In the first system, Raspberry Pi collects data from multiple sensors and then calls the API provided by the OpenCensus framework to record the sensor data. The recorded raw data would firstly be aggregated in a user-defined way and then periodically be exported to the backend server such as Stackdriver.  Afterwards, they would be persisted and visualized so that we could verify and analyze them.
 

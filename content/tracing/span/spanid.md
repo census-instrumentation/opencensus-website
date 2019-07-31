@@ -21,7 +21,7 @@ SpanID is the identifier passed along to [ParentSpanID](/tracing/span/parentspan
 
 * If Span A with SpanIDA is the parent of Span B (whose spanID is SpanIDB), then the [ParentSpanID](/tracing/span/parentspanid) for
 SpanB is SpanIDA.
-* If Span Y's [ParentSpanID](/tracing/span/parentspanid) is NULL/emtpy, then Span Y is a root span
+* If Span Y's [ParentSpanID](/tracing/span/parentspanid) is NULL/empty, then Span Y is a root span
 
 ### References
 

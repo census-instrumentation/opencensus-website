@@ -17,5 +17,5 @@ A tracestate entry is a key-value pair used to annotate a positional state. It c
 
 Field|Description|Restrictions
 ---|---|---
-Key|a collection of characters|MUST begin with a lower case letter, can contain lowercase alphanumeric, dashes, asteriks and forward slashes 
+Key|a collection of characters|MUST begin with a lower case letter, can contain lowercase alphanumeric, dashes, asterisk and forward slashes 
 Value|a collection of characters|ONLY printable ASCII characters

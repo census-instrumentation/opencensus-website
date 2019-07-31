@@ -12,7 +12,7 @@ aliases: [/core-concepts/tracing/span/time_events/annotation]
 
 ### Annotation
 
-An annotation tells a descriptive story in text, of an event that occured during a span's lifetime.
+An annotation tells a descriptive story in text, of an event that occurred during a span's lifetime.
 
 It consists of fields:
 

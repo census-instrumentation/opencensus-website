@@ -139,7 +139,7 @@ func enableOpenCensusTracingAndExporting() error {
 ## End to end code
 Duration: 0:04
 
-And now to examine the exported traces, let's make a simple name registry app. For simplicitly, we use a sqlite3 database.
+And now to examine the exported traces, let's make a simple name registry app. For simplicity, we use a sqlite3 database.
 Place the following code in `main.go`. Save and close the file.
 ```go
 package main

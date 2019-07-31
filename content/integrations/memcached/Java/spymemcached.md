@@ -155,7 +155,7 @@ Zipkin|[Zipkin setup guided codelab](/codelabs/zipkin)
 
 With Memcached now installed and running, we can now start the code sample.
 
-For simplicitly examining metrics, we'll use Prometheus for examining our stats and Zipkin to examine our traces.
+For simplicity examining metrics, we'll use Prometheus for examining our stats and Zipkin to examine our traces.
 
 Please place the Java source code in the following file `src/main/java/io/opencensus/tutorials/ocspymemcached/MemcachedOpenCensusTutorial.java` in your current working directory. You can do this for example by:
 ```shell
