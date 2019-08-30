@@ -127,8 +127,9 @@ func main() {
 	// Enable tracing
 	trace.RegisterExporter(se)
 
-	// Enable metrics collection
-	view.RegisterExporter(se)
+	// Start metrics collection
+	se.StartMetricsExporter()
+	defer se.StopMetricsExporter()
 
 	// Register all the gRPC client views
 	if err := view.Register(ocgrpc.DefaultClientViews...); err != nil {

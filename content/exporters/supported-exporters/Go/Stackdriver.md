@@ -76,10 +76,10 @@ func main() {
 	}
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
-
-	// Register it as a metrics exporter
-	view.RegisterExporter(sd)
-	view.SetReportingPeriod(60 * time.Second)
+	
+	// Start metric exporter
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 }
 {{</highlight>}}
 
@@ -134,9 +134,9 @@ func main() {
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
 
-	// Register it as a metrics exporter
-	view.RegisterExporter(sd)
-	view.SetReportingPeriod(60 * time.Second)
+	// Start metric exporter
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	// Register it as a trace exporter
 	trace.RegisterExporter(sd)

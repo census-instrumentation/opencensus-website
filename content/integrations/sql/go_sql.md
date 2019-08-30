@@ -168,9 +168,6 @@ func enableOpenCensusObservability(mux *http.ServeMux) (fnStop func(), err error
 	// set up the prometheus exporter
 	prometheusExporter, err := prometheus.NewExporter(prometheus.Options{})
 	if err == nil {
-		// On success, register it as a metrics exporter
-		view.RegisterExporter(prometheusExporter)
-		view.SetReportingPeriod(5 * time.Second)
 		// provide /metrics endpoint for Prometheus to scrape from.
 		mux.Handle("/metrics", prometheusExporter)
 	}
@@ -451,9 +448,6 @@ func enableOpenCensusObservability(mux *http.ServeMux) (fnStop func(), err error
 	// set up the prometheus exporter
 	prometheusExporter, err := prometheus.NewExporter(prometheus.Options{})
 	if err == nil {
-		// On success, register it as a metrics exporter
-		view.RegisterExporter(prometheusExporter)
-		view.SetReportingPeriod(5 * time.Second)
 		// provide /metrics endpoint for Prometheus to scrape from.
 		mux.Handle("/metrics", prometheusExporter)
 	}

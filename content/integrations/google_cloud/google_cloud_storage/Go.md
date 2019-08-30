@@ -137,8 +137,9 @@ func main() {
 	// Register the trace exporter
 	trace.RegisterExporter(sd)
 
-	// Register the stats exporter
-	view.RegisterExporter(sd)
+	// Start the metrics exporter
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	ctx := context.Background()
 	gcsClient, err := storage.NewClient(ctx)
