@@ -210,10 +210,8 @@ func enableOpenCensusTracingAndMetrics() (func(), error) {
 	// Register as a tracing exporter.
 	trace.RegisterExporter(sd)
 
-	// Register as a metrics exporter.
-	view.RegisterExporter(sd)
-
-	view.SetReportingPeriod(60 * time.Second)
+	// Start metrics exporter.
+	sd.StartMetricsExporter()
 
 	// Most importantly register all the views for GoMemcache.
 	if err := view.Register(memcache.AllViews...); err != nil {

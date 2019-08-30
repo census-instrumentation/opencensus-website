@@ -216,7 +216,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create Stackdriver exporter: %v", err)
 	}
-	view.RegisterExporter(sde)
+	sde.StartMetricsExporter()
+	defer sde.StopMetricsExporter()
 	trace.RegisterExporter(sde)
 	if err := mongowrapper.RegisterAllViews(); err != nil {
 		log.Fatalf("Failed to register all views: %v\n", err)

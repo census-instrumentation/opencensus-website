@@ -167,7 +167,6 @@ func enableOpenCensus() (func(), error) {
 		return nil, err
 	}
 	sd.StartMetricsExporter()
-	defer sd.StopMetricsExporter()
 
 	return sd.Flush, nil
 }
@@ -249,7 +248,6 @@ func enableOpenCensus() (func(), error) {
 		return nil, err
 	}
 	sd.StartMetricsExporter()
-	defer sd.StopMetricsExporter()
 
 	return sd.Flush, nil
 }
@@ -436,7 +434,6 @@ func enableOpenCensus() (func(), error) {
 		return nil, err
 	}
 	sd.StartMetricsExporter()
-	defer sd.StopMetricsExporter()
 
 	// Enable tracing
 	trace.RegisterExporter(sd)

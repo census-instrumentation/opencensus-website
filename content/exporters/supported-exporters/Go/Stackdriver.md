@@ -70,6 +70,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
@@ -77,7 +80,7 @@ func main() {
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
 	
-	// Start metric exporter
+	// Start the metrics exporter
 	sd.StartMetricsExporter()
 	defer sd.StopMetricsExporter()
 }
@@ -98,6 +101,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
@@ -127,6 +133,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
@@ -134,7 +143,7 @@ func main() {
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
 
-	// Start metric exporter
+	// Start the metrics exporter
 	sd.StartMetricsExporter()
 	defer sd.StopMetricsExporter()
 

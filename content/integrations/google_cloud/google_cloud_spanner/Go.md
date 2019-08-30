@@ -127,7 +127,7 @@ func main() {
 	// Enable tracing
 	trace.RegisterExporter(se)
 
-	// Start metrics collection
+	// Start the metrics exporter
 	se.StartMetricsExporter()
 	defer se.StopMetricsExporter()
 
