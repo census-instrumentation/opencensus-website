@@ -70,6 +70,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
@@ -98,6 +101,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
@@ -127,6 +133,9 @@ func main() {
 		ProjectID: "demo-project-id",
 		// MetricPrefix helps uniquely identify your metrics.
 		MetricPrefix: "demo-prefix",
+		// ReportingInterval sets the frequency of reporting metrics
+		// to stackdriver backend.
+		ReportingInterval: 60 * time.Second,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create the Stackdriver exporter: %v", err)
