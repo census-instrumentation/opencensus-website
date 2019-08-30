@@ -207,7 +207,6 @@ func enableObservabilityAndExporters() {
 		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
 	}
 
-	view.RegisterExporter(pe)
 	go func() {
 		mux := http.NewServeMux()
 		mux.Handle("/metrics", pe)

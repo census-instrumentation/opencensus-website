@@ -1234,9 +1234,6 @@ func main() {
 		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
 	}
 
-	// Register the Prometheus exporters as a stats exporter.
-	view.RegisterExporter(pe)
-
 	// Now finally run the Prometheus exporter as a scrape endpoint.
 	// We'll run the server on port 8888.
 	go func() {
@@ -1248,14 +1245,6 @@ func main() {
 	}()
 }
 ```
-
-### Register the exporter
-```go
-// Register the Prometheus exporter.
-// This step is needed so that metrics can be exported.
-view.RegisterExporter(pe)
-```
-
 
 ## End to end code
 Collectively the code will be
@@ -1335,9 +1324,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create the Prometheus stats exporter: %v", err)
 	}
-	// Register the Prometheus exporter.
-	// This step is needed so that metrics can be exported.
-	view.RegisterExporter(pe)
 
 	// Now finally run the Prometheus exporter as a scrape endpoint.
 	// We'll run the server on port 8888.

@@ -166,8 +166,8 @@ func enableOpenCensus() (func(), error) {
 	if err := view.Register(redis.ObservabilityMetricViews...); err != nil {
 		return nil, err
 	}
-	view.RegisterExporter(sd)
-	view.SetReportingPeriod(60 * time.Second)
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	return sd.Flush, nil
 }
@@ -248,8 +248,8 @@ func enableOpenCensus() (func(), error) {
 	if err := view.Register(redis.ObservabilityMetricViews...); err != nil {
 		return nil, err
 	}
-	view.RegisterExporter(sd)
-	view.SetReportingPeriod(50 * time.Millisecond)
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	return sd.Flush, nil
 }
@@ -435,8 +435,8 @@ func enableOpenCensus() (func(), error) {
 	if err := view.Register(redis.ObservabilityMetricViews...); err != nil {
 		return nil, err
 	}
-	view.RegisterExporter(sd)
-	view.SetReportingPeriod(50 * time.Millisecond)
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	// Enable tracing
 	trace.RegisterExporter(sd)
