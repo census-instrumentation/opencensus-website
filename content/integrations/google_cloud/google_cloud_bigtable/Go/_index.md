@@ -131,8 +131,9 @@ func main() {
 	// Register the exporter as a trace exporter
 	trace.RegisterExporter(sd)
 
-	// Register the exporter as a metrics exporter
-	view.RegisterExporter(sd)
+	// Start the metrics exporter
+	sd.StartMetricsExporter()
+	defer sd.StopMetricsExporter()
 
 	// For demo purposes, always sample
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})

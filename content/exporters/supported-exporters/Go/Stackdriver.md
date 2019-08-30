@@ -77,7 +77,7 @@ func main() {
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
 	
-	// Start metric exporter
+	// Start the metrics exporter
 	sd.StartMetricsExporter()
 	defer sd.StopMetricsExporter()
 }
@@ -134,7 +134,7 @@ func main() {
 	// It is imperative to invoke flush before your main function exits
 	defer sd.Flush()
 
-	// Start metric exporter
+	// Start the metrics exporter
 	sd.StartMetricsExporter()
 	defer sd.StopMetricsExporter()
 
