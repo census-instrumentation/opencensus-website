@@ -37,23 +37,23 @@ but also distributed as Maven, Gradle, Ivy and Builder artifacts as you'll short
 <dependency>
     <groupId>io.orijtech.integrations</groupId>
     <artifactId>ocjdbc</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 {{</highlight>}}
 
 {{<highlight gradle>}}
 // https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
-compile group: 'io.orijtech.integrations', name: 'ocjdbc', version: '0.0.4'
+compile group: 'io.orijtech.integrations', name: 'ocjdbc', version: '0.0.5'
 {{</highlight>}}
 
 {{<highlight xml>}}
 <!-- https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc -->
-<dependency org="io.orijtech.integrations" name="ocjdbc" rev="0.0.4"/>
+<dependency org="io.orijtech.integrations" name="ocjdbc" rev="0.0.5"/>
 {{</highlight>}}
 
 {{<highlight python>}}
 # https://mvnrepository.com/artifact/io.orijtech.integrations/ocjdbc
-'io.orijtech.integrations:ocjdbc:jar:0.0.4'
+'io.orijtech.integrations:ocjdbc:jar:0.0.5'
 {{</highlight>}}
 {{</tabs>}}
 
@@ -268,7 +268,7 @@ public class App {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.21.0</opencensus.version>
+        <opencensus.version>0.24.0</opencensus.version>
     </properties>
 
     <dependencies>
@@ -287,7 +287,7 @@ public class App {
         <dependency>
             <groupId>io.orijtech.integrations</groupId>
             <artifactId>ocjdbc</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5</version>
         </dependency>
 
         <dependency>
