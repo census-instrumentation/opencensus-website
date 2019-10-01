@@ -16,7 +16,7 @@ logo: /img/partners/datadog_logo.svg
 ## Introduction
 [Datadog](https://www.datadoghq.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
 
-Its OpenCensus Go exporter is available at [https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog](https://godoc.org/github.com/Datadog/opencensus-go-exporter-datadog)
+Its OpenCensus Go exporter is available at [https://godoc.org/github.com/DataDog/opencensus-go-exporter-datadog](https://godoc.org/github.com/DataDog/opencensus-go-exporter-datadog)
 
 
 ## Creating the exporter
@@ -28,7 +28,7 @@ To create the exporter, we'll need:
 This is possible by importing the exporter
 
 {{<highlight go>}}
-import "github.com/Datadog/opencensus-go-exporter-datadog"
+import "github.com/DataDog/opencensus-go-exporter-datadog"
 
 // then create the actual exporter
 dd := datadog.NewExporter(datadog.Options{})
@@ -43,7 +43,7 @@ package main
 import (
   "log"
 
-  "github.com/Datadog/opencensus-go-exporter-datadog"
+  "github.com/DataDog/opencensus-go-exporter-datadog"
   "go.opencensus.io/stats/view"
 )
 
@@ -66,7 +66,7 @@ package main
 import (
    "log"
 
-  "github.com/Datadog/opencensus-go-exporter-datadog"
+  "github.com/DataDog/opencensus-go-exporter-datadog"
   "go.opencensus.io/trace"
 )
 
@@ -92,7 +92,7 @@ package main
 import (
   "log"
 
-  "github.com/Datadog/opencensus-go-exporter-datadog"
+  "github.com/DataDog/opencensus-go-exporter-datadog"
   "go.opencensus.io/stats/view"
   "go.opencensus.io/trace"
 )
