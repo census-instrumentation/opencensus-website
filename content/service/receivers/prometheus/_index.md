@@ -28,7 +28,7 @@ Instead of starting Prometheus with a configuration file, copy the contents of t
 
 #### Format
 
-Paaste and indent them under sub-section
+Paste and indent them under sub-section
 ```yaml
 receivers:
   prometheus:
