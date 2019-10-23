@@ -38,7 +38,7 @@ ze = ZipkinExporter(service_name="python-quickstart",
 # 1b. Set the tracer to use the exporter
 # 2. Configure 100% sample rate, otherwise, few traces will be sampled.
 # 3. Get the global singleton Tracer object
-tracer = Tracer(exporter=ze, sampler=always_on.AlwaysOnSampler())
+tracer = Tracer(exporter=ze, sampler=AlwaysOnSampler())
 
 def main():
     # 4. Create a scoped span. The span will close at the end of the block.
@@ -58,7 +58,7 @@ import sys
 from opencensus.trace.tracer import Tracer
 from opencensus.trace import time_event as time_event_module
 from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
-from opencensus.trace.samplers import always_on
+from opencensus.trace.samplers import AlwaysOnSampler
 
 # 1a. Setup the exporter
 ze = ZipkinExporter(service_name="python-quickstart",
