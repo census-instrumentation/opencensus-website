@@ -72,7 +72,7 @@ scrape_configs:
     scrape_interval: 10s
 
     static_configs:
-      - targets: ['localhost:8888']
+      - targets: ['localhost:9464']
 ```
 
 ## Running Prometheus
