@@ -38,7 +38,7 @@ class: "shadowed-image lightbox"
 
 #### Run it locally
 
-1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts.git
+1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts.git`
 2. Change to the example directory: `cd opencensus-quickstarts/java/opencensus-tracing-to-zipkin`
 3. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
 4. Start Zipkin: `java -jar zipkin.jar`
