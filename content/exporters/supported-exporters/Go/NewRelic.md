@@ -14,7 +14,7 @@ logo: /img/partners/newrelic_logo.svg
 - [Viewing your traces](#viewing-your-traces)
 
 ## Introduction
-[New Relic](https://www.newrelic.com.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
+[New Relic](https://www.newrelic.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
 
 Its OpenCensus Go exporter is available at [https://github.com/newrelic/newrelic-opencensus-exporter-go](https://github.com/newrelic/newrelic-opencensus-exporter-go)
 
