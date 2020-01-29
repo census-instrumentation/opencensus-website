@@ -37,7 +37,7 @@ We also provide guides on how to [write a custom exporter](#writing-a-custom-exp
 #### Supported exporters
 {{<card-exporter target-url="supported-exporters/go" src="/images/gopher.png" lang="Go" tracing="true" stats="true">}}
 {{<card-exporter target-url="supported-exporters/java" src="/images/java-icon.png" lang="Java" tracing="true" stats="true">}}
-{{<card-exporter target-url="supported-exporters/python" src="/images/python-icon.png" lang="Python" tracing="true">}}
+{{<card-exporter target-url="supported-exporters/python" src="/images/python-icon.png" lang="Python" tracing="true" stats="true">}}
 {{<card-exporter target-url="supported-exporters/node.js" src="/images/nodejs.png" lang="Node.js" tracing="true" stats="true">}}
 
 #### Writing a custom exporter
