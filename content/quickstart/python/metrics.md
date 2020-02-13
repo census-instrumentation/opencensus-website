@@ -29,7 +29,7 @@ You can swap out any other exporter from the [list of Python exporters](/exporte
 {{% /notice %}}
 
 ## Installation
-`pip install --upgrade opencensus prometheus-client`
+`pip install --upgrade opencensus opencensus-ext-prometheus prometheus-client`
 
 
 ## Brief Overview
@@ -283,7 +283,7 @@ def setupOpenCensusAndPrometheusExporter():
 import sys
 import time
 
-from opencensus.stats.exporters import prometheus_exporter as prometheus
+from opencensus.ext.prometheus import stats_exporter as prometheus
 
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
