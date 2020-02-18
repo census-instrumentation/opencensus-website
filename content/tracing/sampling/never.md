@@ -6,7 +6,7 @@ aliases: [/core-concepts/tracing/sampling/never]
 ---
 
 ### Never sampler
-The Never sampler never returns a decision of False for any sampling decision
+The Never sampler always returns a decision of False for any sampling decision
 
 {{<tabs Go Java Python CplusPlus NodeJS>}}
 {{<highlight go>}}
