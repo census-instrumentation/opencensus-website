@@ -23,7 +23,7 @@ Protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master
 By default, the OpenCensus Service listens on TCP port `55678` and receives traffic from:
 
 * HTTP/2 clients with Protobuf messages
-* HTTP/1 clients that use the [grpc-web-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
+* HTTP/1 clients that use the [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
 
 ### Configuration
 An OpenCensus receiver can be turned on by using the configuration file
@@ -76,7 +76,7 @@ Node.js|[opencensus-node-exporter](https://github.com/census-instrumentation/ope
 Resource|URL
 ---|---
 OpenCensus Protocol|[opencensus protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master/src/opencensus/proto/agent)
-grpc-web-gateway|https://github.com/grpc-ecosystem/grpc-gateway
+grpc-gateway|https://github.com/grpc-ecosystem/grpc-gateway
 Go exporter|[opencensus-go-exporter](/exporters/supported-exporters/go/ocagent/)
 Python exporter|[opencensus-python-exporter](https://github.com/census-instrumentation/opencensus-python/tree/master/opencensus/trace/exporters/ocagent)
 Java exporter|[opencensus-java-trace-exporter](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/ocagent) and [opencensus-java-metrics-exporter](https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/metrics/ocagent)

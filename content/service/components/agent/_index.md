@@ -22,7 +22,7 @@ to the centralized point before they are exported to the target backends.
 By default, ocagent runs on TCP port `55678` and receives traffic from:
 
 * HTTP/2 clients with Protobuf messages
-* HTTP/1 clients that use the [grpc-web-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
+* HTTP/1 clients that use the [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
 
 ocagent is written in the [Go programming language](https://golang.org/), it is cross platform, self-monitored and receives traffic
 from any application that supports the [ocagent protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master/src/opencensus/proto/agent) or from
@@ -83,5 +83,5 @@ Resource|URL
 OpenCensus Agent Protocol|[ocagent-protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master/src/opencensus/proto/agent)
 OpenCensus Agent Design|[ocagent design doc](https://github.com/census-instrumentation/opencensus-service/blob/master/DESIGN.md#opencensus-agent)
 OpenCensus Collector Design|[occollector design doc](https://github.com/census-instrumentation/opencensus-service/blob/master/DESIGN.md#opencensus-collector)
-grpc-web-gateway|[grpc-web-gateway on GitHub](https://github.com/grpc-ecosystem/grpc-gateway)
+grpc-gateway|[grpc-gateway on GitHub](https://github.com/grpc-ecosystem/grpc-gateway)
 OpenCensus PHP design|[Design doc](https://docs.google.com/document/d/1CRiRq_wpzOuG9VKM_eaImcrS12Iie2V7LePnH9AwclU/)
