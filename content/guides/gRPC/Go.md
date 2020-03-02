@@ -263,6 +263,10 @@ func (fi *fetchIt) Capitalize(ctx context.Context, in *rpc.Payload) (*rpc.Payloa
 	}
 	return out, nil
 }
+
+func main () {
+	srv := grpc.NewServer(grpc.StatsHandler(&ocgrpc.ServerHandler{}))
+}
 {{</highlight>}}
 
 {{<highlight go>}}
@@ -359,6 +363,9 @@ which will be registered as a grpc StatsHandler.
 import "go.opencensus.io/trace"
 
 func main() {
+		cc, err := grpc.Dial(serverAddr, grpc.WithInsecure(), grpc.WithStatsHandler(new(ocgrpc.ClientHandler)))
+		
+		
 		ctx, span := trace.StartSpan(context.Background(), "oc.tutorials.grpc.ClientCapitalize")
 		out, err := fc.Capitalize(ctx, &rpc.Payload{Data: line})
 		if err != nil {
