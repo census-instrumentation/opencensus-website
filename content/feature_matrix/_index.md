@@ -117,10 +117,10 @@ Add resource labels to span|Yes|<span style="color: #CF7675">No</span>|<span sty
 Feature|Java|Go|C#|Python|Nodejs|PHP|Ruby|Erlang/Elixir
 ---|---|---|---|---|---|---|---|---
 <b>Metrics</b>||||||||
-Stackdriver Monitoring|Yes|Yes|<span style="color: #CF7675">No</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|Yes|<span style="color: #CF7675">No</span>
+Google Cloud Monitoring|Yes|Yes|<span style="color: #CF7675">No</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|Yes|<span style="color: #CF7675">No</span>
 Prometheus|Yes|Yes|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #CF7675"> (without Gauges)</span>|Yes<span style="color: #6bb1e0"> (using Go Daemon)</span>|<span style="color: #CF7675">No</span>|Yes
 <b>Tracing</b>||||||||
-Strackdriver Trace|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes|yes
+Google Cloud Trace|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|Yes|yes
 Jaeger|Yes|Yes|<span style="color: #CF7675">No</span>|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 Zipkin|Yes|Yes|Yes|Yes|Yes|Yes|<span style="color: #CF7675">No</span>|Yes
 {{% /tabs %}}
