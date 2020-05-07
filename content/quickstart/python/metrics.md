@@ -406,7 +406,7 @@ Here is the final state of the code:
 import sys
 import time
 
-from opencensus.stats.exporters import prometheus_exporter as prometheus
+from opencensus.ext.prometheus import stats_exporter as prometheus
 
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
