@@ -141,6 +141,8 @@ that is:
 #### <a name="enable-metrics-workspace-file"></a>WORKSPACE
 Please add the content below to a file `WORKSPACE`:
 ```shell
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
     name = "io_opencensus_cpp",
     strip_prefix = "opencensus-cpp-master",
@@ -162,13 +164,13 @@ http_archive(
 Please add the content below to a file `BUILD`:
 ```shell
 cc_binary(
-        name = "metrics",
-        srcs = ["metrics.cc"],
-        linkopts = ["-pthread"],
-        deps = [
-            "@com_google_absl//absl/time",
-            "@io_opencensus_cpp//opencensus/stats:stats",
-        ],
+    name = "metrics",
+    srcs = ["metrics.cc"],
+    linkopts = ["-pthread"],
+    deps = [
+        "@com_google_absl//absl/time",
+        "@io_opencensus_cpp//opencensus/stats:stats",
+    ],
 )
 ```
 
@@ -240,54 +242,47 @@ To aggregate recorded measurements with tags against measures, we'll need to mak
 and for that, the code will look like this:
 
 ```cpp
-void registerAsView(opencensus::stats::ViewDescriptor vd) {
-  opencensus::stats::View view(vd);
-  vd.RegisterForExport();
+void RegisterViews() {
+  // 1. Latency view
+  // We need to register the measure before registering the view.
+  LatencyMsMeasure();
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/latency")
+      .set_description("The various methods' latencies in milliseconds")
+      .set_measure(kLatencyMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Distribution(
+          opencensus::stats::BucketBoundaries::Explicit(
+              {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
+               6000})))
+      .add_column(MethodKey())
+      .RegisterForExport();
+
+  // 2. Line lengths
+  LineLengthsMeasure();
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/line_lengths")
+      .set_description("The length of the lines read in")
+      .set_measure(kLineLengthsMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Distribution(
+          opencensus::stats::BucketBoundaries::Explicit(
+              {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
+               1000})))
+      .add_column(MethodKey())
+      .RegisterForExport();
+
+  // 3. Lines count: just a count aggregation on the line lengths measure
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/lines_in")
+      .set_description("The number of lines read in")
+      .set_measure(kLineLengthsMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Count())
+      .add_column(MethodKey())
+      .RegisterForExport();
 }
 
 int main(int argc, char **argv) {
-  // Register Measures.
-  LatencyMsMeasure();
-  LineLengthsMeasure();
-
-  // Let's create the various views
-  // 1. Latency view
-  const opencensus::stats::ViewDescriptor latency_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/latency")
-          .set_description("The various methods' latencies in milliseconds")
-          .set_measure(kLatencyMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Distribution(
-              opencensus::stats::BucketBoundaries::Explicit(
-                  {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
-                   6000})))
-          .add_column(MethodKey());
-
-  // 2. Lines count: just a count aggregation on the latency measurement
-  const opencensus::stats::ViewDescriptor lines_count_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/lines_in")
-          .set_description("The number of lines read in")
-          .set_measure(kLineLengthsMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Count())
-          .add_column(MethodKey());
-
-  // 3. The line lengths:
-  const opencensus::stats::ViewDescriptor line_lengths_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/line_lengths")
-          .set_description("The length of the lines read in")
-          .set_measure(kLineLengthsMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Distribution(
-              opencensus::stats::BucketBoundaries::Explicit(
-                  {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
-                   1000})))
-          .add_column(MethodKey());
-
-  // Register the views to enable stats aggregation.
-  registerAsView(latency_view);
-  registerAsView(lines_count_view);
-  registerAsView(line_lengths_view);
+  // Register the views to enable stats aggregation
+  RegisterViews();
 
   // ...
 }
@@ -389,6 +384,8 @@ cc_binary(
 #### <a name="exporting-workspace-file"></a>WORKSPACE
 
 ```python
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
     name = "io_opencensus_cpp",
     strip_prefix = "opencensus-cpp-master",
@@ -410,7 +407,8 @@ http_archive(
     urls = ["https://github.com/jupp0r/prometheus-cpp/archive/master.zip"],
 )
 
-load("@com_github_jupp0r_prometheus_cpp//:repositories.bzl", "prometheus_cpp_repositories")
+load("@com_github_jupp0r_prometheus_cpp//bazel:repositories.bzl", "prometheus_cpp_repositories")
+
 prometheus_cpp_repositories()
 ```
 
@@ -469,9 +467,42 @@ opencensus::tags::TagKey MethodKey() {
   return key;
 }
 
-void registerAsView(const opencensus::stats::ViewDescriptor& vd) {
-  opencensus::stats::View view(vd);
-  vd.RegisterForExport();
+void RegisterViews() {
+  // 1. Latency view
+  // We need to register the measure before registering the view.
+  LatencyMsMeasure();
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/latency")
+      .set_description("The various methods' latencies in milliseconds")
+      .set_measure(kLatencyMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Distribution(
+          opencensus::stats::BucketBoundaries::Explicit(
+              {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
+               6000})))
+      .add_column(MethodKey())
+      .RegisterForExport();
+
+  // 2. Line lengths
+  LineLengthsMeasure();
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/line_lengths")
+      .set_description("The length of the lines read in")
+      .set_measure(kLineLengthsMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Distribution(
+          opencensus::stats::BucketBoundaries::Explicit(
+              {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
+               1000})))
+      .add_column(MethodKey())
+      .RegisterForExport();
+
+  // 3. Lines count: just a count aggregation on the line lengths measure
+  opencensus::stats::ViewDescriptor()
+      .set_name("ocquickstart.io/lines_in")
+      .set_description("The number of lines read in")
+      .set_measure(kLineLengthsMeasureName)
+      .set_aggregation(opencensus::stats::Aggregation::Count())
+      .add_column(MethodKey())
+      .RegisterForExport();
 }
 
 std::string getLine() {
@@ -518,48 +549,8 @@ int main(int argc, char** argv) {
   prometheus::Exposer exposer("127.0.0.1:8888");
   exposer.RegisterCollectable(exporter);
 
-  // Register Measures.
-  LatencyMsMeasure();
-  LineLengthsMeasure();
-
-  // Let's create the various views
-  // 1. Latency view
-  const opencensus::stats::ViewDescriptor latency_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/latency")
-          .set_description("The various methods' latencies in milliseconds")
-          .set_measure(kLatencyMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Distribution(
-              opencensus::stats::BucketBoundaries::Explicit(
-                  {0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000,
-                   6000})))
-          .add_column(MethodKey());
-
-  // 2. Lines count: just a count aggregation on the latency measurement
-  const opencensus::stats::ViewDescriptor lines_count_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/lines_in")
-          .set_description("The number of lines read in")
-          .set_measure(kLineLengthsMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Count())
-          .add_column(MethodKey());
-
-  // 3. The line lengths:
-  const opencensus::stats::ViewDescriptor line_lengths_view =
-      opencensus::stats::ViewDescriptor()
-          .set_name("ocquickstart.io/line_lengths")
-          .set_description("The length of the lines read in")
-          .set_measure(kLineLengthsMeasureName)
-          .set_aggregation(opencensus::stats::Aggregation::Distribution(
-              opencensus::stats::BucketBoundaries::Explicit(
-                  {0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800,
-                   1000})))
-          .add_column(MethodKey());
-
-  // Register the views to enable stats aggregation.
-  registerAsView(latency_view);
-  registerAsView(lines_count_view);
-  registerAsView(line_lengths_view);
+  // Register the views to enable stats aggregation
+  RegisterViews();
 
   while (1) {
     std::cout << "\n> ";
