@@ -316,7 +316,7 @@ http_archive(
 )
 
 # Curl library used by the Zipkin exporter
-new_http_archive(
+http_archive(
     name = "com_github_curl",
     build_file_content =
         """
@@ -354,8 +354,8 @@ cc_library(
 )
 
 # Rapidjson library - used by the Zipkin exporter.
-new_http_archive(
-    name = "com_github_rapidjson",
+http_archive(
+    name = "com_github_tencent_rapidjson",
     build_file_content =
         """
 cc_library(
