@@ -15,4 +15,4 @@ Resource|Link
 ---|---
 HexDoc|https://hexdocs.pm/opencensus/
 Erlang lib Github repository|https://github.com/census-instrumentation/opencensus-erlang
-Elixir lib Github repository|https://github.com/opencensus-beam/opencensus-elixir
+Elixir lib Github repository|https://github.com/opencensus-beam/opencensus_elixir
