@@ -26,7 +26,7 @@ Our service takes in a payload containing bytes and capitalizes them.
 
 Using OpenCensus, we can collect traces and metrics of our system and export them to the backend of our choice, to give observability to our distributed systems.
 
-grpc-Java has already been instrumented [gRPC-Core](https://github.com/grpc/grpc-java) with OpenCensus for tracing and metrics. Application users just need to add a runtime dependency on OpenCensus-Java impl, and the instrumentations should just work.
+grpc-Java has already been instrumented [gRPC-Core](https://github.com/grpc/grpc-java) with OpenCensus for tracing and metrics. Application users just need to add runtime dependencies on grpc-census and opencensus-impl, and the instrumentations should just work.
 
 {{% notice tip %}}
 Before beginning, if you haven't already:
@@ -45,30 +45,30 @@ As specified at [grpc-java on Github](https://github.com/grpc/grpc-java#download
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-netty-shaded</artifactId>
-  <version>1.16.1</version>
+  <version>1.30.1</version>
 </dependency>
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-protobuf</artifactId>
-  <version>1.16.1</version>
+  <version>1.30.1</version>
 </dependency>
 <dependency>
   <groupId>io.grpc</groupId>
   <artifactId>grpc-stub</artifactId>
-  <version>1.16.1</version>
+  <version>1.30.1</version>
 </dependency>
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-netty-shaded:1.16.1'
-compile 'io.grpc:grpc-protobuf:1.16.1'
-compile 'io.grpc:grpc-stub:1.16.1'
+compile 'io.grpc:grpc-netty-shaded:1.30.1'
+compile 'io.grpc:grpc-protobuf:1.30.1'
+compile 'io.grpc:grpc-stub:1.30.1'
 {{</highlight>}}
 
 {{<highlight text>}}
-compile 'io.grpc:grpc-okhttp:1.16.1'
-compile 'io.grpc:grpc-protobuf-lite:1.16.1'
-compile 'io.grpc:grpc-stub:1.16.1'
+compile 'io.grpc:grpc-okhttp:1.30.1'
+compile 'io.grpc:grpc-protobuf-lite:1.30.1'
+compile 'io.grpc:grpc-stub:1.30.1'
 {{</highlight>}}
 {{</tabs>}}
 
@@ -612,8 +612,8 @@ public class TutorialServer {
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <opencensus.version>0.15.0</opencensus.version> <!-- The version of OpenCensus to use -->
-        <grpc.version>1.12.0</grpc.version> <!-- The gRPC version to use with the version of OpenCensus -->
+        <opencensus.version>0.24.0</opencensus.version> <!-- The version of OpenCensus to use -->
+        <grpc.version>1.30.1</grpc.version> <!-- The gRPC version to use with the version of OpenCensus -->
     </properties>
 
     <dependencies>
@@ -632,6 +632,12 @@ public class TutorialServer {
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-census</artifactId>
             <version>${grpc.version}</version>
         </dependency>
 
@@ -669,7 +675,7 @@ public class TutorialServer {
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <version>2.0.8.Final</version>
+            <version>2.0.31.Final</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -740,19 +746,19 @@ public class TutorialServer {
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
-                <version>3.6.1</version>
+                <version>3.12.0</version>
             </dependency>
 
             <dependency>
                 <groupId>io.grpc</groupId>
                 <artifactId>grpc-all</artifactId>
-                <version>1.13.1</version>
+                <version>1.30.1</version>
             </dependency>
 
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.1.28.Final</version>
+                <version>4.1.48.Final</version>
             </dependency>
         </dependencies>
   </dependencyManagement>
