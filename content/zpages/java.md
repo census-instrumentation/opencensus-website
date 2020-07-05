@@ -7,7 +7,7 @@ aliases: [/core-concepts/zpages/java]
 - [Dependency addition](#dependency-addition)
 - [Source code example](#source-code-example)
 - [Rpcz](#rpcz)
-- [Statz](#statz)
+- [Statsz](#statsz)
 - [Tracez](#tracez)
 - [TraceConfigz](#traceconfigz)
 - [References](#references)
@@ -64,10 +64,10 @@ public class MyMainClass {
 On visiting http://localhost:8887/rpcz
 ![](/images/zpages-rpcz-example-java.png)
 
-#### Statz
-/statz displays measures and stats for all the exported views. Views are grouped into directories according to their namespace
+#### Statsz
+/statsz displays measures and stats for all the exported views. Views are grouped into directories according to their namespace
 
-On visiting http://localhost:8887/statz
+On visiting http://localhost:8887/statsz
 ![](/images/zpages-statsz-example-1-java.png)
 ![](/images/zpages-statsz-example-2-java.png)
 
