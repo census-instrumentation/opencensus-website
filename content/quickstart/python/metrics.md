@@ -85,13 +85,13 @@ Now we'll import the required packages and instrument our code.
 
 {{<tabs Snippet All>}}
 {{<highlight python>}}
-import opencensus.stats import aggregation as aggregation_module
-import opencensus.stats import measure as measure_module
-import opencensus.stats import stats as stats_module
-import opencensus.stats import view as view_module
-import opencensus.tags import tag_key as tag_key_module
-import opencensus.tags import tag_map as tag_map_module
-import opencensus.tags import tag_value as tag_value_module
+from opencensus.stats import aggregation as aggregation_module
+from opencensus.stats import measure as measure_module
+from opencensus.stats import stats as stats_module
+from opencensus.stats import view as view_module
+from opencensus.tags import tag_key as tag_key_module
+from opencensus.tags import tag_map as tag_map_module
+from opencensus.tags import tag_value as tag_value_module
 
 # Create the measures
 # The latency in milliseconds
