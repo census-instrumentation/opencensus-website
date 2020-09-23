@@ -16,7 +16,7 @@ class: "shadowed-image lightbox"
 #### Run it locally
 1. Clone the example repository: `git clone https://github.com/opencensus-otherwork/opencensus-quickstarts`
 2. Change to the example directory: `cd opencensus-quickstarts/go/tracing-to-zipkin`
-3. Install dependencies: `go get go.opencensus.io/* && go get contrib.go.opencensus.io/exporter/zipkin`
+3. Install dependencies: `go get go.opencensus.io/... && go get contrib.go.opencensus.io/exporter/zipkin`
 4. Download Zipkin: `curl -sSL https://zipkin.io/quickstart.sh | bash -s`
 5. Start Zipkin: `java -jar zipkin.jar`
 6. Run the code: `go run tracingtozipkin.go`
