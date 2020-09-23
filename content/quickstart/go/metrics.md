@@ -603,6 +603,7 @@ Now we will record the desired metrics. To do so, we will use `stats.Record` and
 {{% tabs Snippet All %}}
 ```go
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	startTime := time.Now()
 	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
@@ -702,6 +703,7 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	startTime := time.Now()
 	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
@@ -826,6 +828,7 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	startTime := time.Now()
 	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
@@ -987,6 +990,7 @@ func main() {
 // readEvaluateProcess reads a line from the input reader and
 // then processes it. It returns an error if any was encountered.
 func readEvaluateProcess(br *bufio.Reader) (terr error) {
+	startTime := time.Now()
 	ctx, err := tag.New(context.Background(), tag.Insert(KeyMethod, "repl"), tag.Insert(KeyStatus, "OK"))
 	if err != nil {
 		return err
