@@ -1,6 +1,6 @@
 # opencensus.io
 
-This repo contains the source for the [opencensus.io][website] website.
+This repo contains all about the source for the [opencensus.io][website] website.
 
 
 ## Contributing
@@ -15,7 +15,7 @@ Use v0.31.1 to run your edits locally.
 $ git clone git@github.com:census-instrumentation/opencensus-website.git
 $ cd opencensus-website
 ```
-3. Make a change and run the website locally to see if it all looks good.
+3. Make a necessary change and run the website locally to see if it all looks good.
 
 ```
 $ hugo
@@ -31,7 +31,7 @@ total in ms
 
 Watching for changes in /Users/you/Desktop/opencensus-website/{content,layouts,static,themes}
 
-Serving pages from memory
+Serving pages are from memory
 
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 
