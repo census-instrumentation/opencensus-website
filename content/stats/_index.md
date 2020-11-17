@@ -15,7 +15,7 @@ decisions to scale up a deployment automatically upon high demand.
 Stats collection allows users to collect custom metrics and provide
 a set of predefined metrics through the framework integrations.
 Collected data can be multidimensional and
-it can be filtered and grouped by [tags](/tags).
+it can be filtered and grouped by [tags](/tag).
 
 Stats collection requires two steps:  
 
