@@ -13,7 +13,7 @@ logo: /images/opencensus-logo.png
 
 The OpenCensus Collector is a component that runs “nearby” (e.g. in the same
 VPC, AZ, etc.) a user’s application components and receives trace spans and
-metrics emitted by supported [Receivers](/collector/receivers). The received
+metrics emitted by supported [Receivers](/service/receivers). The received
 spans and metrics could be emitted directly by clients in instrumented tasks,
 or potentially routed via intermediate proxy sidecar/daemon agents such as the
 [OpenCensus Agent](/agent). The collector provides a central egress point for
@@ -27,18 +27,18 @@ By default, the OpenCensus Collector listens on TCP port `55678` and receives
 traffic from the [opencensus
 protocol](https://github.com/census-instrumentation/opencensus-proto/tree/master/src/opencensus/proto/agent).
 It can be configured to listen for a variety of different protocols as defined
-in the [Receivers](/collector/receivers) section.
+in the [Receivers](/service/receivers) section.
 
 The Collector is written in the [Go programming language](https://golang.org/),
 it is cross platform, self-monitored and receives traffic from any application
-that supports any of the available [Receivers](/collector/receivers) regardless
+that supports any of the available [Receivers](/service/receivers) regardless
 of the programming language and deployment.
 
 ### Benefits
 
 ##### For Tracing/Metrics Providers ...
 
-* <b>Implement one [Exporter](/collector/exporters) and get data from applications in many languages.</b>
+* <b>Implement one [Exporter](/service/exporters) and get data from applications in many languages.</b>
 Developing exporters only for one language ("Go") dramatically scales
 infrastructure development and deployment, as observability backends no longer
 have to develop exporters in [every 1 of the 9+ languages that OpenCensus
@@ -49,10 +49,10 @@ Cloud providers can define the backends/exporters that the Collector sends data 
 
 ##### For Application Developers ...
 
-* <b>Manage a single [Exporter](/collector/exporter).</b>
+* <b>Manage a single [Exporter](/service/exporters).</b>
 Your applications no longer have to locally enable each exporter per language.
 All applications sends data using [OpenCensus
-Exporter](/collector/exporters/opencensus).
+Exporter](/service/exporters/opencensus).
 
 * <b>Democratizes deployments</b>
 Developers can send the data to the backends of their choice.
