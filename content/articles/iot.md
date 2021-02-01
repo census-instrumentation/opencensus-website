@@ -124,15 +124,15 @@ One interesting phenomenon is that there are sometimes sudden peaks during the n
 
 ###### Architecture
 
-In the second system, we redesign the architecture of the above system: Data export is implemented on Raspberry Pi (master) while data collection is implemented on Arduino (slave).  In this way, the system could be more cohesive and low-cost because one expensive Pi could receive data from more cheap sensors.  
+In the second system, we redesign the architecture of the above system: Data export is implemented on Raspberry Pi (leader) while data collection is implemented on Arduino (follower).  In this way, the system could be more cohesive and low-cost because one expensive Pi could receive data from more cheap sensors.  
 
 ![](/images/systemii.png)
 
 ###### Protocol
 
-To decouple the master and slave nodes in the System II, we design a robust and low-overhead protocol to support efficient coordination between any IoT device and the master node under OpenCensus. Data collection could be implemented on any cheap embedded platform if it follows the protocol.
+To decouple the leader and follower nodes in the System II, we design a robust and low-overhead protocol to support efficient coordination between any IoT device and the leader node under OpenCensus. Data collection could be implemented on any cheap embedded platform if it follows the protocol.
 
-The protocol defines the basic format of messages exchanged between the master and slave nodes. One example is as below:
+The protocol defines the basic format of messages exchanged between the leader and follower nodes. One example is as below:
 
 ```json
 {
@@ -145,11 +145,11 @@ The protocol defines the basic format of messages exchanged between the master a
 }
 ```
 
-In the message, except for the measurement name and measurement value, slaves could also upload tags for the measurement. Tags allow us to associate contextual key-value pairs with collected data.
+In the message, except for the measurement name and measurement value, followers could also upload tags for the measurement. Tags allow us to associate contextual key-value pairs with collected data.
 
 After collection, tags can later be used as dimensions to break down the data and analyze it from various different perspectives to target specific cases in isolation even in highly complex systems. More details would be discussed in the demo part.
 
-Moreover,  the protocol defines the message exchange pattern between master and slave nodes: Every time after a slave node sends a data request to the master node, it must wait for the positive response from master node to send another data request. With exponential backoff mechanism, the flow condition in the system could be controlled to some extends. There's also a predefined timeout after certain times of retries.
+Moreover,  the protocol defines the message exchange pattern between leader and follower nodes: Every time after a follower node sends a data request to the leader node, it must wait for the positive response from leader node to send another data request. With exponential backoff mechanism, the flow condition in the system could be controlled to some extends. There's also a predefined timeout after certain times of retries.
 
 ###### System Configuration
 
@@ -165,7 +165,7 @@ In the System II, we also collect the temperature but there is large change in t
 
 ![](/images/protocol.png)
 
-The graph above looks very similar to the graph we get in the first system. However, we could use `Filter` or `Groupby` method provided by the StackDriver to select the data source based on the tag uploaded by the slave nodes.
+The graph above looks very similar to the graph we get in the first system. However, we could use `Filter` or `Groupby` method provided by the StackDriver to select the data source based on the tag uploaded by the follower nodes.
 
 ![](/images/protocolid.png)
 
