@@ -50,7 +50,7 @@ if err != nil {
 {{</highlight>}}
 
 {{% notice warning %}}
-Stackdriver's minimum stats reporting period must be >= 60 seconds. Find out why at this [official Stackdriver advisory](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#writing-ts)
+Stackdriver's minimum stats reporting period must be >= 10 seconds. Find out why at this [official Stackdriver advisory](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#writing-ts).
 {{% /notice %}}
 
 {{<tabs Stats Tracing All>}}
