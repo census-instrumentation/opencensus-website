@@ -5,7 +5,7 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/go/newrelic, /guides/exporters/supported-exporters/go/newrelic]
-logo: /img/partners/newrelic_logo.svg
+logo: /img/partners/new_relic_logo.png
 ---
 
 - [Introduction](#introduction)
@@ -16,7 +16,7 @@ logo: /img/partners/newrelic_logo.svg
 ## Introduction
 [New Relic](https://www.newrelic.com/) is a real-time monitoring system that supports distributed tracing and monitoring.
 
-Its OpenCensus Go exporter is available at [https://github.com/newrelic/newrelic-opencensus-exporter-go](https://github.com/newrelic/newrelic-opencensus-exporter-go)
+Its OpenCensus Go exporter is available at [https://github.com/newrelic/newrelic-opencensus-exporter-go](https://github.com/newrelic/newrelic-opencensus-exporter-go) Also check [New Relic Open Census integration](https://newrelic.com/instant-observability/opencensus/7ffcbd99-a8ac-4414-bdd1-f3bb9f02598e) page.
 
 ## Installation
 

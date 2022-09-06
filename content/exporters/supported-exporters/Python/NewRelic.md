@@ -5,7 +5,7 @@ draft: false
 weight: 3
 class: "resized-logo"
 aliases: [/supported-exporters/python/newrelic, /guides/exporters/supported-exporters/python/newrelic]
-logo: /img/partners/newrelic_logo.svg
+logo: /img/partners/new_relic_logo.png
 ---
 
 - [Introduction](#introduction)
