@@ -7,7 +7,11 @@ class: "no-pagination no-top-border-header no-search max-text-width"
 
 {{<title-card>}}
 
-> OpenCensus and OpenTracing have merged to form [OpenTelemetry](https://opentelemetry.io), which will become the next major version of OpenCensus and OpenTracing. OpenTelemetry will offer backwards compatibility with existing OpenCensus integrations, and we will continue to make security patches to existing OpenCensus libraries for two years. To keep up to date with news and progress of OpenTelemetry, refer to the OpenTelemetry [blog](https://medium.com/opentelemetry).
+> OpenCensus and OpenTracing have merged to form [OpenTelemetry](https://opentelemetry.io), which serves as the next major version of OpenCensus and OpenTracing.
+>
+> OpenTelemetry has now reached feature parity with OpenCensus, with tracing and metrics SDKs available in .NET, Golang, Java, NodeJS, and Python. **All OpenCensus Github repositories, except [census-instrumentation/opencensus-python](https://github.com/census-instrumentation/opencensus-python), will be archived on July 31st, 2023**. We encourage users to migrate to OpenTelemetry by this date.
+>
+> To help you gradually migrate your instrumentation to OpenTelemetry, bridges are available in Java, Go, Python, and JS. [**Read the full blog post to learn more**](https://opentelemetry.io/blog/2023/sunsetting-opencensus/).
 
 ##### What is OpenCensus?
 
