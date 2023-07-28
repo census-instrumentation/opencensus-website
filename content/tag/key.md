@@ -25,7 +25,7 @@ keyMethod, _ := tag.NewKey("method")
 {{</highlight>}}
 
 {{<highlight python>}}
-import opencensus.tags import tag_key
+import opencensus.tags as tag_key
 
 keyMethod = tag_key.TagKey("method")
 {{</highlight>}}
