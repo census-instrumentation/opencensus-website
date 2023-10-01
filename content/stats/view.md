@@ -129,7 +129,7 @@ def enable_views():
                              "The distribution of the latencies",
                              [key_method],
                              m_latency_ms,
-                             aggregation.DistributionAggregation(0, 25, 100, 200, 400, 800, 10000))
+                             aggregation.DistributionAggregation([0, 25, 100, 200, 400, 800, 10000]))
 
     line_count_view = view.View("myapp/lines_in",
                              "The number of lines that were received",
