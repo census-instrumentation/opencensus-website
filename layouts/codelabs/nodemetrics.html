@@ -1,0 +1,262 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Node.js Metrics Quickstart</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Node.js Metrics Quickstart"
+                  environment="web"
+                  feedback-link="">
+
+      <google-codelab-step label="Overview of the tutorial" duration="1">
+        <p>By the end of this tutorial, we will do these four things to obtain metrics using OpenCensus:</p>
+<ol type="1">
+<li>Create quantifiable <code>metrics</code> (numerical) that we will <strong>record</strong></li>
+<li>Create <a href="/core-concepts/tags" target="_blank">tags</a> that we will associate with our metrics</li>
+<li>Organize our metrics, similar to writing a report, in to a <code>View</code></li>
+<li>Export our views to a backend (Stackdriver in this case)</li>
+</ol>
+<p>Requirements:</p>
+<ul>
+<li><a href="https://nodejs.org/" target="_blank">Node.js</a> 6 or above and <code>npm</code> (already comes with Node.js)</li>
+<li>Google Cloud Platform account and project</li>
+<li>Google Stackdriver Monitoring enabled on your project</li>
+</ul>
+<aside class="special"><p>For assistance setting up Stackdriver, <a href="/codelabs/stackdriver" target="_blank">Click here</a> for a guided codelab.</p>
+</aside>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Installation" duration="1">
+        <p>First, let&#39;s create a folder called <code>repl-app</code> for our project and navigate inside it:</p>
+<pre><code>mkdir repl-app
+cd repl-app
+</code></pre>
+<p>Then, let&#39;s install the OpenCensus and Stackdriver packages with:</p>
+<pre><code>npm install @opencensus/core
+npm install @opencensus/exporter-stackdriver
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Getting Started" duration="1">
+        <aside class="special"><p>Unsure how to write and execute Node.js code? <a href="https://nodejs.org/en/docs/guides/getting-started-guide/" target="_blank">Click here</a>.</p>
+</aside>
+<p>We will be a simple &#34;read-evaluate-print-loop&#34; (REPL) app. In there we&#39;ll collect some metrics to observe the work that is going on within this code, such as:</p>
+<ul>
+<li>Latency per processing loop</li>
+<li>Number of lines read</li>
+<li>Line lengths</li>
+</ul>
+<p>First, create a file called <code>repl.js</code>:</p>
+<pre><code>touch repl.js
+</code></pre>
+<p>Next, put the following code inside of <code>repl.js</code>:</p>
+<pre><code>const fs = require(&#39;fs&#39;);
+const readline = require(&#39;readline&#39;);
+
+// Creates a stream to read our file
+const stream = fs.createReadStream(&#34;./test.txt&#34;);
+
+// Creates an interface to read and process our file line by line
+const lineReader = readline.createInterface({ input: stream });
+
+// REPL is the read, evaluate, print and loop
+lineReader.on(&#34;line&#34;, function (line) {       // Read
+    const processedLine = processLine(line);    // Evaluate
+    console.log(processedLine);                // Print
+});
+
+/**
+* Takes a line and process it.
+* @param {string} line The line to process
+*/
+function processLine(line) {
+    // Currently, it just capitalizes it.
+    return line.toUpperCase();
+}
+</code></pre>
+<p>Then, let&#39;s create our text file that we&#39;ll feed the REPL. Let&#39;s call it <code>test.txt</code>:</p>
+<pre><code>touch test.txt
+</code></pre>
+<p>And put the following lines inside of <code>test.txt</code>:</p>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+</code></pre>
+<p>Now, you can run the code via <code>node repl.js</code> and see it working.</p>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Enable Metrics" duration="1">
+        <h2>Import Packages</h2>
+<p>To enable metrics, we&#39;ll import a few items from OpenCensus Core package.</p>
+<pre><code>const { Stats, MeasureUnit, AggregationType } = require(&#39;@opencensus/core&#39;);
+</code></pre>
+<h2>Create Metrics</h2>
+<p>First, we will create the variables needed to later record our metrics.</p>
+<pre><code>// Our Stats manager
+const stats = new Stats();
+
+// The latency in milliseconds
+const mLatencyMs = stats.createMeasureDouble(&#34;repl/latency&#34;, MeasureUnit.MS, &#34;The latency in milliseconds per REPL loop&#34;);
+
+// Counts/groups the lengths of lines read in.
+const mLineLengths = stats.createMeasureInt64(&#34;repl/line_lengths&#34;, MeasureUnit.BYTE, &#34;The distribution of line lengths&#34;);
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Record and Aggregate Data" duration="1">
+        <h2>Create Views and Tags</h2>
+<p>We now determine how our metrics will be organized by creating <code>Views</code>. We will also create the variable needed to add extra text meta-data to our metrics – <code>methodTagKey</code>, <code>statusTagKey</code>, and <code>errorTagKey</code>.</p>
+<pre><code>const methodTagKey = &#34;method&#34;;
+const statusTagKey = &#34;status&#34;;
+const errorTagKey = &#34;error&#34;;
+
+const latencyView = stats.createView(
+    &#34;demo/latency&#34;,
+    mLatencyMs,
+    AggregationType.DISTRIBUTION,
+    [methodTagKey, statusTagKey, errorTagKey],
+    &#34;The distribution of the latencies&#34;,
+    // Bucket Boundaries:
+    // [&gt;=0ms, &gt;=25ms, &gt;=50ms, &gt;=75ms, &gt;=100ms, &gt;=200ms, &gt;=400ms, &gt;=600ms, &gt;=800ms, &gt;=1s, &gt;=2s, &gt;=4s, &gt;=6s]
+    [0, 25, 50, 75, 100, 200, 400, 600, 800, 1000, 2000, 4000, 6000]
+);
+
+const lineCountView = stats.createView(
+        &#34;demo/lines_in&#34;,
+        mLineLengths,
+        AggregationType.COUNT,
+        [methodTagKey],
+        &#34;The number of lines from standard input&#34;
+)
+
+const lineLengthView = stats.createView(
+    &#34;demo/line_lengths&#34;,
+    mLineLengths,
+    AggregationType.DISTRIBUTION,
+    [methodTagKey],
+    &#34;Groups the lengths of keys in buckets&#34;,
+    // Bucket Boudaries:
+    // [&gt;=0B, &gt;=5B, &gt;=10B, &gt;=15B, &gt;=20B, &gt;=40B, &gt;=60B, &gt;=80, &gt;=100B, &gt;=200B, &gt;=400, &gt;=600, &gt;=800, &gt;=1000]
+    [0, 5, 10, 15, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]
+)
+</code></pre>
+<p>We will later use this tag key, to record what method is being invoked. In our scenario, we will only use it to record that &#34;repl&#34; is calling our data.</p>
+<p>Again, this is arbitrary and purely up the user. For example, if we wanted to track what operating system a user is using, we could create a tag key <code>&#34;operating_system&#34;</code> and later, when we use it, we will be given an opportunity to enter values such as &#34;windows&#34; or &#34;mac&#34;.</p>
+<h2>Recording Metrics</h2>
+<p>Now we will record the desired metrics. To do so, we will use <code>stats.record()</code> and pass in our measurements.</p>
+<pre><code>lineReader.on(&#34;line&#34;, function (line) {
+    // Registers the Tags for our measurements
+    const tags = {method: &#34;repl&#34;, status: &#34;OK&#34;};
+
+    try {
+        // ...
+        stats.record({
+        measure: mLineLengths,
+        tags,
+        value: processedLine.length
+        });
+    } catch (err) {
+        tags.status = &#34;ERROR&#34;;
+        tags.error = err.message;
+    }
+
+    stats.record({
+        measure: mLatencyMs,
+        tags,
+        value: (new Date()) - startTime.getTime()
+    });
+
+    // Restarts the start time for the REPL
+    startTime = new Date();
+});
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Exporting to Stackdriver" duration="1">
+        <p>We will be adding the Stackdriver package: <code>@opencensus/exporter-stackdriver</code>, create the Stackdriver exporter and pass it to the stats manager:</p>
+<pre><code>const { Stats, MeasureUnit, AggregationType } = require(&#39;@opencensus/core&#39;);
+const { StackdriverStatsExporter } = require(&#39;@opencensus/exporter-stackdriver&#39;);
+
+const fs = require(&#39;fs&#39;);
+const readline = require(&#39;readline&#39;);
+
+// Create the Stats manager
+const stats = new Stats();
+
+// Add your project id to the Stackdriver options
+const exporter = new StackdriverStatsExporter({projectId: &#34;your-project-id&#34;});
+
+// Pass the created exporter to Stats
+stats.registerExporter(exporter);
+</code></pre>
+
+
+      </google-codelab-step>
+
+      <google-codelab-step label="Viewing your metrics" duration="0">
+        <p>Once registed, the Stackdriver exporter will be notified on every view registered and measurement recorded. It will translate and send the collected data on its own. Now, simply go to the <a href="https://app.google.stackdriver.com/" target="_blank">monitoring console</a> and check the collected data.<br><img src="./../../img/bdd60db47597754c.png"><br>Each bar in the heatmap represents one run of the program, and the colored components of each bar represent part of the latency distribution.</p>
+
+
+      </google-codelab-step>
+
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
